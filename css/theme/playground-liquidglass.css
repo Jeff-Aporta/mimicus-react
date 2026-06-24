@@ -68,7 +68,7 @@ html[data-looknfeel="mac-liquidglass"] {
 	--pg-shell-header-edge: 0.5px solid var(--mlg-border);
 }
 
-html[data-looknfeel="mac-liquidglass"] .jagu-ui-root {
+html[data-looknfeel="mac-liquidglass"] .mimicus-ui-root {
 	position: relative;
 	isolation: isolate;
 	min-height: 100vh;
@@ -96,7 +96,7 @@ html[data-looknfeel="mac-liquidglass"] .pg-neon-bg {
 	display: none !important;
 }
 
-html[data-looknfeel="mac-liquidglass"] .jagu-ui-brand {
+html[data-looknfeel="mac-liquidglass"] .mimicus-ui-brand {
 	font-weight: 600;
 	letter-spacing: -0.025em;
 	text-transform: none;
@@ -276,8 +276,8 @@ html[data-looknfeel="mac-liquidglass"] .catalog-home {
 	--catalog-card-backdrop: blur(40px) saturate(180%);
 }
 
-html[data-looknfeel="mac-liquidglass"] .jagu-glass-card,
-html[data-looknfeel="mac-liquidglass"] .jagu-ui-glass-card {
+html[data-looknfeel="mac-liquidglass"] .mimicus-glass-card,
+html[data-looknfeel="mac-liquidglass"] .mimicus-ui-glass-card {
 	border-radius: var(--mlg-radius-lg);
 }
 
@@ -320,7 +320,7 @@ html[data-looknfeel="mac-liquidglass"] :is(.custom-scrollbar, .pg-scrollbar)::-w
 	background-clip: padding-box;
 }
 
-html[data-looknfeel="mac-liquidglass"] .jagu-autocomplete__panel {
+html[data-looknfeel="mac-liquidglass"] .mimicus-autocomplete__panel {
 	-webkit-backdrop-filter: var(--mlg-blur);
 	backdrop-filter: var(--mlg-blur);
 	background: var(--mlg-fill-strong) !important;
@@ -329,12 +329,12 @@ html[data-looknfeel="mac-liquidglass"] .jagu-autocomplete__panel {
 	box-shadow: var(--mlg-shadow-lg);
 }
 
-html[data-looknfeel="mac-liquidglass"] .jagu-autocomplete__option {
+html[data-looknfeel="mac-liquidglass"] .mimicus-autocomplete__option {
 	color: var(--mlg-fg);
 }
 
-html[data-looknfeel="mac-liquidglass"] .jagu-autocomplete__option--active,
-html[data-looknfeel="mac-liquidglass"] .jagu-autocomplete__option:hover {
+html[data-looknfeel="mac-liquidglass"] .mimicus-autocomplete__option--active,
+html[data-looknfeel="mac-liquidglass"] .mimicus-autocomplete__option:hover {
 	background: var(--mlg-sidebar-active);
 	color: var(--mlg-accent);
 }
@@ -346,24 +346,24 @@ html[data-luminance="light"][data-looknfeel="mac-liquidglass"] .pg-sidebar .sm-t
 }
 
 /* Diálogos / modales — chrome de ventana macOS */
-html[data-looknfeel="mac-liquidglass"] dialog.jagu-dialog[data-scope="global"][data-backeffect="blur"]::backdrop {
+html[data-looknfeel="mac-liquidglass"] dialog.mimicus-dialog[data-scope="global"][data-backeffect="blur"]::backdrop {
 	background: rgba(0, 0, 0, 0.28);
 	-webkit-backdrop-filter: blur(14px) saturate(120%);
 	backdrop-filter: blur(14px) saturate(120%);
 }
 
-html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] dialog.jagu-dialog[data-scope="global"][data-backeffect="blur"]::backdrop {
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] dialog.mimicus-dialog[data-scope="global"][data-backeffect="blur"]::backdrop {
 	background: rgba(0, 0, 0, 0.42);
 }
 
-html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-window.card-root {
+html[data-looknfeel="mac-liquidglass"] dialog.mimicus-modal #modal-window.card-root {
 	border-radius: var(--mlg-radius-xl) !important;
 	overflow: hidden;
 	border: 0.5px solid var(--mlg-border) !important;
 	box-shadow: var(--mlg-shadow-lg) !important;
 }
 
-html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-header {
+html[data-looknfeel="mac-liquidglass"] dialog.mimicus-modal #modal-header {
 	display: flex !important;
 	align-items: center !important;
 	background: var(--mlg-titlebar) !important;
@@ -375,7 +375,7 @@ html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-header {
 	backdrop-filter: blur(24px) saturate(180%);
 }
 
-html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-header::before {
+html[data-looknfeel="mac-liquidglass"] dialog.mimicus-modal #modal-header::before {
 	content: "";
 	flex: 0 0 auto;
 	width: 52px;
@@ -387,7 +387,7 @@ html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-header::before {
 	opacity: 0.92;
 }
 
-html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-header :is(button, .button-wrap)[data-variant="text"] {
+html[data-looknfeel="mac-liquidglass"] dialog.mimicus-modal #modal-header :is(button, .button-wrap)[data-variant="text"] {
 	color: var(--mlg-fg-secondary) !important;
 	background: transparent !important;
 	border: none !important;
@@ -395,11 +395,11 @@ html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-header :is(butto
 	opacity: 0.72;
 }
 
-html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-header :is(button, .button-wrap)[data-variant="text"]:hover {
+html[data-looknfeel="mac-liquidglass"] dialog.mimicus-modal #modal-header :is(button, .button-wrap)[data-variant="text"]:hover {
 	opacity: 1;
 	background: var(--mlg-sidebar-hover) !important;
 }
 
-html[data-looknfeel="mac-liquidglass"] dialog.jagu-modal #modal-content {
+html[data-looknfeel="mac-liquidglass"] dialog.mimicus-modal #modal-content {
 	padding: 0.85rem 1rem 1rem;
 }

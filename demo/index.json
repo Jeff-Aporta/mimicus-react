@@ -1,8 +1,8 @@
 {
-  "id": "jagudeloe-react-ui",
-  "title": "Jagu React UI",
-  "description": "Biblioteca UI React personal — layout, button, card y SPA por CDN",
-  "icon": "mdi:react",
-  "repo": "Jeff-Aporta/jagudeloe-react-ui",
-  "demoUrl": "https://jeff-aporta.github.io/jagudeloe-react-ui/"
+  "id": "mimicus-react",
+  "title": "Mimicus React",
+  "subtitle": "Biblioteca UI React temática — CDN Jeff-Aporta",
+  "icon": "assets/mimicus-logo.svg",
+  "repo": "Jeff-Aporta/mimicus-react",
+  "demoUrl": "https://jeff-aporta.github.io/mimicus-react/"
 }

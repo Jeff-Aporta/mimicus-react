@@ -61,29 +61,29 @@ function AppLayoutRoot({
   const responsiveGridTemplate = responsive ? appLayoutResponsiveGridTemplate(variant, slotFlags) : null;
 
   const rootClass = [
-    "jagu-app-layout",
-    `jagu-app-layout--${variant}`,
-    hasSider && "jagu-app-layout--has-sider",
-    fixedHeader && "jagu-app-layout--fixed-header",
-    fixedSider && "jagu-app-layout--fixed-sider",
-    responsive && "jagu-app-layout--responsive",
-    responsiveDrawer && "jagu-app-layout--drawer-sider",
+    "mimicus-app-layout",
+    `mimicus-app-layout--${variant}`,
+    hasSider && "mimicus-app-layout--has-sider",
+    fixedHeader && "mimicus-app-layout--fixed-header",
+    fixedSider && "mimicus-app-layout--fixed-sider",
+    responsive && "mimicus-app-layout--responsive",
+    responsiveDrawer && "mimicus-app-layout--drawer-sider",
     className,
   ].filter(Boolean).join(" ");
 
-  const rootStyle = [
-    `--jagu-app-layout-sider-w:${siderWidthCss}`,
-    `grid-template:${gridTemplate}`,
-    responsiveGridTemplate ? `--jagu-app-layout-grid-responsive:${responsiveGridTemplate}` : null,
-    style,
-  ].filter(Boolean).join(";");
+  const rootStyle = {
+    "--mimicus-app-layout-sider-w": siderWidthCss,
+    gridTemplate,
+    ...(responsiveGridTemplate ? { "--mimicus-app-layout-grid-responsive": responsiveGridTemplate } : {}),
+    ...(style && typeof style === "object" ? style : {}),
+  };
 
   return (
     <div {...rest} className={rootClass} style={rootStyle}>
-      {hasHeader && <div className="jagu-app-layout__cell jagu-app-layout__cell--header">{slots.header}</div>}
-      {hasSider && <div className="jagu-app-layout__cell jagu-app-layout__cell--sider">{slots.sider}</div>}
-      <div className="jagu-app-layout__cell jagu-app-layout__cell--content">{slots.default}</div>
-      {hasFooter && <div className="jagu-app-layout__cell jagu-app-layout__cell--footer">{slots.footer}</div>}
+      {hasHeader && <div className="mimicus-app-layout__cell mimicus-app-layout__cell--header">{slots.header}</div>}
+      {hasSider && <div className="mimicus-app-layout__cell mimicus-app-layout__cell--sider">{slots.sider}</div>}
+      <div className="mimicus-app-layout__cell mimicus-app-layout__cell--content">{slots.default}</div>
+      {hasFooter && <div className="mimicus-app-layout__cell mimicus-app-layout__cell--footer">{slots.footer}</div>}
     </div>
   );
 }

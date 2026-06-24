@@ -32,9 +32,9 @@ body {
 	margin: 0;
 }
 
-.jagu-ui-root,
+.mimicus-ui-root,
 .mui-tooltip,
-.jagu-autocomplete__panel {
+.mimicus-autocomplete__panel {
 	font-family: var(--pg-font-sans);
 }
 

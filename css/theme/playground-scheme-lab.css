@@ -1,47 +1,47 @@
-/* Lab looks — verificación visual de esquemas dual y tríada (--jagu-design-active-*) */
+/* Lab looks — verificación visual de esquemas dual y tríada (--mimicus-design-active-*) */
 
 html[data-looknfeel="lab-dual"],
 html[data-looknfeel="lab-triad"] {
-	--pg-shell-surface: var(--jagu-bg-primary);
-	--pg-shell-header-bg: var(--jagu-bg-secondary);
-	--pg-shell-header-edge: 1px solid var(--jagu-b-color);
-	--pg-section-accent: var(--jagu-design-active-1, var(--jagu-primary));
+	--pg-shell-surface: var(--mimicus-bg-primary);
+	--pg-shell-header-bg: var(--mimicus-bg-secondary);
+	--pg-shell-header-edge: 1px solid var(--mimicus-b-color);
+	--pg-section-accent: var(--mimicus-design-active-1, var(--mimicus-primary));
 }
 
 /* ── Lab dual ── */
 html[data-looknfeel="lab-dual"] .pg-sidebar {
-	--pg-sidebar-chrome: color-mix(in srgb, var(--jagu-bg-secondary), var(--jagu-design-active-1) 5%);
-	--pg-sidebar-fg: var(--jagu-color);
+	--pg-sidebar-chrome: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-design-active-1) 5%);
+	--pg-sidebar-fg: var(--mimicus-color);
 	background: var(--pg-sidebar-chrome);
 	border-right: none;
-	color: var(--jagu-color);
+	color: var(--mimicus-color);
 }
 
 html[data-looknfeel="lab-dual"] .pg-sidebar .pg-sidebar-body {
-	border-right: 3px solid var(--jagu-design-active-1);
+	border-right: 3px solid var(--mimicus-design-active-1);
 }
 
 html[data-looknfeel="lab-dual"] .pg-sidebar-header,
 html[data-looknfeel="lab-dual"] .pg-content-header {
 	background: linear-gradient(
 		90deg,
-		color-mix(in srgb, var(--jagu-design-active-1), var(--jagu-bg-secondary) 72%) 0%,
-		color-mix(in srgb, var(--jagu-design-active-2), var(--jagu-bg-secondary) 68%) 100%
+		color-mix(in srgb, var(--mimicus-design-active-1), var(--mimicus-bg-secondary) 72%) 0%,
+		color-mix(in srgb, var(--mimicus-design-active-2), var(--mimicus-bg-secondary) 68%) 100%
 	);
 	border-bottom: var(--pg-shell-header-edge);
-	color: var(--ct-on-bg-secondary, var(--jagu-color));
+	color: var(--ct-on-bg-secondary, var(--mimicus-color));
 }
 
 html[data-looknfeel="lab-dual"] .pg-content-header .pg-route-title {
 	font-weight: 700;
-	background: linear-gradient(90deg, var(--jagu-design-active-1), var(--jagu-design-active-2));
+	background: linear-gradient(90deg, var(--mimicus-design-active-1), var(--mimicus-design-active-2));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
 
-html[data-looknfeel="lab-dual"] .jagu-ui-brand {
-	background: linear-gradient(105deg, var(--jagu-design-active-1), var(--jagu-design-active-2));
+html[data-looknfeel="lab-dual"] .mimicus-ui-brand {
+	background: linear-gradient(105deg, var(--mimicus-design-active-1), var(--mimicus-design-active-2));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
@@ -61,37 +61,37 @@ html[data-looknfeel="lab-dual"] .demo-panel-header,
 html[data-looknfeel="lab-dual"] .accordion-header-wrap {
 	background: linear-gradient(
 		90deg,
-		color-mix(in srgb, var(--jagu-design-active-1), white 12%) 0%,
-		color-mix(in srgb, var(--jagu-design-active-2), white 8%) 100%
+		color-mix(in srgb, var(--mimicus-design-active-1), white 12%) 0%,
+		color-mix(in srgb, var(--mimicus-design-active-2), white 8%) 100%
 	);
 	color: var(--ct-on-primary, #fff);
 }
 
 html[data-looknfeel="lab-dual"] .preview-frame {
-	border: 1px solid color-mix(in srgb, var(--jagu-design-active-1), var(--jagu-b-color) 55%);
-	background: color-mix(in srgb, var(--jagu-bg-secondary), var(--jagu-design-active-1) 4%) !important;
+	border: 1px solid color-mix(in srgb, var(--mimicus-design-active-1), var(--mimicus-b-color) 55%);
+	background: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-design-active-1) 4%) !important;
 }
 
 html[data-looknfeel="lab-dual"] .demo-panel-body .pg-demo-config-section.card-root {
-	border-color: color-mix(in srgb, var(--jagu-design-active-2), var(--jagu-b-color) 45%) !important;
+	border-color: color-mix(in srgb, var(--mimicus-design-active-2), var(--mimicus-b-color) 45%) !important;
 }
 
 /* ── Lab tríada ── */
 html[data-looknfeel="lab-triad"] .pg-sidebar {
-	--pg-sidebar-chrome: var(--jagu-bg-secondary);
-	--pg-sidebar-fg: var(--jagu-color);
+	--pg-sidebar-chrome: var(--mimicus-bg-secondary);
+	--pg-sidebar-fg: var(--mimicus-color);
 	background: var(--pg-sidebar-chrome);
 	border-right: none;
-	color: var(--jagu-color);
+	color: var(--mimicus-color);
 }
 
 html[data-looknfeel="lab-triad"] .pg-sidebar .pg-sidebar-body {
-	border-right: 1px solid var(--jagu-b-color);
+	border-right: 1px solid var(--mimicus-b-color);
 	background: linear-gradient(
 		180deg,
-		color-mix(in srgb, var(--jagu-design-active-1), transparent 94%) 0%,
-		color-mix(in srgb, var(--jagu-design-active-2), transparent 94%) 50%,
-		color-mix(in srgb, var(--jagu-design-active-3), transparent 94%) 100%
+		color-mix(in srgb, var(--mimicus-design-active-1), transparent 94%) 0%,
+		color-mix(in srgb, var(--mimicus-design-active-2), transparent 94%) 50%,
+		color-mix(in srgb, var(--mimicus-design-active-3), transparent 94%) 100%
 	);
 }
 
@@ -99,33 +99,33 @@ html[data-looknfeel="lab-triad"] .pg-sidebar-header,
 html[data-looknfeel="lab-triad"] .pg-content-header {
 	background: linear-gradient(
 		100deg,
-		color-mix(in srgb, var(--jagu-design-active-1), var(--jagu-bg-secondary) 70%) 0%,
-		color-mix(in srgb, var(--jagu-design-active-2), var(--jagu-bg-secondary) 66%) 48%,
-		color-mix(in srgb, var(--jagu-design-active-3), var(--jagu-bg-secondary) 62%) 100%
+		color-mix(in srgb, var(--mimicus-design-active-1), var(--mimicus-bg-secondary) 70%) 0%,
+		color-mix(in srgb, var(--mimicus-design-active-2), var(--mimicus-bg-secondary) 66%) 48%,
+		color-mix(in srgb, var(--mimicus-design-active-3), var(--mimicus-bg-secondary) 62%) 100%
 	);
 	border-bottom: var(--pg-shell-header-edge);
-	color: var(--ct-on-bg-secondary, var(--jagu-color));
+	color: var(--ct-on-bg-secondary, var(--mimicus-color));
 }
 
 html[data-looknfeel="lab-triad"] .pg-content-header .pg-route-title {
 	font-weight: 700;
 	background: linear-gradient(
 		100deg,
-		var(--jagu-design-active-1) 0%,
-		var(--jagu-design-active-2) 52%,
-		var(--jagu-design-active-3) 100%
+		var(--mimicus-design-active-1) 0%,
+		var(--mimicus-design-active-2) 52%,
+		var(--mimicus-design-active-3) 100%
 	);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
 
-html[data-looknfeel="lab-triad"] .jagu-ui-brand {
+html[data-looknfeel="lab-triad"] .mimicus-ui-brand {
 	background: linear-gradient(
 		105deg,
-		var(--jagu-design-active-1),
-		var(--jagu-design-active-2) 45%,
-		var(--jagu-design-active-3) 88%
+		var(--mimicus-design-active-1),
+		var(--mimicus-design-active-2) 45%,
+		var(--mimicus-design-active-3) 88%
 	);
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -148,25 +148,25 @@ html[data-looknfeel="lab-triad"] .demo-panel-header,
 html[data-looknfeel="lab-triad"] .accordion-header-wrap {
 	background: linear-gradient(
 		100deg,
-		var(--jagu-design-active-1) 0%,
-		color-mix(in srgb, var(--jagu-design-active-2), var(--jagu-design-active-1) 35%) 50%,
-		var(--jagu-design-active-3) 100%
+		var(--mimicus-design-active-1) 0%,
+		color-mix(in srgb, var(--mimicus-design-active-2), var(--mimicus-design-active-1) 35%) 50%,
+		var(--mimicus-design-active-3) 100%
 	);
 	color: var(--ct-on-primary, #fff);
 }
 
 html[data-looknfeel="lab-triad"] .preview-frame {
-	border: 1px solid color-mix(in srgb, var(--jagu-design-active-3), var(--jagu-b-color) 50%);
-	background: color-mix(in srgb, var(--jagu-bg-secondary), var(--jagu-design-active-2) 5%) !important;
+	border: 1px solid color-mix(in srgb, var(--mimicus-design-active-3), var(--mimicus-b-color) 50%);
+	background: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-design-active-2) 5%) !important;
 }
 
 html[data-looknfeel="lab-triad"] .catalog-home__title {
 	background: linear-gradient(
 		100deg,
-		var(--jagu-color) 0%,
-		var(--jagu-design-active-1) 40%,
-		var(--jagu-design-active-2) 70%,
-		var(--jagu-design-active-3) 100%
+		var(--mimicus-color) 0%,
+		var(--mimicus-design-active-1) 40%,
+		var(--mimicus-design-active-2) 70%,
+		var(--mimicus-design-active-3) 100%
 	);
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -175,30 +175,30 @@ html[data-looknfeel="lab-triad"] .catalog-home__title {
 
 /* ── Shell, demos y preview ── */
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(.pg-content, .pg-shell-main) {
-	background: var(--pg-shell-surface, var(--jagu-bg-primary));
-	color: var(--jagu-color);
+	background: var(--pg-shell-surface, var(--mimicus-bg-primary));
+	color: var(--mimicus-color);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .demo-panel.pg-glass-demo,
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .accordion.pg-glass-accordion {
-	border: 1px solid color-mix(in srgb, var(--jagu-design-active-1), var(--jagu-b-color) 52%) !important;
-	background: color-mix(in srgb, var(--jagu-bg-secondary), var(--jagu-design-active-1) 3%) !important;
+	border: 1px solid color-mix(in srgb, var(--mimicus-design-active-1), var(--mimicus-b-color) 52%) !important;
+	background: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-design-active-1) 3%) !important;
 	border-radius: 0.65rem !important;
 	overflow: hidden;
-	box-shadow: 0 8px 28px color-mix(in srgb, var(--jagu-color), transparent 90%);
+	box-shadow: 0 8px 28px color-mix(in srgb, var(--mimicus-color), transparent 90%);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .demo-panel-body,
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .accordion-body {
-	background: color-mix(in srgb, var(--jagu-bg-readonly), var(--jagu-bg-secondary) 48%) !important;
-	border-color: color-mix(in srgb, var(--jagu-design-active-2, var(--jagu-primary)), var(--jagu-b-color) 62%) !important;
-	color: var(--jagu-color);
+	background: color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-bg-secondary) 48%) !important;
+	border-color: color-mix(in srgb, var(--mimicus-design-active-2, var(--mimicus-primary)), var(--mimicus-b-color) 62%) !important;
+	color: var(--mimicus-color);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) {
-	--pg-preview-frame-bg: color-mix(in srgb, var(--jagu-bg-secondary), var(--jagu-design-active-1) 5%);
-	--pg-preview-stage-bg: color-mix(in srgb, var(--jagu-bg-readonly), var(--jagu-design-active-2, var(--jagu-primary)) 4%);
-	--pg-preview-stage-shadow: inset 0 0 0 1px color-mix(in srgb, var(--jagu-design-active-1), transparent 82%);
+	--pg-preview-frame-bg: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-design-active-1) 5%);
+	--pg-preview-stage-bg: color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-design-active-2, var(--mimicus-primary)) 4%);
+	--pg-preview-stage-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mimicus-design-active-1), transparent 82%);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .preview-frame .preview-stage {
@@ -209,13 +209,13 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .preview-fram
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .preview-frame,
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .code-inline {
 	background: var(--pg-preview-frame-bg) !important;
-	color: var(--jagu-color) !important;
+	color: var(--mimicus-color) !important;
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .catalog-home {
-	--catalog-fg: var(--jagu-color);
-	--catalog-muted: color-mix(in srgb, var(--jagu-color), transparent 38%);
-	--catalog-sketch-accent: var(--jagu-design-active-1, var(--jagu-primary));
-	--catalog-card-footer-fg: var(--jagu-color);
-	--catalog-card-name-fg: var(--jagu-color);
+	--catalog-fg: var(--mimicus-color);
+	--catalog-muted: color-mix(in srgb, var(--mimicus-color), transparent 38%);
+	--catalog-sketch-accent: var(--mimicus-design-active-1, var(--mimicus-primary));
+	--catalog-card-footer-fg: var(--mimicus-color);
+	--catalog-card-name-fg: var(--mimicus-color);
 }

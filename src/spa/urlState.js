@@ -77,7 +77,7 @@ function createUrlState() {
       if (json === "{}" || json === `{"v":${STATE_VERSION}}`) url.searchParams.delete(URL_STATE_PARAM);
       else url.searchParams.set(URL_STATE_PARAM, b64urlEncode(json));
       url.hash = "";
-      history.replaceState({ jaguSpa: true }, "", url);
+      history.replaceState({ mimicusSpa: true }, "", url);
     } catch (e) {
       console.warn("urlState: no se pudo escribir ?s=", e);
     }

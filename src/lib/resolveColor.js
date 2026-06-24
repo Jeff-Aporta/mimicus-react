@@ -5,7 +5,7 @@ export const componentColors = [
   "inherit", "currentColor", "white", "black", "transparent",
 ];
 
-const cssVar = (c) => `var(--jagu-${c})`;
+const cssVar = (c) => `var(--mimicus-${c})`;
 
 export function resolveColor(color, defaultColor = "") {
   color ||= defaultColor;

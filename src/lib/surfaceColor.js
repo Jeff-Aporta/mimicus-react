@@ -9,14 +9,14 @@ export function surfaceColorAttrs(color, opts = {}) {
   if (color === "currentColor") return {};
   if (color === "neutral") return { "data-surface-color": "neutral" };
   if (CSS_SURFACE_COLORS.has(color)) return { "data-surface-color": color };
-  return { style: `--surface-accent: ${resolveColor(color)}` };
+  return { style: { "--surface-accent": resolveColor(color) } };
 }
 
 export function mergeSurfaceStyle(color, opts = {}) {
   const colorAttrs = surfaceColorAttrs(color, opts);
-  const style = [colorAttrs.style, opts.style].filter(Boolean).join("; ");
   const out = {};
   if (colorAttrs["data-surface-color"]) out["data-surface-color"] = colorAttrs["data-surface-color"];
-  if (style) out.style = style;
+  const merged = { ...(colorAttrs.style || {}), ...(opts.style && typeof opts.style === "object" ? opts.style : {}) };
+  if (Object.keys(merged).length) out.style = merged;
   return out;
 }

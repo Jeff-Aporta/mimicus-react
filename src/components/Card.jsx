@@ -27,14 +27,14 @@ export function Card({
   const fillBg = normalizedVariant === "onion" ? colorMix(baseBg, "transparent", 60) : baseBg;
   const boxShadow = autoBoxShadow ? cardShadow(normalizedVariant, resolvedRelieve) : undefined;
 
-  const cardStyle = [
-    `color: ${resolveColor("color")}`,
-    `padding: ${PADDING_BY_SIZE[sizew] || PADDING_BY_SIZE.md}`,
-    `border: 1px solid ${borderColor}`,
-    boxShadow && `box-shadow: ${boxShadow}`,
-    autoBackground && `background-color: ${fillBg}`,
-    style,
-  ].filter(Boolean).join("; ");
+  const cardStyle = {
+    color: resolveColor("color"),
+    padding: PADDING_BY_SIZE[sizew] || PADDING_BY_SIZE.md,
+    border: `1px solid ${borderColor}`,
+    ...(boxShadow ? { boxShadow } : {}),
+    ...(autoBackground ? { backgroundColor: fillBg } : {}),
+    ...(style && typeof style === "object" ? style : {}),
+  };
 
   const Tag = inline ? "span" : "div";
 

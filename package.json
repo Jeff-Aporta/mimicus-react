@@ -1,10 +1,17 @@
 {
-  "name": "@jeff-aporta/jagudeloe-react-ui",
+  "name": "@jeff-aporta/mimicus-react",
   "private": true,
-  "description": "Biblioteca UI React temática — consumo CDN (window.JaguUI)",
+  "type": "module",
+  "description": "Mimicus React — biblioteca temática React (ESM import + CDN)",
+  "exports": {
+    ".": "./cdn/mimicus-react.esm.js",
+    "./bootstrap": "./cdn/mimicus-react.bootstrap.esm.js",
+    "./style.css": "./cdn/mimicus-ui.min.css"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "build:demo": "node scripts/build-demo.mjs"
+    "build:demo": "node scripts/build-demo.mjs && node scripts/patch-demo-index.mjs",
+    "build:all": "npm run build && npm run build:demo"
   },
   "devDependencies": {
     "esbuild": "^0.28.1"

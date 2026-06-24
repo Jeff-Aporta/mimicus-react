@@ -27,19 +27,19 @@ export function AppLayoutSider({
   }, [ctx, wCss]);
 
   const rootClass = [
-    "jagu-app-layout-sider",
-    `jagu-app-layout-sider--${theme}`,
-    collapsed && "jagu-app-layout-sider--collapsed",
+    "mimicus-app-layout-sider",
+    `mimicus-app-layout-sider--${theme}`,
+    collapsed && "mimicus-app-layout-sider--collapsed",
     className,
   ].filter(Boolean).join(" ");
 
-  const mergedStyle = [
-    "width:100%",
-    `max-width:${wCss}`,
-    `background:${bg}`,
-    `color:${fg}`,
-    style,
-  ].filter(Boolean).join(";");
+  const mergedStyle = {
+    width: "100%",
+    maxWidth: wCss,
+    background: bg,
+    color: fg,
+    ...(style && typeof style === "object" ? style : {}),
+  };
 
   function toggle() {
     onCollapse?.(!collapsed);
@@ -47,9 +47,9 @@ export function AppLayoutSider({
 
   return (
     <aside {...rest} className={rootClass} style={mergedStyle}>
-      <div className="jagu-app-layout-sider__body">{children}</div>
+      <div className="mimicus-app-layout-sider__body">{children}</div>
       {collapsible && (
-        <div className="jagu-app-layout-sider__trigger">
+        <div className="mimicus-app-layout-sider__trigger">
           <Button variant="text" color={isDark ? "neutral" : "primary"} onClick={toggle} style={{ width: "100%", justifyContent: "center", color: "inherit" }}>
             {collapsed ? "›" : "‹"}
           </Button>

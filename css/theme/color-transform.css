@@ -1,57 +1,57 @@
 /**
- * Utilidades CSS de transformación de color — reactivas a paleta (`--jagu-*`).
+ * Utilidades CSS de transformación de color — reactivas a paleta (`--mimicus-*`).
  * Establecer `--ct-base` vía `data-ct-base` o inline (`paletteBaseStyle()`).
  * `--ct-on-*` = paridad con `bg2font()` en color-transform.ts.
  */
 
 html {
-	--ct-on-primary: oklch(from var(--jagu-primary) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
-	--ct-on-color: oklch(from var(--jagu-color) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
-	--ct-on-bg-primary: oklch(from var(--jagu-bg-primary) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
-	--ct-on-bg-secondary: oklch(from var(--jagu-bg-secondary) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
+	--ct-on-primary: oklch(from var(--mimicus-primary) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
+	--ct-on-color: oklch(from var(--mimicus-color) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
+	--ct-on-bg-primary: oklch(from var(--mimicus-bg-primary) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
+	--ct-on-bg-secondary: oklch(from var(--mimicus-bg-secondary) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
 	--ct-on-readable: var(--ct-on-bg-secondary);
 }
 
 [data-ct-base="primary"],
-[data-ct-base="design-1"] { --ct-base: var(--jagu-design-active-1, var(--jagu-design-1, var(--jagu-primary))); }
-[data-ct-base="design-2"] { --ct-base: var(--jagu-design-active-2, var(--jagu-design-2, var(--jagu-info))); }
-[data-ct-base="design-3"] { --ct-base: var(--jagu-design-active-3, var(--jagu-design-3, var(--jagu-warning))); }
-[data-ct-base="info"] { --ct-base: var(--jagu-info); }
-[data-ct-base="success"] { --ct-base: var(--jagu-success); }
-[data-ct-base="warning"] { --ct-base: var(--jagu-warning); }
+[data-ct-base="design-1"] { --ct-base: var(--mimicus-design-active-1, var(--mimicus-design-1, var(--mimicus-primary))); }
+[data-ct-base="design-2"] { --ct-base: var(--mimicus-design-active-2, var(--mimicus-design-2, var(--mimicus-info))); }
+[data-ct-base="design-3"] { --ct-base: var(--mimicus-design-active-3, var(--mimicus-design-3, var(--mimicus-warning))); }
+[data-ct-base="info"] { --ct-base: var(--mimicus-info); }
+[data-ct-base="success"] { --ct-base: var(--mimicus-success); }
+[data-ct-base="warning"] { --ct-base: var(--mimicus-warning); }
 [data-ct-base="error"],
-[data-ct-base="danger"] { --ct-base: var(--jagu-danger); }
-[data-ct-base="color"] { --ct-base: var(--jagu-color); }
-[data-ct-base="neutral"] { --ct-base: color-mix(in srgb, var(--jagu-color) 62%, transparent); }
-[data-ct-base="card"] { --ct-base: var(--jagu-bg-secondary); }
-[data-ct-base="bg"] { --ct-base: var(--jagu-bg-primary); }
-[data-ct-base="border"] { --ct-base: var(--jagu-b-color); }
+[data-ct-base="danger"] { --ct-base: var(--mimicus-danger); }
+[data-ct-base="color"] { --ct-base: var(--mimicus-color); }
+[data-ct-base="neutral"] { --ct-base: color-mix(in srgb, var(--mimicus-color) 62%, transparent); }
+[data-ct-base="card"] { --ct-base: var(--mimicus-bg-secondary); }
+[data-ct-base="bg"] { --ct-base: var(--mimicus-bg-primary); }
+[data-ct-base="border"] { --ct-base: var(--mimicus-b-color); }
 
 /* Recetas derivadas de --ct-base (paridad con color-transform.ts) */
 .ct-root,
 [data-ct-base] {
-	--ct-darken-10: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), black 10%);
-	--ct-darken-20: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), black 20%);
-	--ct-lighten-15: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), white 15%);
-	--ct-lighten-30: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), white 30%);
-	--ct-alpha-85: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), transparent 85%);
-	--ct-alpha-88: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), transparent 88%);
-	--ct-bow-40: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), var(--jagu-color) 40%);
-	--ct-invert-l: hsl(from var(--ct-base, var(--jagu-color)) h s calc(100 - l));
-	--ct-unbow-50: color-mix(in srgb, var(--ct-base, color-mix(in srgb, var(--jagu-color) 62%, transparent)), var(--ct-invert-l) 50%);
-	--ct-readable: oklch(from var(--ct-base, var(--jagu-bg-secondary)) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
+	--ct-darken-10: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), black 10%);
+	--ct-darken-20: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), black 20%);
+	--ct-lighten-15: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), white 15%);
+	--ct-lighten-30: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), white 30%);
+	--ct-alpha-85: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), transparent 85%);
+	--ct-alpha-88: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), transparent 88%);
+	--ct-bow-40: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), var(--mimicus-color) 40%);
+	--ct-invert-l: hsl(from var(--ct-base, var(--mimicus-color)) h s calc(100 - l));
+	--ct-unbow-50: color-mix(in srgb, var(--ct-base, color-mix(in srgb, var(--mimicus-color) 62%, transparent)), var(--ct-invert-l) 50%);
+	--ct-readable: oklch(from var(--ct-base, var(--mimicus-bg-secondary)) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
 	--ct-bg2font: var(--ct-readable);
-	--ct-soft-bg: color-mix(in srgb, var(--ct-base, var(--jagu-primary)), transparent 88%);
-	--ct-border: color-mix(in srgb, color-mix(in srgb, var(--ct-base, var(--jagu-b-color)), var(--ct-invert-l) 50%), transparent 85%);
+	--ct-soft-bg: color-mix(in srgb, var(--ct-base, var(--mimicus-primary)), transparent 88%);
+	--ct-border: color-mix(in srgb, color-mix(in srgb, var(--ct-base, var(--mimicus-b-color)), var(--ct-invert-l) 50%), transparent 85%);
 }
 
 .ct-text-readable { color: var(--ct-readable); }
 .ct-bg-soft { background-color: var(--ct-soft-bg); }
 .ct-border-semantic { border-color: var(--ct-border); }
 
-/* ── Windows chrome — rampas OKLCH desde acento de paleta (misma intensidad Luna, matiz de --jagu-primary) ── */
+/* ── Windows chrome — rampas OKLCH desde acento de paleta (misma intensidad Luna, matiz de --mimicus-primary) ── */
 html:is([data-looknfeel="w98"], [data-looknfeel="wxp"], [data-looknfeel="wvista"]) {
-	--pg-win-accent-src: var(--jagu-design-active-1, var(--jagu-design-1, var(--jagu-primary)));
+	--pg-win-accent-src: var(--mimicus-design-active-1, var(--mimicus-design-1, var(--mimicus-primary)));
 	--pg-win-accent: oklch(from var(--pg-win-accent-src) l calc(min(0.26, max(c, 0.14) + 0.05)) h);
 	--pg-win-title-hi: oklch(from var(--pg-win-accent) calc(min(0.98, l + 0.22)) c h);
 	--pg-win-title-mid-lo: oklch(from var(--pg-win-accent) calc(max(0.14, l - 0.06)) c h);

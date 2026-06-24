@@ -39,7 +39,7 @@ export function SpaNavLink({ route, children, className, variant = "text", ...re
     <Button
       {...rest}
       variant={variant}
-      className={["jagu-nav-link", isActive && "is-active", className].filter(Boolean).join(" ")}
+      className={["mimicus-nav-link", isActive && "is-active", className].filter(Boolean).join(" ")}
       onClick={() => navigate(route)}
       aria-current={isActive ? "page" : undefined}
     >
@@ -48,11 +48,11 @@ export function SpaNavLink({ route, children, className, variant = "text", ...re
   );
 }
 
-export function JagSidebar({ title, children, className, ...rest }) {
+export function MimicusSidebar({ title, children, className, ...rest }) {
   return (
-    <nav {...rest} className={["jagu-sidebar", className].filter(Boolean).join(" ")}>
-      {title != null && <div className="jagu-sidebar-header pg-sidebar-header">{title}</div>}
-      <div className="jagu-sidebar-body pg-sidebar-body">{children}</div>
+    <nav {...rest} className={["mimicus-sidebar", className].filter(Boolean).join(" ")}>
+      {title != null && <div className="mimicus-sidebar-header pg-sidebar-header">{title}</div>}
+      <div className="mimicus-sidebar-body pg-sidebar-body">{children}</div>
     </nav>
   );
 }

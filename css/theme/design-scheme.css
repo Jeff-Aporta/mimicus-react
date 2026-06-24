@@ -1,25 +1,25 @@
 /**
  * Esquema de color de diseño — mono · dual · tríada.
- * Lo fija el look (`applyLooknfeel` → `data-design-scheme`); la paleta define `--jagu-design-1/2/3`.
+ * Lo fija el look (`applyLooknfeel` → `data-design-scheme`); la paleta define `--mimicus-design-1/2/3`.
  */
 
 html {
-	--jagu-design-active-1: var(--jagu-design-1, var(--jagu-primary));
-	--jagu-design-active-2: var(--jagu-design-2, var(--jagu-design-1, var(--jagu-primary)));
-	--jagu-design-active-3: var(--jagu-design-3, var(--jagu-design-1, var(--jagu-primary)));
+	--mimicus-design-active-1: var(--mimicus-design-1, var(--mimicus-primary));
+	--mimicus-design-active-2: var(--mimicus-design-2, var(--mimicus-design-1, var(--mimicus-primary)));
+	--mimicus-design-active-3: var(--mimicus-design-3, var(--mimicus-design-1, var(--mimicus-primary)));
 }
 
 html[data-design-scheme="mono"] {
-	--jagu-design-active-2: var(--jagu-design-1, var(--jagu-primary));
-	--jagu-design-active-3: var(--jagu-design-1, var(--jagu-primary));
+	--mimicus-design-active-2: var(--mimicus-design-1, var(--mimicus-primary));
+	--mimicus-design-active-3: var(--mimicus-design-1, var(--mimicus-primary));
 }
 
 html[data-design-scheme="dual"] {
-	--jagu-design-active-2: var(--jagu-design-2, var(--jagu-info, var(--jagu-primary)));
-	--jagu-design-active-3: var(--jagu-design-2, var(--jagu-info, var(--jagu-primary)));
+	--mimicus-design-active-2: var(--mimicus-design-2, var(--mimicus-info, var(--mimicus-primary)));
+	--mimicus-design-active-3: var(--mimicus-design-2, var(--mimicus-info, var(--mimicus-primary)));
 }
 
 html[data-design-scheme="triad"] {
-	--jagu-design-active-2: var(--jagu-design-2, var(--jagu-info, var(--jagu-primary)));
-	--jagu-design-active-3: var(--jagu-design-3, var(--jagu-warning, var(--jagu-primary)));
+	--mimicus-design-active-2: var(--mimicus-design-2, var(--mimicus-info, var(--mimicus-primary)));
+	--mimicus-design-active-3: var(--mimicus-design-3, var(--mimicus-warning, var(--mimicus-primary)));
 }

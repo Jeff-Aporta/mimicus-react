@@ -17,7 +17,7 @@ export function normalizeAppLayoutVariant(value) {
   return "side";
 }
 
-const SIDER = "var(--jagu-app-layout-sider-w, 200px)";
+const SIDER = "var(--mimicus-app-layout-sider-w, 200px)";
 
 function row(name, size) {
   return `"${name}" ${size}`;

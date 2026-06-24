@@ -1,90 +1,335 @@
 /**
- * Build jagudeloe-react-ui: bundle src → IIFE CDN + CSS aplanado.
+
+ * Build mimicus-react: ESM (primario) + IIFE legacy + CSS + snippets.
+
  */
+
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
+
 import { dirname, join, resolve } from "node:path";
+
 import { fileURLToPath } from "node:url";
+
 import { createRequire } from "node:module";
 
+import { bootCssText } from "../src/snippets/bootScreen.js";
+
+
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const root = join(__dirname, "..");
+
 const require = createRequire(import.meta.url);
+
 const esbuild = require("esbuild");
 
-const ENTRY = join(root, "src", "entry-iife.jsx");
-const CSS_IN = join(root, "css", "jagu-ui.css");
-const CDN_JS = join(root, "cdn", "jagu-ui.js");
-const CDN_MIN = join(root, "cdn", "jagu-ui.min.js");
-const CDN_CSS = join(root, "cdn", "jagu-ui.min.css");
+
+
+const ESM_ENTRY = join(root, "src", "index.jsx");
+
+const BOOTSTRAP_ESM = join(root, "src", "bootstrap.js");
+
+const IIFE_ENTRY = join(root, "src", "entry-iife.jsx");
+
+const SNIPPETS_IIFE = join(root, "src", "entry-snippets-iife.js");
+
+const CSS_IN = join(root, "css", "mimicus-ui.css");
+
+
+
+const OUT = {
+
+  esm: join(root, "cdn", "mimicus-react.esm.js"),
+
+  esmMin: join(root, "cdn", "mimicus-react.esm.min.js"),
+
+  bootstrapEsm: join(root, "cdn", "mimicus-react.bootstrap.esm.js"),
+
+  bootstrapMin: join(root, "cdn", "mimicus-react.bootstrap.esm.min.js"),
+
+  iife: join(root, "cdn", "mimicus-ui.js"),
+
+  iifeMin: join(root, "cdn", "mimicus-ui.min.js"),
+
+  snippets: join(root, "cdn", "mimicus-snippets.js"),
+
+  snippetsMin: join(root, "cdn", "mimicus-snippets.min.js"),
+
+  css: join(root, "cdn", "mimicus-ui.min.css"),
+
+  bootCss: join(root, "css", "snippets", "app-boot.css"),
+
+  bootCssMin: join(root, "cdn", "app-boot.min.css"),
+
+};
+
+
+
+const REACT_EXTERNAL = ["react", "react-dom", "react-dom/client", "react/jsx-runtime"];
+
+
 
 function minifyCss(css) {
+
   return css
+
     .replace(/\/\*[\s\S]*?\*\//g, "")
+
     .replace(/\s+/g, " ")
+
     .replace(/\s*([{}:;,>+~])\s*/g, "$1")
+
     .trim();
+
 }
 
+
+
 function flattenCss(filePath, seen = new Set()) {
+
   const abs = resolve(filePath);
+
   if (seen.has(abs)) return "";
+
   seen.add(abs);
+
   let raw = readFileSync(abs, "utf8");
+
   const dir = dirname(abs);
+
   return raw.replace(/@import\s+["']([^"']+)["']\s*;/g, (_, rel) => {
+
     const imported = join(dir, rel);
+
     if (!existsSync(imported)) throw new Error(`CSS import no encontrado: ${imported}`);
+
     return flattenCss(imported, seen);
+
   });
+
 }
+
+
+
+function buildEsm(entry, outfile, { minOut } = {}) {
+
+  esbuild.buildSync({
+
+    entryPoints: [entry],
+
+    outfile,
+
+    bundle: true,
+
+    format: "esm",
+
+    platform: "browser",
+
+    target: "es2020",
+
+    jsx: "automatic",
+
+    external: REACT_EXTERNAL,
+
+    legalComments: "none",
+
+    loader: { ".jsx": "jsx", ".js": "jsx" },
+
+  });
+
+  if (minOut) {
+
+    esbuild.buildSync({
+
+      entryPoints: [outfile],
+
+      outfile: minOut,
+
+      minify: true,
+
+      format: "esm",
+
+      target: "es2020",
+
+      legalComments: "none",
+
+    });
+
+  }
+
+}
+
+
 
 const REQUIRE_SHIM = `var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom"||m==="react-dom/client")return globalThis.ReactDOM;throw new Error("Cannot require "+m)};`;
 
-function build() {
-  const banner =
-    REQUIRE_SHIM +
-    "\n/**\n * @jeff-aporta/jagudeloe-react-ui — CDN\n * Registra window.JaguUI\n * Requiere globalThis.React y globalThis.ReactDOM.createRoot\n */\n";
+
+
+function buildIife(entry, outfile, { reactExternal = true } = {}) {
 
   esbuild.buildSync({
-    entryPoints: [ENTRY],
-    outfile: CDN_JS,
+
+    entryPoints: [entry],
+
+    outfile,
+
     bundle: true,
+
     format: "iife",
+
     platform: "browser",
+
     target: "es2020",
+
     jsx: "transform",
+
     jsxFactory: "React.createElement",
+
     jsxFragment: "React.Fragment",
-    external: ["react", "react-dom", "react/jsx-runtime"],
+
+    external: reactExternal ? REACT_EXTERNAL : [],
+
     legalComments: "none",
+
     loader: { ".jsx": "jsx", ".js": "jsx" },
+
   });
 
-  let js = readFileSync(CDN_JS, "utf8");
-  if (!js.startsWith("/**")) js = banner + js;
-  writeFileSync(CDN_JS, js, "utf8");
+  if (reactExternal) {
 
-  esbuild.buildSync({
-    entryPoints: [CDN_JS],
-    outfile: CDN_MIN,
-    minify: true,
-    legalComments: "none",
-    target: "es2020",
-    format: "iife",
-    loader: { ".js": "jsx" },
-  });
+    let js = readFileSync(outfile, "utf8");
 
-  writeFileSync(CDN_CSS, minifyCss(flattenCss(CSS_IN)), "utf8");
+    if (!js.startsWith("/**")) js = REQUIRE_SHIM + "\n" + js;
 
-  const demoCdn = join(root, "demo", "cdn");
-  mkdirSync(demoCdn, { recursive: true });
-  for (const name of ["jagu-ui.js", "jagu-ui.min.js", "jagu-ui.min.css", "versions.json"]) {
-    copyFileSync(join(root, "cdn", name), join(demoCdn, name));
+    writeFileSync(outfile, js, "utf8");
+
   }
 
-  console.log("jagudeloe-react-ui build OK");
-  console.log("  ", CDN_MIN);
-  console.log("  ", CDN_CSS);
+  const minOut = outfile.replace(/\.js$/, ".min.js");
+
+  esbuild.buildSync({
+
+    entryPoints: [outfile],
+
+    outfile: minOut,
+
+    minify: true,
+
+    format: "iife",
+
+    target: "es2020",
+
+    legalComments: "none",
+
+    loader: { ".js": "jsx" },
+
+  });
+
 }
 
+
+
+function build() {
+
+  buildEsm(ESM_ENTRY, OUT.esm, { minOut: OUT.esmMin });
+
+  buildEsm(BOOTSTRAP_ESM, OUT.bootstrapEsm, { minOut: OUT.bootstrapMin });
+
+  buildIife(IIFE_ENTRY, OUT.iife);
+
+  buildIife(SNIPPETS_IIFE, OUT.snippets, { reactExternal: false });
+
+  writeFileSync(OUT.iifeMin, readFileSync(OUT.iife.replace(".js", ".min.js"), "utf8"));
+
+  writeFileSync(OUT.snippetsMin, readFileSync(OUT.snippets.replace(".js", ".min.js"), "utf8"));
+
+
+
+  writeFileSync(OUT.css, minifyCss(flattenCss(CSS_IN)), "utf8");
+
+  mkdirSync(dirname(OUT.bootCss), { recursive: true });
+
+  const bootRaw = bootCssText("");
+
+  writeFileSync(OUT.bootCss, bootRaw, "utf8");
+
+  writeFileSync(OUT.bootCssMin, minifyCss(bootRaw), "utf8");
+
+
+
+  const versions = {
+
+    componentRef: "main",
+
+    module: {
+
+      main: "mimicus-react.esm.min.js",
+
+      bootstrap: "mimicus-react.bootstrap.esm.min.js",
+
+      css: "mimicus-ui.min.css",
+
+    },
+
+    legacy: { js: "mimicus-ui.min.js", snippets: "mimicus-snippets.min.js" },
+
+  };
+
+  writeFileSync(join(root, "cdn", "versions.json"), JSON.stringify(versions, null, 2) + "\n");
+
+
+
+  const demoCdn = join(root, "demo", "cdn");
+
+  mkdirSync(demoCdn, { recursive: true });
+
+  for (const name of [
+
+    "mimicus-react.esm.js",
+
+    "mimicus-react.esm.min.js",
+
+    "mimicus-react.bootstrap.esm.js",
+
+    "mimicus-react.bootstrap.esm.min.js",
+
+    "mimicus-ui.js",
+
+    "mimicus-ui.min.js",
+
+    "mimicus-ui.min.css",
+
+    "mimicus-snippets.js",
+
+    "mimicus-snippets.min.js",
+
+    "app-boot.min.css",
+
+    "versions.json",
+
+  ]) {
+
+    copyFileSync(join(root, "cdn", name), join(demoCdn, name));
+
+  }
+
+  const demoAssets = join(root, "demo", "assets");
+  mkdirSync(demoAssets, { recursive: true });
+  copyFileSync(join(root, "assets", "mimicus-logo.svg"), join(demoAssets, "mimicus-logo.svg"));
+
+
+
+  console.log("mimicus-react build OK (ESM primary)");
+
+  console.log("  ", OUT.esmMin);
+
+  console.log("  ", OUT.bootstrapMin);
+
+}
+
+
+
 build();
+
+

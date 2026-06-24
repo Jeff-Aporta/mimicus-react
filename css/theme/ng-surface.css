@@ -1,16 +1,16 @@
 /* Superficies neon — looks `neon-mono` · `neon-dual` · `neon-triad` (`data-looknfeel^="neon-"`). */
 
 html[data-looknfeel^="neon-"] [data-variant] {
-	--ng-accent: var(--bttn-clr, var(--bdg-clr, var(--jagu-primary)));
+	--ng-accent: var(--bttn-clr, var(--bdg-clr, var(--mimicus-primary)));
 }
 
 /* Card — sombras neón (anula relieve gris inline de Card.svelte) */
 html[data-looknfeel^="neon-"] .card-root {
-	box-shadow: var(--jagu-glass-shadow-dark) !important;
+	box-shadow: var(--mimicus-glass-shadow-dark) !important;
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root {
-	box-shadow: var(--jagu-glass-shadow-light) !important;
+	box-shadow: var(--mimicus-glass-shadow-light) !important;
 }
 
 html[data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
@@ -22,7 +22,7 @@ html[data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
 	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--jagu-primary), transparent 82%),
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 82%),
 		0 0 16px color-mix(in srgb, var(--neon-blue), transparent 84%),
 		0 0 28px color-mix(in srgb, var(--neon-cyan), transparent 88%) !important;
 }
@@ -31,7 +31,7 @@ html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="f
 html[data-looknfeel^="neon-"] .card-root[data-variant="solid"],
 html[data-looknfeel^="neon-"] .card-root[data-variant="flat"],
 html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
-	border-radius: var(--jagu-ui-glass-radius, 14px);
+	border-radius: var(--mimicus-ui-glass-radius, 14px);
 	-webkit-backdrop-filter: blur(12px) saturate(150%);
 	backdrop-filter: blur(12px) saturate(150%);
 }
@@ -39,51 +39,51 @@ html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="solid"],
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"],
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
-	border-color: var(--jagu-glass-border-light) !important;
-	box-shadow: var(--jagu-glass-shadow-light) !important;
+	border-color: var(--mimicus-glass-border-light) !important;
+	box-shadow: var(--mimicus-glass-shadow-light) !important;
 }
 
 html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="solid"],
 html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="flat"],
 html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
-	border-color: var(--jagu-glass-border-dark) !important;
-	box-shadow: var(--jagu-glass-shadow-dark) !important;
+	border-color: var(--mimicus-glass-border-dark) !important;
+	box-shadow: var(--mimicus-glass-shadow-dark) !important;
 }
 
 html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
 	background: linear-gradient(
 		165deg,
 		color-mix(in srgb, var(--neon-blue), transparent 90%),
-		color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 28%)
+		color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 28%)
 	) !important;
-	border: 1px solid var(--jagu-glass-border-dark) !important;
+	border: 1px solid var(--mimicus-glass-border-dark) !important;
 }
 
 html[data-looknfeel^="neon-"] .card-root[data-variant="solid"] {
 	background: linear-gradient(
 		145deg,
 		color-mix(in srgb, var(--neon-blue), transparent 94%),
-		color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 24%)
+		color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 24%)
 	) !important;
-	border: 1px solid var(--jagu-glass-border-dark) !important;
+	border: 1px solid var(--mimicus-glass-border-dark) !important;
 }
 
 html[data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
-	background: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 38%) !important;
-	border: 1px solid color-mix(in srgb, var(--jagu-glass-border-dark), transparent 28%) !important;
+	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 38%) !important;
+	border: 1px solid color-mix(in srgb, var(--mimicus-glass-border-dark), transparent 28%) !important;
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
-	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 94%), color-mix(in srgb, var(--jagu-bg-secondary), transparent 14%)) !important;
-	border-color: var(--jagu-glass-border-light) !important;
+	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 94%), color-mix(in srgb, var(--mimicus-bg-secondary), transparent 14%)) !important;
+	border-color: var(--mimicus-glass-border-light) !important;
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="solid"] {
-	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 96%), color-mix(in srgb, var(--jagu-bg-secondary), transparent 12%)) !important;
+	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 96%), color-mix(in srgb, var(--mimicus-bg-secondary), transparent 12%)) !important;
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
-	background: color-mix(in srgb, var(--jagu-bg-secondary), transparent 32%) !important;
+	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 32%) !important;
 }
 
 /* CheckboxIcon / Switch */
@@ -92,25 +92,25 @@ html[data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"] .lbl-cnt
 	border-radius: 999px;
 	-webkit-backdrop-filter: blur(8px) saturate(140%);
 	backdrop-filter: blur(8px) saturate(140%);
-	border: 1px solid color-mix(in srgb, var(--c-tr, var(--jagu-primary)) 35%, transparent);
+	border: 1px solid color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 35%, transparent);
 	background: linear-gradient(
 		145deg,
-		color-mix(in srgb, var(--c-tr, var(--jagu-primary)) 10%, transparent),
-		color-mix(in srgb, var(--jagu-glass-bg-dark, rgba(15, 23, 42, 0.72)) 88%, transparent)
+		color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 10%, transparent),
+		color-mix(in srgb, var(--mimicus-glass-bg-dark, rgba(15, 23, 42, 0.72)) 88%, transparent)
 	);
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt {
-	background: linear-gradient(145deg, color-mix(in srgb, var(--c-tr, var(--jagu-primary)) 5%, transparent), color-mix(in srgb, var(--jagu-bg-secondary), transparent 10%));
-	border-color: color-mix(in srgb, var(--c-tr, var(--jagu-primary)) 22%, var(--jagu-b-color));
+	background: linear-gradient(145deg, color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 5%, transparent), color-mix(in srgb, var(--mimicus-bg-secondary), transparent 10%));
+	border-color: color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 22%, var(--mimicus-b-color));
 }
 
 html[data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"]:has(input:checked) .lbl-cntnt {
-	box-shadow: 0 0 14px color-mix(in srgb, var(--c-tr, var(--jagu-primary)) 32%, transparent);
+	box-shadow: 0 0 14px color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 32%, transparent);
 }
 
 /* Divider glow — fallback fuera de neon-glass */
-html:not([data-looknfeel^="neon-"]) .jagu-divider--glow.jagu-divider--horizontal .jagu-divider__rail {
+html:not([data-looknfeel^="neon-"]) .mimicus-divider--glow.mimicus-divider--horizontal .mimicus-divider__rail {
 	border-top-width: 1px;
 	border-style: solid;
 	height: auto;
@@ -119,7 +119,7 @@ html:not([data-looknfeel^="neon-"]) .jagu-divider--glow.jagu-divider--horizontal
 	opacity: 1;
 }
 
-html:not([data-looknfeel^="neon-"]) .jagu-divider--glow.jagu-divider--vertical .jagu-divider__rail--solo-vertical {
+html:not([data-looknfeel^="neon-"]) .mimicus-divider--glow.mimicus-divider--vertical .mimicus-divider__rail--solo-vertical {
 	border-left-width: 1px;
 	width: 0;
 	background: none;
@@ -127,7 +127,7 @@ html:not([data-looknfeel^="neon-"]) .jagu-divider--glow.jagu-divider--vertical .
 	opacity: 1;
 }
 
-html[data-looknfeel^="neon-"] .jagu-divider--glow.jagu-divider--horizontal .jagu-divider__rail {
+html[data-looknfeel^="neon-"] .mimicus-divider--glow.mimicus-divider--horizontal .mimicus-divider__rail {
 	border-top: none;
 	height: 2px;
 	background: linear-gradient(90deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);
@@ -135,7 +135,7 @@ html[data-looknfeel^="neon-"] .jagu-divider--glow.jagu-divider--horizontal .jagu
 	opacity: 0.92;
 }
 
-html[data-looknfeel^="neon-"] .jagu-divider--glow.jagu-divider--vertical .jagu-divider__rail--solo-vertical {
+html[data-looknfeel^="neon-"] .mimicus-divider--glow.mimicus-divider--vertical .mimicus-divider__rail--solo-vertical {
 	border-left: none;
 	width: 2px;
 	background: linear-gradient(180deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);
@@ -143,8 +143,8 @@ html[data-looknfeel^="neon-"] .jagu-divider--glow.jagu-divider--vertical .jagu-d
 	opacity: 0.92;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-divider--glow .jagu-divider__rail,
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-divider--glow .jagu-divider__rail--solo-vertical {
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-divider--glow .mimicus-divider__rail,
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-divider--glow .mimicus-divider__rail--solo-vertical {
 	box-shadow: 0 0 8px color-mix(in srgb, var(--neon-blue, #1e90ff) 22%, transparent);
 	opacity: 0.85;
 }

@@ -1,52 +1,52 @@
-/* JAGUDELOE-UI Playground — kit neon-glass, solo src/playground */
+/* Mimicus UI Playground — kit neon-glass, solo src/playground */
 
 :root {
-	/* Acentos neon — reactivos a paleta + esquema de diseño (--jagu-design-active-*) */
-	--neon-blue: var(--jagu-design-active-1, var(--jagu-primary, dodgerblue));
-	--neon-cyan: var(--jagu-design-active-2, var(--jagu-info, #5eb3ff));
-	--neon-green: var(--jagu-success, #2e9e5a);
-	--neon-amber: var(--jagu-warning, #e6a817);
-	--neon-purple: var(--jagu-design-active-3, color-mix(in srgb, var(--jagu-primary, dodgerblue) 52%, var(--jagu-info, #5eb3ff) 48%));
-	--neon-magenta: color-mix(in srgb, var(--jagu-design-active-1, var(--jagu-primary)) 42%, var(--jagu-danger, #c6283a) 58%);
-	--neon-teal: color-mix(in srgb, var(--jagu-design-active-2, var(--jagu-info)) 58%, var(--jagu-success) 42%);
-	--neon-ember: color-mix(in srgb, var(--jagu-warning) 48%, var(--jagu-danger) 52%);
-	--neon-rose: color-mix(in srgb, var(--jagu-danger) 40%, var(--jagu-primary) 60%);
-	--neon-sage: color-mix(in srgb, var(--jagu-success) 55%, var(--jagu-info) 45%);
-	--neon-lilac: color-mix(in srgb, var(--neon-purple) 62%, var(--jagu-info) 38%);
-	--neon-slate: color-mix(in srgb, var(--jagu-color) 26%, var(--jagu-bg-primary) 74%);
+	/* Acentos neon — reactivos a paleta + esquema de diseño (--mimicus-design-active-*) */
+	--neon-blue: var(--mimicus-design-active-1, var(--mimicus-primary, dodgerblue));
+	--neon-cyan: var(--mimicus-design-active-2, var(--mimicus-info, #5eb3ff));
+	--neon-green: var(--mimicus-success, #2e9e5a);
+	--neon-amber: var(--mimicus-warning, #e6a817);
+	--neon-purple: var(--mimicus-design-active-3, color-mix(in srgb, var(--mimicus-primary, dodgerblue) 52%, var(--mimicus-info, #5eb3ff) 48%));
+	--neon-magenta: color-mix(in srgb, var(--mimicus-design-active-1, var(--mimicus-primary)) 42%, var(--mimicus-danger, #c6283a) 58%);
+	--neon-teal: color-mix(in srgb, var(--mimicus-design-active-2, var(--mimicus-info)) 58%, var(--mimicus-success) 42%);
+	--neon-ember: color-mix(in srgb, var(--mimicus-warning) 48%, var(--mimicus-danger) 52%);
+	--neon-rose: color-mix(in srgb, var(--mimicus-danger) 40%, var(--mimicus-primary) 60%);
+	--neon-sage: color-mix(in srgb, var(--mimicus-success) 55%, var(--mimicus-info) 45%);
+	--neon-lilac: color-mix(in srgb, var(--neon-purple) 62%, var(--mimicus-info) 38%);
+	--neon-slate: color-mix(in srgb, var(--mimicus-color) 26%, var(--mimicus-bg-primary) 74%);
 	--glow-blue: color-mix(in srgb, var(--neon-blue), transparent 55%);
 	/* Neutros de paleta (paridad color-transform — no grises planos) */
-	--pg-neon-neutral: color-mix(in srgb, var(--jagu-color) 62%, transparent);
-	--pg-neon-ink: color-mix(in srgb, var(--jagu-color) 76%, var(--jagu-bg-primary) 24%);
-	--pg-neon-mist: color-mix(in srgb, var(--jagu-bg-secondary), var(--jagu-color) 9%);
-	--pg-neon-fog: color-mix(in srgb, var(--jagu-bg-primary), var(--jagu-bg-readonly) 44%);
-	--pg-neon-haze: color-mix(in srgb, var(--jagu-bg-readonly), var(--jagu-info) 8%);
-	--pg-neon-warm-haze: color-mix(in srgb, var(--jagu-bg-readonly), var(--jagu-warning) 7%);
-	--pg-neon-cool-haze: color-mix(in srgb, var(--jagu-bg-readonly), var(--jagu-primary) 11%);
-	--pg-neon-depth: color-mix(in srgb, var(--jagu-bg-primary), var(--jagu-color) 20%);
-	--pg-neon-tint-a: color-mix(in srgb, var(--jagu-design-active-1, var(--jagu-primary)), var(--pg-neon-fog) 64%);
-	--pg-neon-tint-b: color-mix(in srgb, var(--jagu-design-active-2, var(--jagu-info)), var(--pg-neon-mist) 58%);
-	--pg-neon-tint-c: color-mix(in srgb, var(--jagu-design-active-3, var(--neon-purple)), var(--pg-neon-warm-haze) 52%);
+	--pg-neon-neutral: color-mix(in srgb, var(--mimicus-color) 62%, transparent);
+	--pg-neon-ink: color-mix(in srgb, var(--mimicus-color) 76%, var(--mimicus-bg-primary) 24%);
+	--pg-neon-mist: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-color) 9%);
+	--pg-neon-fog: color-mix(in srgb, var(--mimicus-bg-primary), var(--mimicus-bg-readonly) 44%);
+	--pg-neon-haze: color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-info) 8%);
+	--pg-neon-warm-haze: color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-warning) 7%);
+	--pg-neon-cool-haze: color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-primary) 11%);
+	--pg-neon-depth: color-mix(in srgb, var(--mimicus-bg-primary), var(--mimicus-color) 20%);
+	--pg-neon-tint-a: color-mix(in srgb, var(--mimicus-design-active-1, var(--mimicus-primary)), var(--pg-neon-fog) 64%);
+	--pg-neon-tint-b: color-mix(in srgb, var(--mimicus-design-active-2, var(--mimicus-info)), var(--pg-neon-mist) 58%);
+	--pg-neon-tint-c: color-mix(in srgb, var(--mimicus-design-active-3, var(--neon-purple)), var(--pg-neon-warm-haze) 52%);
 	--pg-neon-tint-d: color-mix(in srgb, var(--neon-sage), var(--pg-neon-cool-haze) 48%);
-	/* Tokens JAGUDELOE-UI (aliases públicos; --jagu-glass-* legacy interno) */
-	--jagu-ui-brand-gradient: linear-gradient(105deg, var(--jagu-design-active-1, var(--neon-cyan)), var(--jagu-design-active-2, var(--neon-blue)) 42%, var(--jagu-design-active-3, var(--neon-lilac)) 78%, var(--neon-purple));
-	--jagu-ui-glass-radius: 14px;
-	--jagu-ui-glass-bg-dark: color-mix(in srgb, var(--jagu-bg-secondary, #0f2340) 34%, transparent);
-	--jagu-ui-glass-bg-light: color-mix(in srgb, var(--jagu-bg-secondary, #ffffff) 46%, transparent);
-	--jagu-ui-glass-border-dark: color-mix(in srgb, var(--neon-purple), transparent 65%);
-	--jagu-ui-glass-border-light: color-mix(in srgb, var(--jagu-primary), transparent 78%);
-	--jagu-glass-radius: var(--jagu-ui-glass-radius);
-	--jagu-glass-bg-dark: var(--jagu-ui-glass-bg-dark);
-	--jagu-glass-bg-light: var(--jagu-ui-glass-bg-light);
-	--jagu-glass-border-dark: var(--jagu-ui-glass-border-dark);
-	--jagu-glass-border-light: var(--jagu-ui-glass-border-light);
-	--jagu-glass-shadow-dark:
+	/* Tokens Mimicus UI (aliases públicos; --mimicus-glass-* legacy interno) */
+	--mimicus-ui-brand-gradient: linear-gradient(105deg, var(--mimicus-design-active-1, var(--neon-cyan)), var(--mimicus-design-active-2, var(--neon-blue)) 42%, var(--mimicus-design-active-3, var(--neon-lilac)) 78%, var(--neon-purple));
+	--mimicus-ui-glass-radius: 14px;
+	--mimicus-ui-glass-bg-dark: color-mix(in srgb, var(--mimicus-bg-secondary, #0f2340) 34%, transparent);
+	--mimicus-ui-glass-bg-light: color-mix(in srgb, var(--mimicus-bg-secondary, #ffffff) 46%, transparent);
+	--mimicus-ui-glass-border-dark: color-mix(in srgb, var(--neon-purple), transparent 65%);
+	--mimicus-ui-glass-border-light: color-mix(in srgb, var(--mimicus-primary), transparent 78%);
+	--mimicus-glass-radius: var(--mimicus-ui-glass-radius);
+	--mimicus-glass-bg-dark: var(--mimicus-ui-glass-bg-dark);
+	--mimicus-glass-bg-light: var(--mimicus-ui-glass-bg-light);
+	--mimicus-glass-border-dark: var(--mimicus-ui-glass-border-dark);
+	--mimicus-glass-border-light: var(--mimicus-ui-glass-border-light);
+	--mimicus-glass-shadow-dark:
 		0 0 0 1px color-mix(in srgb, var(--neon-cyan), transparent 62%),
 		0 4px 20px color-mix(in srgb, var(--neon-blue), transparent 68%),
 		0 0 32px color-mix(in srgb, var(--neon-cyan), transparent 74%),
 		0 0 56px color-mix(in srgb, var(--neon-purple), transparent 78%);
-	--jagu-glass-shadow-light:
-		0 0 0 1px color-mix(in srgb, var(--jagu-primary), transparent 72%),
+	--mimicus-glass-shadow-light:
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 72%),
 		0 2px 12px color-mix(in srgb, var(--neon-blue), transparent 78%),
 		0 0 26px color-mix(in srgb, var(--neon-cyan), transparent 82%),
 		0 0 44px color-mix(in srgb, var(--neon-purple), transparent 86%);
@@ -66,7 +66,7 @@
 		radial-gradient(ellipse 70% 44% at 96% 8%, color-mix(in srgb, var(--pg-neon-tint-c), transparent 80%), transparent 54%),
 		radial-gradient(ellipse 56% 36% at 18% 88%, color-mix(in srgb, var(--neon-sage), transparent 84%), transparent 58%),
 		radial-gradient(ellipse 50% 32% at 82% 78%, color-mix(in srgb, var(--neon-teal), transparent 86%), transparent 60%),
-		linear-gradient(168deg, color-mix(in srgb, var(--jagu-bg-secondary), transparent 6%) 0%, color-mix(in srgb, var(--pg-neon-warm-haze), transparent 18%) 38%, color-mix(in srgb, var(--jagu-bg-primary), transparent 2%) 100%);
+		linear-gradient(168deg, color-mix(in srgb, var(--mimicus-bg-secondary), transparent 6%) 0%, color-mix(in srgb, var(--pg-neon-warm-haze), transparent 18%) 38%, color-mix(in srgb, var(--mimicus-bg-primary), transparent 2%) 100%);
 	/* Catálogo — mesh ampliado y suave (menos manchas, más zoom/difuminado) */
 	--mesh-card-dark:
 		radial-gradient(ellipse 180% 130% at 16% 4%, color-mix(in srgb, var(--pg-neon-tint-c), transparent 54%), transparent 68%),
@@ -79,14 +79,14 @@
 		radial-gradient(ellipse 165% 120% at 92% 4%, color-mix(in srgb, var(--pg-neon-tint-c), transparent 70%), transparent 68%),
 		radial-gradient(ellipse 155% 110% at 14% 92%, color-mix(in srgb, var(--neon-sage), transparent 76%), transparent 70%),
 		radial-gradient(ellipse 150% 105% at 86% 84%, color-mix(in srgb, var(--neon-teal), transparent 78%), transparent 72%),
-		linear-gradient(168deg, color-mix(in srgb, var(--jagu-bg-secondary), transparent 14%) 0%, color-mix(in srgb, var(--pg-neon-warm-haze), transparent 32%) 44%, color-mix(in srgb, var(--jagu-bg-primary), transparent 10%) 100%);
+		linear-gradient(168deg, color-mix(in srgb, var(--mimicus-bg-secondary), transparent 14%) 0%, color-mix(in srgb, var(--pg-neon-warm-haze), transparent 32%) 44%, color-mix(in srgb, var(--mimicus-bg-primary), transparent 10%) 100%);
 }
 
 html[data-luminance="dark"] {
-	--pg-neon-void: color-mix(in srgb, var(--jagu-bg-primary), var(--neon-purple) 22%);
-	--pg-neon-void-soft: color-mix(in srgb, var(--jagu-bg-primary), var(--jagu-color) 32%);
-	--pg-neon-lift: color-mix(in srgb, var(--jagu-bg-secondary), var(--jagu-info) 14%);
-	--jagu-glass-page-mesh-base:
+	--pg-neon-void: color-mix(in srgb, var(--mimicus-bg-primary), var(--neon-purple) 22%);
+	--pg-neon-void-soft: color-mix(in srgb, var(--mimicus-bg-primary), var(--mimicus-color) 32%);
+	--pg-neon-lift: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-info) 14%);
+	--mimicus-glass-page-mesh-base:
 		radial-gradient(ellipse 145% 58% at 50% 114%, color-mix(in srgb, var(--pg-neon-void), transparent 38%), transparent 56%),
 		radial-gradient(ellipse 96% 86% at 0% 100%, color-mix(in srgb, var(--pg-neon-void-soft), transparent 42%), transparent 52%),
 		radial-gradient(ellipse 96% 86% at 100% 100%, color-mix(in srgb, var(--pg-neon-void-soft), transparent 42%), transparent 52%),
@@ -104,16 +104,16 @@ html[data-luminance="dark"] {
 		radial-gradient(ellipse 114% 44% at 50% 110%, color-mix(in srgb, var(--pg-neon-tint-a), transparent 48%), transparent 58%),
 		linear-gradient(
 			152deg,
-			color-mix(in srgb, var(--jagu-bg-primary), var(--pg-neon-void) 32%) 0%,
-			color-mix(in srgb, var(--jagu-bg-primary), var(--neon-purple) 28%) 12%,
-			color-mix(in srgb, var(--jagu-bg-secondary), var(--neon-blue) 34%) 28%,
+			color-mix(in srgb, var(--mimicus-bg-primary), var(--pg-neon-void) 32%) 0%,
+			color-mix(in srgb, var(--mimicus-bg-primary), var(--neon-purple) 28%) 12%,
+			color-mix(in srgb, var(--mimicus-bg-secondary), var(--neon-blue) 34%) 28%,
 			color-mix(in srgb, var(--pg-neon-lift), var(--neon-cyan) 24%) 44%,
-			color-mix(in srgb, var(--jagu-bg-primary), var(--neon-sage) 18%) 58%,
-			color-mix(in srgb, var(--jagu-bg-secondary), var(--neon-rose) 14%) 72%,
-			color-mix(in srgb, var(--jagu-bg-primary), var(--neon-teal) 16%) 86%,
-			color-mix(in srgb, var(--jagu-bg-primary), var(--pg-neon-void) 36%) 100%
+			color-mix(in srgb, var(--mimicus-bg-primary), var(--neon-sage) 18%) 58%,
+			color-mix(in srgb, var(--mimicus-bg-secondary), var(--neon-rose) 14%) 72%,
+			color-mix(in srgb, var(--mimicus-bg-primary), var(--neon-teal) 16%) 86%,
+			color-mix(in srgb, var(--mimicus-bg-primary), var(--pg-neon-void) 36%) 100%
 		);
-	--jagu-glass-page-mesh-vignette:
+	--mimicus-glass-page-mesh-vignette:
 		radial-gradient(ellipse 108% 98% at 50% 50%, transparent 28%, color-mix(in srgb, var(--neon-blue), transparent 92%) 78%, color-mix(in srgb, var(--neon-purple), transparent 88%) 100%),
 		radial-gradient(ellipse 54% 42% at 82% 14%, color-mix(in srgb, var(--pg-neon-tint-b), transparent 72%), transparent 70%),
 		radial-gradient(ellipse 48% 36% at 10% 78%, color-mix(in srgb, var(--pg-neon-tint-c), transparent 70%), transparent 68%),
@@ -121,15 +121,15 @@ html[data-luminance="dark"] {
 		radial-gradient(ellipse 36% 26% at 24% 52%, color-mix(in srgb, var(--neon-sage), transparent 86%), transparent 76%),
 		linear-gradient(118deg, transparent 38%, color-mix(in srgb, var(--neon-cyan), transparent 90%) 49%, color-mix(in srgb, var(--neon-blue), transparent 94%) 51%, transparent 62%),
 		linear-gradient(32deg, transparent 62%, color-mix(in srgb, var(--neon-ember), transparent 94%) 72%, transparent 82%);
-	--jagu-glass-page-fallback: var(--jagu-bg-primary);
-	--pg-field-border: color-mix(in srgb, var(--jagu-b-color), transparent 22%);
+	--mimicus-glass-page-fallback: var(--mimicus-bg-primary);
+	--pg-field-border: color-mix(in srgb, var(--mimicus-b-color), transparent 22%);
 }
 
 html[data-luminance="light"] {
-	--pg-neon-void: color-mix(in srgb, var(--jagu-color), transparent 90%);
+	--pg-neon-void: color-mix(in srgb, var(--mimicus-color), transparent 90%);
 	--pg-neon-void-soft: color-mix(in srgb, var(--pg-neon-slate), transparent 72%);
-	--pg-neon-lift: color-mix(in srgb, var(--jagu-bg-secondary), white 38%);
-	--jagu-glass-page-mesh-base:
+	--pg-neon-lift: color-mix(in srgb, var(--mimicus-bg-secondary), white 38%);
+	--mimicus-glass-page-mesh-base:
 		radial-gradient(ellipse 98% 68% at 94% -10%, color-mix(in srgb, var(--pg-neon-tint-b), transparent 66%), transparent 56%),
 		radial-gradient(ellipse 78% 58% at 2% 104%, color-mix(in srgb, var(--pg-neon-tint-c), transparent 68%), transparent 52%),
 		radial-gradient(ellipse 74% 48% at 46% -14%, color-mix(in srgb, var(--pg-neon-tint-a), transparent 72%), transparent 60%),
@@ -141,45 +141,45 @@ html[data-luminance="light"] {
 		radial-gradient(ellipse 42% 30% at 28% 22%, color-mix(in srgb, var(--neon-rose), transparent 86%), transparent 66%),
 		linear-gradient(
 			164deg,
-			var(--jagu-bg-primary) 0%,
+			var(--mimicus-bg-primary) 0%,
 			color-mix(in srgb, var(--pg-neon-warm-haze), var(--neon-cyan) 16%) 18%,
 			color-mix(in srgb, var(--pg-neon-haze), var(--neon-blue) 12%) 34%,
-			color-mix(in srgb, var(--jagu-bg-readonly), var(--neon-sage) 14%) 50%,
+			color-mix(in srgb, var(--mimicus-bg-readonly), var(--neon-sage) 14%) 50%,
 			color-mix(in srgb, var(--pg-neon-cool-haze), var(--neon-purple) 11%) 66%,
-			color-mix(in srgb, var(--jagu-bg-secondary), var(--neon-teal) 9%) 82%,
-			var(--jagu-bg-primary) 100%
+			color-mix(in srgb, var(--mimicus-bg-secondary), var(--neon-teal) 9%) 82%,
+			var(--mimicus-bg-primary) 100%
 		);
-	--jagu-glass-page-mesh-vignette:
+	--mimicus-glass-page-mesh-vignette:
 		linear-gradient(to bottom, color-mix(in srgb, var(--pg-neon-lift), transparent 22%) 0%, transparent 16%),
 		linear-gradient(to top, color-mix(in srgb, var(--pg-neon-lift), transparent 26%) 0%, transparent 18%),
 		radial-gradient(ellipse 102% 94% at 50% 46%, transparent 34%, color-mix(in srgb, var(--pg-neon-void-soft), transparent 78%) 70%, color-mix(in srgb, var(--pg-neon-neutral), transparent 82%) 100%),
 		radial-gradient(ellipse 52% 40% at 80% 18%, color-mix(in srgb, var(--pg-neon-tint-b), transparent 84%), transparent 70%),
 		radial-gradient(ellipse 44% 34% at 12% 84%, color-mix(in srgb, var(--pg-neon-tint-c), transparent 84%), transparent 68%),
 		radial-gradient(ellipse 36% 28% at 54% 72%, color-mix(in srgb, var(--neon-sage), transparent 90%), transparent 74%),
-		linear-gradient(108deg, transparent 44%, color-mix(in srgb, var(--jagu-bg-secondary), white 48%) 50%, transparent 56%);
-	--jagu-glass-page-fallback: var(--jagu-bg-primary);
-	--pg-field-border: color-mix(in srgb, var(--jagu-b-color), transparent 18%);
+		linear-gradient(108deg, transparent 44%, color-mix(in srgb, var(--mimicus-bg-secondary), white 48%) 50%, transparent 56%);
+	--mimicus-glass-page-fallback: var(--mimicus-bg-primary);
+	--pg-field-border: color-mix(in srgb, var(--mimicus-b-color), transparent 18%);
 }
 
 html[data-looknfeel^="neon-"] {
 	color: var(--pg-text);
 	min-height: 100vh;
-	background: var(--jagu-glass-page-fallback);
+	background: var(--mimicus-glass-page-fallback);
 }
 
 /* Overlays portalados a body (fuera de .pg-neon) — tipografía en playground-typography.css */
 
-.jagu-ui-brand {
+.mimicus-ui-brand {
 	font-weight: 700;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
-	background: var(--jagu-ui-brand-gradient);
+	background: var(--mimicus-ui-brand-gradient);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
 
-html[data-looknfeel^="neon-"] .sidebar-title.jagu-ui-brand {
+html[data-looknfeel^="neon-"] .sidebar-title.mimicus-ui-brand {
 	font-size: 0.68rem;
 	line-height: 1.15;
 	letter-spacing: 0.05em;
@@ -188,7 +188,7 @@ html[data-looknfeel^="neon-"] .sidebar-title.jagu-ui-brand {
 
 html[data-looknfeel^="neon-"] .sidebar-brand-icon--title,
 html[data-looknfeel^="neon-"] .sidebar-brand-icon--rail {
-	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--jagu-primary), transparent 45%));
+	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--mimicus-primary), transparent 45%));
 }
 
 html[data-looknfeel^="neon-"] .sidebar-brand-icon--title {
@@ -199,27 +199,27 @@ html[data-looknfeel^="neon-"] .sidebar-brand-icon--rail {
 	font-size: 1.62rem !important;
 }
 
-.catalog-home__kicker.jagu-ui-brand {
+.catalog-home__kicker.mimicus-ui-brand {
 	font-size: 0.72rem;
 	line-height: 1.3;
 }
 
-html[data-looknfeel^="neon-"] .catalog-home__kicker.jagu-ui-brand {
-	background: linear-gradient(105deg, var(--jagu-primary), color-mix(in srgb, var(--jagu-primary), var(--jagu-info) 42%));
+html[data-looknfeel^="neon-"] .catalog-home__kicker.mimicus-ui-brand {
+	background: linear-gradient(105deg, var(--mimicus-primary), color-mix(in srgb, var(--mimicus-primary), var(--mimicus-info) 42%));
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
 }
 
-html[data-looknfeel^="neon-"] .jagu-ui-root {
+html[data-looknfeel^="neon-"] .mimicus-ui-root {
 	position: relative;
 	isolation: isolate;
 	min-height: 100vh;
 	background-color: transparent;
 }
 
-html[data-looknfeel^="neon-"] .jagu-ui-root::before,
-html[data-looknfeel^="neon-"] .jagu-ui-root::after {
+html[data-looknfeel^="neon-"] .mimicus-ui-root::before,
+html[data-looknfeel^="neon-"] .mimicus-ui-root::after {
 	content: "";
 	position: fixed;
 	inset: 0;
@@ -227,13 +227,13 @@ html[data-looknfeel^="neon-"] .jagu-ui-root::after {
 	pointer-events: none;
 }
 
-html[data-looknfeel^="neon-"] .jagu-ui-root::before {
-	background: var(--jagu-glass-page-mesh-base);
+html[data-looknfeel^="neon-"] .mimicus-ui-root::before {
+	background: var(--mimicus-glass-page-mesh-base);
 	background-attachment: fixed;
 }
 
-html[data-looknfeel^="neon-"] .jagu-ui-root::after {
-	background: var(--jagu-glass-page-mesh-vignette);
+html[data-looknfeel^="neon-"] .mimicus-ui-root::after {
+	background: var(--mimicus-glass-page-mesh-vignette);
 	background-attachment: fixed;
 }
 
@@ -419,36 +419,36 @@ html[data-looknfeel^="neon-"] .pg-playground-shell {
 	background: transparent;
 }
 
-html[data-looknfeel^="neon-"] .pg-playground-shell .jagu-app-layout__cell--content,
-html[data-looknfeel^="neon-"] .pg-playground-shell .jagu-app-layout-content.pg-content {
+html[data-looknfeel^="neon-"] .pg-playground-shell .mimicus-app-layout__cell--content,
+html[data-looknfeel^="neon-"] .pg-playground-shell .mimicus-app-layout-content.pg-content {
 	background: transparent !important;
 }
 
 html[data-looknfeel^="neon-"] .pg-sidebar {
-	background: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 38%);
+	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 38%);
 	background-image: var(--mesh-dark);
 	backdrop-filter: blur(16px) saturate(165%);
 	-webkit-backdrop-filter: blur(16px) saturate(165%);
 	border-right: none;
 	box-shadow: none;
-	color: var(--jagu-color);
+	color: var(--mimicus-color);
 }
 
 html[data-looknfeel^="neon-"] .pg-sidebar .pg-sidebar-body {
-	border-right: 1px solid var(--jagu-glass-border-dark);
+	border-right: 1px solid var(--mimicus-glass-border-dark);
 	box-shadow:
 		4px 0 28px color-mix(in srgb, var(--neon-blue), transparent 86%),
 		0 0 36px color-mix(in srgb, var(--neon-purple), transparent 92%);
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .pg-sidebar {
-	background: color-mix(in srgb, var(--jagu-glass-bg-light), transparent 28%);
+	background: color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 28%);
 	background-image: var(--mesh-light);
 	border-right: none;
 	box-shadow: none;
 	backdrop-filter: blur(16px) saturate(165%);
 	-webkit-backdrop-filter: blur(16px) saturate(165%);
-	color: var(--jagu-color);
+	color: var(--mimicus-color);
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .pg-sidebar .pg-sidebar-body {
@@ -459,7 +459,7 @@ html[data-luminance="light"][data-looknfeel^="neon-"] .pg-sidebar .pg-sidebar-bo
 }
 
 html[data-looknfeel^="neon-"] {
-	--pg-shell-header-bg: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 28%);
+	--pg-shell-header-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 28%);
 	--pg-shell-header-edge: 1px solid color-mix(in srgb, var(--neon-blue), transparent 82%);
 	--pg-shell-header-glow:
 		0 8px 28px color-mix(in srgb, var(--neon-blue), transparent 84%),
@@ -467,12 +467,12 @@ html[data-looknfeel^="neon-"] {
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] {
-	--pg-shell-header-bg: color-mix(in srgb, var(--jagu-glass-bg-light), transparent 22%);
+	--pg-shell-header-bg: color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 22%);
 	--pg-shell-header-edge: 1px solid var(--pg-field-border);
 	--pg-shell-header-glow:
 		0 6px 22px color-mix(in srgb, var(--neon-blue), transparent 90%),
 		0 0 32px color-mix(in srgb, var(--neon-cyan), transparent 94%);
-	--pg-content-surface: color-mix(in srgb, var(--jagu-bg-secondary), white 40%);
+	--pg-content-surface: color-mix(in srgb, var(--mimicus-bg-secondary), white 40%);
 	--pg-content-surface-mesh: linear-gradient(
 		168deg,
 		color-mix(in srgb, var(--pg-content-surface), var(--pg-neon-haze) 5%) 0%,
@@ -493,7 +493,7 @@ html[data-looknfeel^="neon-"] .pg-content-header {
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .pg-sidebar-header {
-	background: color-mix(in srgb, var(--pg-shell-header-bg), var(--jagu-primary) 4%);
+	background: color-mix(in srgb, var(--pg-shell-header-bg), var(--mimicus-primary) 4%);
 }
 
 html[data-looknfeel^="neon-"] .pg-content-header .pg-route-title {
@@ -517,109 +517,109 @@ html[data-luminance="light"][data-looknfeel^="neon-"] .pg-content {
 	-webkit-backdrop-filter: blur(8px) saturate(130%);
 }
 
-html[data-looknfeel^="neon-"] .jagu-glass-card,
-html[data-looknfeel^="neon-"] .jagu-ui-glass-card {
+html[data-looknfeel^="neon-"] .mimicus-glass-card,
+html[data-looknfeel^="neon-"] .mimicus-ui-glass-card {
 	position: relative;
 	overflow: hidden;
-	border-radius: var(--jagu-glass-radius);
-	border: 1px solid var(--jagu-glass-border-dark);
-	background-color: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 32%);
+	border-radius: var(--mimicus-glass-radius);
+	border: 1px solid var(--mimicus-glass-border-dark);
+	background-color: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 32%);
 	background-image: var(--mesh-dark);
 	backdrop-filter: blur(16px) saturate(160%);
 	-webkit-backdrop-filter: blur(16px) saturate(160%);
-	box-shadow: var(--jagu-glass-shadow-dark);
+	box-shadow: var(--mimicus-glass-shadow-dark);
 	transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-/* Catálogo — tokens neon sensibles a paleta (--jagu-primary / --jagu-info) */
+/* Catálogo — tokens neon sensibles a paleta (--mimicus-primary / --mimicus-info) */
 html[data-looknfeel^="neon-"] .catalog-home {
-	--catalog-sketch-accent: var(--pg-sketch-accent, var(--jagu-primary));
+	--catalog-sketch-accent: var(--pg-sketch-accent, var(--mimicus-primary));
 	--catalog-sketch-color: color-mix(in srgb, var(--catalog-sketch-accent), var(--pg-text-muted) 45%);
 	--catalog-fg: var(--pg-text);
 	--catalog-muted: var(--pg-text-muted);
-	--catalog-section-nav-bg: color-mix(in srgb, var(--jagu-glass-bg-dark), var(--jagu-primary) 14%);
-	--catalog-section-nav-border: color-mix(in srgb, var(--jagu-primary), transparent 62%);
-	--catalog-section-nav-hover-bg: color-mix(in srgb, var(--jagu-glass-bg-dark), var(--jagu-primary) 20%);
-	--catalog-section-nav-hover-border: color-mix(in srgb, var(--jagu-primary), transparent 45%);
+	--catalog-section-nav-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), var(--mimicus-primary) 14%);
+	--catalog-section-nav-border: color-mix(in srgb, var(--mimicus-primary), transparent 62%);
+	--catalog-section-nav-hover-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), var(--mimicus-primary) 20%);
+	--catalog-section-nav-hover-border: color-mix(in srgb, var(--mimicus-primary), transparent 45%);
 	--catalog-section-nav-hover-shadow:
-		0 4px 16px color-mix(in srgb, var(--jagu-primary), transparent 84%),
+		0 4px 16px color-mix(in srgb, var(--mimicus-primary), transparent 84%),
 		0 0 24px color-mix(in srgb, var(--neon-cyan), transparent 88%);
-	--catalog-section-nav-focus: color-mix(in srgb, var(--jagu-primary), transparent 35%);
-	--catalog-section-icon: var(--jagu-primary);
-	--catalog-card-bg: var(--jagu-glass-bg-dark);
+	--catalog-section-nav-focus: color-mix(in srgb, var(--mimicus-primary), transparent 35%);
+	--catalog-section-icon: var(--mimicus-primary);
+	--catalog-card-bg: var(--mimicus-glass-bg-dark);
 	--catalog-card-bg-image: var(--mesh-card-dark);
 	--catalog-card-bg-size: 270% 245%;
 	--catalog-card-bg-position: 40% 34%;
-	--catalog-card-border: color-mix(in srgb, var(--jagu-primary), transparent 62%);
-	--catalog-card-shadow: var(--jagu-glass-shadow-dark);
+	--catalog-card-border: color-mix(in srgb, var(--mimicus-primary), transparent 62%);
+	--catalog-card-shadow: var(--mimicus-glass-shadow-dark);
 	--catalog-card-backdrop: blur(22px) saturate(155%);
-	--catalog-card-hover-border: color-mix(in srgb, var(--jagu-primary), transparent 35%);
+	--catalog-card-hover-border: color-mix(in srgb, var(--mimicus-primary), transparent 35%);
 	--catalog-card-hover-shadow:
-		var(--jagu-glass-shadow-dark),
-		0 0 36px color-mix(in srgb, var(--jagu-primary), transparent 78%),
+		var(--mimicus-glass-shadow-dark),
+		0 0 36px color-mix(in srgb, var(--mimicus-primary), transparent 78%),
 		0 0 64px color-mix(in srgb, var(--neon-purple), transparent 88%);
 	--catalog-card-hover-transform: translateY(-2px);
-	--catalog-card-focus: color-mix(in srgb, var(--jagu-primary), transparent 30%);
-	--catalog-card-preview-bg: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 64%);
+	--catalog-card-focus: color-mix(in srgb, var(--mimicus-primary), transparent 30%);
+	--catalog-card-preview-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 64%);
 	--catalog-card-preview-backdrop: blur(16px) saturate(145%);
-	--catalog-card-preview-border: color-mix(in srgb, var(--jagu-primary), transparent 88%);
-	--catalog-card-preview-color: color-mix(in srgb, var(--pg-text-muted), var(--jagu-primary) 22%);
+	--catalog-card-preview-border: color-mix(in srgb, var(--mimicus-primary), transparent 88%);
+	--catalog-card-preview-color: color-mix(in srgb, var(--pg-text-muted), var(--mimicus-primary) 22%);
 	--catalog-card-footer-fg: var(--pg-text);
 	--catalog-card-name-fg: var(--pg-text);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-glass-card,
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-ui-glass-card {
-	border-color: var(--jagu-glass-border-light);
-	background-color: var(--jagu-glass-bg-light);
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-glass-card,
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-ui-glass-card {
+	border-color: var(--mimicus-glass-border-light);
+	background-color: var(--mimicus-glass-bg-light);
 	background-image: var(--mesh-light);
-	box-shadow: var(--jagu-glass-shadow-light);
+	box-shadow: var(--mimicus-glass-shadow-light);
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .catalog-home {
-	--catalog-sketch-accent: var(--pg-sketch-accent, var(--jagu-primary));
-	--catalog-sketch-color: color-mix(in srgb, var(--pg-sketch-accent, var(--jagu-primary)), var(--jagu-color) 42%);
-	--catalog-fg: var(--jagu-color);
+	--catalog-sketch-accent: var(--pg-sketch-accent, var(--mimicus-primary));
+	--catalog-sketch-color: color-mix(in srgb, var(--pg-sketch-accent, var(--mimicus-primary)), var(--mimicus-color) 42%);
+	--catalog-fg: var(--mimicus-color);
 	--catalog-muted: var(--pg-text-muted);
-	--catalog-section-nav-bg: color-mix(in srgb, var(--jagu-primary), var(--jagu-bg-secondary) 92%);
+	--catalog-section-nav-bg: color-mix(in srgb, var(--mimicus-primary), var(--mimicus-bg-secondary) 92%);
 	--catalog-section-nav-border: var(--pg-field-border);
-	--catalog-section-nav-hover-bg: color-mix(in srgb, var(--jagu-primary), var(--jagu-bg-secondary) 86%);
-	--catalog-section-nav-hover-border: color-mix(in srgb, var(--jagu-primary), transparent 50%);
+	--catalog-section-nav-hover-bg: color-mix(in srgb, var(--mimicus-primary), var(--mimicus-bg-secondary) 86%);
+	--catalog-section-nav-hover-border: color-mix(in srgb, var(--mimicus-primary), transparent 50%);
 	--catalog-section-nav-hover-shadow:
-		0 0 16px color-mix(in srgb, var(--jagu-primary), transparent 84%),
+		0 0 16px color-mix(in srgb, var(--mimicus-primary), transparent 84%),
 		0 0 28px color-mix(in srgb, var(--neon-cyan), transparent 90%),
-		0 0 0 1px color-mix(in srgb, var(--jagu-primary), transparent 86%);
-	--catalog-section-nav-focus: color-mix(in srgb, var(--jagu-primary), transparent 30%);
-	--catalog-section-icon: var(--jagu-primary);
-	--catalog-card-bg: var(--jagu-bg-secondary);
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 86%);
+	--catalog-section-nav-focus: color-mix(in srgb, var(--mimicus-primary), transparent 30%);
+	--catalog-section-icon: var(--mimicus-primary);
+	--catalog-card-bg: var(--mimicus-bg-secondary);
 	--catalog-card-bg-image: var(--mesh-card-light);
 	--catalog-card-bg-size: 270% 245%;
 	--catalog-card-bg-position: 40% 34%;
 	--catalog-card-border: var(--pg-field-border);
-	--catalog-card-shadow: var(--jagu-glass-shadow-light);
+	--catalog-card-shadow: var(--mimicus-glass-shadow-light);
 	--catalog-card-backdrop: blur(22px) saturate(155%);
-	--catalog-card-hover-border: color-mix(in srgb, var(--jagu-primary), transparent 50%);
+	--catalog-card-hover-border: color-mix(in srgb, var(--mimicus-primary), transparent 50%);
 	--catalog-card-hover-shadow:
-		0 0 20px color-mix(in srgb, var(--jagu-primary), transparent 82%),
+		0 0 20px color-mix(in srgb, var(--mimicus-primary), transparent 82%),
 		0 0 36px color-mix(in srgb, var(--neon-blue), transparent 88%),
-		0 0 0 1px color-mix(in srgb, var(--jagu-primary), transparent 86%);
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 86%);
 	--catalog-card-hover-transform: translateY(-1px);
-	--catalog-card-focus: color-mix(in srgb, var(--jagu-primary), transparent 25%);
-	--catalog-card-preview-bg: color-mix(in srgb, var(--jagu-bg-secondary), transparent 58%);
+	--catalog-card-focus: color-mix(in srgb, var(--mimicus-primary), transparent 25%);
+	--catalog-card-preview-bg: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 58%);
 	--catalog-card-preview-backdrop: blur(16px) saturate(145%);
 	--catalog-card-preview-border: var(--pg-field-border);
-	--catalog-card-preview-color: color-mix(in srgb, var(--jagu-color), transparent 38%);
-	--catalog-card-footer-fg: var(--jagu-color);
-	--catalog-card-name-fg: var(--jagu-color);
+	--catalog-card-preview-color: color-mix(in srgb, var(--mimicus-color), transparent 38%);
+	--catalog-card-footer-fg: var(--mimicus-color);
+	--catalog-card-name-fg: var(--mimicus-color);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-glass-card--hover:hover,
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-ui-glass-card--hover:hover {
-	border-color: color-mix(in srgb, var(--jagu-primary), transparent 50%);
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-glass-card--hover:hover,
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-ui-glass-card--hover:hover {
+	border-color: color-mix(in srgb, var(--mimicus-primary), transparent 50%);
 	box-shadow:
-		0 0 18px color-mix(in srgb, var(--jagu-primary), transparent 80%),
+		0 0 18px color-mix(in srgb, var(--mimicus-primary), transparent 80%),
 		0 0 32px color-mix(in srgb, var(--neon-cyan), transparent 88%),
-		0 0 0 1px color-mix(in srgb, var(--jagu-primary), transparent 86%);
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 86%);
 	transform: translateY(-1px);
 }
 
@@ -631,9 +631,9 @@ html[data-looknfeel^="neon-"] .catalog-home__title {
 	margin: 0.15rem 0 0.35rem;
 	background: linear-gradient(
 		100deg,
-		var(--jagu-color) 0%,
-		var(--jagu-primary) 52%,
-		color-mix(in srgb, var(--jagu-primary), var(--jagu-info) 38%) 100%
+		var(--mimicus-color) 0%,
+		var(--mimicus-primary) 52%,
+		color-mix(in srgb, var(--mimicus-primary), var(--mimicus-info) 38%) 100%
 	);
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -643,48 +643,48 @@ html[data-looknfeel^="neon-"] .catalog-home__title {
 }
 
 html[data-luminance="dark"][data-looknfeel^="neon-"] .catalog-home__title {
-	text-shadow: 0 0 40px color-mix(in srgb, var(--jagu-primary), transparent 80%);
+	text-shadow: 0 0 40px color-mix(in srgb, var(--mimicus-primary), transparent 80%);
 }
 
-html[data-looknfeel^="neon-"] .catalog-home .jagu-ui-section-label,
-html[data-looknfeel^="neon-"] .catalog-section .jagu-neon-section-label,
-html[data-looknfeel^="neon-"] .catalog-section .jagu-ui-section-label {
+html[data-looknfeel^="neon-"] .catalog-home .mimicus-ui-section-label,
+html[data-looknfeel^="neon-"] .catalog-section .mimicus-neon-section-label,
+html[data-looknfeel^="neon-"] .catalog-section .mimicus-ui-section-label {
 	margin: 0;
 	font-size: 1.15rem;
 	font-weight: 700;
 	letter-spacing: 0.03em;
-	color: var(--pg-section-accent, color-mix(in srgb, var(--jagu-primary), var(--pg-text) 25%));
+	color: var(--pg-section-accent, color-mix(in srgb, var(--mimicus-primary), var(--pg-text) 25%));
 }
 
 /* Paleta & Look — contraste legible (neon + paletas saturadas) */
 html[data-looknfeel^="neon-"] .theme-lab__title,
 html[data-looknfeel^="neon-"] .theme-lab__swatch-label,
 html[data-looknfeel^="neon-"] .theme-lab__swatch-token {
-	color: var(--jagu-color);
+	color: var(--mimicus-color);
 }
 
 html[data-looknfeel^="neon-"] .theme-lab__section-title {
-	color: color-mix(in srgb, var(--jagu-color), var(--jagu-primary) 22%);
+	color: color-mix(in srgb, var(--mimicus-color), var(--mimicus-primary) 22%);
 }
 
 html[data-looknfeel^="neon-"] .theme-lab__swatch {
-	border-color: color-mix(in srgb, var(--jagu-b-color), var(--jagu-color) 18%);
-	background: color-mix(in srgb, var(--jagu-bg-secondary), transparent 10%);
-	color: var(--jagu-color);
+	border-color: color-mix(in srgb, var(--mimicus-b-color), var(--mimicus-color) 18%);
+	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 10%);
+	color: var(--mimicus-color);
 }
 
 html[data-looknfeel^="neon-"] .theme-lab__samples :is(button, .button-wrap)[data-variant="outlined"] {
-	color: color-mix(in srgb, var(--bttn-clr) 48%, var(--jagu-color) 52%) !important;
-	background: color-mix(in srgb, var(--jagu-bg-secondary), transparent 18%) !important;
+	color: color-mix(in srgb, var(--bttn-clr) 48%, var(--mimicus-color) 52%) !important;
+	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 18%) !important;
 }
 
 html[data-looknfeel^="neon-"] .theme-lab__samples span[data-variant="soft"] {
-	color: color-mix(in srgb, var(--bdg-clr) 42%, var(--jagu-color) 58%) !important;
+	color: color-mix(in srgb, var(--bdg-clr) 42%, var(--mimicus-color) 58%) !important;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-neon-section-label,
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-ui-section-label {
-	color: color-mix(in srgb, var(--jagu-primary), var(--jagu-color) 32%);
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-neon-section-label,
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-ui-section-label {
+	color: color-mix(in srgb, var(--mimicus-primary), var(--mimicus-color) 32%);
 	letter-spacing: 0.02em;
 	background: none;
 	-webkit-background-clip: unset;
@@ -693,7 +693,7 @@ html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-ui-section-label {
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .accordion.pg-glass-accordion .accordion-body,
 html[data-luminance="light"][data-looknfeel^="neon-"] .demo-panel.pg-glass-demo .demo-panel-body {
-	background: color-mix(in srgb, var(--jagu-bg-readonly), transparent 42%) !important;
+	background: color-mix(in srgb, var(--mimicus-bg-readonly), transparent 42%) !important;
 	border-top-color: var(--pg-field-border) !important;
 }
 
@@ -707,7 +707,7 @@ html[data-looknfeel^="neon-"] .preview-frame {
 	color: var(--pg-text);
 	border-radius: 12px;
 	border-style: solid;
-	--pg-preview-frame-bg: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 52%);
+	--pg-preview-frame-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 52%);
 	--pg-preview-frame-border: color-mix(in srgb, var(--neon-cyan), transparent 72%);
 	--pg-preview-stage-bg: transparent;
 	--pg-preview-stage-shadow: none;
@@ -729,7 +729,7 @@ html[data-looknfeel^="neon-"] .preview-frame .preview-viewport {
 		linear-gradient(90deg, color-mix(in srgb, var(--neon-cyan), transparent 76%) 1px, transparent 1px),
 		radial-gradient(ellipse 72% 58% at 50% 42%, color-mix(in srgb, var(--neon-blue), transparent 86%), transparent 68%),
 		radial-gradient(ellipse 48% 38% at 82% 78%, color-mix(in srgb, var(--neon-purple), transparent 88%), transparent 72%),
-		color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 62%);
+		color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 62%);
 	background-size: 36px 36px, 36px 36px, auto, auto, auto;
 }
 
@@ -748,23 +748,23 @@ html[data-looknfeel^="neon-"] .preview-frame .preview-stage {
 }
 
 html[data-looknfeel^="neon-"] .preview-frame .card-root {
-	background: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 48%) !important;
+	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 48%) !important;
 	border-color: color-mix(in srgb, var(--neon-cyan), transparent 68%) !important;
 	backdrop-filter: blur(10px) saturate(155%);
 	-webkit-backdrop-filter: blur(10px) saturate(155%);
 	box-shadow:
 		0 0 0 1px color-mix(in srgb, var(--neon-blue), transparent 78%),
-		0 0 22px color-mix(in srgb, var(--jagu-design-active-1, var(--neon-blue)), transparent 74%),
+		0 0 22px color-mix(in srgb, var(--mimicus-design-active-1, var(--neon-blue)), transparent 74%),
 		0 0 44px color-mix(in srgb, var(--neon-purple), transparent 86%) !important;
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .preview-frame {
-	--pg-preview-frame-bg: color-mix(in srgb, var(--jagu-glass-bg-light), transparent 42%);
-	--pg-preview-frame-border: color-mix(in srgb, var(--jagu-primary), transparent 72%);
+	--pg-preview-frame-bg: color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 42%);
+	--pg-preview-frame-border: color-mix(in srgb, var(--mimicus-primary), transparent 72%);
 	--pg-preview-vignette: var(--neon-blue);
 	--pg-preview-vignette-mix: 98%;
 	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--jagu-primary), transparent 88%),
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 88%),
 		0 6px 24px color-mix(in srgb, var(--neon-blue), transparent 90%),
 		0 0 36px color-mix(in srgb, var(--neon-cyan), transparent 94%) !important;
 }
@@ -773,16 +773,16 @@ html[data-luminance="light"][data-looknfeel^="neon-"] .preview-frame .preview-vi
 	background:
 		linear-gradient(color-mix(in srgb, var(--neon-blue), transparent 80%) 1px, transparent 1px),
 		linear-gradient(90deg, color-mix(in srgb, var(--neon-blue), transparent 80%) 1px, transparent 1px),
-		radial-gradient(ellipse 70% 55% at 50% 40%, color-mix(in srgb, var(--jagu-primary), transparent 90%), transparent 70%),
-		color-mix(in srgb, var(--jagu-glass-bg-light), transparent 52%);
+		radial-gradient(ellipse 70% 55% at 50% 40%, color-mix(in srgb, var(--mimicus-primary), transparent 90%), transparent 70%),
+		color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 52%);
 	background-size: 36px 36px, 36px 36px, auto, auto;
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .preview-frame .card-root {
-	background: color-mix(in srgb, var(--jagu-glass-bg-light), transparent 38%) !important;
-	border-color: color-mix(in srgb, var(--jagu-primary), transparent 74%) !important;
+	background: color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 38%) !important;
+	border-color: color-mix(in srgb, var(--mimicus-primary), transparent 74%) !important;
 	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--jagu-primary), transparent 84%),
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 84%),
 		0 0 18px color-mix(in srgb, var(--neon-blue), transparent 88%),
 		0 0 32px color-mix(in srgb, var(--neon-cyan), transparent 92%) !important;
 }
@@ -851,18 +851,18 @@ html[data-looknfeel^="neon-"] .preview-frame :is(button, .button-wrap)[data-vari
 		0 0 28px color-mix(in srgb, var(--neon-cyan), transparent 86%) !important;
 }
 
-html[data-looknfeel^="neon-"] .jagu-glass-card--hover:hover,
-html[data-looknfeel^="neon-"] .jagu-ui-glass-card--hover:hover {
+html[data-looknfeel^="neon-"] .mimicus-glass-card--hover:hover,
+html[data-looknfeel^="neon-"] .mimicus-ui-glass-card--hover:hover {
 	border-color: color-mix(in srgb, var(--neon-cyan), transparent 35%);
 	box-shadow:
-		var(--jagu-glass-shadow-dark),
+		var(--mimicus-glass-shadow-dark),
 		0 0 36px color-mix(in srgb, var(--neon-blue), transparent 76%),
 		0 0 64px color-mix(in srgb, var(--neon-purple), transparent 86%);
 	transform: translateY(-2px);
 }
 
-html[data-looknfeel^="neon-"] .jagu-neon-section-label,
-html[data-looknfeel^="neon-"] .jagu-ui-section-label {
+html[data-looknfeel^="neon-"] .mimicus-neon-section-label,
+html[data-looknfeel^="neon-"] .mimicus-ui-section-label {
 	margin: 0;
 	font-size: 1.15rem;
 	font-weight: 700;
@@ -875,8 +875,8 @@ html[data-looknfeel^="neon-"] .pg-sidebar .sidebar-separator {
 }
 
 html[data-looknfeel^="neon-"] .pg-sidebar {
-	--pg-sidebar-chrome: color-mix(in oklch, var(--jagu-glass-bg-dark), var(--neon-cyan) 10%);
-	--pg-sidebar-fg: var(--pg-text, var(--jagu-color));
+	--pg-sidebar-chrome: color-mix(in oklch, var(--mimicus-glass-bg-dark), var(--neon-cyan) 10%);
+	--pg-sidebar-fg: var(--pg-text, var(--mimicus-color));
 }
 
 /* Sidebar — acordeones (blend sección × chrome neon) */
@@ -918,7 +918,7 @@ html[data-looknfeel^="neon-"] .pg-sidebar .sm-section .sm-content {
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .pg-sidebar {
-	--pg-sidebar-chrome: color-mix(in oklch, var(--jagu-bg-secondary), var(--jagu-primary) 8%);
+	--pg-sidebar-chrome: color-mix(in oklch, var(--mimicus-bg-secondary), var(--mimicus-primary) 8%);
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .pg-sidebar .sm-section {
@@ -975,20 +975,20 @@ html[data-looknfeel^="neon-"] .pg-sidebar .sm-section :is(button, .button-wrap)[
 
 html[data-looknfeel^="neon-"] .accordion.pg-glass-accordion,
 html[data-looknfeel^="neon-"] .demo-panel.pg-glass-demo {
-	border: 1px solid var(--jagu-glass-border-dark) !important;
-	background: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 32%) !important;
+	border: 1px solid var(--mimicus-glass-border-dark) !important;
+	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 32%) !important;
 	background-image: var(--mesh-dark) !important;
 	backdrop-filter: blur(16px) saturate(155%);
 	-webkit-backdrop-filter: blur(16px) saturate(155%);
-	box-shadow: var(--jagu-glass-shadow-dark) !important;
+	box-shadow: var(--mimicus-glass-shadow-dark) !important;
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .accordion.pg-glass-accordion,
 html[data-luminance="light"][data-looknfeel^="neon-"] .demo-panel.pg-glass-demo {
-	border-color: var(--jagu-glass-border-light) !important;
-	background: color-mix(in srgb, var(--jagu-glass-bg-light), transparent 24%) !important;
+	border-color: var(--mimicus-glass-border-light) !important;
+	background: color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 24%) !important;
 	background-image: var(--mesh-light) !important;
-	box-shadow: var(--jagu-glass-shadow-light) !important;
+	box-shadow: var(--mimicus-glass-shadow-light) !important;
 }
 
 html[data-looknfeel^="neon-"] .accordion.pg-glass-accordion .accordion-body,
@@ -1004,14 +1004,14 @@ html[data-looknfeel^="neon-"] .accordion.pg-glass-accordion .accordion-header-wr
 	padding: 0.85rem 1rem;
 	border-bottom: 1px solid color-mix(in srgb, var(--neon-blue), transparent 85%);
 	color: var(--pg-text);
-	background: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 8%);
+	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 8%);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .demo-panel.pg-glass-demo .demo-panel-header,
 html[data-luminance="light"][data-looknfeel^="neon-"] .accordion.pg-glass-accordion .accordion-header-wrap {
-	background: color-mix(in srgb, var(--jagu-glass-bg-light), var(--jagu-bg-secondary) 32%);
+	background: color-mix(in srgb, var(--mimicus-glass-bg-light), var(--mimicus-bg-secondary) 32%);
 }
 
 html[data-looknfeel^="neon-"] .demo-panel.pg-glass-demo .demo-panel-header + .demo-panel-body {
@@ -1026,7 +1026,7 @@ html[data-looknfeel^="neon-"] :is(.demo-panel-header, .accordion-header-wrap) :i
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] :is(.demo-panel-header, .accordion-header-wrap) :is(h2, h2 *, .title, .title-icon) {
-	color: color-mix(in srgb, var(--jagu-primary), var(--jagu-color) 38%) !important;
+	color: color-mix(in srgb, var(--mimicus-primary), var(--mimicus-color) 38%) !important;
 }
 
 html[data-luminance="dark"][data-looknfeel^="neon-"] :is(.demo-panel-header, .accordion-header-wrap) :is(h2, h2 *, .title, .title-icon) {
@@ -1039,7 +1039,7 @@ html[data-looknfeel^="neon-"] .demo-panel.pg-glass-demo .demo-panel-header .head
 }
 
 html[data-looknfeel^="neon-"] .accordion.pg-glass-accordion .accordion-header-wrap.is-stuck {
-	background: color-mix(in srgb, var(--jagu-glass-bg-dark), transparent 8%) !important;
+	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 8%) !important;
 	backdrop-filter: blur(8px);
 }
 
@@ -1048,13 +1048,13 @@ html[data-looknfeel^="neon-"] .accordion.pg-glass-accordion .head .title {
 }
 
 html[data-looknfeel^="neon-"] .code-inline {
-	background: color-mix(in srgb, var(--jagu-bg-readonly), transparent 20%) !important;
+	background: color-mix(in srgb, var(--mimicus-bg-readonly), transparent 20%) !important;
 	border-color: color-mix(in srgb, var(--neon-purple), transparent 70%) !important;
 	font-family: var(--pg-font-mono);
 }
 
 html[data-luminance="light"][data-looknfeel^="neon-"] .code-inline {
-	background: color-mix(in srgb, var(--jagu-bg-readonly), var(--jagu-bg-secondary) 30%) !important;
+	background: color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-bg-secondary) 30%) !important;
 }
 
 html[data-looknfeel^="neon-"] *::-webkit-scrollbar,
@@ -1065,28 +1065,28 @@ html[data-looknfeel^="neon-"] :is(.custom-scrollbar, .pg-scrollbar)::-webkit-scr
 
 html[data-looknfeel^="neon-"] *::-webkit-scrollbar-track,
 html[data-looknfeel^="neon-"] :is(.custom-scrollbar, .pg-scrollbar)::-webkit-scrollbar-track {
-	background: color-mix(in srgb, var(--jagu-primary) 10%, transparent);
+	background: color-mix(in srgb, var(--mimicus-primary) 10%, transparent);
 }
 
 html[data-looknfeel^="neon-"] *::-webkit-scrollbar-thumb,
 html[data-looknfeel^="neon-"] :is(.custom-scrollbar, .pg-scrollbar)::-webkit-scrollbar-thumb {
 	background: linear-gradient(
 		180deg,
-		color-mix(in srgb, var(--jagu-primary) 68%, transparent),
-		color-mix(in srgb, var(--jagu-info, var(--jagu-primary)) 48%, transparent)
+		color-mix(in srgb, var(--mimicus-primary) 68%, transparent),
+		color-mix(in srgb, var(--mimicus-info, var(--mimicus-primary)) 48%, transparent)
 	);
 	border-radius: 999px;
-	box-shadow: 0 0 6px color-mix(in srgb, var(--jagu-primary) 35%, transparent);
+	box-shadow: 0 0 6px color-mix(in srgb, var(--mimicus-primary) 35%, transparent);
 }
 
 html[data-looknfeel^="neon-"] *::-webkit-scrollbar-thumb:hover,
 html[data-looknfeel^="neon-"] :is(.custom-scrollbar, .pg-scrollbar)::-webkit-scrollbar-thumb:hover {
 	background: linear-gradient(
 		180deg,
-		color-mix(in srgb, var(--jagu-primary) 82%, transparent),
-		color-mix(in srgb, var(--jagu-info, var(--jagu-primary)) 62%, transparent)
+		color-mix(in srgb, var(--mimicus-primary) 82%, transparent),
+		color-mix(in srgb, var(--mimicus-info, var(--mimicus-primary)) 62%, transparent)
 	);
-	box-shadow: 0 0 10px color-mix(in srgb, var(--jagu-primary) 45%, transparent);
+	box-shadow: 0 0 10px color-mix(in srgb, var(--mimicus-primary) 45%, transparent);
 }
 
 html[data-looknfeel^="neon-"] *,
@@ -1097,16 +1097,16 @@ html[data-looknfeel^="neon-"] :is(.custom-scrollbar, .pg-scrollbar) {
 /* —— Demo panel: legibilidad (config, casos de prueba, intro) —— */
 html[data-looknfeel^="neon-"] .demo-panel-body,
 html[data-looknfeel^="neon-"] .accordion.pg-glass-accordion .accordion-body {
-	--jagu-color: var(--pg-text);
-	--jagu-b-optional: color-mix(in srgb, var(--jagu-primary), var(--pg-text-muted) 55%);
-	--jagu-b-required: color-mix(in srgb, var(--jagu-primary), var(--pg-text) 25%);
-	--jagu-b-readonly: color-mix(in srgb, var(--pg-text-muted), transparent 35%);
-	--jagu-bg-readonly: color-mix(in srgb, var(--pg-text-muted), transparent 88%);
+	--mimicus-color: var(--pg-text);
+	--mimicus-b-optional: color-mix(in srgb, var(--mimicus-primary), var(--pg-text-muted) 55%);
+	--mimicus-b-required: color-mix(in srgb, var(--mimicus-primary), var(--pg-text) 25%);
+	--mimicus-b-readonly: color-mix(in srgb, var(--pg-text-muted), transparent 35%);
+	--mimicus-bg-readonly: color-mix(in srgb, var(--pg-text-muted), transparent 88%);
 }
 
 html[data-luminance="dark"][data-looknfeel^="neon-"] .demo-panel.pg-glass-demo .demo-panel-body,
 html[data-luminance="dark"][data-looknfeel^="neon-"] .accordion.pg-glass-accordion .accordion-body {
-	background: color-mix(in srgb, var(--jagu-bg-readonly), var(--neon-purple) 6%) !important;
+	background: color-mix(in srgb, var(--mimicus-bg-readonly), var(--neon-purple) 6%) !important;
 	border-top-color: var(--pg-field-border) !important;
 }
 
@@ -1150,14 +1150,14 @@ html[data-looknfeel^="neon-"] .demo-panel-body .input-decorated-label-icon {
 }
 
 html[data-looknfeel^="neon-"] .demo-panel-body .palette-grid__label,
-html[data-looknfeel^="neon-"] .demo-panel-body .jagu-input-decorated-label {
+html[data-looknfeel^="neon-"] .demo-panel-body .mimicus-input-decorated-label {
 	color: var(--pg-text) !important;
 	border-bottom-color: var(--pg-field-border) !important;
 	opacity: 1 !important;
 }
 
 html[data-looknfeel^="neon-"] .demo-panel-body input,
-html[data-looknfeel^="neon-"] .demo-panel-body .jagu-autocomplete__input,
+html[data-looknfeel^="neon-"] .demo-panel-body .mimicus-autocomplete__input,
 html[data-looknfeel^="neon-"] .demo-panel-body .input-decorated-number {
 	color: var(--pg-text) !important;
 }
@@ -1176,12 +1176,12 @@ html[data-looknfeel^="neon-"] .demo-panel-body label.translate {
 }
 
 html[data-looknfeel^="neon-"] .demo-panel-body .label-required-mark {
-	color: var(--jagu-b-required, #8888) !important;
+	color: var(--mimicus-b-required, #8888) !important;
 	opacity: 1 !important;
 }
 
-html[data-looknfeel^="neon-"] .jagu-autocomplete__panel {
-	background: color-mix(in srgb, var(--jagu-glass-bg-dark), var(--pg-text) 4%) !important;
+html[data-looknfeel^="neon-"] .mimicus-autocomplete__panel {
+	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), var(--pg-text) 4%) !important;
 	border-color: var(--pg-field-border) !important;
 	color: var(--pg-text);
 	box-shadow:
@@ -1189,39 +1189,39 @@ html[data-looknfeel^="neon-"] .jagu-autocomplete__panel {
 		0 0 48px color-mix(in srgb, var(--neon-purple), transparent 86%);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-autocomplete__panel {
-	background: var(--jagu-bg-secondary) !important;
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-autocomplete__panel {
+	background: var(--mimicus-bg-secondary) !important;
 	border-color: var(--pg-field-border) !important;
-	color: var(--jagu-color);
-	box-shadow: 0 8px 28px color-mix(in srgb, var(--jagu-color), transparent 88%);
+	color: var(--mimicus-color);
+	box-shadow: 0 8px 28px color-mix(in srgb, var(--mimicus-color), transparent 88%);
 }
 
-html[data-looknfeel^="neon-"] .jagu-autocomplete__option {
+html[data-looknfeel^="neon-"] .mimicus-autocomplete__option {
 	color: var(--pg-text);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-autocomplete__option {
-	color: var(--jagu-color);
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-autocomplete__option {
+	color: var(--mimicus-color);
 }
 
-html[data-looknfeel^="neon-"] .jagu-autocomplete__option--active,
-html[data-looknfeel^="neon-"] .jagu-autocomplete__option:hover {
-	background: color-mix(in srgb, var(--jagu-primary), transparent 82%);
+html[data-looknfeel^="neon-"] .mimicus-autocomplete__option--active,
+html[data-looknfeel^="neon-"] .mimicus-autocomplete__option:hover {
+	background: color-mix(in srgb, var(--mimicus-primary), transparent 82%);
 	color: var(--pg-text);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-autocomplete__option--active,
-html[data-luminance="light"][data-looknfeel^="neon-"] .jagu-autocomplete__option:hover {
-	background: color-mix(in srgb, var(--jagu-primary), transparent 88%);
-	color: var(--jagu-color);
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-autocomplete__option--active,
+html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-autocomplete__option:hover {
+	background: color-mix(in srgb, var(--mimicus-primary), transparent 88%);
+	color: var(--mimicus-color);
 }
 
-html[data-looknfeel^="neon-"] .demo-panel-body .jagu-autocomplete__input {
+html[data-looknfeel^="neon-"] .demo-panel-body .mimicus-autocomplete__input {
 	border-bottom-color: var(--pg-field-border) !important;
 }
 
-html[data-looknfeel^="neon-"] .demo-panel-body .jagu-autocomplete__input:focus {
-	border-bottom-color: color-mix(in srgb, var(--jagu-primary), var(--pg-text) 30%) !important;
+html[data-looknfeel^="neon-"] .demo-panel-body .mimicus-autocomplete__input:focus {
+	border-bottom-color: color-mix(in srgb, var(--mimicus-primary), var(--pg-text) 30%) !important;
 }
 
 html[data-looknfeel^="neon-"] .demo-panel-body .demo-test-rail {
@@ -1319,28 +1319,28 @@ html[data-luminance="dark"][data-looknfeel^="neon-"] .palette-grid__chip[data-va
 
 /* Esquema fijado por look — gradientes de marca coherentes mono · dual · tríada */
 html[data-looknfeel="neon-mono"] {
-	--jagu-ui-brand-gradient: linear-gradient(
+	--mimicus-ui-brand-gradient: linear-gradient(
 		105deg,
-		var(--jagu-design-active-1),
-		color-mix(in oklch, var(--jagu-design-active-1), white 22%) 72%
+		var(--mimicus-design-active-1),
+		color-mix(in oklch, var(--mimicus-design-active-1), white 22%) 72%
 	);
 }
 
 html[data-looknfeel="neon-dual"] {
-	--jagu-ui-brand-gradient: linear-gradient(
+	--mimicus-ui-brand-gradient: linear-gradient(
 		105deg,
-		var(--jagu-design-active-1) 0%,
-		var(--jagu-design-active-2) 58%,
-		color-mix(in oklch, var(--jagu-design-active-2), var(--neon-purple) 28%) 100%
+		var(--mimicus-design-active-1) 0%,
+		var(--mimicus-design-active-2) 58%,
+		color-mix(in oklch, var(--mimicus-design-active-2), var(--neon-purple) 28%) 100%
 	);
 }
 
 html[data-looknfeel="neon-triad"] {
-	--jagu-ui-brand-gradient: linear-gradient(
+	--mimicus-ui-brand-gradient: linear-gradient(
 		105deg,
-		var(--jagu-design-active-1) 0%,
-		var(--jagu-design-active-2) 42%,
-		var(--jagu-design-active-3) 78%,
+		var(--mimicus-design-active-1) 0%,
+		var(--mimicus-design-active-2) 42%,
+		var(--mimicus-design-active-3) 78%,
 		var(--neon-purple) 100%
 	);
 }

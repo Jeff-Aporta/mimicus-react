@@ -1,7 +1,12 @@
 {
   "componentRef": "main",
-  "jaguUi": {
-    "js": "jagu-ui.min.js",
-    "css": "jagu-ui.min.css"
+  "module": {
+    "main": "mimicus-react.esm.min.js",
+    "bootstrap": "mimicus-react.bootstrap.esm.min.js",
+    "css": "mimicus-ui.min.css"
+  },
+  "legacy": {
+    "js": "mimicus-ui.min.js",
+    "snippets": "mimicus-snippets.min.js"
   }
 }
