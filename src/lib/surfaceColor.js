@@ -1,7 +1,7 @@
-import { componentColorsIS, resolveColor } from "./resolveColor.js";
+import { componentColors, resolveColor } from "./resolveColor.js";
 
 const CSS_SURFACE_COLORS = new Set(
-  componentColorsIS.filter((c) => !["inherit", "currentColor", "white", "black", "transparent", "neutral", "bg", "card", "border", "color"].includes(c)),
+  componentColors.filter((c) => !["inherit", "currentColor", "white", "black", "transparent", "neutral", "bg", "card", "border", "color"].includes(c)),
 );
 
 export function surfaceColorAttrs(color, opts = {}) {

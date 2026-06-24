@@ -1,6 +1,6 @@
 const React = globalThis.React;
 const { useState } = React;
-const J = globalThis.ISAComponents.JaguUI;
+const J = globalThis.JaguUI;
 
 const {
   AppLayout, AppLayoutProvider, AppLayoutSider, Button, Card, ThemeProvider,

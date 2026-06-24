@@ -1,30 +1,30 @@
 /* Superficies Lab dual / tríada — `html[data-looknfeel="lab-dual|lab-triad"]` */
 
 html[data-looknfeel="lab-dual"] {
-	--lab-a1: var(--is-design-active-1, var(--is-primary));
-	--lab-a2: var(--is-design-active-2, var(--is-info));
-	--lab-a3: var(--is-design-active-2, var(--is-info));
+	--lab-a1: var(--jagu-design-active-1, var(--jagu-primary));
+	--lab-a2: var(--jagu-design-active-2, var(--jagu-info));
+	--lab-a3: var(--jagu-design-active-2, var(--jagu-info));
 	--lab-grad-solid: linear-gradient(128deg, var(--lab-a1), color-mix(in srgb, var(--lab-a2), var(--lab-a1) 36%));
-	--lab-grad-soft: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 22%, var(--is-bg-secondary)), color-mix(in srgb, var(--lab-a2) 10%, var(--is-bg-readonly)));
+	--lab-grad-soft: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 22%, var(--jagu-bg-secondary)), color-mix(in srgb, var(--lab-a2) 10%, var(--jagu-bg-readonly)));
 	--lab-grad-glass: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 28%, transparent), color-mix(in srgb, var(--lab-a2) 10%, transparent));
-	--lab-grad-outline: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 10%, var(--is-bg-secondary)), color-mix(in srgb, var(--lab-a2) 5%, var(--is-bg-readonly)));
+	--lab-grad-outline: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 10%, var(--jagu-bg-secondary)), color-mix(in srgb, var(--lab-a2) 5%, var(--jagu-bg-readonly)));
 }
 
 html[data-looknfeel="lab-triad"] {
-	--lab-a1: var(--is-design-active-1, var(--is-primary));
-	--lab-a2: var(--is-design-active-2, var(--is-info));
-	--lab-a3: var(--is-design-active-3, var(--is-warning));
+	--lab-a1: var(--jagu-design-active-1, var(--jagu-primary));
+	--lab-a2: var(--jagu-design-active-2, var(--jagu-info));
+	--lab-a3: var(--jagu-design-active-3, var(--jagu-warning));
 	--lab-grad-solid: linear-gradient(112deg, var(--lab-a1) 0%, color-mix(in srgb, var(--lab-a2), var(--lab-a1) 32%) 52%, var(--lab-a3) 100%);
-	--lab-grad-soft: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 18%, var(--is-bg-secondary)), color-mix(in srgb, var(--lab-a3) 12%, var(--is-bg-readonly)));
+	--lab-grad-soft: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 18%, var(--jagu-bg-secondary)), color-mix(in srgb, var(--lab-a3) 12%, var(--jagu-bg-readonly)));
 	--lab-grad-glass: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 24%, transparent), color-mix(in srgb, var(--lab-a3) 12%, transparent));
-	--lab-grad-outline: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 9%, var(--is-bg-secondary)), color-mix(in srgb, var(--lab-a3) 6%, var(--is-bg-readonly)));
+	--lab-grad-outline: linear-gradient(145deg, color-mix(in srgb, var(--lab-a1) 9%, var(--jagu-bg-secondary)), color-mix(in srgb, var(--lab-a3) 6%, var(--jagu-bg-readonly)));
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) {
 	--lab-on-accent: var(--ct-on-primary, #fff);
-	--lab-surface: color-mix(in srgb, var(--is-bg-secondary), var(--lab-a1) 5%);
-	--lab-surface-deep: color-mix(in srgb, var(--is-bg-readonly), var(--lab-a1) 4%);
-	--lab-border: color-mix(in srgb, var(--lab-a1), var(--is-b-color) 58%);
+	--lab-surface: color-mix(in srgb, var(--jagu-bg-secondary), var(--lab-a1) 5%);
+	--lab-surface-deep: color-mix(in srgb, var(--jagu-bg-readonly), var(--lab-a1) 4%);
+	--lab-border: color-mix(in srgb, var(--lab-a1), var(--jagu-b-color) 58%);
 	--lab-glow: 0 2px 14px color-mix(in srgb, var(--lab-a1), transparent 74%);
 }
 
@@ -53,7 +53,7 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(button, .
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="soft"] {
 	background: var(--lab-grad-soft);
 	border: 1px solid color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 38%);
-	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--is-color) 22%);
+	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--jagu-color) 22%);
 	box-shadow: inset 0 1px 0 color-mix(in srgb, var(--lab-on-accent), transparent 92%);
 }
 
@@ -62,7 +62,7 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(button, .
 	-webkit-backdrop-filter: blur(10px) saturate(145%);
 	background: var(--lab-grad-glass);
 	border: 1px solid color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 42%);
-	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--is-color) 18%);
+	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--jagu-color) 18%);
 	box-shadow: 0 0 0 1px color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 16%), 0 0 16px color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 78%);
 }
 
@@ -76,14 +76,14 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(button, .
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not(:hover):not(:active) {
 	background: var(--lab-grad-outline);
 	border: 1px solid color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 48%);
-	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--is-color) 15%);
+	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--jagu-color) 15%);
 	box-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 84%);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="text"] {
 	background: transparent;
 	border: none;
-	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--is-color) 12%);
+	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--jagu-color) 12%);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="text"]:not(:disabled):hover,
@@ -107,7 +107,7 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) span[data-var
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) span[data-variant="soft"] {
 	background: var(--lab-grad-soft);
 	border: 1px solid color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), transparent 38%);
-	color: color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), var(--is-color) 20%);
+	color: color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), var(--jagu-color) 20%);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) span[data-variant="glass"] {
@@ -115,14 +115,14 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) span[data-var
 	-webkit-backdrop-filter: blur(8px) saturate(140%);
 	background: var(--lab-grad-glass);
 	border: 1px solid color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), transparent 40%);
-	color: color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), var(--is-color) 16%);
+	color: color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), var(--jagu-color) 16%);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) span[data-variant="outlined"],
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) span[data-variant="ghost"]:not(:hover) {
 	background: var(--lab-grad-outline);
 	border: 1px solid color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), transparent 46%);
-	color: color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), var(--is-color) 14%);
+	color: color-mix(in srgb, var(--bdg-clr, var(--lab-a1)), var(--jagu-color) 14%);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) span[data-variant="ghost"]:hover {
@@ -138,7 +138,7 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .card-root[da
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .card-root[data-variant="onion"] {
 	background: var(--lab-surface) !important;
 	border-color: var(--lab-border) !important;
-	color: var(--is-color);
+	color: var(--jagu-color);
 	box-shadow: 0 4px 18px color-mix(in srgb, var(--lab-a1), transparent 86%), inset 0 1px 0 color-mix(in srgb, var(--lab-on-accent), transparent 94%) !important;
 }
 
@@ -152,7 +152,7 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .card-root[da
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) :is(.palette-grid__chip, .checkbox-chip__pill):not([data-chip-selected="true"]) {
 	background: var(--lab-grad-outline) !important;
 	border: 1px solid color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 44%) !important;
-	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--is-color) 18%) !important;
+	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--jagu-color) 18%) !important;
 	box-shadow: none !important;
 }
 
@@ -170,11 +170,11 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) label.checkbo
 	border-radius: 999px;
 	background: var(--lab-grad-outline);
 	border: 1px solid var(--lab-border);
-	color: var(--is-color);
+	color: var(--jagu-color);
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) label.checkbox-icon:has(input:checked) .lbl-cntnt {
-	background: color-mix(in srgb, var(--c-tr, var(--lab-a1)) 78%, var(--is-bg-secondary) 22%);
+	background: color-mix(in srgb, var(--c-tr, var(--lab-a1)) 78%, var(--jagu-bg-secondary) 22%);
 	border-color: color-mix(in srgb, var(--c-tr, var(--lab-a1)), transparent 42%);
 	color: var(--lab-on-accent);
 }
@@ -185,12 +185,12 @@ html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .pg-sidebar :
 	background: transparent !important;
 	border: none !important;
 	box-shadow: none !important;
-	color: var(--is-color) !important;
+	color: var(--jagu-color) !important;
 }
 
 html:is([data-looknfeel="lab-dual"], [data-looknfeel="lab-triad"]) .pg-sidebar :is(button, .button-wrap)[data-variant="soft"] {
-	background: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)) 14%, var(--is-bg-secondary)) !important;
+	background: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)) 14%, var(--jagu-bg-secondary)) !important;
 	border: 1px solid color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), transparent 50%) !important;
-	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--is-color) 20%) !important;
+	color: color-mix(in srgb, var(--bttn-clr, var(--lab-a1)), var(--jagu-color) 20%) !important;
 	box-shadow: none !important;
 }

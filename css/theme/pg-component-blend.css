@@ -1,8 +1,8 @@
 /* Blend chrome del look × acento semántico (--surface-accent) en panel demo y preview */
 
 .demo-panel-body {
-	--pg-panel-chrome: var(--pg-config-field-bg, var(--is-bg-secondary));
-	--pg-panel-fg: var(--pg-config-label-fg, var(--is-color));
+	--pg-panel-chrome: var(--pg-config-field-bg, var(--jagu-bg-secondary));
+	--pg-panel-fg: var(--pg-config-label-fg, var(--jagu-color));
 }
 
 .preview-frame {
@@ -13,7 +13,7 @@
 :is(.palette-grid__chip, .checkbox-chip__pill) {
 	--cmp-chrome: var(--pg-panel-chrome);
 	--cmp-chrome-fg: var(--pg-panel-fg);
-	--cmp-accent: var(--surface-accent, var(--is-primary));
+	--cmp-accent: var(--surface-accent, var(--jagu-primary));
 	--cmp-blend-bg: color-mix(in oklch, var(--cmp-chrome) 88%, var(--cmp-accent) 12%);
 	--cmp-blend-bg-hover: color-mix(in oklch, var(--cmp-chrome) 80%, var(--cmp-accent) 20%);
 	--cmp-blend-bg-active: color-mix(in oklch, var(--cmp-chrome) 58%, var(--cmp-accent) 42%);
@@ -94,7 +94,7 @@ html[data-looknfeel^="neon-"] .demo-panel-body .demo-config-shell :is(.palette-g
 .preview-frame :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
 	background: transparent !important;
 	background-image: none !important;
-	border: 1px solid color-mix(in oklch, var(--surface-accent, var(--is-primary)) 38%, var(--is-b-color)) !important;
+	border: 1px solid color-mix(in oklch, var(--surface-accent, var(--jagu-primary)) 38%, var(--jagu-b-color)) !important;
 	box-shadow: none !important;
 }
 

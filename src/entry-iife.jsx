@@ -1,5 +1,5 @@
 /**
- * @jeff-aporta/jagudeloe-react-ui — entry IIFE → window.ISAComponents.JaguUI
+ * @jeff-aporta/jagudeloe-react-ui — entry IIFE → window.JaguUI
  */
 import { AppLayout } from "./layout/AppLayout.jsx";
 import { AppLayoutProvider } from "./layout/appLayoutContext.jsx";
@@ -16,14 +16,12 @@ import * as appLayoutVariants from "./layout/appLayoutVariants.js";
 import { resolveColor, colorMix } from "./lib/resolveColor.js";
 import { mergeSurfaceStyle } from "./lib/surfaceColor.js";
 
-globalThis.ISAComponents = globalThis.ISAComponents || {};
-
 function bootJaguUI() {
   bootTheme();
   bootLooknfeel();
 }
 
-globalThis.ISAComponents.JaguUI = {
+globalThis.JaguUI = {
   bootJaguUI,
   bootTheme,
   bootLooknfeel,

@@ -1,8 +1,8 @@
 /* Navegación SPA lateral — enlaces simples (sin acordeón) */
 
 .jagu-sidebar {
-	--jagu-sidebar-chrome: var(--pg-sidebar-chrome, var(--is-bg-secondary));
-	--jagu-sidebar-fg: var(--pg-sidebar-fg, var(--is-color));
+	--jagu-sidebar-chrome: var(--pg-sidebar-chrome, var(--jagu-bg-secondary));
+	--jagu-sidebar-fg: var(--pg-sidebar-fg, var(--jagu-color));
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -48,7 +48,7 @@
 .jagu-sidebar .jagu-nav-link[data-variant="ghost"] {
 	--sm-chrome: var(--jagu-sidebar-chrome);
 	--sm-chrome-fg: var(--jagu-sidebar-fg);
-	--sm-accent: var(--is-design-1, var(--is-primary));
+	--sm-accent: var(--jagu-design-1, var(--jagu-primary));
 	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 91%, var(--sm-accent) 9%);
 	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 94%, var(--sm-accent) 6%);
 	--sm-blend-bg-active: color-mix(in oklch, var(--sm-chrome) 66%, var(--sm-accent) 34%);

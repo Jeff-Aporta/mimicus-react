@@ -106,7 +106,7 @@ html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):no
 html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="soft"] {
 	background: linear-gradient(180deg, var(--pg-wxp-surface, #fff) 0%, var(--pg-wxp-surface-deep, #ece9d8) 100%);
 	color: var(--pg-wxp-fg, #1a1a1a);
-	border: 1px solid var(--pg-wxp-border, var(--is-b-color));
+	border: 1px solid var(--pg-wxp-border, var(--jagu-b-color));
 	box-shadow: inset 0 1px 0 color-mix(in srgb, var(--pg-wxp-surface, #fff), transparent 15%);
 }
 
@@ -124,15 +124,15 @@ html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):no
 html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"],
 html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not(:hover):not(:active) {
 	background: linear-gradient(180deg, var(--pg-wxp-surface, #fff) 0%, var(--pg-wxp-surface-deep, #ece9d8) 100%);
-	color: var(--pg-wxp-fg, var(--is-color));
-	border: 1px solid var(--pg-wxp-border, var(--is-b-color));
+	color: var(--pg-wxp-fg, var(--jagu-color));
+	border: 1px solid var(--pg-wxp-border, var(--jagu-b-color));
 }
 
 html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not(:disabled):hover,
 html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not([aria-disabled="true"]):hover {
 	background: linear-gradient(180deg, var(--pg-wxp-surface, #fff) 0%, var(--pg-wxp-surface-deep, #ece9d8) 100%);
 	color: var(--pg-wxp-fg, #1a1a1a);
-	border: 1px solid var(--pg-wxp-border, var(--is-b-color));
+	border: 1px solid var(--pg-wxp-border, var(--jagu-b-color));
 	box-shadow: inset 0 1px 0 color-mix(in srgb, var(--pg-wxp-surface, #fff), transparent 15%);
 }
 
@@ -144,21 +144,21 @@ html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):no
 
 html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="text"] {
 	background: transparent;
-	color: var(--pg-wxp-fg, var(--is-color));
+	color: var(--pg-wxp-fg, var(--jagu-color));
 	border: none;
 }
 
 html[data-looknfeel="wxp"] :is(button, .button-wrap):not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"] {
 	background: linear-gradient(180deg, color-mix(in srgb, var(--pg-wxp-surface, #fff), transparent 5%), color-mix(in srgb, var(--pg-wxp-surface-deep, #ece9d8), transparent 8%));
-	border: 1px solid var(--pg-wxp-border, var(--is-b-color));
-	color: var(--pg-wxp-fg, var(--is-color));
+	border: 1px solid var(--pg-wxp-border, var(--jagu-b-color));
+	color: var(--pg-wxp-fg, var(--jagu-color));
 }
 
 html[data-looknfeel="wxp"] .card-root[data-variant="solid"],
 html[data-looknfeel="wxp"] .card-root[data-variant="flat"],
 html[data-looknfeel="wxp"] .card-root[data-variant="glass"] {
 	border-radius: 6px;
-	border: 1px solid var(--pg-wxp-border, var(--is-b-color));
+	border: 1px solid var(--pg-wxp-border, var(--jagu-b-color));
 	background: linear-gradient(180deg, var(--pg-wxp-surface, #fff) 0%, var(--pg-wxp-surface-deep, #ece9d8) 100%);
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), inset 0 1px 0 color-mix(in srgb, var(--pg-wxp-surface, #fff), transparent 12%);
 	color: var(--pg-wxp-fg, #1a1a1a);
@@ -168,7 +168,7 @@ html[data-looknfeel="wxp"] span[data-variant="solid"] {
 	border-radius: 10px;
 	background: linear-gradient(180deg, var(--bdg-bg-bs, var(--pg-win-accent, var(--bttn-clr))), color-mix(in oklch, var(--bdg-clr, var(--pg-win-accent, var(--bttn-clr))), black 18%));
 	color: #fff;
-	border: 1px solid var(--pg-wxp-border, var(--is-primary));
+	border: 1px solid var(--pg-wxp-border, var(--jagu-primary));
 }
 
 /* ── wvista: Aero, Segoe, glass sutil ── */
@@ -292,7 +292,7 @@ html[data-looknfeel="wxp"] :is(.palette-grid__chip, .checkbox-chip__pill):not([d
 		color-mix(in srgb, var(--bttn-clr) 4%, var(--pg-wxp-surface-deep, var(--pg-config-field-bg, #ece9d8)))
 	) !important;
 	color: color-mix(in srgb, var(--bttn-clr), var(--pg-wxp-fg, var(--pg-config-label-fg, #1a1a1a)) 40%) !important;
-	border: 1px solid color-mix(in srgb, var(--bttn-clr) 32%, var(--pg-wxp-border, color-mix(in srgb, var(--is-primary) 26%, #aca899 74%))) !important;
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 32%, var(--pg-wxp-border, color-mix(in srgb, var(--jagu-primary) 26%, #aca899 74%))) !important;
 	box-shadow: inset 0 1px 0 color-mix(in srgb, var(--pg-wxp-surface, white), transparent 10%) !important;
 }
 
@@ -303,7 +303,7 @@ html[data-looknfeel="wxp"] :is(.palette-grid__chip, .checkbox-chip__pill)[data-c
 		color-mix(in srgb, var(--bttn-clr), black 12%)
 	) !important;
 	color: oklch(from var(--bttn-clr) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
-	border: 1px solid color-mix(in srgb, var(--bttn-clr) 44%, var(--is-primary)) !important;
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 44%, var(--jagu-primary)) !important;
 	box-shadow: inset 0 1px 0 color-mix(in srgb, white, transparent 16%), inset 0 0 0 1px color-mix(in srgb, var(--bttn-clr), white 24%) !important;
 	font-weight: 700;
 }
@@ -315,7 +315,7 @@ html[data-looknfeel="wvista"] :is(.palette-grid__chip, .checkbox-chip__pill):not
 		color-mix(in srgb, var(--bttn-clr) 5%, var(--pg-vista-surface-deep, rgba(255, 255, 255, 0.34)))
 	) !important;
 	color: color-mix(in srgb, var(--bttn-clr), var(--pg-vista-fg, var(--pg-config-label-fg)) 38%) !important;
-	border: 1px solid color-mix(in srgb, var(--bttn-clr) 34%, var(--pg-vista-border, color-mix(in srgb, white, var(--is-primary) 35%))) !important;
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 34%, var(--pg-vista-border, color-mix(in srgb, white, var(--jagu-primary) 35%))) !important;
 	box-shadow: inset 0 1px 0 color-mix(in srgb, white, transparent 55%) !important;
 }
 
@@ -326,17 +326,17 @@ html[data-looknfeel="wvista"] :is(.palette-grid__chip, .checkbox-chip__pill)[dat
 		color-mix(in srgb, var(--bttn-clr), black 10%)
 	) !important;
 	color: oklch(from var(--bttn-clr) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
-	border: 1px solid color-mix(in srgb, var(--bttn-clr) 42%, var(--pg-vista-border, color-mix(in srgb, white, var(--is-primary) 35%))) !important;
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 42%, var(--pg-vista-border, color-mix(in srgb, white, var(--jagu-primary) 35%))) !important;
 	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bttn-clr), white 22%) !important;
 	font-weight: 700;
 }
 
-html[data-looknfeel="w98"] .palette-grid__chip :is(.checkbox-icon, .is-text-icon),
-html[data-looknfeel="wxp"] .palette-grid__chip :is(.checkbox-icon, .is-text-icon),
-html[data-looknfeel="wvista"] .palette-grid__chip :is(.checkbox-icon, .is-text-icon),
-html[data-looknfeel="w98"] .checkbox-chip__pill :is(.checkbox-icon, .is-text-icon),
-html[data-looknfeel="wxp"] .checkbox-chip__pill :is(.checkbox-icon, .is-text-icon),
-html[data-looknfeel="wvista"] .checkbox-chip__pill :is(.checkbox-icon, .is-text-icon) {
+html[data-looknfeel="w98"] .palette-grid__chip :is(.checkbox-icon, .jagu-text-icon),
+html[data-looknfeel="wxp"] .palette-grid__chip :is(.checkbox-icon, .jagu-text-icon),
+html[data-looknfeel="wvista"] .palette-grid__chip :is(.checkbox-icon, .jagu-text-icon),
+html[data-looknfeel="w98"] .checkbox-chip__pill :is(.checkbox-icon, .jagu-text-icon),
+html[data-looknfeel="wxp"] .checkbox-chip__pill :is(.checkbox-icon, .jagu-text-icon),
+html[data-looknfeel="wvista"] .checkbox-chip__pill :is(.checkbox-icon, .jagu-text-icon) {
 	color: inherit;
 	opacity: 0.92;
 }

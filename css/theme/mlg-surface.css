@@ -35,7 +35,7 @@ html[data-looknfeel="mac-liquidglass"] .demo-panel-body label.checkbox-icon .lbl
 	backdrop-filter: var(--mlg-blur, blur(40px) saturate(180%));
 	border: 0.5px solid var(--mlg-border, rgba(0, 0, 0, 0.09));
 	background: var(--mlg-fill, rgba(255, 255, 255, 0.62));
-	color: var(--mlg-fg, var(--is-color));
+	color: var(--mlg-fg, var(--jagu-color));
 }
 
 html[data-looknfeel="mac-liquidglass"] label.checkbox-icon[data-variant="glass"]:has(input:checked) .lbl-cntnt {

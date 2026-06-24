@@ -43,7 +43,7 @@ const REQUIRE_SHIM = `var require=function(m){if(m==="react")return globalThis.R
 function build() {
   const banner =
     REQUIRE_SHIM +
-    "\n/**\n * @jeff-aporta/jagudeloe-react-ui — CDN\n * Registra window.ISAComponents.JaguUI\n * Requiere globalThis.React y globalThis.ReactDOM.createRoot\n */\n";
+    "\n/**\n * @jeff-aporta/jagudeloe-react-ui — CDN\n * Registra window.JaguUI\n * Requiere globalThis.React y globalThis.ReactDOM.createRoot\n */\n";
 
   esbuild.buildSync({
     entryPoints: [ENTRY],

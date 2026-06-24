@@ -34,7 +34,7 @@ body {
 
 .jagu-ui-root,
 .mui-tooltip,
-.is-autocomplete__panel {
+.jagu-autocomplete__panel {
 	font-family: var(--pg-font-sans);
 }
 

@@ -57,8 +57,8 @@ button[data-shape="pill"],
 	border-radius: 999px;
 }
 
-button .is-text-icon,
-.button-wrap .is-text-icon {
+button .jagu-text-icon,
+.button-wrap .jagu-text-icon {
 	pointer-events: none;
 }
 
@@ -229,7 +229,7 @@ html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbo
 	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 44%, transparent), color-mix(in srgb, var(--bttn-clr) 16%, rgba(15, 34, 54, 0.38)));
 	border: 1px solid color-mix(in srgb, var(--bttn-clr) 58%, transparent);
 	box-shadow: 0 0 16px color-mix(in srgb, var(--bttn-clr) 28%, transparent), 0 0 0 1px color-mix(in srgb, var(--bttn-clr) 18%, transparent);
-	color: oklch(from color-mix(in srgb, var(--bttn-clr) 42%, var(--is-bg-primary) 58%) calc((sign(0.58 - l) + 1) / 2 * 100%) 0 h / 1);
+	color: oklch(from color-mix(in srgb, var(--bttn-clr) 42%, var(--jagu-bg-primary) 58%) calc((sign(0.58 - l) + 1) / 2 * 100%) 0 h / 1);
 	text-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr), transparent 62%), 0 1px 2px color-mix(in srgb, black, transparent 55%);
 }
 
@@ -322,7 +322,7 @@ html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbo
 	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 44%, transparent), color-mix(in srgb, var(--bttn-clr) 16%, rgba(15, 34, 54, 0.38)));
 	border: 1px solid color-mix(in srgb, var(--bttn-clr) 58%, transparent);
 	box-shadow: 0 0 16px color-mix(in srgb, var(--bttn-clr) 28%, transparent), 0 0 0 1px color-mix(in srgb, var(--bttn-clr) 18%, transparent);
-	color: oklch(from color-mix(in srgb, var(--bttn-clr) 42%, var(--is-bg-primary) 58%) calc((sign(0.58 - l) + 1) / 2 * 100%) 0 h / 1);
+	color: oklch(from color-mix(in srgb, var(--bttn-clr) 42%, var(--jagu-bg-primary) 58%) calc((sign(0.58 - l) + 1) / 2 * 100%) 0 h / 1);
 	text-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr), transparent 62%), 0 1px 2px color-mix(in srgb, black, transparent 55%);
 	transform: translateY(-1px);
 }
@@ -344,7 +344,7 @@ html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="ghost"]:not(:h
 	background: rgba(120, 120, 128, 0.14);
 	border: 0.5px solid var(--mlg-border, rgba(0, 0, 0, 0.09));
 	box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.12);
-	color: var(--mlg-fg, var(--is-color));
+	color: var(--mlg-fg, var(--jagu-color));
 }
 
 html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] button[data-variant="glass"],
@@ -386,7 +386,7 @@ html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="ghost"]:not([a
 	background: var(--mlg-sidebar-hover, rgba(0, 0, 0, 0.05)) !important;
 	border-color: var(--mlg-border, rgba(0, 0, 0, 0.09)) !important;
 	box-shadow: none !important;
-	color: var(--mlg-fg, var(--is-color)) !important;
+	color: var(--mlg-fg, var(--jagu-color)) !important;
 }
 
 html[data-looknfeel="mac-liquidglass"] button[data-variant="soft"],

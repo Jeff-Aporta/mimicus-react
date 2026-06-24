@@ -1,24 +1,22 @@
-const DirectColors = ["inherit", "currentColor", "white", "black", "transparent"];
-
-export const componentColorsIS = [
+export const componentColors = [
   "primary", "design-1", "design-2", "design-3",
   "info", "success", "warning", "error", "danger",
   "color", "bg", "card", "border", "neutral",
-  ...DirectColors,
+  "inherit", "currentColor", "white", "black", "transparent",
 ];
 
-const cssVarIs = (c) => `var(--is-${c})`;
+const cssVar = (c) => `var(--jagu-${c})`;
 
 export function resolveColor(color, defaultColor = "") {
   color ||= defaultColor;
   if (!color) return "";
-  if (DirectColors.includes(color)) return color;
-  if (color === "neutral") return `color-mix(in srgb, ${cssVarIs("color")} 62%, transparent)`;
-  if (color === "bg") return cssVarIs("bg-primary");
-  if (color === "card") return cssVarIs("bg-secondary");
-  if (color === "border") return cssVarIs("b-color");
-  if (color === "primary") return cssVarIs("design-1");
-  if (componentColorsIS.includes(color)) return cssVarIs(color);
+  if (["inherit", "currentColor", "white", "black", "transparent"].includes(color)) return color;
+  if (color === "neutral") return `color-mix(in srgb, ${cssVar("color")} 62%, transparent)`;
+  if (color === "bg") return cssVar("bg-primary");
+  if (color === "card") return cssVar("bg-secondary");
+  if (color === "border") return cssVar("b-color");
+  if (color === "primary") return cssVar("design-1");
+  if (componentColors.includes(color)) return cssVar(color);
   return color;
 }
 

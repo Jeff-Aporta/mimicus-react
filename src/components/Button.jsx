@@ -61,7 +61,7 @@ export function Button({
 
   const content = (
     <>
-      {(icon || isLoading) && (isLoading ? <span className="is-text-icon" aria-hidden>…</span> : icon)}
+      {(icon || isLoading) && (isLoading ? <span className="jagu-text-icon" aria-hidden>…</span> : icon)}
       {children != null && <span className="button-content">{children}</span>}
     </>
   );

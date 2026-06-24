@@ -1,6 +1,6 @@
 /* AppLayout — grid responsive (portado de ISP AppLayout.svelte) */
 
-.is-app-layout {
+.jagu-app-layout {
 	box-sizing: border-box;
 	display: grid;
 	width: 100%;
@@ -9,25 +9,25 @@
 	min-width: 0;
 }
 
-.is-app-layout__cell {
+.jagu-app-layout__cell {
 	min-width: 0;
 	min-height: 0;
 	display: flex;
 	flex-direction: column;
 }
 
-.is-app-layout__cell--header { grid-area: header; }
-.is-app-layout__cell--sider { grid-area: sider; }
-.is-app-layout__cell--content { grid-area: content; overflow: hidden; }
-.is-app-layout__cell--footer { grid-area: footer; }
+.jagu-app-layout__cell--header { grid-area: header; }
+.jagu-app-layout__cell--sider { grid-area: sider; }
+.jagu-app-layout__cell--content { grid-area: content; overflow: hidden; }
+.jagu-app-layout__cell--footer { grid-area: footer; }
 
-.is-app-layout--fixed-header .is-app-layout__cell--header {
+.jagu-app-layout--fixed-header .jagu-app-layout__cell--header {
 	position: sticky;
 	top: 0;
 	z-index: 4;
 }
 
-.is-app-layout--fixed-sider .is-app-layout__cell--sider {
+.jagu-app-layout--fixed-sider .jagu-app-layout__cell--sider {
 	position: sticky;
 	top: 0;
 	align-self: stretch;
@@ -36,7 +36,7 @@
 	z-index: 3;
 }
 
-.is-app-layout-sider {
+.jagu-app-layout-sider {
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -45,11 +45,11 @@
 	border-right: 1px solid color-mix(in srgb, currentColor, transparent 85%);
 }
 
-.is-app-layout-sider--light {
-	border-right-color: color-mix(in srgb, var(--is-b-color), transparent 40%);
+.jagu-app-layout-sider--light {
+	border-right-color: color-mix(in srgb, var(--jagu-b-color), transparent 40%);
 }
 
-.is-app-layout-sider__body {
+.jagu-app-layout-sider__body {
 	flex: 1 1 auto;
 	min-height: 0;
 	overflow: auto;
@@ -57,27 +57,27 @@
 	-webkit-overflow-scrolling: touch;
 }
 
-.is-app-layout-sider__trigger {
+.jagu-app-layout-sider__trigger {
 	flex-shrink: 0;
 	border-top: 1px solid color-mix(in srgb, currentColor, transparent 85%);
 }
 
 @media (max-width: 767px) {
-	.is-app-layout--responsive.is-app-layout--drawer-sider .is-app-layout__cell--sider {
+	.jagu-app-layout--responsive.jagu-app-layout--drawer-sider .jagu-app-layout__cell--sider {
 		display: none;
 	}
 
-	.is-app-layout--responsive.is-app-layout--has-sider:not(.is-app-layout--drawer-sider) {
-		grid-template: var(--is-app-layout-grid-responsive);
+	.jagu-app-layout--responsive.jagu-app-layout--has-sider:not(.jagu-app-layout--drawer-sider) {
+		grid-template: var(--jagu-app-layout-grid-responsive);
 	}
 
-	.is-app-layout--responsive.is-app-layout--fixed-sider .is-app-layout__cell--sider {
+	.jagu-app-layout--responsive.jagu-app-layout--fixed-sider .jagu-app-layout__cell--sider {
 		position: relative;
 		height: auto;
 		max-height: none;
 	}
 
-	.is-app-layout--responsive:not(.is-app-layout--drawer-sider) .is-app-layout__cell--sider .is-app-layout-sider {
+	.jagu-app-layout--responsive:not(.jagu-app-layout--drawer-sider) .jagu-app-layout__cell--sider .jagu-app-layout-sider {
 		width: 100% !important;
 		max-width: 100%;
 		max-height: min(38vh, 280px);
@@ -85,7 +85,7 @@
 		border-bottom: 1px solid color-mix(in srgb, currentColor, transparent 85%);
 	}
 
-	.is-app-layout-sider__trigger button {
+	.jagu-app-layout-sider__trigger button {
 		min-height: 2.75rem;
 	}
 }
@@ -95,8 +95,8 @@
 	display: flex;
 	flex-direction: column;
 	min-height: 100dvh;
-	background: var(--is-bg-primary, canvas);
-	color: var(--is-color, canvastext);
+	background: var(--jagu-bg-primary, canvas);
+	color: var(--jagu-color, canvastext);
 }
 
 .jagu-shell-header,

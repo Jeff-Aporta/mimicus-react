@@ -1,35 +1,29 @@
 ---
 name: jagu-react-ui
-description: UI React temática InSoft (jagudeloe-react-ui). Contrato html data-luminance/theme-color/design-scheme/looknfeel; componentes data-variant + data-surface-color. CDN window.ISAComponents.JaguUI. Guía ISP-Svelte-Playground.
+description: >-
+  UI React temática personal (jagudeloe-react-ui). Contrato html data-luminance/theme-color/design-scheme/looknfeel;
+  componentes data-variant + data-surface-color; tokens --jagu-*; CDN window.JaguUI.
 ---
 
 # jagudeloe-react-ui
 
-Port React del ISP-Svelte-Playground. **CSS-first**: JS solo escribe atributos en `<html>` y `data-*` en superficies.
+Biblioteca UI React personal — **CSS-first**: JS solo escribe atributos en `<html>` y `data-*` en superficies.
 
-## Contrato
+## CDN
 
-- Global: `data-luminance`, `data-theme-color`, `data-design-scheme`, `data-looknfeel`
-- Superficies: `data-variant`, `data-surface-color` (o `--surface-accent` inline)
-- API: `ISAComponents.JaguUI.bootJaguUI()`, `applyTheme`, `applyLooknfeel`
+- CSS: `cdn/jagu-ui.min.css`
+- JS: `cdn/jagu-ui.min.js` → `globalThis.JaguUI`
+- API: `JaguUI.bootJaguUI()`, `applyTheme`, `applyLooknfeel`
 
 ## Componentes v0
 
-- `AppLayout` + `AppLayout.Header|Sider|Footer`, `AppLayoutSider`, `AppLayoutProvider`
-- `Button`, `Card`
-- `SpaRouter`, `SpaNavLink`, `SpaOutlet` — ruta en `?s=` (JSON base64url, campo `r`)
+`AppLayout`, `AppLayoutSider`, `Button`, `Card`, `SpaRouter`, `SpaNavLink`, `JagSidebar`, `SpaOutlet`
 
-## CSS
+## Clases layout
 
-Fuente en `css/isp/` (copiado del ISP). No duplicar tokens; extender en `css/components/`.
+- `jagu-app-layout`, `jagu-app-layout-sider`
+- Variables: `--jagu-app-layout-sider-w`, `--jagu-color`, `--jagu-design-1`, etc.
 
-## Skills ISP relacionados
+## Skills de looks (en este repo)
 
-En `.cursor/skills/`: `isp-playground-looknfeel`, `isp-look-*`, `isp-playground-theming-qa`.
-
-## Build
-
-```bash
-npm run build       # cdn/jagu-ui.min.js + .css
-npm run build:demo
-```
+Usar skills `jagu-look-*` si existen; los estilos viven en `css/theme/*.css` bajo selectores `html[data-looknfeel]`.

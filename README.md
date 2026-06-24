@@ -1,6 +1,6 @@
 # @jeff-aporta/jagudeloe-react-ui
 
-UI React temática InSoft — port del contrato de [ISP-Svelte-Playground](https://github.com/Jeff-Aporta/ISP-Svelte-Playground). Consumo principal por **CDN** (`window.ISAComponents.JaguUI`).
+Biblioteca UI React personal de Jeff-Aporta — tematización CSS-first y consumo por **CDN** (`window.JaguUI`).
 
 ## Contrato de tematización
 
@@ -13,20 +13,20 @@ Atributos en `<html>`:
 | `data-design-scheme` | `mono` \| `dual` \| `triad` |
 | `data-looknfeel` | `contapyme`, `neon-*`, `mac-liquidglass`, `w*`, `lab-*` |
 
-Componentes usan `data-variant` + `data-surface-color`.
+Componentes usan `data-variant` + `data-surface-color`. Tokens CSS: `--jagu-*`.
 
 ## CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/jagudeloe-react-ui@<ref>/cdn/jagu-ui.min.css" />
-<script src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/jagudeloe-react-ui@<ref>/cdn/jagu-ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/jagudeloe-react-ui@main/cdn/jagu-ui.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/jagudeloe-react-ui@main/cdn/jagu-ui.min.js"></script>
 <script>
-  ISAComponents.JaguUI.bootJaguUI();
-  const { AppLayout, Button, Card, SpaRouter } = ISAComponents.JaguUI;
+  JaguUI.bootJaguUI();
+  const { AppLayout, Button, Card, SpaRouter } = JaguUI;
 </script>
 ```
 
-Requiere React 18 global (`React`, `ReactDOM.createRoot`) vía import map o script previo. **Sin MUI ni front-shared.**
+Requiere React 18 global (`React`, `ReactDOM.createRoot`) vía import map o script previo. **Sin MUI.**
 
 ## Build
 
@@ -42,6 +42,6 @@ npm run build:demo   # demo/_dist/app.min.js
 - `AppLayoutSider` + `JagSidebar`
 - `Button`, `Card`
 - `SpaRouter` / `SpaNavLink` / `SpaOutlet` (`?s=` base64url)
-- Fundación CSS: todas las paletas y looks del ISP
+- Fundación CSS: paletas y looks completos
 
-Skills de look & feel del ISP copiados en `.cursor/skills/`.
+Demo: https://jeff-aporta.github.io/jagudeloe-react-ui/

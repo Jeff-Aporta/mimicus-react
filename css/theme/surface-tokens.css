@@ -3,25 +3,25 @@
  * Requiere `data-surface-color` o `--surface-accent` inline para colores arbitrarios.
  */
 
-[data-surface-color="neutral"] { --surface-accent: color-mix(in srgb, var(--is-color) 62%, transparent); }
+[data-surface-color="neutral"] { --surface-accent: color-mix(in srgb, var(--jagu-color) 62%, transparent); }
 
 [data-surface-color="primary"],
 [data-surface-color="design-1"],
 button[data-variant]:not([data-surface-color]),
 .button-wrap[data-variant]:not([data-surface-color]),
 span[data-variant][data-shape]:not([data-surface-color]) {
-	--surface-accent: var(--is-design-active-1, var(--is-design-1, var(--is-primary)));
+	--surface-accent: var(--jagu-design-active-1, var(--jagu-design-1, var(--jagu-primary)));
 }
 
-[data-surface-color="design-2"] { --surface-accent: var(--is-design-active-2, var(--is-design-2, var(--is-info))); }
-[data-surface-color="design-3"] { --surface-accent: var(--is-design-active-3, var(--is-design-3, var(--is-warning))); }
+[data-surface-color="design-2"] { --surface-accent: var(--jagu-design-active-2, var(--jagu-design-2, var(--jagu-info))); }
+[data-surface-color="design-3"] { --surface-accent: var(--jagu-design-active-3, var(--jagu-design-3, var(--jagu-warning))); }
 
-[data-surface-color="info"] { --surface-accent: var(--is-info); }
-[data-surface-color="success"] { --surface-accent: var(--is-success); }
-[data-surface-color="warning"] { --surface-accent: var(--is-warning); }
+[data-surface-color="info"] { --surface-accent: var(--jagu-info); }
+[data-surface-color="success"] { --surface-accent: var(--jagu-success); }
+[data-surface-color="warning"] { --surface-accent: var(--jagu-warning); }
 [data-surface-color="error"],
-[data-surface-color="danger"] { --surface-accent: var(--is-danger); }
-[data-surface-color="color"] { --surface-accent: var(--is-color); }
+[data-surface-color="danger"] { --surface-accent: var(--jagu-danger); }
+[data-surface-color="color"] { --surface-accent: var(--jagu-color); }
 
 button[data-variant="text"]:not([data-surface-color]),
 .button-wrap[data-variant="text"]:not([data-surface-color]) {
@@ -31,7 +31,7 @@ button[data-variant="text"]:not([data-surface-color]),
 /* Button — alias legacy --bttn-* */
 button[data-variant],
 .button-wrap[data-variant] {
-	--bttn-clr: var(--surface-accent, var(--is-primary));
+	--bttn-clr: var(--surface-accent, var(--jagu-primary));
 	--bttn-ccnt-clr: color-mix(in srgb, var(--bttn-clr), white 20%);
 	--bttn-bg-bs: color-mix(in srgb, var(--bttn-clr), black 7%);
 	--bttn-bg-hvr: color-mix(in srgb, var(--bttn-clr), white 30%);
@@ -44,23 +44,23 @@ button[data-variant],
 	--bttn-sft-bg: color-mix(in srgb, var(--bttn-clr), transparent 15%);
 	--bttn-sft-bg-hvr: color-mix(in srgb, var(--bttn-clr), transparent 30%);
 	--bttn-sft-bg-ctv: color-mix(in srgb, var(--bttn-clr), transparent 45%);
-	--bttn-sft-fnt: color-mix(in srgb, var(--bttn-clr) 15%, var(--is-bg-secondary));
-	--bttn-sft-fnt-hvr: color-mix(in srgb, var(--bttn-clr) 30%, var(--is-bg-secondary));
-	--bttn-sft-fnt-ctv: color-mix(in srgb, var(--bttn-clr) 45%, var(--is-bg-secondary));
+	--bttn-sft-fnt: color-mix(in srgb, var(--bttn-clr) 15%, var(--jagu-bg-secondary));
+	--bttn-sft-fnt-hvr: color-mix(in srgb, var(--bttn-clr) 30%, var(--jagu-bg-secondary));
+	--bttn-sft-fnt-ctv: color-mix(in srgb, var(--bttn-clr) 45%, var(--jagu-bg-secondary));
 }
 
 /* Text/ghost hover en oscuro: fondo teñido sobre chrome (no velo claro sobre transparente). */
 html[data-luminance="dark"] :is(button, .button-wrap)[data-variant="text"],
 html[data-luminance="dark"] :is(button, .button-wrap)[data-variant="ghost"] {
-	--bttn-l-hvr-bg: color-mix(in srgb, var(--bttn-clr) 22%, var(--is-bg-secondary) 78%);
-	--bttn-l-ctv-bg: color-mix(in srgb, var(--bttn-clr) 32%, var(--is-bg-secondary) 68%);
-	--bttn-txt-hvr-fg: color-mix(in srgb, var(--bttn-clr) 65%, var(--is-color) 35%);
-	--bttn-txt-ctv-fg: color-mix(in srgb, var(--bttn-clr) 78%, var(--is-color) 22%);
+	--bttn-l-hvr-bg: color-mix(in srgb, var(--bttn-clr) 22%, var(--jagu-bg-secondary) 78%);
+	--bttn-l-ctv-bg: color-mix(in srgb, var(--bttn-clr) 32%, var(--jagu-bg-secondary) 68%);
+	--bttn-txt-hvr-fg: color-mix(in srgb, var(--bttn-clr) 65%, var(--jagu-color) 35%);
+	--bttn-txt-ctv-fg: color-mix(in srgb, var(--bttn-clr) 78%, var(--jagu-color) 22%);
 }
 
 /* Badge — alias legacy --bdg-* */
 span[data-variant][data-shape] {
-	--bdg-clr: var(--surface-accent, var(--is-primary));
+	--bdg-clr: var(--surface-accent, var(--jagu-primary));
 	--bdg-ccnt-clr: color-mix(in srgb, var(--bdg-clr), white 20%);
 	--bdg-bg-bs: color-mix(in srgb, var(--bdg-clr), black 7%);
 	--bdg-bg-hvr: color-mix(in srgb, var(--bdg-clr), white 30%);

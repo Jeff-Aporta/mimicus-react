@@ -1,24 +1,24 @@
 /**
- * @jeff-aporta/jagudeloe-react-ui — kit temático (portado desde ISP-Svelte-Playground).
+ * @jeff-aporta/jagudeloe-react-ui — kit temático CSS-first.
  * Contrato: html[data-luminance|data-theme-color|data-design-scheme|data-looknfeel]
  */
-@import "./isp/playground-typography.css";
-@import "./isp/theme-color-palettes.css";
-@import "./isp/theme.css";
-@import "./isp/design-scheme.css";
-@import "./isp/color-transform.css";
-@import "./isp/surface-tokens.css";
-@import "./isp/button.css";
-@import "./isp/lab-surfaces.css";
-@import "./isp/windows-surfaces.css";
-@import "./isp/ng-surface.css";
-@import "./isp/mlg-surface.css";
-@import "./isp/playground-contapyme.css";
-@import "./isp/playground-scheme-lab.css";
-@import "./isp/playground-windows.css";
-@import "./isp/playground-glass.css";
-@import "./isp/playground-liquidglass.css";
-@import "./isp/pg-component-blend.css";
+@import "./theme/playground-typography.css";
+@import "./theme/theme-color-palettes.css";
+@import "./theme/theme.css";
+@import "./theme/design-scheme.css";
+@import "./theme/color-transform.css";
+@import "./theme/surface-tokens.css";
+@import "./theme/button.css";
+@import "./theme/lab-surfaces.css";
+@import "./theme/windows-surfaces.css";
+@import "./theme/ng-surface.css";
+@import "./theme/mlg-surface.css";
+@import "./theme/playground-contapyme.css";
+@import "./theme/playground-scheme-lab.css";
+@import "./theme/playground-windows.css";
+@import "./theme/playground-glass.css";
+@import "./theme/playground-liquidglass.css";
+@import "./theme/pg-component-blend.css";
 @import "./components/app-layout.css";
 @import "./components/card.css";
 @import "./components/shell-nav.css";

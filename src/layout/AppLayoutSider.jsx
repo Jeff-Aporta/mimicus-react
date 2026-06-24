@@ -27,9 +27,9 @@ export function AppLayoutSider({
   }, [ctx, wCss]);
 
   const rootClass = [
-    "is-app-layout-sider",
-    `is-app-layout-sider--${theme}`,
-    collapsed && "is-app-layout-sider--collapsed",
+    "jagu-app-layout-sider",
+    `jagu-app-layout-sider--${theme}`,
+    collapsed && "jagu-app-layout-sider--collapsed",
     className,
   ].filter(Boolean).join(" ");
 
@@ -47,9 +47,9 @@ export function AppLayoutSider({
 
   return (
     <aside {...rest} className={rootClass} style={mergedStyle}>
-      <div className="is-app-layout-sider__body">{children}</div>
+      <div className="jagu-app-layout-sider__body">{children}</div>
       {collapsible && (
-        <div className="is-app-layout-sider__trigger">
+        <div className="jagu-app-layout-sider__trigger">
           <Button variant="text" color={isDark ? "neutral" : "primary"} onClick={toggle} style={{ width: "100%", justifyContent: "center", color: "inherit" }}>
             {collapsed ? "›" : "‹"}
           </Button>

@@ -61,29 +61,29 @@ function AppLayoutRoot({
   const responsiveGridTemplate = responsive ? appLayoutResponsiveGridTemplate(variant, slotFlags) : null;
 
   const rootClass = [
-    "is-app-layout",
-    `is-app-layout--${variant}`,
-    hasSider && "is-app-layout--has-sider",
-    fixedHeader && "is-app-layout--fixed-header",
-    fixedSider && "is-app-layout--fixed-sider",
-    responsive && "is-app-layout--responsive",
-    responsiveDrawer && "is-app-layout--drawer-sider",
+    "jagu-app-layout",
+    `jagu-app-layout--${variant}`,
+    hasSider && "jagu-app-layout--has-sider",
+    fixedHeader && "jagu-app-layout--fixed-header",
+    fixedSider && "jagu-app-layout--fixed-sider",
+    responsive && "jagu-app-layout--responsive",
+    responsiveDrawer && "jagu-app-layout--drawer-sider",
     className,
   ].filter(Boolean).join(" ");
 
   const rootStyle = [
-    `--is-app-layout-sider-w:${siderWidthCss}`,
+    `--jagu-app-layout-sider-w:${siderWidthCss}`,
     `grid-template:${gridTemplate}`,
-    responsiveGridTemplate ? `--is-app-layout-grid-responsive:${responsiveGridTemplate}` : null,
+    responsiveGridTemplate ? `--jagu-app-layout-grid-responsive:${responsiveGridTemplate}` : null,
     style,
   ].filter(Boolean).join(";");
 
   return (
     <div {...rest} className={rootClass} style={rootStyle}>
-      {hasHeader && <div className="is-app-layout__cell is-app-layout__cell--header">{slots.header}</div>}
-      {hasSider && <div className="is-app-layout__cell is-app-layout__cell--sider">{slots.sider}</div>}
-      <div className="is-app-layout__cell is-app-layout__cell--content">{slots.default}</div>
-      {hasFooter && <div className="is-app-layout__cell is-app-layout__cell--footer">{slots.footer}</div>}
+      {hasHeader && <div className="jagu-app-layout__cell jagu-app-layout__cell--header">{slots.header}</div>}
+      {hasSider && <div className="jagu-app-layout__cell jagu-app-layout__cell--sider">{slots.sider}</div>}
+      <div className="jagu-app-layout__cell jagu-app-layout__cell--content">{slots.default}</div>
+      {hasFooter && <div className="jagu-app-layout__cell jagu-app-layout__cell--footer">{slots.footer}</div>}
     </div>
   );
 }

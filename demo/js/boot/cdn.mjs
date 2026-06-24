@@ -30,7 +30,7 @@ function ensureStylesheet(href) {
 }
 
 function ensureScript(src) {
-  if (globalThis.ISAComponents?.JaguUI?.bootJaguUI) return Promise.resolve();
+  if (globalThis.JaguUI?.bootJaguUI) return Promise.resolve();
   const stale = document.querySelector("script[data-jagu-ui-js]");
   if (stale) stale.remove();
   return new Promise((resolve, reject) => {
@@ -38,8 +38,8 @@ function ensureScript(src) {
     el.src = src;
     el.setAttribute("data-jagu-ui-js", "1");
     el.onload = () => {
-      if (!globalThis.ISAComponents?.JaguUI?.bootJaguUI) {
-        reject(new Error("JaguUI no registró ISAComponents.JaguUI"));
+      if (!globalThis.JaguUI?.bootJaguUI) {
+        reject(new Error("JaguUI no registró globalThis.JaguUI"));
         return;
       }
       resolve();
@@ -53,13 +53,13 @@ export async function ensureJaguUI(base = jaguUiBase()) {
   const b = base.endsWith("/") ? base : base + "/";
   await ensureStylesheet(b + "jagu-ui.min.css");
   await ensureScript(b + "jagu-ui.min.js");
-  globalThis.ISAComponents.JaguUI.bootJaguUI();
-  return globalThis.ISAComponents.JaguUI;
+  globalThis.JaguUI.bootJaguUI();
+  return globalThis.JaguUI;
 }
 
 export function demoAppUrl() {
   const base = document.querySelector("base")?.href || location.href;
-  if (globalThis.__ISA_DIST__) {
+  if (globalThis.__JAGU_UI_DIST__) {
     return new URL("_dist/app.min.js", base).href;
   }
   return new URL("js/app/App.jsx", base).href;

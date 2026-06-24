@@ -1,7 +1,7 @@
 var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom"||m==="react-dom/client")return globalThis.ReactDOM;throw new Error("Cannot require "+m)};
 /**
  * @jeff-aporta/jagudeloe-react-ui — CDN
- * Registra window.ISAComponents.JaguUI
+ * Registra window.JaguUI
  * Requiere globalThis.React y globalThis.ReactDOM.createRoot
  */
 (() => {
@@ -43,7 +43,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     if (isAppLayoutVariant(value)) return value;
     return "side";
   }
-  var SIDER = "var(--is-app-layout-sider-w, 200px)";
+  var SIDER = "var(--jagu-app-layout-sider-w, 200px)";
   function row(name, size) {
     return `"${name}" ${size}`;
   }
@@ -152,22 +152,22 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const gridTemplate = appLayoutGridTemplate(variant, slotFlags);
     const responsiveGridTemplate = responsive ? appLayoutResponsiveGridTemplate(variant, slotFlags) : null;
     const rootClass = [
-      "is-app-layout",
-      `is-app-layout--${variant}`,
-      hasSider && "is-app-layout--has-sider",
-      fixedHeader && "is-app-layout--fixed-header",
-      fixedSider && "is-app-layout--fixed-sider",
-      responsive && "is-app-layout--responsive",
-      responsiveDrawer && "is-app-layout--drawer-sider",
+      "jagu-app-layout",
+      `jagu-app-layout--${variant}`,
+      hasSider && "jagu-app-layout--has-sider",
+      fixedHeader && "jagu-app-layout--fixed-header",
+      fixedSider && "jagu-app-layout--fixed-sider",
+      responsive && "jagu-app-layout--responsive",
+      responsiveDrawer && "jagu-app-layout--drawer-sider",
       className
     ].filter(Boolean).join(" ");
     const rootStyle = [
-      `--is-app-layout-sider-w:${siderWidthCss}`,
+      `--jagu-app-layout-sider-w:${siderWidthCss}`,
       `grid-template:${gridTemplate}`,
-      responsiveGridTemplate ? `--is-app-layout-grid-responsive:${responsiveGridTemplate}` : null,
+      responsiveGridTemplate ? `--jagu-app-layout-grid-responsive:${responsiveGridTemplate}` : null,
       style
     ].filter(Boolean).join(";");
-    return /* @__PURE__ */ React.createElement("div", { ...rest, className: rootClass, style: rootStyle }, hasHeader && /* @__PURE__ */ React.createElement("div", { className: "is-app-layout__cell is-app-layout__cell--header" }, slots.header), hasSider && /* @__PURE__ */ React.createElement("div", { className: "is-app-layout__cell is-app-layout__cell--sider" }, slots.sider), /* @__PURE__ */ React.createElement("div", { className: "is-app-layout__cell is-app-layout__cell--content" }, slots.default), hasFooter && /* @__PURE__ */ React.createElement("div", { className: "is-app-layout__cell is-app-layout__cell--footer" }, slots.footer));
+    return /* @__PURE__ */ React.createElement("div", { ...rest, className: rootClass, style: rootStyle }, hasHeader && /* @__PURE__ */ React.createElement("div", { className: "jagu-app-layout__cell jagu-app-layout__cell--header" }, slots.header), hasSider && /* @__PURE__ */ React.createElement("div", { className: "jagu-app-layout__cell jagu-app-layout__cell--sider" }, slots.sider), /* @__PURE__ */ React.createElement("div", { className: "jagu-app-layout__cell jagu-app-layout__cell--content" }, slots.default), hasFooter && /* @__PURE__ */ React.createElement("div", { className: "jagu-app-layout__cell jagu-app-layout__cell--footer" }, slots.footer));
   }
   var AppLayout = Object.assign(AppLayoutRoot, { Header, Sider, Footer, SLOT_TYPES });
 
@@ -175,8 +175,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   var import_react4 = __require("react");
 
   // src/lib/resolveColor.js
-  var DirectColors = ["inherit", "currentColor", "white", "black", "transparent"];
-  var componentColorsIS = [
+  var componentColors = [
     "primary",
     "design-1",
     "design-2",
@@ -191,19 +190,23 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     "card",
     "border",
     "neutral",
-    ...DirectColors
+    "inherit",
+    "currentColor",
+    "white",
+    "black",
+    "transparent"
   ];
-  var cssVarIs = (c) => `var(--is-${c})`;
+  var cssVar = (c) => `var(--jagu-${c})`;
   function resolveColor(color, defaultColor = "") {
     color || (color = defaultColor);
     if (!color) return "";
-    if (DirectColors.includes(color)) return color;
-    if (color === "neutral") return `color-mix(in srgb, ${cssVarIs("color")} 62%, transparent)`;
-    if (color === "bg") return cssVarIs("bg-primary");
-    if (color === "card") return cssVarIs("bg-secondary");
-    if (color === "border") return cssVarIs("b-color");
-    if (color === "primary") return cssVarIs("design-1");
-    if (componentColorsIS.includes(color)) return cssVarIs(color);
+    if (["inherit", "currentColor", "white", "black", "transparent"].includes(color)) return color;
+    if (color === "neutral") return `color-mix(in srgb, ${cssVar("color")} 62%, transparent)`;
+    if (color === "bg") return cssVar("bg-primary");
+    if (color === "card") return cssVar("bg-secondary");
+    if (color === "border") return cssVar("b-color");
+    if (color === "primary") return cssVar("design-1");
+    if (componentColors.includes(color)) return cssVar(color);
     return color;
   }
   function colorMix(c1, c2, p) {
@@ -383,7 +386,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
 
   // src/lib/surfaceColor.js
   var CSS_SURFACE_COLORS = new Set(
-    componentColorsIS.filter((c) => !["inherit", "currentColor", "white", "black", "transparent", "neutral", "bg", "card", "border", "color"].includes(c))
+    componentColors.filter((c) => !["inherit", "currentColor", "white", "black", "transparent", "neutral", "bg", "card", "border", "color"].includes(c))
   );
   function surfaceColorAttrs(color, opts = {}) {
     if (!color) return {};
@@ -455,7 +458,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       className: cls,
       style: surfaceStyle.style
     };
-    const content = /* @__PURE__ */ React.createElement(React.Fragment, null, (icon || isLoading) && (isLoading ? /* @__PURE__ */ React.createElement("span", { className: "is-text-icon", "aria-hidden": true }, "\u2026") : icon), children != null && /* @__PURE__ */ React.createElement("span", { className: "button-content" }, children));
+    const content = /* @__PURE__ */ React.createElement(React.Fragment, null, (icon || isLoading) && (isLoading ? /* @__PURE__ */ React.createElement("span", { className: "jagu-text-icon", "aria-hidden": true }, "\u2026") : icon), children != null && /* @__PURE__ */ React.createElement("span", { className: "button-content" }, children));
     if (wrap) {
       return /* @__PURE__ */ React.createElement(
         "div",
@@ -507,9 +510,9 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       ctx?.setSiderWidth(wCss);
     }, [ctx, wCss]);
     const rootClass = [
-      "is-app-layout-sider",
-      `is-app-layout-sider--${theme}`,
-      collapsed && "is-app-layout-sider--collapsed",
+      "jagu-app-layout-sider",
+      `jagu-app-layout-sider--${theme}`,
+      collapsed && "jagu-app-layout-sider--collapsed",
       className
     ].filter(Boolean).join(" ");
     const mergedStyle = [
@@ -522,7 +525,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     function toggle() {
       onCollapse?.(!collapsed);
     }
-    return /* @__PURE__ */ React.createElement("aside", { ...rest, className: rootClass, style: mergedStyle }, /* @__PURE__ */ React.createElement("div", { className: "is-app-layout-sider__body" }, children), collapsible && /* @__PURE__ */ React.createElement("div", { className: "is-app-layout-sider__trigger" }, /* @__PURE__ */ React.createElement(Button, { variant: "text", color: isDark ? "neutral" : "primary", onClick: toggle, style: { width: "100%", justifyContent: "center", color: "inherit" } }, collapsed ? "\u203A" : "\u2039")));
+    return /* @__PURE__ */ React.createElement("aside", { ...rest, className: rootClass, style: mergedStyle }, /* @__PURE__ */ React.createElement("div", { className: "jagu-app-layout-sider__body" }, children), collapsible && /* @__PURE__ */ React.createElement("div", { className: "jagu-app-layout-sider__trigger" }, /* @__PURE__ */ React.createElement(Button, { variant: "text", color: isDark ? "neutral" : "primary", onClick: toggle, style: { width: "100%", justifyContent: "center", color: "inherit" } }, collapsed ? "\u203A" : "\u2039")));
   }
 
   // src/lib/colorTransform.js
@@ -979,12 +982,11 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/entry-iife.jsx
-  globalThis.ISAComponents = globalThis.ISAComponents || {};
   function bootJaguUI() {
     bootTheme();
     bootLooknfeel();
   }
-  globalThis.ISAComponents.JaguUI = {
+  globalThis.JaguUI = {
     bootJaguUI,
     bootTheme,
     bootLooknfeel,
