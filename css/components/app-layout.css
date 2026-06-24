@@ -1,0 +1,111 @@
+/* AppLayout — grid responsive (portado de ISP AppLayout.svelte) */
+
+.is-app-layout {
+	box-sizing: border-box;
+	display: grid;
+	width: 100%;
+	height: 100%;
+	min-height: 0;
+	min-width: 0;
+}
+
+.is-app-layout__cell {
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.is-app-layout__cell--header { grid-area: header; }
+.is-app-layout__cell--sider { grid-area: sider; }
+.is-app-layout__cell--content { grid-area: content; overflow: hidden; }
+.is-app-layout__cell--footer { grid-area: footer; }
+
+.is-app-layout--fixed-header .is-app-layout__cell--header {
+	position: sticky;
+	top: 0;
+	z-index: 4;
+}
+
+.is-app-layout--fixed-sider .is-app-layout__cell--sider {
+	position: sticky;
+	top: 0;
+	align-self: stretch;
+	height: 100%;
+	max-height: 100%;
+	z-index: 3;
+}
+
+.is-app-layout-sider {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
+	border-right: 1px solid color-mix(in srgb, currentColor, transparent 85%);
+}
+
+.is-app-layout-sider--light {
+	border-right-color: color-mix(in srgb, var(--is-b-color), transparent 40%);
+}
+
+.is-app-layout-sider__body {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: auto;
+	padding: clamp(0.35rem, 2vw, 0.5rem) clamp(0.45rem, 2.5vw, 0.65rem);
+	-webkit-overflow-scrolling: touch;
+}
+
+.is-app-layout-sider__trigger {
+	flex-shrink: 0;
+	border-top: 1px solid color-mix(in srgb, currentColor, transparent 85%);
+}
+
+@media (max-width: 767px) {
+	.is-app-layout--responsive.is-app-layout--drawer-sider .is-app-layout__cell--sider {
+		display: none;
+	}
+
+	.is-app-layout--responsive.is-app-layout--has-sider:not(.is-app-layout--drawer-sider) {
+		grid-template: var(--is-app-layout-grid-responsive);
+	}
+
+	.is-app-layout--responsive.is-app-layout--fixed-sider .is-app-layout__cell--sider {
+		position: relative;
+		height: auto;
+		max-height: none;
+	}
+
+	.is-app-layout--responsive:not(.is-app-layout--drawer-sider) .is-app-layout__cell--sider .is-app-layout-sider {
+		width: 100% !important;
+		max-width: 100%;
+		max-height: min(38vh, 280px);
+		border-right: none !important;
+		border-bottom: 1px solid color-mix(in srgb, currentColor, transparent 85%);
+	}
+
+	.is-app-layout-sider__trigger button {
+		min-height: 2.75rem;
+	}
+}
+
+/* Shell chrome mínimo para demo / apps CDN */
+.jagu-shell {
+	display: flex;
+	flex-direction: column;
+	min-height: 100dvh;
+	background: var(--is-bg-primary, canvas);
+	color: var(--is-color, canvastext);
+}
+
+.jagu-shell-header,
+.jagu-shell-footer {
+	flex-shrink: 0;
+}
+
+.jagu-shell-main {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: auto;
+}

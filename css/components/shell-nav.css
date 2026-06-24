@@ -1,0 +1,77 @@
+/* Navegación SPA lateral — enlaces simples (sin acordeón) */
+
+.jagu-sidebar {
+	--jagu-sidebar-chrome: var(--pg-sidebar-chrome, var(--is-bg-secondary));
+	--jagu-sidebar-fg: var(--pg-sidebar-fg, var(--is-color));
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	height: 100%;
+	background: var(--jagu-sidebar-chrome);
+	color: var(--jagu-sidebar-fg);
+}
+
+.jagu-sidebar-header {
+	flex-shrink: 0;
+	padding: 0.65rem 0.75rem;
+	border-bottom: 1px solid color-mix(in srgb, currentColor, transparent 82%);
+	font-weight: 600;
+	font-size: 0.95rem;
+}
+
+.jagu-sidebar-body {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: auto;
+	padding: 0.45rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.jagu-nav-link {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	width: 100%;
+	text-align: left;
+	text-decoration: none;
+}
+
+.jagu-nav-link.is-active {
+	font-weight: 600;
+}
+
+/* Blend nav × chrome del look (simplificado desde pg-sidebar-section) */
+.jagu-sidebar .jagu-nav-link[data-variant="text"],
+.jagu-sidebar .jagu-nav-link[data-variant="ghost"] {
+	--sm-chrome: var(--jagu-sidebar-chrome);
+	--sm-chrome-fg: var(--jagu-sidebar-fg);
+	--sm-accent: var(--is-design-1, var(--is-primary));
+	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 91%, var(--sm-accent) 9%);
+	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 94%, var(--sm-accent) 6%);
+	--sm-blend-bg-active: color-mix(in oklch, var(--sm-chrome) 66%, var(--sm-accent) 34%);
+	--sm-blend-fg: color-mix(in oklch, var(--sm-chrome-fg) 68%, var(--sm-accent) 32%);
+	--sm-blend-fg-strong: color-mix(in oklch, var(--sm-chrome-fg) 52%, var(--sm-accent) 48%);
+	background: var(--sm-blend-idle);
+	color: var(--sm-blend-fg);
+	border: 1px solid color-mix(in oklch, var(--sm-chrome-fg), transparent 75%);
+}
+
+.jagu-sidebar .jagu-nav-link.is-active[data-variant="text"],
+.jagu-sidebar .jagu-nav-link.is-active[data-variant="ghost"] {
+	background: var(--sm-blend-bg-active);
+	color: var(--sm-blend-fg-strong);
+}
+
+.jagu-sidebar .jagu-nav-link:not(.is-active):hover {
+	background: var(--sm-blend-subtle);
+	color: var(--sm-blend-fg-strong);
+}
+
+html[data-luminance="dark"] .jagu-sidebar .jagu-nav-link[data-variant="text"],
+html[data-luminance="dark"] .jagu-sidebar .jagu-nav-link[data-variant="ghost"] {
+	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 84%, var(--sm-accent) 16%);
+	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 76%, var(--sm-accent) 24%);
+}

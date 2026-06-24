@@ -1,0 +1,7 @@
+{
+  "componentRef": "main",
+  "jaguUi": {
+    "js": "jagu-ui.min.js",
+    "css": "jagu-ui.min.css"
+  }
+}

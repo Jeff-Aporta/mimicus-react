@@ -1,0 +1,278 @@
+/* Shell clásico — tokens --is-* (paleta + luminancia). */
+
+html[data-looknfeel="contapyme"] .pg-sidebar {
+	--pg-sidebar-chrome: var(--is-bg-secondary);
+	--pg-sidebar-fg: var(--is-color);
+	background: var(--is-bg-secondary);
+	border-right: none;
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .pg-sidebar-body {
+	border-right: 1px solid var(--is-b-color);
+}
+
+html[data-looknfeel="contapyme"] {
+	--pg-shell-header-bg: var(--is-bg-secondary);
+	--pg-shell-header-edge: 1px solid var(--is-b-color);
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar-header {
+	background: color-mix(in srgb, var(--pg-shell-header-bg), var(--is-primary) 4%);
+	border-bottom: var(--pg-shell-header-edge);
+	border-radius: 0;
+	margin: 0;
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar button[data-variant="text"]:not(.sm-section *),
+html[data-looknfeel="contapyme"] .pg-sidebar .button-wrap[data-variant="text"]:not(.sm-section *) {
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar button[data-variant="text"]:not(.sm-section *):not(:disabled):hover,
+html[data-looknfeel="contapyme"] .pg-sidebar .button-wrap[data-variant="text"]:not(.sm-section *):not(:disabled):hover {
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header {
+	background: var(--pg-shell-header-bg);
+	border-bottom: var(--pg-shell-header-edge);
+	border-radius: 0;
+	margin: 0;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-route-title {
+	color: var(--is-color);
+	font-weight: 700;
+}
+
+html[data-looknfeel="contapyme"] .pg-content {
+	background: transparent;
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .jagu-ui-brand {
+	background: linear-gradient(105deg, var(--is-primary), color-mix(in srgb, var(--is-primary), var(--is-info) 40%));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+html[data-looknfeel="contapyme"] .jagu-ui-section-label {
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .sidebar-separator {
+	border-top-color: var(--is-b-color) !important;
+}
+
+/* Catálogo — tokens explícitos ContaPyme (defaults en catalog-tokens.css) */
+html[data-looknfeel="contapyme"] .catalog-home {
+	--catalog-sketch-accent: var(--is-primary);
+	--catalog-sketch-color: color-mix(in srgb, var(--is-primary), var(--is-color) 52%);
+	--catalog-fg: var(--is-color);
+	--catalog-muted: var(--pg-text-muted);
+	--catalog-section-icon: var(--is-primary);
+}
+
+/* Sidebar — acordeones por categoría (blend sección × chrome) */
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section {
+	box-sizing: border-box;
+	margin-inline: 0.1rem;
+	padding: 0.1rem 0.15rem 0.1rem 0;
+	border-radius: 6px;
+	border-left: 2px solid color-mix(in oklch, var(--sm-blend-bar), transparent 42%);
+	background: var(--sm-blend-bg);
+	transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section.is-open {
+	background: var(--sm-blend-bg-open);
+	border-left-color: color-mix(in oklch, var(--sm-blend-bar), transparent 28%);
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section.is-active {
+	background: var(--sm-blend-bg-active);
+	border-left-color: var(--sm-blend-bar);
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section.is-collapsed {
+	border-left-width: 0;
+	background: transparent;
+	padding-inline: 0;
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="text"],
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="ghost"] {
+	background: var(--sm-blend-idle) !important;
+	border: 1px solid color-mix(in oklch, var(--sm-blend-border), transparent 52%) !important;
+	box-shadow: none !important;
+	color: var(--sm-blend-fg) !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="text"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="ghost"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section .button-wrap[data-variant="text"]:not([aria-disabled="true"]):hover,
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section .button-wrap[data-variant="ghost"]:not([aria-disabled="true"]):hover {
+	background: var(--sm-blend-subtle) !important;
+	color: var(--sm-blend-fg-strong) !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="soft"] {
+	background: var(--sm-blend-bg-active) !important;
+	color: var(--sm-blend-fg-strong) !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-sidebar .sm-section .sm-content {
+	margin-top: 0.08rem;
+	padding-top: 0.15rem;
+	border-top: 1px solid var(--sm-blend-border);
+}
+
+/* Sidebar — badges de conteo compactos y legibles */
+html[data-luminance="light"][data-looknfeel="contapyme"] .pg-sidebar .sm-trail span[data-element="badge"] {
+	min-width: 1.2em;
+	padding-inline: 0.42em;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+
+/* Demo shell */
+html[data-looknfeel="contapyme"] .demo-panel.pg-glass-demo,
+html[data-looknfeel="contapyme"] .accordion.pg-glass-accordion {
+	border: 1px solid var(--is-b-color);
+	background: var(--is-bg-secondary);
+	color: var(--is-color);
+	box-shadow: 0 1px 3px color-mix(in srgb, var(--is-color), transparent 92%);
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-header {
+	border-bottom-color: var(--is-b-color);
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body,
+html[data-looknfeel="contapyme"] .accordion-body {
+	background: color-mix(in srgb, var(--is-bg-readonly), transparent 15%) !important;
+	border-color: var(--is-b-color) !important;
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .intro {
+	color: var(--is-color);
+	opacity: 0.92;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .intro code {
+	background: color-mix(in srgb, var(--is-primary), transparent 88%);
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .preview-frame {
+	border: 1px dashed color-mix(in srgb, var(--is-primary), var(--is-b-color) 50%);
+	background: color-mix(in srgb, var(--is-bg-secondary), var(--is-primary) 5%) !important;
+	border-radius: 12px;
+	color: var(--is-color);
+}
+
+/* Config / form controls en demos */
+html[data-looknfeel="contapyme"] .demo-panel-body .input-decorated-label,
+html[data-looknfeel="contapyme"] .demo-panel-body .is-input-decorated-label {
+	border-bottom-color: var(--pg-field-border) !important;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .input-decorated-label-text,
+html[data-looknfeel="contapyme"] .demo-panel-body .is-input-decorated-label-text,
+html[data-looknfeel="contapyme"] .demo-panel-body .palette-grid__label {
+	color: var(--is-color) !important;
+	opacity: 1 !important;
+	font-weight: 600;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .input-decorated-label.is-title .input-decorated-label-text {
+	color: color-mix(in srgb, var(--is-primary), var(--is-color) 30%) !important;
+	letter-spacing: 0.06em;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .input-decorated-label-icon {
+	color: var(--pg-text-muted);
+	opacity: 1 !important;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body input,
+html[data-looknfeel="contapyme"] .demo-panel-body .is-autocomplete__input,
+html[data-looknfeel="contapyme"] .demo-panel-body .input-decorated-number {
+	color: var(--is-color) !important;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .is-autocomplete__input {
+	border-bottom-color: var(--pg-field-border) !important;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .is-autocomplete__input:focus {
+	border-bottom-color: color-mix(in srgb, var(--is-primary), var(--is-b-color) 40%) !important;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body label.focusOptional,
+html[data-looknfeel="contapyme"] .demo-panel-body label.focusRequired,
+html[data-looknfeel="contapyme"] .demo-panel-body label.translate {
+	color: var(--pg-text-muted) !important;
+	opacity: 1 !important;
+}
+
+html:not([data-looknfeel^="neon-"]) .is-autocomplete__panel {
+	background: var(--is-bg-secondary) !important;
+	border-color: var(--is-b-color) !important;
+	color: var(--is-color);
+	box-shadow: 0 8px 24px color-mix(in srgb, var(--is-color), transparent 88%);
+}
+
+html:not([data-looknfeel^="neon-"]) .is-autocomplete__option {
+	color: var(--is-color);
+}
+
+html:not([data-looknfeel^="neon-"]) .is-autocomplete__option--active,
+html:not([data-looknfeel^="neon-"]) .is-autocomplete__option:hover {
+	background: color-mix(in srgb, var(--is-primary), transparent 88%);
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .demo-test-rail {
+	border-left-color: var(--is-b-color);
+}
+
+html[data-looknfeel="contapyme"] .theme-lab__title {
+	color: var(--is-color);
+}
+
+html[data-looknfeel="contapyme"] .theme-lab__section-title {
+	color: color-mix(in srgb, var(--is-primary), var(--is-color) 35%);
+}
+
+html[data-looknfeel="contapyme"] .theme-lab__swatch {
+	border-color: var(--is-b-color);
+	background: var(--is-bg-secondary);
+	color: var(--is-color);
+}
+
+/* Chips de color en config demos — densidad alineada con PaletteGrid */
+html[data-looknfeel="contapyme"] .checkbox-chip__label {
+	margin-bottom: 0.65rem;
+	padding-bottom: 0.35rem;
+}
+
+html[data-looknfeel="contapyme"] .checkbox-chip__pill {
+	line-height: 1.2;
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .checkbox-chip__pill[data-variant="outlined"] {
+	background: transparent;
+	border-color: color-mix(in srgb, var(--bttn-clr) 42%, var(--is-b-color));
+	color: color-mix(in srgb, var(--bttn-clr) 72%, var(--is-color));
+}
+
+html[data-looknfeel="contapyme"] .demo-panel-body .checkbox-chip__pill[data-variant="solid"] {
+	font-weight: 600;
+}

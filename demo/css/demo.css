@@ -1,0 +1,9 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.jagu-demo-code {
+  font-family: var(--pg-font-mono, ui-monospace, monospace);
+  font-size: 0.85em;
+}

@@ -1,0 +1,417 @@
+/* Button — layout base + variantes por look (`html[data-looknfeel]`). */
+
+button,
+.button-wrap {
+	user-select: none;
+	cursor: pointer;
+	appearance: none;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	white-space: nowrap;
+	min-width: 16px;
+	width: 100%;
+	height: fit-content;
+	min-height: 2rem;
+	padding: 0.35rem;
+	box-sizing: border-box;
+	border: none;
+	transition: all 0.25s ease-in-out;
+}
+
+button:focus,
+button:focus-visible,
+.button-wrap:focus,
+.button-wrap:focus-visible {
+	outline: none;
+}
+
+button.loading,
+.button-wrap.loading {
+	animation: sz-pulse 1.5s infinite ease-in-out;
+	filter: grayscale(0.4);
+	pointer-events: none;
+	user-select: none;
+}
+
+button:disabled,
+.button-wrap[aria-disabled="true"] {
+	cursor: not-allowed;
+	filter: grayscale(0.5) opacity(0.5);
+}
+
+button[data-shape="round"],
+.button-wrap[data-shape="round"] {
+	border-radius: 0.5rem;
+}
+
+button[data-shape="rect"],
+.button-wrap[data-shape="rect"] {
+	border-radius: 0;
+}
+
+button[data-shape="pill"],
+.button-wrap[data-shape="pill"] {
+	border-radius: 999px;
+}
+
+button .is-text-icon,
+.button-wrap .is-text-icon {
+	pointer-events: none;
+}
+
+button .button-content,
+.button-wrap .button-content {
+	white-space: nowrap;
+}
+
+/* ── contapyme ── */
+html[data-looknfeel="contapyme"] button[data-variant="solid"],
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="solid"],
+html[data-looknfeel="contapyme"] button[data-variant="ghost"]:hover,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="ghost"]:hover {
+	--bttn-ccnt-clr: var(--bttn-clr);
+	background-color: var(--bttn-bg-bs);
+	border: 1px solid transparent;
+	color: var(--bttn-fnt-sld);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="solid"]:not(:disabled):not([data-variant="ghost"]):hover,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="solid"]:not([aria-disabled="true"]):hover {
+	background-color: var(--bttn-bg-hvr);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="solid"]:not(:disabled):active,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="solid"]:not([aria-disabled="true"]):active,
+html[data-looknfeel="contapyme"] button[data-variant="ghost"]:not(:disabled):active,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="ghost"]:not([aria-disabled="true"]):active {
+	background-color: var(--bttn-bg-ctv);
+	transform: translateY(1px);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="outlined"],
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="outlined"],
+html[data-looknfeel="contapyme"] button[data-variant="ghost"]:not(:hover),
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="ghost"]:not(:hover) {
+	background-color: transparent;
+	color: var(--bttn-clr);
+	border: 1px solid var(--bttn-clr);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="outlined"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="outlined"]:not([aria-disabled="true"]):hover {
+	background-color: var(--bttn-l-hvr-bg);
+	color: var(--bttn-clr);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="outlined"]:not(:disabled):active,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="outlined"]:not([aria-disabled="true"]):active {
+	background-color: var(--bttn-l-ctv-bg);
+	color: var(--bttn-clr);
+	transform: translateY(1px);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="text"],
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="text"] {
+	background-color: transparent;
+	color: var(--bttn-ccnt-clr);
+	border: none;
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="text"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="text"]:not([aria-disabled="true"]):hover {
+	background-color: var(--bttn-l-hvr-bg);
+	color: var(--bttn-txt-hvr-fg);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="text"]:not(:disabled):active,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="text"]:not([aria-disabled="true"]):active {
+	background-color: var(--bttn-l-ctv-bg);
+	color: var(--bttn-txt-ctv-fg);
+	transform: translateY(1px);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="soft"],
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="soft"] {
+	background-color: var(--bttn-sft-bg);
+	color: var(--bttn-sft-fnt);
+	border: none;
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="soft"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="soft"]:not([aria-disabled="true"]):hover {
+	background-color: var(--bttn-sft-bg-hvr);
+	color: var(--bttn-sft-fnt-hvr);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="soft"]:not(:disabled):active,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="soft"]:not([aria-disabled="true"]):active {
+	background-color: var(--bttn-sft-bg-ctv);
+	color: var(--bttn-sft-fnt-ctv);
+	transform: translateY(1px);
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="glass"],
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="glass"] {
+	backdrop-filter: blur(8px) saturate(130%);
+	-webkit-backdrop-filter: blur(8px) saturate(130%);
+	background: color-mix(in srgb, var(--bttn-clr) 12%, transparent);
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 35%, transparent);
+	color: var(--bttn-ccnt-clr);
+	box-shadow: none;
+}
+
+html[data-looknfeel="contapyme"] button[data-variant="glass"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="glass"]:not([aria-disabled="true"]):hover {
+	background: color-mix(in srgb, var(--bttn-clr) 18%, transparent);
+}
+
+/* ── neon-glass ── */
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"],
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"] {
+	backdrop-filter: blur(10px) saturate(145%);
+	-webkit-backdrop-filter: blur(10px) saturate(145%);
+	background: linear-gradient(
+		145deg,
+		color-mix(in srgb, var(--bttn-clr) 22%, transparent),
+		color-mix(in srgb, var(--bttn-clr) 5%, transparent)
+	);
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 44%, transparent);
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--bttn-clr) 14%, transparent),
+		0 0 16px color-mix(in srgb, var(--bttn-clr) 28%, transparent),
+		0 0 28px color-mix(in srgb, var(--neon-cyan, var(--bttn-clr)), transparent 82%);
+	color: var(--bttn-ccnt-clr);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"]:not(:disabled):hover,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"]:not([aria-disabled="true"]):hover {
+	border-color: color-mix(in srgb, var(--bttn-clr) 58%, transparent);
+	box-shadow:
+		0 0 18px color-mix(in srgb, var(--bttn-clr) 34%, transparent),
+		0 0 32px color-mix(in srgb, var(--neon-blue, var(--bttn-clr)), transparent 76%),
+		0 0 0 1px color-mix(in srgb, var(--bttn-clr) 20%, transparent);
+	transform: translateY(-1px);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"]:not(:disabled):active,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"]:not([aria-disabled="true"]):active {
+	transform: scale(0.98);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"][data-glass-active="true"],
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"][data-glass-active="true"] {
+	background: linear-gradient(
+		145deg,
+		color-mix(in srgb, var(--bttn-clr) 38%, transparent),
+		color-mix(in srgb, var(--bttn-clr) 14%, transparent)
+	);
+	border-color: color-mix(in srgb, var(--bttn-clr) 68%, transparent);
+	box-shadow:
+		0 0 22px color-mix(in srgb, var(--bttn-clr) 40%, transparent),
+		0 0 38px color-mix(in srgb, var(--neon-purple, var(--bttn-clr)), transparent 74%),
+		0 0 0 1px color-mix(in srgb, var(--bttn-clr) 28%, transparent);
+	color: color-mix(in srgb, var(--bttn-clr), white 22%);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"]:focus-visible,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="glass"]:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--bttn-clr) 55%, var(--neon-blue, #1e90ff) 45%);
+	outline-offset: 2px;
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="solid"],
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="solid"] {
+	backdrop-filter: blur(10px) saturate(145%);
+	-webkit-backdrop-filter: blur(10px) saturate(145%);
+	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 44%, transparent), color-mix(in srgb, var(--bttn-clr) 16%, rgba(15, 34, 54, 0.38)));
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 58%, transparent);
+	box-shadow: 0 0 16px color-mix(in srgb, var(--bttn-clr) 28%, transparent), 0 0 0 1px color-mix(in srgb, var(--bttn-clr) 18%, transparent);
+	color: oklch(from color-mix(in srgb, var(--bttn-clr) 42%, var(--is-bg-primary) 58%) calc((sign(0.58 - l) + 1) / 2 * 100%) 0 h / 1);
+	text-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr), transparent 62%), 0 1px 2px color-mix(in srgb, black, transparent 55%);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="solid"]:not(:disabled):hover,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="solid"]:not([aria-disabled="true"]):hover {
+	box-shadow: 0 0 22px color-mix(in srgb, var(--bttn-clr) 36%, transparent);
+	transform: translateY(-1px);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="solid"]:not(:disabled):active,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="solid"]:not([aria-disabled="true"]):active {
+	transform: scale(0.98);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"],
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"] {
+	backdrop-filter: blur(10px) saturate(145%);
+	-webkit-backdrop-filter: blur(10px) saturate(145%);
+	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 12%, transparent), color-mix(in srgb, var(--bttn-clr) 4%, rgba(15, 23, 42, 0.2)));
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 52%, transparent);
+	color: var(--bttn-clr);
+	box-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr) 16%, transparent);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not(:disabled):hover,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not([aria-disabled="true"]):hover {
+	border-color: color-mix(in srgb, var(--bttn-clr) 65%, transparent);
+	box-shadow: 0 0 14px color-mix(in srgb, var(--bttn-clr) 24%, transparent);
+	transform: translateY(-1px);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not(:disabled):active,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not([aria-disabled="true"]):active {
+	transform: scale(0.98);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="soft"],
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="soft"] {
+	backdrop-filter: blur(10px) saturate(145%);
+	-webkit-backdrop-filter: blur(10px) saturate(145%);
+	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 24%, transparent), color-mix(in srgb, var(--bttn-clr) 8%, transparent));
+	border: none;
+	color: var(--bttn-sft-fnt);
+	box-shadow: 0 0 8px color-mix(in srgb, var(--bttn-clr) 12%, transparent);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="soft"]:not(:disabled):hover,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="soft"]:not([aria-disabled="true"]):hover {
+	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 32%, transparent), color-mix(in srgb, var(--bttn-clr) 12%, transparent));
+	box-shadow: 0 0 14px color-mix(in srgb, var(--bttn-clr) 20%, transparent);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="text"],
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="text"] {
+	background: transparent;
+	border: none;
+	color: var(--bttn-ccnt-clr);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="text"]:not(:disabled):hover,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="text"]:not([aria-disabled="true"]):hover {
+	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 14%, transparent), transparent);
+	box-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr) 14%, transparent);
+	color: var(--bttn-txt-hvr-fg);
+}
+
+/* ── Ghost: idle ≈ outlined · hover/active ≈ solid (todos los looks) ── */
+
+html[data-looknfeel="contapyme"] button[data-variant="ghost"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .button-wrap[data-variant="ghost"]:not([aria-disabled="true"]):hover {
+	background-color: var(--bttn-bg-hvr);
+	color: var(--bttn-fnt-sld);
+	border: 1px solid transparent;
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not(:hover):not(:active),
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not(:hover):not(:active) {
+	backdrop-filter: blur(10px) saturate(145%);
+	-webkit-backdrop-filter: blur(10px) saturate(145%);
+	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 12%, transparent), color-mix(in srgb, var(--bttn-clr) 4%, rgba(15, 23, 42, 0.2)));
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 52%, transparent);
+	color: var(--bttn-clr);
+	box-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr) 16%, transparent);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not(:disabled):hover,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not([aria-disabled="true"]):hover {
+	backdrop-filter: blur(10px) saturate(145%);
+	-webkit-backdrop-filter: blur(10px) saturate(145%);
+	background: linear-gradient(145deg, color-mix(in srgb, var(--bttn-clr) 44%, transparent), color-mix(in srgb, var(--bttn-clr) 16%, rgba(15, 34, 54, 0.38)));
+	border: 1px solid color-mix(in srgb, var(--bttn-clr) 58%, transparent);
+	box-shadow: 0 0 16px color-mix(in srgb, var(--bttn-clr) 28%, transparent), 0 0 0 1px color-mix(in srgb, var(--bttn-clr) 18%, transparent);
+	color: oklch(from color-mix(in srgb, var(--bttn-clr) 42%, var(--is-bg-primary) 58%) calc((sign(0.58 - l) + 1) / 2 * 100%) 0 h / 1);
+	text-shadow: 0 0 10px color-mix(in srgb, var(--bttn-clr), transparent 62%), 0 1px 2px color-mix(in srgb, black, transparent 55%);
+	transform: translateY(-1px);
+}
+
+html[data-looknfeel^="neon-"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not(:disabled):active,
+html[data-looknfeel^="neon-"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="ghost"]:not([aria-disabled="true"]):active {
+	transform: scale(0.98);
+}
+
+/* ── mac-liquidglass — controles estilo macOS ── */
+html[data-looknfeel="mac-liquidglass"] button[data-variant="glass"],
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="glass"],
+html[data-looknfeel="mac-liquidglass"] button[data-variant="outlined"],
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="outlined"],
+html[data-looknfeel="mac-liquidglass"] button[data-variant="ghost"]:not(:hover):not(:active),
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="ghost"]:not(:hover):not(:active) {
+	-webkit-backdrop-filter: blur(20px) saturate(160%);
+	backdrop-filter: blur(20px) saturate(160%);
+	background: rgba(120, 120, 128, 0.14);
+	border: 0.5px solid var(--mlg-border, rgba(0, 0, 0, 0.09));
+	box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.12);
+	color: var(--mlg-fg, var(--is-color));
+}
+
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] button[data-variant="glass"],
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="glass"],
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] button[data-variant="outlined"],
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="outlined"],
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] button[data-variant="ghost"]:not(:hover):not(:active),
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="ghost"]:not(:hover):not(:active) {
+	background: rgba(120, 120, 128, 0.22);
+}
+
+html[data-looknfeel="mac-liquidglass"] button[data-variant="solid"]:not([data-surface-color]),
+html[data-looknfeel="mac-liquidglass"] button[data-variant="solid"][data-surface-color="primary"],
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="solid"]:not([data-surface-color]),
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="solid"][data-surface-color="primary"] {
+	background: var(--mlg-accent, #007aff) !important;
+	border: 0.5px solid color-mix(in srgb, var(--mlg-accent, #007aff), #000 14%) !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), inset 0 0.5px 0 rgba(255, 255, 255, 0.22) !important;
+	color: #fff !important;
+}
+
+html[data-looknfeel="mac-liquidglass"] button[data-variant="solid"]:is([data-surface-color="danger"], [data-surface-color="error"]),
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="solid"]:is([data-surface-color="danger"], [data-surface-color="error"]) {
+	background: #ff3b30 !important;
+	border-color: color-mix(in srgb, #ff3b30, #000 12%) !important;
+	color: #fff !important;
+}
+
+html[data-looknfeel="mac-liquidglass"] button[data-variant="solid"]:not(:is(:not([data-surface-color]), [data-surface-color="primary"], [data-surface-color="danger"], [data-surface-color="error"])),
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="solid"]:not(:is(:not([data-surface-color]), [data-surface-color="primary"], [data-surface-color="danger"], [data-surface-color="error"])) {
+	background: linear-gradient(180deg, color-mix(in srgb, var(--bttn-clr) 88%, white 12%), var(--bttn-clr)) !important;
+	border: 0.5px solid color-mix(in srgb, var(--bttn-clr), #000 16%) !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0.5px 0 rgba(255, 255, 255, 0.2) !important;
+	color: #fff !important;
+}
+
+html[data-looknfeel="mac-liquidglass"] button[data-variant="ghost"]:not(:disabled):hover,
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="ghost"]:not([aria-disabled="true"]):hover {
+	background: var(--mlg-sidebar-hover, rgba(0, 0, 0, 0.05)) !important;
+	border-color: var(--mlg-border, rgba(0, 0, 0, 0.09)) !important;
+	box-shadow: none !important;
+	color: var(--mlg-fg, var(--is-color)) !important;
+}
+
+html[data-looknfeel="mac-liquidglass"] button[data-variant="soft"],
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="soft"] {
+	background: rgba(120, 120, 128, 0.16);
+	border: none;
+	color: var(--mlg-accent, var(--bttn-clr));
+	box-shadow: none;
+}
+
+html[data-looknfeel="mac-liquidglass"] button[data-variant="text"],
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="text"] {
+	background: transparent;
+	border: none;
+	color: var(--mlg-accent, var(--bttn-clr));
+}
+
+html[data-looknfeel="mac-liquidglass"] button[data-variant="text"]:not(:disabled):hover,
+html[data-looknfeel="mac-liquidglass"] .button-wrap[data-variant="text"]:not([aria-disabled="true"]):hover {
+	background: var(--mlg-sidebar-hover, rgba(0, 0, 0, 0.05));
+	border-radius: 6px;
+}
+
+html[data-looknfeel="mac-liquidglass"] button:focus-visible,
+html[data-looknfeel="mac-liquidglass"] .button-wrap:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--mlg-accent, #007aff) 72%, transparent);
+	outline-offset: 2px;
+}

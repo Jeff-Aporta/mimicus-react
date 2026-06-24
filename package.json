@@ -1,0 +1,12 @@
+{
+  "name": "@jeff-aporta/jagudeloe-react-ui",
+  "private": true,
+  "description": "UI React temática InSoft — consumo CDN (ISAComponents.JaguUI)",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:demo": "node scripts/build-demo.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  }
+}

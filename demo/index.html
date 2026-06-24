@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jagu React UI — Jeff-Aporta</title>
+  <meta name="description" content="UI React temática InSoft: AppLayout, Button, Card y navegación SPA por CDN. Sin MUI." />
+  <meta name="application-name" content="Jagu React UI" />
+  <meta name="theme-color" content="#1e90ff" />
+  <script>
+    (function () {
+      var path = location.pathname.replace(/\/index\.html$/, "/");
+      if (!path.endsWith("/")) path = path.replace(/[^/]+$/, "");
+      if (path && path !== "/" && !document.querySelector("base")) {
+        var b = document.createElement("base");
+        b.href = path;
+        document.head.appendChild(b);
+      }
+    })();
+  </script>
+  <script>window.__ISA_DIST__ = true;</script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="css/demo.css" />
+  <link rel="stylesheet" href="cdn/jagu-ui.min.css" />
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?external=react",
+    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime"
+  }
+}
+  </script>
+  <script type="module" src="js/boot/loader.mjs"></script>
+</head>
+<body>
+  <div id="root">
+    <style>
+      html { color-scheme: dark; background: var(--is-bg-primary, #0b1220); }
+      body { margin: 0; min-height: 100vh; background: inherit; color: var(--is-color, #e2e8f0); }
+      #root { min-height: 100vh; }
+      .jagu-app-boot { min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; color: #94a3b8; }
+    </style>
+    <div class="jagu-app-boot" role="status" aria-live="polite">Cargando Jagu React UI…</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+/* Superficies neon — looks `neon-mono` · `neon-dual` · `neon-triad` (`data-looknfeel^="neon-"`). */
+
+html[data-looknfeel^="neon-"] [data-variant] {
+	--ng-accent: var(--bttn-clr, var(--bdg-clr, var(--is-primary)));
+}
+
+/* Card — sombras neón (anula relieve gris inline de Card.svelte) */
+html[data-looknfeel^="neon-"] .card-root {
+	box-shadow: var(--isa-glass-shadow-dark) !important;
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root {
+	box-shadow: var(--isa-glass-shadow-light) !important;
+}
+
+html[data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--neon-cyan), transparent 72%),
+		0 0 20px color-mix(in srgb, var(--neon-blue), transparent 78%),
+		0 0 36px color-mix(in srgb, var(--neon-purple), transparent 84%) !important;
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--is-primary), transparent 82%),
+		0 0 16px color-mix(in srgb, var(--neon-blue), transparent 84%),
+		0 0 28px color-mix(in srgb, var(--neon-cyan), transparent 88%) !important;
+}
+
+/* Card */
+html[data-looknfeel^="neon-"] .card-root[data-variant="solid"],
+html[data-looknfeel^="neon-"] .card-root[data-variant="flat"],
+html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+	border-radius: var(--jagu-ui-glass-radius, 14px);
+	-webkit-backdrop-filter: blur(12px) saturate(150%);
+	backdrop-filter: blur(12px) saturate(150%);
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="solid"],
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"],
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+	border-color: var(--isa-glass-border-light) !important;
+	box-shadow: var(--isa-glass-shadow-light) !important;
+}
+
+html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="solid"],
+html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="flat"],
+html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+	border-color: var(--isa-glass-border-dark) !important;
+	box-shadow: var(--isa-glass-shadow-dark) !important;
+}
+
+html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+	background: linear-gradient(
+		165deg,
+		color-mix(in srgb, var(--neon-blue), transparent 90%),
+		color-mix(in srgb, var(--isa-glass-bg-dark), transparent 28%)
+	) !important;
+	border: 1px solid var(--isa-glass-border-dark) !important;
+}
+
+html[data-looknfeel^="neon-"] .card-root[data-variant="solid"] {
+	background: linear-gradient(
+		145deg,
+		color-mix(in srgb, var(--neon-blue), transparent 94%),
+		color-mix(in srgb, var(--isa-glass-bg-dark), transparent 24%)
+	) !important;
+	border: 1px solid var(--isa-glass-border-dark) !important;
+}
+
+html[data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+	background: color-mix(in srgb, var(--isa-glass-bg-dark), transparent 38%) !important;
+	border: 1px solid color-mix(in srgb, var(--isa-glass-border-dark), transparent 28%) !important;
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 94%), color-mix(in srgb, var(--is-bg-secondary), transparent 14%)) !important;
+	border-color: var(--isa-glass-border-light) !important;
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="solid"] {
+	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 96%), color-mix(in srgb, var(--is-bg-secondary), transparent 12%)) !important;
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+	background: color-mix(in srgb, var(--is-bg-secondary), transparent 32%) !important;
+}
+
+/* CheckboxIcon / Switch */
+html[data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt {
+	padding: 0.2rem 0.55rem;
+	border-radius: 999px;
+	-webkit-backdrop-filter: blur(8px) saturate(140%);
+	backdrop-filter: blur(8px) saturate(140%);
+	border: 1px solid color-mix(in srgb, var(--c-tr, var(--is-primary)) 35%, transparent);
+	background: linear-gradient(
+		145deg,
+		color-mix(in srgb, var(--c-tr, var(--is-primary)) 10%, transparent),
+		color-mix(in srgb, var(--isa-glass-bg-dark, rgba(15, 23, 42, 0.72)) 88%, transparent)
+	);
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt {
+	background: linear-gradient(145deg, color-mix(in srgb, var(--c-tr, var(--is-primary)) 5%, transparent), color-mix(in srgb, var(--is-bg-secondary), transparent 10%));
+	border-color: color-mix(in srgb, var(--c-tr, var(--is-primary)) 22%, var(--is-b-color));
+}
+
+html[data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"]:has(input:checked) .lbl-cntnt {
+	box-shadow: 0 0 14px color-mix(in srgb, var(--c-tr, var(--is-primary)) 32%, transparent);
+}
+
+/* Divider glow — fallback fuera de neon-glass */
+html:not([data-looknfeel^="neon-"]) .is-divider--glow.is-divider--horizontal .is-divider__rail {
+	border-top-width: 1px;
+	border-style: solid;
+	height: auto;
+	background: none;
+	box-shadow: none;
+	opacity: 1;
+}
+
+html:not([data-looknfeel^="neon-"]) .is-divider--glow.is-divider--vertical .is-divider__rail--solo-vertical {
+	border-left-width: 1px;
+	width: 0;
+	background: none;
+	box-shadow: none;
+	opacity: 1;
+}
+
+html[data-looknfeel^="neon-"] .is-divider--glow.is-divider--horizontal .is-divider__rail {
+	border-top: none;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);
+	box-shadow: 0 0 10px color-mix(in srgb, var(--neon-blue, #1e90ff) 45%, transparent);
+	opacity: 0.92;
+}
+
+html[data-looknfeel^="neon-"] .is-divider--glow.is-divider--vertical .is-divider__rail--solo-vertical {
+	border-left: none;
+	width: 2px;
+	background: linear-gradient(180deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);
+	box-shadow: 0 0 10px color-mix(in srgb, var(--neon-blue, #1e90ff) 45%, transparent);
+	opacity: 0.92;
+}
+
+html[data-luminance="light"][data-looknfeel^="neon-"] .is-divider--glow .is-divider__rail,
+html[data-luminance="light"][data-looknfeel^="neon-"] .is-divider--glow .is-divider__rail--solo-vertical {
+	box-shadow: 0 0 8px color-mix(in srgb, var(--neon-blue, #1e90ff) 22%, transparent);
+	opacity: 0.85;
+}

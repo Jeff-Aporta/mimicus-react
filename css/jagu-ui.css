@@ -1,0 +1,24 @@
+/**
+ * @jeff-aporta/jagudeloe-react-ui — kit temático (portado desde ISP-Svelte-Playground).
+ * Contrato: html[data-luminance|data-theme-color|data-design-scheme|data-looknfeel]
+ */
+@import "./isp/playground-typography.css";
+@import "./isp/theme-color-palettes.css";
+@import "./isp/theme.css";
+@import "./isp/design-scheme.css";
+@import "./isp/color-transform.css";
+@import "./isp/surface-tokens.css";
+@import "./isp/button.css";
+@import "./isp/lab-surfaces.css";
+@import "./isp/windows-surfaces.css";
+@import "./isp/ng-surface.css";
+@import "./isp/mlg-surface.css";
+@import "./isp/playground-contapyme.css";
+@import "./isp/playground-scheme-lab.css";
+@import "./isp/playground-windows.css";
+@import "./isp/playground-glass.css";
+@import "./isp/playground-liquidglass.css";
+@import "./isp/pg-component-blend.css";
+@import "./components/app-layout.css";
+@import "./components/card.css";
+@import "./components/shell-nav.css";

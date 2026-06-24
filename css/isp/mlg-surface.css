@@ -1,0 +1,46 @@
+/* Superficies Mac liquid glass — `html[data-looknfeel="mac-liquidglass"]` */
+
+html[data-looknfeel="mac-liquidglass"] [data-variant] {
+	--mlg-accent: var(--mlg-accent, #007aff);
+}
+
+/* Card */
+html[data-looknfeel="mac-liquidglass"] .card-root[data-variant="solid"],
+html[data-looknfeel="mac-liquidglass"] .card-root[data-variant="flat"],
+html[data-looknfeel="mac-liquidglass"] .card-root[data-variant="glass"] {
+	border-radius: var(--mlg-radius-lg, 10px);
+	-webkit-backdrop-filter: var(--mlg-blur, blur(40px) saturate(180%));
+	backdrop-filter: var(--mlg-blur, blur(40px) saturate(180%));
+	border: 0.5px solid var(--mlg-border, rgba(0, 0, 0, 0.09));
+	box-shadow: var(--mlg-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.08));
+	background: var(--mlg-fill, rgba(255, 255, 255, 0.62)) !important;
+}
+
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] .card-root[data-variant="solid"],
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] .card-root[data-variant="flat"],
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] .card-root[data-variant="glass"] {
+	background: var(--mlg-fill, rgba(40, 40, 42, 0.58)) !important;
+}
+
+html[data-looknfeel="mac-liquidglass"] .card-root[data-variant="flat"] {
+	box-shadow: var(--mlg-shadow-sm, 0 0.5px 0 rgba(0, 0, 0, 0.04)) !important;
+}
+
+/* CheckboxIcon pill */
+html[data-looknfeel="mac-liquidglass"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt,
+html[data-looknfeel="mac-liquidglass"] .demo-panel-body label.checkbox-icon .lbl-cntnt {
+	padding: 0.18rem 0.55rem;
+	border-radius: 999px;
+	-webkit-backdrop-filter: var(--mlg-blur, blur(40px) saturate(180%));
+	backdrop-filter: var(--mlg-blur, blur(40px) saturate(180%));
+	border: 0.5px solid var(--mlg-border, rgba(0, 0, 0, 0.09));
+	background: var(--mlg-fill, rgba(255, 255, 255, 0.62));
+	color: var(--mlg-fg, var(--is-color));
+}
+
+html[data-looknfeel="mac-liquidglass"] label.checkbox-icon[data-variant="glass"]:has(input:checked) .lbl-cntnt {
+	background: var(--mlg-accent, #007aff);
+	border-color: color-mix(in srgb, var(--mlg-accent, #007aff), #000 12%);
+	color: #fff;
+	box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.22);
+}
