@@ -1,0 +1,12 @@
+{
+  "id": "TreeSelect",
+  "category": "Inputs",
+  "label": "TreeSelect",
+  "titleIcon": "mdi:file-tree-outline",
+  "status": "approved",
+  "intro": "Árbol seleccionable Ant.",
+  "component": { "name": "TreeSelect", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-tree-select" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

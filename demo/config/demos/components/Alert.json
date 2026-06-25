@@ -1,0 +1,19 @@
+{
+   "id": "Alert",
+   "category": "Containers",
+   "label": "Alert",
+   "titleIcon": "mdi:alert-circle-outline",
+   "status": "pending",
+   "intro": "Callout semántico sobre <code>Card</code>: icono, título opcional y cuerpo con color <code>info</code>/<code>success</code>/<code>warning</code>/<code>error</code>. Portado desde capacitación ContaPymeU.",
+   "component": { "name": "Alert", "path": "src/components/containers/Alert.svelte" },
+   "preview": { "template": "cmp-alert" },
+   "state": { "color": "info", "title": "Aviso", "inline": false },
+   "details": { "body": "Texto descriptivo del alert con contexto para el usuario." },
+   "fields": [
+      { "kind": "color", "key": "color", "label": "Color", "labelIcon": "mdi:palette", "attrType": "color" },
+      { "kind": "text", "key": "title", "label": "title", "labelIcon": "mdi:format-title" },
+      { "kind": "switch", "key": "inline", "label": "inline", "labelIcon": "mdi:tune" }
+   ],
+   "detailFields": [{ "kind": "text", "key": "body", "label": "Cuerpo", "labelIcon": "mdi:text" }]
+}
+

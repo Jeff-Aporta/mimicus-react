@@ -31,7 +31,7 @@ html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="f
 html[data-looknfeel^="neon-"] .card-root[data-variant="solid"],
 html[data-looknfeel^="neon-"] .card-root[data-variant="flat"],
 html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
-	border-radius: var(--mimicus-ui-glass-radius, 14px);
+	border-radius: var(--mimicus-ui-radius, 0.5rem);
 	-webkit-backdrop-filter: blur(12px) saturate(150%);
 	backdrop-filter: blur(12px) saturate(150%);
 }

@@ -1,12 +1,18 @@
 {
   "componentRef": "main",
-  "module": {
+  "esm": {
     "main": "mimicus-react.esm.min.js",
     "bootstrap": "mimicus-react.bootstrap.esm.min.js",
-    "css": "mimicus-ui.min.css"
+    "css": "mimicus-ui.min.css",
+    "loadCdns": "stack-esm"
   },
-  "legacy": {
-    "js": "mimicus-ui.min.js",
-    "snippets": "mimicus-snippets.min.js"
+  "global": {
+    "main": "mimicus-react.iife.min.js",
+    "globalName": "MimicusUI",
+    "bootstrap": "mimicus-snippets.min.js",
+    "bootstrapGlobal": "MimicusBootstrap",
+    "css": "mimicus-ui.min.css",
+    "loadCdns": "stack-global",
+    "alias": "mimicus-ui.min.js"
   }
 }

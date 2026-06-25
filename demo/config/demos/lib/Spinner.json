@@ -1,0 +1,13 @@
+{
+   "id": "Spinner",
+   "category": "Primitives",
+   "label": "Spinner",
+   "titleIcon": "mdi:loading",
+   "status": "approved",
+   "intro": "Indicador de carga circular con color semántico opcional.",
+   "component": { "name": "Spinner", "path": "src/lib/primitives/Spinner.svelte" },
+   "preview": { "template": "component", "scale": 1.5 },
+   "state": { "color": null },
+   "fields": [{ "kind": "color", "key": "color", "label": "Color", "labelIcon": "mdi:palette", "attrType": "color", "attrEmit": "colorDefaultNeutral" }],
+   "code": { "strategy": "default" }
+}

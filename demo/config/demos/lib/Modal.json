@@ -1,0 +1,24 @@
+{
+   "id": "Modal",
+   "category": "Overlays",
+   "label": "Modal",
+   "titleIcon": "mdi:window-maximize",
+   "status": "approved",
+   "intro": "Diálogo modal centrado: título por slot o mínimo, cierre en cabecera, scope global/local (como ActionDrawer) e inclusión de modales anidados.",
+   "component": { "name": "Modal", "path": "src/lib/overlays/Modal.svelte" },
+   "preview": { "template": "modal" },
+   "tests": "extras/ModalTests.svelte",
+   "state": { "_scope": "global", "showCloseHeader": true, "variant": "solid" },
+   "details": { "titulo": "Modal Demo", "icono": "logos:svelte-icon", "bTituloPorSlot": true, "bSimularLoading": false },
+   "fields": [
+      { "kind": "select-enum", "key": "_scope", "label": "scope", "labelIcon": "mdi:earth", "attrOmit": true, "enumValue": { "global": "global", "local": "local" } },
+      { "kind": "palette", "key": "variant", "label": "variant", "labelIcon": "mdi:shape-outline", "attrType": "str", "options": { "solid": "solid", "flat": "flat", "glass": "glass" }, "accent": "primary", "iconMap": { "solid": "mdi:card-bulleted", "flat": "mdi:card-outline", "glass": "mdi:shimmer" } },
+      { "kind": "switch", "key": "showCloseHeader", "label": "showCloseHeader", "attrOmit": true }
+   ],
+   "detailFields": [
+      { "kind": "icon-text", "key": "titulo-icono", "label": "Título", "labelIcon": "mdi:format-title", "iconKey": "icono", "textKey": "titulo" },
+      { "kind": "switch", "key": "bTituloPorSlot", "label": "Título por slot" },
+      { "kind": "switch", "key": "bSimularLoading", "label": "Simular loading (5s al abrir)" }
+   ],
+   "code": { "strategy": "modal" }
+}

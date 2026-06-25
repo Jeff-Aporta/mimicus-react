@@ -1,0 +1,32 @@
+/* Tokens del catálogo — defaults alineados a ContaPyme; cada look los sobrescribe en .catalog-home */
+
+.catalog-home {
+	--catalog-sketch-accent: var(--mimicus-primary);
+	--catalog-sketch-color: color-mix(in srgb, var(--catalog-sketch-accent), var(--mimicus-color) 52%);
+	--catalog-fg: var(--pg-text, var(--mimicus-color));
+	--catalog-muted: var(--pg-text-muted, color-mix(in srgb, var(--mimicus-color), transparent 32%));
+	--catalog-section-nav-bg: color-mix(in srgb, var(--mimicus-primary), transparent 92%);
+	--catalog-section-nav-border: var(--pg-field-border, var(--mimicus-b-color));
+	--catalog-section-nav-hover-bg: color-mix(in srgb, var(--mimicus-primary), transparent 86%);
+	--catalog-section-nav-hover-border: color-mix(in srgb, var(--mimicus-primary), transparent 55%);
+	--catalog-section-nav-hover-shadow: 0 2px 12px color-mix(in srgb, var(--mimicus-primary), transparent 88%);
+	--catalog-section-nav-focus: color-mix(in srgb, var(--mimicus-primary), transparent 30%);
+	--catalog-section-icon: var(--mimicus-primary);
+	--catalog-card-bg: var(--mimicus-bg-secondary);
+	--catalog-card-bg-image: none;
+	--catalog-card-bg-size: 100% 100%;
+	--catalog-card-bg-position: 50% 42%;
+	--catalog-card-border: var(--pg-field-border, var(--mimicus-b-color));
+	--catalog-card-shadow: 0 1px 2px color-mix(in srgb, var(--mimicus-color), transparent 92%);
+	--catalog-card-backdrop: none;
+	--catalog-card-hover-border: color-mix(in srgb, var(--mimicus-primary) 42%, var(--mimicus-b-color));
+	--catalog-card-hover-shadow: 0 4px 14px color-mix(in srgb, var(--mimicus-primary), transparent 88%);
+	--catalog-card-hover-transform: translateY(-1px);
+	--catalog-card-focus: color-mix(in srgb, var(--mimicus-primary), transparent 25%);
+	--catalog-card-preview-bg: color-mix(in srgb, var(--mimicus-primary), transparent 94%);
+	--catalog-card-preview-backdrop: none;
+	--catalog-card-preview-border: var(--pg-field-border, var(--mimicus-b-color));
+	--catalog-card-preview-color: color-mix(in srgb, var(--mimicus-color), transparent 38%);
+	--catalog-card-footer-fg: var(--catalog-fg);
+	--catalog-card-name-fg: var(--catalog-fg);
+}

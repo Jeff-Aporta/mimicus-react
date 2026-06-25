@@ -1,0 +1,268 @@
+/* Panel demo AccordionDemo — layout base (portado de AccordionDemo.svelte) */
+
+.demo-config-shell {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	width: 100%;
+	min-width: 0;
+}
+
+.demo-config-shell.card-root {
+	overflow: hidden;
+}
+
+.demo-panel-header {
+	flex-shrink: 0;
+}
+
+:is(.demo-panel-body, .accordion-body) {
+	box-sizing: border-box;
+	min-width: 0;
+	width: 100%;
+	color: var(--pg-text, var(--mimicus-color, inherit));
+}
+
+:is(.demo-panel-body, .accordion-body) .intro {
+	box-sizing: border-box;
+	color: var(--pg-text, var(--mimicus-color, inherit));
+	font-size: 0.95rem;
+	line-height: 1.5;
+	margin: 0 0 1rem;
+	max-width: 100%;
+	padding-inline: 0.15rem;
+	width: 100%;
+}
+
+:is(.demo-panel-body, .accordion-body) .intro code {
+	background: color-mix(in srgb, currentColor 8%, transparent);
+	border-radius: 0.2em;
+	font-size: 0.9em;
+	padding: 0.12em 0.35em;
+}
+
+.preview-frame {
+	position: relative;
+	box-sizing: border-box;
+	color: var(--pg-text, var(--mimicus-color, inherit));
+	--pg-preview-vignette: var(--mimicus-color);
+	--pg-preview-vignette-mix: 96%;
+	--pg-preview-frame-bg: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-primary) 5%);
+	--pg-preview-frame-border: color-mix(in srgb, var(--mimicus-b-color), transparent 28%);
+	--pg-preview-stage-bg: transparent;
+	--pg-preview-stage-shadow: none;
+	border: 1px solid var(--pg-preview-frame-border);
+	border-radius: var(--mimicus-ui-radius, 0.75rem);
+	padding: 1.25rem 1rem 1.1rem;
+	background: var(--pg-preview-frame-bg);
+	overflow: hidden;
+	min-width: 0;
+	max-width: 100%;
+}
+
+.preview-frame .pg-input-decorated {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	max-width: 100%;
+}
+
+.preview-frame .pg-input-decorated__label {
+	flex-shrink: 0;
+	margin-bottom: 0.65rem;
+}
+
+.preview-frame .pg-input-decorated__body {
+	flex: 0 1 auto;
+	min-width: 0;
+	min-height: 0;
+	overflow: auto;
+	max-width: 100%;
+}
+
+.preview-frame .pg-input-decorated__body > * {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.preview-viewport {
+	position: relative;
+	isolation: isolate;
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	min-height: clamp(9rem, 32vh, 400px);
+	max-height: 70vh;
+	overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.65rem 0.5rem;
+}
+
+.preview-frame:not(:has(.layout-inline-demo, .fc-preview-shell, .local-scope-zone, .layout-app-preview, .anchor-preview-shell)) .preview-viewport {
+	min-height: clamp(8.5rem, 28vh, 280px);
+}
+
+.preview-viewport::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+	border-radius: 0.5rem;
+	background: radial-gradient(
+		ellipse 92% 86% at 50% 48%,
+		transparent 0%,
+		transparent 58%,
+		color-mix(in srgb, var(--pg-preview-vignette, var(--mimicus-color)), transparent var(--pg-preview-vignette-mix, 95%)) 100%
+	);
+}
+
+.preview-scale-track {
+	box-sizing: border-box;
+	width: max-content;
+	max-width: 100%;
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-inline: auto;
+}
+
+.preview-stage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	width: max-content;
+	max-width: 100%;
+	min-height: 0;
+	border-radius: 0.5rem;
+	background: var(--pg-preview-stage-bg);
+	box-shadow: var(--pg-preview-stage-shadow);
+	transition: background-color 0.15s ease, box-shadow 0.15s ease;
+	padding: 0.75rem 1rem;
+}
+
+.preview-frame:not(:has(.layout-inline-demo, .fc-preview-shell, .local-scope-zone, .layout-app-preview, .anchor-preview-shell)) .preview-stage {
+	padding: 0.35rem 0.5rem;
+}
+
+.preview-frame:has(.layout-app-preview) .preview-viewport {
+	align-items: stretch;
+	justify-content: flex-start;
+}
+
+.preview-frame:has(.layout-app-preview) .preview-scale-track {
+	width: 100%;
+	max-width: 100%;
+	flex: 1 1 auto;
+	margin-inline: 0;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.preview-frame:has(.layout-app-preview) .preview-stage {
+	width: 100%;
+	max-width: 100%;
+	align-items: stretch;
+	justify-content: flex-start;
+	padding: 0.35rem 0.5rem;
+}
+
+.layout-app-preview {
+	width: 100%;
+	max-width: 100%;
+}
+
+.layout-app-preview .mimicus-app-layout {
+	width: 100%;
+	max-width: 100%;
+}
+
+/* Input decorado en panel de configuración */
+.pg-input-decorated {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	width: 100%;
+}
+
+.pg-input-decorated__label {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	margin: 0 0 0.45rem;
+	padding: 0.15rem 0 0.45rem;
+	border-bottom: 1px solid var(--pg-config-label-border, color-mix(in srgb, var(--mimicus-b-color), transparent 52%));
+	color: var(--pg-config-label-fg, var(--mimicus-color));
+	font-size: 0.74rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.pg-input-decorated--title > .pg-input-decorated__label {
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0.07em;
+	margin-bottom: 0.65rem;
+	padding-bottom: 0.5rem;
+}
+
+.pg-input-decorated__icon {
+	opacity: 0.72;
+	flex-shrink: 0;
+}
+
+.pg-input-decorated__body {
+	min-width: 0;
+	width: 100%;
+}
+
+.demo-config-shell .pg-demo-config-card {
+	box-sizing: border-box;
+	min-width: 0;
+}
+
+.demo-config-shell input[type="text"],
+.demo-config-shell input[type="number"],
+.demo-config-shell select {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	padding: 0.4rem 0.55rem;
+	border-radius: var(--pg-config-input-radius, 0.35rem);
+	border: 1px solid var(--pg-config-input-border, color-mix(in srgb, var(--mimicus-b-color), transparent 38%));
+	background: var(--pg-config-input-bg, color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-primary) 5%));
+	color: var(--pg-config-input-fg, var(--mimicus-color));
+	font-size: 0.84rem;
+}
+
+.demo-config-shell .pg-demo-config-section > .pg-input-decorated > .pg-input-decorated__body > [style*="grid"] {
+	width: 100%;
+}
+
+.demo-config-shell .pg-config-range {
+	touch-action: none;
+}
+
+.demo-config-shell .pg-config-range .mimicus-slider__input {
+	cursor: grab;
+}
+
+.demo-config-shell .pg-config-range .mimicus-slider__input:active {
+	cursor: grabbing;
+}
+
+@media (max-width: 767px) {
+	.preview-viewport {
+		min-height: clamp(8rem, 26vh, 240px);
+		max-height: 58vh;
+	}
+}

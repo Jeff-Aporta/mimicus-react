@@ -1,0 +1,20 @@
+{
+   "id": "Switch",
+   "category": "Iconized",
+   "label": "Switch",
+   "titleIcon": "mdi:toggle-switch-outline",
+   "status": "approved",
+   "intro": "Interruptor deslizante con etiqueta, colores y estados equivalentes al checkbox compacto.",
+   "component": { "name": "Switch", "path": "src/components/forms/Forms.jsx" },
+   "preview": { "template": "switch", "scale": 1.3 },
+   "state": { "checked": true, "color": null, "colorFalse": null, "variant": null, "loading": false, "disabled": false },
+   "details": { "label": "Texto de demostración" },
+   "fields": [
+      { "kind": "palette", "key": "variant", "label": "Variante", "labelIcon": "mdi:shape-outline", "attrType": "str", "options": [{ "label": "Por defecto", "value": null }, { "label": "glass", "value": "glass" }], "accent": "primary", "iconMap": { "": "mdi:block-helper", "glass": "mdi:shimmer" } },
+      { "kind": "color", "key": "color", "label": "Activo", "labelIcon": "mdi:palette-swatch", "attrType": "color" },
+      { "kind": "color", "key": "colorFalse", "label": "Inactivo", "labelIcon": "mdi:palette-outline", "attrType": "color" },
+      { "kind": "switch-group", "key": "estados", "label": "Estado", "labelIcon": "mdi:tune", "switches": [{ "key": "loading", "label": "loading" }, { "key": "disabled", "label": "disabled" }] }
+   ],
+   "detailFields": [{ "kind": "text", "key": "label", "label": "slot", "labelIcon": "mdi:text-short", "placeholder": "Ingrese un texto descriptivo" }],
+   "code": { "strategy": "bind-checked-body", "options": { "textKey": "label" } }
+}

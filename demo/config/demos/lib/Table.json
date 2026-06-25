@@ -1,0 +1,16 @@
+{
+  "id": "Table",
+  "category": "Containers",
+  "label": "Table",
+  "titleIcon": "mdi:table",
+  "status": "approved",
+  "intro": "Tabla declarativa con ordenamiento opcional. Compatible con <a href=\"https://ant.design/components/table\" target=\"_blank\" rel=\"noreferrer\">Ant Table</a> y <a href=\"https://mui.com/material-ui/react-table/\" target=\"_blank\" rel=\"noreferrer\">MUI Table</a>.",
+  "component": { "name": "Table", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-table" },
+  "state": { "bordered": false, "size": "medium", "sortable": true },
+  "fields": [
+    { "kind": "select-enum", "key": "size", "label": "size", "labelIcon": "mdi:format-line-spacing", "attrType": "str", "enumValue": { "Small": "small", "Medium": "medium" } },
+    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "bordered", "label": "bordered" }, { "key": "sortable", "label": "sortable" }] }
+  ],
+  "code": { "strategy": "disp-table" }
+}

@@ -3,6 +3,12 @@ html, body, #root {
   margin: 0;
 }
 
+html.pg-playground-doc,
+html.pg-playground-doc body {
+  overflow: hidden !important;
+  height: 100vh;
+}
+
 .mimicus-demo-code {
   font-family: var(--pg-font-mono, ui-monospace, monospace);
   font-size: 0.85em;

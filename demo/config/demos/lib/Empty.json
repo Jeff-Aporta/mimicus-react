@@ -1,0 +1,17 @@
+{
+  "id": "Empty",
+  "category": "Containers",
+  "label": "Empty",
+  "titleIcon": "mdi:inbox-outline",
+  "status": "approved",
+  "intro": "Estado vacío con imagen y acción opcional. Ver <a href=\"https://ant.design/components/empty\" target=\"_blank\" rel=\"noreferrer\">Ant Empty</a>.",
+  "component": { "name": "Empty", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-empty" },
+  "state": { "description": "No data", "image": "default", "showAction": true },
+  "fields": [
+    { "kind": "text", "key": "description", "label": "description", "labelIcon": "mdi:text" },
+    { "kind": "select-enum", "key": "image", "label": "image", "labelIcon": "mdi:image-outline", "attrType": "str", "enumValue": { "Default": "default", "Simple": "simple" } },
+    { "kind": "switch", "key": "showAction", "label": "acción", "labelIcon": "mdi:gesture-tap-button" }
+  ],
+  "code": { "strategy": "disp-empty" }
+}

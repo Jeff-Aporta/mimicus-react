@@ -1,0 +1,14 @@
+{
+   "id": "Box",
+   "category": "Layouts",
+   "label": "Box",
+   "titleIcon": "mdi:checkbox-blank-outline",
+   "status": "approved",
+   "intro": "Contenedor genérico theme-aware (MUI <code>Box</code>): <code>component</code>, className y style.",
+   "component": { "name": "Box", "path": "src/layout/Box.jsx" },
+   "preview": { "template": "layout-block" },
+   "state": {},
+   "details": { "itemCount": 2 },
+   "detailFields": [{ "kind": "number", "key": "itemCount", "label": "Elementos", "min": 1, "max": 6, "step": 1 }],
+   "code": { "strategy": "default", "tagOpts": { "multiline": true } }
+}

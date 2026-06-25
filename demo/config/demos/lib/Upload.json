@@ -1,0 +1,12 @@
+{
+  "id": "Upload",
+  "category": "Inputs",
+  "label": "Upload",
+  "titleIcon": "mdi:cloud-upload-outline",
+  "status": "approved",
+  "intro": "Subida de archivos Ant con lista de nombres.",
+  "component": { "name": "Upload", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-upload" },
+  "state": { "multiple": true, "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

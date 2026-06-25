@@ -1,0 +1,16 @@
+{
+  "id": "Timeline",
+  "category": "Containers",
+  "label": "Timeline",
+  "titleIcon": "mdi:timeline-outline",
+  "status": "approved",
+  "intro": "Línea de tiempo vertical u horizontal. Ver <a href=\"https://ant.design/components/timeline\" target=\"_blank\" rel=\"noreferrer\">Ant Timeline</a>.",
+  "component": { "name": "Timeline", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-timeline" },
+  "state": { "mode": "left", "pending": false },
+  "fields": [
+    { "kind": "select-enum", "key": "mode", "label": "mode", "labelIcon": "mdi:align-horizontal-left", "attrType": "str", "enumValue": { "Left": "left", "Right": "right", "Alternate": "alternate" } },
+    { "kind": "switch", "key": "pending", "label": "pending", "labelIcon": "mdi:clock-outline" }
+  ],
+  "code": { "strategy": "disp-timeline", "tagOpts": { "multiline": true } }
+}

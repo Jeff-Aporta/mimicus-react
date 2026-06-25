@@ -1,0 +1,12 @@
+{
+  "id": "Radio",
+  "category": "Inputs",
+  "label": "Radio",
+  "titleIcon": "mdi:radiobox-marked",
+  "status": "approved",
+  "intro": "Grupo de radio Ant / MUI <code>RadioGroup</code>.",
+  "component": { "name": "RadioGroup", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-radio" },
+  "state": { "direction": "horizontal", "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

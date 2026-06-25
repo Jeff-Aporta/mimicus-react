@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "sections": {
+    "general": {
+      "label": "General",
+      "description": "Elementos base: botones, iconografía y tipografía fundamental.",
+      "icon": "mdi:gesture-tap-button"
+    },
+    "layout": {
+      "label": "Layout",
+      "description": "Estructura de la interfaz: contenedores, flex, grid, espaciado y shells de aplicación.",
+      "icon": "mdi:view-grid-outline"
+    },
+    "navigation": {
+      "label": "Navigation",
+      "description": "Navegación en página: anclas, pestañas y acordeones.",
+      "icon": "mdi:compass-outline"
+    },
+    "data-entry": {
+      "label": "Data Entry",
+      "description": "Entradas y controles de formulario: switches, casillas y tableros de transferencia.",
+      "icon": "mdi:form-select"
+    },
+    "data-display": {
+      "label": "Data Display",
+      "description": "Presentación de contenido: tarjetas, texto, chips y bloques de código.",
+      "icon": "mdi:card-text-outline"
+    },
+    "feedback": {
+      "label": "Feedback",
+      "description": "Estado y capas modales: alertas, diálogos, carga y notificaciones.",
+      "icon": "mdi:message-alert-outline"
+    },
+    "other": {
+      "label": "Other",
+      "description": "Utilidades y visualizaciones especializadas.",
+      "icon": "mdi:dots-horizontal-circle-outline"
+    }
+  }
+}

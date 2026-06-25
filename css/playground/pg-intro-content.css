@@ -1,0 +1,115 @@
+/* Intro de demos — enlaces y énfasis, tokens por looknfeel */
+
+:root {
+	--pg-intro-link: var(--mimicus-primary);
+	--pg-intro-link-hover: color-mix(in srgb, var(--mimicus-primary), var(--mimicus-color) 14%);
+	--pg-intro-link-underline: color-mix(in srgb, var(--pg-intro-link), transparent 52%);
+	--pg-intro-strong: var(--mimicus-color);
+}
+
+:is(.demo-panel-body, .accordion-body) .intro a {
+	color: var(--pg-intro-link);
+	font-weight: 600;
+	text-decoration: none;
+	text-underline-offset: 0.2em;
+	border-bottom: 1px solid var(--pg-intro-link-underline);
+	transition: color 0.15s ease, border-color 0.15s ease, text-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+:is(.demo-panel-body, .accordion-body) .intro a:hover {
+	color: var(--pg-intro-link-hover);
+	border-bottom-color: color-mix(in srgb, var(--pg-intro-link-hover), transparent 28%);
+}
+
+:is(.demo-panel-body, .accordion-body) .intro a:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--pg-intro-link), transparent 42%);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+:is(.demo-panel-body, .accordion-body) .intro strong {
+	font-weight: 700;
+	color: color-mix(in srgb, var(--pg-intro-strong), var(--pg-intro-link) 16%);
+}
+
+/* contapyme — enlace corporativo */
+html[data-looknfeel="contapyme"] {
+	--pg-intro-link: color-mix(in srgb, var(--mimicus-primary), var(--mimicus-color) 8%);
+	--pg-intro-link-hover: var(--mimicus-primary);
+	--pg-intro-link-underline: color-mix(in srgb, var(--mimicus-primary), transparent 62%);
+}
+
+/* neon-glass */
+html[data-looknfeel^="neon-"] {
+	--pg-intro-link: color-mix(in srgb, var(--neon-cyan, var(--mimicus-primary)), var(--pg-text, var(--mimicus-color)) 22%);
+	--pg-intro-link-hover: var(--neon-cyan, var(--mimicus-primary));
+	--pg-intro-link-underline: color-mix(in srgb, var(--neon-cyan, var(--mimicus-primary)), transparent 58%);
+	--pg-intro-strong: var(--pg-text, var(--mimicus-color));
+}
+
+html[data-looknfeel^="neon-"] :is(.demo-panel-body, .accordion-body) .intro a:hover {
+	text-shadow: 0 0 16px color-mix(in srgb, var(--neon-cyan, var(--mimicus-primary)), transparent 62%);
+}
+
+/* mac-liquidglass */
+html[data-looknfeel="mac-liquidglass"] {
+	--pg-intro-link: var(--mlg-accent, #007aff);
+	--pg-intro-link-hover: color-mix(in srgb, var(--mlg-accent, #007aff), white 18%);
+	--pg-intro-link-underline: color-mix(in srgb, var(--pg-intro-link), transparent 52%);
+}
+
+html[data-luminance="dark"][data-looknfeel="mac-liquidglass"] {
+	--pg-intro-link: var(--mlg-accent, #0a84ff);
+	--pg-intro-link-hover: #64b5ff;
+}
+
+/* w98 */
+html[data-looknfeel="w98"] {
+	--pg-intro-link: #0000ee;
+	--pg-intro-link-hover: #0000cc;
+	--pg-intro-strong: var(--pg-w98-fg, #000);
+}
+
+html[data-looknfeel="w98"] :is(.demo-panel-body, .accordion-body) .intro a {
+	font-weight: 400;
+	border-bottom: none;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+}
+
+html[data-luminance="dark"][data-looknfeel="w98"] {
+	--pg-intro-link: #6eb5ff;
+	--pg-intro-link-hover: #9ed0ff;
+}
+
+/* wxp */
+html[data-looknfeel="wxp"] {
+	--pg-intro-link: #0066cc;
+	--pg-intro-link-hover: #004f9e;
+	--pg-intro-strong: var(--pg-win-chrome-fg, var(--mimicus-color));
+}
+
+html[data-looknfeel="wxp"] :is(.demo-panel-body, .accordion-body) .intro a {
+	font-weight: 600;
+}
+
+html[data-luminance="dark"][data-looknfeel="wxp"] {
+	--pg-intro-link: color-mix(in srgb, #7eb8ff 75%, var(--mimicus-primary) 25%);
+	--pg-intro-link-hover: #a8d4ff;
+}
+
+/* wvista */
+html[data-looknfeel="wvista"] {
+	--pg-intro-link: color-mix(in srgb, var(--mimicus-primary) 55%, #1a5fb4 45%);
+	--pg-intro-link-hover: color-mix(in srgb, var(--mimicus-primary) 35%, #3d8fd9 65%);
+	--pg-intro-strong: var(--pg-win-glass-fg, var(--mimicus-color));
+}
+
+html[data-looknfeel="wvista"] :is(.demo-panel-body, .accordion-body) .intro a:hover {
+	text-shadow: 0 0 12px color-mix(in srgb, var(--pg-intro-link-hover), transparent 72%);
+}
+
+html[data-luminance="dark"][data-looknfeel="wvista"] {
+	--pg-intro-link: color-mix(in srgb, #7ec8ff 68%, var(--mimicus-primary) 32%);
+	--pg-intro-link-hover: #b0ddff;
+}

@@ -1,0 +1,12 @@
+{
+  "id": "ColorPicker",
+  "category": "Inputs",
+  "label": "ColorPicker",
+  "titleIcon": "mdi:palette",
+  "status": "approved",
+  "intro": "Selector de color Ant con muestra y hex.",
+  "component": { "name": "ColorPicker", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-color-picker" },
+  "state": { "defaultValue": "#1677ff", "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

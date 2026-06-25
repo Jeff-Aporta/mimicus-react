@@ -1,0 +1,18 @@
+{
+  "id": "Input",
+  "category": "Inputs",
+  "label": "Input",
+  "titleIcon": "mdi:form-textbox",
+  "status": "approved",
+  "intro": "Campo de texto Ant / MUI <code>TextField</code>: tamaños, clear, prefijos y estados.",
+  "component": { "name": "Input", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-input" },
+  "state": { "size": "medium", "disabled": false, "allowClear": true },
+  "details": { "placeholder": "Escribe aquí…" },
+  "fields": [
+    { "kind": "select-enum", "key": "size", "label": "size", "attrType": "str", "enumValue": { "Small": "small", "Medium": "medium", "Large": "large" } },
+    { "kind": "switch", "key": "disabled", "label": "disabled" },
+    { "kind": "switch", "key": "allowClear", "label": "allowClear" }
+  ],
+  "code": { "strategy": "form-entry" }
+}

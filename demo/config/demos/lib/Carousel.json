@@ -1,0 +1,15 @@
+{
+  "id": "Carousel",
+  "category": "Containers",
+  "label": "Carousel",
+  "titleIcon": "mdi:view-carousel-outline",
+  "status": "approved",
+  "intro": "Carrusel con flechas, puntos y autoplay. Controlador <code>data-mimicus-display=\"carousel\"</code>. Ver <a href=\"https://ant.design/components/carousel\" target=\"_blank\" rel=\"noreferrer\">Ant Carousel</a>.",
+  "component": { "name": "Carousel", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-carousel" },
+  "state": { "autoplay": false, "arrows": true, "dots": true, "infinite": true },
+  "fields": [
+    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "autoplay", "label": "autoplay" }, { "key": "arrows", "label": "arrows" }, { "key": "dots", "label": "dots" }, { "key": "infinite", "label": "infinite" }] }
+  ],
+  "code": { "strategy": "disp-carousel", "tagOpts": { "multiline": true } }
+}

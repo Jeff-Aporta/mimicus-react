@@ -1,0 +1,12 @@
+{
+  "id": "Transfer",
+  "category": "Inputs",
+  "label": "Transfer",
+  "titleIcon": "mdi:swap-horizontal",
+  "status": "approved",
+  "intro": "Lista de transferencia Ant / MUI Transfer List.",
+  "component": { "name": "Transfer", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-transfer" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

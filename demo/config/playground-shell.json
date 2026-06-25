@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "panel": {
+    "storageKey": "mimicus:sidebarOpen",
+    "size": {
+      "expanded": 260,
+      "collapsed": 52,
+      "min": 200,
+      "max": 480,
+      "unit": "px"
+    }
+  },
+  "views": {
+    "collapsed": {
+      "type": "stack",
+      "className": "pg-panel-view pg-panel-view--rail",
+      "gap": "0.35rem",
+      "children": [{ "type": "catalog-categories", "mode": "rail" }]
+    },
+    "expanded": {
+      "type": "stack",
+      "className": "pg-panel-view pg-panel-view--expanded",
+      "gap": "0.25rem",
+      "children": [{ "type": "catalog-categories", "mode": "sections" }]
+    }
+  },
+  "navigation": {
+    "rows": [
+      {
+        "id": "primary",
+        "tier": "primary",
+        "when": "always",
+        "active": { "type": "primary" },
+        "children": [
+          { "type": "action", "id": "__home__", "label": "Inicio", "icon": "mdi:home", "nav": "home" },
+          { "type": "catalog-categories", "mode": "tabs" }
+        ]
+      },
+      {
+        "id": "secondary",
+        "tier": "secondary",
+        "when": "category-demos",
+        "active": { "type": "slug" },
+        "children": [{ "type": "catalog-demos", "mode": "tabs" }]
+      }
+    ]
+  },
+  "theme": {
+    "sectionColors": ["primary", "info", "success", "warning", "error", "danger", "color"]
+  }
+}

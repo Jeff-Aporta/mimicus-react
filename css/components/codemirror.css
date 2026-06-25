@@ -1,0 +1,123 @@
+/* CodeMirror 5 — panel Mimicus (CDN lazy, tema según data-luminance) */
+
+.mimicus-cm-fallback {
+  width: 100%;
+  margin: 0;
+  resize: vertical;
+  font-family: var(--pg-font-mono, ui-monospace, Consolas, monospace);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  background: color-mix(in srgb, var(--mimicus-bg-readonly, #0f172a) 88%, var(--mimicus-color) 4%);
+  color: var(--mimicus-color, #e2e8f0);
+  border: 0;
+  border-radius: 0;
+  padding: 0.65rem 0.75rem;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+html[data-luminance="light"] .mimicus-cm-fallback {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.mimicus-cm-host {
+  min-height: 8rem;
+}
+
+.mimicus-cm-host .CodeMirror {
+  height: 100% !important;
+  font-family: var(--pg-font-mono, ui-monospace, Consolas, "Cascadia Code", monospace);
+  font-size: 0.8rem;
+}
+
+.mimicus-cm-host .CodeMirror-scroll {
+  overflow: auto !important;
+}
+
+html[data-luminance="light"] .mimicus-cm-host .cm-s-default .CodeMirror-activeline-background {
+  background: rgba(30, 144, 255, 0.06);
+}
+
+html[data-luminance="light"] .mimicus-cm-host .cm-s-default .CodeMirror-cursor {
+  border-left-color: #1e293b;
+}
+
+html[data-luminance="light"] .mimicus-cm-host .cm-s-default .CodeMirror-gutters {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+html[data-luminance="light"] .mimicus-cm-host .cm-s-default .CodeMirror-linenumber {
+  color: #94a3b8;
+}
+
+html[data-luminance="light"] .mimicus-cm-host .cm-s-default .CodeMirror-selected {
+  background: rgba(30, 144, 255, 0.18);
+}
+
+html[data-luminance="light"] .mimicus-cm-host .cm-s-default.CodeMirror {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.mimicus-cm-panel {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--mimicus-primary, #1e90ff) 22%, var(--mimicus-b-color, #334155) 78%);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--mimicus-bg-readonly, #0f172a) 70%, transparent);
+}
+
+html[data-luminance="light"] .mimicus-cm-panel {
+  background: #f8fafc;
+  border-color: color-mix(in srgb, var(--mimicus-b-color, #cbd5e1) 55%, transparent);
+}
+
+.mimicus-cm-panel--bounded .mimicus-cm-host {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mimicus-cm-panel--bounded .mimicus-cm-host .CodeMirror {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+.mimicus-cm-panel__toolbar {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 3;
+  display: flex;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.mimicus-cm-panel__toolbar > * {
+  pointer-events: auto;
+}
+
+.mimicus-cm-panel__copy {
+  min-width: 1.75rem !important;
+  min-height: 1.75rem !important;
+  padding: 0 !important;
+  font-size: 0.85rem !important;
+  background: color-mix(in srgb, var(--mimicus-bg-secondary, #0f172a) 82%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--mimicus-b-color, #94a3b8) 45%, transparent) !important;
+  backdrop-filter: blur(4px);
+}
+
+html[data-luminance="light"] .mimicus-cm-panel__copy {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #334155 !important;
+}
+
+.pg-demo-example__code.mimicus-cm-panel {
+  border-top: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 35%);
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}

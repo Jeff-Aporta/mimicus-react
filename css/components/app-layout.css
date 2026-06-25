@@ -17,6 +17,51 @@
 }
 
 .mimicus-app-layout__cell--header { grid-area: header; }
+
+.mimicus-app-layout-header {
+	flex-shrink: 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-width: 0;
+}
+
+.mimicus-app-layout-header__bar {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 0.35rem;
+	width: 100%;
+	min-height: var(--mimicus-app-layout-header-h, 2.75rem);
+	box-sizing: border-box;
+}
+
+.mimicus-app-layout-header__brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	flex-shrink: 0;
+	min-width: 0;
+}
+
+.mimicus-app-layout-header__center {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.35rem;
+	min-width: 0;
+	overflow: hidden;
+}
+
+.mimicus-app-layout-header__tools {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.35rem;
+	flex-shrink: 0;
+	min-width: 0;
+}
 .mimicus-app-layout__cell--sider { grid-area: sider; }
 .mimicus-app-layout__cell--content { grid-area: content; overflow: hidden; }
 .mimicus-app-layout__cell--footer { grid-area: footer; }
@@ -90,8 +135,8 @@
 	}
 }
 
-/* Shell chrome mínimo para demo / apps CDN */
-.mimicus-shell {
+/* Shell chrome mínimo para demo / apps CDN (sin AppLayout grid) */
+.mimicus-shell:not(.mimicus-app-layout) {
 	display: flex;
 	flex-direction: column;
 	min-height: 100dvh;

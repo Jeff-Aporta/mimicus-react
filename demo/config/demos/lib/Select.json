@@ -1,0 +1,12 @@
+{
+  "id": "Select",
+  "category": "Inputs",
+  "label": "Select",
+  "titleIcon": "mdi:menu-down",
+  "status": "approved",
+  "intro": "Selector nativo estilizado Ant / MUI.",
+  "component": { "name": "Select", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-select" },
+  "state": { "size": "medium", "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

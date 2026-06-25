@@ -1,0 +1,47 @@
+/* Panel JSON — vista rail (colapsado): solo iconos de categoría */
+
+.pg-sidebar-body--rail {
+	padding: 0;
+	overflow-x: hidden;
+}
+
+.pg-panel-view--rail {
+	align-items: center;
+	padding-inline: 0;
+}
+
+.pg-panel-rail__btn {
+	width: 100% !important;
+	max-width: 100%;
+	min-width: 0 !important;
+	padding-inline: 0.2rem !important;
+	border-radius: var(--mimicus-ui-radius, 0.5rem);
+}
+
+.pg-panel-rail__btn :is(.sm-label, .sm-item-text, .sm-title-group, .sm-trail, .fps-histogram-chip__unit) {
+	display: none !important;
+}
+
+.pg-panel-rail__btn .sm-item-label {
+	gap: 0;
+}
+
+.pg-playground-shell.is-collapsed .pg-sidebar .sm-section,
+.pg-playground-shell.is-collapsed .pg-sidebar .sm-content,
+.pg-playground-shell.is-collapsed .pg-sidebar .pg-panel-demo-link {
+	display: none !important;
+}
+
+.pg-panel-view--expanded {
+	padding: 0.5rem 0.4rem 1rem;
+}
+
+.pg-playground-shell.is-collapsed .pg-sidebar-drawer-bar {
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 0.2rem;
+	height: auto;
+	min-height: var(--pg-shell-header-h);
+	padding-block: 0.3rem;
+}

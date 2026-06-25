@@ -30,7 +30,7 @@
 	--pg-neon-tint-d: color-mix(in srgb, var(--neon-sage), var(--pg-neon-cool-haze) 48%);
 	/* Tokens Mimicus UI (aliases públicos; --mimicus-glass-* legacy interno) */
 	--mimicus-ui-brand-gradient: linear-gradient(105deg, var(--mimicus-design-active-1, var(--neon-cyan)), var(--mimicus-design-active-2, var(--neon-blue)) 42%, var(--mimicus-design-active-3, var(--neon-lilac)) 78%, var(--neon-purple));
-	--mimicus-ui-glass-radius: 14px;
+	--mimicus-ui-glass-radius: 0.5rem;
 	--mimicus-ui-glass-bg-dark: color-mix(in srgb, var(--mimicus-bg-secondary, #0f2340) 34%, transparent);
 	--mimicus-ui-glass-bg-light: color-mix(in srgb, var(--mimicus-bg-secondary, #ffffff) 46%, transparent);
 	--mimicus-ui-glass-border-dark: color-mix(in srgb, var(--neon-purple), transparent 65%);
@@ -705,7 +705,7 @@ html[data-looknfeel^="neon-"] .accordion-body {
 /* Preview — escenario glass + cuadrícula neón */
 html[data-looknfeel^="neon-"] .preview-frame {
 	color: var(--pg-text);
-	border-radius: 12px;
+	border-radius: var(--mimicus-ui-radius, 0.5rem);
 	border-style: solid;
 	--pg-preview-frame-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 52%);
 	--pg-preview-frame-border: color-mix(in srgb, var(--neon-cyan), transparent 72%);
@@ -884,7 +884,7 @@ html[data-looknfeel^="neon-"] .pg-sidebar .sm-section {
 	box-sizing: border-box;
 	margin-inline: 0.1rem;
 	padding: 0.1rem 0.15rem 0.1rem 0;
-	border-radius: 6px;
+	border-radius: var(--mimicus-ui-radius, 0.5rem);
 	border-left: 2px solid color-mix(in oklch, var(--sm-blend-bar), transparent 38%);
 	background: linear-gradient(90deg, var(--sm-blend-bg) 0%, transparent 82%);
 	box-shadow: inset 0 0 18px var(--sm-blend-glow);

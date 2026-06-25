@@ -1,0 +1,12 @@
+{
+  "id": "Rating",
+  "category": "Inputs",
+  "label": "Rating",
+  "titleIcon": "mdi:star",
+  "status": "approved",
+  "intro": "Alias MUI de <code>Rate</code>.",
+  "component": { "name": "Rating", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-rate" },
+  "state": { "allowHalf": true, "size": "medium" },
+  "code": { "strategy": "form-entry" }
+}

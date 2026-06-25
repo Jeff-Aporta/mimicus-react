@@ -1,0 +1,12 @@
+{
+  "id": "TimePicker",
+  "category": "Inputs",
+  "label": "TimePicker",
+  "titleIcon": "mdi:clock-outline",
+  "status": "approved",
+  "intro": "Hora Ant — input <code>type=time</code> estilizado.",
+  "component": { "name": "TimePicker", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-time-picker" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

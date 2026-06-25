@@ -1,0 +1,35 @@
+{
+   "id": "Divider",
+   "category": "Layouts",
+   "label": "Divider",
+   "titleIcon": "mdi:minus",
+   "status": "approved",
+   "intro": "Línea separadora horizontal o vertical (estilo Ant Design Divider): variantes <code>solid</code>/<code>dashed</code>/<code>dotted</code>, texto en el centro o alineado (<code>titlePlacement</code>), estilo <code>plain</code> y espaciado <code>size</code>. Combina con FlexLayout, GridLayout, BlockLayout y Splitter.",
+   "component": { "name": "Divider", "path": "src/lib/containers/layout/Divider.svelte" },
+   "preview": { "template": "layout-divider" },
+   "shell": { "relieve": 55, "configBlockCount": 2 },
+   "state": { "orientation": "horizontal", "variant": "solid", "titlePlacement": "center", "plain": false, "size": "medium", "dashed": false },
+   "details": { "showTitle": true, "title": "Sección", "orientationMargin": "" },
+   "fields": [
+      { "kind": "select-enum", "key": "orientation", "label": "orientation", "labelIcon": "mdi:arrow-split-vertical", "attrType": "str", "enumValue": { "Horizontal": "horizontal", "Vertical": "vertical" } },
+      { "kind": "select-enum", "key": "variant", "label": "variant", "labelIcon": "mdi:line-style", "attrType": "str", "enumValue": { "Solid": "solid", "Dashed": "dashed", "Dotted": "dotted", "Neon glow": "glow" } },
+      { "kind": "select-enum", "key": "titlePlacement", "label": "titlePlacement", "labelIcon": "mdi:format-align-center", "attrType": "str", "enumValue": { "start": "start", "center": "center", "end": "end" } },
+      { "kind": "select-enum", "key": "size", "label": "size", "labelIcon": "mdi:arrow-expand-vertical", "attrType": "str", "enumValue": { "small": "small", "medium": "medium", "large": "large" } },
+      { "kind": "switch-group", "key": "estilos", "label": "Estilo", "labelIcon": "mdi:tune", "switches": [{ "key": "plain", "label": "plain" }, { "key": "dashed", "label": "dashed (legacy)" }] }
+   ],
+   "detailFields": [
+      { "kind": "switch", "key": "showTitle", "label": "Texto en divider" },
+      { "kind": "text", "key": "title", "label": "title", "labelIcon": "mdi:text-short", "placeholder": "Etiqueta del separador" },
+      { "kind": "text", "key": "orientationMargin", "label": "orientationMargin", "labelIcon": "mdi:format-indent-increase", "placeholder": "ej: 0, 48px, 12%", "normalize": "cssLength" }
+   ],
+   "presets": [
+      { "label": "Horizontal sólido", "icon": "mdi:minus", "state": { "orientation": "horizontal", "variant": "solid", "titlePlacement": "center", "plain": false, "size": "medium", "dashed": false }, "details": { "showTitle": false, "title": "", "orientationMargin": "" } },
+      { "label": "Con título", "icon": "mdi:format-title", "state": { "orientation": "horizontal", "variant": "solid", "titlePlacement": "center", "plain": false, "size": "medium", "dashed": false }, "details": { "showTitle": true, "title": "Sección A", "orientationMargin": "" } },
+      { "label": "Título start plain", "icon": "mdi:format-align-left", "state": { "orientation": "horizontal", "variant": "solid", "titlePlacement": "start", "plain": true, "size": "medium", "dashed": false }, "details": { "showTitle": true, "title": "Izquierda", "orientationMargin": "0" } },
+      { "label": "Vertical en fila", "icon": "mdi:drag-vertical-variant", "state": { "orientation": "vertical", "variant": "solid", "titlePlacement": "center", "plain": false, "size": "medium", "dashed": false }, "details": { "showTitle": false, "title": "", "orientationMargin": "" } },
+      { "label": "Dashed large", "icon": "mdi:dots-horizontal", "state": { "orientation": "horizontal", "variant": "dashed", "titlePlacement": "center", "plain": false, "size": "large", "dashed": true }, "details": { "showTitle": true, "title": "Dashed", "orientationMargin": "" } },
+      { "label": "Dotted end", "icon": "mdi:dots-horizontal-circle-outline", "state": { "orientation": "horizontal", "variant": "dotted", "titlePlacement": "end", "plain": true, "size": "small", "dashed": false }, "details": { "showTitle": true, "title": "Fin", "orientationMargin": "3rem" } }
+   ],
+   "tests": "extras/DividerLayoutTests.svelte",
+   "code": { "strategy": "divider-layout", "tagOpts": { "multiline": true } }
+}

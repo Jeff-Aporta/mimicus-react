@@ -1,0 +1,44 @@
+{
+   "id": "CheckboxIcon",
+   "category": "Iconized",
+   "label": "CheckboxIcon",
+   "titleIcon": "mdi:checkbox-marked-circle-outline",
+   "status": "approved",
+   "intro": "Casilla con iconos personalizables en cada estado, colores activo/inactivo y modo carga.",
+   "component": { "name": "CheckboxIcon", "path": "src/components/forms/Forms.jsx" },
+   "preview": { "template": "checkbox-icon", "scale": 1.3 },
+   "state": { "checked": true, "color": null, "colorFalse": null, "variant": null, "loading": false, "disabled": false },
+   "details": { "previewLabel": "Texto de demostración", "previewIconTrue": "fluent-emoji:rocket", "previewIconFalse": "fluent-emoji:fire" },
+   "fields": [
+      { "kind": "palette", "key": "variant", "label": "Variante", "labelIcon": "mdi:shape-outline", "attrType": "str", "options": [{ "label": "Por defecto", "value": null }, { "label": "glass", "value": "glass" }], "accent": "primary", "iconMap": { "": "mdi:block-helper", "glass": "mdi:shimmer" } },
+      { "kind": "color", "key": "color", "label": "Activo", "labelIcon": "mdi:palette-swatch", "attrType": "color" },
+      { "kind": "color", "key": "colorFalse", "label": "Inactivo", "labelIcon": "mdi:palette-outline", "attrType": "color" },
+      { "kind": "switch-group", "key": "estados", "label": "Estado", "labelIcon": "mdi:tune", "switches": [{ "key": "loading", "label": "loading" }, { "key": "disabled", "label": "disabled" }] }
+   ],
+   "detailFields": [
+      { "kind": "text", "key": "previewLabel", "label": "slot", "labelIcon": "mdi:text-short", "placeholder": "Ingrese un texto descriptivo" },
+      { "kind": "select-enum", "key": "previewIconTrue", "label": "Ícono on", "labelIcon": "mdi:image-multiple-outline", "enumRef": "iconEnum" },
+      { "kind": "select-enum", "key": "previewIconFalse", "label": "Ícono off", "labelIcon": "mdi:image-multiple-outline", "enumRef": "iconEnum" }
+   ],
+   "presets": [
+      {
+         "label": "Modo claro",
+         "icon": "mdi:weather-sunny",
+         "state": { "checked": false, "color": "primary", "colorFalse": "neutral", "loading": false, "disabled": false },
+         "details": { "previewLabel": "Modo Claro", "previewIconTrue": "mdi:weather-night", "previewIconFalse": "mdi:weather-sunny" }
+      },
+      {
+         "label": "Notificaciones",
+         "icon": "mdi:bell-outline",
+         "state": { "checked": false, "color": "primary", "colorFalse": "neutral", "loading": false, "disabled": false },
+         "details": { "previewLabel": "Notificaciones", "previewIconTrue": "mdi:bell", "previewIconFalse": "mdi:bell-off" }
+      },
+      {
+         "label": "Bluetooth",
+         "icon": "mdi:bluetooth",
+         "state": { "checked": true, "color": "primary", "colorFalse": "neutral", "loading": false, "disabled": false },
+         "details": { "previewLabel": "Bluetooth", "previewIconTrue": "mdi:bluetooth", "previewIconFalse": "mdi:bluetooth-off" }
+      }
+   ],
+   "code": { "strategy": "checkbox-icon-body" }
+}

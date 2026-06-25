@@ -1,0 +1,19 @@
+{
+   "id": "InvokedFloater",
+   "category": "Overlays",
+   "label": "InvokedFloater",
+   "titleIcon": "mdi:message-arrow-right-outline",
+   "status": "pending",
+   "intro": "Popover anclado con <code>Dialog</code> nativo: posicionamiento viewport-aware, triggers click/hover/contextmenu y cierre exterior.",
+   "component": { "name": "InvokedFloater", "path": "src/components/overlays/InvokedFloater.svelte" },
+   "preview": { "template": "cmp-invoked-floater" },
+   "state": { "anchorLabel": "Abrir panel", "panelText": "Contenido del floater reposicionado según espacio disponible.", "side": "bottom", "align": "center", "trigger": "click" },
+   "fields": [
+      { "kind": "text", "key": "anchorLabel", "label": "anchorLabel", "labelIcon": "mdi:gesture-tap-button" },
+      { "kind": "text", "key": "panelText", "label": "panelText", "labelIcon": "mdi:text" },
+      { "kind": "select-enum", "key": "side", "label": "side", "labelIcon": "mdi:arrow-decision", "enumValue": { "top": "top", "right": "right", "bottom": "bottom", "left": "left" } },
+      { "kind": "select-enum", "key": "align", "label": "align", "labelIcon": "mdi:format-align-center", "enumValue": { "start": "start", "center": "center", "end": "end" } },
+      { "kind": "select-enum", "key": "trigger", "label": "trigger", "labelIcon": "mdi:gesture-tap", "enumValue": { "click": "click", "hover": "hover", "contextmenu": "contextmenu", "manual": "manual" } }
+   ]
+}
+

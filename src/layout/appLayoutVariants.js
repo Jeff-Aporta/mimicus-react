@@ -1,9 +1,14 @@
 /** Distribuciones de shell vía grid-template (áreas: header, sider, content, footer). */
 
+/** Solo panel lateral en el playground (izquierda / derecha). */
+export const PLAYGROUND_APP_LAYOUT_OPTIONS = [
+  { id: "side", label: "Panel izquierdo" },
+  { id: "top-side-2", label: "Panel derecho" },
+];
+
 export const APP_LAYOUT_VARIANT_OPTIONS = [
-  { id: "side", label: "Side" },
+  ...PLAYGROUND_APP_LAYOUT_OPTIONS,
   { id: "top-side", label: "Top + side" },
-  { id: "top-side-2", label: "Side derecho" },
   { id: "top", label: "Top" },
 ];
 
@@ -15,6 +20,11 @@ export function normalizeAppLayoutVariant(value) {
   if (value === "top-side") return "side";
   if (isAppLayoutVariant(value)) return value;
   return "side";
+}
+
+/** Variante persistida en el shell del playground (solo paneles laterales). */
+export function normalizePlaygroundAppLayoutVariant(value) {
+  return value === "top-side-2" ? "top-side-2" : "side";
 }
 
 const SIDER = "var(--mimicus-app-layout-sider-w, 200px)";

@@ -1,0 +1,12 @@
+{
+  "id": "Rate",
+  "category": "Inputs",
+  "label": "Rate",
+  "titleIcon": "mdi:star-outline",
+  "status": "approved",
+  "intro": "Valoración Ant <code>Rate</code> / MUI <code>Rating</code> con medias estrellas.",
+  "component": { "name": "Rate", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-rate" },
+  "state": { "allowHalf": true, "disabled": false, "size": "medium" },
+  "code": { "strategy": "form-entry" }
+}

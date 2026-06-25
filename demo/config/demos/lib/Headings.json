@@ -1,0 +1,20 @@
+{
+   "id": "Headings",
+   "category": "Typography",
+   "label": "Headings",
+   "title": "Headings (H1–H6)",
+   "titleIcon": "mdi:format-header-1",
+   "status": "approved",
+   "intro": "Encabezados <code>H1</code>–<code>H6</code> con color de paleta y truncado opcional en varias líneas.",
+   "component": { "name": "Headings", "path": "src/components/typography/Typography.jsx" },
+   "preview": { "template": "headings" },
+   "shell": { "class": "demo-headings-wrapper" },
+   "state": { "color": null, "lines": 0 },
+   "details": { "sampleText": "Encabezado de demostración para validar estilos." },
+   "fields": [
+      { "kind": "color", "key": "color", "label": "Color", "labelIcon": "mdi:palette", "attrOmit": true },
+      { "kind": "number", "key": "lines", "label": "lines", "labelIcon": "mdi:format-line-spacing", "min": 0, "max": 20, "attrOmit": true }
+   ],
+   "detailFields": [{ "kind": "text", "key": "sampleText", "label": "slot", "labelIcon": "mdi:text", "placeholder": "Texto de encabezado" }],
+   "code": { "strategy": "headings-all" }
+}

@@ -1,0 +1,19 @@
+{
+   "id": "TipInfo",
+   "category": "Overlays",
+   "label": "TipInfo",
+   "titleIcon": "mdi:information-outline",
+   "status": "pending",
+   "intro": "Etiqueta de campo con icono de ayuda: tooltip flotante (<code>InvokedFloater</code>) o modal. <code>kind</code> info/warn.",
+   "component": { "name": "TipInfo", "path": "src/components/overlays/TipInfo.svelte" },
+   "preview": { "template": "cmp-tip-info" },
+   "state": { "label": "Nombre del curso", "descripcion": "Nombre visible en el catálogo de capacitación.", "kind": "info", "trigger": "click", "useModal": false },
+   "fields": [
+      { "kind": "text", "key": "label", "label": "label", "labelIcon": "mdi:form-textbox" },
+      { "kind": "text", "key": "descripcion", "label": "descripcion", "labelIcon": "mdi:text" },
+      { "kind": "select-enum", "key": "kind", "label": "kind", "labelIcon": "mdi:alert", "enumValue": { "info": "info", "warn": "warn" } },
+      { "kind": "select-enum", "key": "trigger", "label": "trigger", "labelIcon": "mdi:gesture-tap", "enumValue": { "click": "click", "hover": "hover" } },
+      { "kind": "switch", "key": "useModal", "label": "useModal", "labelIcon": "mdi:application-outline" }
+   ]
+}
+

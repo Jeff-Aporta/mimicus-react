@@ -12,7 +12,8 @@ button,
 	gap: 0.5rem;
 	white-space: nowrap;
 	min-width: 16px;
-	width: 100%;
+	width: fit-content;
+	max-width: 100%;
 	height: fit-content;
 	min-height: 2rem;
 	padding: 0.35rem;
@@ -55,6 +56,99 @@ button[data-shape="rect"],
 button[data-shape="pill"],
 .button-wrap[data-shape="pill"] {
 	border-radius: 999px;
+}
+
+button[data-shape="circle"],
+.button-wrap[data-shape="circle"],
+a.button-link[data-shape="circle"] {
+	border-radius: 50%;
+	width: 2.5rem;
+	height: 2.5rem;
+	min-width: 2.5rem;
+	padding: 0;
+}
+
+button[data-size="small"],
+.button-wrap[data-size="small"],
+a.button-link[data-size="small"] {
+	min-height: 1.65rem;
+	padding: 0.2rem 0.6rem;
+	font-size: 0.82rem;
+	gap: 0.35rem;
+}
+
+button[data-size="medium"],
+.button-wrap[data-size="medium"],
+a.button-link[data-size="medium"] {
+	min-height: 2rem;
+	font-size: 0.9rem;
+}
+
+button[data-size="large"],
+.button-wrap[data-size="large"],
+a.button-link[data-size="large"] {
+	min-height: 2.5rem;
+	padding: 0.45rem 1rem;
+	font-size: 1rem;
+}
+
+button[data-size="small"][data-shape="circle"],
+.button-wrap[data-size="small"][data-shape="circle"] {
+	width: 2rem;
+	height: 2rem;
+	min-width: 2rem;
+}
+
+button[data-size="large"][data-shape="circle"],
+.button-wrap[data-size="large"][data-shape="circle"] {
+	width: 3rem;
+	height: 3rem;
+	min-width: 3rem;
+}
+
+button.button-block,
+.button-wrap.button-block,
+a.button-block {
+	width: 100%;
+}
+
+button.button-icon-only,
+.button-wrap.button-icon-only {
+	width: fit-content;
+}
+
+button[data-icon-placement="end"],
+.button-wrap[data-icon-placement="end"] {
+	flex-direction: row-reverse;
+}
+
+button[data-variant="dashed"],
+.button-wrap[data-variant="dashed"] {
+	background-color: transparent;
+	border: 1px dashed var(--bttn-clr, var(--mimicus-b-color));
+	color: var(--bttn-clr, var(--mimicus-color));
+}
+
+button[data-variant="dashed"]:not(:disabled):hover,
+.button-wrap[data-variant="dashed"]:not([aria-disabled="true"]):hover {
+	background-color: var(--bttn-l-hvr-bg, color-mix(in srgb, var(--mimicus-primary), transparent 92%));
+}
+
+button[data-danger="true"][data-variant="solid"],
+.button-wrap[data-danger="true"][data-variant="solid"] {
+	--bttn-clr: var(--mimicus-danger);
+}
+
+a[role="button"].button-wrap,
+a.button-link {
+	display: inline-flex;
+	text-decoration: none;
+	color: inherit;
+}
+
+.mimicus-btn-spinner {
+	display: inline-block;
+	animation: sz-pulse 1.2s infinite ease-in-out;
 }
 
 button .mimicus-text-icon,

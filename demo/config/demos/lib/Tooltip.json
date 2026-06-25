@@ -1,0 +1,17 @@
+{
+  "id": "Tooltip",
+  "category": "Containers",
+  "label": "Tooltip",
+  "titleIcon": "mdi:tooltip-text-outline",
+  "status": "approved",
+  "intro": "Ayuda contextual al hover/foco. <code>bindTooltip</code>. Ver <a href=\"https://ant.design/components/tooltip\" target=\"_blank\" rel=\"noreferrer\">Ant Tooltip</a> y <a href=\"https://mui.com/material-ui/react-tooltip/\" target=\"_blank\" rel=\"noreferrer\">MUI Tooltip</a>.",
+  "component": { "name": "Tooltip", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-tooltip" },
+  "state": { "title": "Texto de ayuda", "placement": "top", "arrow": false },
+  "fields": [
+    { "kind": "text", "key": "title", "label": "title", "labelIcon": "mdi:text" },
+    { "kind": "select-enum", "key": "placement", "label": "placement", "labelIcon": "mdi:arrow-all", "attrType": "str", "enumValue": { "Top": "top", "Bottom": "bottom", "Left": "left", "Right": "right" } },
+    { "kind": "switch", "key": "arrow", "label": "arrow", "labelIcon": "mdi:arrow-top-right" }
+  ],
+  "code": { "strategy": "disp-tooltip" }
+}

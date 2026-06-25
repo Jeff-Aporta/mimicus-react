@@ -1,0 +1,18 @@
+{
+   "id": "Masonry",
+   "category": "Layouts",
+   "label": "Masonry",
+   "titleIcon": "mdi:view-dashboard-variant",
+   "status": "approved",
+   "intro": "Cuadrícula masonry con alturas variables (Ant Design <code>Masonry</code>).",
+   "component": { "name": "Masonry", "path": "src/layout/Masonry.jsx" },
+   "preview": { "template": "layout-grid" },
+   "state": { "columns": 3, "gutter": 8 },
+   "details": { "itemCount": 9 },
+   "fields": [
+      { "kind": "number", "key": "columns", "label": "columns", "min": 1, "max": 6, "step": 1 },
+      { "kind": "number", "key": "gutter", "label": "gutter", "min": 0, "max": 32, "step": 4 }
+   ],
+   "detailFields": [{ "kind": "number", "key": "itemCount", "label": "Elementos", "min": 3, "max": 24, "step": 1 }],
+   "code": { "strategy": "layout-items", "tagOpts": { "multiline": true }, "options": { "layout": "grid", "useCard": true } }
+}

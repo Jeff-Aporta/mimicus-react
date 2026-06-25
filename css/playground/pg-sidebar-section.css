@@ -1,0 +1,49 @@
+/* Sidebar — blend sección (--sm-accent) × chrome del look (--pg-sidebar-chrome) */
+
+.pg-sidebar .sm-section {
+	--sm-chrome: var(--pg-sidebar-chrome, var(--mimicus-bg-secondary));
+	--sm-chrome-fg: var(--pg-sidebar-fg, var(--mimicus-color));
+	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 91%, var(--sm-accent, var(--mimicus-primary)) 9%);
+	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 94%, var(--sm-accent, var(--mimicus-primary)) 6%);
+	--sm-blend-bg: color-mix(in oklch, var(--sm-chrome) 88%, var(--sm-accent, var(--mimicus-primary)) 12%);
+	--sm-blend-bg-open: color-mix(in oklch, var(--sm-chrome) 78%, var(--sm-accent, var(--mimicus-primary)) 22%);
+	--sm-blend-bg-active: color-mix(in oklch, var(--sm-chrome) 66%, var(--sm-accent, var(--mimicus-primary)) 34%);
+	--sm-blend-bar: color-mix(in oklch, var(--sm-chrome) 36%, var(--sm-accent, var(--mimicus-primary)) 64%);
+	--sm-blend-border: color-mix(in oklch, var(--sm-chrome) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
+	--sm-blend-fg: color-mix(in oklch, var(--sm-chrome-fg) 68%, var(--sm-accent, var(--mimicus-primary)) 32%);
+	--sm-blend-fg-strong: color-mix(in oklch, var(--sm-chrome-fg) 52%, var(--sm-accent, var(--mimicus-primary)) 48%);
+	--sm-blend-glow: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 22%, transparent);
+}
+
+/* Oscuro — hover sidebar: más acento en fondo, texto sobre chrome (evita blanco sobre gris claro). */
+html[data-luminance="dark"] .pg-sidebar .sm-section {
+	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 84%, var(--sm-accent, var(--mimicus-primary)) 16%);
+	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 76%, var(--sm-accent, var(--mimicus-primary)) 24%);
+	--sm-blend-fg-strong: color-mix(in oklch, var(--sm-chrome-fg) 86%, var(--sm-accent, var(--mimicus-primary)) 14%);
+}
+
+.pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="text"],
+.pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="ghost"] {
+	background: var(--sm-blend-idle);
+	color: var(--sm-blend-fg);
+	border: 1px solid color-mix(in oklch, var(--sm-blend-border), transparent 52%);
+	box-shadow: none;
+}
+
+.pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="text"]:not(:disabled):hover,
+.pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="ghost"]:not(:disabled):hover,
+.pg-sidebar .sm-section .button-wrap:not([aria-disabled="true"]) :is(button, .button-wrap)[data-variant="text"]:hover {
+	background: var(--sm-blend-subtle);
+	color: var(--sm-blend-fg-strong);
+}
+
+.pg-sidebar .sm-section :is(button, .button-wrap)[data-variant="soft"] {
+	background: var(--sm-blend-bg-active);
+	color: var(--sm-blend-fg-strong);
+	border: none;
+	box-shadow: none;
+}
+
+.pg-sidebar .sm-section .sm-content {
+	border-top-color: var(--sm-blend-border);
+}

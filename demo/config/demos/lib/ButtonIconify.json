@@ -1,0 +1,19 @@
+{
+   "id": "ButtonIconify",
+   "category": "Iconized",
+   "label": "ButtonIconify",
+   "titleIcon": "mdi:gesture-tap-button",
+   "status": "approved",
+   "intro": "Botón solo icono con forma, variante, color y estados.",
+   "component": { "name": "ButtonIconify", "path": "src/lib/primitives/iconized/ButtonIconify.svelte" },
+   "preview": { "template": "component", "scale": 2.5 },
+   "state": { "icon": "mdi:account", "color": null, "variant": null, "shape": "", "disabled": false, "loading": false },
+   "fields": [
+      { "kind": "select-enum", "key": "icon", "label": "icon", "enumRef": "iconEnum" },
+      { "kind": "palette", "key": "shape", "label": "Forma", "labelIcon": "mdi:shape-outline", "attrType": "str", "attrEmit": "emptyToNull", "options": [{ "label": "Ninguno", "value": "" }, { "label": "Round", "value": "round" }, { "label": "Círculo", "value": "circle" }, { "label": "Cuadrado", "value": "square" }, { "label": "Píldora", "value": "pill" }], "accent": "primary", "iconMap": { "": "mdi:block-helper", "round": "mdi:rounded-corner", "circle": "mdi:circle-outline", "square": "mdi:square-outline", "pill": "mdi:pill" } },
+      { "kind": "palette", "key": "variant", "label": "Variante", "labelIcon": "mdi:shape-outline", "attrType": "str", "options": [{ "label": "Por defecto", "value": null }, { "label": "solid", "value": "solid" }, { "label": "outlined", "value": "outlined" }, { "label": "ghost", "value": "ghost" }, { "label": "text", "value": "text" }, { "label": "glass", "value": "glass" }], "accent": "primary", "iconMap": { "": "mdi:block-helper", "solid": "mdi:checkbox-blank-circle", "outlined": "mdi:checkbox-blank-circle-outline", "ghost": "mdi:ghost-outline", "text": "mdi:format-text", "glass": "mdi:shimmer" } },
+      { "kind": "color", "key": "color", "label": "Color", "labelIcon": "mdi:palette", "attrType": "color" },
+      { "kind": "switch-group", "key": "estados", "label": "Estado", "labelIcon": "mdi:tune", "switches": [{ "key": "disabled", "label": "disabled" }, { "key": "loading", "label": "loading" }] }
+   ],
+   "code": { "strategy": "default" }
+}

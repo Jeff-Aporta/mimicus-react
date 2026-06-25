@@ -1,0 +1,16 @@
+{
+  "id": "Link",
+  "category": "Navigation",
+  "label": "Link",
+  "titleIcon": "mdi:link-variant",
+  "status": "approved",
+  "intro": "Enlace MUI con subrayado <code>none | hover | always</code> y color temático.",
+  "component": { "name": "NavLink", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-link" },
+  "state": { "underline": "hover", "color": "primary" },
+  "fields": [
+    { "kind": "select-enum", "key": "underline", "label": "underline", "labelIcon": "mdi:format-underline", "attrType": "str", "enumValue": { "Hover": "hover", "Always": "always", "None": "none" } },
+    { "kind": "select-enum", "key": "color", "label": "color", "labelIcon": "mdi:palette-outline", "attrType": "str", "enumValue": { "Primary": "primary", "Inherit": "inherit" } }
+  ],
+  "code": { "strategy": "nav-link" }
+}

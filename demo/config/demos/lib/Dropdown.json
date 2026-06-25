@@ -1,0 +1,15 @@
+{
+  "id": "Dropdown",
+  "category": "Navigation",
+  "label": "Dropdown",
+  "titleIcon": "mdi:menu-down",
+  "status": "approved",
+  "intro": "Menú desplegable Ant Design: apertura por clic, cierre con Escape o clic fuera (<code>bindDropdown</code>).",
+  "component": { "name": "Dropdown", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-dropdown" },
+  "state": { "placement": "bottomLeft" },
+  "fields": [
+    { "kind": "select-enum", "key": "placement", "label": "placement", "labelIcon": "mdi:arrow-bottom-left", "attrType": "str", "enumValue": { "Bottom left": "bottomLeft", "Bottom right": "bottomRight", "Top left": "topLeft" } }
+  ],
+  "code": { "strategy": "nav-dropdown" }
+}

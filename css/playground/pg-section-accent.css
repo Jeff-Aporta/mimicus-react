@@ -1,0 +1,64 @@
+/* Acento por sección — fondos/texto con alpha (nav tabs + rail + coherencia visual) */
+
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+	--sm-accent: var(--mimicus-design-active-1, var(--mimicus-primary));
+	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 22%, transparent);
+	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 11%, transparent);
+	--pg-accent-fg-selected: color-mix(in srgb, var(--sm-accent) 94%, var(--pg-sidebar-fg, var(--mimicus-color)) 6%);
+	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 78%, var(--sm-accent) 22%);
+	--pg-accent-border-selected: color-mix(in srgb, var(--sm-accent) 38%, transparent);
+	--pg-accent-ring-selected: color-mix(in srgb, var(--sm-accent) 16%, transparent);
+}
+
+html[data-luminance="dark"] .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 28%, transparent);
+	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 14%, transparent);
+	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 72%, var(--sm-accent) 28%);
+}
+
+html[data-luminance="light"] .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 18%, transparent);
+	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 9%, transparent);
+}
+
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="primary"] { --sm-accent: var(--mimicus-primary); }
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="info"] { --sm-accent: var(--mimicus-info); }
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="success"] { --sm-accent: var(--mimicus-success); }
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="warning"] { --sm-accent: var(--mimicus-warning); }
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="error"],
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="danger"] { --sm-accent: var(--mimicus-error, var(--mimicus-danger)); }
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="color"] { --sm-accent: var(--mimicus-color); }
+
+/* Seleccionado — tinte alpha sobre chrome (no bloque sólido) */
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="soft"] {
+	background: var(--pg-accent-bg-selected) !important;
+	color: var(--pg-accent-fg-selected) !important;
+	border: 1px solid var(--pg-accent-border-selected) !important;
+	box-shadow: inset 0 0 0 1px var(--pg-accent-ring-selected);
+}
+
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="soft"] :is(iconify-icon, .iconify) {
+	color: var(--pg-accent-fg-selected) !important;
+}
+
+/* Idle — texto teñido suave, fondo transparente */
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"] {
+	background: transparent !important;
+	color: var(--pg-accent-fg-idle) !important;
+	border: 1px solid transparent !important;
+	box-shadow: none;
+}
+
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"] :is(iconify-icon, .iconify) {
+	color: var(--pg-accent-fg-idle) !important;
+}
+
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"]:not(:disabled):hover {
+	background: var(--pg-accent-bg-hover) !important;
+	color: var(--pg-accent-fg-selected) !important;
+	border-color: color-mix(in srgb, var(--sm-accent) 22%, transparent) !important;
+}
+
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"]:not(:disabled):hover :is(iconify-icon, .iconify) {
+	color: var(--pg-accent-fg-selected) !important;
+}

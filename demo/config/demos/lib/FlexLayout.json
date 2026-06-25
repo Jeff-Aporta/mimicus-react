@@ -1,0 +1,24 @@
+{
+   "id": "FlexLayout",
+   "category": "Layouts",
+   "label": "FlexLayout",
+   "titleIcon": "mdi:arrow-split-vertical",
+   "status": "approved",
+   "intro": "Contenedor en flex: dirección del eje, distribución y alineación de ítems, separación (<code>gap</code>) y opciones <code>inline</code> / <code>wrap</code> para adaptar filas y columnas.",
+   "component": { "name": "FlexLayout", "path": "src/lib/containers/layout/FlexLayout.svelte" },
+   "preview": { "template": "layout-flex" },
+   "shell": { "relieve": 65 },
+   "state": { "direction": "row", "justify": null, "items": null, "inline": false, "wrap": false, "gap": null },
+   "details": { "itemCount": 4 },
+   "fields": [
+      { "kind": "select-enum", "key": "direction", "label": "direction", "labelIcon": "mdi:arrow-split-vertical", "attrType": "str", "enumValue": { "Row": "row", "Column": "column", "Row Reverse": "row-reverse", "Column Reverse": "column-reverse" } },
+      { "kind": "select-enum-row", "key": "justify-items", "label": "alineación", "labelIcon": "mdi:format-align-center", "selects": [
+         { "kind": "select-enum", "key": "justify", "label": "justify", "labelIcon": "mdi:format-horizontal-align-left", "attrType": "str", "enumValue": { "Vacío": null, "start": "start", "end": "end", "center": "center", "between": "between", "around": "around", "evenly": "evenly" } },
+         { "kind": "select-enum", "key": "items", "label": "items", "labelIcon": "mdi:format-vertical-align-center", "required": false, "attrType": "str", "enumValue": { "start": "start", "end": "end", "center": "center", "stretch": "stretch" } }
+      ]},
+      { "kind": "switch-group", "key": "estados", "label": "Estados", "labelIcon": "mdi:tune", "switches": [{ "key": "inline", "label": "inline" }, { "key": "wrap", "label": "wrap" }] },
+      { "kind": "text", "key": "gap", "label": "gap", "labelIcon": "mdi:arrow-expand-horizontal", "placeholder": "ej: 0.75rem", "normalize": "cssLength" }
+   ],
+   "detailFields": [{ "kind": "number", "key": "itemCount", "label": "Elementos", "labelIcon": "mdi:numeric", "min": 1, "max": 50, "step": 1 }],
+   "code": { "strategy": "layout-items", "tagOpts": { "multiline": true }, "options": { "layout": "flex", "useCard": true } }
+}

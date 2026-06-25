@@ -1,0 +1,12 @@
+{
+  "id": "Mentions",
+  "category": "Inputs",
+  "label": "Mentions",
+  "titleIcon": "mdi:at",
+  "status": "approved",
+  "intro": "Menciones Ant con panel @.",
+  "component": { "name": "Mentions", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-mentions" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

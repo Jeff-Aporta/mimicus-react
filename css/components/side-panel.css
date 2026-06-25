@@ -1,0 +1,117 @@
+/* SidePanel — panel lateral replicable (playground + apps) */
+
+.mimicus-side-panel {
+	--mimicus-side-panel-chrome: var(--pg-sidebar-chrome, var(--mimicus-bg-secondary));
+	--mimicus-side-panel-fg: var(--pg-sidebar-fg, var(--mimicus-color));
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background: var(--mimicus-side-panel-chrome);
+	color: var(--mimicus-side-panel-fg);
+}
+
+.mimicus-side-panel__drawer-bar {
+	flex-shrink: 0;
+}
+
+.mimicus-side-panel__header {
+	flex-shrink: 0;
+}
+
+.pg-sidebar-header--panel {
+	padding: 0 0.35rem 0 0.4rem;
+}
+
+.pg-sidebar-header--rail {
+	justify-content: center;
+	padding: 0;
+}
+
+.sidebar-header-btn--rail {
+	width: 100%;
+	justify-content: center;
+}
+
+.mimicus-side-panel__body {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	padding: clamp(0.35rem, 2vw, 0.5rem) clamp(0.35rem, 2vw, 0.45rem);
+}
+
+.mimicus-side-panel__body--rail {
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.mimicus-side-panel-view--rail {
+	align-items: center;
+	padding-inline: 0;
+}
+
+.mimicus-side-panel-view--expanded {
+	padding: 0.15rem 0.05rem 0.5rem;
+}
+
+.mimicus-side-panel-section {
+	width: 100%;
+	min-width: 0;
+}
+
+.mimicus-side-panel-section__content {
+	border-top: 1px solid color-mix(in oklch, var(--sm-chrome, var(--mimicus-bg-secondary)) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
+	margin-top: 0.15rem;
+	padding-top: 0.2rem;
+}
+
+/* Blend sección × chrome del look (paridad pg-sidebar-section) */
+.mimicus-side-panel .mimicus-side-panel-section,
+.pg-sidebar .sm-section {
+	--sm-chrome: var(--mimicus-side-panel-chrome, var(--pg-sidebar-chrome, var(--mimicus-bg-secondary)));
+	--sm-chrome-fg: var(--mimicus-side-panel-fg, var(--pg-sidebar-fg, var(--mimicus-color)));
+	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 91%, var(--sm-accent, var(--mimicus-primary)) 9%);
+	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 94%, var(--sm-accent, var(--mimicus-primary)) 6%);
+	--sm-blend-bg-active: color-mix(in oklch, var(--sm-chrome) 66%, var(--sm-accent, var(--mimicus-primary)) 34%);
+	--sm-blend-fg: color-mix(in oklch, var(--sm-chrome-fg) 68%, var(--sm-accent, var(--mimicus-primary)) 32%);
+	--sm-blend-fg-strong: color-mix(in oklch, var(--sm-chrome-fg) 52%, var(--sm-accent, var(--mimicus-primary)) 48%);
+	--sm-blend-border: color-mix(in oklch, var(--sm-chrome) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
+}
+
+html[data-luminance="dark"] .mimicus-side-panel .mimicus-side-panel-section,
+html[data-luminance="dark"] .pg-sidebar .sm-section {
+	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 84%, var(--sm-accent, var(--mimicus-primary)) 16%);
+	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 76%, var(--sm-accent, var(--mimicus-primary)) 24%);
+	--sm-blend-fg-strong: color-mix(in oklch, var(--sm-chrome-fg) 86%, var(--sm-accent, var(--mimicus-primary)) 14%);
+}
+
+.mimicus-side-panel .mimicus-side-panel-section :is(button, .button-wrap)[data-variant="text"],
+.mimicus-side-panel .mimicus-side-panel-section :is(button, .button-wrap)[data-variant="ghost"] {
+	background: var(--sm-blend-idle);
+	color: var(--sm-blend-fg);
+	border: 1px solid color-mix(in oklch, var(--sm-blend-border), transparent 52%);
+	box-shadow: none;
+}
+
+.mimicus-side-panel .mimicus-side-panel-section :is(button, .button-wrap)[data-variant="text"]:not(:disabled):hover,
+.mimicus-side-panel .mimicus-side-panel-section :is(button, .button-wrap)[data-variant="ghost"]:not(:disabled):hover {
+	background: var(--sm-blend-subtle);
+	color: var(--sm-blend-fg-strong);
+}
+
+.mimicus-side-panel .mimicus-side-panel-section :is(button, .button-wrap)[data-variant="soft"] {
+	background: var(--sm-blend-bg-active);
+	color: var(--sm-blend-fg-strong);
+	border: none;
+	box-shadow: none;
+}
+
+.mimicus-app-layout-sider--collapsed .mimicus-app-layout-sider__body {
+	overflow-y: hidden;
+}

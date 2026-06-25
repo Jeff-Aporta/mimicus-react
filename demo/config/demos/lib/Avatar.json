@@ -1,0 +1,17 @@
+{
+  "id": "Avatar",
+  "category": "Primitives",
+  "label": "Avatar",
+  "titleIcon": "mdi:account-circle-outline",
+  "status": "approved",
+  "intro": "Avatar con imagen, iniciales o grupo apilado. <code>data-mimicus-display</code> opcional; ver <a href=\"https://mui.com/material-ui/react-avatar/\" target=\"_blank\" rel=\"noreferrer\">MUI Avatar</a>.",
+  "component": { "name": "Avatar", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-avatar" },
+  "state": { "size": "medium", "variant": "circular", "group": false, "max": 4 },
+  "fields": [
+    { "kind": "select-enum", "key": "size", "label": "size", "labelIcon": "mdi:resize", "attrType": "str", "enumValue": { "Small": "small", "Medium": "medium", "Large": "large" } },
+    { "kind": "select-enum", "key": "variant", "label": "variant", "labelIcon": "mdi:crop-square", "attrType": "str", "enumValue": { "Circular": "circular", "Rounded": "rounded", "Square": "square" } },
+    { "kind": "switch", "key": "group", "label": "AvatarGroup", "labelIcon": "mdi:account-group-outline" }
+  ],
+  "code": { "strategy": "disp-avatar" }
+}

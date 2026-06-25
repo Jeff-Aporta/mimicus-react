@@ -15,20 +15,26 @@ Atributos en `<html>`:
 
 Componentes usan `data-variant` + `data-surface-color`. Tokens CSS: `--mimicus-*`.
 
-## CDN
+## CDN — dos modos de consumo
+
+El consumidor elige **import ESM** o **variable global** (`MimicusUI`). Ver `cdn/versions.json`.
+
+### Modo variable (`MimicusUI`)
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jeff-Aporta/mimicus-react@main/cdn/mimicus-ui.min.css" />
-<script src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/mimicus-react@main/cdn/mimicus-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Jeff-Aporta/mimicus-react@main/cdn/mimicus-react.iife.min.js"></script>
 <script>
   MimicusUI.bootMimicusUI();
   const { AppLayout, Button, Card, SpaRouter } = MimicusUI;
 </script>
 ```
 
-Requiere React 18 global (`React`, `ReactDOM.createRoot`) vía import map o script previo. **Sin MUI.**
+Requiere React 18 global (`React`, `ReactDOM.createRoot`). Bootstrap: `MimicusBootstrap.loadCDNs("stack-global")`.
 
-## Desarrollo ESM (`import from`) — meta
+`mimicus-ui.min.js` es alias de `mimicus-react.iife.min.js` (compatibilidad).
+
+### Modo import ESM
 
 Todas las apps usan **`type="module"`** e imports nombrados; sin `globalThis.MimicusUI` en código de aplicación.
 
@@ -70,9 +76,9 @@ Build app: `npm run build:demo` → `demo/_dist/app.esm.js` (externals: react + 
 | Import | Archivo CDN |
 |--------|-------------|
 | `@jeff-aporta/mimicus-react` | `mimicus-react.esm.min.js` |
+| `@jeff-aporta/mimicus-react` (default namespace) | mismo archivo — `import MimicusUI from "…"` |
 | `@jeff-aporta/mimicus-react/bootstrap` | `mimicus-react.bootstrap.esm.min.js` |
-
-Legacy IIFE (`mimicus-ui.min.js`, `MimicusUI`) sigue en build por compatibilidad.
+| global `MimicusUI` | `mimicus-react.iife.min.js` |
 
 ## CDN bootstrap (`MimicusBootstrap.loadCDNs`)
 
@@ -83,7 +89,7 @@ Legacy IIFE (`mimicus-ui.min.js`, `MimicusUI`) sigue en build por compatibilidad
 </script>
 ```
 
-Grupos: `stack-mimicus` (mínimo), `stack-mui` (React+MUI+babel+iconify), o claves sueltas.
+Grupos: `stack-mimicus` / `stack-esm` (import), `stack-mimicus-global` / `stack-global` (variable), `stack-mui` (React+MUI+babel+iconify), o claves sueltas.
 
 ## Snippets (boot + fluidCss)
 
@@ -106,7 +112,7 @@ API: `fluidCss` / `js2css`, `patchIndexRoot`, `writeAppBoot`, `buildThemeInitInl
 
 ```bash
 npm install
-npm run build        # cdn/mimicus-ui.min.js + mimicus-snippets + app-boot.min.css
+npm run build        # cdn/mimicus-react.esm + mimicus-react.iife + snippets + CSS
 npm run build:demo   # demo/_dist/app.min.js (ESM) + parche index boot
 npm run build:all    # ambos
 ```

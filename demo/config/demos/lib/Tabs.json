@@ -1,0 +1,20 @@
+{
+  "id": "Tabs",
+  "category": "Navigation",
+  "label": "Tabs",
+  "titleIcon": "mdi:tab",
+  "status": "approved",
+  "intro": "Pestañas Ant Design / MUI: navegación por paneles con controlador <code>data-mimicus-nav=\"tabs\"</code> en JS puro.",
+  "component": { "name": "Tabs", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-tabs" },
+  "state": { "type": "line", "tabPosition": "top" },
+  "details": { "tabCount": 3 },
+  "fields": [
+    { "kind": "select-enum", "key": "type", "label": "type", "labelIcon": "mdi:cards-outline", "attrType": "str", "enumValue": { "Line": "line", "Card": "card" } },
+    { "kind": "select-enum", "key": "tabPosition", "label": "tabPosition", "labelIcon": "mdi:arrow-collapse-up", "attrType": "str", "enumValue": { "Top": "top", "Left": "left" } }
+  ],
+  "detailFields": [
+    { "kind": "number", "key": "tabCount", "label": "Pestañas", "labelIcon": "mdi:numeric", "min": 2, "max": 5, "step": 1 }
+  ],
+  "code": { "strategy": "nav-tabs", "tagOpts": { "multiline": true } }
+}

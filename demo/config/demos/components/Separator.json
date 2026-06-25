@@ -1,0 +1,20 @@
+{
+   "id": "Separator",
+   "category": "Layouts",
+   "label": "Separator",
+   "titleIcon": "mdi:minus",
+   "status": "pending",
+   "intro": "Separador visual horizontal o vertical (línea CSS). Complementa a <code>Divider</code> cuando no hace falta texto ni variantes Ant Design.",
+   "component": { "name": "Separator", "path": "src/components/primitives/Separator.svelte" },
+   "preview": { "template": "component", "options": { "wrapperStyle": "width: 100%; max-width: 28rem; padding: 0.5rem 0;" } },
+   "state": { "orientation": "horizontal", "color": "", "borderStyle": "solid", "thickness": 1, "startMargin": 8, "endMargin": 8 },
+   "fields": [
+      { "kind": "select-enum", "key": "orientation", "label": "orientation", "labelIcon": "mdi:arrow-split-vertical", "enumValue": { "Horizontal": "horizontal", "Vertical": "vertical" } },
+      { "kind": "select-enum", "key": "borderStyle", "label": "borderStyle", "labelIcon": "mdi:line-style", "enumValue": { "solid": "solid", "dashed": "dashed", "dotted": "dotted" } },
+      { "kind": "color", "key": "color", "label": "color", "labelIcon": "mdi:palette" },
+      { "kind": "number", "key": "thickness", "label": "thickness", "labelIcon": "mdi:format-line-spacing", "min": 1, "max": 8, "step": 1 },
+      { "kind": "number", "key": "startMargin", "label": "startMargin", "labelIcon": "mdi:format-indent-increase", "min": 0, "max": 48, "step": 2 },
+      { "kind": "number", "key": "endMargin", "label": "endMargin", "labelIcon": "mdi:format-indent-decrease", "min": 0, "max": 48, "step": 2 }
+   ]
+}
+

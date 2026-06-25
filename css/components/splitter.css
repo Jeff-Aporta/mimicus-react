@@ -1,0 +1,119 @@
+/* Splitter — Ant Design horizontal / vertical */
+
+.is-splitter {
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: nowrap;
+	width: 100%;
+	height: 100%;
+	min-width: 0;
+	min-height: 0;
+}
+
+.is-splitter--inline {
+	display: inline-flex;
+	width: auto;
+	max-width: min(20rem, 100%);
+	height: auto;
+	vertical-align: middle;
+}
+
+.is-splitter--horizontal { flex-direction: row; }
+.is-splitter--horizontal.is-splitter--panel-end { flex-direction: row-reverse; }
+.is-splitter--vertical { flex-direction: column; }
+.is-splitter--vertical .is-splitter__panel { width: 100%; max-width: 100%; }
+.is-splitter--stacked.is-splitter--horizontal { flex-direction: column; }
+
+.is-splitter__panel {
+	position: relative;
+	box-sizing: border-box;
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.is-splitter--stacked .is-splitter__panel { max-height: min(42vh, 320px); }
+
+.is-splitter__panel-body {
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 0;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	-webkit-overflow-scrolling: touch;
+}
+
+.is-splitter__main {
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.is-splitter__resize-handle {
+	position: absolute;
+	z-index: 5;
+	touch-action: none;
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	transition: background 0.15s ease;
+}
+
+.is-splitter__resize-handle--col {
+	top: 0;
+	right: -5px;
+	width: 10px;
+	height: 100%;
+	cursor: col-resize;
+}
+
+.is-splitter__resize-handle--row {
+	left: 0;
+	right: 0;
+	bottom: -5px;
+	width: 100%;
+	height: 10px;
+	cursor: row-resize;
+}
+
+.is-splitter__resize-handle::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	background: rgba(148, 163, 184, 0.45);
+	transition: background 0.15s ease, width 0.15s ease, height 0.15s ease;
+}
+
+.is-splitter__resize-handle--col::after { width: 1px; height: 100%; }
+.is-splitter__resize-handle--row::after { width: 100%; height: 1px; }
+
+.is-splitter__resize-handle:hover,
+.is-splitter__resize-handle.is-dragging {
+	background: color-mix(in srgb, var(--mimicus-design-1, #1e90ff), transparent 88%);
+}
+
+.is-splitter__resize-handle--col:hover::after,
+.is-splitter__resize-handle--col.is-dragging::after {
+	width: 2px;
+	background: var(--mimicus-design-1, #1e90ff);
+}
+
+.is-splitter__resize-handle--row:hover::after,
+.is-splitter__resize-handle--row.is-dragging::after {
+	height: 2px;
+	background: var(--mimicus-design-1, #1e90ff);
+}
+
+body.is-split-resize-active { user-select: none !important; }
+body.is-split-resize-active--horizontal,
+body.is-split-resize-active--horizontal * { cursor: col-resize !important; }
+body.is-split-resize-active--vertical,
+body.is-split-resize-active--vertical * { cursor: row-resize !important; }

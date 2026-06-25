@@ -1,0 +1,12 @@
+{
+  "id": "ToggleButton",
+  "category": "Inputs",
+  "label": "Toggle Button",
+  "titleIcon": "mdi:toggle-switch",
+  "status": "approved",
+  "intro": "MUI ToggleButtonGroup exclusivo o múltiple.",
+  "component": { "name": "ToggleButtonGroup", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-toggle" },
+  "state": { "exclusive": true, "orientation": "horizontal" },
+  "code": { "strategy": "form-entry" }
+}

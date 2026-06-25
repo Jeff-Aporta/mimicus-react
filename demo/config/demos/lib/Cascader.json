@@ -1,0 +1,12 @@
+{
+  "id": "Cascader",
+  "category": "Inputs",
+  "label": "Cascader",
+  "titleIcon": "mdi:file-tree",
+  "status": "approved",
+  "intro": "Selección en cascada Ant.",
+  "component": { "name": "Cascader", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-cascader" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

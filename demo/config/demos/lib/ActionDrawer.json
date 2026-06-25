@@ -1,0 +1,21 @@
+{
+   "id": "ActionDrawer",
+   "category": "Overlays",
+   "label": "ActionDrawer",
+   "titleIcon": "mdi:dock-bottom",
+   "status": "approved",
+   "intro": "Panel lateral o inferior que desliza sobre el contenido; ideal para acciones secundarias sin abandonar la vista.",
+   "component": { "name": "ActionDrawer", "path": "src/lib/overlays/ActionDrawer.svelte" },
+   "preview": { "template": "action-drawer" },
+   "state": { "side": "right", "_scope": "global" },
+   "details": { "bSimularLoading": false },
+   "fields": [
+      { "kind": "select-enum", "key": "_scope", "label": "scope", "labelIcon": "mdi:earth", "attrOmit": true, "enumValue": { "global": "global", "local": "local" } },
+      {
+         "kind": "palette", "key": "side", "label": "Lado", "labelIcon": "mdi:dock-left", "attrType": "str", "attrName": "side", "layout": "sideCross", "accent": "primary",
+         "options": { "Top": "top", "Left": "left", "Ninguno": null, "Right": "right", "Bottom": "bottom" }, "name": "drawer-side-2", "iconMapRef": "drawerSide"
+      }
+   ],
+   "detailFields": [{ "kind": "switch", "key": "bSimularLoading", "label": "Simular loading (5s al abrir)" }],
+   "code": { "strategy": "action-drawer" }
+}

@@ -1,0 +1,19 @@
+{
+   "id": "ImageList",
+   "category": "Layouts",
+   "label": "ImageList",
+   "titleIcon": "mdi:image-multiple",
+   "status": "approved",
+   "intro": "Cuadrícula de imágenes (MUI <code>ImageList</code>): variantes standard y masonry.",
+   "component": { "name": "ImageList", "path": "src/layout/ImageList.jsx" },
+   "preview": { "template": "layout-grid" },
+   "state": { "cols": 3, "gap": 8, "variant": "standard", "rowHeight": 120 },
+   "details": { "itemCount": 6 },
+   "fields": [
+      { "kind": "number", "key": "cols", "label": "cols", "min": 1, "max": 6, "step": 1 },
+      { "kind": "select-enum", "key": "variant", "label": "variant", "enumValue": { "standard": "standard", "masonry": "masonry" } },
+      { "kind": "number", "key": "gap", "label": "gap", "min": 0, "max": 24, "step": 4 }
+   ],
+   "detailFields": [{ "kind": "number", "key": "itemCount", "label": "Elementos", "min": 3, "max": 12, "step": 1 }],
+   "code": { "strategy": "layout-items", "tagOpts": { "multiline": true }, "options": { "layout": "grid", "useCard": true } }
+}

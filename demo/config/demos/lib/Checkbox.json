@@ -1,0 +1,12 @@
+{
+  "id": "Checkbox",
+  "category": "Inputs",
+  "label": "Checkbox",
+  "titleIcon": "mdi:checkbox-marked-outline",
+  "status": "approved",
+  "intro": "Casilla Ant / MUI con estado indeterminado.",
+  "component": { "name": "Checkbox", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-checkbox" },
+  "state": { "indeterminate": false, "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

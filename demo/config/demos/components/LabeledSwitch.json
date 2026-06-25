@@ -1,0 +1,28 @@
+{
+
+   "id": "LabeledSwitch",
+
+   "category": "Iconized",
+
+   "label": "LabeledSwitch",
+
+   "titleIcon": "mdi:toggle-switch-outline",
+
+   "status": "pending",
+
+   "intro": "<code>Switch</code> con etiqueta de texto inline (wrapper de capacitación). Distinto del <code>Switch</code> base del kit.",
+
+   "component": { "name": "LabeledSwitch", "path": "src/components/forms/Forms.jsx" },
+
+   "preview": { "template": "cmp-labeled-switch" },
+
+   "state": { "checked": true, "readonly": false, "label": "Publicar en catálogo" },
+
+   "fields": [
+      { "kind": "text", "key": "label", "label": "label", "labelIcon": "mdi:form-textbox" },
+      { "kind": "switch-group", "key": "estados", "label": "Estado", "labelIcon": "mdi:tune", "switches": [{ "key": "checked", "label": "checked" }, { "key": "readonly", "label": "readonly" }] }
+   ]
+
+}
+
+

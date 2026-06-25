@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "build:demo": "node scripts/build-demo.mjs && node scripts/patch-demo-index.mjs",
+    "build:demo": "node scripts/gen-catalog-items.mjs && node scripts/build-demo.mjs && node scripts/patch-demo-index.mjs",
     "build:all": "npm run build && npm run build:demo"
   },
   "devDependencies": {

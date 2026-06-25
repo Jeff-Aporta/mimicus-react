@@ -1,0 +1,88 @@
+/* Tarjeta del catálogo (paridad CatalogCard.svelte) */
+
+.catalog-card {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	width: 100%;
+	min-height: 0;
+	padding: 0;
+	border: 1px solid var(--catalog-card-border);
+	border-radius: var(--catalog-card-radius, 0.5rem);
+	overflow: hidden;
+	background-color: var(--catalog-card-bg);
+	background-image: var(--catalog-card-bg-image);
+	background-size: var(--catalog-card-bg-size, 100% 100%);
+	background-position: var(--catalog-card-bg-position, 50% 42%);
+	background-repeat: no-repeat;
+	backdrop-filter: var(--catalog-card-backdrop);
+	-webkit-backdrop-filter: var(--catalog-card-backdrop);
+	box-shadow: var(--catalog-card-shadow);
+	cursor: pointer;
+	text-align: left;
+	color: var(--catalog-card-footer-fg);
+	font: inherit;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.catalog-card:hover {
+	border-color: var(--catalog-card-hover-border);
+	box-shadow: var(--catalog-card-hover-shadow);
+	transform: var(--catalog-card-hover-transform);
+}
+
+.catalog-card:focus-visible {
+	outline: 2px solid var(--catalog-card-focus);
+	outline-offset: 2px;
+}
+
+.catalog-card__preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1 1 auto;
+	min-height: 5rem;
+	aspect-ratio: 16 / 8;
+	padding: 0.35rem 0.45rem;
+	background: var(--catalog-card-preview-bg);
+	backdrop-filter: var(--catalog-card-preview-backdrop, none);
+	-webkit-backdrop-filter: var(--catalog-card-preview-backdrop, none);
+	border-bottom: 1px solid var(--catalog-card-preview-border);
+	color: var(--catalog-card-preview-color);
+}
+
+.catalog-card__preview .demo-sketch {
+	width: 100%;
+	max-width: 10.5rem;
+	height: auto;
+	max-height: 100%;
+}
+
+.catalog-card__footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.35rem;
+	flex: 0 0 auto;
+	min-width: 0;
+	min-height: 1.65rem;
+	padding: 0.32rem 0.55rem;
+	font-size: 0.78rem;
+	color: var(--catalog-card-footer-fg);
+}
+
+.catalog-card__name {
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	color: var(--catalog-card-name-fg);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.demo-sketch {
+	width: 100%;
+	height: auto;
+	color: var(--catalog-sketch-color);
+	opacity: 1;
+}

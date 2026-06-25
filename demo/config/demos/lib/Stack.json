@@ -1,0 +1,18 @@
+{
+   "id": "Stack",
+   "category": "Layouts",
+   "label": "Stack",
+   "titleIcon": "mdi:view-sequential",
+   "status": "approved",
+   "intro": "Layout unidimensional (MUI <code>Stack</code>): columna o fila con <code>spacing</code>.",
+   "component": { "name": "Stack", "path": "src/layout/Stack.jsx" },
+   "preview": { "template": "layout-flex" },
+   "state": { "direction": "column", "spacing": 1 },
+   "details": { "itemCount": 3 },
+   "fields": [
+      { "kind": "select-enum", "key": "direction", "label": "direction", "enumValue": { "column": "column", "row": "row" } },
+      { "kind": "number", "key": "spacing", "label": "spacing", "min": 0, "max": 8, "step": 1 }
+   ],
+   "detailFields": [{ "kind": "number", "key": "itemCount", "label": "Elementos", "min": 1, "max": 12, "step": 1 }],
+   "code": { "strategy": "layout-items", "tagOpts": { "multiline": true }, "options": { "layout": "flex", "useCard": true } }
+}

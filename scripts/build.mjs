@@ -1,6 +1,6 @@
 /**
 
- * Build mimicus-react: ESM (primario) + IIFE legacy + CSS + snippets.
+ * Build mimicus-react: ESM (import) + IIFE (global MimicusUI) + CSS + snippets.
 
  */
 
@@ -26,7 +26,7 @@ const esbuild = require("esbuild");
 
 
 
-const ESM_ENTRY = join(root, "src", "index.jsx");
+const ESM_ENTRY = join(root, "src", "entry-esm.jsx");
 
 const BOOTSTRAP_ESM = join(root, "src", "bootstrap.js");
 
@@ -48,9 +48,13 @@ const OUT = {
 
   bootstrapMin: join(root, "cdn", "mimicus-react.bootstrap.esm.min.js"),
 
-  iife: join(root, "cdn", "mimicus-ui.js"),
+  iife: join(root, "cdn", "mimicus-react.iife.js"),
 
-  iifeMin: join(root, "cdn", "mimicus-ui.min.js"),
+  iifeMin: join(root, "cdn", "mimicus-react.iife.min.js"),
+
+  iifeAlias: join(root, "cdn", "mimicus-ui.js"),
+
+  iifeAliasMin: join(root, "cdn", "mimicus-ui.min.js"),
 
   snippets: join(root, "cdn", "mimicus-snippets.js"),
 
@@ -238,9 +242,11 @@ function build() {
 
   buildIife(IIFE_ENTRY, OUT.iife);
 
-  buildIife(SNIPPETS_IIFE, OUT.snippets, { reactExternal: false });
+  copyFileSync(OUT.iife, OUT.iifeAlias);
 
-  writeFileSync(OUT.iifeMin, readFileSync(OUT.iife.replace(".js", ".min.js"), "utf8"));
+  copyFileSync(OUT.iifeMin, OUT.iifeAliasMin);
+
+  buildIife(SNIPPETS_IIFE, OUT.snippets, { reactExternal: false });
 
   writeFileSync(OUT.snippetsMin, readFileSync(OUT.snippets.replace(".js", ".min.js"), "utf8"));
 
@@ -259,21 +265,22 @@ function build() {
 
 
   const versions = {
-
     componentRef: "main",
-
-    module: {
-
+    esm: {
       main: "mimicus-react.esm.min.js",
-
       bootstrap: "mimicus-react.bootstrap.esm.min.js",
-
       css: "mimicus-ui.min.css",
-
+      loadCdns: "stack-esm",
     },
-
-    legacy: { js: "mimicus-ui.min.js", snippets: "mimicus-snippets.min.js" },
-
+    global: {
+      main: "mimicus-react.iife.min.js",
+      globalName: "MimicusUI",
+      bootstrap: "mimicus-snippets.min.js",
+      bootstrapGlobal: "MimicusBootstrap",
+      css: "mimicus-ui.min.css",
+      loadCdns: "stack-global",
+      alias: "mimicus-ui.min.js",
+    },
   };
 
   writeFileSync(join(root, "cdn", "versions.json"), JSON.stringify(versions, null, 2) + "\n");
@@ -285,17 +292,13 @@ function build() {
   mkdirSync(demoCdn, { recursive: true });
 
   for (const name of [
-
     "mimicus-react.esm.js",
-
     "mimicus-react.esm.min.js",
-
     "mimicus-react.bootstrap.esm.js",
-
     "mimicus-react.bootstrap.esm.min.js",
-
+    "mimicus-react.iife.js",
+    "mimicus-react.iife.min.js",
     "mimicus-ui.js",
-
     "mimicus-ui.min.js",
 
     "mimicus-ui.min.css",
@@ -320,11 +323,9 @@ function build() {
 
 
 
-  console.log("mimicus-react build OK (ESM primary)");
-
-  console.log("  ", OUT.esmMin);
-
-  console.log("  ", OUT.bootstrapMin);
+  console.log("mimicus-react build OK");
+  console.log("  ESM ", OUT.esmMin);
+  console.log("  IIFE", OUT.iifeMin, "(global MimicusUI)");
 
 }
 

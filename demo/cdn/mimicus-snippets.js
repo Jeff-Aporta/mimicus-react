@@ -468,9 +468,16 @@ ${indent}</div>`;
       href: (base) => base + "mimicus-ui.min.css",
       attrs: { "data-mimicus-ui-css": "1", "data-mimicus-cdn": "mimicus-ui-css" }
     },
+    "script-mimicus-react-iife": {
+      kind: "script-src",
+      src: (base) => base + "mimicus-react.iife.min.js",
+      defer: false,
+      attrs: { "data-mimicus-react-iife": "1", "data-mimicus-cdn": "mimicus-react-iife" }
+    },
+    /** @deprecated alias de script-mimicus-react-iife */
     "script-mimicus-ui": {
       kind: "script-src",
-      src: (base) => base + "mimicus-ui.min.js",
+      src: (base) => base + "mimicus-react.iife.min.js",
       defer: false,
       attrs: { "data-mimicus-ui-js": "1", "data-mimicus-cdn": "mimicus-ui" }
     },
@@ -494,14 +501,18 @@ ${indent}</div>`;
     iconify: ["script-iconify"],
     babel: ["script-babel"],
     "mimicus-ui-css": ["link-mimicus-ui-css"],
-    /** @deprecated IIFE legacy — usar stack-esm */
-    "mimicus-ui": ["link-mimicus-ui-css", "script-mimicus-ui"],
+    /** Modo variable — React global + CSS + MimicusUI en globalThis */
+    "mimicus-ui": ["link-mimicus-ui-css", "script-mimicus-react-iife"],
     "importmap-mimicus": ["importmap-mimicus-ui"],
     "app-boot-css": ["link-app-boot-css"],
-    /** Stack ESM — React importmap + UI CSS + alias @jeff-aporta/mimicus-react */
+    /** Modo import — React importmap + CSS + alias @jeff-aporta/mimicus-react */
     "stack-esm": ["preconnect", "react18", "iconify", "mimicus-ui-css", "importmap-mimicus-ui"],
-    /** Stack mínimo Mimicus React (sin MUI). */
+    /** Modo variable — React UMD/global + CSS + mimicus-react.iife */
+    "stack-global": ["preconnect", "react18", "iconify", "mimicus-ui-css", "script-mimicus-react-iife"],
+    /** Stack mínimo Mimicus React ESM (sin MUI). */
     "stack-mimicus": ["stack-esm"],
+    /** Stack mínimo Mimicus React global (sin MUI). */
+    "stack-mimicus-global": ["stack-global"],
     /** Stack tipo swagger (React + MUI + babel + iconify). */
     "stack-mui": ["preconnect", "react18-mui", "iconify", "babel"]
   };

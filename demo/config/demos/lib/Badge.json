@@ -1,0 +1,17 @@
+{
+  "id": "Badge",
+  "category": "Containers",
+  "label": "Badge",
+  "titleIcon": "mdi:bell-badge-outline",
+  "status": "approved",
+  "intro": "Insignia numérica o punto de estado sobre un control hijo. Compatible con patrones <a href=\"https://ant.design/components/badge\" target=\"_blank\" rel=\"noreferrer\">Ant Badge</a> y <a href=\"https://mui.com/material-ui/react-badge/\" target=\"_blank\" rel=\"noreferrer\">MUI Badge</a>.",
+  "component": { "name": "Badge", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-badge" },
+  "state": { "count": 5, "dot": false, "showZero": false, "max": 99, "color": "primary" },
+  "fields": [
+    { "kind": "number", "key": "count", "label": "count", "labelIcon": "mdi:counter", "min": 0, "max": 9999, "step": 1 },
+    { "kind": "select-enum", "key": "color", "label": "color", "labelIcon": "mdi:palette", "attrType": "str", "enumValue": { "Primary": "primary", "Success": "success", "Warning": "warning", "Error": "error" } },
+    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "dot", "label": "dot" }, { "key": "showZero", "label": "showZero" }] }
+  ],
+  "code": { "strategy": "disp-badge" }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "Statistic",
+  "category": "Containers",
+  "label": "Statistic",
+  "titleIcon": "mdi:chart-box-outline",
+  "status": "approved",
+  "intro": "Métrica destacada con prefijo/sufijo. Ver <a href=\"https://ant.design/components/statistic\" target=\"_blank\" rel=\"noreferrer\">Ant Statistic</a>.",
+  "component": { "name": "Statistic", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-statistic" },
+  "state": { "title": "Balance", "value": 112893, "prefix": "$", "precision": null, "suffix": null },
+  "fields": [
+    { "kind": "text", "key": "title", "label": "title", "labelIcon": "mdi:format-title" },
+    { "kind": "number", "key": "value", "label": "value", "labelIcon": "mdi:numeric", "step": 1 },
+    { "kind": "text", "key": "prefix", "label": "prefix", "labelIcon": "mdi:currency-usd" }
+  ],
+  "code": { "strategy": "disp-statistic" }
+}

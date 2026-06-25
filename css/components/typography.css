@@ -1,0 +1,52 @@
+/* Typography — escala Ant/MUI con tokens Mimicus (--mimicus-*) */
+
+.mimicus-typography {
+	margin: 0;
+	color: var(--mimicus-color);
+	font-family: inherit;
+}
+
+.mimicus-typography[data-surface-color] {
+	color: var(--bttn-clr, var(--mimicus-primary));
+}
+
+.mimicus-typography--strong { font-weight: 700; }
+.mimicus-typography--italic { font-style: italic; }
+.mimicus-typography--underline { text-decoration: underline; text-underline-offset: 0.12em; }
+.mimicus-typography--delete { text-decoration: line-through; opacity: 0.82; }
+.mimicus-typography--disabled { opacity: 0.45; cursor: not-allowed; }
+
+.mimicus-typography-title { margin-block: 0.35rem 0.5rem; }
+
+.mimicus-typography-paragraph { margin-block: 0 0.85rem; }
+
+.mimicus-typography-link {
+	color: var(--mimicus-primary);
+	text-decoration: none;
+	cursor: pointer;
+	transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.mimicus-typography-link:hover {
+	color: color-mix(in srgb, var(--mimicus-primary), var(--mimicus-color) 18%);
+	text-decoration: underline;
+}
+
+.mimicus-typography-headings-demo {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	width: 100%;
+}
+
+html[data-looknfeel^="neon-"] .mimicus-typography-link {
+	text-shadow: 0 0 12px color-mix(in srgb, var(--mimicus-primary), transparent 70%);
+}
+
+html[data-looknfeel="mac-liquidglass"] .mimicus-typography-link {
+	color: var(--mlg-accent, var(--mimicus-primary));
+}
+
+html[data-looknfeel="contapyme"] .mimicus-typography-title {
+	color: var(--mimicus-color);
+}

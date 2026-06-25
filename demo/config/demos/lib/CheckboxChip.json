@@ -1,0 +1,15 @@
+{
+   "id": "CheckboxChip",
+   "category": "Primitives",
+   "label": "CheckboxChip",
+   "titleIcon": "mdi:checkbox-multiple-blank-circle-outline",
+   "status": "approved",
+   "intro": "Selector de valor único en chips (píldoras). Pensado para paletas de color semántico (<code>primary</code>, <code>success</code>, …) y opciones compactas con icono. Sustituye el layout <code>chips</code> de <code>PaletteGrid</code> en campos <code>color</code> del playground.",
+   "component": { "name": "CheckboxChip", "path": "src/components/forms/Forms.jsx" },
+   "preview": { "template": "checkbox-chip", "scale": 1.15 },
+   "state": { "color": null },
+   "fields": [
+      { "kind": "color", "key": "color", "label": "Color", "labelIcon": "mdi:palette", "attrType": "color" }
+   ],
+   "code": { "strategy": "checkbox-chip-body", "options": { "valueKey": "color" } }
+}

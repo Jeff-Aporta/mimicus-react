@@ -1,0 +1,35 @@
+{
+   "id": "AppLayout",
+   "category": "Layouts",
+   "label": "AppLayout",
+   "titleIcon": "mdi:view-dashboard-outline",
+   "status": "approved",
+   "intro": "Layout de aplicación (Ant Design Layout): compuesto por <code>AppLayout</code>, <code>AppLayout.Header</code> (zonas <code>Brand</code>, <code>Center</code>, <code>Tools</code>), <code>AppLayout.Sider</code>, contenido y <code>AppLayout.Footer</code>. La distribución se define con la prop <code>variant</code> y CSS <code>grid-template</code>.",
+   "component": { "name": "AppLayout", "path": "src/lib/containers/layout/AppLayout.svelte" },
+   "preview": { "template": "layout-app" },
+   "shell": { "relieve": 60, "configBlockCount": 2 },
+   "state": { "variant": "side", "fixedHeader": false, "fixedSider": false, "siderTheme": "dark", "siderCollapsible": true, "siderCollapsed": false, "siderWidth": 200 },
+   "details": { "brandLabel": "Brand", "headerLabel": "Center", "toolsLabel": "Tools", "contentLabel": "Content", "footerLabel": "Footer", "siderLabel": "Sider" },
+   "fields": [
+      { "kind": "select-enum", "key": "variant", "label": "variant", "labelIcon": "mdi:view-dashboard-outline", "attrType": "str", "enumValue": { "side · Panel izquierdo": "side", "top-side-2 · Panel derecho": "top-side-2" } },
+      { "kind": "select-enum", "key": "siderTheme", "label": "sider theme", "labelIcon": "mdi:theme-light-dark", "attrType": "str", "enumValue": { "dark": "dark", "light": "light" } },
+      { "kind": "number", "key": "siderWidth", "label": "siderWidth", "labelIcon": "mdi:arrow-expand-horizontal", "min": 120, "max": 320, "step": 8 },
+      { "kind": "switch-group", "key": "sider", "label": "Sider", "labelIcon": "mdi:dock-left", "switches": [{ "key": "siderCollapsible", "label": "collapsible" }, { "key": "siderCollapsed", "label": "collapsed" }] },
+      { "kind": "switch-group", "key": "fixed", "label": "Fixed", "labelIcon": "mdi:pin", "switches": [{ "key": "fixedHeader", "label": "fixedHeader" }, { "key": "fixedSider", "label": "fixedSider" }] }
+   ],
+   "detailFields": [
+      { "kind": "text", "key": "brandLabel", "label": "Brand", "labelIcon": "mdi:tag-outline" },
+      { "kind": "text", "key": "headerLabel", "label": "Center", "labelIcon": "mdi:page-layout-header" },
+      { "kind": "text", "key": "toolsLabel", "label": "Tools", "labelIcon": "mdi:tune-variant" },
+      { "kind": "text", "key": "contentLabel", "label": "Content", "labelIcon": "mdi:file-document-outline" },
+      { "kind": "text", "key": "footerLabel", "label": "Footer", "labelIcon": "mdi:page-layout-footer" },
+      { "kind": "text", "key": "siderLabel", "label": "Sider", "labelIcon": "mdi:dock-left" }
+   ],
+   "presets": [
+      { "label": "Panel izquierdo", "icon": "mdi:view-compact-outline", "state": { "variant": "side", "fixedHeader": false, "fixedSider": true, "siderTheme": "dark", "siderCollapsible": true, "siderCollapsed": false, "siderWidth": 200 }, "details": { "headerLabel": "Header", "contentLabel": "Content", "footerLabel": "Footer", "siderLabel": "Nav" } },
+      { "label": "Panel derecho", "icon": "mdi:dock-right", "state": { "variant": "top-side-2", "fixedHeader": false, "fixedSider": false, "siderTheme": "light", "siderCollapsible": true, "siderCollapsed": false, "siderWidth": 180 }, "details": { "headerLabel": "Header", "contentLabel": "Content", "footerLabel": "Footer", "siderLabel": "Sider" } },
+      { "label": "Header fijo", "icon": "mdi:pin", "state": { "variant": "side", "fixedHeader": true, "fixedSider": false, "siderTheme": "dark", "siderCollapsible": true, "siderCollapsed": false, "siderWidth": 200 }, "details": { "headerLabel": "Fixed Header", "contentLabel": "Scroll content…", "footerLabel": "Footer", "siderLabel": "Nav" } }
+   ],
+   "tests": "extras/AppLayoutTests.svelte",
+   "code": { "strategy": "applayout-pattern", "tagOpts": { "multiline": true } }
+}

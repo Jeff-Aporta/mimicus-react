@@ -1,0 +1,12 @@
+{
+  "id": "DatePicker",
+  "category": "Inputs",
+  "label": "DatePicker",
+  "titleIcon": "mdi:calendar",
+  "status": "approved",
+  "intro": "Fecha Ant — input nativo estilizado.",
+  "component": { "name": "DatePicker", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-date-picker" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

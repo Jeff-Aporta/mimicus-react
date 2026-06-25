@@ -45,9 +45,15 @@ export function AppLayoutSider({
     onCollapse?.(!collapsed);
   }
 
+  const bodyClass = [
+    "mimicus-app-layout-sider__body",
+    !collapsed && "custom-scrollbar",
+    collapsed && "mimicus-app-layout-sider__body--collapsed mimicus-scrollbar--hidden",
+  ].filter(Boolean).join(" ");
+
   return (
     <aside {...rest} className={rootClass} style={mergedStyle}>
-      <div className="mimicus-app-layout-sider__body">{children}</div>
+      <div className={bodyClass}>{children}</div>
       {collapsible && (
         <div className="mimicus-app-layout-sider__trigger">
           <Button variant="text" color={isDark ? "neutral" : "primary"} onClick={toggle} style={{ width: "100%", justifyContent: "center", color: "inherit" }}>

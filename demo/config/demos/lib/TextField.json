@@ -1,0 +1,12 @@
+{
+  "id": "TextField",
+  "category": "Inputs",
+  "label": "TextField",
+  "titleIcon": "mdi:textbox",
+  "status": "approved",
+  "intro": "Alias MUI de <code>Input</code>.",
+  "component": { "name": "TextField", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-input" },
+  "state": { "size": "medium", "allowClear": true },
+  "code": { "strategy": "form-entry" }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "SpeedDial",
+  "category": "Navigation",
+  "label": "Speed Dial",
+  "titleIcon": "mdi:plus-circle-multiple-outline",
+  "status": "approved",
+  "intro": "FAB con acciones relacionadas MUI Speed Dial; animación y tooltips vía CSS.",
+  "component": { "name": "SpeedDial", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-speed-dial" },
+  "state": { "direction": "up" },
+  "fields": [
+    { "kind": "select-enum", "key": "direction", "label": "direction", "labelIcon": "mdi:arrow-up", "attrType": "str", "enumValue": { "Up": "up", "Left": "left", "Right": "right" } }
+  ],
+  "code": { "strategy": "nav-speed-dial", "tagOpts": { "multiline": true } }
+}

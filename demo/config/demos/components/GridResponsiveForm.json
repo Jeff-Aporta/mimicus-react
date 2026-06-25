@@ -1,0 +1,18 @@
+{
+   "id": "GridResponsiveForm",
+   "category": "Layouts",
+   "label": "GridResponsiveForm",
+   "titleIcon": "mdi:form-select",
+   "status": "pending",
+   "intro": "Rejilla de formulario responsive (1–5 columnas según <code>sizew</code> de <code>BlockLayout</code>). Envuelve <code>GridLayout</code> con celdas automáticas.",
+   "component": { "name": "GridResponsiveForm", "path": "src/components/form/GridResponsiveForm.svelte" },
+   "preview": { "template": "cmp-grid-responsive-form", "style": "width: 100%;" },
+   "demoConfig": { "fieldCount": 4, "maxcells": 0, "mincells": 0 },
+   "state": {},
+   "demoConfigFields": [
+      { "kind": "number", "key": "fieldCount", "label": "Campos", "labelIcon": "mdi:counter", "min": 2, "max": 8, "step": 1 },
+      { "kind": "number", "key": "maxcells", "label": "maxcells", "labelIcon": "mdi:view-column-outline", "min": 0, "max": 5, "step": 1 },
+      { "kind": "number", "key": "mincells", "label": "mincells", "labelIcon": "mdi:view-column-outline", "min": 0, "max": 5, "step": 1 }
+   ]
+}
+

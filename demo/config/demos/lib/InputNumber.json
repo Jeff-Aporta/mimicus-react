@@ -1,0 +1,12 @@
+{
+  "id": "InputNumber",
+  "category": "Inputs",
+  "label": "InputNumber",
+  "titleIcon": "mdi:numeric",
+  "status": "approved",
+  "intro": "Entrada numérica Ant con botones ±.",
+  "component": { "name": "InputNumber", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-input-number" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

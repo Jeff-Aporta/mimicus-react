@@ -1,0 +1,19 @@
+{
+   "id": "CodeBlock",
+   "category": "Typography",
+   "label": "CodeBlock",
+   "titleIcon": "mdi:code-tags",
+   "status": "approved",
+   "intro": "Editor de código con <strong>CodeMirror 5</strong> cargado por CDN. El tema (<code>default</code> / <code>dracula</code>) sigue <code>html[data-luminance]</code> de Mimicus.",
+   "component": { "name": "CodeBlock", "path": "src/components/CodeBlock.jsx" },
+   "preview": { "template": "cmp-code-block" },
+   "state": {
+      "code": "<Button color=\"primary\" variant=\"soft\">\n  Guardar\n</Button>",
+      "minHeight": "7rem"
+   },
+   "fields": [
+      { "kind": "code", "key": "code", "label": "code", "labelIcon": "mdi:code-braces", "lang": "html", "minHeight": "16rem" },
+      { "kind": "text", "key": "minHeight", "label": "minHeight", "labelIcon": "mdi:arrow-expand-vertical" }
+   ],
+   "code": { "strategy": "default" }
+}

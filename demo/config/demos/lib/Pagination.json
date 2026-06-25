@@ -1,0 +1,18 @@
+{
+  "id": "Pagination",
+  "category": "Navigation",
+  "label": "Pagination",
+  "titleIcon": "mdi:page-last",
+  "status": "approved",
+  "intro": "Paginación Ant / MUI: botones generados por <code>paginationMath.js</code>, evento <code>mimicus-pagination-change</code>.",
+  "component": { "name": "Pagination", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-pagination" },
+  "state": { "count": 10, "defaultPage": 1, "siblingCount": 1 },
+  "fields": [
+    { "kind": "number", "key": "count", "label": "count", "labelIcon": "mdi:numeric", "min": 3, "max": 50, "step": 1 },
+    { "kind": "number", "key": "defaultPage", "label": "defaultPage", "labelIcon": "mdi:page-next-outline", "min": 1, "max": 50, "step": 1 },
+    { "kind": "number", "key": "siblingCount", "label": "siblingCount", "labelIcon": "mdi:dots-horizontal", "min": 0, "max": 3, "step": 1 },
+    { "kind": "select-enum", "key": "size", "label": "size", "labelIcon": "mdi:format-size", "attrType": "str", "enumValue": { "Default": "", "Small": "small" } }
+  ],
+  "code": { "strategy": "nav-pagination" }
+}

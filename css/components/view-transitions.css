@@ -1,0 +1,392 @@
+/* View Transitions API — playground wow (SPA + navigation:auto para enlaces externos) */
+
+@view-transition {
+	navigation: auto;
+}
+
+/* —— Keyframes —— */
+@keyframes vt-slide-out-left {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(-18%);
+		opacity: 0.35;
+	}
+}
+
+@keyframes vt-slide-in-right {
+	from {
+		transform: translateX(22%);
+		opacity: 0.2;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes vt-slide-out-right {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(22%);
+		opacity: 0.35;
+	}
+}
+
+@keyframes vt-slide-in-left {
+	from {
+		transform: translateX(-18%);
+		opacity: 0.2;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes vt-fade-out {
+	from {
+		opacity: 1;
+		filter: blur(0);
+	}
+	to {
+		opacity: 0;
+		filter: blur(6px);
+	}
+}
+
+@keyframes vt-fade-in {
+	from {
+		opacity: 0;
+		filter: blur(8px);
+	}
+	to {
+		opacity: 1;
+		filter: blur(0);
+	}
+}
+
+@keyframes vt-scale-out {
+	from {
+		transform: scale(1);
+		opacity: 1;
+	}
+	to {
+		transform: scale(0.94);
+		opacity: 0;
+	}
+}
+
+@keyframes vt-scale-in {
+	from {
+		transform: scale(1.04);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes vt-zoom-out-home {
+	from {
+		transform: scale(1);
+		opacity: 1;
+	}
+	to {
+		transform: scale(1.06);
+		opacity: 0;
+	}
+}
+
+@keyframes vt-zoom-in-home {
+	from {
+		transform: scale(0.92);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/* —— Capas nombradas en el DOM —— */
+.pg-vt-main {
+	view-transition-name: pg-main;
+	contain: layout;
+}
+
+.pg-vt-hero {
+	view-transition-name: pg-hero;
+}
+
+.pg-vt-demo {
+	view-transition-name: pg-demo;
+}
+
+.pg-vt-sidebar {
+	view-transition-name: pg-sidebar;
+}
+
+.pg-vt-header {
+	view-transition-name: pg-header;
+}
+
+.pg-vt-preview {
+	view-transition-name: pg-preview;
+}
+
+.pg-vt-category {
+	view-transition-name: pg-category;
+}
+
+.pg-vt-card-source {
+	view-transition-name: pg-card-morph;
+}
+
+.pg-vt-demo-morph {
+	view-transition-name: pg-card-morph;
+}
+
+/* —— ::view-transition (contenedor raíz de la transición) —— */
+::view-transition {
+	pointer-events: none;
+}
+
+/* —— root: según dirección de navegación —— */
+::view-transition-group(root) {
+	animation-duration: 0.48s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-image-pair(root) {
+	isolation: isolate;
+}
+
+html[data-vt="forward"]::view-transition-old(root) {
+	animation: vt-slide-out-left 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="forward"]::view-transition-new(root) {
+	animation: vt-slide-in-right 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="back"]::view-transition-old(root) {
+	animation: vt-slide-out-right 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="back"]::view-transition-new(root) {
+	animation: vt-slide-in-left 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="swap"]::view-transition-old(root) {
+	animation: vt-fade-out 0.38s ease both;
+}
+
+html[data-vt="swap"]::view-transition-new(root) {
+	animation: vt-fade-in 0.42s ease both;
+}
+
+html[data-vt="home"]::view-transition-old(root) {
+	animation: vt-zoom-out-home 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="home"]::view-transition-new(root) {
+	animation: vt-zoom-in-home 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* —— pg-main (contenido principal) —— */
+::view-transition-group(pg-main) {
+	animation-duration: 0.5s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-image-pair(pg-main) {
+	isolation: isolate;
+}
+
+html[data-vt="forward"]::view-transition-old(pg-main) {
+	animation: vt-slide-out-left 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="forward"]::view-transition-new(pg-main) {
+	animation: vt-slide-in-right 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="back"]::view-transition-old(pg-main) {
+	animation: vt-slide-out-right 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="back"]::view-transition-new(pg-main) {
+	animation: vt-slide-in-left 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="swap"]::view-transition-old(pg-main),
+html[data-vt="swap"]::view-transition-new(pg-main) {
+	animation-duration: 0.4s;
+}
+
+html[data-vt="swap"]::view-transition-old(pg-main) {
+	animation: vt-fade-out 0.4s ease both;
+}
+
+html[data-vt="swap"]::view-transition-new(pg-main) {
+	animation: vt-fade-in 0.42s ease both;
+}
+
+/* —— pg-hero (cabecera catálogo / categoría) —— */
+::view-transition-group(pg-hero) {
+	animation-duration: 0.45s;
+}
+
+::view-transition-image-pair(pg-hero) {
+	isolation: isolate;
+}
+
+::view-transition-old(pg-hero) {
+	animation: vt-scale-out 0.42s ease both;
+}
+
+::view-transition-new(pg-hero) {
+	animation: vt-scale-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* —— pg-demo (panel de demo) —— */
+::view-transition-group(pg-demo) {
+	animation-duration: 0.52s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-image-pair(pg-demo) {
+	isolation: isolate;
+}
+
+html[data-vt="forward"]::view-transition-new(pg-demo) {
+	animation: vt-slide-in-right 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-vt="back"]::view-transition-old(pg-demo) {
+	animation: vt-slide-out-right 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* —— pg-preview (vista previa dentro del demo) —— */
+::view-transition-group(pg-preview) {
+	animation-duration: 0.36s;
+}
+
+::view-transition-image-pair(pg-preview) {
+	isolation: isolate;
+}
+
+::view-transition-old(pg-preview) {
+	animation: vt-fade-out 0.32s ease both;
+}
+
+::view-transition-new(pg-preview) {
+	animation: vt-fade-in 0.36s ease both;
+}
+
+/* —— pg-category (nav de sección en home) —— */
+::view-transition-group(pg-category) {
+	animation-duration: 0.4s;
+}
+
+::view-transition-image-pair(pg-category) {
+	isolation: isolate;
+}
+
+::view-transition-old(pg-category) {
+	animation: vt-scale-out 0.38s ease both;
+}
+
+::view-transition-new(pg-category) {
+	animation: vt-scale-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* —— pg-card-morph (tarjeta → demo) —— */
+::view-transition-group(pg-card-morph) {
+	animation-duration: 0.58s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-image-pair(pg-card-morph) {
+	isolation: isolate;
+}
+
+::view-transition-old(pg-card-morph) {
+	animation: vt-scale-out 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-new(pg-card-morph) {
+	animation: vt-scale-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* —— pg-sidebar / pg-header (sutil) —— */
+::view-transition-group(pg-sidebar) {
+	animation-duration: 0.35s;
+}
+
+::view-transition-image-pair(pg-sidebar) {
+	isolation: isolate;
+}
+
+::view-transition-old(pg-sidebar),
+::view-transition-new(pg-sidebar) {
+	animation: vt-fade-in 0.35s ease both;
+}
+
+::view-transition-group(pg-header) {
+	animation-duration: 0.38s;
+}
+
+::view-transition-image-pair(pg-header) {
+	isolation: isolate;
+}
+
+::view-transition-old(pg-header) {
+	animation: vt-fade-out 0.32s ease both;
+}
+
+::view-transition-new(pg-header) {
+	animation: vt-fade-in 0.38s ease both;
+}
+
+/* Drill-in demo: solo anima el título, no el sub-nav del header */
+html[data-vt="forward"]::view-transition-old(pg-header),
+html[data-vt="forward"]::view-transition-new(pg-header),
+html[data-vt="swap"]::view-transition-old(pg-header),
+html[data-vt="swap"]::view-transition-new(pg-header) {
+	animation: none;
+	opacity: 1;
+}
+
+/* —— Grupos genéricos (cualquier nombre no listado arriba) —— */
+::view-transition-group(*) {
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-image-pair(*) {
+	isolation: isolate;
+}
+
+/* Neon glow en capas nuevas */
+html[data-vt]::view-transition-new(root) {
+	box-shadow: 0 0 60px color-mix(in srgb, var(--neon-cyan, #22d3ee), transparent 82%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	@view-transition {
+		navigation: none;
+	}
+
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}

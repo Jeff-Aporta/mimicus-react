@@ -586,7 +586,7 @@ html[data-luminance="light"] {
 /* Tokens scrollbar — derivados de la paleta activa (--mimicus-* en html / .mimicus-ui-root). */
 html,
 .mimicus-ui-root {
-	--pg-scrollbar-size: 6px;
+	--pg-scrollbar-size: 3px;
 	--pg-scrollbar-track: color-mix(in srgb, var(--mimicus-primary) 16%, transparent);
 	--pg-scrollbar-thumb: color-mix(in srgb, var(--mimicus-primary) 55%, var(--mimicus-info, var(--mimicus-primary)) 12%);
 	--pg-scrollbar-thumb-hover: color-mix(in srgb, var(--mimicus-primary) 72%, var(--mimicus-info, var(--mimicus-primary)) 18%);
@@ -639,6 +639,24 @@ html[data-luminance="light"] .mimicus-ui-root {
 .pg-playground-shell :is(.pg-shell-main, .pg-sidebar-body, .pg-top-nav) {
 	scrollbar-width: thin;
 	scrollbar-color: var(--pg-scrollbar-thumb) transparent;
+}
+
+/* Sin scrollbar — rail / panel colapsado / área de interacción mínima */
+.mimicus-scrollbar--hidden,
+.mimicus-side-panel__body--rail,
+.mimicus-app-layout-sider--collapsed .mimicus-app-layout-sider__body,
+.pg-sidebar-body--rail {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.mimicus-scrollbar--hidden::-webkit-scrollbar,
+.mimicus-side-panel__body--rail::-webkit-scrollbar,
+.mimicus-app-layout-sider--collapsed .mimicus-app-layout-sider__body::-webkit-scrollbar,
+.pg-sidebar-body--rail::-webkit-scrollbar {
+	display: none;
+	width: 0;
+	height: 0;
 }
 
 /* Overlays portalados a <body> (autocomplete, tooltips) — fuera de .mimicus-ui-root */

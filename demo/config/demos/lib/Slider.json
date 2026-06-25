@@ -1,0 +1,12 @@
+{
+  "id": "Slider",
+  "category": "Inputs",
+  "label": "Slider",
+  "titleIcon": "mdi:tune-vertical",
+  "status": "approved",
+  "intro": "Deslizador MUI / Ant con riel relleno vía CSS.",
+  "component": { "name": "Slider", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-slider" },
+  "state": { "defaultValue": 40, "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

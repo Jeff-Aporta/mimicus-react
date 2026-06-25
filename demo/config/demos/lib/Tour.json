@@ -1,0 +1,13 @@
+{
+  "id": "Tour",
+  "category": "Containers",
+  "label": "Tour",
+  "titleIcon": "mdi:map-marker-path",
+  "status": "approved",
+  "intro": "Recorrido guiado por pasos con overlay. <code>bindTour</code>. Ver <a href=\"https://ant.design/components/tour\" target=\"_blank\" rel=\"noreferrer\">Ant Tour</a>.",
+  "component": { "name": "Tour", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-tour" },
+  "state": { "open": true },
+  "fields": [{ "kind": "switch", "key": "open", "label": "open", "labelIcon": "mdi:eye-outline" }],
+  "code": { "strategy": "disp-tour" }
+}

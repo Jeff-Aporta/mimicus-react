@@ -1,0 +1,23 @@
+{
+   "id": "Button",
+   "category": "Iconized",
+   "label": "Button",
+   "titleIcon": "mdi:gesture-tap",
+   "status": "approved",
+   "intro": "Botón con variantes Ant/MUI (<code>solid</code>, <code>outlined</code>, <code>text</code>, <code>ghost</code>, <code>dashed</code>, <code>glass</code>), tamaños, <code>block</code>, <code>danger</code>, icono con placement y enlace. Se adapta a paleta y look & feel vía tokens <code>--bttn-*</code>.",
+   "component": { "name": "Button", "path": "src/components/Button.jsx" },
+   "preview": { "template": "icon-text", "scale": 1.6, "options": { "wrapperStyle": "width: fit-content; max-width: 100%;" } },
+   "state": { "color": null, "variant": "solid", "size": "medium", "shape": "round", "type": "button", "block": false, "danger": false, "ghost": false, "dashed": false, "disabled": false, "loading": false, "iconPlacement": "start" },
+   "details": { "text": "Button", "icon": "mdi:gesture-tap-button" },
+   "fields": [
+      { "kind": "palette", "key": "variant", "label": "variant", "labelIcon": "mdi:shape-outline", "attrType": "str", "attrDefault": "solid", "options": [{ "label": "solid", "value": "solid" }, { "label": "outlined", "value": "outlined" }, { "label": "ghost", "value": "ghost" }, { "label": "soft", "value": "soft" }, { "label": "text", "value": "text" }, { "label": "dashed", "value": "dashed" }, { "label": "glass", "value": "glass" }], "accent": "primary" },
+      { "kind": "palette", "key": "size", "label": "size", "labelIcon": "mdi:resize", "attrType": "str", "attrDefault": "medium", "options": { "small": "small", "medium": "medium", "large": "large" }, "accent": "primary" },
+      { "kind": "palette", "key": "shape", "label": "shape", "labelIcon": "mdi:circle-outline", "attrType": "str", "attrDefault": "round", "options": { "round": "round", "rect": "rect", "pill": "pill", "circle": "circle" }, "accent": "primary" },
+      { "kind": "palette", "key": "iconPlacement", "label": "iconPlacement", "labelIcon": "mdi:arrow-left-right", "attrType": "str", "attrDefault": "start", "options": { "start": "start", "end": "end" }, "accent": "primary" },
+      { "kind": "palette", "key": "type", "label": "htmlType", "labelIcon": "mdi:format-list-bulleted-type", "attrDefault": "button", "options": [{ "label": "button", "value": "button" }, { "label": "submit", "value": "submit" }, { "label": "reset", "value": "reset" }], "accent": "primary" },
+      { "kind": "color", "key": "color", "label": "color", "labelIcon": "mdi:palette", "attrType": "color" },
+      { "kind": "switch-group", "key": "flags", "label": "Flags", "labelIcon": "mdi:tune", "switches": [{ "key": "block", "label": "block" }, { "key": "danger", "label": "danger" }, { "key": "ghost", "label": "ghost" }, { "key": "dashed", "label": "dashed" }, { "key": "disabled", "label": "disabled" }, { "key": "loading", "label": "loading" }] }
+   ],
+   "detailFields": [{ "kind": "icon-text", "key": "icon-text", "label": "Texto e ícono", "labelIcon": "mdi:text-box-multiple-outline", "iconKey": "icon", "textKey": "text" }],
+   "code": { "strategy": "icon-text-body" }
+}

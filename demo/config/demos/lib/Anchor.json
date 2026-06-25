@@ -1,0 +1,32 @@
+{
+   "id": "Anchor",
+   "category": "Navigation",
+   "label": "Anchor",
+   "titleIcon": "mdi:anchor",
+   "status": "approved",
+   "intro": "Navegación por anclas en una página (Ant Design Anchor): scroll suave a secciones, indicador activo tipo tabs, dirección <code>vertical</code> u <code>horizontal</code>. Con <code>affix={false}</code> queda en modo <strong>static</strong>: solo resalta al hacer clic, sin seguir el scroll.",
+   "component": { "name": "Anchor", "path": "src/components/navigation/Navigation.jsx" },
+   "preview": { "template": "nav-anchor" },
+   "shell": { "relieve": 58, "configBlockCount": 2 },
+   "state": { "direction": "vertical", "affix": false, "targetOffset": 0, "bounds": 5 },
+   "details": { "sectionCount": 5, "nestedItems": false },
+   "fields": [
+      { "kind": "select-enum", "key": "direction", "label": "direction", "labelIcon": "mdi:arrow-split-vertical", "attrType": "str", "enumValue": { "Vertical": "vertical", "Horizontal": "horizontal" } },
+      { "kind": "switch", "key": "affix", "label": "affix (scroll spy)", "labelIcon": "mdi:eye-outline" },
+      { "kind": "number", "key": "targetOffset", "label": "targetOffset", "labelIcon": "mdi:arrow-collapse-up", "min": 0, "max": 120, "step": 4 },
+      { "kind": "number", "key": "bounds", "label": "bounds", "labelIcon": "mdi:border-outside", "min": 0, "max": 40, "step": 1 }
+   ],
+   "detailFields": [
+      { "kind": "number", "key": "sectionCount", "label": "Secciones", "labelIcon": "mdi:numeric", "min": 2, "max": 8, "step": 1 },
+      { "kind": "switch", "key": "nestedItems", "label": "Ítems anidados (API)" }
+   ],
+   "presets": [
+      { "label": "Static (vertical)", "icon": "mdi:anchor", "state": { "direction": "vertical", "affix": false, "targetOffset": 0, "bounds": 5 }, "details": { "sectionCount": 5, "nestedItems": false } },
+      { "label": "Basic (scroll spy)", "icon": "mdi:eye-outline", "state": { "direction": "vertical", "affix": true, "targetOffset": 8, "bounds": 5 }, "details": { "sectionCount": 5, "nestedItems": false } },
+      { "label": "Horizontal tabs", "icon": "mdi:tab", "state": { "direction": "horizontal", "affix": true, "targetOffset": 0, "bounds": 5 }, "details": { "sectionCount": 4, "nestedItems": false } },
+      { "label": "Horizontal static", "icon": "mdi:tab-unselected", "state": { "direction": "horizontal", "affix": false, "targetOffset": 0, "bounds": 5 }, "details": { "sectionCount": 4, "nestedItems": false } },
+      { "label": "Con anidados", "icon": "mdi:file-tree-outline", "state": { "direction": "vertical", "affix": true, "targetOffset": 0, "bounds": 5 }, "details": { "sectionCount": 5, "nestedItems": true } }
+   ],
+   "tests": "extras/AnchorTests.svelte",
+   "code": { "strategy": "anchor-nav", "tagOpts": { "multiline": true } }
+}

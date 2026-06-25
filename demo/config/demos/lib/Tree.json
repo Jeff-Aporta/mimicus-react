@@ -1,0 +1,15 @@
+{
+  "id": "Tree",
+  "category": "Containers",
+  "label": "Tree",
+  "titleIcon": "mdi:file-tree-outline",
+  "status": "approved",
+  "intro": "Árbol jerárquico expandible (display). Distinto de <code>TreeSelect</code>. Ver <a href=\"https://ant.design/components/tree\" target=\"_blank\" rel=\"noreferrer\">Ant Tree</a>.",
+  "component": { "name": "Tree", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-tree" },
+  "state": { "checkable": false, "defaultExpandAll": true },
+  "fields": [
+    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "checkable", "label": "checkable" }, { "key": "defaultExpandAll", "label": "defaultExpandAll" }] }
+  ],
+  "code": { "strategy": "disp-tree" }
+}

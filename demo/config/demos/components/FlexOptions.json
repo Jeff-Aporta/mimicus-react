@@ -1,0 +1,14 @@
+{
+   "id": "FlexOptions",
+   "category": "Iconized",
+   "label": "FlexOptions",
+   "titleIcon": "mdi:dots-horizontal-circle-outline",
+   "status": "pending",
+   "intro": "Barra de acciones tipo toolbar: botones <code>ButtonOption</code>, separadores automáticos y menú overflow <code>CascadeOptions</code>.",
+   "component": { "name": "FlexOptions", "path": "src/components/options/FlexOptions.svelte" },
+   "preview": { "template": "cmp-flex-options" },
+   "demoConfig": { "showMore": true },
+   "state": {},
+   "demoConfigFields": [{ "kind": "switch", "key": "showMore", "label": "Menú ⋮", "labelIcon": "mdi:dots-vertical" }]
+}
+

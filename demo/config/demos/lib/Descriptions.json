@@ -1,0 +1,16 @@
+{
+  "id": "Descriptions",
+  "category": "Containers",
+  "label": "Descriptions",
+  "titleIcon": "mdi:table-column-width",
+  "status": "approved",
+  "intro": "Lista clave-valor en rejilla. Ver <a href=\"https://ant.design/components/descriptions\" target=\"_blank\" rel=\"noreferrer\">Ant Descriptions</a>.",
+  "component": { "name": "Descriptions", "path": "src/components/display/Display.jsx" },
+  "preview": { "template": "disp-descriptions" },
+  "state": { "bordered": false, "column": 3 },
+  "fields": [
+    { "kind": "switch", "key": "bordered", "label": "bordered", "labelIcon": "mdi:border-all" },
+    { "kind": "number", "key": "column", "label": "column", "labelIcon": "mdi:table-column", "min": 1, "max": 4, "step": 1 }
+  ],
+  "code": { "strategy": "disp-descriptions", "tagOpts": { "multiline": true } }
+}

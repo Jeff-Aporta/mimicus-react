@@ -1,6 +1,8 @@
 import { Children, isValidElement, useMemo } from "react";
 import { appLayoutGridTemplate, appLayoutResponsiveGridTemplate } from "./appLayoutVariants.js";
 import { useAppLayoutContext } from "./appLayoutContext.jsx";
+import { AppLayoutSider } from "./AppLayoutSider.jsx";
+import { AppLayoutHeader } from "./AppLayoutHeader.jsx";
 
 const SLOT_TYPES = { Header: "header", Sider: "sider", Footer: "footer" };
 
@@ -23,12 +25,33 @@ function Slot({ children }) {
 }
 
 function Header(props) {
-  return <Slot {...props} />;
+  return <AppLayoutHeader {...props} />;
 }
 Header.__appLayoutSlot = "header";
+Header.Brand = AppLayoutHeader.Brand;
+Header.Center = AppLayoutHeader.Center;
+Header.Tools = AppLayoutHeader.Tools;
 
-function Sider(props) {
-  return <Slot {...props} />;
+function Sider({ children, width, collapsed, collapsible, collapsedWidth, theme, onCollapse, className, style, ...rest }) {
+  const useSiderChrome = width !== undefined || collapsible || collapsed !== undefined || theme !== undefined;
+  if (useSiderChrome) {
+    return (
+      <AppLayoutSider
+        width={width}
+        collapsed={collapsed}
+        collapsible={collapsible}
+        collapsedWidth={collapsedWidth}
+        theme={theme}
+        onCollapse={onCollapse}
+        className={className}
+        style={style}
+        {...rest}
+      >
+        {children}
+      </AppLayoutSider>
+    );
+  }
+  return children;
 }
 Sider.__appLayoutSlot = "sider";
 

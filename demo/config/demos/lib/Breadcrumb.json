@@ -1,0 +1,20 @@
+{
+  "id": "Breadcrumb",
+  "category": "Navigation",
+  "label": "Breadcrumb",
+  "titleIcon": "mdi:chevron-right",
+  "status": "approved",
+  "intro": "Migas de pan Ant / MUI <code>Breadcrumbs</code>: estructura semántica <code>nav &gt; ol</code>, separador configurable.",
+  "component": { "name": "Breadcrumbs", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-breadcrumbs" },
+  "state": { "separator": "/" },
+  "details": { "currentLabel": "Navigation" },
+  "fields": [
+    { "kind": "text", "key": "separator", "label": "separator", "labelIcon": "mdi:slash-forward" },
+    { "kind": "number", "key": "maxItems", "label": "maxItems", "labelIcon": "mdi:dots-horizontal", "min": 0, "max": 8, "step": 1 }
+  ],
+  "detailFields": [
+    { "kind": "text", "key": "currentLabel", "label": "Página actual", "labelIcon": "mdi:file-document-outline" }
+  ],
+  "code": { "strategy": "nav-breadcrumbs" }
+}

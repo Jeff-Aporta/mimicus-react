@@ -1,0 +1,17 @@
+{
+  "id": "Steps",
+  "category": "Navigation",
+  "label": "Steps",
+  "titleIcon": "mdi:stairs",
+  "status": "approved",
+  "intro": "Pasos Ant Design / Stepper MUI: indicador de progreso; opcional <code>clickable</code> para saltar pasos.",
+  "component": { "name": "Steps", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-steps" },
+  "state": { "current": 1, "direction": "horizontal", "clickable": false },
+  "fields": [
+    { "kind": "number", "key": "current", "label": "current", "labelIcon": "mdi:counter", "min": 0, "max": 2, "step": 1 },
+    { "kind": "select-enum", "key": "direction", "label": "direction", "labelIcon": "mdi:arrow-split-vertical", "attrType": "str", "enumValue": { "Horizontal": "horizontal", "Vertical": "vertical" } },
+    { "kind": "switch", "key": "clickable", "label": "clickable", "labelIcon": "mdi:gesture-tap" }
+  ],
+  "code": { "strategy": "nav-steps" }
+}

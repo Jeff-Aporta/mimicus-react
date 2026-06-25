@@ -1,0 +1,15 @@
+{
+  "id": "Menu",
+  "category": "Navigation",
+  "label": "Menu",
+  "titleIcon": "mdi:menu",
+  "status": "approved",
+  "intro": "Menú de navegación con soporte teclado (↑↓ Home End) vía controlador vanilla.",
+  "component": { "name": "Menu", "path": "src/components/navigation/Navigation.jsx" },
+  "preview": { "template": "nav-menu" },
+  "state": { "mode": "vertical" },
+  "fields": [
+    { "kind": "select-enum", "key": "mode", "label": "mode", "labelIcon": "mdi:arrow-split-vertical", "attrType": "str", "enumValue": { "Vertical": "vertical", "Horizontal": "horizontal" } }
+  ],
+  "code": { "strategy": "nav-menu", "tagOpts": { "multiline": true } }
+}

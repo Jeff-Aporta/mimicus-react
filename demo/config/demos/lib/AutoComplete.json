@@ -1,0 +1,12 @@
+{
+  "id": "AutoComplete",
+  "category": "Inputs",
+  "label": "AutoComplete",
+  "titleIcon": "mdi:form-dropdown",
+  "status": "approved",
+  "intro": "Autocompletado Ant / MUI con panel filtrable (<code>bindAutocomplete</code>).",
+  "component": { "name": "AutoComplete", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-autocomplete" },
+  "state": { "disabled": false },
+  "code": { "strategy": "form-entry" }
+}

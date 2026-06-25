@@ -1,0 +1,16 @@
+{
+  "id": "Form",
+  "category": "Inputs",
+  "label": "Form",
+  "titleIcon": "mdi:form-select",
+  "status": "approved",
+  "intro": "Formulario Ant con <code>FormItem</code> y layout vertical/horizontal.",
+  "component": { "name": "Form", "path": "src/components/forms/Forms.jsx" },
+  "preview": { "template": "form-form" },
+  "state": { "layout": "vertical" },
+  "details": { "placeholder": "Comentarios" },
+  "fields": [
+    { "kind": "select-enum", "key": "layout", "label": "layout", "attrType": "str", "enumValue": { "Vertical": "vertical", "Horizontal": "horizontal" } }
+  ],
+  "code": { "strategy": "form-entry", "tagOpts": { "multiline": true } }
+}

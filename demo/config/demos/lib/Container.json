@@ -1,0 +1,15 @@
+{
+   "id": "Container",
+   "category": "Layouts",
+   "label": "Container",
+   "titleIcon": "mdi:arrow-collapse-horizontal",
+   "status": "approved",
+   "intro": "Centra el contenido con <code>maxWidth</code> fluido (MUI Container).",
+   "component": { "name": "Container", "path": "src/layout/Container.jsx" },
+   "preview": { "template": "layout-block", "options": { "wrapperStyle": "width: 100%;" } },
+   "state": { "maxWidth": "md" },
+   "fields": [
+      { "kind": "select-enum", "key": "maxWidth", "label": "maxWidth", "enumValue": { "xs": "xs", "sm": "sm", "md": "md", "lg": "lg", "xl": "xl" } }
+   ],
+   "code": { "strategy": "default", "tagOpts": { "multiline": true } }
+}

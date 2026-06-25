@@ -1,0 +1,15 @@
+{
+   "id": "Loading",
+   "category": "Overlays",
+   "label": "Loading",
+   "titleIcon": "mdi:loading",
+   "status": "approved",
+   "intro": "Indicador a pantalla completa durante operaciones largas; color coherente con la paleta.",
+   "component": { "name": "Loading", "path": "src/lib/overlays/Loading.svelte" },
+   "preview": { "template": "loading" },
+   "state": { "color": null },
+   "demoConfig": { "autoCloseSec": 3 },
+   "fields": [{ "kind": "color", "key": "color", "label": "Color", "labelIcon": "mdi:palette", "attrType": "color" }],
+   "demoConfigFields": [{ "kind": "number", "key": "autoCloseSec", "label": "Autocierre (s)", "labelIcon": "mdi:timer-outline", "min": 0.5, "max": 60, "step": 0.5 }],
+   "code": { "strategy": "default" }
+}
