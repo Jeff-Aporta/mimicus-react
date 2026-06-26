@@ -4,7 +4,7 @@
  * repo: Jeff-Aporta/mimicus-react · src/devkit/shared/demo-shell/demoShellUi.jsx
  * UI del shell de un demo: DemoController, renderer de campos de config y AccordionDemo.
  */
-import { Button, CodeBlock } from "../../_ui.js";
+import { Button, CodeBlock, Switch, Input, Select, InputNumber } from "../../_ui.js";
 import { useMemo, useState } from "react";
 import { buildTag, colorOptions, columnsConfig, iconEnum, mergeStyleString, optionsToItems, parseStyleString, stepCssLength } from "../playgroundKit.js";
 import { Icon } from "../../../components/Icon.jsx";
@@ -158,12 +158,7 @@ function withNoneOption(options) {
 }
 
 function SwitchRow({ checked, label, onChange }) {
-  return (
-    <label className="pg-switch-row" style={{ display: "inline-flex", alignItems: "center", gap: "0.45rem", cursor: "pointer" }}>
-      <input type="checkbox" checked={!!checked} onChange={(e) => onChange?.(e.target.checked)} />
-      <span>{label}</span>
-    </label>
-  );
+  return <Switch className="pg-switch-row" size="small" checked={!!checked} onChange={(v) => onChange?.(v)}>{label}</Switch>;
 }
 
 function ConfigRangeField({ value, min = 0, max = 100, step = 1, onChange }) {
@@ -184,17 +179,18 @@ function IconTextField({ field, state, patchState }) {
   const textVal = state[field.textKey] ?? "";
   return (
     <InputDecorated label={field.label} icon={field.labelIcon}>
-      <div style={{ display: "grid", gap: "0.5rem" }}>
-        <label style={{ display: "grid", gap: "0.25rem" }}>
+      <div style={{ display: "grid", gap: "0.6rem" }}>
+        <label style={{ display: "grid", gap: "0.3rem" }}>
           <span style={{ fontSize: "0.8rem", opacity: 0.85 }}>Ícono</span>
-          <select value={String(iconVal)} onChange={(e) => patchState(String(field.iconKey), e.target.value)} style={{ width: "100%" }}>
-            {Object.entries(iconEnum).map(([k, lbl]) => <option key={k || "none"} value={k}>{lbl}</option>)}
-          </select>
-          {iconVal && <Icon icon={String(iconVal)} />}
+          <Select
+            value={String(iconVal)}
+            onChange={(v) => patchState(String(field.iconKey), v)}
+            options={Object.entries(iconEnum).map(([k, lbl]) => ({ value: k, label: lbl }))}
+          />
         </label>
-        <label style={{ display: "grid", gap: "0.25rem" }}>
+        <label style={{ display: "grid", gap: "0.3rem" }}>
           <span style={{ fontSize: "0.8rem", opacity: 0.85 }}>Texto</span>
-          <input type="text" value={String(textVal)} onChange={(e) => patchState(String(field.textKey), e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
+          <Input value={String(textVal)} onChange={(v) => patchState(String(field.textKey), v)} prefix={iconVal ? <Icon icon={String(iconVal)} /> : undefined} />
         </label>
       </div>
     </InputDecorated>
@@ -262,27 +258,25 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
         const normalize = field.normalize;
         return wrap(
           <InputDecorated label={field.label} icon={field.labelIcon}>
-            <input
-              type="text"
+            <Input
               className="input-decorated-number"
               placeholder={field.placeholder}
-              defaultValue={String(state[fkey] ?? "")}
-              onBlur={(e) => { const next = normalize(e.target.value); e.target.value = next; patchState(fkey, next === "" ? undefined : next); }}
+              value={String(state[fkey] ?? "")}
+              onChange={(v) => patchState(fkey, v === "" ? undefined : v)}
+              onBlur={(e) => { const next = normalize(e.target.value); patchState(fkey, next === "" ? undefined : next); }}
               onKeyDown={(e) => {
                 if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
                 e.preventDefault();
                 const next = stepCssLength(e.currentTarget.value, e.key === "ArrowUp" ? 0.5 : -0.5);
-                e.currentTarget.value = next;
                 patchState(fkey, next === "" ? undefined : next);
               }}
-              style={{ width: "100%", boxSizing: "border-box" }}
             />
           </InputDecorated>,
         );
       }
       return wrap(
         <InputDecorated label={field.label} icon={field.labelIcon}>
-          <input type="text" placeholder={field.placeholder} value={String(state[field.key] ?? "")} onChange={(e) => patchState(String(field.key), e.target.value)} style={{ width: "100%", boxSizing: "border-box" }} />
+          <Input placeholder={field.placeholder} value={String(state[field.key] ?? "")} onChange={(v) => patchState(String(field.key), v)} />
         </InputDecorated>,
       );
     }
@@ -298,7 +292,7 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
     if (field.kind === "number") {
       return wrap(
         <InputDecorated label={field.label} icon={field.labelIcon}>
-          <input type="number" min={field.min} max={field.max} step={field.step} value={Number(state[field.key] ?? 0)} onChange={(e) => patchState(String(field.key), e.target.value)} style={{ width: "100%" }} />
+          <InputNumber min={field.min} max={field.max} step={field.step} value={Number(state[field.key] ?? 0)} onChange={(v) => patchState(String(field.key), v)} />
         </InputDecorated>,
       );
     }
@@ -307,9 +301,8 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
       const entries = Object.entries(field.enumValue ?? {});
       return wrap(
         <InputDecorated label={field.label} icon={field.labelIcon}>
-          <select value={String(state[field.key] ?? "")} onChange={(e) => patchState(String(field.key), e.target.value)} style={{ width: "100%" }}>
-            {entries.map(([k, v]) => <option key={k} value={String(v)}>{k}</option>)}
-          </select>
+          <Select value={String(state[field.key] ?? "")} onChange={(v) => patchState(String(field.key), v)}
+            options={entries.map(([k, v]) => ({ value: String(v), label: k }))} />
         </InputDecorated>,
       );
     }

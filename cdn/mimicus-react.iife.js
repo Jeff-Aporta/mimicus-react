@@ -1440,7 +1440,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function bindSegmented(root) {
     const btns = qsa("[data-mimicus-segmented]", root);
-    const set2 = (v) => {
+    const set = (v) => {
       root.dataset.value = v;
       btns.forEach((b) => {
         const on2 = b.dataset.mimicusSegmented === v;
@@ -1449,8 +1449,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       });
       emit(root, "mimicus-segmented-change", { value: v });
     };
-    set2(root.dataset.value ?? btns.find((b) => b.classList.contains("is-active"))?.dataset.mimicusSegmented ?? btns[0]?.dataset.mimicusSegmented ?? "");
-    return btns.map((b) => on(b, "click", () => set2(b.dataset.mimicusSegmented)));
+    set(root.dataset.value ?? btns.find((b) => b.classList.contains("is-active"))?.dataset.mimicusSegmented ?? btns[0]?.dataset.mimicusSegmented ?? "");
+    return btns.map((b) => on(b, "click", () => set(b.dataset.mimicusSegmented)));
   }
   function bindTree(root) {
     const checkable = parseBool(root.dataset.checkable);
@@ -4100,15 +4100,15 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const min = () => parseNum(root.dataset.min, -Infinity);
     const max = () => parseNum(root.dataset.max, Infinity);
     const clamp = (v) => Math.min(max(), Math.max(min(), v));
-    const set2 = (v) => {
+    const set = (v) => {
       input.value = String(clamp(v));
       root.dataset.value = input.value;
       emit(root, "mimicus-input-number-change", { value: parseNum(input.value) });
     };
     const cleanups = [
-      on(input, "change", () => set2(parseNum(input.value, 0))),
-      dec && on(dec, "click", () => set2(parseNum(input.value, 0) - step())),
-      inc && on(inc, "click", () => set2(parseNum(input.value, 0) + step()))
+      on(input, "change", () => set(parseNum(input.value, 0))),
+      dec && on(dec, "click", () => set(parseNum(input.value, 0) - step())),
+      inc && on(inc, "click", () => set(parseNum(input.value, 0) + step()))
     ].filter(Boolean);
     return () => cleanups.forEach((fn) => fn());
   }
@@ -4199,11 +4199,11 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   function useCtrl(value, defaultValue, onChange) {
     const [inner, setInner] = (0, import_react20.useState)(defaultValue);
     const v = value ?? inner;
-    const set2 = (next) => {
+    const set = (next) => {
       if (value === void 0) setInner(next);
       onChange?.(next);
     };
-    return [v, set2];
+    return [v, set];
   }
   function FormItem({ label, required, help, error, children, className, layout = "vertical", ...rest }) {
     return /* @__PURE__ */ React.createElement("label", { ...rest, className: cx4("mimicus-form-item", `mimicus-form-item--${layout}`, error && "has-error", className) }, label && /* @__PURE__ */ React.createElement("span", { className: "mimicus-form-item__label" }, label, required && /* @__PURE__ */ React.createElement("span", { className: "mimicus-form-item__req" }, "*")), /* @__PURE__ */ React.createElement("span", { className: "mimicus-form-item__control" }, children), (help || error) && /* @__PURE__ */ React.createElement("span", { className: "mimicus-form-item__extra" }, error ?? help));
@@ -4229,7 +4229,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     style,
     ...rest
   }) {
-    const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     return /* @__PURE__ */ React.createElement("span", { className: cx4("mimicus-input", `mimicus-input--${size}`, status && `is-${status}`, disabled && "is-disabled", className), style }, prefix && /* @__PURE__ */ React.createElement("span", { className: "mimicus-input__affix mimicus-input__prefix" }, prefix), /* @__PURE__ */ React.createElement(
       "input",
       {
@@ -4246,7 +4246,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   var TextField = Input;
   function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, className, style, ...rest }) {
-    const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     return /* @__PURE__ */ React.createElement(
       "textarea",
       {
@@ -4261,7 +4261,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, size = "medium", disabled, className, style, ...rest }) {
     const ref = (0, import_react20.useRef)(null);
-    const [val, setVal] = useCtrl(value, defaultValue, onChange);
+    const [val, set] = useCtrl(value, defaultValue, onChange);
     useFormBinding(ref, "input-number", [min, max, step, val]);
     return /* @__PURE__ */ React.createElement(
       "span",
@@ -4304,7 +4304,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     style,
     ...rest
   }) {
-    const [on2, setOn] = useCtrl(checked, defaultChecked, onChange);
+    const [on2, set] = useCtrl(checked, defaultChecked, onChange);
     const id = (0, import_react20.useId)();
     return /* @__PURE__ */ React.createElement("label", { className: cx4("mimicus-checkbox", `mimicus-checkbox--${size}`, on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style }, /* @__PURE__ */ React.createElement(
       "input",
@@ -4341,7 +4341,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     return /* @__PURE__ */ React.createElement(ToggleButtonGroup, { exclusive: true, value, onChange, className: cx4("mimicus-checkbox-chip", className), style }, options?.map((opt) => /* @__PURE__ */ React.createElement(ToggleButton, { key: opt.value, value: opt.value, icon: opt.icon }, opt.label ?? opt.value)));
   }
   function Switch({ checked, defaultChecked = false, onChange, disabled, loading, size = "medium", children, className, style, ...rest }) {
-    const [on2, setOn] = useCtrl(checked, defaultChecked, onChange);
+    const [on2, set] = useCtrl(checked, defaultChecked, onChange);
     return /* @__PURE__ */ React.createElement("label", { className: cx4("mimicus-switch", `mimicus-switch--${size}`, on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", className), style }, /* @__PURE__ */ React.createElement(
       "input",
       {
@@ -4376,7 +4376,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function RadioGroup({ value, defaultValue, onChange, name, direction = "horizontal", options, children, className, style, ...rest }) {
     const groupName = (0, import_react20.useId)();
-    const [val, setVal] = useCtrl(value, defaultValue, onChange);
+    const [val, set] = useCtrl(value, defaultValue, onChange);
     const resolvedName = name ?? groupName;
     const body = children ?? options?.map((opt) => /* @__PURE__ */ React.createElement(
       Radio,
@@ -4394,7 +4394,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 1, disabled, vertical, className, style, showValue, ...rest }) {
     const ref = (0, import_react20.useRef)(null);
-    const [val, setVal] = useCtrl(value, defaultValue, onChange);
+    const [val, set] = useCtrl(value, defaultValue, onChange);
     useFormBinding(ref, "slider", [min, max, step]);
     return /* @__PURE__ */ React.createElement(
       "div",
@@ -4427,7 +4427,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "\u2605", size = "medium", className, style, ...rest }) {
     const ref = (0, import_react20.useRef)(null);
-    const [val, setVal] = useCtrl(value, defaultValue, onChange);
+    const [val, set] = useCtrl(value, defaultValue, onChange);
     useFormBinding(ref, "rate", [count, allowHalf, allowClear, val, disabled]);
     return /* @__PURE__ */ React.createElement(
       "div",
@@ -4450,12 +4450,12 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   var Rating = Rate;
   function Select({ value, defaultValue, onChange, options, placeholder, disabled, size = "medium", className, style, children, ...rest }) {
-    const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     return /* @__PURE__ */ React.createElement("span", { className: cx4("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style }, /* @__PURE__ */ React.createElement("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value) }, placeholder && /* @__PURE__ */ React.createElement("option", { value: "" }, placeholder), children ?? options?.map((opt) => /* @__PURE__ */ React.createElement("option", { key: opt.value, value: opt.value, disabled: opt.disabled }, opt.label))), /* @__PURE__ */ React.createElement("span", { className: "mimicus-select__arrow", "aria-hidden": true }, "\u25BE"));
   }
   function AutoComplete({ options = [], value, defaultValue, onChange, onSelect, placeholder, disabled, className, style, ...rest }) {
     const ref = (0, import_react20.useRef)(null);
-    const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     useFormBinding(ref, "autocomplete", [options.length]);
     return /* @__PURE__ */ React.createElement("div", { ref, className: cx4("mimicus-autocomplete", disabled && "is-disabled", className), style, "data-mimicus-form": "autocomplete" }, /* @__PURE__ */ React.createElement(Input, { ...rest, value: val, onChange: set, placeholder, disabled }), /* @__PURE__ */ React.createElement("div", { className: "mimicus-autocomplete__panel", "data-mimicus-autocomplete-panel": true, role: "listbox", hidden: true }, options.map((opt) => /* @__PURE__ */ React.createElement(
       "button",
@@ -4493,7 +4493,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", size, children, className, style, ...rest }) {
     const ref = (0, import_react20.useRef)(null);
-    const [val, setVal] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
     useFormBinding(ref, "toggle-group", [exclusive, val, orientation]);
     const normalized = exclusive ? val : Array.isArray(val) ? val.join(",") : val;
     return /* @__PURE__ */ React.createElement(
@@ -4566,7 +4566,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function ColorPicker({ value = "#1677ff", defaultValue, onChange, disabled, className, style, ...rest }) {
     const ref = (0, import_react20.useRef)(null);
-    const [val, setVal] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
     useFormBinding(ref, "color-picker", [val]);
     return /* @__PURE__ */ React.createElement(
       "div",
@@ -4583,11 +4583,11 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     );
   }
   function DatePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
-    const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     return /* @__PURE__ */ React.createElement(Input, { ...rest, type: "date", className: cx4("mimicus-date-picker", className), style, value: val, disabled, onChange: set });
   }
   function TimePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
-    const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     return /* @__PURE__ */ React.createElement(Input, { ...rest, type: "time", className: cx4("mimicus-time-picker", className), style, value: val, disabled, onChange: set });
   }
   function Cascader({ options = [], value, onChange, placeholder = "Seleccionar", disabled, className, style }) {
@@ -4616,7 +4616,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function Mentions({ options = [], value, defaultValue, onChange, rows = 3, placeholder, disabled, className, style, ...rest }) {
     const ref = (0, import_react20.useRef)(null);
-    const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+    const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     useFormBinding(ref, "mentions", [options.length]);
     return /* @__PURE__ */ React.createElement("div", { ref, className: cx4("mimicus-mentions", disabled && "is-disabled", className), style, "data-mimicus-form": "mentions" }, /* @__PURE__ */ React.createElement(TextArea, { ...rest, rows, value: val, onChange: set, placeholder: placeholder ?? "Escribe @ para mencionar", disabled }), /* @__PURE__ */ React.createElement("div", { className: "mimicus-mentions__panel", "data-mimicus-mentions-panel": true, hidden: true }, options.map((opt) => /* @__PURE__ */ React.createElement("button", { key: opt.value ?? opt, type: "button", className: "mimicus-mentions__option", "data-mimicus-mentions-option": true, "data-value": opt.value ?? opt }, "@", opt.label ?? opt))));
   }
@@ -7189,7 +7189,7 @@ ${indent}<\/script>`;
     return hasNone ? mapped : [{ label: "", value: "" }, ...mapped];
   }
   function SwitchRow({ checked, label, onChange }) {
-    return /* @__PURE__ */ React.createElement("label", { className: "pg-switch-row", style: { display: "inline-flex", alignItems: "center", gap: "0.45rem", cursor: "pointer" } }, /* @__PURE__ */ React.createElement("input", { type: "checkbox", checked: !!checked, onChange: (e) => onChange?.(e.target.checked) }), /* @__PURE__ */ React.createElement("span", null, label));
+    return /* @__PURE__ */ React.createElement(Switch, { className: "pg-switch-row", size: "small", checked: !!checked, onChange: (v) => onChange?.(v) }, label);
   }
   function ConfigRangeField({ value, min = 0, max = 100, step = 1, onChange }) {
     const num = Number(value ?? min);
@@ -7200,7 +7200,14 @@ ${indent}<\/script>`;
   function IconTextField({ field, state: state2, patchState }) {
     const iconVal = state2[field.iconKey] ?? "";
     const textVal = state2[field.textKey] ?? "";
-    return /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: "0.5rem" } }, /* @__PURE__ */ React.createElement("label", { style: { display: "grid", gap: "0.25rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.8rem", opacity: 0.85 } }, "\xCDcono"), /* @__PURE__ */ React.createElement("select", { value: String(iconVal), onChange: (e) => patchState(String(field.iconKey), e.target.value), style: { width: "100%" } }, Object.entries(iconEnum).map(([k, lbl]) => /* @__PURE__ */ React.createElement("option", { key: k || "none", value: k }, lbl))), iconVal && /* @__PURE__ */ React.createElement(Icon, { icon: String(iconVal) })), /* @__PURE__ */ React.createElement("label", { style: { display: "grid", gap: "0.25rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.8rem", opacity: 0.85 } }, "Texto"), /* @__PURE__ */ React.createElement("input", { type: "text", value: String(textVal), onChange: (e) => patchState(String(field.textKey), e.target.value), style: { width: "100%", boxSizing: "border-box" } }))));
+    return /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: "0.6rem" } }, /* @__PURE__ */ React.createElement("label", { style: { display: "grid", gap: "0.3rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.8rem", opacity: 0.85 } }, "\xCDcono"), /* @__PURE__ */ React.createElement(
+      Select,
+      {
+        value: String(iconVal),
+        onChange: (v) => patchState(String(field.iconKey), v),
+        options: Object.entries(iconEnum).map(([k, lbl]) => ({ value: k, label: lbl }))
+      }
+    )), /* @__PURE__ */ React.createElement("label", { style: { display: "grid", gap: "0.3rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.8rem", opacity: 0.85 } }, "Texto"), /* @__PURE__ */ React.createElement(Input, { value: String(textVal), onChange: (v) => patchState(String(field.textKey), v), prefix: iconVal ? /* @__PURE__ */ React.createElement(Icon, { icon: String(iconVal) }) : void 0 }))));
   }
   function ConfigCodeField({ value = "", onChange, placeholder, mode, lang, minHeight = "4.5rem", maxHeight = "8.5rem" }) {
     return /* @__PURE__ */ React.createElement("div", { className: "code-edit-field" }, /* @__PURE__ */ React.createElement(
@@ -7250,31 +7257,28 @@ ${indent}<\/script>`;
           const normalize3 = field.normalize;
           return wrap(
             /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement(
-              "input",
+              Input,
               {
-                type: "text",
                 className: "input-decorated-number",
                 placeholder: field.placeholder,
-                defaultValue: String(state2[fkey] ?? ""),
+                value: String(state2[fkey] ?? ""),
+                onChange: (v) => patchState(fkey, v === "" ? void 0 : v),
                 onBlur: (e) => {
                   const next = normalize3(e.target.value);
-                  e.target.value = next;
                   patchState(fkey, next === "" ? void 0 : next);
                 },
                 onKeyDown: (e) => {
                   if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
                   e.preventDefault();
                   const next = stepCssLength(e.currentTarget.value, e.key === "ArrowUp" ? 0.5 : -0.5);
-                  e.currentTarget.value = next;
                   patchState(fkey, next === "" ? void 0 : next);
-                },
-                style: { width: "100%", boxSizing: "border-box" }
+                }
               }
             ))
           );
         }
         return wrap(
-          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("input", { type: "text", placeholder: field.placeholder, value: String(state2[field.key] ?? ""), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%", boxSizing: "border-box" } }))
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement(Input, { placeholder: field.placeholder, value: String(state2[field.key] ?? ""), onChange: (v) => patchState(String(field.key), v) }))
         );
       }
       if (field.kind === "range") {
@@ -7284,13 +7288,20 @@ ${indent}<\/script>`;
       }
       if (field.kind === "number") {
         return wrap(
-          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("input", { type: "number", min: field.min, max: field.max, step: field.step, value: Number(state2[field.key] ?? 0), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%" } }))
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement(InputNumber, { min: field.min, max: field.max, step: field.step, value: Number(state2[field.key] ?? 0), onChange: (v) => patchState(String(field.key), v) }))
         );
       }
       if (field.kind === "select-enum") {
         const entries = Object.entries(field.enumValue ?? {});
         return wrap(
-          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("select", { value: String(state2[field.key] ?? ""), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%" } }, entries.map(([k, v]) => /* @__PURE__ */ React.createElement("option", { key: k, value: String(v) }, k))))
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement(
+            Select,
+            {
+              value: String(state2[field.key] ?? ""),
+              onChange: (v) => patchState(String(field.key), v),
+              options: entries.map(([k, v]) => ({ value: String(v), label: k }))
+            }
+          ))
         );
       }
       if (field.kind === "code") {

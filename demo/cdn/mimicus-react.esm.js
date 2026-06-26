@@ -1477,7 +1477,7 @@ function bindTooltip(root) {
 }
 function bindSegmented(root) {
   const btns = qsa("[data-mimicus-segmented]", root);
-  const set2 = (v) => {
+  const set = (v) => {
     root.dataset.value = v;
     btns.forEach((b) => {
       const on2 = b.dataset.mimicusSegmented === v;
@@ -1486,8 +1486,8 @@ function bindSegmented(root) {
     });
     emit(root, "mimicus-segmented-change", { value: v });
   };
-  set2(root.dataset.value ?? btns.find((b) => b.classList.contains("is-active"))?.dataset.mimicusSegmented ?? btns[0]?.dataset.mimicusSegmented ?? "");
-  return btns.map((b) => on(b, "click", () => set2(b.dataset.mimicusSegmented)));
+  set(root.dataset.value ?? btns.find((b) => b.classList.contains("is-active"))?.dataset.mimicusSegmented ?? btns[0]?.dataset.mimicusSegmented ?? "");
+  return btns.map((b) => on(b, "click", () => set(b.dataset.mimicusSegmented)));
 }
 function bindTree(root) {
   const checkable = parseBool(root.dataset.checkable);
@@ -4303,15 +4303,15 @@ function bindInputNumber(root) {
   const min = () => parseNum(root.dataset.min, -Infinity);
   const max = () => parseNum(root.dataset.max, Infinity);
   const clamp = (v) => Math.min(max(), Math.max(min(), v));
-  const set2 = (v) => {
+  const set = (v) => {
     input.value = String(clamp(v));
     root.dataset.value = input.value;
     emit(root, "mimicus-input-number-change", { value: parseNum(input.value) });
   };
   const cleanups = [
-    on(input, "change", () => set2(parseNum(input.value, 0))),
-    dec && on(dec, "click", () => set2(parseNum(input.value, 0) - step())),
-    inc && on(inc, "click", () => set2(parseNum(input.value, 0) + step()))
+    on(input, "change", () => set(parseNum(input.value, 0))),
+    dec && on(dec, "click", () => set(parseNum(input.value, 0) - step())),
+    inc && on(inc, "click", () => set(parseNum(input.value, 0) + step()))
   ].filter(Boolean);
   return () => cleanups.forEach((fn) => fn());
 }
@@ -4403,11 +4403,11 @@ function cx4(...p) {
 function useCtrl(value, defaultValue, onChange) {
   const [inner, setInner] = useState7(defaultValue);
   const v = value ?? inner;
-  const set2 = (next) => {
+  const set = (next) => {
     if (value === void 0) setInner(next);
     onChange?.(next);
   };
-  return [v, set2];
+  return [v, set];
 }
 function FormItem({ label, required, help, error, children, className, layout = "vertical", ...rest }) {
   return /* @__PURE__ */ jsxs15("label", { ...rest, className: cx4("mimicus-form-item", `mimicus-form-item--${layout}`, error && "has-error", className), children: [
@@ -4440,7 +4440,7 @@ function Input({
   style,
   ...rest
 }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return /* @__PURE__ */ jsxs15("span", { className: cx4("mimicus-input", `mimicus-input--${size}`, status && `is-${status}`, disabled && "is-disabled", className), style, children: [
     prefix && /* @__PURE__ */ jsx27("span", { className: "mimicus-input__affix mimicus-input__prefix", children: prefix }),
     /* @__PURE__ */ jsx27(
@@ -4462,7 +4462,7 @@ function Input({
 }
 var TextField = Input;
 function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, className, style, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return /* @__PURE__ */ jsx27(
     "textarea",
     {
@@ -4477,7 +4477,7 @@ function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, className
 }
 function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, size = "medium", disabled, className, style, ...rest }) {
   const ref = useRef6(null);
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "input-number", [min, max, step, val]);
   return /* @__PURE__ */ jsxs15(
     "span",
@@ -4522,7 +4522,7 @@ function Checkbox({
   style,
   ...rest
 }) {
-  const [on2, setOn] = useCtrl(checked, defaultChecked, onChange);
+  const [on2, set] = useCtrl(checked, defaultChecked, onChange);
   const id = useId2();
   return /* @__PURE__ */ jsxs15("label", { className: cx4("mimicus-checkbox", `mimicus-checkbox--${size}`, on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style, children: [
     /* @__PURE__ */ jsx27(
@@ -4568,7 +4568,7 @@ function CheckboxChip({ value, options, onChange, className, style }) {
   return /* @__PURE__ */ jsx27(ToggleButtonGroup, { exclusive: true, value, onChange, className: cx4("mimicus-checkbox-chip", className), style, children: options?.map((opt) => /* @__PURE__ */ jsx27(ToggleButton, { value: opt.value, icon: opt.icon, children: opt.label ?? opt.value }, opt.value)) });
 }
 function Switch({ checked, defaultChecked = false, onChange, disabled, loading, size = "medium", children, className, style, ...rest }) {
-  const [on2, setOn] = useCtrl(checked, defaultChecked, onChange);
+  const [on2, set] = useCtrl(checked, defaultChecked, onChange);
   return /* @__PURE__ */ jsxs15("label", { className: cx4("mimicus-switch", `mimicus-switch--${size}`, on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", className), style, children: [
     /* @__PURE__ */ jsx27(
       "input",
@@ -4611,7 +4611,7 @@ function Radio({ value, checked, defaultChecked, onChange, disabled, children, c
 }
 function RadioGroup({ value, defaultValue, onChange, name, direction = "horizontal", options, children, className, style, ...rest }) {
   const groupName = useId2();
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   const resolvedName = name ?? groupName;
   const body = children ?? options?.map((opt) => /* @__PURE__ */ jsx27(
     Radio,
@@ -4629,7 +4629,7 @@ function RadioGroup({ value, defaultValue, onChange, name, direction = "horizont
 }
 function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 1, disabled, vertical, className, style, showValue, ...rest }) {
   const ref = useRef6(null);
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "slider", [min, max, step]);
   return /* @__PURE__ */ jsxs15(
     "div",
@@ -4664,7 +4664,7 @@ function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 
 }
 function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "\u2605", size = "medium", className, style, ...rest }) {
   const ref = useRef6(null);
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "rate", [count, allowHalf, allowClear, val, disabled]);
   return /* @__PURE__ */ jsx27(
     "div",
@@ -4687,7 +4687,7 @@ function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowCl
 }
 var Rating = Rate;
 function Select({ value, defaultValue, onChange, options, placeholder, disabled, size = "medium", className, style, children, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return /* @__PURE__ */ jsxs15("span", { className: cx4("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style, children: [
     /* @__PURE__ */ jsxs15("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: [
       placeholder && /* @__PURE__ */ jsx27("option", { value: "", children: placeholder }),
@@ -4698,7 +4698,7 @@ function Select({ value, defaultValue, onChange, options, placeholder, disabled,
 }
 function AutoComplete({ options = [], value, defaultValue, onChange, onSelect, placeholder, disabled, className, style, ...rest }) {
   const ref = useRef6(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   useFormBinding(ref, "autocomplete", [options.length]);
   return /* @__PURE__ */ jsxs15("div", { ref, className: cx4("mimicus-autocomplete", disabled && "is-disabled", className), style, "data-mimicus-form": "autocomplete", children: [
     /* @__PURE__ */ jsx27(Input, { ...rest, value: val, onChange: set, placeholder, disabled }),
@@ -4741,7 +4741,7 @@ function ToggleButton({ value, selected, onChange, disabled, children, icon, cla
 }
 function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", size, children, className, style, ...rest }) {
   const ref = useRef6(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
   useFormBinding(ref, "toggle-group", [exclusive, val, orientation]);
   const normalized = exclusive ? val : Array.isArray(val) ? val.join(",") : val;
   return /* @__PURE__ */ jsx27(
@@ -4840,7 +4840,7 @@ function Upload({ accept, multiple, disabled, children, className, style, ...res
 }
 function ColorPicker({ value = "#1677ff", defaultValue, onChange, disabled, className, style, ...rest }) {
   const ref = useRef6(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
   useFormBinding(ref, "color-picker", [val]);
   return /* @__PURE__ */ jsxs15(
     "div",
@@ -4859,11 +4859,11 @@ function ColorPicker({ value = "#1677ff", defaultValue, onChange, disabled, clas
   );
 }
 function DatePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return /* @__PURE__ */ jsx27(Input, { ...rest, type: "date", className: cx4("mimicus-date-picker", className), style, value: val, disabled, onChange: set });
 }
 function TimePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return /* @__PURE__ */ jsx27(Input, { ...rest, type: "time", className: cx4("mimicus-time-picker", className), style, value: val, disabled, onChange: set });
 }
 function Cascader({ options = [], value, onChange, placeholder = "Seleccionar", disabled, className, style }) {
@@ -4902,7 +4902,7 @@ function TreeSelect({ treeData = [], value, onChange, placeholder = "Seleccionar
 }
 function Mentions({ options = [], value, defaultValue, onChange, rows = 3, placeholder, disabled, className, style, ...rest }) {
   const ref = useRef6(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   useFormBinding(ref, "mentions", [options.length]);
   return /* @__PURE__ */ jsxs15("div", { ref, className: cx4("mimicus-mentions", disabled && "is-disabled", className), style, "data-mimicus-form": "mentions", children: [
     /* @__PURE__ */ jsx27(TextArea, { ...rest, rows, value: val, onChange: set, placeholder: placeholder ?? "Escribe @ para mencionar", disabled }),
@@ -7623,10 +7623,7 @@ function withNoneOption(options) {
   return hasNone ? mapped : [{ label: "", value: "" }, ...mapped];
 }
 function SwitchRow({ checked, label, onChange }) {
-  return /* @__PURE__ */ jsxs21("label", { className: "pg-switch-row", style: { display: "inline-flex", alignItems: "center", gap: "0.45rem", cursor: "pointer" }, children: [
-    /* @__PURE__ */ jsx37("input", { type: "checkbox", checked: !!checked, onChange: (e) => onChange?.(e.target.checked) }),
-    /* @__PURE__ */ jsx37("span", { children: label })
-  ] });
+  return /* @__PURE__ */ jsx37(Switch, { className: "pg-switch-row", size: "small", checked: !!checked, onChange: (v) => onChange?.(v), children: label });
 }
 function ConfigRangeField({ value, min = 0, max = 100, step = 1, onChange }) {
   const num = Number(value ?? min);
@@ -7641,15 +7638,21 @@ function ConfigRangeField({ value, min = 0, max = 100, step = 1, onChange }) {
 function IconTextField({ field, state: state2, patchState }) {
   const iconVal = state2[field.iconKey] ?? "";
   const textVal = state2[field.textKey] ?? "";
-  return /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsxs21("div", { style: { display: "grid", gap: "0.5rem" }, children: [
-    /* @__PURE__ */ jsxs21("label", { style: { display: "grid", gap: "0.25rem" }, children: [
+  return /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsxs21("div", { style: { display: "grid", gap: "0.6rem" }, children: [
+    /* @__PURE__ */ jsxs21("label", { style: { display: "grid", gap: "0.3rem" }, children: [
       /* @__PURE__ */ jsx37("span", { style: { fontSize: "0.8rem", opacity: 0.85 }, children: "\xCDcono" }),
-      /* @__PURE__ */ jsx37("select", { value: String(iconVal), onChange: (e) => patchState(String(field.iconKey), e.target.value), style: { width: "100%" }, children: Object.entries(iconEnum).map(([k, lbl]) => /* @__PURE__ */ jsx37("option", { value: k, children: lbl }, k || "none")) }),
-      iconVal && /* @__PURE__ */ jsx37(Icon, { icon: String(iconVal) })
+      /* @__PURE__ */ jsx37(
+        Select,
+        {
+          value: String(iconVal),
+          onChange: (v) => patchState(String(field.iconKey), v),
+          options: Object.entries(iconEnum).map(([k, lbl]) => ({ value: k, label: lbl }))
+        }
+      )
     ] }),
-    /* @__PURE__ */ jsxs21("label", { style: { display: "grid", gap: "0.25rem" }, children: [
+    /* @__PURE__ */ jsxs21("label", { style: { display: "grid", gap: "0.3rem" }, children: [
       /* @__PURE__ */ jsx37("span", { style: { fontSize: "0.8rem", opacity: 0.85 }, children: "Texto" }),
-      /* @__PURE__ */ jsx37("input", { type: "text", value: String(textVal), onChange: (e) => patchState(String(field.textKey), e.target.value), style: { width: "100%", boxSizing: "border-box" } })
+      /* @__PURE__ */ jsx37(Input, { value: String(textVal), onChange: (v) => patchState(String(field.textKey), v), prefix: iconVal ? /* @__PURE__ */ jsx37(Icon, { icon: String(iconVal) }) : void 0 })
     ] })
   ] }) });
 }
@@ -7701,31 +7704,28 @@ function DemoConfigRenderer({ fields, state: state2, onStateChange }) {
         const normalize3 = field.normalize;
         return wrap(
           /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsx37(
-            "input",
+            Input,
             {
-              type: "text",
               className: "input-decorated-number",
               placeholder: field.placeholder,
-              defaultValue: String(state2[fkey] ?? ""),
+              value: String(state2[fkey] ?? ""),
+              onChange: (v) => patchState(fkey, v === "" ? void 0 : v),
               onBlur: (e) => {
                 const next = normalize3(e.target.value);
-                e.target.value = next;
                 patchState(fkey, next === "" ? void 0 : next);
               },
               onKeyDown: (e) => {
                 if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
                 e.preventDefault();
                 const next = stepCssLength(e.currentTarget.value, e.key === "ArrowUp" ? 0.5 : -0.5);
-                e.currentTarget.value = next;
                 patchState(fkey, next === "" ? void 0 : next);
-              },
-              style: { width: "100%", boxSizing: "border-box" }
+              }
             }
           ) })
         );
       }
       return wrap(
-        /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsx37("input", { type: "text", placeholder: field.placeholder, value: String(state2[field.key] ?? ""), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%", boxSizing: "border-box" } }) })
+        /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsx37(Input, { placeholder: field.placeholder, value: String(state2[field.key] ?? ""), onChange: (v) => patchState(String(field.key), v) }) })
       );
     }
     if (field.kind === "range") {
@@ -7735,13 +7735,20 @@ function DemoConfigRenderer({ fields, state: state2, onStateChange }) {
     }
     if (field.kind === "number") {
       return wrap(
-        /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsx37("input", { type: "number", min: field.min, max: field.max, step: field.step, value: Number(state2[field.key] ?? 0), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%" } }) })
+        /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsx37(InputNumber, { min: field.min, max: field.max, step: field.step, value: Number(state2[field.key] ?? 0), onChange: (v) => patchState(String(field.key), v) }) })
       );
     }
     if (field.kind === "select-enum") {
       const entries = Object.entries(field.enumValue ?? {});
       return wrap(
-        /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsx37("select", { value: String(state2[field.key] ?? ""), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%" }, children: entries.map(([k, v]) => /* @__PURE__ */ jsx37("option", { value: String(v), children: k }, k)) }) })
+        /* @__PURE__ */ jsx37(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ jsx37(
+          Select,
+          {
+            value: String(state2[field.key] ?? ""),
+            onChange: (v) => patchState(String(field.key), v),
+            options: entries.map(([k, v]) => ({ value: String(v), label: k }))
+          }
+        ) })
       );
     }
     if (field.kind === "code") {
