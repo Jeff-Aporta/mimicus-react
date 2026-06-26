@@ -1,3 +1,4 @@
+// NOTE: se mantiene .js — lo importan scripts Node (scripts/build.mjs, scripts/patch-demo-index.mjs) que no ejecutan TypeScript. No convertir a .ts.
 /**
  * Pantalla de arranque canónica Mimicus React — mesh + tarjeta glass + barra animada.
  * Consumible vía document.write, patch de index.html o MimicusUI.snippets / MimicusSnippets.

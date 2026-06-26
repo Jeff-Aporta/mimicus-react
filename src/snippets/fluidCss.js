@@ -1,3 +1,4 @@
+// NOTE: se mantiene .js — lo importa bootScreen.js (cargado por scripts Node build.mjs/patch-demo-index.mjs). No convertir a .ts.
 /**
  * fluidCss — convierte un árbol JSON de reglas CSS en texto CSS moderno.
  * Soporta selectores planos, @media, @keyframes y propiedades camelCase → kebab-case.

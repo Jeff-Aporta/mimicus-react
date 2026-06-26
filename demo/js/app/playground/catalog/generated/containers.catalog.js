@@ -401,6 +401,108 @@ export const items = [
   {
     "section": "data-display",
     "category": "Containers",
+    "slug": "data-grid",
+    "id": "DataGrid",
+    "label": "DataGrid",
+    "displayLabel": "DataGrid",
+    "path": "demos/lib/DataGrid.json",
+    "definition": {
+      "id": "DataGrid",
+      "category": "Containers",
+      "label": "DataGrid",
+      "titleIcon": "mdi:table-large",
+      "status": "approved",
+      "intro": "Grilla de datos de alto rendimiento con virtualización de filas, orden multi-columna, filtros por columna (texto/número/fecha/conjunto), filtro rápido, selección, fijado/reordenamiento/redimensionado de columnas, paginación, densidad y exportación CSV. Motor agnóstico (TS puro) con capa React delgada — vive en la isla <code>./datagrid</code>.",
+      "component": {
+        "name": "DataGrid",
+        "path": "src/datagrid/react/DataGrid.tsx"
+      },
+      "preview": {
+        "template": "datagrid"
+      },
+      "state": {
+        "selectionMode": "multiple",
+        "density": "normal",
+        "pagination": false,
+        "pageSize": 50,
+        "toolbar": true,
+        "rowCount": 1000
+      },
+      "fields": [
+        {
+          "kind": "select-enum",
+          "key": "selectionMode",
+          "label": "selectionMode",
+          "labelIcon": "mdi:checkbox-multiple-marked-outline",
+          "attrType": "str",
+          "enumValue": {
+            "Ninguna": "none",
+            "Única": "single",
+            "Múltiple": "multiple"
+          }
+        },
+        {
+          "kind": "select-enum",
+          "key": "density",
+          "label": "density",
+          "labelIcon": "mdi:format-line-spacing",
+          "attrType": "str",
+          "enumValue": {
+            "Compacta": "compact",
+            "Normal": "normal",
+            "Cómoda": "comfortable"
+          }
+        },
+        {
+          "kind": "select-enum",
+          "key": "pageSize",
+          "label": "pageSize",
+          "labelIcon": "mdi:numeric",
+          "attrType": "num",
+          "enumValue": {
+            "25": "25",
+            "50": "50",
+            "100": "100"
+          }
+        },
+        {
+          "kind": "select-enum",
+          "key": "rowCount",
+          "label": "filas",
+          "labelIcon": "mdi:table-row",
+          "attrType": "num",
+          "enumValue": {
+            "100": "100",
+            "1.000": "1000",
+            "10.000": "10000",
+            "50.000": "50000"
+          }
+        },
+        {
+          "kind": "switch-group",
+          "key": "opts",
+          "label": "Opciones",
+          "labelIcon": "mdi:tune",
+          "switches": [
+            {
+              "key": "pagination",
+              "label": "pagination"
+            },
+            {
+              "key": "toolbar",
+              "label": "toolbar"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "strategy": "datagrid"
+      }
+    }
+  },
+  {
+    "section": "data-display",
+    "category": "Containers",
     "slug": "descriptions",
     "id": "Descriptions",
     "label": "Descriptions",

@@ -1,3 +1,4 @@
+// NOTE: script Node (ESM) ejecutado por `node` en los npm scripts (build/build:demo). No se convierte a TypeScript para no requerir un runner TS (tsx/ts-node) ni un paso de compilación adicional.
 /** Genera catálogo por categoría (100–1000 líneas por archivo) + índice liviano. */
 import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync, rmSync } from "node:fs";
 import { join, dirname, relative } from "node:path";

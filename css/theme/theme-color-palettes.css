@@ -586,12 +586,18 @@ html[data-luminance="light"] {
 /* Tokens scrollbar — derivados de la paleta activa (--mimicus-* en html / .mimicus-ui-root). */
 html,
 .mimicus-ui-root {
-	--pg-scrollbar-size: 3px;
+	--pg-scrollbar-size: 6px;
 	--pg-scrollbar-track: color-mix(in srgb, var(--mimicus-primary) 16%, transparent);
 	--pg-scrollbar-thumb: color-mix(in srgb, var(--mimicus-primary) 55%, var(--mimicus-info, var(--mimicus-primary)) 12%);
 	--pg-scrollbar-thumb-hover: color-mix(in srgb, var(--mimicus-primary) 72%, var(--mimicus-info, var(--mimicus-primary)) 18%);
-	scrollbar-width: thin;
+	/* Sin `scrollbar-width: thin`: en Chromium eso ignora el ::-webkit-scrollbar y rinde una barra más gruesa.
+	   Dejamos que aplique el tamaño webkit fino (--pg-scrollbar-size). Firefox usa scrollbar-width:thin abajo. */
 	scrollbar-color: var(--pg-scrollbar-thumb) transparent;
+}
+
+@supports (-moz-appearance: none) {
+	html,
+	.mimicus-ui-root { scrollbar-width: thin; }
 }
 
 html[data-luminance="dark"],
@@ -635,10 +641,13 @@ html[data-luminance="light"] .mimicus-ui-root {
 	background: var(--pg-scrollbar-thumb-hover);
 }
 
-/* Shell playground — mismos scrollbars en sidebar, main y nav superior */
+/* Shell playground — mismos scrollbars en sidebar, main y nav superior (webkit fino vía --pg-scrollbar-size) */
 .pg-playground-shell :is(.pg-shell-main, .pg-sidebar-body, .pg-top-nav) {
-	scrollbar-width: thin;
 	scrollbar-color: var(--pg-scrollbar-thumb) transparent;
+}
+
+@supports (-moz-appearance: none) {
+	.pg-playground-shell :is(.pg-shell-main, .pg-sidebar-body, .pg-top-nav) { scrollbar-width: thin; }
 }
 
 /* Sin scrollbar — rail / panel colapsado / área de interacción mínima */

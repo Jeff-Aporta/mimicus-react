@@ -38,15 +38,15 @@ button[data-variant="text"]:not([data-surface-color]),
 button[data-variant],
 .button-wrap[data-variant] {
 	--bttn-clr: var(--surface-accent, var(--mimicus-primary));
-	--bttn-ccnt-clr: color-mix(in srgb, var(--bttn-clr), white 20%);
+	--bttn-ccnt-clr: color-mix(in srgb, var(--bttn-clr) 85%, var(--mimicus-color));
 	--bttn-bg-bs: color-mix(in srgb, var(--bttn-clr), black 7%);
 	--bttn-bg-hvr: color-mix(in srgb, var(--bttn-clr), white 30%);
 	--bttn-bg-ctv: color-mix(in srgb, var(--bttn-clr), black 10%);
 	--bttn-fnt-sld: oklch(from var(--bttn-bg-bs) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
 	--bttn-l-hvr-bg: color-mix(in srgb, var(--bttn-clr), transparent 15%);
 	--bttn-l-ctv-bg: color-mix(in srgb, var(--bttn-clr), transparent 30%);
-	--bttn-txt-hvr-fg: color-mix(in srgb, var(--bttn-ccnt-clr), white 12%);
-	--bttn-txt-ctv-fg: color-mix(in srgb, var(--bttn-ccnt-clr), white 30%);
+	--bttn-txt-hvr-fg: color-mix(in srgb, var(--bttn-clr) 72%, var(--mimicus-color));
+	--bttn-txt-ctv-fg: color-mix(in srgb, var(--bttn-clr) 58%, var(--mimicus-color));
 	/* Soft = tinte alpha tenue de acento + texto de acento fuerte (legible sobre la superficie). */
 	--bttn-sft-bg: color-mix(in srgb, var(--bttn-clr) 18%, transparent);
 	--bttn-sft-bg-hvr: color-mix(in srgb, var(--bttn-clr) 28%, transparent);

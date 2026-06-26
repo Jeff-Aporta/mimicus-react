@@ -1,3 +1,4 @@
+// NOTE: script Node (ESM) ejecutado por `node` en los npm scripts (build/build:demo). No se convierte a TypeScript para no requerir un runner TS (tsx/ts-node) ni un paso de compilación adicional.
 /**
  * Parchea demo/index.html con el bloque #root canónico (boot Mimicus React).
  */

@@ -24,6 +24,7 @@
 @import "./components/navigation.css";
 @import "./components/forms.css";
 @import "./components/display.css";
+@import "./components/datagrid/datagrid.css";
 @import "./components/codemirror.css";
 @import "./components/contapyme-login.css";
 @import "./components/view-transitions.css";

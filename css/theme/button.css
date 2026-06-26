@@ -9,17 +9,38 @@ button,
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.5rem;
+	gap: 0.4rem;
 	white-space: nowrap;
 	min-width: 16px;
 	width: fit-content;
 	max-width: 100%;
 	height: fit-content;
 	min-height: 2rem;
-	padding: 0.35rem;
+	padding: 0.35rem 0.75rem;
 	box-sizing: border-box;
 	border: none;
+	line-height: 1.2;
 	transition: all 0.25s ease-in-out;
+}
+
+/* Icono dentro del botón: centrado vertical y tamaño/gap coherentes con el label. */
+button > iconify-icon,
+.button-wrap > iconify-icon,
+button > .mimicus-text-icon,
+.button-wrap > .mimicus-text-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	line-height: 0;
+	font-size: 1.15em;
+}
+
+button > .button-content,
+.button-wrap > .button-content {
+	display: inline-flex;
+	align-items: center;
+	line-height: 1.2;
 }
 
 button:focus,

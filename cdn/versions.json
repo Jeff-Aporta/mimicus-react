@@ -1,18 +1,18 @@
 {
   "componentRef": "main",
   "esm": {
-    "main": "mimicus-react.esm.min.js",
-    "bootstrap": "mimicus-react.bootstrap.esm.min.js",
-    "css": "mimicus-ui.min.css",
+    "main": "esm/mimicus-react.esm.min.js",
+    "bootstrap": "esm/mimicus-react.bootstrap.esm.min.js",
+    "css": "css/mimicus-ui.min.css",
     "loadCdns": "stack-esm"
   },
   "global": {
-    "main": "mimicus-react.iife.min.js",
+    "main": "iife/mimicus-react.iife.min.js",
     "globalName": "MimicusUI",
-    "bootstrap": "mimicus-snippets.min.js",
+    "bootstrap": "iife/mimicus-snippets.min.js",
     "bootstrapGlobal": "MimicusBootstrap",
-    "css": "mimicus-ui.min.css",
+    "css": "css/mimicus-ui.min.css",
     "loadCdns": "stack-global",
-    "alias": "mimicus-ui.min.js"
+    "alias": "iife/mimicus-ui.min.js"
   }
 }

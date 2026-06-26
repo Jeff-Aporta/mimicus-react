@@ -8,16 +8,57 @@
 	--sm-chrome: var(--pg-sidebar-chrome, var(--mimicus-bg-secondary));
 	--sm-chrome-fg: var(--pg-sidebar-fg, var(--mimicus-color));
 	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 91%, var(--sm-accent, var(--mimicus-primary)) 9%);
-	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 94%, var(--sm-accent, var(--mimicus-primary)) 6%);
+	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 88%, var(--sm-accent, var(--mimicus-primary)) 12%);
 	--sm-blend-bg: color-mix(in oklch, var(--sm-chrome) 88%, var(--sm-accent, var(--mimicus-primary)) 12%);
 	--sm-blend-bg-open: color-mix(in oklch, var(--sm-chrome) 78%, var(--sm-accent, var(--mimicus-primary)) 22%);
 	--sm-blend-bg-active: color-mix(in oklch, var(--sm-chrome) 66%, var(--sm-accent, var(--mimicus-primary)) 34%);
 	--sm-blend-bar: color-mix(in oklch, var(--sm-chrome) 36%, var(--sm-accent, var(--mimicus-primary)) 64%);
 	--sm-blend-border: color-mix(in oklch, var(--sm-chrome) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
 	--sm-blend-fg: color-mix(in oklch, var(--sm-chrome-fg) 68%, var(--sm-accent, var(--mimicus-primary)) 32%);
-	--sm-blend-fg-strong: color-mix(in oklch, var(--sm-chrome-fg) 52%, var(--sm-accent, var(--mimicus-primary)) 48%);
+	--sm-blend-fg-strong: color-mix(in oklch, var(--sm-chrome-fg) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
 	--sm-blend-glow: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 22%, transparent);
 }
+
+/* Distribución del header de sección: icono · título(+dots) · chip de cantidad a la derecha */
+.pg-sidebar .sm-section > div > :is(button, .button-wrap) > .button-content {
+	flex: 1 1 auto;
+	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	min-width: 0;
+}
+.pg-sidebar .sm-section .sm-title-group {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+	min-width: 0;
+}
+.pg-sidebar .sm-section .sm-status-dots {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.22rem;
+	flex-shrink: 0;
+}
+.pg-sidebar .sm-section .sm-trail {
+	margin-left: auto;
+	display: inline-flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+.pg-sidebar .sm-section .sm-trail .mimicus-badge {
+	min-width: 1.4rem;
+	padding: 0.05rem 0.4rem;
+	font-size: 0.66rem;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	background: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 18%, transparent);
+	color: var(--sm-blend-fg-strong);
+	border: 1px solid color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 32%, transparent);
+}
+/* Demo-links: gap icono↔label y dot de estado */
+.pg-sidebar .sm-section .sm-item-label { gap: 0.4em; }
+.pg-sidebar .sm-section .sm-item-label .review-status-dot { margin-left: 0.15rem; }
 
 /* Oscuro — hover sidebar: más acento en fondo, texto sobre chrome (evita blanco sobre gris claro). */
 html[data-luminance="dark"] .pg-sidebar .sm-section {

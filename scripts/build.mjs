@@ -1,3 +1,4 @@
+// NOTE: script Node (ESM) ejecutado por `node` en los npm scripts (build/build:demo). No se convierte a TypeScript para no requerir un runner TS (tsx/ts-node) ni un paso de compilación adicional.
 /**
 
  * Build mimicus-react: ESM (import) + IIFE (global MimicusUI) + CSS + snippets.
@@ -26,13 +27,13 @@ const esbuild = require("esbuild");
 
 
 
-const ESM_ENTRY = join(root, "src", "entry-esm.jsx");
+const ESM_ENTRY = join(root, "src", "entry-esm.tsx");
 
-const BOOTSTRAP_ESM = join(root, "src", "bootstrap.js");
+const BOOTSTRAP_ESM = join(root, "src", "bootstrap.ts");
 
-const IIFE_ENTRY = join(root, "src", "entry-iife.jsx");
+const IIFE_ENTRY = join(root, "src", "entry-iife.tsx");
 
-const SNIPPETS_IIFE = join(root, "src", "entry-snippets-iife.js");
+const SNIPPETS_IIFE = join(root, "src", "entry-snippets-iife.ts");
 
 const CSS_IN = join(root, "css", "mimicus-ui.css");
 
@@ -40,31 +41,31 @@ const CSS_IN = join(root, "css", "mimicus-ui.css");
 
 const OUT = {
 
-  esm: join(root, "cdn", "mimicus-react.esm.js"),
+  esm: join(root, "cdn", "esm", "mimicus-react.esm.js"),
 
-  esmMin: join(root, "cdn", "mimicus-react.esm.min.js"),
+  esmMin: join(root, "cdn", "esm", "mimicus-react.esm.min.js"),
 
-  bootstrapEsm: join(root, "cdn", "mimicus-react.bootstrap.esm.js"),
+  bootstrapEsm: join(root, "cdn", "esm", "mimicus-react.bootstrap.esm.js"),
 
-  bootstrapMin: join(root, "cdn", "mimicus-react.bootstrap.esm.min.js"),
+  bootstrapMin: join(root, "cdn", "esm", "mimicus-react.bootstrap.esm.min.js"),
 
-  iife: join(root, "cdn", "mimicus-react.iife.js"),
+  iife: join(root, "cdn", "iife", "mimicus-react.iife.js"),
 
-  iifeMin: join(root, "cdn", "mimicus-react.iife.min.js"),
+  iifeMin: join(root, "cdn", "iife", "mimicus-react.iife.min.js"),
 
-  iifeAlias: join(root, "cdn", "mimicus-ui.js"),
+  iifeAlias: join(root, "cdn", "iife", "mimicus-ui.js"),
 
-  iifeAliasMin: join(root, "cdn", "mimicus-ui.min.js"),
+  iifeAliasMin: join(root, "cdn", "iife", "mimicus-ui.min.js"),
 
-  snippets: join(root, "cdn", "mimicus-snippets.js"),
+  snippets: join(root, "cdn", "iife", "mimicus-snippets.js"),
 
-  snippetsMin: join(root, "cdn", "mimicus-snippets.min.js"),
+  snippetsMin: join(root, "cdn", "iife", "mimicus-snippets.min.js"),
 
-  css: join(root, "cdn", "mimicus-ui.min.css"),
+  css: join(root, "cdn", "css", "mimicus-ui.min.css"),
 
   bootCss: join(root, "css", "snippets", "app-boot.css"),
 
-  bootCssMin: join(root, "cdn", "app-boot.min.css"),
+  bootCssMin: join(root, "cdn", "css", "app-boot.min.css"),
 
 };
 
@@ -78,18 +79,19 @@ const REACT_EXTERNAL = ["react", "react-dom", "react-dom/client", "react/jsx-run
  * `hasCss: false` → isla solo-JS (sin hoja de estilos propia).
  */
 const ISLANDS = [
-  { name: "theme", hasCss: true },
-  { name: "utils", hasCss: false },
-  { name: "primitives", hasCss: true },
-  { name: "layout", hasCss: true },
-  { name: "forms", hasCss: true },
-  { name: "display", hasCss: true },
-  { name: "navigation", hasCss: true },
-  { name: "spa", hasCss: true },
-  { name: "shell", hasCss: true },
-  { name: "general", hasCss: true },
-  { name: "contapyme", hasCss: true },
-  { name: "devkit", hasCss: true },
+  { name: "theme", dir: "category", hasCss: true },
+  { name: "utils", dir: "category", hasCss: false },
+  { name: "primitives", dir: "category", hasCss: true },
+  { name: "layout", dir: "category", hasCss: true },
+  { name: "forms", dir: "category", hasCss: true },
+  { name: "display", dir: "category", hasCss: true },
+  { name: "navigation", dir: "category", hasCss: true },
+  { name: "datagrid", dir: "category", hasCss: true },
+  { name: "spa", dir: "category", hasCss: true },
+  { name: "shell", dir: "category", hasCss: true },
+  { name: "general", dir: "bundle", hasCss: true },
+  { name: "contapyme", dir: "bundle", hasCss: true },
+  { name: "devkit", dir: "bundle", hasCss: true },
 ];
 
 /** Skins de looknfeel: cada uno con su CSS propio (opt-in) → carga mínima si la app usa uno solo. */
@@ -259,6 +261,10 @@ function buildIife(entry, outfile, { reactExternal = true } = {}) {
 
 function build() {
 
+  mkdirSync(join(root, "cdn", "esm"), { recursive: true });
+  mkdirSync(join(root, "cdn", "iife"), { recursive: true });
+  mkdirSync(join(root, "cdn", "css"), { recursive: true });
+
   buildEsm(ESM_ENTRY, OUT.esm, { minOut: OUT.esmMin });
 
   buildEsm(BOOTSTRAP_ESM, OUT.bootstrapEsm, { minOut: OUT.bootstrapMin });
@@ -278,15 +284,15 @@ function build() {
   writeFileSync(OUT.css, minifyCss(flattenCss(CSS_IN)), "utf8");
 
   // ── Islas de desarrollo: un bundle ESM (+min) y CSS por isla ──
-  for (const { name, hasCss } of ISLANDS) {
+  for (const { name, dir, hasCss } of ISLANDS) {
     buildEsm(
-      join(root, "src", "islands", `${name}.js`),
-      join(root, "cdn", `mimicus-${name}.esm.js`),
-      { minOut: join(root, "cdn", `mimicus-${name}.esm.min.js`) }
+      join(root, "src", "islands", dir, `${name}.ts`),
+      join(root, "cdn", "esm", `mimicus-${name}.esm.js`),
+      { minOut: join(root, "cdn", "esm", `mimicus-${name}.esm.min.js`) }
     );
     if (hasCss) {
       writeFileSync(
-        join(root, "cdn", `mimicus-${name}.css`),
+        join(root, "cdn", "css", `mimicus-${name}.css`),
         minifyCss(flattenCss(join(root, "css", "islands", `${name}.css`))),
         "utf8"
       );
@@ -296,7 +302,7 @@ function build() {
   // ── Skins de looknfeel: un CSS por look (opt-in) ──
   for (const look of LOOKNFEELS) {
     writeFileSync(
-      join(root, "cdn", `mimicus-looknfeel-${look}.css`),
+      join(root, "cdn", "css", `mimicus-looknfeel-${look}.css`),
       minifyCss(flattenCss(join(root, "css", "looknfeel", `${look}.css`))),
       "utf8"
     );
@@ -315,19 +321,19 @@ function build() {
   const versions = {
     componentRef: "main",
     esm: {
-      main: "mimicus-react.esm.min.js",
-      bootstrap: "mimicus-react.bootstrap.esm.min.js",
-      css: "mimicus-ui.min.css",
+      main: "esm/mimicus-react.esm.min.js",
+      bootstrap: "esm/mimicus-react.bootstrap.esm.min.js",
+      css: "css/mimicus-ui.min.css",
       loadCdns: "stack-esm",
     },
     global: {
-      main: "mimicus-react.iife.min.js",
+      main: "iife/mimicus-react.iife.min.js",
       globalName: "MimicusUI",
-      bootstrap: "mimicus-snippets.min.js",
+      bootstrap: "iife/mimicus-snippets.min.js",
       bootstrapGlobal: "MimicusBootstrap",
-      css: "mimicus-ui.min.css",
+      css: "css/mimicus-ui.min.css",
       loadCdns: "stack-global",
-      alias: "mimicus-ui.min.js",
+      alias: "iife/mimicus-ui.min.js",
     },
   };
 
@@ -338,30 +344,33 @@ function build() {
   const demoCdn = join(root, "demo", "cdn");
 
   mkdirSync(demoCdn, { recursive: true });
+  mkdirSync(join(demoCdn, "esm"), { recursive: true });
+  mkdirSync(join(demoCdn, "iife"), { recursive: true });
+  mkdirSync(join(demoCdn, "css"), { recursive: true });
 
-  for (const name of [
-    "mimicus-react.esm.js",
-    "mimicus-react.esm.min.js",
-    "mimicus-react.bootstrap.esm.js",
-    "mimicus-react.bootstrap.esm.min.js",
-    "mimicus-react.iife.js",
-    "mimicus-react.iife.min.js",
-    "mimicus-ui.js",
-    "mimicus-ui.min.js",
+  for (const rel of [
+    "esm/mimicus-react.esm.js",
+    "esm/mimicus-react.esm.min.js",
+    "esm/mimicus-react.bootstrap.esm.js",
+    "esm/mimicus-react.bootstrap.esm.min.js",
+    "iife/mimicus-react.iife.js",
+    "iife/mimicus-react.iife.min.js",
+    "iife/mimicus-ui.js",
+    "iife/mimicus-ui.min.js",
 
-    "mimicus-ui.min.css",
+    "css/mimicus-ui.min.css",
 
-    "mimicus-snippets.js",
+    "iife/mimicus-snippets.js",
 
-    "mimicus-snippets.min.js",
+    "iife/mimicus-snippets.min.js",
 
-    "app-boot.min.css",
+    "css/app-boot.min.css",
 
     "versions.json",
 
   ]) {
 
-    copyFileSync(join(root, "cdn", name), join(demoCdn, name));
+    copyFileSync(join(root, "cdn", rel), join(demoCdn, rel));
 
   }
 

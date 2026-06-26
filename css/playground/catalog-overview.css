@@ -96,7 +96,7 @@
 	font-weight: 600;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
-	color: var(--catalog-muted);
+	color: color-mix(in srgb, var(--mimicus-color), transparent 30%);
 }
 
 .catalog-toc__list {
@@ -115,7 +115,7 @@
 	gap: 0.35rem;
 	padding: 0.28rem 0;
 	font-size: 0.82rem;
-	color: var(--catalog-muted);
+	color: color-mix(in srgb, var(--mimicus-color), transparent 16%);
 	text-decoration: none;
 	border-bottom: 1px solid transparent;
 	transition: color 0.15s ease;

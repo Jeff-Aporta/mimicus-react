@@ -1,0 +1,271 @@
+/**
+ * DataGrid — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/datagrid/datagrid.css
+ * Estilos del DataGrid (grilla virtualizada): superficie, encabezado, filas, celdas y selección. Nesting nativo + tokens Mimicus.
+ */
+.mim-dg {
+	--mim-dg-border: color-mix(in srgb, var(--mimicus-b-color), transparent 30%);
+	--mim-dg-header-bg: color-mix(in srgb, var(--mimicus-bg-secondary, var(--mimicus-bg-primary)), var(--mimicus-primary) 6%);
+	--mim-dg-row-hover: color-mix(in srgb, var(--mimicus-primary) 8%, transparent);
+	--mim-dg-row-odd: color-mix(in srgb, var(--mimicus-color) 3%, transparent);
+	--mim-dg-selected: color-mix(in srgb, var(--mimicus-primary) 16%, transparent);
+	--mim-dg-selected-bar: var(--mimicus-primary);
+
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	border: 1px solid var(--mim-dg-border);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	color: var(--mimicus-color);
+	background: var(--mimicus-bg-primary);
+	font-size: 0.875rem;
+
+	& *, & *::before, & *::after { box-sizing: border-box; }
+
+	/* Barra de herramientas */
+	& .mim-dg__toolbar {
+		display: flex; align-items: center; gap: 0.5rem;
+		flex: 0 0 auto; padding: 0.4rem 0.6rem;
+		border-bottom: 1px solid var(--mim-dg-border);
+		background: var(--mim-dg-header-bg);
+	}
+	& .mim-dg__toolbar-spacer { flex: 1 1 auto; }
+	& .mim-dg__quick {
+		display: inline-flex; align-items: center; gap: 0.35rem;
+		min-width: 12rem; padding: 0.25rem 0.55rem;
+		border: 1px solid var(--mim-dg-border); border-radius: 0.4rem;
+		background: var(--mimicus-bg-primary);
+		& .mim-dg__quick-icon { color: color-mix(in srgb, var(--mimicus-color), transparent 35%); }
+		&:focus-within { border-color: var(--mimicus-primary); }
+	}
+	& .mim-dg__quick-input { flex: 1 1 auto; border: 0; outline: none; background: none; color: var(--mimicus-color); font: inherit; }
+	& .mim-dg__density { display: inline-flex; border: 1px solid var(--mim-dg-border); border-radius: 0.4rem; overflow: hidden; }
+	& .mim-dg__density-btn {
+		display: inline-flex; align-items: center; justify-content: center;
+		width: 2rem; height: 1.85rem; border: 0; background: none; cursor: pointer;
+		color: color-mix(in srgb, var(--mimicus-color), transparent 25%); font-size: 1.05rem;
+		&:hover { background: var(--mim-dg-row-hover); }
+		&.is-active { background: var(--mimicus-primary); color: var(--mimicus-on-primary, #fff); }
+	}
+	& .mim-dg__tool-btn {
+		display: inline-flex; align-items: center; gap: 0.35rem;
+		padding: 0.35rem 0.6rem; border: 1px solid var(--mim-dg-border); border-radius: 0.4rem;
+		background: var(--mimicus-bg-primary); color: var(--mimicus-color); font: inherit; cursor: pointer;
+		&:hover { background: var(--mim-dg-row-hover); }
+		&.is-primary { background: var(--mimicus-primary); color: var(--mimicus-on-primary, #fff); border-color: transparent; }
+	}
+
+	& .mim-dg__viewport {
+		position: relative;
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow: auto;
+	}
+
+	/* Encabezado pegado arriba */
+	& .mim-dg__header {
+		position: sticky;
+		top: 0;
+		z-index: 2;
+		display: flex;
+		background: var(--mim-dg-header-bg);
+		border-bottom: 1px solid var(--mim-dg-border);
+		backdrop-filter: blur(2px);
+	}
+
+	& .mim-dg__head-cell {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		user-select: none;
+		border-right: 1px solid color-mix(in srgb, var(--mim-dg-border), transparent 50%);
+		overflow: hidden;
+
+		&.is-sortable { cursor: pointer; }
+		&.is-sortable:hover { background: var(--mim-dg-row-hover); }
+
+		& .mim-dg__head-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+		& .mim-dg__sort-icon { font-size: 1rem; color: var(--mimicus-primary); flex: 0 0 auto; }
+		& .mim-dg__filter-icon { font-size: 0.85rem; color: var(--mimicus-primary); flex: 0 0 auto; }
+		& .mim-dg__sort-order {
+			display: inline-flex; align-items: center; justify-content: center;
+			min-width: 1rem; height: 1rem; padding: 0 0.2rem;
+			font-size: 0.65rem; font-weight: 700; line-height: 1;
+			color: var(--mimicus-on-primary, #fff); background: var(--mimicus-primary);
+			border-radius: 999px;
+		}
+		&.is-sorted { color: var(--mimicus-color); }
+	}
+
+	/* Cuerpo virtualizado */
+	& .mim-dg__body { position: relative; }
+	& .mim-dg__rows { position: absolute; top: 0; left: 0; right: 0; will-change: transform; }
+
+	& .mim-dg__row {
+		display: flex;
+		border-bottom: 1px solid color-mix(in srgb, var(--mim-dg-border), transparent 55%);
+
+		&.is-odd { background: var(--mim-dg-row-odd); }
+		&:hover { background: var(--mim-dg-row-hover); }
+
+		&.is-selected {
+			background: var(--mim-dg-selected);
+			box-shadow: inset 3px 0 0 0 var(--mim-dg-selected-bar);
+		}
+		&.is-focused { outline: 2px solid color-mix(in srgb, var(--mimicus-primary) 70%, transparent); outline-offset: -2px; }
+	}
+
+	& .mim-dg__cell {
+		display: flex;
+		align-items: center;
+		padding: 0 0.625rem;
+		overflow: hidden;
+		border-right: 1px solid color-mix(in srgb, var(--mim-dg-border), transparent 70%);
+
+		& .mim-dg__cell-inner { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+		&.mim-dg__cell--right { justify-content: flex-end; text-align: right; }
+		&.mim-dg__cell--center { justify-content: center; text-align: center; }
+		&.mim-dg__cell--check { flex: 0 0 44px; width: 44px; justify-content: center; padding: 0; }
+	}
+
+	/* Checkbox de selección (icono iconify) */
+	& .mim-dg__checkbox {
+		display: inline-flex; align-items: center; justify-content: center;
+		font-size: 1.15rem; line-height: 1; color: var(--mimicus-primary);
+		background: none; border: 0; padding: 0; cursor: pointer;
+
+		&.mim-dg__checkbox--none { color: color-mix(in srgb, var(--mimicus-color), transparent 45%); }
+		&.mim-dg__checkbox--some, &.mim-dg__checkbox--all { color: var(--mimicus-primary); }
+	}
+
+	/* Renderers integrados */
+	& .mim-dg-bool { font-size: 1.1rem; }
+	& .mim-dg-bool--on { color: var(--mimicus-success, var(--mimicus-primary)); }
+	& .mim-dg-bool--off { color: color-mix(in srgb, var(--mimicus-color), transparent 55%); }
+	& .mim-dg-tag {
+		padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.78rem;
+		color: var(--mimicus-on-primary, #fff); background: var(--mimicus-primary);
+	}
+	& .mim-dg-link { color: var(--mimicus-primary); text-decoration: none; &:hover { text-decoration: underline; } }
+
+	/* Columnas fijadas (sticky): fondo opaco + sombra separadora */
+	& .mim-dg__cell.is-pinned { background: var(--mimicus-bg-primary); }
+	& .mim-dg__head-cell.is-pinned { background: var(--mim-dg-header-bg); }
+	& .mim-dg__cell.is-pinned-left { box-shadow: 2px 0 4px -2px color-mix(in srgb, var(--mimicus-color) 35%, transparent); }
+	& .mim-dg__cell.is-pinned-right { box-shadow: -2px 0 4px -2px color-mix(in srgb, var(--mimicus-color) 35%, transparent); }
+	& .mim-dg__row.is-odd .mim-dg__cell.is-pinned { background: color-mix(in srgb, var(--mim-dg-row-odd), var(--mimicus-bg-primary)); }
+	& .mim-dg__row:hover .mim-dg__cell.is-pinned { background: color-mix(in srgb, var(--mim-dg-row-hover), var(--mimicus-bg-primary)); }
+	& .mim-dg__row.is-selected .mim-dg__cell.is-pinned { background: color-mix(in srgb, var(--mim-dg-selected), var(--mimicus-bg-primary)); }
+
+	/* Botón de menú de columna (aparece al pasar el cursor) */
+	& .mim-dg__head-menu-btn {
+		display: inline-flex; align-items: center; justify-content: center;
+		width: 1.25rem; height: 1.25rem; margin-left: auto; padding: 0;
+		border: 0; border-radius: 0.25rem; background: none; cursor: pointer;
+		color: color-mix(in srgb, var(--mimicus-color), transparent 30%);
+		opacity: 0; transition: opacity 0.12s ease, background 0.12s ease;
+		&:hover { background: color-mix(in srgb, var(--mimicus-primary) 18%, transparent); color: var(--mimicus-color); }
+	}
+	& .mim-dg__head-cell:hover .mim-dg__head-menu-btn { opacity: 1; }
+
+	/* Tirador de redimensionado */
+	& .mim-dg__resizer {
+		position: absolute; right: 0; top: 0; bottom: 0; width: 6px;
+		cursor: col-resize; touch-action: none;
+		&:hover { background: color-mix(in srgb, var(--mimicus-primary) 50%, transparent); }
+	}
+	& .mim-dg__head-cell { position: relative; }
+
+	/* Pie / paginación */
+	& .mim-dg__footer {
+		display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+		flex: 0 0 auto; min-height: 2.5rem; padding: 0.25rem 0.75rem;
+		border-top: 1px solid var(--mim-dg-border);
+		background: var(--mim-dg-header-bg);
+		font-size: 0.8rem;
+	}
+	& .mim-dg__count { color: color-mix(in srgb, var(--mimicus-color), transparent 22%); }
+	& .mim-dg__count-sel { color: var(--mimicus-primary); font-weight: 600; }
+	& .mim-dg__pager { display: flex; align-items: center; gap: 0.15rem; }
+	& .mim-dg__pager-gap { padding: 0 0.25rem; color: color-mix(in srgb, var(--mimicus-color), transparent 45%); }
+	& .mim-dg__pager-btn {
+		display: inline-flex; align-items: center; justify-content: center;
+		min-width: 1.75rem; height: 1.75rem; padding: 0 0.35rem;
+		border: 1px solid transparent; border-radius: 0.35rem; background: none; cursor: pointer;
+		color: var(--mimicus-color); font: inherit;
+		&:hover:not(:disabled) { background: var(--mim-dg-row-hover); }
+		&:disabled { opacity: 0.4; cursor: default; }
+		&.is-active { background: var(--mimicus-primary); color: var(--mimicus-on-primary, #fff); font-weight: 600; }
+	}
+
+	/* Densidad */
+	&[data-density="compact"] { font-size: 0.82rem; & .mim-dg__cell { padding: 0 0.45rem; } }
+	&[data-density="comfortable"] { & .mim-dg__cell { padding: 0 0.85rem; } }
+}
+
+/* Menú de columna (renderizado en flujo, posición fija respecto al viewport) */
+.mim-dg__menu {
+	position: fixed; z-index: 1000;
+	min-width: 13rem; max-height: 70vh; overflow: auto; padding: 0.3rem;
+	border: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 20%);
+	border-radius: 0.5rem;
+	background: var(--mimicus-bg-primary);
+	color: var(--mimicus-color);
+	box-shadow: 0 8px 28px -6px color-mix(in srgb, var(--mimicus-color) 45%, transparent);
+
+	& .mim-dg__menu-item {
+		display: flex; align-items: center; gap: 0.5rem; width: 100%;
+		padding: 0.4rem 0.55rem; border: 0; border-radius: 0.35rem;
+		background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+		& iconify-icon { font-size: 1.05rem; color: color-mix(in srgb, var(--mimicus-color), transparent 25%); }
+		&:hover { background: var(--mimicus-primary); color: var(--mimicus-on-primary, #fff); & iconify-icon { color: inherit; } }
+	}
+	& .mim-dg__menu-sep { height: 1px; margin: 0.3rem 0.2rem; background: color-mix(in srgb, var(--mimicus-b-color), transparent 35%); }
+}
+
+/* Popover de filtro de columna */
+.mim-dg__filter {
+	position: fixed; z-index: 1000;
+	display: flex; flex-direction: column; gap: 0.45rem;
+	min-width: 15rem; max-width: 20rem; max-height: 75vh; overflow: auto; padding: 0.6rem;
+	border: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 20%);
+	border-radius: 0.5rem;
+	background: var(--mimicus-bg-primary);
+	color: var(--mimicus-color);
+	box-shadow: 0 8px 28px -6px color-mix(in srgb, var(--mimicus-color) 45%, transparent);
+	font-size: 0.85rem;
+
+	& .mim-dg__filter-field {
+		width: 100%; padding: 0.4rem 0.5rem;
+		border: 1px solid var(--mimicus-b-color); border-radius: 0.35rem;
+		background: var(--mimicus-bg-primary); color: var(--mimicus-color); font: inherit;
+		&:focus { outline: none; border-color: var(--mimicus-primary); }
+	}
+	& .mim-dg__filter-actions-row { display: flex; gap: 0.75rem; }
+	& .mim-dg__filter-link { border: 0; background: none; color: var(--mimicus-primary); cursor: pointer; font: inherit; padding: 0; &:hover { text-decoration: underline; } }
+	& .mim-dg__filter-set { display: flex; flex-direction: column; gap: 0.15rem; max-height: 12rem; overflow: auto; padding-right: 0.2rem; }
+	& .mim-dg__filter-set-item {
+		display: flex; align-items: center; gap: 0.4rem; padding: 0.15rem 0.25rem; border-radius: 0.3rem; cursor: pointer;
+		& span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+		&:hover { background: var(--mim-dg-row-hover); }
+		& .mim-dg__checkbox { font-size: 1.05rem; }
+	}
+	& .mim-dg__filter-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.2rem; }
+	& .mim-dg__tool-btn {
+		display: inline-flex; align-items: center; gap: 0.35rem;
+		padding: 0.35rem 0.7rem; border: 1px solid var(--mimicus-b-color); border-radius: 0.4rem;
+		background: var(--mimicus-bg-primary); color: var(--mimicus-color); font: inherit; cursor: pointer;
+		&:hover { background: color-mix(in srgb, var(--mimicus-primary) 10%, transparent); }
+		&.is-primary { background: var(--mimicus-primary); color: var(--mimicus-on-primary, #fff); border-color: transparent; }
+	}
+	& .mim-dg__checkbox {
+		display: inline-flex; align-items: center; justify-content: center;
+		border: 0; background: none; padding: 0; cursor: pointer; color: var(--mimicus-primary);
+		&.mim-dg__checkbox--none { color: color-mix(in srgb, var(--mimicus-color), transparent 45%); }
+	}
+}
