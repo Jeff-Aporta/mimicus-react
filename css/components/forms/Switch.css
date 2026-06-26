@@ -1,0 +1,21 @@
+/**
+ * Switch (forms) — CSS
+ * demo: demo/config/demos/lib/Switch.json
+ * llm:  ./Switch.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Switch.css
+ * Interruptor on/off con track y thumb animados, tamaños y estado de carga.
+ */
+
+/* ── Switch ── */
+.mimicus-switch { display: inline-flex; align-items: center; gap: 0.55rem; cursor: pointer; user-select: none; }
+.mimicus-switch__native { position: absolute; opacity: 0; width: 0; height: 0; }
+.mimicus-switch__track { width: 2.5rem; height: 1.35rem; border-radius: 999px; background: color-mix(in srgb, var(--mimicus-text, #000) 25%, transparent); position: relative; transition: background 0.25s; flex-shrink: 0; }
+.mimicus-switch__thumb { position: absolute; top: 0.15rem; left: 0.15rem; width: 1.05rem; height: 1.05rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); transition: transform 0.25s; }
+.mimicus-switch.is-checked .mimicus-switch__track { background: var(--mimicus-primary, #1677ff); }
+.mimicus-switch.is-checked .mimicus-switch__thumb { transform: translateX(1.15rem); }
+.mimicus-switch--small .mimicus-switch__track { width: 2rem; height: 1.1rem; }
+.mimicus-switch--small .mimicus-switch__thumb { width: 0.85rem; height: 0.85rem; }
+.mimicus-switch--small.is-checked .mimicus-switch__thumb { transform: translateX(0.9rem); }
+.mimicus-switch.is-disabled { opacity: 0.5; cursor: not-allowed; }
+.mimicus-switch.is-loading .mimicus-switch__thumb { animation: mimicus-switch-pulse 1s infinite; }
+@keyframes mimicus-switch-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }

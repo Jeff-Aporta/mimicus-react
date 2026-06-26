@@ -1,0 +1,16 @@
+/**
+ * Form (forms) — CSS
+ * demo: demo/config/demos/lib/Form.json
+ * llm:  ./Form.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Form.css
+ * Layout del formulario y sus items (label, requerido, extra, estado de error).
+ */
+
+/* ── Form ── */
+.mimicus-form { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
+.mimicus-form-item { display: flex; flex-direction: column; gap: 0.35rem; }
+.mimicus-form-item--horizontal { flex-direction: row; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.mimicus-form-item__label { font-size: 0.875rem; font-weight: 600; color: var(--mimicus-text, rgba(0, 0, 0, 0.88)); }
+.mimicus-form-item__req { color: var(--mimicus-danger, #ff4d4f); margin-left: 0.15rem; }
+.mimicus-form-item__extra { font-size: 0.8rem; opacity: 0.75; }
+.mimicus-form-item.has-error .mimicus-form-item__extra { color: var(--mimicus-danger, #ff4d4f); }

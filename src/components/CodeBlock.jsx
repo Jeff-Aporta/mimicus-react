@@ -1,3 +1,11 @@
+/**
+ * CodeBlock — isla: primitives
+ * demo: demo/config/demos/lib/CodeBlock.json
+ * llm:  ./CodeBlock.llm.md
+ * css:  css/components/codemirror.css
+ * repo: Jeff-Aporta/mimicus-react · src/components/CodeBlock.jsx
+ * Editor/visor de código con CodeMirror 5 (CDN lazy), copia al portapapeles y tema sincronizado.
+ */
 import { useEffect, useRef, useState } from "react";
 import { IconButton } from "./FloatButton.jsx";
 import {

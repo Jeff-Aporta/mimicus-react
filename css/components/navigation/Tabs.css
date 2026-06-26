@@ -1,0 +1,20 @@
+/**
+ * Tabs (navigation) — CSS
+ * demo: demo/config/demos/lib/Tabs.json
+ * llm:  ./Tabs.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Tabs.css
+ * Pestañas en línea/card y orientación lateral, con panel activo y estado deshabilitado.
+ */
+.mimicus-tabs { display: flex; flex-direction: column; gap: 0.65rem; width: 100%; }
+.mimicus-tabs--left, .mimicus-tabs--right { flex-direction: row; }
+.mimicus-tabs__nav { display: flex; flex-wrap: wrap; gap: 0.15rem; border-bottom: 1px solid var(--mimicus-border, rgba(0,0,0,.1)); }
+.mimicus-tabs--card .mimicus-tabs__nav { border-bottom: none; gap: 0.35rem; }
+.mimicus-tabs--left .mimicus-tabs__nav, .mimicus-tabs--right .mimicus-tabs__nav { flex-direction: column; border-bottom: none; border-right: 1px solid var(--mimicus-border, rgba(0,0,0,.1)); min-width: 7rem; }
+.mimicus-tabs__tab { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.55rem 0.85rem; border: none; border-bottom: 2px solid transparent; background: transparent; color: var(--mimicus-text-secondary, rgba(0,0,0,.65)); font: inherit; cursor: pointer; margin-bottom: -1px; }
+.mimicus-tabs--card .mimicus-tabs__tab { border: 1px solid transparent; border-radius: 0.35rem 0.35rem 0 0; }
+.mimicus-tabs__tab:hover { color: var(--mimicus-primary, #1677ff); }
+.mimicus-tabs__tab.is-active { color: var(--mimicus-primary, #1677ff); border-bottom-color: var(--mimicus-primary, #1677ff); font-weight: 600; }
+.mimicus-tabs--card .mimicus-tabs__tab.is-active { border-color: var(--mimicus-border, rgba(0,0,0,.1)); border-bottom-color: var(--mimicus-surface, #fff); background: var(--mimicus-surface, #fff); }
+.mimicus-tabs__tab:disabled { opacity: 0.45; cursor: not-allowed; }
+.mimicus-tabs__panel { padding: 0.65rem 0.15rem; }
+.mimicus-tabs__panel[hidden] { display: none; }

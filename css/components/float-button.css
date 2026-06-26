@@ -1,4 +1,8 @@
-/* FloatButton / Fab — Ant FloatButton + MUI Fab */
+/**
+ * FloatButton — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/float-button.css
+ * Botón flotante / FAB (Ant FloatButton + MUI Fab) y su grupo.
+ */
 
 .mimicus-float-btn {
 	position: relative;
@@ -18,82 +22,82 @@
 	font-size: 0.9rem;
 	font-weight: 600;
 	line-height: 1;
-}
 
-.mimicus-float-btn[data-shape="circle"] {
-	border-radius: 50%;
-	width: 3.5rem;
-	height: 3.5rem;
-	min-width: 3.5rem;
-	padding: 0;
-}
+	&[data-shape="circle"] {
+		border-radius: 50%;
+		width: 3.5rem;
+		height: 3.5rem;
+		min-width: 3.5rem;
+		padding: 0;
+	}
 
-.mimicus-float-btn[data-shape="square"] {
-	border-radius: 0.55rem;
-	width: 3.5rem;
-	height: 3.5rem;
-	min-width: 3.5rem;
-	padding: 0;
-}
+	&[data-shape="square"] {
+		border-radius: 0.55rem;
+		width: 3.5rem;
+		height: 3.5rem;
+		min-width: 3.5rem;
+		padding: 0;
+	}
 
-.mimicus-float-btn--extended[data-shape="circle"],
-.mimicus-float-btn--extended[data-shape="square"] {
-	width: auto;
-	min-width: 3.5rem;
-	padding-inline: 1rem;
-	border-radius: 999px;
-}
+	&--extended[data-shape="circle"],
+	&--extended[data-shape="square"] {
+		width: auto;
+		min-width: 3.5rem;
+		padding-inline: 1rem;
+		border-radius: 999px;
+	}
 
-.mimicus-float-btn[data-size="small"][data-shape="circle"],
-.mimicus-float-btn[data-size="small"][data-shape="square"] {
-	width: 2.5rem;
-	height: 2.5rem;
-	min-width: 2.5rem;
-	font-size: 0.82rem;
-}
+	&[data-size="small"][data-shape="circle"],
+	&[data-size="small"][data-shape="square"] {
+		width: 2.5rem;
+		height: 2.5rem;
+		min-width: 2.5rem;
+		font-size: 0.82rem;
+	}
 
-.mimicus-float-btn[data-type="primary"] {
-	background: var(--bttn-bg-bs, var(--mimicus-primary));
-	color: var(--bttn-fnt-sld, #fff);
-	border: 1px solid transparent;
-}
+	&[data-type="primary"] {
+		background: var(--bttn-bg-bs, var(--mimicus-primary));
+		color: var(--bttn-fnt-sld, #fff);
+		border: 1px solid transparent;
+	}
 
-.mimicus-float-btn[data-type="default"] {
-	background: var(--mimicus-bg-secondary);
-	border: 1px solid var(--mimicus-b-color);
-}
+	&[data-type="default"] {
+		background: var(--mimicus-bg-secondary);
+		border: 1px solid var(--mimicus-b-color);
+	}
 
-.mimicus-float-btn:not(:disabled):hover {
-	transform: translateY(-2px);
-	box-shadow: 0 10px 22px color-mix(in srgb, var(--mimicus-primary), transparent 82%), 0 4px 10px color-mix(in srgb, var(--mimicus-color), transparent 90%);
-}
+	&:not(:disabled):hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 22px color-mix(in srgb, var(--mimicus-primary), transparent 82%), 0 4px 10px color-mix(in srgb, var(--mimicus-color), transparent 90%);
+	}
 
-.mimicus-float-btn:not(:disabled):active {
-	transform: translateY(0) scale(0.98);
-}
+	&:not(:disabled):active {
+		transform: translateY(0) scale(0.98);
+	}
 
-.mimicus-float-btn:disabled {
-	opacity: 0.45;
-	cursor: not-allowed;
-	pointer-events: none;
-}
+	&:disabled {
+		opacity: 0.45;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
 
-.mimicus-float-btn__icon {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 1.25rem;
-	line-height: 1;
-}
+	&__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.25rem;
+		line-height: 1;
+	}
 
-.mimicus-float-btn__content {
-	white-space: nowrap;
-}
+	&__content {
+		white-space: nowrap;
+	}
 
-.mimicus-float-btn--back-top {
-	position: fixed;
-	right: 1.25rem;
-	bottom: 1.25rem;
+	&--back-top {
+		position: fixed;
+		right: 1.25rem;
+		bottom: 1.25rem;
+	}
 }
 
 .mimicus-float-btn-group {
@@ -102,18 +106,18 @@
 	flex-direction: column;
 	align-items: flex-end;
 	gap: 0.55rem;
-}
 
-.mimicus-float-btn-group__menu {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	gap: 0.45rem;
-}
+	&__menu {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.45rem;
+	}
 
-.mimicus-float-btn-group[data-placement="left"] .mimicus-float-btn-group__menu,
-.mimicus-float-btn-group[data-placement="right"] .mimicus-float-btn-group__menu {
-	flex-direction: row;
+	&[data-placement="left"] .mimicus-float-btn-group__menu,
+	&[data-placement="right"] .mimicus-float-btn-group__menu {
+		flex-direction: row;
+	}
 }
 
 html[data-looknfeel^="neon-"] .mimicus-float-btn[data-type="primary"] {
@@ -121,17 +125,4 @@ html[data-looknfeel^="neon-"] .mimicus-float-btn[data-type="primary"] {
 	border: 1px solid color-mix(in srgb, var(--mimicus-primary) 58%, transparent);
 	box-shadow: 0 0 18px color-mix(in srgb, var(--mimicus-primary) 32%, transparent);
 	color: #fff;
-}
-
-html[data-looknfeel="mac-liquidglass"] .mimicus-float-btn[data-type="primary"] {
-	background: var(--mlg-accent, #007aff) !important;
-	color: #fff !important;
-	border: 0.5px solid color-mix(in srgb, var(--mlg-accent, #007aff), #000 14%) !important;
-}
-
-html[data-looknfeel="mac-liquidglass"] .mimicus-float-btn[data-type="default"] {
-	backdrop-filter: blur(20px) saturate(160%);
-	-webkit-backdrop-filter: blur(20px) saturate(160%);
-	background: rgba(120, 120, 128, 0.18);
-	border: 0.5px solid var(--mlg-border, rgba(0, 0, 0, 0.09));
 }

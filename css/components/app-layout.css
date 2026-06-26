@@ -1,4 +1,8 @@
-/* AppLayout — grid responsive (portado de ISP AppLayout.svelte) */
+/**
+ * AppLayout — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/app-layout.css
+ * Grid responsive de layout de app (header/sider/content/footer) + shell mínimo.
+ */
 
 .mimicus-app-layout {
 	box-sizing: border-box;
@@ -7,6 +11,21 @@
 	height: 100%;
 	min-height: 0;
 	min-width: 0;
+
+	&--fixed-header .mimicus-app-layout__cell--header {
+		position: sticky;
+		top: 0;
+		z-index: 4;
+	}
+
+	&--fixed-sider .mimicus-app-layout__cell--sider {
+		position: sticky;
+		top: 0;
+		align-self: stretch;
+		height: 100%;
+		max-height: 100%;
+		z-index: 3;
+	}
 }
 
 .mimicus-app-layout__cell {
@@ -14,9 +33,12 @@
 	min-height: 0;
 	display: flex;
 	flex-direction: column;
-}
 
-.mimicus-app-layout__cell--header { grid-area: header; }
+	&--header { grid-area: header; }
+	&--sider { grid-area: sider; }
+	&--content { grid-area: content; overflow: hidden; }
+	&--footer { grid-area: footer; }
+}
 
 .mimicus-app-layout-header {
 	flex-shrink: 0;
@@ -25,60 +47,42 @@
 	flex-direction: column;
 	width: 100%;
 	min-width: 0;
-}
 
-.mimicus-app-layout-header__bar {
-	display: grid;
-	grid-template-columns: auto minmax(0, 1fr) auto;
-	align-items: center;
-	gap: 0.35rem;
-	width: 100%;
-	min-height: var(--mimicus-app-layout-header-h, 2.75rem);
-	box-sizing: border-box;
-}
+	&__bar {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		align-items: center;
+		gap: 0.35rem;
+		width: 100%;
+		min-height: var(--mimicus-app-layout-header-h, 2.75rem);
+		box-sizing: border-box;
+	}
 
-.mimicus-app-layout-header__brand {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.35rem;
-	flex-shrink: 0;
-	min-width: 0;
-}
+	&__brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		flex-shrink: 0;
+		min-width: 0;
+	}
 
-.mimicus-app-layout-header__center {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.35rem;
-	min-width: 0;
-	overflow: hidden;
-}
+	&__center {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35rem;
+		min-width: 0;
+		overflow: hidden;
+	}
 
-.mimicus-app-layout-header__tools {
-	display: inline-flex;
-	align-items: center;
-	justify-content: flex-end;
-	gap: 0.35rem;
-	flex-shrink: 0;
-	min-width: 0;
-}
-.mimicus-app-layout__cell--sider { grid-area: sider; }
-.mimicus-app-layout__cell--content { grid-area: content; overflow: hidden; }
-.mimicus-app-layout__cell--footer { grid-area: footer; }
-
-.mimicus-app-layout--fixed-header .mimicus-app-layout__cell--header {
-	position: sticky;
-	top: 0;
-	z-index: 4;
-}
-
-.mimicus-app-layout--fixed-sider .mimicus-app-layout__cell--sider {
-	position: sticky;
-	top: 0;
-	align-self: stretch;
-	height: 100%;
-	max-height: 100%;
-	z-index: 3;
+	&__tools {
+		display: inline-flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 0.35rem;
+		flex-shrink: 0;
+		min-width: 0;
+	}
 }
 
 .mimicus-app-layout-sider {
@@ -88,23 +92,23 @@
 	min-height: 0;
 	overflow: hidden;
 	border-right: 1px solid color-mix(in srgb, currentColor, transparent 85%);
-}
 
-.mimicus-app-layout-sider--light {
-	border-right-color: color-mix(in srgb, var(--mimicus-b-color), transparent 40%);
-}
+	&--light {
+		border-right-color: color-mix(in srgb, var(--mimicus-b-color), transparent 40%);
+	}
 
-.mimicus-app-layout-sider__body {
-	flex: 1 1 auto;
-	min-height: 0;
-	overflow: auto;
-	padding: clamp(0.35rem, 2vw, 0.5rem) clamp(0.45rem, 2.5vw, 0.65rem);
-	-webkit-overflow-scrolling: touch;
-}
+	&__body {
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow: auto;
+		padding: clamp(0.35rem, 2vw, 0.5rem) clamp(0.45rem, 2.5vw, 0.65rem);
+		-webkit-overflow-scrolling: touch;
+	}
 
-.mimicus-app-layout-sider__trigger {
-	flex-shrink: 0;
-	border-top: 1px solid color-mix(in srgb, currentColor, transparent 85%);
+	&__trigger {
+		flex-shrink: 0;
+		border-top: 1px solid color-mix(in srgb, currentColor, transparent 85%);
+	}
 }
 
 @media (max-width: 767px) {

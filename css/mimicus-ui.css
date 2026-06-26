@@ -9,15 +9,9 @@
 @import "./theme/color-transform.css";
 @import "./theme/surface-tokens.css";
 @import "./theme/button.css";
-@import "./theme/lab-surfaces.css";
-@import "./theme/windows-surfaces.css";
 @import "./theme/ng-surface.css";
-@import "./theme/mlg-surface.css";
 @import "./theme/playground-contapyme.css";
-@import "./theme/playground-scheme-lab.css";
-@import "./theme/playground-windows.css";
 @import "./theme/playground-glass.css";
-@import "./theme/playground-liquidglass.css";
 @import "./theme/look-radius.css";
 @import "./theme/pg-component-blend.css";
 @import "./components/side-panel.css";

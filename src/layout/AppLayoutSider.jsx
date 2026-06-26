@@ -1,3 +1,10 @@
+/**
+ * AppLayoutSider — isla: layout
+ * llm:  ./AppLayoutSider.llm.md
+ * css:  css/components/app-layout.css
+ * repo: Jeff-Aporta/mimicus-react · src/layout/AppLayoutSider.jsx
+ * Barra lateral de AppLayout con tema dark/light, ancho colapsable y trigger de colapso.
+ */
 import { useEffect } from "react";
 import { resolveColor } from "../lib/resolveColor.js";
 import { useAppLayoutContext } from "./appLayoutContext.jsx";

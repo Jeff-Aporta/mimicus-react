@@ -1,0 +1,11 @@
+/**
+ * Segmented (display) — CSS
+ * demo: demo/config/demos/lib/Segmented.json
+ * llm:  ./Segmented.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Segmented.css
+ * Control segmentado de opciones mutuamente excluyentes.
+ */
+.mimicus-segmented { display: inline-flex; padding: 0.15rem; border-radius: 0.45rem; background: color-mix(in srgb, var(--mimicus-color) 6%, transparent); border: 1px solid var(--mimicus-border); }
+.mimicus-segmented--block { display: flex; width: 100%; }
+.mimicus-segmented__item { flex: 1 1 auto; border: 0; background: transparent; padding: 0.35rem 0.75rem; border-radius: 0.35rem; cursor: pointer; font: inherit; font-size: 0.82rem; color: inherit; opacity: 0.75; }
+.mimicus-segmented__item.is-active { background: var(--mimicus-primary); color: var(--mimicus-on-primary); opacity: 1; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }

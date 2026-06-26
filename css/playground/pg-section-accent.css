@@ -1,4 +1,8 @@
-/* Acento por sección — fondos/texto con alpha (nav tabs + rail + coherencia visual) */
+/**
+ * pg-section-accent (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/pg-section-accent.css
+ * Acento por sección — fondos/texto con alpha (nav tabs + rail + coherencia visual).
+ */
 
 .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
 	--sm-accent: var(--mimicus-design-active-1, var(--mimicus-primary));
@@ -21,44 +25,48 @@ html[data-luminance="light"] .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rai
 	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 9%, transparent);
 }
 
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="primary"] { --sm-accent: var(--mimicus-primary); }
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="info"] { --sm-accent: var(--mimicus-info); }
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="success"] { --sm-accent: var(--mimicus-success); }
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="warning"] { --sm-accent: var(--mimicus-warning); }
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="error"],
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="danger"] { --sm-accent: var(--mimicus-error, var(--mimicus-danger)); }
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color="color"] { --sm-accent: var(--mimicus-color); }
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn) {
+	&[data-section-color="primary"] { --sm-accent: var(--mimicus-primary); }
+	&[data-section-color="info"] { --sm-accent: var(--mimicus-info); }
+	&[data-section-color="success"] { --sm-accent: var(--mimicus-success); }
+	&[data-section-color="warning"] { --sm-accent: var(--mimicus-warning); }
+	&[data-section-color="error"],
+	&[data-section-color="danger"] { --sm-accent: var(--mimicus-error, var(--mimicus-danger)); }
+	&[data-section-color="color"] { --sm-accent: var(--mimicus-color); }
+}
 
 /* Seleccionado — tinte alpha sobre chrome (no bloque sólido) */
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="soft"] {
-	background: var(--pg-accent-bg-selected) !important;
-	color: var(--pg-accent-fg-selected) !important;
-	border: 1px solid var(--pg-accent-border-selected) !important;
-	box-shadow: inset 0 0 0 1px var(--pg-accent-ring-selected);
-}
+.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+	&[data-variant="soft"] {
+		background: var(--pg-accent-bg-selected) !important;
+		color: var(--pg-accent-fg-selected) !important;
+		border: 1px solid var(--pg-accent-border-selected) !important;
+		box-shadow: inset 0 0 0 1px var(--pg-accent-ring-selected);
+	}
 
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="soft"] :is(iconify-icon, .iconify) {
-	color: var(--pg-accent-fg-selected) !important;
-}
+	&[data-variant="soft"] :is(iconify-icon, .iconify) {
+		color: var(--pg-accent-fg-selected) !important;
+	}
 
-/* Idle — texto teñido suave, fondo transparente */
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"] {
-	background: transparent !important;
-	color: var(--pg-accent-fg-idle) !important;
-	border: 1px solid transparent !important;
-	box-shadow: none;
-}
+	/* Idle — texto teñido suave, fondo transparente */
+	&[data-variant="text"] {
+		background: transparent !important;
+		color: var(--pg-accent-fg-idle) !important;
+		border: 1px solid transparent !important;
+		box-shadow: none;
+	}
 
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"] :is(iconify-icon, .iconify) {
-	color: var(--pg-accent-fg-idle) !important;
-}
+	&[data-variant="text"] :is(iconify-icon, .iconify) {
+		color: var(--pg-accent-fg-idle) !important;
+	}
 
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"]:not(:disabled):hover {
-	background: var(--pg-accent-bg-hover) !important;
-	color: var(--pg-accent-fg-selected) !important;
-	border-color: color-mix(in srgb, var(--sm-accent) 22%, transparent) !important;
-}
+	&[data-variant="text"]:not(:disabled):hover {
+		background: var(--pg-accent-bg-hover) !important;
+		color: var(--pg-accent-fg-selected) !important;
+		border-color: color-mix(in srgb, var(--sm-accent) 22%, transparent) !important;
+	}
 
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color][data-variant="text"]:not(:disabled):hover :is(iconify-icon, .iconify) {
-	color: var(--pg-accent-fg-selected) !important;
+	&[data-variant="text"]:not(:disabled):hover :is(iconify-icon, .iconify) {
+		color: var(--pg-accent-fg-selected) !important;
+	}
 }

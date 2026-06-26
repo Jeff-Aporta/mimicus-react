@@ -1,0 +1,3 @@
+/* Isla CSS `spa`. */
+@import "./theme.css";
+@import "../components/view-transitions.css";

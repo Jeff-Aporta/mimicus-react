@@ -1,0 +1,13 @@
+/**
+ * BottomNavigation (navigation) — CSS
+ * demo: demo/config/demos/lib/BottomNavigation.json
+ * llm:  ./BottomNavigation.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/BottomNavigation.css
+ * Barra inferior de acciones con ícono y etiqueta condicional, marcando la acción activa.
+ */
+.mimicus-bottom-nav { display: flex; justify-content: space-around; align-items: stretch; width: 100%; min-height: 3.5rem; border-top: 1px solid var(--mimicus-border, rgba(0,0,0,.1)); background: var(--mimicus-surface, #fff); }
+.mimicus-bottom-nav__action { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem; padding: 0.35rem 0.25rem; border: none; background: transparent; color: var(--mimicus-text-secondary, rgba(0,0,0,.55)); font: inherit; font-size: 0.7rem; cursor: pointer; max-width: 6rem; }
+.mimicus-bottom-nav__action.is-active { color: var(--mimicus-primary, #1677ff); }
+.mimicus-bottom-nav:not(.mimicus-bottom-nav--labels) .mimicus-bottom-nav__label { display: none; }
+.mimicus-bottom-nav--labels .mimicus-bottom-nav__action.is-active .mimicus-bottom-nav__label { display: block; }
+.mimicus-bottom-nav__icon { font-size: 1.25rem; line-height: 1; }

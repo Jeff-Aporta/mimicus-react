@@ -1,0 +1,14 @@
+/**
+ * Descriptions (display) — CSS
+ * demo: demo/config/demos/lib/Descriptions.json
+ * llm:  ./Descriptions.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Descriptions.css
+ * Lista de pares etiqueta/valor en cuadrícula, con variante bordeada.
+ */
+.mimicus-descriptions__title { font-weight: 600; margin-bottom: 0.65rem; }
+.mimicus-descriptions__list { display: grid; grid-template-columns: repeat(var(--mimicus-desc-cols, 3), minmax(0, 1fr)); gap: 0.65rem 1rem; margin: 0; }
+.mimicus-descriptions__item { margin: 0; }
+.mimicus-descriptions__label { margin: 0; font-size: 0.78rem; opacity: 0.65; }
+.mimicus-descriptions__content { margin: 0.15rem 0 0; font-size: 0.88rem; }
+.mimicus-descriptions--bordered .mimicus-descriptions__list { border: 1px solid var(--mimicus-border); border-radius: 0.5rem; }
+.mimicus-descriptions--bordered .mimicus-descriptions__item { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--mimicus-border); }

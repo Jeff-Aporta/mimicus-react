@@ -1,3 +1,18 @@
+/**
+ * Puente de tokens semánticos → tokens canónicos de paleta.
+ * Las paletas (theme-color-palettes.css) definen `--mimicus-color`, `--mimicus-bg-*`
+ * y `--mimicus-b-*` por `data-theme-color`+`data-luminance`. Los componentes consumen
+ * nombres semánticos (`--mimicus-surface`/`-text`/`-border`/`-bg`); aquí se resuelven a
+ * los canónicos para que respondan a luminance + paleta sin color-math en JS.
+ */
+html {
+	--mimicus-surface: var(--mimicus-bg-secondary);
+	--mimicus-bg: var(--mimicus-bg-primary);
+	--mimicus-text: var(--mimicus-color);
+	--mimicus-text-secondary: color-mix(in srgb, var(--mimicus-color) 64%, transparent);
+	--mimicus-border: var(--mimicus-b-color);
+}
+
 @keyframes sz-pulse {
 	0%,
 	100% {

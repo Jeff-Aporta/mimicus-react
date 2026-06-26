@@ -1,0 +1,18 @@
+/**
+ * Calendar (display) — CSS
+ * demo: demo/config/demos/lib/Calendar.json
+ * llm:  ./Calendar.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Calendar.css
+ * Calendario mensual con cabecera, días de la semana y celdas seleccionables.
+ */
+.mimicus-calendar { border: 1px solid var(--mimicus-border); border-radius: 0.5rem; padding: 0.65rem; max-width: 22rem; }
+.mimicus-calendar--fullscreen { max-width: none; }
+.mimicus-calendar__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; }
+.mimicus-calendar__nav { border: 0; background: transparent; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.45rem; opacity: 0.8; }
+.mimicus-calendar__weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.15rem; margin-bottom: 0.25rem; font-size: 0.7rem; opacity: 0.6; text-align: center; }
+.mimicus-calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.15rem; }
+.mimicus-calendar__cell { aspect-ratio: 1; border: 0; border-radius: 0.35rem; background: transparent; cursor: pointer; font: inherit; font-size: 0.78rem; color: inherit; }
+.mimicus-calendar__cell:hover { background: color-mix(in srgb, var(--mimicus-color) 8%, transparent); }
+.mimicus-calendar__cell.is-today { border: 1px solid var(--mimicus-primary); }
+.mimicus-calendar__cell.is-selected { background: var(--mimicus-primary); color: var(--mimicus-on-primary); }
+.mimicus-calendar__cell--empty { pointer-events: none; }

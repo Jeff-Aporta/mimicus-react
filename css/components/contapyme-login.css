@@ -1,4 +1,8 @@
-/* Login ContaPyme — modal glass + chip de sesión (paridad front-shared LoginButton) */
+/**
+ * Login ContaPyme — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/contapyme-login.css
+ * Modal de login glass + chip de sesión (paridad front-shared LoginButton).
+ */
 
 .mimicus-login-dialog {
   padding: 0;
@@ -7,93 +11,87 @@
   max-width: min(28rem, 96vw);
   width: 100%;
   color: var(--mimicus-color, inherit);
-}
 
-.mimicus-login-dialog::backdrop {
-  background: color-mix(in srgb, var(--mimicus-bg-primary, #0b1220), transparent 35%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
+  &::backdrop {
+    background: color-mix(in srgb, var(--mimicus-bg-primary, #0b1220), transparent 35%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
 
-.mimicus-login-dialog__card {
-  border-radius: var(--mimicus-ui-radius, 0.5rem);
-  border: 1px solid var(--mimicus-glass-border-dark, color-mix(in srgb, var(--mimicus-primary), transparent 72%));
-  background: color-mix(in srgb, var(--mimicus-glass-bg-dark, var(--mimicus-bg-secondary)), transparent 28%);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  box-shadow: var(--mimicus-glass-shadow-dark, 0 8px 32px color-mix(in srgb, black, transparent 55%));
-  overflow: hidden;
-}
+  &__card {
+    border-radius: var(--mimicus-ui-radius, 0.5rem);
+    border: 1px solid var(--mimicus-glass-border-dark, color-mix(in srgb, var(--mimicus-primary), transparent 72%));
+    background: color-mix(in srgb, var(--mimicus-glass-bg-dark, var(--mimicus-bg-secondary)), transparent 28%);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    box-shadow: var(--mimicus-glass-shadow-dark, 0 8px 32px color-mix(in srgb, black, transparent 55%));
+    overflow: hidden;
+  }
 
-html[data-luminance="light"] .mimicus-login-dialog__card {
-  border-color: var(--mimicus-glass-border-light, color-mix(in srgb, var(--mimicus-primary), transparent 78%));
-  background: color-mix(in srgb, var(--mimicus-glass-bg-light, var(--mimicus-bg-secondary)), transparent 22%);
-  box-shadow: var(--mimicus-glass-shadow-light, 0 8px 28px color-mix(in srgb, var(--mimicus-color), transparent 88%));
-}
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1rem 0.85rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 35%);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--mimicus-primary), transparent 78%), transparent 72%);
+    border-left: 4px solid var(--mimicus-primary, #1e90ff);
+  }
 
-.mimicus-login-dialog__header {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem 1rem 0.85rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 35%);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--mimicus-primary), transparent 78%), transparent 72%);
-  border-left: 4px solid var(--mimicus-primary, #1e90ff);
-}
+  &__icon-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: var(--mimicus-ui-radius, 0.5rem);
+    background: linear-gradient(145deg, color-mix(in srgb, var(--mimicus-primary), transparent 55%), color-mix(in srgb, var(--mimicus-info, #5eb3ff), transparent 70%));
+    color: #fff;
+    flex-shrink: 0;
+  }
 
-.mimicus-login-dialog__icon-box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: var(--mimicus-ui-radius, 0.5rem);
-  background: linear-gradient(145deg, color-mix(in srgb, var(--mimicus-primary), transparent 55%), color-mix(in srgb, var(--mimicus-info, #5eb3ff), transparent 70%));
-  color: #fff;
-  flex-shrink: 0;
-}
+  &__titles {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
 
-.mimicus-login-dialog__titles {
-  flex: 1 1 auto;
-  min-width: 0;
-}
+  &__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
 
-.mimicus-login-dialog__title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
+  &__subtitle {
+    margin: 0.2rem 0 0;
+    font-size: 0.78rem;
+    opacity: 0.82;
+    line-height: 1.35;
+  }
 
-.mimicus-login-dialog__subtitle {
-  margin: 0.2rem 0 0;
-  font-size: 0.78rem;
-  opacity: 0.82;
-  line-height: 1.35;
-}
+  &__close {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0.1rem 0.25rem;
 
-.mimicus-login-dialog__close {
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font-size: 1.35rem;
-  line-height: 1;
-  cursor: pointer;
-  opacity: 0.7;
-  padding: 0.1rem 0.25rem;
-}
+    &:hover:not(:disabled) {
+      opacity: 1;
+    }
+  }
 
-.mimicus-login-dialog__close:hover:not(:disabled) {
-  opacity: 1;
-}
+  &__body {
+    padding: 1rem 1rem 0.5rem;
+  }
 
-.mimicus-login-dialog__body {
-  padding: 1rem 1rem 0.5rem;
-}
-
-.mimicus-login-dialog__footer {
-  padding: 0 1rem 1rem;
+  &__footer {
+    padding: 0 1rem 1rem;
+  }
 }
 
 .mimicus-login-form__alert {
@@ -126,6 +124,18 @@ html[data-luminance="light"] .mimicus-login-dialog__card {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+
+  &__menu-user {
+    display: block;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+
+  &__menu-role {
+    display: block;
+    font-size: 0.72rem;
+    opacity: 0.75;
+  }
 }
 
 .header-session-chip,
@@ -135,16 +145,10 @@ html[data-luminance="light"] .mimicus-login-dialog__card {
   padding-inline: 0.65rem;
 }
 
-.mimicus-login-button__menu-user {
-  display: block;
-  font-weight: 600;
-  font-size: 0.82rem;
-}
-
-.mimicus-login-button__menu-role {
-  display: block;
-  font-size: 0.72rem;
-  opacity: 0.75;
+html[data-luminance="light"] .mimicus-login-dialog__card {
+  border-color: var(--mimicus-glass-border-light, color-mix(in srgb, var(--mimicus-primary), transparent 78%));
+  background: color-mix(in srgb, var(--mimicus-glass-bg-light, var(--mimicus-bg-secondary)), transparent 22%);
+  box-shadow: var(--mimicus-glass-shadow-light, 0 8px 28px color-mix(in srgb, var(--mimicus-color), transparent 88%));
 }
 
 html[data-looknfeel="contapyme"] .mimicus-login-dialog__card {

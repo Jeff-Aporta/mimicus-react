@@ -1,3 +1,10 @@
+/**
+ * Space — isla: layout
+ * demo: demo/config/demos/lib/Space.json
+ * llm:  ./Space.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Space.jsx
+ * Espaciado uniforme entre hijos (Ant Space) con orientación, tamaño, wrap y separador opcional.
+ */
 import { Children } from "react";
 import { joinStyle } from "./layoutHelpers.js";
 

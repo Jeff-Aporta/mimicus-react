@@ -1,3 +1,10 @@
+/**
+ * SidePanelSection — isla: layout
+ * llm:  ./SidePanelSection.llm.md
+ * css:  css/components/side-panel.css
+ * repo: Jeff-Aporta/mimicus-react · src/layout/SidePanelSection.jsx
+ * Sección tipo acordeón para SidePanel: encabezado con icono, label, conteo y dots de estado.
+ */
 import { Button } from "../components/Button.jsx";
 import { Badge } from "../components/display/Display.jsx";
 import { resolveColor } from "../lib/resolveColor.js";

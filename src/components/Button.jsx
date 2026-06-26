@@ -1,3 +1,10 @@
+/**
+ * Button — isla: primitives
+ * demo: demo/config/demos/lib/Button.json
+ * llm:  ./Button.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/components/Button.jsx
+ * Botón polimórfico (button/a/div) con variantes, color de superficie, estados loading/disabled e icono.
+ */
 import { useState } from "react";
 import { normalizeVariant, isGlassVariant } from "../theme/constants.js";
 import { mergeSurfaceStyle } from "../lib/surfaceColor.js";

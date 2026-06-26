@@ -1,3 +1,10 @@
+/**
+ * Stack — isla: layout
+ * demo: demo/config/demos/lib/Stack.json
+ * llm:  ./Stack.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Stack.jsx
+ * Layout 1D estilo MUI Stack: dirección, spacing y divider entre hijos; delega en FlexLayout.
+ */
 import { Children } from "react";
 import { FlexLayout } from "./FlexLayout.jsx";
 

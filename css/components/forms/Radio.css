@@ -1,0 +1,17 @@
+/**
+ * Radio (forms) — CSS
+ * demo: demo/config/demos/lib/Radio.json
+ * llm:  ./Radio.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Radio.css
+ * Grupo de opciones de selección única (horizontal/vertical) con dot animado.
+ */
+
+/* ── Radio ── */
+.mimicus-radio-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.mimicus-radio-group--vertical { flex-direction: column; }
+.mimicus-radio { display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; }
+.mimicus-radio__native { position: absolute; opacity: 0; width: 0; height: 0; }
+.mimicus-radio__dot { width: 1.05rem; height: 1.05rem; border: 1.5px solid var(--mimicus-field-border); border-radius: 50%; position: relative; transition: border-color 0.2s; }
+.mimicus-radio__dot::after { content: ""; position: absolute; inset: 0.2rem; border-radius: 50%; background: var(--mimicus-primary, #1677ff); transform: scale(0); transition: transform 0.15s; }
+.mimicus-radio.is-checked .mimicus-radio__dot { border-color: var(--mimicus-primary, #1677ff); }
+.mimicus-radio.is-checked .mimicus-radio__dot::after { transform: scale(1); }

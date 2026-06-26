@@ -1,4 +1,8 @@
-/* Tarjeta del catálogo (paridad CatalogCard.svelte) */
+/**
+ * catalog-card (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/catalog-card.css
+ * Tarjeta del catálogo — preview, footer y sketch (paridad CatalogCard.svelte).
+ */
 
 .catalog-card {
 	display: flex;
@@ -23,17 +27,17 @@
 	color: var(--catalog-card-footer-fg);
 	font: inherit;
 	transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
 
-.catalog-card:hover {
-	border-color: var(--catalog-card-hover-border);
-	box-shadow: var(--catalog-card-hover-shadow);
-	transform: var(--catalog-card-hover-transform);
-}
+	&:hover {
+		border-color: var(--catalog-card-hover-border);
+		box-shadow: var(--catalog-card-hover-shadow);
+		transform: var(--catalog-card-hover-transform);
+	}
 
-.catalog-card:focus-visible {
-	outline: 2px solid var(--catalog-card-focus);
-	outline-offset: 2px;
+	&:focus-visible {
+		outline: 2px solid var(--catalog-card-focus);
+		outline-offset: 2px;
+	}
 }
 
 .catalog-card__preview {
@@ -49,13 +53,13 @@
 	-webkit-backdrop-filter: var(--catalog-card-preview-backdrop, none);
 	border-bottom: 1px solid var(--catalog-card-preview-border);
 	color: var(--catalog-card-preview-color);
-}
 
-.catalog-card__preview .demo-sketch {
-	width: 100%;
-	max-width: 10.5rem;
-	height: auto;
-	max-height: 100%;
+	& .demo-sketch {
+		width: 100%;
+		max-width: 10.5rem;
+		height: auto;
+		max-height: 100%;
+	}
 }
 
 .catalog-card__footer {

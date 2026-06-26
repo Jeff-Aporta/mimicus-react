@@ -1,3 +1,9 @@
+/**
+ * GridResponsiveForm — isla: layout
+ * llm:  ./GridResponsiveForm.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/GridResponsiveForm.jsx
+ * Rejilla de formulario responsive: nº de columnas según breakpoint (sizew), acotado por min/maxcells.
+ */
 import { BlockLayout } from "./BlockLayout.jsx";
 import { GridLayout } from "./GridLayout.jsx";
 import { useLayoutSlot } from "./layoutSlotContext.jsx";

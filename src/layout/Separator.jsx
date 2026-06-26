@@ -1,3 +1,9 @@
+/**
+ * Separator — isla: layout
+ * llm:  ./Separator.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Separator.jsx
+ * Línea separadora simple (hr inline) con grosor, estilo, color y márgenes configurables.
+ */
 import { resolveColor } from "../lib/resolveColor.js";
 
 export function Separator({
@@ -23,7 +29,7 @@ export function Separator({
         border: "none",
         borderTop: `${thickness}px ${borderStyle} ${lineColor}`,
         margin: `${startMargin}px 0 ${endMargin}px`,
-        ...style,
+        ...(style && typeof style === "object" ? style : {}),
       }
     : {
         display: "inline-block",
@@ -36,7 +42,7 @@ export function Separator({
         margin: `0 ${startMargin}px 0 ${endMargin}px`,
         verticalAlign: "middle",
         flexShrink: 0,
-        ...style,
+        ...(style && typeof style === "object" ? style : {}),
       };
 
   return <span className={cls} role="separator" aria-orientation={axis} style={mergedStyle} {...rest} />;

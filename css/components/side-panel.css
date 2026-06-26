@@ -1,4 +1,8 @@
-/* SidePanel — panel lateral replicable (playground + apps) */
+/**
+ * SidePanel — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/side-panel.css
+ * Panel lateral replicable (playground + apps) con blend de sección × chrome.
+ */
 
 .mimicus-side-panel {
 	--mimicus-side-panel-chrome: var(--pg-sidebar-chrome, var(--mimicus-bg-secondary));
@@ -12,14 +16,29 @@
 	overflow: hidden;
 	background: var(--mimicus-side-panel-chrome);
 	color: var(--mimicus-side-panel-fg);
-}
 
-.mimicus-side-panel__drawer-bar {
-	flex-shrink: 0;
-}
+	&__drawer-bar {
+		flex-shrink: 0;
+	}
 
-.mimicus-side-panel__header {
-	flex-shrink: 0;
+	&__header {
+		flex-shrink: 0;
+	}
+
+	&__body {
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		padding: clamp(0.35rem, 2vw, 0.5rem) clamp(0.35rem, 2vw, 0.45rem);
+	}
+
+	&__body--rail {
+		padding: 0;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
 }
 
 .pg-sidebar-header--panel {
@@ -36,21 +55,6 @@
 	justify-content: center;
 }
 
-.mimicus-side-panel__body {
-	flex: 1 1 auto;
-	min-height: 0;
-	overflow-x: hidden;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
-	padding: clamp(0.35rem, 2vw, 0.5rem) clamp(0.35rem, 2vw, 0.45rem);
-}
-
-.mimicus-side-panel__body--rail {
-	padding: 0;
-	overflow-x: hidden;
-	overflow-y: hidden;
-}
-
 .mimicus-side-panel-view--rail {
 	align-items: center;
 	padding-inline: 0;
@@ -63,12 +67,12 @@
 .mimicus-side-panel-section {
 	width: 100%;
 	min-width: 0;
-}
 
-.mimicus-side-panel-section__content {
-	border-top: 1px solid color-mix(in oklch, var(--sm-chrome, var(--mimicus-bg-secondary)) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
-	margin-top: 0.15rem;
-	padding-top: 0.2rem;
+	&__content {
+		border-top: 1px solid color-mix(in oklch, var(--sm-chrome, var(--mimicus-bg-secondary)) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
+		margin-top: 0.15rem;
+		padding-top: 0.2rem;
+	}
 }
 
 /* Blend sección × chrome del look (paridad pg-sidebar-section) */

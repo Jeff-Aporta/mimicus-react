@@ -1,3 +1,11 @@
+/**
+ * AppLayout — isla: layout
+ * demo: demo/config/demos/lib/AppLayout.json
+ * llm:  ./AppLayout.llm.md
+ * css:  css/components/app-layout.css
+ * repo: Jeff-Aporta/mimicus-react · src/layout/AppLayout.jsx
+ * Estructura de aplicación por slots (Header/Sider/Footer) sobre grid, con variantes y responsive.
+ */
 import { Children, isValidElement, useMemo } from "react";
 import { appLayoutGridTemplate, appLayoutResponsiveGridTemplate } from "./appLayoutVariants.js";
 import { useAppLayoutContext } from "./appLayoutContext.jsx";
@@ -31,6 +39,7 @@ Header.__appLayoutSlot = "header";
 Header.Brand = AppLayoutHeader.Brand;
 Header.Center = AppLayoutHeader.Center;
 Header.Tools = AppLayoutHeader.Tools;
+Header.Nav = AppLayoutHeader.Nav;
 
 function Sider({ children, width, collapsed, collapsible, collapsedWidth, theme, onCollapse, className, style, ...rest }) {
   const useSiderChrome = width !== undefined || collapsible || collapsed !== undefined || theme !== undefined;

@@ -1,0 +1,13 @@
+/**
+ * Tour (display) — CSS
+ * demo: demo/config/demos/lib/Tour.json
+ * llm:  ./Tour.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Tour.css
+ * Recorrido guiado con superposición, tarjeta de paso y resaltado del objetivo.
+ */
+.mimicus-tour { position: relative; }
+.mimicus-tour__overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 90; }
+.mimicus-tour__card { position: absolute; z-index: 95; min-width: 14rem; max-width: 18rem; padding: 0.85rem; border-radius: 0.5rem; background: var(--mimicus-surface); border: 1px solid var(--mimicus-border); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+.mimicus-tour__close { position: absolute; top: 0.35rem; right: 0.45rem; border: 0; background: transparent; cursor: pointer; opacity: 0.7; }
+.mimicus-tour__actions { display: flex; justify-content: flex-end; gap: 0.45rem; margin-top: 0.65rem; }
+.mimicus-tour-target { outline: 2px solid var(--mimicus-primary); outline-offset: 2px; border-radius: 0.25rem; }

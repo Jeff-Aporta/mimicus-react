@@ -1,0 +1,18 @@
+/**
+ * Carousel (display) — CSS
+ * demo: demo/config/demos/lib/Carousel.json
+ * llm:  ./Carousel.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Carousel.css
+ * Carrusel de diapositivas con flechas, indicadores y transición deslizante.
+ */
+.mimicus-carousel { position: relative; overflow: hidden; border-radius: 0.5rem; }
+.mimicus-carousel__viewport { overflow: hidden; }
+.mimicus-carousel__track { display: flex; transition: transform 0.5s ease; }
+.mimicus-carousel__slide { flex: 0 0 100%; min-height: 8rem; display: flex; align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
+.mimicus-carousel__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 2rem; height: 2rem; border: 0; border-radius: 50%; background: rgba(0,0,0,0.45); color: #fff; cursor: pointer; }
+.mimicus-carousel__arrow--prev { left: 0.5rem; }
+.mimicus-carousel__arrow--next { right: 0.5rem; }
+.mimicus-carousel__dots { display: flex; justify-content: center; gap: 0.35rem; padding: 0.5rem; }
+.mimicus-carousel__dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; border: 0; background: color-mix(in srgb, var(--mimicus-color) 25%, transparent); cursor: pointer; }
+.mimicus-carousel__dot.is-active { background: var(--mimicus-primary); width: 1.1rem; border-radius: 999px; }
+.mimicus-carousel--dots-top .mimicus-carousel__dots { order: -1; }

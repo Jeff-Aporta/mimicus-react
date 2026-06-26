@@ -1,141 +1,24 @@
-/* Data Display — Mimicus React */
-.mimicus-badge-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-.mimicus-badge { position: absolute; top: 0; right: 0; transform: translate(50%, -50%); min-width: 1.1rem; height: 1.1rem; padding: 0 0.3rem; border-radius: 999px; font-size: 0.65rem; font-weight: 600; line-height: 1.1rem; text-align: center; color: #fff; background: var(--mimicus-primary, #1677ff); box-shadow: 0 0 0 2px var(--mimicus-bg, #0d1117); z-index: 1; }
-.mimicus-badge--dot { width: 0.5rem; min-width: 0.5rem; height: 0.5rem; padding: 0; border-radius: 50%; }
-.mimicus-badge--success { background: #52c41a; }
-.mimicus-badge--error { background: #ff4d4f; }
-.mimicus-badge--warning { background: #faad14; }
-.mimicus-badge--small { min-width: 0.95rem; height: 0.95rem; font-size: 0.6rem; line-height: 0.95rem; }
-
-.mimicus-tag { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.15rem 0.55rem; border-radius: 0.35rem; font-size: 0.78rem; line-height: 1.35; border: 1px solid var(--mimicus-border, rgba(255,255,255,0.14)); background: rgba(255,255,255,0.04); }
-.mimicus-tag--pill { border-radius: 999px; }
-.mimicus-tag--round { border-radius: 0.65rem; }
-.mimicus-tag--rect { border-radius: 0.2rem; }
-.mimicus-tag--solid { background: var(--mimicus-primary, #1677ff); border-color: transparent; color: #fff; }
-.mimicus-tag--outlined { background: transparent; border-color: var(--mimicus-primary, #1677ff); color: var(--mimicus-primary, #1677ff); }
-.mimicus-tag--ghost { background: rgba(255,255,255,0.06); }
-.mimicus-tag--glass { backdrop-filter: blur(8px); background: rgba(255,255,255,0.08); }
-.mimicus-tag--upper { text-transform: uppercase; letter-spacing: 0.04em; }
-.mimicus-tag__close { border: 0; background: transparent; cursor: pointer; opacity: 0.7; padding: 0 0.1rem; font-size: 0.9rem; line-height: 1; }
-
-.mimicus-avatar { display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 50%; background: rgba(255,255,255,0.08); color: #fff; font-size: 0.75rem; font-weight: 600; }
-.mimicus-avatar--small { width: 1.5rem; height: 1.5rem; font-size: 0.65rem; }
-.mimicus-avatar--large { width: 2.75rem; height: 2.75rem; font-size: 0.9rem; }
-.mimicus-avatar--square { border-radius: 0.35rem; }
-.mimicus-avatar--rounded { border-radius: 0.65rem; }
-.mimicus-avatar__img { width: 100%; height: 100%; object-fit: cover; }
-.mimicus-avatar-group { display: inline-flex; align-items: center; }
-.mimicus-avatar-group .mimicus-avatar { margin-inline-start: -0.45rem; border: 2px solid var(--mimicus-bg, #0d1117); }
-.mimicus-avatar-group .mimicus-avatar:first-child { margin-inline-start: 0; }
-.mimicus-avatar-group--small .mimicus-avatar { margin-inline-start: -0.3rem; }
-.mimicus-avatar-group__surplus { background: rgba(255,255,255,0.12); }
-
-.mimicus-carousel { position: relative; overflow: hidden; border-radius: 0.5rem; }
-.mimicus-carousel__viewport { overflow: hidden; }
-.mimicus-carousel__track { display: flex; transition: transform 0.5s ease; }
-.mimicus-carousel__slide { flex: 0 0 100%; min-height: 8rem; display: flex; align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
-.mimicus-carousel__arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 2rem; height: 2rem; border: 0; border-radius: 50%; background: rgba(0,0,0,0.45); color: #fff; cursor: pointer; }
-.mimicus-carousel__arrow--prev { left: 0.5rem; }
-.mimicus-carousel__arrow--next { right: 0.5rem; }
-.mimicus-carousel__dots { display: flex; justify-content: center; gap: 0.35rem; padding: 0.5rem; }
-.mimicus-carousel__dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; border: 0; background: rgba(255,255,255,0.25); cursor: pointer; }
-.mimicus-carousel__dot.is-active { background: var(--mimicus-primary, #1677ff); width: 1.1rem; border-radius: 999px; }
-.mimicus-carousel--dots-top .mimicus-carousel__dots { order: -1; }
-
-.mimicus-collapse { border: 1px solid var(--mimicus-border, rgba(255,255,255,0.12)); border-radius: 0.5rem; overflow: hidden; }
-.mimicus-collapse__panel + .mimicus-collapse__panel { border-top: 1px solid var(--mimicus-border, rgba(255,255,255,0.1)); }
-.mimicus-collapse__trigger { width: 100%; display: flex; align-items: center; gap: 0.45rem; padding: 0.65rem 0.85rem; border: 0; background: rgba(255,255,255,0.03); color: inherit; cursor: pointer; text-align: left; font: inherit; }
-.mimicus-collapse__panel.is-open .mimicus-collapse__arrow { transform: rotate(90deg); }
-.mimicus-collapse__body { padding: 0.65rem 0.85rem 0.85rem 1.65rem; font-size: 0.88rem; opacity: 0.92; }
-
-.mimicus-descriptions__title { font-weight: 600; margin-bottom: 0.65rem; }
-.mimicus-descriptions__list { display: grid; grid-template-columns: repeat(var(--mimicus-desc-cols, 3), minmax(0, 1fr)); gap: 0.65rem 1rem; margin: 0; }
-.mimicus-descriptions__item { margin: 0; }
-.mimicus-descriptions__label { margin: 0; font-size: 0.78rem; opacity: 0.65; }
-.mimicus-descriptions__content { margin: 0.15rem 0 0; font-size: 0.88rem; }
-.mimicus-descriptions--bordered .mimicus-descriptions__list { border: 1px solid var(--mimicus-border, rgba(255,255,255,0.12)); border-radius: 0.5rem; }
-.mimicus-descriptions--bordered .mimicus-descriptions__item { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--mimicus-border, rgba(255,255,255,0.08)); }
-
-.mimicus-empty { display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; text-align: center; }
-.mimicus-empty__image { width: 4.5rem; height: 3.5rem; margin-bottom: 0.65rem; opacity: 0.45; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 41'%3E%3Cpath fill='%23999' d='M53 0H11C4.9 0 0 4.9 0 11v19c0 6.1 4.9 11 11 11h42c6.1 0 11-4.9 11-11V11c0-6.1-4.9-11-11-11z'/%3E%3C/svg%3E") center/contain no-repeat; }
-.mimicus-empty--simple .mimicus-empty__image { width: 2.5rem; height: 2rem; }
-.mimicus-empty__desc { margin: 0; font-size: 0.88rem; opacity: 0.65; }
-.mimicus-empty__footer { margin-top: 0.85rem; }
-
-.mimicus-qrcode { display: inline-block; line-height: 0; }
-.mimicus-qrcode--bordered { padding: 0.35rem; border: 1px solid var(--mimicus-border, rgba(255,255,255,0.12)); border-radius: 0.35rem; background: #fff; }
-
-.mimicus-segmented { display: inline-flex; padding: 0.15rem; border-radius: 0.45rem; background: rgba(255,255,255,0.06); border: 1px solid var(--mimicus-border, rgba(255,255,255,0.1)); }
-.mimicus-segmented--block { display: flex; width: 100%; }
-.mimicus-segmented__item { flex: 1 1 auto; border: 0; background: transparent; padding: 0.35rem 0.75rem; border-radius: 0.35rem; cursor: pointer; font: inherit; font-size: 0.82rem; color: inherit; opacity: 0.75; }
-.mimicus-segmented__item.is-active { background: var(--mimicus-primary, #1677ff); color: #fff; opacity: 1; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-
-.mimicus-statistic__title { font-size: 0.78rem; opacity: 0.7; margin-bottom: 0.25rem; }
-.mimicus-statistic__value { font-size: 1.65rem; font-weight: 600; line-height: 1.2; }
-.mimicus-statistic__prefix, .mimicus-statistic__suffix { font-size: 1rem; opacity: 0.85; }
-
-.mimicus-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-.mimicus-table th, .mimicus-table td { padding: 0.55rem 0.75rem; text-align: left; border-bottom: 1px solid var(--mimicus-border, rgba(255,255,255,0.1)); }
-.mimicus-table--bordered th, .mimicus-table--bordered td { border: 1px solid var(--mimicus-border, rgba(255,255,255,0.1)); }
-.mimicus-table__sortable { cursor: pointer; user-select: none; }
-.mimicus-table__sortable.is-asc::after { content: " ↑"; opacity: 0.6; }
-.mimicus-table__sortable.is-desc::after { content: " ↓"; opacity: 0.6; }
-.mimicus-table--small th, .mimicus-table--small td { padding: 0.35rem 0.55rem; font-size: 0.78rem; }
-
-.mimicus-timeline { list-style: none; margin: 0; padding: 0 0 0 0.35rem; }
-.mimicus-timeline__item { position: relative; display: flex; gap: 0.65rem; padding-bottom: 1rem; }
-.mimicus-timeline__item:not(:last-child)::before { content: ""; position: absolute; left: 0.42rem; top: 1rem; bottom: 0; width: 2px; background: var(--mimicus-border, rgba(255,255,255,0.15)); }
-.mimicus-timeline__dot { width: 0.85rem; height: 0.85rem; border-radius: 50%; background: var(--mimicus-primary, #1677ff); flex-shrink: 0; margin-top: 0.15rem; }
-.mimicus-timeline__label { font-size: 0.75rem; opacity: 0.65; margin-bottom: 0.2rem; }
-.mimicus-timeline__item--success .mimicus-timeline__dot { background: #52c41a; }
-.mimicus-timeline__item--error .mimicus-timeline__dot { background: #ff4d4f; }
-
-.mimicus-tooltip { position: relative; display: inline-flex; }
-.mimicus-tooltip__popup { position: absolute; z-index: 50; padding: 0.35rem 0.55rem; font-size: 0.75rem; line-height: 1.35; border-radius: 0.35rem; background: rgba(0,0,0,0.85); color: #fff; white-space: nowrap; pointer-events: none; }
-.mimicus-tooltip.is-open .mimicus-tooltip__popup { pointer-events: auto; }
-.mimicus-tooltip[data-placement="top"] .mimicus-tooltip__popup { bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
-.mimicus-tooltip[data-placement="bottom"] .mimicus-tooltip__popup { top: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
-.mimicus-tooltip[data-placement="left"] .mimicus-tooltip__popup { right: calc(100% + 6px); top: 50%; transform: translateY(-50%); }
-.mimicus-tooltip[data-placement="right"] .mimicus-tooltip__popup { left: calc(100% + 6px); top: 50%; transform: translateY(-50%); }
-
-.mimicus-tour { position: relative; }
-.mimicus-tour__overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 90; }
-.mimicus-tour__card { position: absolute; z-index: 95; min-width: 14rem; max-width: 18rem; padding: 0.85rem; border-radius: 0.5rem; background: var(--mimicus-surface, #1a1f2b); border: 1px solid var(--mimicus-border, rgba(255,255,255,0.12)); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-.mimicus-tour__close { position: absolute; top: 0.35rem; right: 0.45rem; border: 0; background: transparent; cursor: pointer; opacity: 0.7; }
-.mimicus-tour__actions { display: flex; justify-content: flex-end; gap: 0.45rem; margin-top: 0.65rem; }
-.mimicus-tour-target { outline: 2px solid var(--mimicus-primary, #1677ff); outline-offset: 2px; border-radius: 0.25rem; }
-
-.mimicus-tree__node { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; padding: 0.2rem 0; font-size: 0.85rem; }
-.mimicus-tree__children { flex: 0 0 100%; }
-.mimicus-tree__switcher { width: 1.1rem; height: 1.1rem; border: 0; background: transparent; cursor: pointer; padding: 0; font-size: 0.7rem; opacity: 0.75; }
-.mimicus-tree__switcher--leaf { display: inline-block; width: 1.1rem; }
-.mimicus-tree__node:not(.is-expanded) > .mimicus-tree__children { display: none; }
-.mimicus-tree__node:not(.is-expanded) .mimicus-tree__switcher { transform: rotate(-90deg); }
-
-.mimicus-calendar { border: 1px solid var(--mimicus-border, rgba(255,255,255,0.12)); border-radius: 0.5rem; padding: 0.65rem; max-width: 22rem; }
-.mimicus-calendar--fullscreen { max-width: none; }
-.mimicus-calendar__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; }
-.mimicus-calendar__nav { border: 0; background: transparent; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.45rem; opacity: 0.8; }
-.mimicus-calendar__weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.15rem; margin-bottom: 0.25rem; font-size: 0.7rem; opacity: 0.6; text-align: center; }
-.mimicus-calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.15rem; }
-.mimicus-calendar__cell { aspect-ratio: 1; border: 0; border-radius: 0.35rem; background: transparent; cursor: pointer; font: inherit; font-size: 0.78rem; color: inherit; }
-.mimicus-calendar__cell:hover { background: rgba(255,255,255,0.08); }
-.mimicus-calendar__cell.is-today { border: 1px solid var(--mimicus-primary, #1677ff); }
-.mimicus-calendar__cell.is-selected { background: var(--mimicus-primary, #1677ff); color: #fff; }
-.mimicus-calendar__cell--empty { pointer-events: none; }
-
-.mimicus-list { list-style: none; margin: 0; padding: 0; border-radius: 0.5rem; border: 1px solid var(--mimicus-border, rgba(255,255,255,0.1)); overflow: hidden; }
-.mimicus-list--dense .mimicus-list-item { padding-block: 0.35rem; }
-.mimicus-list--gutterless .mimicus-list-item { padding-inline: 0; }
-.mimicus-list__subheader { padding: 0.55rem 1rem; font-size: 0.75rem; font-weight: 600; opacity: 0.65; background: rgba(255,255,255,0.03); }
-.mimicus-list-item { display: flex; align-items: center; gap: 0.65rem; padding: 0.65rem 1rem; border: 0; width: 100%; background: transparent; color: inherit; font: inherit; text-align: left; }
-.mimicus-list-item + .mimicus-list-item { border-top: 1px solid var(--mimicus-border, rgba(255,255,255,0.08)); }
-.mimicus-list-item--button { cursor: pointer; }
-.mimicus-list-item--button:hover { background: rgba(255,255,255,0.04); }
-.mimicus-list-item__primary { display: block; font-size: 0.88rem; }
-.mimicus-list-item__secondary { display: block; font-size: 0.75rem; opacity: 0.65; margin-top: 0.1rem; }
-.mimicus-list-item__secondary-action { margin-left: auto; }
-.mimicus-display-preview { width: 100%; max-width: 100%; }
-
-.mimicus-nav-preview.mimicus-display-preview,
-.mimicus-form-preview.mimicus-display-preview { padding: 0.25rem 0; }
+/**
+ * Data Display (display) — índice CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/display.css
+ * Punto de entrada que reexporta cada componente display desde ./display/*.
+ * El orden de los @import preserva el del monolito original.
+ */
+@import "./display/Badge.css";
+@import "./display/Tag.css";
+@import "./display/Avatar.css";
+@import "./display/Carousel.css";
+@import "./display/Collapse.css";
+@import "./display/Descriptions.css";
+@import "./display/Empty.css";
+@import "./display/QRCode.css";
+@import "./display/Segmented.css";
+@import "./display/Statistic.css";
+@import "./display/Table.css";
+@import "./display/Timeline.css";
+@import "./display/Tooltip.css";
+@import "./display/Tour.css";
+@import "./display/Tree.css";
+@import "./display/Calendar.css";
+@import "./display/List.css";
+@import "./display/_base.css";

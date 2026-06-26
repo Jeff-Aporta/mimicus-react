@@ -1,0 +1,7 @@
+/**
+ * looknfeel: contapyme (skin)
+ * llm:  ./contapyme.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/looknfeel/contapyme.css
+ * Skin "aplicación" ContaPyme (esquema triad). Opt-in: cargar solo si se usa este looknfeel.
+ */
+@import "../theme/playground-contapyme.css";

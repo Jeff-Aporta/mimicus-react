@@ -11,7 +11,7 @@ Atributos en `<html>`:
 | `data-luminance` | `light` \| `dark` |
 | `data-theme-color` | 13 paletas (`hues-dodgerblue`, `vulcano`, …) |
 | `data-design-scheme` | `mono` \| `dual` \| `triad` |
-| `data-looknfeel` | `contapyme`, `neon-*`, `mac-liquidglass`, `w*`, `lab-*` |
+| `data-looknfeel` | `contapyme`, `neon-mono`, `neon-dual`, `neon-triad` |
 
 Componentes usan `data-variant` + `data-surface-color`. Tokens CSS: `--mimicus-*`.
 

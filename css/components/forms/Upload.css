@@ -1,0 +1,14 @@
+/**
+ * Upload (forms) — CSS
+ * demo: demo/config/demos/lib/Upload.json
+ * llm:  ./Upload.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Upload.css
+ * Carga de archivos: input oculto, disparador, botón punteado y lista de archivos.
+ */
+
+/* ── Upload ── */
+.mimicus-upload__native { position: absolute; width: 0; height: 0; opacity: 0; }
+.mimicus-upload__trigger { display: inline-block; cursor: pointer; }
+.mimicus-upload__btn { display: inline-flex; padding: 0.45rem 0.85rem; border: 1px dashed var(--mimicus-primary, #1677ff); border-radius: var(--mimicus-field-radius); color: var(--mimicus-primary, #1677ff); background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 6%, transparent); }
+.mimicus-upload__list { list-style: none; margin: 0.5rem 0 0; padding: 0; font-size: 0.85rem; }
+.mimicus-upload__file { padding: 0.25rem 0; opacity: 0.85; }

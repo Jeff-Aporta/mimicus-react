@@ -1,0 +1,18 @@
+/**
+ * List (display) — CSS
+ * demo: demo/config/demos/lib/List.json
+ * llm:  ./List.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/List.css
+ * Lista de ítems con densidad, subcabeceras, ítems accionables y textos secundarios.
+ */
+.mimicus-list { list-style: none; margin: 0; padding: 0; border-radius: 0.5rem; border: 1px solid var(--mimicus-border); overflow: hidden; }
+.mimicus-list--dense .mimicus-list-item { padding-block: 0.35rem; }
+.mimicus-list--gutterless .mimicus-list-item { padding-inline: 0; }
+.mimicus-list__subheader { padding: 0.55rem 1rem; font-size: 0.75rem; font-weight: 600; opacity: 0.65; background: color-mix(in srgb, var(--mimicus-color) 3%, transparent); }
+.mimicus-list-item { display: flex; align-items: center; gap: 0.65rem; padding: 0.65rem 1rem; border: 0; width: 100%; background: transparent; color: inherit; font: inherit; text-align: left; }
+.mimicus-list-item + .mimicus-list-item { border-top: 1px solid var(--mimicus-border); }
+.mimicus-list-item--button { cursor: pointer; }
+.mimicus-list-item--button:hover { background: color-mix(in srgb, var(--mimicus-color) 5%, transparent); }
+.mimicus-list-item__primary { display: block; font-size: 0.88rem; }
+.mimicus-list-item__secondary { display: block; font-size: 0.75rem; opacity: 0.65; margin-top: 0.1rem; }
+.mimicus-list-item__secondary-action { margin-left: auto; }

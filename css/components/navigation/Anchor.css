@@ -1,0 +1,18 @@
+/**
+ * Anchor (navigation) — CSS
+ * demo: demo/config/demos/lib/Anchor.json
+ * llm:  ./Anchor.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Anchor.css
+ * Lista de anclas verticales/horizontales con marcador activo y demo con scroll.
+ */
+.mimicus-anchor { --mimicus-anchor-ink: var(--mimicus-primary, #1677ff); font-size: 0.875rem; }
+.mimicus-anchor__list { display: flex; flex-direction: column; gap: 0.15rem; margin: 0; padding: 0; list-style: none; }
+.mimicus-anchor--horizontal .mimicus-anchor__list { flex-direction: row; flex-wrap: wrap; gap: 0.35rem; }
+.mimicus-anchor__link { position: relative; display: block; padding: 0.35rem 0 0.35rem 0.85rem; color: var(--mimicus-text-secondary, rgba(0,0,0,.65)); text-decoration: none; border-left: 2px solid var(--mimicus-border, rgba(0,0,0,.08)); transition: color .2s, border-color .2s; }
+.mimicus-anchor--horizontal .mimicus-anchor__link { padding: 0.45rem 0.65rem; border-left: none; border-bottom: 2px solid transparent; }
+.mimicus-anchor__link:hover { color: var(--mimicus-anchor-ink); }
+.mimicus-anchor__link.is-active { color: var(--mimicus-anchor-ink); border-color: var(--mimicus-anchor-ink); font-weight: 600; }
+.mimicus-anchor-demo { display: grid; grid-template-columns: minmax(7rem, 9rem) 1fr; gap: 1rem; align-items: start; }
+.mimicus-anchor-demo--horizontal { grid-template-columns: 1fr; }
+.mimicus-anchor-demo__scroll { max-height: 14rem; overflow: auto; border: 1px solid var(--mimicus-border, rgba(0,0,0,.1)); border-radius: 0.5rem; padding: 0.5rem; }
+.mimicus-anchor-demo__section { min-height: 5rem; padding: 0.75rem; margin-bottom: 0.5rem; border-radius: 0.35rem; background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 6%, transparent); }

@@ -1,0 +1,12 @@
+/**
+ * Dropdown (navigation) — CSS
+ * demo: demo/config/demos/lib/Dropdown.json
+ * llm:  ./Dropdown.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Dropdown.css
+ * Disparador con panel flotante posicionable y oculto cuando está cerrado.
+ */
+.mimicus-dropdown { position: relative; display: inline-block; }
+.mimicus-dropdown__panel { position: absolute; z-index: 50; min-width: 10rem; margin-top: 0.35rem; padding: 0.25rem; border-radius: 0.5rem; border: 1px solid var(--mimicus-border, rgba(0,0,0,.1)); background: var(--mimicus-surface, #fff); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+.mimicus-dropdown--bottomRight .mimicus-dropdown__panel { right: 0; left: auto; }
+.mimicus-dropdown--topLeft .mimicus-dropdown__panel { bottom: calc(100% + 0.35rem); top: auto; }
+.mimicus-dropdown:not(.is-open) .mimicus-dropdown__panel { display: none; }

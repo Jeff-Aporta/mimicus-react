@@ -31,7 +31,7 @@ export function Input({
   value, defaultValue, onChange, size = "medium", status, prefix, suffix, allowClear, disabled, readOnly,
   placeholder, type = "text", className, style, ...rest
 }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return (
     <span className={cx("mimicus-input", `mimicus-input--${size}`, status && `is-${status}`, disabled && "is-disabled", className)} style={style}>
       {prefix && <span className="mimicus-input__affix mimicus-input__prefix">{prefix}</span>}
@@ -45,7 +45,7 @@ export function Input({
 export const TextField = Input;
 
 export function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, className, style, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return (
     <textarea {...rest} rows={rows} className={cx("mimicus-textarea", autoSize && "mimicus-textarea--autosize", className)} style={style}
       value={val ?? ""} onChange={(e) => set(e.target.value)} />
@@ -55,7 +55,7 @@ export function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, cl
 /* ── InputNumber ── */
 export function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, size = "medium", disabled, className, style, ...rest }) {
   const ref = useRef(null);
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "input-number", [min, max, step, val]);
   return (
     <span ref={ref} className={cx("mimicus-input-number", `mimicus-input-number--${size}`, disabled && "is-disabled", className)} style={style}
@@ -72,7 +72,7 @@ export function InputNumber({ value, defaultValue = 0, onChange, min, max, step 
 export function Checkbox({
   checked, defaultChecked = false, onChange, indeterminate, disabled, loading, size = "medium", children, className, style, ...rest
 }) {
-  const [on, setOn] = useCtrl(checked, defaultChecked, onChange);
+  const [on, set] = useCtrl(checked, defaultChecked, onChange);
   const id = useId();
   return (
     <label className={cx("mimicus-checkbox", `mimicus-checkbox--${size}`, on && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className)} style={style}>
@@ -108,7 +108,7 @@ export function CheckboxChip({ value, options, onChange, className, style }) {
 
 /* ── Switch ── */
 export function Switch({ checked, defaultChecked = false, onChange, disabled, loading, size = "medium", children, className, style, ...rest }) {
-  const [on, setOn] = useCtrl(checked, defaultChecked, onChange);
+  const [on, set] = useCtrl(checked, defaultChecked, onChange);
   return (
     <label className={cx("mimicus-switch", `mimicus-switch--${size}`, on && "is-checked", disabled && "is-disabled", loading && "is-loading", className)} style={style}>
       <input {...rest} type="checkbox" role="switch" className="mimicus-switch__native" checked={Boolean(on)} disabled={disabled || loading}
@@ -141,7 +141,7 @@ export function Radio({ value, checked, defaultChecked, onChange, disabled, chil
 
 export function RadioGroup({ value, defaultValue, onChange, name, direction = "horizontal", options, children, className, style, ...rest }) {
   const groupName = useId();
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   const resolvedName = name ?? groupName;
   const body = children ?? options?.map((opt) => (
     <Radio key={opt.value} name={resolvedName} value={opt.value} checked={val === opt.value} disabled={opt.disabled}
@@ -157,7 +157,7 @@ export function RadioGroup({ value, defaultValue, onChange, name, direction = "h
 /* ── Slider ── */
 export function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 1, disabled, vertical, className, style, showValue, ...rest }) {
   const ref = useRef(null);
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "slider", [min, max, step]);
   return (
     <div ref={ref} {...rest} className={cx("mimicus-slider", vertical && "mimicus-slider--vertical", disabled && "is-disabled", className)}
@@ -173,7 +173,7 @@ export function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, 
 /* ── Rate / Rating ── */
 export function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "★", size = "medium", className, style, ...rest }) {
   const ref = useRef(null);
-  const [val, setVal] = useCtrl(value, defaultValue, onChange);
+  const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "rate", [count, allowHalf, allowClear, val, disabled]);
   return (
     <div ref={ref} {...rest} role="radiogroup" className={cx("mimicus-rate", `mimicus-rate--${size}`, disabled && "is-disabled", className)} style={style}
@@ -189,7 +189,7 @@ export const Rating = Rate;
 
 /* ── Select ── */
 export function Select({ value, defaultValue, onChange, options, placeholder, disabled, size = "medium", className, style, children, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return (
     <span className={cx("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className)} style={style}>
       <select {...rest} className="mimicus-select__native" value={val ?? ""} disabled={disabled} onChange={(e) => set(e.target.value)}>
@@ -204,7 +204,7 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
 /* ── AutoComplete ── */
 export function AutoComplete({ options = [], value, defaultValue, onChange, onSelect, placeholder, disabled, className, style, ...rest }) {
   const ref = useRef(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   useFormBinding(ref, "autocomplete", [options.length]);
   return (
     <div ref={ref} className={cx("mimicus-autocomplete", disabled && "is-disabled", className)} style={style} data-mimicus-form="autocomplete">
@@ -235,7 +235,7 @@ export function ToggleButton({ value, selected, onChange, disabled, children, ic
 
 export function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", size, children, className, style, ...rest }) {
   const ref = useRef(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
   useFormBinding(ref, "toggle-group", [exclusive, val, orientation]);
   const normalized = exclusive ? val : (Array.isArray(val) ? val.join(",") : val);
   return (
@@ -325,7 +325,7 @@ export function Upload({ accept, multiple, disabled, children, className, style,
 /* ── ColorPicker ── */
 export function ColorPicker({ value = "#1677ff", defaultValue, onChange, disabled, className, style, ...rest }) {
   const ref = useRef(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
   useFormBinding(ref, "color-picker", [val]);
   return (
     <div ref={ref} className={cx("mimicus-color-picker", disabled && "is-disabled", className)} style={style}
@@ -339,12 +339,12 @@ export function ColorPicker({ value = "#1677ff", defaultValue, onChange, disable
 
 /* ── DatePicker / TimePicker ── */
 export function DatePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return <Input {...rest} type="date" className={cx("mimicus-date-picker", className)} style={style} value={val} disabled={disabled} onChange={set} />;
 }
 
 export function TimePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return <Input {...rest} type="time" className={cx("mimicus-time-picker", className)} style={style} value={val} disabled={disabled} onChange={set} />;
 }
 
@@ -395,7 +395,7 @@ export function TreeSelect({ treeData = [], value, onChange, placeholder = "Sele
 /* ── Mentions ── */
 export function Mentions({ options = [], value, defaultValue, onChange, rows = 3, placeholder, disabled, className, style, ...rest }) {
   const ref = useRef(null);
-  const [val, setVal] = useCtrl(value, defaultValue ?? "", onChange);
+  const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   useFormBinding(ref, "mentions", [options.length]);
   return (
     <div ref={ref} className={cx("mimicus-mentions", disabled && "is-disabled", className)} style={style} data-mimicus-form="mentions">

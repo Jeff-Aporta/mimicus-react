@@ -1,0 +1,14 @@
+/**
+ * Tooltip (display) — CSS
+ * demo: demo/config/demos/lib/Tooltip.json
+ * llm:  ./Tooltip.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Tooltip.css
+ * Globo informativo posicionable en los cuatro lados del disparador.
+ */
+.mimicus-tooltip { position: relative; display: inline-flex; }
+.mimicus-tooltip__popup { position: absolute; z-index: 50; padding: 0.35rem 0.55rem; font-size: 0.75rem; line-height: 1.35; border-radius: 0.35rem; background: rgba(0,0,0,0.85); color: #fff; white-space: nowrap; pointer-events: none; }
+.mimicus-tooltip.is-open .mimicus-tooltip__popup { pointer-events: auto; }
+.mimicus-tooltip[data-placement="top"] .mimicus-tooltip__popup { bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
+.mimicus-tooltip[data-placement="bottom"] .mimicus-tooltip__popup { top: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
+.mimicus-tooltip[data-placement="left"] .mimicus-tooltip__popup { right: calc(100% + 6px); top: 50%; transform: translateY(-50%); }
+.mimicus-tooltip[data-placement="right"] .mimicus-tooltip__popup { left: calc(100% + 6px); top: 50%; transform: translateY(-50%); }

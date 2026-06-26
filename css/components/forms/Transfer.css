@@ -1,0 +1,26 @@
+/**
+ * Transfer (forms) — CSS
+ * demo: demo/config/demos/lib/Transfer.json
+ * llm:  ./Transfer.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Transfer.css
+ * Transferencia entre listas y tablero drag-and-drop de tarjetas.
+ */
+
+/* ── Transfer ── */
+.mimicus-transfer { display: flex; align-items: stretch; gap: 0.65rem; width: 100%; }
+.mimicus-transfer__panel { flex: 1; min-width: 0; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); display: flex; flex-direction: column; }
+.mimicus-transfer__title { padding: 0.5rem 0.75rem; font-size: 0.8rem; font-weight: 600; border-bottom: 1px solid var(--mimicus-field-border); }
+.mimicus-transfer__list { list-style: none; margin: 0; padding: 0.35rem; min-height: 8rem; max-height: 12rem; overflow: auto; }
+.mimicus-transfer__item { padding: 0.45rem 0.65rem; border-radius: 0.35rem; cursor: pointer; font-size: 0.875rem; }
+.mimicus-transfer__item:hover { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 8%, transparent); }
+.mimicus-transfer__item.is-selected { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 16%, transparent); font-weight: 600; }
+.mimicus-transfer__actions { display: flex; flex-direction: column; justify-content: center; gap: 0.35rem; }
+.mimicus-transfer__action { width: 2rem; height: 2rem; border: 1px solid var(--mimicus-field-border); border-radius: 0.35rem; background: var(--mimicus-surface, #fff); cursor: pointer; }
+
+.mimicus-transfer-board { display: flex; gap: 0.65rem; overflow-x: auto; padding: 0.25rem; }
+.mimicus-transfer-board__stack { flex: 0 0 auto; border: 1px solid var(--mimicus-field-border); border-radius: 0.65rem; background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 5%, var(--mimicus-surface, #fff)); padding: 0.5rem; }
+.mimicus-transfer-board__stack.is-drag-over { outline: 2px dashed var(--mimicus-primary, #1677ff); }
+.mimicus-transfer-board__stack-title { font-size: 0.75rem; font-weight: 700; margin-bottom: 0.45rem; opacity: 0.85; }
+.mimicus-transfer-board__list { list-style: none; margin: 0; padding: 0; min-height: 6rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.mimicus-transfer-board__card { padding: 0.5rem 0.65rem; border-radius: 0.45rem; background: var(--mimicus-surface, #fff); border: 1px solid var(--mimicus-field-border); font-size: 0.85rem; cursor: grab; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
+.mimicus-transfer-board__card.is-dragging { opacity: 0.55; }

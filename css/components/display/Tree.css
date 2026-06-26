@@ -1,0 +1,13 @@
+/**
+ * Tree (display) — CSS
+ * demo: demo/config/demos/lib/Tree.json
+ * llm:  ./Tree.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Tree.css
+ * Árbol jerárquico con nodos expandibles e interruptor de hoja.
+ */
+.mimicus-tree__node { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; padding: 0.2rem 0; font-size: 0.85rem; }
+.mimicus-tree__children { flex: 0 0 100%; }
+.mimicus-tree__switcher { width: 1.1rem; height: 1.1rem; border: 0; background: transparent; cursor: pointer; padding: 0; font-size: 0.7rem; opacity: 0.75; }
+.mimicus-tree__switcher--leaf { display: inline-block; width: 1.1rem; }
+.mimicus-tree__node:not(.is-expanded) > .mimicus-tree__children { display: none; }
+.mimicus-tree__node:not(.is-expanded) .mimicus-tree__switcher { transform: rotate(-90deg); }

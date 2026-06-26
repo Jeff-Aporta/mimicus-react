@@ -1,0 +1,24 @@
+/**
+ * Base (forms) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/_base.css
+ * Tokens compartidos (--mimicus-field-*) y overlays neon comunes a todos los forms.
+ */
+
+:root {
+  --mimicus-field-bg: color-mix(in srgb, var(--mimicus-surface, #fff) 92%, var(--mimicus-primary, #1677ff) 8%);
+  --mimicus-field-border: var(--mimicus-border, rgba(0, 0, 0, 0.12));
+  --mimicus-field-focus: color-mix(in srgb, var(--mimicus-primary, #1677ff) 55%, transparent);
+  --mimicus-field-radius: 0.5rem;
+  --mimicus-rate-color: var(--mimicus-warning);
+}
+
+.mimicus-form-preview { width: 100%; max-width: 100%; }
+
+html[data-looknfeel^="neon-"] .mimicus-input,
+html[data-looknfeel^="neon-"] .mimicus-textarea,
+html[data-looknfeel^="neon-"] .mimicus-select__native,
+html[data-looknfeel^="neon-"] .mimicus-transfer__panel,
+html[data-looknfeel^="neon-"] .mimicus-transfer-board__stack {
+  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--mimicus-surface, #fff) 55%, transparent);
+}

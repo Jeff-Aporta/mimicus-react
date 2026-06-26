@@ -1,4 +1,8 @@
-/* Página de demo — estructura tipo Ant Design / MUI docs */
+/**
+ * pg-demo-doc (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/pg-demo-doc.css
+ * Página de demo — estructura tipo Ant Design / MUI docs (hero, secciones, ejemplos, tabla API).
+ */
 
 .pg-demo-doc {
 	display: flex;
@@ -64,13 +68,13 @@
 	border-radius: var(--mimicus-ui-radius, 0.65rem);
 	overflow: hidden;
 	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 6%);
-}
 
-.pg-demo-example .preview-frame {
-	border: 0;
-	border-radius: 0;
-	padding: 1.35rem 1.1rem;
-	background: transparent;
+	& .preview-frame {
+		border: 0;
+		border-radius: 0;
+		padding: 1.35rem 1.1rem;
+		background: transparent;
+	}
 }
 
 .pg-demo-example__toolbar {
@@ -105,27 +109,27 @@
 	border-collapse: collapse;
 	font-size: 0.86rem;
 	line-height: 1.45;
-}
 
-.pg-api-table th,
-.pg-api-table td {
-	padding: 0.62rem 0.75rem;
-	text-align: left;
-	vertical-align: top;
-	border-bottom: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 40%);
-}
+	& th,
+	& td {
+		padding: 0.62rem 0.75rem;
+		text-align: left;
+		vertical-align: top;
+		border-bottom: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 40%);
+	}
 
-.pg-api-table thead th {
-	font-size: 0.78rem;
-	font-weight: 600;
-	letter-spacing: 0.04em;
-	text-transform: uppercase;
-	color: var(--catalog-muted, color-mix(in srgb, var(--mimicus-color), transparent 32%));
-	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 10%);
-}
+	& thead th {
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--catalog-muted, color-mix(in srgb, var(--mimicus-color), transparent 32%));
+		background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 10%);
+	}
 
-.pg-api-table tbody tr:last-child td {
-	border-bottom: 0;
+	& tbody tr:last-child td {
+		border-bottom: 0;
+	}
 }
 
 .pg-api-table__prop {

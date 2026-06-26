@@ -1,3 +1,11 @@
+/**
+ * Card — isla: primitives
+ * demo: demo/config/demos/lib/Card.json
+ * llm:  ./Card.llm.md
+ * css:  css/components/card.css
+ * repo: Jeff-Aporta/mimicus-react · src/components/Card.jsx
+ * Contenedor de superficie con variantes (solid/onion/flat), relieve (sombra) y tamaño de padding.
+ */
 import { surfaceVariantAttrs } from "../theme/constants.js";
 import { resolveColor } from "../lib/resolveColor.js";
 import { mkSemanticBorder } from "../lib/colorTransform.js";

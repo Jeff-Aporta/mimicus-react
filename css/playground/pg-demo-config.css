@@ -1,4 +1,8 @@
-/* Panel Configuración en demos — campos, labels y chips integrados por looknfeel */
+/**
+ * pg-demo-config (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/pg-demo-config.css
+ * Panel Configuración en demos — campos, labels y chips integrados por looknfeel.
+ */
 
 :root {
 	--pg-config-section-bg: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-primary) 3%);
@@ -38,13 +42,13 @@
 	margin-bottom: 0.65rem;
 	padding-bottom: 0.5rem;
 	border-bottom-color: var(--pg-config-label-border);
-}
 
-.demo-panel-body .pg-demo-config-section .input-decorated-label.mimicus-title .input-decorated-label-text {
-	color: var(--pg-config-label-fg) !important;
-	font-size: 0.82rem;
-	font-weight: 700;
-	letter-spacing: 0.07em;
+	& .input-decorated-label-text {
+		color: var(--pg-config-label-fg) !important;
+		font-size: 0.82rem;
+		font-weight: 700;
+		letter-spacing: 0.07em;
+	}
 }
 
 /* ── Tiles de campo (CardHollow) ── */
@@ -58,158 +62,158 @@
 }
 
 /* ── Labels (CLASS, RELIEVE, VARIANTE, …) ── */
-.demo-config-shell :is(.input-decorated-label, .palette-grid__label, .mimicus-input-decorated-label, .pg-input-decorated__label) {
-	margin-bottom: 0.65rem;
-	padding: 0.15rem 0 0.45rem;
-	border-bottom: 1px solid var(--pg-config-label-border) !important;
-	color: var(--pg-config-label-fg) !important;
-	opacity: 1 !important;
-}
+.demo-config-shell {
+	& :is(.input-decorated-label, .palette-grid__label, .mimicus-input-decorated-label, .pg-input-decorated__label) {
+		margin-bottom: 0.65rem;
+		padding: 0.15rem 0 0.45rem;
+		border-bottom: 1px solid var(--pg-config-label-border) !important;
+		color: var(--pg-config-label-fg) !important;
+		opacity: 1 !important;
+	}
 
-.demo-config-shell :is(.input-decorated-label-text, .mimicus-input-decorated-label-text, .palette-grid__label, .pg-input-decorated__label) {
-	color: var(--pg-config-label-fg) !important;
-	font-size: 0.74rem;
-	font-weight: 600;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	opacity: 1 !important;
-}
+	& :is(.input-decorated-label-text, .mimicus-input-decorated-label-text, .palette-grid__label, .pg-input-decorated__label) {
+		color: var(--pg-config-label-fg) !important;
+		font-size: 0.74rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		opacity: 1 !important;
+	}
 
-.demo-config-shell :is(.input-decorated-label-icon, .palette-grid__label-icon, .pg-input-decorated__icon) {
-	color: var(--pg-config-label-muted) !important;
-	opacity: 1 !important;
-}
+	& :is(.input-decorated-label-icon, .palette-grid__label-icon, .pg-input-decorated__icon) {
+		color: var(--pg-config-label-muted) !important;
+		opacity: 1 !important;
+	}
 
-.demo-config-shell :is(.input-decorated-body, .mimicus-input-decorated-body, .pg-input-decorated__body) {
-	min-width: 0;
-}
+	& :is(.input-decorated-body, .mimicus-input-decorated-body, .pg-input-decorated__body) {
+		min-width: 0;
+	}
 
-.demo-config-shell .palette-grid .mimicus-input-decorated-body > div {
-	display: flex;
-	flex-direction: column;
-	gap: 0.35rem;
-}
+	& .palette-grid .mimicus-input-decorated-body > div {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
 
-.demo-config-shell :is(input, .mimicus-autocomplete__input, .input-decorated-number) {
-	color: var(--pg-config-label-fg) !important;
-}
+	& :is(input, .mimicus-autocomplete__input, .input-decorated-number) {
+		color: var(--pg-config-label-fg) !important;
+	}
 
-.demo-config-shell .mimicus-autocomplete__input {
-	border-bottom-color: var(--pg-config-label-border) !important;
-}
+	& .mimicus-autocomplete__input {
+		border-bottom-color: var(--pg-config-label-border) !important;
 
-.demo-config-shell .mimicus-autocomplete__input:focus {
-	border-bottom-color: color-mix(in srgb, var(--mimicus-primary), var(--pg-config-label-border) 45%) !important;
-}
+		&:focus {
+			border-bottom-color: color-mix(in srgb, var(--mimicus-primary), var(--pg-config-label-border) 45%) !important;
+		}
+	}
 
-.demo-config-shell input.input-decorated-number {
-	background: var(--pg-config-input-bg) !important;
-	border-color: var(--pg-config-input-border) !important;
-	border-radius: var(--pg-config-input-radius);
-	box-shadow: var(--pg-config-input-shadow);
+	& input.input-decorated-number {
+		background: var(--pg-config-input-bg) !important;
+		border-color: var(--pg-config-input-border) !important;
+		border-radius: var(--pg-config-input-radius);
+		box-shadow: var(--pg-config-input-shadow);
+	}
 }
 
 /* ── Inputs inline (style / class / number) — misma superficie que tiles ── */
-.demo-config-shell .code-edit-field__preview {
-	background: var(--pg-config-input-bg) !important;
-	border: 1px solid var(--pg-config-input-border) !important;
-	border-radius: var(--pg-config-input-radius) !important;
-	box-shadow: var(--pg-config-input-shadow) !important;
-	color: var(--pg-config-input-fg) !important;
-	backdrop-filter: var(--pg-config-input-backdrop);
-	-webkit-backdrop-filter: var(--pg-config-input-backdrop);
-}
+.demo-config-shell {
+	& .code-edit-field__preview {
+		background: var(--pg-config-input-bg) !important;
+		border: 1px solid var(--pg-config-input-border) !important;
+		border-radius: var(--pg-config-input-radius) !important;
+		box-shadow: var(--pg-config-input-shadow) !important;
+		color: var(--pg-config-input-fg) !important;
+		backdrop-filter: var(--pg-config-input-backdrop);
+		-webkit-backdrop-filter: var(--pg-config-input-backdrop);
 
-.demo-config-shell .code-edit-field__preview:hover {
-	border-color: var(--pg-config-input-hover-border) !important;
-	box-shadow: var(--pg-config-input-hover-shadow) !important;
-}
+		&:hover {
+			border-color: var(--pg-config-input-hover-border) !important;
+			box-shadow: var(--pg-config-input-hover-shadow) !important;
+		}
 
-.demo-config-shell .code-edit-field__preview.mimicus-placeholder {
-	color: var(--pg-config-placeholder-fg) !important;
-}
+		&.mimicus-placeholder {
+			color: var(--pg-config-placeholder-fg) !important;
+		}
+	}
 
-.demo-config-shell .code-edit-field__placeholder-text {
-	color: var(--pg-config-placeholder-fg) !important;
-	opacity: 1 !important;
-}
+	& .code-edit-field__placeholder-text {
+		color: var(--pg-config-placeholder-fg) !important;
+		opacity: 1 !important;
+	}
 
-.demo-config-shell .pg-demo-config-code.mimicus-cm-panel {
-	width: 100%;
-	border: 1px solid var(--pg-config-input-border) !important;
-	border-radius: var(--pg-config-input-radius) !important;
-	background: var(--pg-config-input-bg) !important;
-	box-shadow: var(--pg-config-input-shadow) !important;
-	overflow: hidden;
-}
+	& .pg-demo-config-code.mimicus-cm-panel {
+		width: 100%;
+		border: 1px solid var(--pg-config-input-border) !important;
+		border-radius: var(--pg-config-input-radius) !important;
+		background: var(--pg-config-input-bg) !important;
+		box-shadow: var(--pg-config-input-shadow) !important;
+		overflow: hidden;
+	}
 
-.demo-config-shell .pg-demo-config-code .mimicus-cm-panel__toolbar {
-	display: none;
-}
+	& .pg-demo-config-code .mimicus-cm-panel__toolbar {
+		display: none;
+	}
 
-.demo-config-shell .pg-demo-config-code .mimicus-cm-host,
-.demo-config-shell .pg-demo-config-code .mimicus-cm-host .CodeMirror {
-	font-family: var(--pg-font-mono);
-	font-size: 0.78rem;
-	line-height: 1.45;
-}
+	& .pg-demo-config-code .mimicus-cm-host,
+	& .pg-demo-config-code .mimicus-cm-host .CodeMirror {
+		font-family: var(--pg-font-mono);
+		font-size: 0.78rem;
+		line-height: 1.45;
+	}
 
-.demo-config-shell .pg-demo-config-code .CodeMirror {
-	background: transparent !important;
-	color: var(--pg-config-input-fg) !important;
-}
+	& .pg-demo-config-code .CodeMirror {
+		background: transparent !important;
+		color: var(--pg-config-input-fg) !important;
+	}
 
-.demo-config-shell .pg-demo-config-code.mimicus-cm-panel--bounded .mimicus-cm-host {
-	border-radius: var(--pg-config-input-radius);
-}
+	& .pg-demo-config-code.mimicus-cm-panel--bounded .mimicus-cm-host {
+		border-radius: var(--pg-config-input-radius);
+	}
 
-.demo-config-shell .pg-demo-config-code .CodeMirror-gutters {
-	display: none;
-}
+	& .pg-demo-config-code .CodeMirror-gutters {
+		display: none;
+	}
 
-.demo-config-shell .pg-demo-config-code .CodeMirror-cursor {
-	border-left-color: var(--mimicus-primary);
-}
+	& .pg-demo-config-code .CodeMirror-cursor {
+		border-left-color: var(--mimicus-primary);
+	}
 
-.demo-config-shell .mimicus-autocomplete__input {
-	background: color-mix(in srgb, var(--pg-config-input-bg), transparent 8%) !important;
-	border-color: var(--pg-config-input-border) !important;
-	border-radius: var(--pg-config-input-radius);
-}
+	& .mimicus-autocomplete__input {
+		background: color-mix(in srgb, var(--pg-config-input-bg), transparent 8%) !important;
+		border-color: var(--pg-config-input-border) !important;
+		border-radius: var(--pg-config-input-radius);
+	}
 
-html[data-looknfeel="w98"] .demo-config-shell input.input-decorated-number,
-html[data-looknfeel="wxp"] .demo-config-shell input.input-decorated-number,
-html[data-looknfeel="wvista"] .demo-config-shell input.input-decorated-number {
-	background: var(--pg-config-field-bg) !important;
-}
-
-.demo-config-shell :is(label.focusOptional, label.focusRequired, label.translate) {
-	color: var(--pg-config-label-muted) !important;
-	opacity: 1 !important;
+	& :is(label.focusOptional, label.focusRequired, label.translate) {
+		color: var(--pg-config-label-muted) !important;
+		opacity: 1 !important;
+	}
 }
 
 /* ── Chips / palette grid en config ── */
-.demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill) {
-	min-height: 2.05rem;
-	font-size: 0.74rem;
-}
+.demo-config-shell {
+	& :is(.palette-grid__chip, .checkbox-chip__pill) {
+		min-height: 2.05rem;
+		font-size: 0.74rem;
+	}
 
-.demo-config-shell .palette-grid__look-divider,
-.demo-config-shell .checkbox-chip__divider {
-	border: 0;
-	border-top: 1px solid var(--pg-config-label-border);
-	margin: 0.2rem 0;
-	opacity: 0.85;
-}
+	& .palette-grid__look-divider,
+	& .checkbox-chip__divider {
+		border: 0;
+		border-top: 1px solid var(--pg-config-label-border);
+		margin: 0.2rem 0;
+		opacity: 0.85;
+	}
 
-/* ── Rail casos de prueba ── */
-.demo-config-shell .demo-test-rail {
-	border-left-color: var(--pg-config-rail-border);
-	background: color-mix(in srgb, var(--pg-config-field-bg), transparent 35%);
-}
+	/* ── Rail casos de prueba ── */
+	& .demo-test-rail {
+		border-left-color: var(--pg-config-rail-border);
+		background: color-mix(in srgb, var(--pg-config-field-bg), transparent 35%);
+	}
 
-.demo-config-shell .demo-test-rail__btn--active {
-	background: linear-gradient(to left, color-mix(in srgb, var(--mimicus-primary), transparent 78%), transparent);
+	& .demo-test-rail__btn--active {
+		background: linear-gradient(to left, color-mix(in srgb, var(--mimicus-primary), transparent 78%), transparent);
+	}
 }
 
 /* ══════════════ contapyme ══════════════ */
@@ -280,159 +284,6 @@ html[data-looknfeel^="neon-"] .demo-config-shell .pg-demo-config-card.card-root 
 	box-shadow: var(--pg-config-field-shadow) !important;
 	backdrop-filter: blur(12px) saturate(155%);
 	-webkit-backdrop-filter: blur(12px) saturate(155%);
-}
-
-/* ══════════════ mac-liquidglass ══════════════ */
-html[data-looknfeel="mac-liquidglass"] {
-	--pg-config-section-bg: var(--mlg-fill, color-mix(in srgb, var(--mimicus-bg-secondary), transparent 22%));
-	--pg-config-section-border: var(--mlg-border, color-mix(in srgb, white, transparent 52%));
-	--pg-config-section-shadow: var(--mlg-shadow-sm, 0 2px 8px color-mix(in srgb, var(--mimicus-color), transparent 90%));
-	--pg-config-field-bg: var(--mlg-fill, color-mix(in srgb, var(--mimicus-bg-secondary), transparent 28%));
-	--pg-config-field-border: var(--mlg-border, color-mix(in srgb, white, transparent 58%));
-	--pg-config-field-shadow: inset 0 1px 0 color-mix(in srgb, white, transparent 72%);
-	--pg-config-field-radius: 0.75rem;
-	--pg-config-input-bg: color-mix(in srgb, var(--pg-config-field-bg), transparent 12%);
-	--pg-config-input-radius: 0.55rem;
-	--pg-config-input-backdrop: blur(16px) saturate(165%);
-}
-
-html[data-looknfeel="mac-liquidglass"] .demo-config-shell :is(.pg-demo-config-section, .pg-demo-config-card).card-root {
-	backdrop-filter: var(--mlg-blur, blur(24px) saturate(170%));
-	-webkit-backdrop-filter: var(--mlg-blur, blur(24px) saturate(170%));
-}
-
-/* ══════════════ w98 ══════════════ */
-html[data-looknfeel="w98"] {
-	--pg-config-section-bg: var(--pg-w98-surface, #c0c0c0);
-	--pg-config-section-border: var(--pg-w98-bevel-mid, #808080);
-	--pg-config-section-shadow: none;
-	--pg-config-field-bg: var(--pg-w98-surface-deep, #b5b5b5);
-	--pg-config-field-border: var(--pg-w98-bevel-mid, #808080);
-	--pg-config-field-radius: 0;
-	--pg-config-label-fg: var(--pg-w98-fg, #000);
-	--pg-config-label-muted: #404040;
-	--pg-config-label-border: var(--pg-w98-bevel-mid, #808080);
-	--pg-config-input-bg: var(--pg-w98-surface-deep, #b5b5b5);
-	--pg-config-input-border: var(--pg-w98-bevel-mid, #808080);
-	--pg-config-input-radius: 0;
-	--pg-config-input-shadow: none;
-	--pg-config-input-hover-border: var(--pg-w98-bevel-mid, #808080);
-	--pg-config-input-hover-shadow: none;
-}
-
-html[data-looknfeel="w98"] .demo-config-shell :is(.pg-demo-config-section, .pg-demo-config-card).card-root {
-	border: 2px solid !important;
-	border-color: var(--pg-w98-bevel-hi, #fff) var(--pg-w98-bevel-lo, #404040) var(--pg-w98-bevel-lo, #404040) var(--pg-w98-bevel-hi, #fff) !important;
-	box-shadow: none !important;
-}
-
-/* ══════════════ wxp ══════════════ */
-html[data-looknfeel="wxp"] {
-	--pg-config-section-bg: linear-gradient(180deg, var(--pg-wxp-surface) 0%, var(--pg-wxp-surface-deep) 100%);
-	--pg-config-section-border: var(--pg-wxp-border, color-mix(in srgb, var(--mimicus-primary) 30%, #aca899 70%));
-	--pg-config-section-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-	--pg-config-field-bg: var(--pg-wxp-surface, #fff);
-	--pg-config-field-border: var(--pg-wxp-border, color-mix(in srgb, var(--mimicus-primary) 26%, #aca899 74%));
-	--pg-config-field-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
-	--pg-config-field-radius: 4px;
-	--pg-config-label-fg: var(--pg-wxp-fg, #1a1a1a);
-	--pg-config-label-muted: var(--pg-wxp-muted, color-mix(in srgb, var(--pg-wxp-fg, #1a1a1a), transparent 32%));
-	--pg-config-input-bg: var(--pg-wxp-surface, #fff);
-	--pg-config-input-border: var(--pg-wxp-border, color-mix(in srgb, var(--mimicus-primary) 26%, #aca899 74%));
-	--pg-config-input-radius: 4px;
-	--pg-config-input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
-	--pg-config-input-hover-border: color-mix(in srgb, var(--mimicus-primary) 55%, var(--pg-wxp-border) 45%);
-	--pg-config-input-hover-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08), 0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 70%);
-}
-
-html[data-looknfeel="wxp"] .demo-config-shell .pg-demo-config-section.card-root {
-	background: linear-gradient(180deg, var(--pg-wxp-surface) 0%, var(--pg-wxp-surface-deep) 100%) !important;
-}
-
-/* ══════════════ wvista ══════════════ */
-html[data-looknfeel="wvista"] {
-	--pg-config-section-bg: var(--pg-vista-surface-deep, rgba(255, 255, 255, 0.34));
-	--pg-config-section-border: var(--pg-vista-border, color-mix(in srgb, var(--mimicus-b-color), var(--mimicus-primary) 24%));
-	--pg-config-section-shadow: 0 4px 16px color-mix(in srgb, var(--mimicus-color), transparent 82%);
-	--pg-config-field-bg: var(--pg-vista-surface, rgba(255, 255, 255, 0.52));
-	--pg-config-field-border: var(--pg-vista-border, color-mix(in srgb, var(--mimicus-b-color), var(--mimicus-primary) 24%));
-	--pg-config-field-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
-	--pg-config-field-radius: 8px;
-	--pg-config-label-fg: var(--pg-vista-fg, var(--pg-win-glass-fg));
-	--pg-config-label-muted: color-mix(in srgb, var(--pg-vista-fg, var(--pg-win-glass-fg)), transparent 32%);
-	--pg-config-input-bg: var(--pg-vista-surface, rgba(255, 255, 255, 0.52));
-	--pg-config-input-border: var(--pg-vista-border, color-mix(in srgb, var(--mimicus-b-color), var(--mimicus-primary) 24%));
-	--pg-config-input-radius: 8px;
-	--pg-config-input-shadow: inset 0 1px 0 color-mix(in srgb, white, transparent 75%);
-	--pg-config-input-backdrop: blur(6px) saturate(140%);
-	--pg-config-input-hover-border: color-mix(in srgb, var(--mimicus-primary) 45%, var(--pg-vista-border) 55%);
-	--pg-config-input-hover-shadow: 0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 72%);
-}
-
-html[data-looknfeel="wvista"] .demo-config-shell :is(.pg-demo-config-section, .pg-demo-config-card).card-root {
-	backdrop-filter: blur(8px) saturate(150%);
-}
-
-html[data-looknfeel="w98"] .demo-config-shell input.input-decorated-number {
-	background: var(--pg-w98-surface) !important;
-}
-
-html[data-looknfeel="wxp"] .demo-config-shell input.input-decorated-number {
-	background: var(--pg-wxp-surface) !important;
-}
-
-html[data-looknfeel="wvista"] .demo-config-shell input.input-decorated-number {
-	background: var(--pg-vista-surface) !important;
-}
-
-html[data-luminance="dark"][data-looknfeel="w98"] {
-	--pg-config-label-fg: var(--pg-w98-fg);
-	--pg-config-label-muted: color-mix(in srgb, var(--pg-w98-fg), transparent 38%);
-	--pg-config-input-bg: var(--pg-w98-surface);
-	--pg-config-placeholder-fg: color-mix(in oklch, var(--pg-w98-fg) 60%, var(--pg-w98-surface) 40%);
-}
-
-html[data-luminance="dark"][data-looknfeel="wxp"] {
-	--pg-config-input-bg: var(--pg-wxp-surface);
-	--pg-config-input-fg: var(--pg-wxp-fg);
-	--pg-config-input-muted: color-mix(in oklch, var(--pg-wxp-fg) 70%, var(--pg-wxp-surface) 30%);
-	--pg-config-placeholder-fg: color-mix(in oklch, var(--pg-wxp-fg) 62%, var(--pg-wxp-surface) 38%);
-}
-
-html[data-luminance="dark"][data-looknfeel="wvista"] {
-	--pg-config-input-bg: var(--pg-vista-surface);
-	--pg-config-input-fg: var(--pg-vista-fg);
-	--pg-config-placeholder-fg: color-mix(in oklch, var(--pg-vista-fg) 58%, var(--pg-vista-surface-deep) 42%);
-}
-
-/* w98 — borde inset en inputs (no se puede expresar solo con token de color) */
-html[data-looknfeel="w98"] .demo-config-shell .code-edit-field__preview {
-	border: 2px inset var(--pg-w98-bevel-mid, #808080) !important;
-	border-radius: 0 !important;
-}
-
-html[data-looknfeel="lab-dual"],
-html[data-looknfeel="lab-triad"] {
-	--pg-config-section-bg: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-design-active-1) 4%);
-	--pg-config-field-bg: color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-bg-secondary) 42%);
-	--pg-config-input-bg: color-mix(in srgb, var(--pg-config-field-bg), var(--mimicus-design-active-1) 6%);
-	--pg-config-input-hover-border: color-mix(in srgb, var(--mimicus-design-active-2, var(--mimicus-primary)), var(--pg-config-field-border) 38%);
-}
-
-html[data-looknfeel="lab-triad"] {
-	--pg-config-input-hover-shadow:
-		0 0 0 1px color-mix(in srgb, var(--mimicus-design-active-3, var(--mimicus-primary)), transparent 78%),
-		0 0 0 1px color-mix(in srgb, var(--mimicus-design-active-1), transparent 88%);
-}
-
-/* ── Chips paleta en config — Windows (refuerzo sobre variantes Button) ── */
-html[data-looknfeel="w98"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill):not(:disabled):hover,
-html[data-looknfeel="wxp"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill):not(:disabled):hover,
-html[data-looknfeel="wvista"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill):not(:disabled):hover,
-html[data-looknfeel="w98"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill):not([aria-disabled="true"]):hover,
-html[data-looknfeel="wxp"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill):not([aria-disabled="true"]):hover,
-html[data-looknfeel="wvista"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill):not([aria-disabled="true"]):hover {
-	transform: none !important;
 }
 
 /* Chips en config — blend en pg-component-blend.css */
@@ -524,18 +375,18 @@ html[data-looknfeel="wvista"] .demo-config-shell :is(.palette-grid__chip, .check
 	transition: transform 0.2s ease;
 	pointer-events: none;
 	visibility: hidden;
-}
 
-.layout-app-preview__drawer--right {
-	right: 0;
-	left: auto;
-	transform: translateX(108%);
-}
+	&--right {
+		right: 0;
+		left: auto;
+		transform: translateX(108%);
+	}
 
-.layout-app-preview__drawer.is-open {
-	transform: translateX(0);
-	pointer-events: auto;
-	visibility: visible;
+	&.is-open {
+		transform: translateX(0);
+		pointer-events: auto;
+		visibility: visible;
+	}
 }
 
 .layout-app-preview__drawer-inner {

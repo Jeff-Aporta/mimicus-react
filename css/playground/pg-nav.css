@@ -1,31 +1,37 @@
-/* Nav rows — paridad front-shared isa-nav-row en playground */
+/**
+ * pg-nav (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/pg-nav.css
+ * Nav rows — estado activo, subrayado e iconos (paridad front-shared isa-nav-row en playground).
+ */
 
-.pg-playground-shell .pg-nav-row--primary {
-	border-top: none;
-}
+.pg-playground-shell {
+	& .pg-nav-row--primary {
+		border-top: none;
+	}
 
-.pg-playground-shell .pg-nav-tab.is-active,
-.pg-playground-shell .pg-nav-tab[aria-selected="true"] {
-	position: relative;
-}
+	& .pg-nav-tab.is-active,
+	& .pg-nav-tab[aria-selected="true"] {
+		position: relative;
+	}
 
-.pg-playground-shell .pg-nav-row--secondary .pg-nav-tab.is-active,
-.pg-playground-shell .pg-nav-row--secondary .pg-nav-tab[aria-selected="true"] {
-	font-weight: 700;
-	opacity: 1;
-}
+	& .pg-nav-row--secondary .pg-nav-tab.is-active,
+	& .pg-nav-row--secondary .pg-nav-tab[aria-selected="true"] {
+		font-weight: 700;
+		opacity: 1;
+	}
 
-.pg-playground-shell .pg-nav-row--secondary .pg-nav-tab.is-active::after,
-.pg-playground-shell .pg-nav-row--secondary .pg-nav-tab[aria-selected="true"]::after {
-	content: "";
-	position: absolute;
-	left: 0.45rem;
-	right: 0.45rem;
-	bottom: 0.12rem;
-	height: 2px;
-	border-radius: 999px;
-	background: color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 82%, transparent);
-	pointer-events: none;
+	& .pg-nav-row--secondary .pg-nav-tab.is-active::after,
+	& .pg-nav-row--secondary .pg-nav-tab[aria-selected="true"]::after {
+		content: "";
+		position: absolute;
+		left: 0.45rem;
+		right: 0.45rem;
+		bottom: 0.12rem;
+		height: 2px;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 82%, transparent);
+		pointer-events: none;
+	}
 }
 
 .pg-shell-header-stack .pg-nav-row {

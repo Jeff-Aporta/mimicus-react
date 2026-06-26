@@ -1,4 +1,8 @@
-/* Navegación SPA lateral — enlaces simples (sin acordeón) */
+/**
+ * Shell Nav — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/shell-nav.css
+ * Navegación SPA lateral (enlaces simples, sin acordeón) con blend × chrome del look.
+ */
 
 .mimicus-sidebar {
 	--mimicus-sidebar-chrome: var(--pg-sidebar-chrome, var(--mimicus-bg-secondary));
@@ -37,10 +41,10 @@
 	width: 100%;
 	text-align: left;
 	text-decoration: none;
-}
 
-.mimicus-nav-link.is-active {
-	font-weight: 600;
+	&.is-active {
+		font-weight: 600;
+	}
 }
 
 /* Blend nav × chrome del look (simplificado desde pg-sidebar-section) */

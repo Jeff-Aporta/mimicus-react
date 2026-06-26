@@ -1,0 +1,15 @@
+/**
+ * Menu (navigation) — CSS
+ * demo: demo/config/demos/lib/Menu.json
+ * llm:  ./Menu.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Menu.css
+ * Menú vertical/horizontal con ítems, estado activo/deshabilitado y divisores.
+ */
+.mimicus-menu { margin: 0; padding: 0.25rem; list-style: none; min-width: 10rem; border-radius: 0.5rem; border: 1px solid var(--mimicus-border, rgba(0,0,0,.1)); background: var(--mimicus-surface, #fff); box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+.mimicus-menu--horizontal { display: flex; flex-wrap: wrap; gap: 0.15rem; min-width: 0; }
+.mimicus-menu__item { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 0.45rem 0.75rem; border: none; border-radius: 0.35rem; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.mimicus-menu--horizontal .mimicus-menu__item { width: auto; }
+.mimicus-menu__item:hover, .mimicus-menu__item:focus-visible { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 10%, transparent); outline: none; }
+.mimicus-menu__item.is-active { color: var(--mimicus-primary, #1677ff); font-weight: 600; }
+.mimicus-menu__item.is-disabled, .mimicus-menu__item:disabled { opacity: 0.45; cursor: not-allowed; }
+.mimicus-menu__divider { height: 1px; margin: 0.25rem 0; background: var(--mimicus-border, rgba(0,0,0,.08)); list-style: none; }

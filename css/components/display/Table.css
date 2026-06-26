@@ -1,0 +1,14 @@
+/**
+ * Table (display) — CSS
+ * demo: demo/config/demos/lib/Table.json
+ * llm:  ./Table.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Table.css
+ * Tabla de datos con variantes bordeada, compacta y columnas ordenables.
+ */
+.mimicus-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.mimicus-table th, .mimicus-table td { padding: 0.55rem 0.75rem; text-align: left; border-bottom: 1px solid var(--mimicus-border); }
+.mimicus-table--bordered th, .mimicus-table--bordered td { border: 1px solid var(--mimicus-border); }
+.mimicus-table__sortable { cursor: pointer; user-select: none; }
+.mimicus-table__sortable.is-asc::after { content: " ↑"; opacity: 0.6; }
+.mimicus-table__sortable.is-desc::after { content: " ↓"; opacity: 0.6; }
+.mimicus-table--small th, .mimicus-table--small td { padding: 0.35rem 0.55rem; font-size: 0.78rem; }

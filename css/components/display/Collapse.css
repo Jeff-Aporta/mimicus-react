@@ -1,0 +1,12 @@
+/**
+ * Collapse (display) — CSS
+ * demo: demo/config/demos/lib/Collapse.json
+ * llm:  ./Collapse.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Collapse.css
+ * Paneles plegables con disparador, flecha y cuerpo expandible.
+ */
+.mimicus-collapse { border: 1px solid var(--mimicus-border); border-radius: 0.5rem; overflow: hidden; }
+.mimicus-collapse__panel + .mimicus-collapse__panel { border-top: 1px solid var(--mimicus-border); }
+.mimicus-collapse__trigger { width: 100%; display: flex; align-items: center; gap: 0.45rem; padding: 0.65rem 0.85rem; border: 0; background: color-mix(in srgb, var(--mimicus-color) 3%, transparent); color: inherit; cursor: pointer; text-align: left; font: inherit; }
+.mimicus-collapse__panel.is-open .mimicus-collapse__arrow { transform: rotate(90deg); }
+.mimicus-collapse__body { padding: 0.65rem 0.85rem 0.85rem 1.65rem; font-size: 0.88rem; opacity: 0.92; }

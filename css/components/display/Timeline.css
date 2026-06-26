@@ -1,0 +1,14 @@
+/**
+ * Timeline (display) — CSS
+ * demo: demo/config/demos/lib/Timeline.json
+ * llm:  ./Timeline.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Timeline.css
+ * Línea de tiempo vertical con nodos, etiquetas y estados.
+ */
+.mimicus-timeline { list-style: none; margin: 0; padding: 0 0 0 0.35rem; }
+.mimicus-timeline__item { position: relative; display: flex; gap: 0.65rem; padding-bottom: 1rem; }
+.mimicus-timeline__item:not(:last-child)::before { content: ""; position: absolute; left: 0.42rem; top: 1rem; bottom: 0; width: 2px; background: var(--mimicus-border); }
+.mimicus-timeline__dot { width: 0.85rem; height: 0.85rem; border-radius: 50%; background: var(--mimicus-primary); flex-shrink: 0; margin-top: 0.15rem; }
+.mimicus-timeline__label { font-size: 0.75rem; opacity: 0.65; margin-bottom: 0.2rem; }
+.mimicus-timeline__item--success .mimicus-timeline__dot { background: var(--mimicus-success); }
+.mimicus-timeline__item--error .mimicus-timeline__dot { background: var(--mimicus-error); }

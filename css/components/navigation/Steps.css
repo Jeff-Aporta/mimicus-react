@@ -1,0 +1,17 @@
+/**
+ * Steps / Stepper (navigation) — CSS
+ * demo: demo/config/demos/lib/Steps.json
+ * llm:  ./Steps.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Steps.css
+ * Progreso por pasos horizontal/vertical con conector, ícono y estados finish/process.
+ */
+.mimicus-steps { display: flex; gap: 0.75rem; }
+.mimicus-steps--vertical { flex-direction: column; }
+.mimicus-steps__item { display: flex; gap: 0.65rem; flex: 1; align-items: flex-start; position: relative; }
+.mimicus-steps--horizontal .mimicus-steps__item:not(:last-child)::after { content: ""; position: absolute; top: 0.9rem; left: calc(1.25rem + 0.65rem); right: -0.35rem; height: 2px; background: var(--mimicus-border, rgba(0,0,0,.12)); z-index: 0; }
+.mimicus-steps__item.is-finish::after { background: var(--mimicus-primary, #1677ff); }
+.mimicus-steps__icon { position: relative; z-index: 1; width: 1.75rem; height: 1.75rem; display: grid; place-items: center; border-radius: 999px; border: 2px solid var(--mimicus-border, rgba(0,0,0,.15)); background: var(--mimicus-surface, #fff); font-size: 0.75rem; font-weight: 600; }
+.mimicus-steps__item.is-finish .mimicus-steps__icon, .mimicus-steps__item.is-process .mimicus-steps__icon { border-color: var(--mimicus-primary, #1677ff); color: var(--mimicus-primary, #1677ff); }
+.mimicus-steps__item.is-process .mimicus-steps__icon { background: var(--mimicus-primary, #1677ff); color: var(--mimicus-on-primary); }
+.mimicus-steps__title { font-weight: 600; font-size: 0.875rem; }
+.mimicus-steps__desc { font-size: 0.8rem; opacity: 0.75; margin-top: 0.15rem; }

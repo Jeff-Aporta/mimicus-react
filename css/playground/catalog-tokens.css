@@ -1,4 +1,8 @@
-/* Tokens del catálogo — defaults alineados a ContaPyme; cada look los sobrescribe en .catalog-home */
+/**
+ * catalog-tokens (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/catalog-tokens.css
+ * Tokens del catálogo — defaults alineados a ContaPyme; cada look los sobrescribe en .catalog-home.
+ */
 
 .catalog-home {
 	--catalog-sketch-accent: var(--mimicus-primary);

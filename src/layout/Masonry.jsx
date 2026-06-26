@@ -1,3 +1,10 @@
+/**
+ * Masonry — isla: layout
+ * demo: demo/config/demos/lib/Masonry.json
+ * llm:  ./Masonry.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Masonry.jsx
+ * Distribución en columnas CSS con alturas variables (Ant Masonry); acepta children o items+itemRender.
+ */
 import { Children } from "react";
 import { joinStyle } from "./layoutHelpers.js";
 

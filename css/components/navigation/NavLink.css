@@ -1,0 +1,14 @@
+/**
+ * NavLink (navigation) — CSS
+ * demo: demo/config/demos/lib/NavLink.json
+ * llm:  ./NavLink.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/NavLink.css
+ * Enlace estilo MUI con variantes de subrayado, color heredado y estado deshabilitado.
+ */
+.mimicus-nav-link { color: var(--mimicus-primary, #1677ff); cursor: pointer; text-decoration: none; font: inherit; background: none; border: none; padding: 0; }
+.mimicus-nav-link--underline-always { text-decoration: underline; }
+.mimicus-nav-link--underline-hover { text-decoration: none; }
+.mimicus-nav-link--underline-hover:hover { text-decoration: underline; }
+.mimicus-nav-link--underline-none { text-decoration: none; }
+.mimicus-nav-link--inherit { color: inherit; }
+.mimicus-nav-link.is-disabled { opacity: 0.45; pointer-events: none; }

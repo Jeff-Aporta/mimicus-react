@@ -1,3 +1,10 @@
+/**
+ * FlexLayout — isla: layout
+ * demo: demo/config/demos/lib/FlexLayout.json
+ * llm:  ./FlexLayout.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/FlexLayout.jsx
+ * Contenedor flexbox con dirección, wrap, justify, align y gap resuelto por breakpoint.
+ */
 import { LayoutSlotContext, useLayoutContainer } from "./layoutSlotContext.jsx";
 import { dataDebug, getScrollbarClass, joinStyle, resolveGap, resolveJustify } from "./layoutHelpers.js";
 

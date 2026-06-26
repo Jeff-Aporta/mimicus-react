@@ -1,0 +1,13 @@
+/**
+ * ColorPicker (forms) — CSS
+ * demo: demo/config/demos/lib/ColorPicker.json
+ * llm:  ./ColorPicker.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/ColorPicker.css
+ * Selector de color con muestra (swatch), input nativo oculto y valor hex.
+ */
+
+/* ── ColorPicker ── */
+.mimicus-color-picker { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.55rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); }
+.mimicus-color-picker__swatch { width: 1.65rem; height: 1.65rem; border-radius: 0.35rem; border: 1px solid var(--mimicus-field-border); }
+.mimicus-color-picker input[type="color"] { width: 0; height: 0; opacity: 0; position: absolute; }
+.mimicus-color-picker__hex { font-size: 0.8rem; opacity: 0.8; }

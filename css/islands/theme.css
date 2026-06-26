@@ -1,0 +1,15 @@
+/**
+ * isla CSS: theme (base)
+ * llm:  ../../src/islands/theme.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/islands/theme.css
+ * Fundación de tokens, paletas, esquema, transform y superficies. SIN skins de looknfeel
+ * (esos van en css/looknfeel/<look>.css, opt-in). Base de las demás islas.
+ */
+@import "../theme/playground-typography.css";
+@import "../theme/theme-color-palettes.css";
+@import "../theme/theme.css";
+@import "../theme/design-scheme.css";
+@import "../theme/color-transform.css";
+@import "../theme/surface-tokens.css";
+@import "../theme/button.css";
+@import "../theme/look-radius.css";

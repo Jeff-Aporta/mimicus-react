@@ -1,0 +1,16 @@
+/**
+ * Rate (forms) — CSS
+ * demo: demo/config/demos/lib/Rate.json
+ * llm:  ./Rate.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Rate.css
+ * Calificación con estrellas: estados full/half/hover, tamaños y disabled.
+ */
+
+/* ── Rate / Rating ── */
+.mimicus-rate { display: inline-flex; gap: 0.15rem; }
+.mimicus-rate__star { border: none; background: transparent; font-size: 1.35rem; line-height: 1; color: color-mix(in srgb, var(--mimicus-rate-color) 25%, var(--mimicus-field-border)); cursor: pointer; padding: 0; transition: transform 0.15s, color 0.15s; }
+.mimicus-rate__star.is-full, .mimicus-rate__star.is-hover { color: var(--mimicus-rate-color); transform: scale(1.08); }
+.mimicus-rate__star.is-half { background: linear-gradient(90deg, var(--mimicus-rate-color) 50%, color-mix(in srgb, var(--mimicus-rate-color) 25%, var(--mimicus-field-border)) 50%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mimicus-rate--small .mimicus-rate__star { font-size: 1rem; }
+.mimicus-rate--large .mimicus-rate__star { font-size: 1.65rem; }
+.mimicus-rate.is-disabled { opacity: 0.5; pointer-events: none; }

@@ -1,0 +1,14 @@
+/**
+ * ToggleButton (forms) — CSS
+ * demo: demo/config/demos/lib/ToggleButton.json
+ * llm:  ./ToggleButton.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/ToggleButton.css
+ * Grupo de botones de alternancia (horizontal/vertical) con estado activo.
+ */
+
+/* ── ToggleButton ── */
+.mimicus-toggle-group { display: inline-flex; flex-wrap: wrap; gap: 0.15rem; padding: 0.2rem; border-radius: var(--mimicus-field-radius); border: 1px solid var(--mimicus-field-border); background: color-mix(in srgb, var(--mimicus-surface, #fff) 90%, transparent); }
+.mimicus-toggle-group--vertical { flex-direction: column; }
+.mimicus-toggle-btn { border: none; background: transparent; padding: 0.4rem 0.75rem; border-radius: calc(var(--mimicus-field-radius) - 0.1rem); font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; transition: background 0.15s, color 0.15s; }
+.mimicus-toggle-btn.is-active { background: var(--mimicus-primary, #1677ff); color: var(--mimicus-on-primary); box-shadow: 0 2px 8px color-mix(in srgb, var(--mimicus-primary, #1677ff) 35%, transparent); }
+.mimicus-checkbox-chip .mimicus-toggle-btn { text-transform: capitalize; }

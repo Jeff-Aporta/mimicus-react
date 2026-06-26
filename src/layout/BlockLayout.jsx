@@ -1,3 +1,10 @@
+/**
+ * BlockLayout — isla: layout
+ * demo: demo/config/demos/lib/BlockLayout.json
+ * llm:  ./BlockLayout.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/BlockLayout.jsx
+ * Contenedor block/inline-block que provee el slot de tamaño (sizew) por contenedor responsive.
+ */
 import { LayoutSlotContext, useLayoutContainer } from "./layoutSlotContext.jsx";
 import { dataDebug, getScrollbarClass, joinStyle } from "./layoutHelpers.js";
 

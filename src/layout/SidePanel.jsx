@@ -1,3 +1,11 @@
+/**
+ * SidePanel — isla: layout
+ * demo: demo/config/demos/lib/SidePanel.json
+ * llm:  ./SidePanel.llm.md
+ * css:  css/components/side-panel.css
+ * repo: Jeff-Aporta/mimicus-react · src/layout/SidePanel.jsx
+ * Panel lateral con modos expandido, rail (colapsado) y drawer; expone SidePanel.View.
+ */
 import { Button } from "../components/Button.jsx";
 
 function View({ mode = "expanded", gap = "0.25rem", className, style, children, ...rest }) {
@@ -50,7 +58,7 @@ export function SidePanel({
     <aside
       {...rest}
       className={["mimicus-side-panel", "sidebar", "pg-sidebar", "pg-vt-sidebar", drawer && "mimicus-side-panel--drawer pg-sidebar--drawer", rail && "mimicus-side-panel--rail is-collapsed"].filter(Boolean).join(" ")}
-      style={style}
+      style={{ ...(style && typeof style === "object" ? style : {}) }}
     >
       {drawer && onClose && (
         <div className="mimicus-side-panel__drawer-bar pg-sidebar-drawer-bar">

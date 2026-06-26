@@ -1,3 +1,11 @@
+/**
+ * Typography — isla: primitives
+ * demo: demo/config/demos/lib/Text.json
+ * llm:  ./Typography.llm.md
+ * css:  css/components/typography.css
+ * repo: Jeff-Aporta/mimicus-react · src/components/typography/Typography.jsx
+ * Sistema tipográfico: Typography (Text/Title/Paragraph/Link) + alias demo Text y Headings.
+ */
 import { buildTypographyStyle, levelToVariant, typographyClass } from "./typographyHelpers.js";
 
 export function TypographyText({

@@ -1,0 +1,16 @@
+/* Isla CSS `devkit` — general + estilos del playground (catálogo, shell, demos). */
+@import "./general.css";
+@import "../playground/catalog-tokens.css";
+@import "../playground/catalog-home.css";
+@import "../playground/catalog-card.css";
+@import "../playground/catalog-overview.css";
+@import "../playground/pg-demo-doc.css";
+@import "../playground/pg-shell.css";
+@import "../playground/pg-nav.css";
+@import "../playground/pg-section-accent.css";
+@import "../playground/pg-panel-rail.css";
+@import "../playground/pg-sidebar-section.css";
+@import "../playground/pg-demo-config.css";
+@import "../playground/pg-demo-panel.css";
+@import "../playground/pg-intro-content.css";
+@import "../playground/pg-skin-toggles.css";

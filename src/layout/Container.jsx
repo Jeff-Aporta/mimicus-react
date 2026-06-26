@@ -1,3 +1,10 @@
+/**
+ * Container — isla: layout
+ * demo: demo/config/demos/lib/Container.json
+ * llm:  ./Container.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Container.jsx
+ * Centra contenido con max-width por breakpoint (MUI Container), gutters fluidos opcionales.
+ */
 import { joinStyle } from "./layoutHelpers.js";
 
 const MAX_WIDTHS = { xs: 444, sm: 600, md: 900, lg: 1200, xl: 1536 };

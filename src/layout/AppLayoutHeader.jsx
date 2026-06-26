@@ -19,15 +19,20 @@ function Tools(props) {
 }
 Tools.__appLayoutHeaderSlot = "tools";
 
+function Nav(props) {
+  return <HeaderZone {...props} />;
+}
+Nav.__appLayoutHeaderSlot = "nav";
+
 function collectHeaderSlots(children) {
-  const slots = { brand: null, center: null, tools: null, extra: [] };
+  const slots = { brand: null, center: null, tools: null, nav: null, extra: [] };
   Children.forEach(children, (child) => {
     if (!isValidElement(child)) {
       if (child != null && child !== false) slots.extra.push(child);
       return;
     }
     const slotName = child.type?.__appLayoutHeaderSlot;
-    if (slotName === "brand" || slotName === "center" || slotName === "tools") slots[slotName] = child;
+    if (slotName === "brand" || slotName === "center" || slotName === "tools" || slotName === "nav") slots[slotName] = child;
     else slots.extra.push(child);
   });
   return slots;
@@ -38,9 +43,9 @@ function renderZone(slot, className) {
   return <div className={className}>{slot.props.children}</div>;
 }
 
-export function AppLayoutHeader({ className, barClassName, children, ...rest }) {
+export function AppLayoutHeader({ className, barClassName, navClassName, children, ...rest }) {
   const slots = collectHeaderSlots(children);
-  const hasZones = Boolean(slots.brand || slots.center || slots.tools);
+  const hasZones = Boolean(slots.brand || slots.center || slots.tools || slots.nav);
   const rootClass = ["mimicus-app-layout-header", "content-header", className].filter(Boolean).join(" ");
 
   if (!hasZones) {
@@ -48,6 +53,7 @@ export function AppLayoutHeader({ className, barClassName, children, ...rest }) 
   }
 
   const barClass = ["mimicus-app-layout-header__bar", "content-header-inner", barClassName].filter(Boolean).join(" ");
+  const navClass = ["mimicus-app-layout-header__nav", "pg-shell-header-nav", navClassName].filter(Boolean).join(" ");
 
   return (
     <header {...rest} className={rootClass}>
@@ -56,6 +62,7 @@ export function AppLayoutHeader({ className, barClassName, children, ...rest }) 
         {renderZone(slots.center, "mimicus-app-layout-header__center pg-shell-toolbar__center")}
         {renderZone(slots.tools, "mimicus-app-layout-header__tools pg-shell-toolbar__tools")}
       </div>
+      {slots.nav ? <div className={navClass}>{slots.nav.props.children}</div> : null}
       {slots.extra.length > 0 ? slots.extra : null}
     </header>
   );
@@ -64,3 +71,4 @@ export function AppLayoutHeader({ className, barClassName, children, ...rest }) 
 AppLayoutHeader.Brand = Brand;
 AppLayoutHeader.Center = Center;
 AppLayoutHeader.Tools = Tools;
+AppLayoutHeader.Nav = Nav;

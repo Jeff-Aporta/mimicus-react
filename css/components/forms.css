@@ -1,179 +1,21 @@
 /* Data Entry — CSS-first (Ant Design + MUI). Lógica en src/forms/controllers.js */
+/* Índice: este archivo solo reexporta los CSS por componente en css/components/forms/. */
 
-:root {
-  --mimicus-field-bg: color-mix(in srgb, var(--mimicus-surface, #fff) 92%, var(--mimicus-primary, #1677ff) 8%);
-  --mimicus-field-border: var(--mimicus-border, rgba(0, 0, 0, 0.12));
-  --mimicus-field-focus: color-mix(in srgb, var(--mimicus-primary, #1677ff) 55%, transparent);
-  --mimicus-field-radius: 0.5rem;
-  --mimicus-rate-color: #fadb14;
-}
-
-/* ── Form ── */
-.mimicus-form { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
-.mimicus-form-item { display: flex; flex-direction: column; gap: 0.35rem; }
-.mimicus-form-item--horizontal { flex-direction: row; align-items: center; justify-content: space-between; gap: 0.75rem; }
-.mimicus-form-item__label { font-size: 0.875rem; font-weight: 600; color: var(--mimicus-text, rgba(0, 0, 0, 0.88)); }
-.mimicus-form-item__req { color: var(--mimicus-danger, #ff4d4f); margin-left: 0.15rem; }
-.mimicus-form-item__extra { font-size: 0.8rem; opacity: 0.75; }
-.mimicus-form-item.has-error .mimicus-form-item__extra { color: var(--mimicus-danger, #ff4d4f); }
-
-/* ── Input / TextField ── */
-.mimicus-input { display: inline-flex; align-items: center; width: 100%; max-width: 100%; min-height: 2.25rem; padding: 0 0.65rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; }
-.mimicus-input:focus-within { border-color: var(--mimicus-primary, #1677ff); box-shadow: 0 0 0 3px var(--mimicus-field-focus); }
-.mimicus-input.is-error { border-color: var(--mimicus-danger, #ff4d4f); }
-.mimicus-input.is-disabled { opacity: 0.55; pointer-events: none; }
-.mimicus-input--small { min-height: 1.85rem; font-size: 0.82rem; }
-.mimicus-input--large { min-height: 2.65rem; font-size: 1rem; }
-.mimicus-input__native { flex: 1; min-width: 0; border: none; background: transparent; font: inherit; color: inherit; outline: none; padding: 0.35rem 0; }
-.mimicus-input__affix { opacity: 0.7; display: inline-flex; }
-.mimicus-input__clear { border: none; background: transparent; opacity: 0.55; cursor: pointer; font-size: 1rem; line-height: 1; padding: 0 0.15rem; }
-
-.mimicus-textarea { width: 100%; min-height: 4.5rem; padding: 0.55rem 0.75rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); font: inherit; resize: vertical; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; }
-.mimicus-textarea:focus { outline: none; border-color: var(--mimicus-primary, #1677ff); box-shadow: 0 0 0 3px var(--mimicus-field-focus); }
-
-/* ── InputNumber ── */
-.mimicus-input-number { display: inline-flex; align-items: stretch; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); overflow: hidden; background: var(--mimicus-field-bg); }
-.mimicus-input-number__btn { width: 2rem; border: none; background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 8%, transparent); cursor: pointer; font-size: 1rem; }
-.mimicus-input-number__btn:hover { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 16%, transparent); }
-.mimicus-input-number__native { width: 3.5rem; border: none; text-align: center; background: transparent; font: inherit; }
-
-/* ── Checkbox ── */
-.mimicus-checkbox { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; user-select: none; }
-.mimicus-checkbox__native { position: absolute; opacity: 0; width: 0; height: 0; }
-.mimicus-checkbox__box { width: 1.05rem; height: 1.05rem; border: 1.5px solid var(--mimicus-field-border); border-radius: 0.25rem; background: var(--mimicus-surface, #fff); display: grid; place-items: center; transition: all 0.2s; flex-shrink: 0; }
-.mimicus-checkbox__box::after { content: ""; width: 0.35rem; height: 0.6rem; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0); transition: transform 0.15s; margin-top: -0.1rem; }
-.mimicus-checkbox.is-checked .mimicus-checkbox__box, .mimicus-checkbox.is-indeterminate .mimicus-checkbox__box { background: var(--mimicus-primary, #1677ff); border-color: var(--mimicus-primary, #1677ff); }
-.mimicus-checkbox.is-checked .mimicus-checkbox__box::after { transform: rotate(45deg) scale(1); }
-.mimicus-checkbox.is-indeterminate .mimicus-checkbox__box::after { content: ""; width: 0.55rem; height: 2px; border: none; background: #fff; transform: none; margin: 0; }
-.mimicus-checkbox.is-disabled { opacity: 0.5; cursor: not-allowed; }
-.mimicus-checkbox--icon .mimicus-checkbox__box { display: none; }
-.mimicus-checkbox__icons { position: relative; width: 1.35rem; height: 1.35rem; }
-.mimicus-checkbox__icon { position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.1rem; transition: opacity 0.2s; }
-.mimicus-checkbox__icon--on { opacity: 0; }
-.mimicus-checkbox.is-checked .mimicus-checkbox__icon--on { opacity: 1; }
-.mimicus-checkbox.is-checked .mimicus-checkbox__icon--off { opacity: 0; }
-
-/* ── Switch ── */
-.mimicus-switch { display: inline-flex; align-items: center; gap: 0.55rem; cursor: pointer; user-select: none; }
-.mimicus-switch__native { position: absolute; opacity: 0; width: 0; height: 0; }
-.mimicus-switch__track { width: 2.5rem; height: 1.35rem; border-radius: 999px; background: color-mix(in srgb, var(--mimicus-text, #000) 25%, transparent); position: relative; transition: background 0.25s; flex-shrink: 0; }
-.mimicus-switch__thumb { position: absolute; top: 0.15rem; left: 0.15rem; width: 1.05rem; height: 1.05rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); transition: transform 0.25s; }
-.mimicus-switch.is-checked .mimicus-switch__track { background: var(--mimicus-primary, #1677ff); }
-.mimicus-switch.is-checked .mimicus-switch__thumb { transform: translateX(1.15rem); }
-.mimicus-switch--small .mimicus-switch__track { width: 2rem; height: 1.1rem; }
-.mimicus-switch--small .mimicus-switch__thumb { width: 0.85rem; height: 0.85rem; }
-.mimicus-switch--small.is-checked .mimicus-switch__thumb { transform: translateX(0.9rem); }
-.mimicus-switch.is-disabled { opacity: 0.5; cursor: not-allowed; }
-.mimicus-switch.is-loading .mimicus-switch__thumb { animation: mimicus-switch-pulse 1s infinite; }
-@keyframes mimicus-switch-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
-
-/* ── Radio ── */
-.mimicus-radio-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-.mimicus-radio-group--vertical { flex-direction: column; }
-.mimicus-radio { display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; }
-.mimicus-radio__native { position: absolute; opacity: 0; width: 0; height: 0; }
-.mimicus-radio__dot { width: 1.05rem; height: 1.05rem; border: 1.5px solid var(--mimicus-field-border); border-radius: 50%; position: relative; transition: border-color 0.2s; }
-.mimicus-radio__dot::after { content: ""; position: absolute; inset: 0.2rem; border-radius: 50%; background: var(--mimicus-primary, #1677ff); transform: scale(0); transition: transform 0.15s; }
-.mimicus-radio.is-checked .mimicus-radio__dot { border-color: var(--mimicus-primary, #1677ff); }
-.mimicus-radio.is-checked .mimicus-radio__dot::after { transform: scale(1); }
-
-/* ── Slider ── */
-.mimicus-slider { position: relative; display: flex; align-items: center; gap: 0.65rem; width: 100%; min-height: 2rem; }
-.mimicus-slider__rail { position: absolute; left: 0; right: 0; height: 0.35rem; border-radius: 999px; background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 12%, transparent); overflow: hidden; }
-.mimicus-slider__fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--mimicus-primary, #1677ff), color-mix(in srgb, var(--mimicus-primary, #1677ff) 70%, #fff)); border-radius: inherit; transition: width 0.1s; }
-.mimicus-slider__input { position: relative; z-index: 1; width: 100%; appearance: none; background: transparent; height: 1.25rem; margin: 0; }
-.mimicus-slider__input::-webkit-slider-thumb { appearance: none; width: 1rem; height: 1rem; border-radius: 50%; background: #fff; border: 2px solid var(--mimicus-primary, #1677ff); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); cursor: pointer; }
-.mimicus-slider__value { font-size: 0.8rem; font-weight: 600; min-width: 2rem; text-align: right; }
-
-/* ── Rate / Rating ── */
-.mimicus-rate { display: inline-flex; gap: 0.15rem; }
-.mimicus-rate__star { border: none; background: transparent; font-size: 1.35rem; line-height: 1; color: color-mix(in srgb, var(--mimicus-rate-color) 25%, var(--mimicus-field-border)); cursor: pointer; padding: 0; transition: transform 0.15s, color 0.15s; }
-.mimicus-rate__star.is-full, .mimicus-rate__star.is-hover { color: var(--mimicus-rate-color); transform: scale(1.08); }
-.mimicus-rate__star.is-half { background: linear-gradient(90deg, var(--mimicus-rate-color) 50%, color-mix(in srgb, var(--mimicus-rate-color) 25%, var(--mimicus-field-border)) 50%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.mimicus-rate--small .mimicus-rate__star { font-size: 1rem; }
-.mimicus-rate--large .mimicus-rate__star { font-size: 1.65rem; }
-.mimicus-rate.is-disabled { opacity: 0.5; pointer-events: none; }
-
-/* ── Select ── */
-.mimicus-select { position: relative; display: inline-flex; width: 100%; max-width: 100%; }
-.mimicus-select__native { width: 100%; appearance: none; min-height: 2.25rem; padding: 0.35rem 2rem 0.35rem 0.65rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); font: inherit; cursor: pointer; }
-.mimicus-select__native:focus { outline: none; border-color: var(--mimicus-primary, #1677ff); box-shadow: 0 0 0 3px var(--mimicus-field-focus); }
-.mimicus-select__arrow { position: absolute; right: 0.55rem; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.55; font-size: 0.75rem; }
-
-/* ── AutoComplete ── */
-.mimicus-autocomplete { position: relative; width: 100%; }
-.mimicus-autocomplete__panel { position: absolute; z-index: 40; top: calc(100% + 0.25rem); left: 0; right: 0; max-height: 12rem; overflow: auto; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-surface, #fff); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); padding: 0.25rem; }
-.mimicus-autocomplete:not(.is-open) .mimicus-autocomplete__panel { display: none; }
-.mimicus-autocomplete__option { display: block; width: 100%; text-align: left; border: none; background: transparent; padding: 0.45rem 0.65rem; border-radius: 0.35rem; font: inherit; cursor: pointer; }
-.mimicus-autocomplete__option:hover, .mimicus-autocomplete__option:focus-visible { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 10%, transparent); outline: none; }
-
-/* ── ToggleButton ── */
-.mimicus-toggle-group { display: inline-flex; flex-wrap: wrap; gap: 0.15rem; padding: 0.2rem; border-radius: var(--mimicus-field-radius); border: 1px solid var(--mimicus-field-border); background: color-mix(in srgb, var(--mimicus-surface, #fff) 90%, transparent); }
-.mimicus-toggle-group--vertical { flex-direction: column; }
-.mimicus-toggle-btn { border: none; background: transparent; padding: 0.4rem 0.75rem; border-radius: calc(var(--mimicus-field-radius) - 0.1rem); font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; transition: background 0.15s, color 0.15s; }
-.mimicus-toggle-btn.is-active { background: var(--mimicus-primary, #1677ff); color: #fff; box-shadow: 0 2px 8px color-mix(in srgb, var(--mimicus-primary, #1677ff) 35%, transparent); }
-.mimicus-checkbox-chip .mimicus-toggle-btn { text-transform: capitalize; }
-
-/* ── Transfer ── */
-.mimicus-transfer { display: flex; align-items: stretch; gap: 0.65rem; width: 100%; }
-.mimicus-transfer__panel { flex: 1; min-width: 0; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); display: flex; flex-direction: column; }
-.mimicus-transfer__title { padding: 0.5rem 0.75rem; font-size: 0.8rem; font-weight: 600; border-bottom: 1px solid var(--mimicus-field-border); }
-.mimicus-transfer__list { list-style: none; margin: 0; padding: 0.35rem; min-height: 8rem; max-height: 12rem; overflow: auto; }
-.mimicus-transfer__item { padding: 0.45rem 0.65rem; border-radius: 0.35rem; cursor: pointer; font-size: 0.875rem; }
-.mimicus-transfer__item:hover { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 8%, transparent); }
-.mimicus-transfer__item.is-selected { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 16%, transparent); font-weight: 600; }
-.mimicus-transfer__actions { display: flex; flex-direction: column; justify-content: center; gap: 0.35rem; }
-.mimicus-transfer__action { width: 2rem; height: 2rem; border: 1px solid var(--mimicus-field-border); border-radius: 0.35rem; background: var(--mimicus-surface, #fff); cursor: pointer; }
-
-.mimicus-transfer-board { display: flex; gap: 0.65rem; overflow-x: auto; padding: 0.25rem; }
-.mimicus-transfer-board__stack { flex: 0 0 auto; border: 1px solid var(--mimicus-field-border); border-radius: 0.65rem; background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 5%, var(--mimicus-surface, #fff)); padding: 0.5rem; }
-.mimicus-transfer-board__stack.is-drag-over { outline: 2px dashed var(--mimicus-primary, #1677ff); }
-.mimicus-transfer-board__stack-title { font-size: 0.75rem; font-weight: 700; margin-bottom: 0.45rem; opacity: 0.85; }
-.mimicus-transfer-board__list { list-style: none; margin: 0; padding: 0; min-height: 6rem; display: flex; flex-direction: column; gap: 0.35rem; }
-.mimicus-transfer-board__card { padding: 0.5rem 0.65rem; border-radius: 0.45rem; background: var(--mimicus-surface, #fff); border: 1px solid var(--mimicus-field-border); font-size: 0.85rem; cursor: grab; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
-.mimicus-transfer-board__card.is-dragging { opacity: 0.55; }
-
-/* ── Upload ── */
-.mimicus-upload__native { position: absolute; width: 0; height: 0; opacity: 0; }
-.mimicus-upload__trigger { display: inline-block; cursor: pointer; }
-.mimicus-upload__btn { display: inline-flex; padding: 0.45rem 0.85rem; border: 1px dashed var(--mimicus-primary, #1677ff); border-radius: var(--mimicus-field-radius); color: var(--mimicus-primary, #1677ff); background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 6%, transparent); }
-.mimicus-upload__list { list-style: none; margin: 0.5rem 0 0; padding: 0; font-size: 0.85rem; }
-.mimicus-upload__file { padding: 0.25rem 0; opacity: 0.85; }
-
-/* ── ColorPicker ── */
-.mimicus-color-picker { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.55rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); }
-.mimicus-color-picker__swatch { width: 1.65rem; height: 1.65rem; border-radius: 0.35rem; border: 1px solid var(--mimicus-field-border); }
-.mimicus-color-picker input[type="color"] { width: 0; height: 0; opacity: 0; position: absolute; }
-.mimicus-color-picker__hex { font-size: 0.8rem; opacity: 0.8; }
-
-/* ── Date / Time ── */
-.mimicus-date-picker, .mimicus-time-picker { max-width: 14rem; }
-
-/* ── Cascader / TreeSelect ── */
-.mimicus-cascader, .mimicus-tree-select { position: relative; width: 100%; max-width: 18rem; }
-.mimicus-cascader__trigger, .mimicus-tree-select__trigger { width: 100%; text-align: left; min-height: 2.25rem; padding: 0.35rem 0.65rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); font: inherit; cursor: pointer; }
-.mimicus-cascader__panel, .mimicus-tree-select__panel { position: absolute; z-index: 40; top: calc(100% + 0.25rem); left: 0; right: 0; max-height: 14rem; overflow: auto; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-surface, #fff); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); padding: 0.35rem; }
-.mimicus-cascader__option { display: block; width: 100%; text-align: left; border: none; background: transparent; padding: 0.45rem 0.65rem; border-radius: 0.35rem; font: inherit; cursor: pointer; }
-.mimicus-cascader__option:hover { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 10%, transparent); }
-.mimicus-tree-select__tree { list-style: none; margin: 0; padding: 0; }
-.mimicus-tree-select__node { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; padding: 0.25rem 0; cursor: pointer; width: 100%; }
-.mimicus-tree-select__node:hover { color: var(--mimicus-primary, #1677ff); }
-.mimicus-tree-select__toggle { border: none; background: transparent; cursor: pointer; width: 1.25rem; }
-.mimicus-tree-select__children { list-style: none; margin: 0; padding: 0; width: 100%; }
-
-/* ── Mentions ── */
-.mimicus-mentions { position: relative; width: 100%; }
-.mimicus-mentions__panel { position: absolute; z-index: 40; left: 0; bottom: calc(100% + 0.25rem); min-width: 10rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-surface, #fff); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); padding: 0.25rem; }
-.mimicus-mentions__option { display: block; width: 100%; text-align: left; border: none; background: transparent; padding: 0.4rem 0.65rem; border-radius: 0.35rem; font: inherit; cursor: pointer; }
-.mimicus-mentions__option:hover { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 10%, transparent); }
-
-.mimicus-form-preview { width: 100%; max-width: 100%; }
-
-html[data-looknfeel^="neon-"] .mimicus-input,
-html[data-looknfeel^="neon-"] .mimicus-textarea,
-html[data-looknfeel^="neon-"] .mimicus-select__native,
-html[data-looknfeel^="neon-"] .mimicus-transfer__panel,
-html[data-looknfeel^="neon-"] .mimicus-transfer-board__stack {
-  backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--mimicus-surface, #fff) 55%, transparent);
-}
+@import "./forms/_base.css";
+@import "./forms/Form.css";
+@import "./forms/Input.css";
+@import "./forms/InputNumber.css";
+@import "./forms/Checkbox.css";
+@import "./forms/Switch.css";
+@import "./forms/Radio.css";
+@import "./forms/Slider.css";
+@import "./forms/Rate.css";
+@import "./forms/Select.css";
+@import "./forms/AutoComplete.css";
+@import "./forms/ToggleButton.css";
+@import "./forms/Transfer.css";
+@import "./forms/Upload.css";
+@import "./forms/ColorPicker.css";
+@import "./forms/DateTime.css";
+@import "./forms/Cascader.css";
+@import "./forms/Mentions.css";

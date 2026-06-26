@@ -20,6 +20,7 @@ import { ImageList } from "./layout/ImageList.jsx";
 import { Separator } from "./layout/Separator.jsx";
 import { GridResponsiveForm } from "./layout/GridResponsiveForm.jsx";
 import { useLayoutSlot } from "./layout/layoutSlotContext.jsx";
+import { Icon } from "./components/Icon.jsx";
 import { Button } from "./components/Button.jsx";
 import { FloatButton, Fab, IconButton } from "./components/FloatButton.jsx";
 import { Card } from "./components/Card.jsx";
@@ -145,6 +146,7 @@ export {
   Separator,
   GridResponsiveForm,
   useLayoutSlot,
+  Icon,
   Button,
   FloatButton,
   Fab,
@@ -303,3 +305,4 @@ export { snippets, cdn, colorTransform };
 export * from "./lib/colorTransform.js";
 export * from "./theme/constants.js";
 export * from "./layout/appLayoutVariants.js";
+export * from "./devkit/index.js";

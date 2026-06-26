@@ -36,8 +36,34 @@ export function dataDebug(rest, segment) {
   return { "data-element": [rest["data-element"], segment].flat(Infinity).filter(Boolean).join(" / ") };
 }
 
+function stylePartToString(part) {
+  if (part == null || part === false) return "";
+  if (typeof part === "object") {
+    return Object.entries(part)
+      .filter(([, v]) => v != null && v !== "")
+      .map(([k, v]) => `${k.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}: ${v}`)
+      .join("; ");
+  }
+  return String(part).trim();
+}
+
+function cssStringToStyle(str) {
+  if (!str || typeof str !== "string") return {};
+  const out = {};
+  for (const part of str.split(";")) {
+    const idx = part.indexOf(":");
+    if (idx < 1) continue;
+    const key = part.slice(0, idx).trim();
+    const val = part.slice(idx + 1).trim();
+    if (!key || !val) continue;
+    out[key.replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = val;
+  }
+  return out;
+}
+
 export function hasOverflowStyle(style = "") {
-  return RGX_OVERFLOW_SCROLL.test(style);
+  const s = typeof style === "string" ? style : stylePartToString(style);
+  return RGX_OVERFLOW_SCROLL.test(s);
 }
 
 export function getScrollbarClass(cscroll = false, style) {
@@ -67,6 +93,8 @@ export function resolveGridTemplate(cells, cellsFit = false) {
   return value;
 }
 
+/** Une fragmentos CSS (string u objeto) en un objeto `style` válido para React. */
 export function joinStyle(...parts) {
-  return parts.filter(Boolean).join("; ");
+  const css = parts.map(stylePartToString).filter(Boolean).join("; ");
+  return css ? cssStringToStyle(css) : undefined;
 }

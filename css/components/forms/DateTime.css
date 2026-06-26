@@ -1,0 +1,10 @@
+/**
+ * DateTime (forms) — CSS
+ * demo: demo/config/demos/lib/DateTime.json
+ * llm:  ./DateTime.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/DateTime.css
+ * Selectores de fecha y hora (date-picker / time-picker) con ancho acotado.
+ */
+
+/* ── Date / Time ── */
+.mimicus-date-picker, .mimicus-time-picker { max-width: 14rem; }

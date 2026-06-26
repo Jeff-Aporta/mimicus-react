@@ -1,3 +1,10 @@
+/**
+ * GridLayout — isla: layout
+ * demo: demo/config/demos/lib/GridLayout.json
+ * llm:  ./GridLayout.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/GridLayout.jsx
+ * Contenedor CSS grid con plantilla de celdas (columns/rows), dirección, justify, align y gap.
+ */
 import { LayoutSlotContext, useLayoutContainer } from "./layoutSlotContext.jsx";
 import { dataDebug, getScrollbarClass, joinStyle, resolveGap, resolveGridTemplate, resolveJustify } from "./layoutHelpers.js";
 

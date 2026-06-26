@@ -72,6 +72,29 @@ const OUT = {
 
 const REACT_EXTERNAL = ["react", "react-dom", "react-dom/client", "react/jsx-runtime"];
 
+/**
+ * Islas de desarrollo: cada una emite su propio bundle ESM (+min) y, si tiene CSS,
+ * su propio índice CSS. Permiten que el consumidor cargue solo lo mínimo necesario.
+ * `hasCss: false` → isla solo-JS (sin hoja de estilos propia).
+ */
+const ISLANDS = [
+  { name: "theme", hasCss: true },
+  { name: "utils", hasCss: false },
+  { name: "primitives", hasCss: true },
+  { name: "layout", hasCss: true },
+  { name: "forms", hasCss: true },
+  { name: "display", hasCss: true },
+  { name: "navigation", hasCss: true },
+  { name: "spa", hasCss: true },
+  { name: "shell", hasCss: true },
+  { name: "general", hasCss: true },
+  { name: "contapyme", hasCss: true },
+  { name: "devkit", hasCss: true },
+];
+
+/** Skins de looknfeel: cada uno con su CSS propio (opt-in) → carga mínima si la app usa uno solo. */
+const LOOKNFEELS = ["contapyme", "neon"];
+
 
 
 function minifyCss(css) {
@@ -253,6 +276,31 @@ function build() {
 
 
   writeFileSync(OUT.css, minifyCss(flattenCss(CSS_IN)), "utf8");
+
+  // ── Islas de desarrollo: un bundle ESM (+min) y CSS por isla ──
+  for (const { name, hasCss } of ISLANDS) {
+    buildEsm(
+      join(root, "src", "islands", `${name}.js`),
+      join(root, "cdn", `mimicus-${name}.esm.js`),
+      { minOut: join(root, "cdn", `mimicus-${name}.esm.min.js`) }
+    );
+    if (hasCss) {
+      writeFileSync(
+        join(root, "cdn", `mimicus-${name}.css`),
+        minifyCss(flattenCss(join(root, "css", "islands", `${name}.css`))),
+        "utf8"
+      );
+    }
+  }
+
+  // ── Skins de looknfeel: un CSS por look (opt-in) ──
+  for (const look of LOOKNFEELS) {
+    writeFileSync(
+      join(root, "cdn", `mimicus-looknfeel-${look}.css`),
+      minifyCss(flattenCss(join(root, "css", "looknfeel", `${look}.css`))),
+      "utf8"
+    );
+  }
 
   mkdirSync(dirname(OUT.bootCss), { recursive: true });
 

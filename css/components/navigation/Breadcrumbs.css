@@ -1,0 +1,14 @@
+/**
+ * Breadcrumbs (navigation) — CSS
+ * demo: demo/config/demos/lib/Breadcrumbs.json
+ * llm:  ./Breadcrumbs.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Breadcrumbs.css
+ * Ruta de migas con separadores, enlaces y página actual destacada.
+ */
+.mimicus-breadcrumbs { font-size: 0.875rem; color: var(--mimicus-text-secondary, rgba(0,0,0,.65)); }
+.mimicus-breadcrumbs__list { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+.mimicus-breadcrumbs__item { display: inline-flex; align-items: center; }
+.mimicus-breadcrumbs__sep { opacity: 0.55; user-select: none; list-style: none; }
+.mimicus-breadcrumbs__link { color: inherit; text-decoration: none; }
+.mimicus-breadcrumbs__link:hover { color: var(--mimicus-primary, #1677ff); text-decoration: underline; }
+.mimicus-breadcrumbs__page { color: var(--mimicus-text, rgba(0,0,0,.88)); font-weight: 500; }

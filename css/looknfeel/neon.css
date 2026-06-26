@@ -1,0 +1,8 @@
+/**
+ * looknfeel: neon (skin)
+ * llm:  ./neon.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/looknfeel/neon.css
+ * Skin glass/neón (neon-mono/dual/triad). Opt-in: cargar solo si se usa este looknfeel.
+ */
+@import "../theme/ng-surface.css";
+@import "../theme/playground-glass.css";

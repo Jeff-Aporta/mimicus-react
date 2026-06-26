@@ -1,0 +1,12 @@
+/**
+ * Empty (display) — CSS
+ * demo: demo/config/demos/lib/Empty.json
+ * llm:  ./Empty.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Empty.css
+ * Estado vacío con ilustración, descripción y acción opcional.
+ */
+.mimicus-empty { display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; text-align: center; }
+.mimicus-empty__image { width: 4.5rem; height: 3.5rem; margin-bottom: 0.65rem; opacity: 0.4; color: var(--mimicus-color); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 41'%3E%3Cpath d='M53 0H11C4.9 0 0 4.9 0 11v19c0 6.1 4.9 11 11 11h42c6.1 0 11-4.9 11-11V11c0-6.1-4.9-11-11-11z'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 41'%3E%3Cpath d='M53 0H11C4.9 0 0 4.9 0 11v19c0 6.1 4.9 11 11 11h42c6.1 0 11-4.9 11-11V11c0-6.1-4.9-11-11-11z'/%3E%3C/svg%3E") center/contain no-repeat; background: currentColor; }
+.mimicus-empty--simple .mimicus-empty__image { width: 2.5rem; height: 2rem; }
+.mimicus-empty__desc { margin: 0; font-size: 0.88rem; opacity: 0.65; }
+.mimicus-empty__footer { margin-top: 0.85rem; }

@@ -1,0 +1,15 @@
+/* Isla CSS `general` — kit completo de propósito general. */
+@import "./theme.css";
+@import "../components/card.css";
+@import "../components/float-button.css";
+@import "../components/typography.css";
+@import "../components/codemirror.css";
+@import "../components/app-layout.css";
+@import "../components/side-panel.css";
+@import "../components/splitter.css";
+@import "../components/divider.css";
+@import "../components/forms.css";
+@import "../components/display.css";
+@import "../components/navigation.css";
+@import "../components/shell-nav.css";
+@import "../components/view-transitions.css";

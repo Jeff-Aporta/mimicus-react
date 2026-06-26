@@ -51,12 +51,6 @@ export const LOOKNFEEL_OPTIONS = [
   { id: "neon-mono", label: "Neon mono" },
   { id: "neon-dual", label: "Neon dual" },
   { id: "neon-triad", label: "Neon tríada" },
-  { id: "mac-liquidglass", label: "Mac glass" },
-  { id: "lab-dual", label: "Lab dual" },
-  { id: "lab-triad", label: "Lab tríada" },
-  { id: "w98", label: "Windows 98" },
-  { id: "wxp", label: "Windows XP" },
-  { id: "wvista", label: "Windows Vista" },
 ];
 
 export const LOOKNFEEL_DESIGN_SCHEME = {
@@ -64,12 +58,6 @@ export const LOOKNFEEL_DESIGN_SCHEME = {
   "neon-mono": "mono",
   "neon-dual": "dual",
   "neon-triad": "triad",
-  "mac-liquidglass": "dual",
-  w98: "mono",
-  wxp: "mono",
-  wvista: "mono",
-  "lab-dual": "dual",
-  "lab-triad": "triad",
 };
 
 export const LEGACY_LOOKNFEEL_MAP = {

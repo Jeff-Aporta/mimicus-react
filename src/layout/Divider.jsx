@@ -1,7 +1,15 @@
+/**
+ * Divider — isla: layout
+ * demo: demo/config/demos/lib/Divider.json
+ * llm:  ./Divider.llm.md
+ * css:  css/components/divider.css
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Divider.jsx
+ * Separador con texto opcional, orientación horizontal/vertical y variantes (solid/dashed/glow).
+ */
 import { Children, isValidElement } from "react";
 import { normalizeVariant } from "../theme/constants.js";
 import { resolveColor } from "../lib/resolveColor.js";
-import { dataDebug } from "./layoutHelpers.js";
+import { dataDebug, joinStyle } from "./layoutHelpers.js";
 
 function toCssLength(v) {
   if (v == null || v === "") return undefined;
@@ -44,12 +52,12 @@ export function Divider({
     className,
   ].filter(Boolean).join(" ");
 
-  const mergedStyle = [
-    `--is-divider-color:${lineColor}`,
-    `margin:${marginCss}`,
-    axis === "horizontal" && titlePlacement !== "center" && `--is-divider-edge:${edgeBasis}`,
+  const mergedStyle = joinStyle(
+    `--is-divider-color: ${lineColor}`,
+    `margin: ${marginCss}`,
+    axis === "horizontal" && titlePlacement !== "center" && `--is-divider-edge: ${edgeBasis}`,
     style,
-  ].filter(Boolean).join(";");
+  );
 
   return (
     <div className={cls} style={mergedStyle} role="separator" aria-orientation={axis} {...dataDebug(rest, "divider")} {...rest}>

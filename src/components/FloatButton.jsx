@@ -1,3 +1,11 @@
+/**
+ * FloatButton — isla: primitives
+ * demo: demo/config/demos/lib/FloatButton.json
+ * llm:  ./FloatButton.llm.md
+ * css:  css/components/float-button.css
+ * repo: Jeff-Aporta/mimicus-react · src/components/FloatButton.jsx
+ * Botón flotante (FAB) con Group, BackTop y alias MUI (Fab, IconButton).
+ */
 import { Children, useEffect, useState } from "react";
 import { mergeSurfaceStyle } from "../lib/surfaceColor.js";
 import { Button } from "./Button.jsx";

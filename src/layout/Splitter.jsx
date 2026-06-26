@@ -1,3 +1,11 @@
+/**
+ * Splitter — isla: layout
+ * demo: demo/config/demos/lib/Splitter.json
+ * llm:  ./Splitter.llm.md
+ * css:  css/components/splitter.css
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Splitter.jsx
+ * Panel redimensionable con handle de arrastre, colapso, persistencia y stacking responsive.
+ */
 import { useEffect, useRef, useState } from "react";
 import { subscribeNarrowViewport } from "./layoutBreakpoints.js";
 import { clampSplitterSize, readSplitterStorage, writeSplitterStorage } from "./splitterResize.js";

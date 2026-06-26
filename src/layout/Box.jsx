@@ -1,3 +1,10 @@
+/**
+ * Box — isla: layout
+ * demo: demo/config/demos/lib/Box.json
+ * llm:  ./Box.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/Box.jsx
+ * Contenedor genérico polimórfico estilo MUI Box (component + className + style + sx).
+ */
 import { createElement } from "react";
 import { joinStyle } from "./layoutHelpers.js";
 

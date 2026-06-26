@@ -1,0 +1,13 @@
+/**
+ * Mentions (forms) — CSS
+ * demo: demo/config/demos/lib/Mentions.json
+ * llm:  ./Mentions.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Mentions.css
+ * Entrada con panel de menciones flotante y opciones seleccionables.
+ */
+
+/* ── Mentions ── */
+.mimicus-mentions { position: relative; width: 100%; }
+.mimicus-mentions__panel { position: absolute; z-index: 40; left: 0; bottom: calc(100% + 0.25rem); min-width: 10rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-surface, #fff); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); padding: 0.25rem; }
+.mimicus-mentions__option { display: block; width: 100%; text-align: left; border: none; background: transparent; padding: 0.4rem 0.65rem; border-radius: 0.35rem; font: inherit; cursor: pointer; }
+.mimicus-mentions__option:hover { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 10%, transparent); }

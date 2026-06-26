@@ -1,0 +1,13 @@
+/**
+ * Select (forms) — CSS
+ * demo: demo/config/demos/lib/Select.json
+ * llm:  ./Select.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/forms/Select.css
+ * Desplegable nativo estilizado con flecha y estado de foco.
+ */
+
+/* ── Select ── */
+.mimicus-select { position: relative; display: inline-flex; width: 100%; max-width: 100%; }
+.mimicus-select__native { width: 100%; appearance: none; min-height: 2.25rem; padding: 0.35rem 2rem 0.35rem 0.65rem; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); font: inherit; cursor: pointer; }
+.mimicus-select__native:focus { outline: none; border-color: var(--mimicus-primary, #1677ff); box-shadow: 0 0 0 3px var(--mimicus-field-focus); }
+.mimicus-select__arrow { position: absolute; right: 0.55rem; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.55; font-size: 0.75rem; }

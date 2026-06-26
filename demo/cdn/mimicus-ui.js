@@ -1,6 +1,7 @@
 var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom"||m==="react-dom/client")return globalThis.ReactDOM;throw new Error("Cannot require "+m)};
 (() => {
   var __defProp = Object.defineProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
     get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
   }) : x)(function(x) {
@@ -11,6 +12,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     for (var name in all)
       __defProp(target, name, { get: all[name], enumerable: true });
   };
+  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
   // src/index.jsx
   var index_exports = {};
@@ -34,6 +36,10 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     Breadcrumb: () => Breadcrumb,
     Breadcrumbs: () => Breadcrumbs,
     Button: () => Button,
+    CARD_INLINE_FLOW_AFTER: () => CARD_INLINE_FLOW_AFTER,
+    CARD_INLINE_FLOW_BEFORE: () => CARD_INLINE_FLOW_BEFORE,
+    CARD_INLINE_SAMPLE_TEXT: () => CARD_INLINE_SAMPLE_TEXT,
+    CARD_PREVIEW_SAMPLE_TEXT: () => CARD_PREVIEW_SAMPLE_TEXT,
     CONTAPYME_LOGIN_DOMAIN: () => CONTAPYME_LOGIN_DOMAIN,
     CONTAPYME_LOGIN_ID_HELPER: () => CONTAPYME_LOGIN_ID_HELPER,
     Calendar: () => Calendar,
@@ -56,6 +62,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     DESIGN_SCHEME_OPTIONS: () => DESIGN_SCHEME_OPTIONS,
     DESIGN_SCHEME_STORAGE_KEY: () => DESIGN_SCHEME_STORAGE_KEY,
     DatePicker: () => DatePicker,
+    DemoPage: () => DemoPage,
     Descriptions: () => Descriptions,
     DescriptionsItem: () => DescriptionsItem,
     Divider: () => Divider,
@@ -70,10 +77,14 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     GridLayout: () => GridLayout,
     GridResponsiveForm: () => GridResponsiveForm,
     Headings: () => Headings,
+    Icon: () => Icon,
     IconButton: () => IconButton,
     ImageList: () => ImageList,
     Input: () => Input,
     InputNumber: () => InputNumber,
+    JsonDemoAdapter: () => JsonDemoAdapter,
+    JsonRenderer: () => JsonRenderer,
+    LAYOUT_PREVIEW_EMOJIS: () => LAYOUT_PREVIEW_EMOJIS,
     LEGACY_LOOKNFEEL_MAP: () => LEGACY_LOOKNFEEL_MAP,
     LEGACY_LUMINANCE_KEYS: () => LEGACY_LUMINANCE_KEYS,
     LEGACY_THEME_COLOR_MAP: () => LEGACY_THEME_COLOR_MAP,
@@ -98,6 +109,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     MAIN_ORCHESTRATOR_LS_KEY: () => MAIN_ORCHESTRATOR_LS_KEY,
     MAIN_ORCHESTRATOR_URL_LOCAL: () => MAIN_ORCHESTRATOR_URL_LOCAL,
     MAIN_ORCHESTRATOR_URL_PROD: () => MAIN_ORCHESTRATOR_URL_PROD,
+    MIMICUS_UI: () => MIMICUS_UI,
     Masonry: () => Masonry,
     Mentions: () => Mentions,
     Menu: () => Menu,
@@ -107,6 +119,9 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     NavTabRow: () => NavTabRow,
     PLAYGROUND_APP_LAYOUT_OPTIONS: () => PLAYGROUND_APP_LAYOUT_OPTIONS,
     Pagination: () => Pagination,
+    Playground: () => Playground,
+    PlaygroundJsonPanel: () => PlaygroundJsonPanel,
+    PreviewRenderer: () => PreviewRenderer,
     QRCode: () => QRCode,
     Radio: () => Radio,
     RadioGroup: () => RadioGroup,
@@ -166,14 +181,22 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     bootLooknfeel: () => bootLooknfeel,
     bootMimicusUI: () => bootMimicusUI,
     bootTheme: () => bootTheme,
+    buildJsxTag: () => buildJsxTag,
+    buildTag: () => buildTag,
     cdn: () => cdn_exports,
     clearLoginCredentials: () => clearLoginCredentials,
     colorMix: () => colorMix,
+    colorOptions: () => colorOptions,
     colorTransform: () => colorTransform_exports,
+    columnsConfig: () => columnsConfig,
+    columnsGridPlayground: () => columnsGridPlayground,
+    configurePlayground: () => configurePlayground,
     copyEditorText: () => copyEditorText,
     createDemoSession: () => createDemoSession,
+    createJsonAdapter: () => createJsonAdapter,
     createOrchestratorSession: () => createOrchestratorSession,
     defaultIterceroFromTerceros: () => defaultIterceroFromTerceros,
+    demoSlug: () => demoSlug,
     designSchemeForLooknfeel: () => designSchemeForLooknfeel,
     destroyCodeMirror: () => destroyCodeMirror,
     dispatchShellNav: () => dispatchShellNav,
@@ -185,17 +208,21 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     getLooknfeelState: () => getLooknfeelState,
     getSpaRoute: () => getSpaRoute,
     getThemeState: () => getThemeState,
+    iconEnum: () => iconEnum,
     isAppLayoutVariant: () => isAppLayoutVariant,
     isDesignScheme: () => isDesignScheme,
     isGlassVariant: () => isGlassVariant,
     isLooknfeel: () => isLooknfeel,
     isLuminance: () => isLuminance,
     isNgVariant: () => isNgVariant,
+    isStubComponent: () => isStubComponent,
     isThemeColor: () => isThemeColor,
     joinColorStyle: () => joinColorStyle,
     js2css: () => js2css,
     loginWithInsoftAutoRetry: () => loginWithInsoftAutoRetry,
+    mergeStyleString: () => mergeStyleString,
     mergeSurfaceStyle: () => mergeSurfaceStyle,
+    mimicusPageTitle: () => mimicusPageTitle,
     mkAlpha: () => mkAlpha,
     mkBow: () => mkBow,
     mkDarken: () => mkDarken,
@@ -214,15 +241,20 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     ngBaseVariant: () => ngBaseVariant,
     normalizeAppLayoutVariant: () => normalizeAppLayoutVariant,
     normalizeContapymeLoginId: () => normalizeContapymeLoginId,
+    normalizeCssLength: () => normalizeCssLength,
     normalizeDesignScheme: () => normalizeDesignScheme,
     normalizeLooknfeel: () => normalizeLooknfeel,
     normalizePlaygroundAppLayoutVariant: () => normalizePlaygroundAppLayoutVariant,
     normalizeShellNavRows: () => normalizeShellNavRows,
     normalizeThemeColor: () => normalizeThemeColor,
     normalizeVariant: () => normalizeVariant,
+    optionsToItems: () => optionsToItems,
+    packCardRelieve: () => packCardRelieve,
     paletteBaseStyle: () => paletteBaseStyle,
     paletteStateVarRules: () => paletteStateVarRules,
     paletteSurfaceTint: () => paletteSurfaceTint,
+    parseStyleString: () => parseStyleString,
+    playgroundData: () => playgroundData,
     readDesignSchemeFromDom: () => readDesignSchemeFromDom,
     readLoginCredentials: () => readLoginCredentials,
     readLooknfeelFromDom: () => readLooknfeelFromDom,
@@ -232,11 +264,13 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     resolveCategoryTabDescriptors: () => resolveCategoryTabDescriptors,
     resolveCodeMirrorTheme: () => resolveCodeMirrorTheme,
     resolveColor: () => resolveColor,
+    resolveComponent: () => resolveComponent,
     resolveContapymeSession: () => resolveContapymeSession,
     resolveNavRowTabs: () => resolveNavRowTabs,
     resolveNavRowValue: () => resolveNavRowValue,
     resolveSessionHeaderLabel: () => resolveSessionHeaderLabel,
     resolveShellNavigation: () => resolveShellNavigation,
+    responsiveGridCols: () => responsiveGridCols,
     saveLoginCredentials: () => saveLoginCredentials,
     sectionColorFor: () => sectionColorFor,
     sectionMeta: () => sectionMeta,
@@ -246,6 +280,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     setThemeColor: () => setThemeColor,
     snippets: () => snippets_exports,
     sortedCategories: () => sortedCategories,
+    stepCssLength: () => stepCssLength,
     subscribeLooknfeel: () => subscribeLooknfeel,
     subscribeTheme: () => subscribeTheme,
     surfaceVariantAttrs: () => surfaceVariantAttrs,
@@ -432,25 +467,13 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     { id: "contapyme", label: "ContaPyme" },
     { id: "neon-mono", label: "Neon mono" },
     { id: "neon-dual", label: "Neon dual" },
-    { id: "neon-triad", label: "Neon tr\xEDada" },
-    { id: "mac-liquidglass", label: "Mac glass" },
-    { id: "lab-dual", label: "Lab dual" },
-    { id: "lab-triad", label: "Lab tr\xEDada" },
-    { id: "w98", label: "Windows 98" },
-    { id: "wxp", label: "Windows XP" },
-    { id: "wvista", label: "Windows Vista" }
+    { id: "neon-triad", label: "Neon tr\xEDada" }
   ];
   var LOOKNFEEL_DESIGN_SCHEME = {
     contapyme: "triad",
     "neon-mono": "mono",
     "neon-dual": "dual",
-    "neon-triad": "triad",
-    "mac-liquidglass": "dual",
-    w98: "mono",
-    wxp: "mono",
-    wvista: "mono",
-    "lab-dual": "dual",
-    "lab-triad": "triad"
+    "neon-triad": "triad"
   };
   var LEGACY_LOOKNFEEL_MAP = {
     classic: "contapyme",
@@ -705,15 +728,19 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     return /* @__PURE__ */ React.createElement(HeaderZone, { ...props });
   }
   Tools.__appLayoutHeaderSlot = "tools";
+  function Nav(props) {
+    return /* @__PURE__ */ React.createElement(HeaderZone, { ...props });
+  }
+  Nav.__appLayoutHeaderSlot = "nav";
   function collectHeaderSlots(children) {
-    const slots = { brand: null, center: null, tools: null, extra: [] };
+    const slots = { brand: null, center: null, tools: null, nav: null, extra: [] };
     import_react4.Children.forEach(children, (child) => {
       if (!(0, import_react4.isValidElement)(child)) {
         if (child != null && child !== false) slots.extra.push(child);
         return;
       }
       const slotName = child.type?.__appLayoutHeaderSlot;
-      if (slotName === "brand" || slotName === "center" || slotName === "tools") slots[slotName] = child;
+      if (slotName === "brand" || slotName === "center" || slotName === "tools" || slotName === "nav") slots[slotName] = child;
       else slots.extra.push(child);
     });
     return slots;
@@ -722,19 +749,21 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     if (!slot) return null;
     return /* @__PURE__ */ React.createElement("div", { className }, slot.props.children);
   }
-  function AppLayoutHeader({ className, barClassName, children, ...rest }) {
+  function AppLayoutHeader({ className, barClassName, navClassName, children, ...rest }) {
     const slots = collectHeaderSlots(children);
-    const hasZones = Boolean(slots.brand || slots.center || slots.tools);
+    const hasZones = Boolean(slots.brand || slots.center || slots.tools || slots.nav);
     const rootClass = ["mimicus-app-layout-header", "content-header", className].filter(Boolean).join(" ");
     if (!hasZones) {
       return /* @__PURE__ */ React.createElement("header", { ...rest, className: rootClass }, children);
     }
     const barClass = ["mimicus-app-layout-header__bar", "content-header-inner", barClassName].filter(Boolean).join(" ");
-    return /* @__PURE__ */ React.createElement("header", { ...rest, className: rootClass }, /* @__PURE__ */ React.createElement("div", { className: barClass }, renderZone(slots.brand, "mimicus-app-layout-header__brand pg-shell-toolbar__brand"), renderZone(slots.center, "mimicus-app-layout-header__center pg-shell-toolbar__center"), renderZone(slots.tools, "mimicus-app-layout-header__tools pg-shell-toolbar__tools")), slots.extra.length > 0 ? slots.extra : null);
+    const navClass = ["mimicus-app-layout-header__nav", "pg-shell-header-nav", navClassName].filter(Boolean).join(" ");
+    return /* @__PURE__ */ React.createElement("header", { ...rest, className: rootClass }, /* @__PURE__ */ React.createElement("div", { className: barClass }, renderZone(slots.brand, "mimicus-app-layout-header__brand pg-shell-toolbar__brand"), renderZone(slots.center, "mimicus-app-layout-header__center pg-shell-toolbar__center"), renderZone(slots.tools, "mimicus-app-layout-header__tools pg-shell-toolbar__tools")), slots.nav ? /* @__PURE__ */ React.createElement("div", { className: navClass }, slots.nav.props.children) : null, slots.extra.length > 0 ? slots.extra : null);
   }
   AppLayoutHeader.Brand = Brand;
   AppLayoutHeader.Center = Center;
   AppLayoutHeader.Tools = Tools;
+  AppLayoutHeader.Nav = Nav;
 
   // src/layout/AppLayout.jsx
   var SLOT_TYPES = { Header: "header", Sider: "sider", Footer: "footer" };
@@ -761,6 +790,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   Header.Brand = AppLayoutHeader.Brand;
   Header.Center = AppLayoutHeader.Center;
   Header.Tools = AppLayoutHeader.Tools;
+  Header.Nav = AppLayoutHeader.Nav;
   function Sider({ children, width, collapsed, collapsible, collapsedWidth, theme, onCollapse, className, style, ...rest }) {
     const useSiderChrome = width !== void 0 || collapsible || collapsed !== void 0 || theme !== void 0;
     if (useSiderChrome) {
@@ -862,8 +892,29 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     if (!rest["data-element"] && !segment) return {};
     return { "data-element": [rest["data-element"], segment].flat(Infinity).filter(Boolean).join(" / ") };
   }
+  function stylePartToString(part) {
+    if (part == null || part === false) return "";
+    if (typeof part === "object") {
+      return Object.entries(part).filter(([, v]) => v != null && v !== "").map(([k, v]) => `${k.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}: ${v}`).join("; ");
+    }
+    return String(part).trim();
+  }
+  function cssStringToStyle(str) {
+    if (!str || typeof str !== "string") return {};
+    const out = {};
+    for (const part of str.split(";")) {
+      const idx = part.indexOf(":");
+      if (idx < 1) continue;
+      const key = part.slice(0, idx).trim();
+      const val = part.slice(idx + 1).trim();
+      if (!key || !val) continue;
+      out[key.replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = val;
+    }
+    return out;
+  }
   function hasOverflowStyle(style = "") {
-    return RGX_OVERFLOW_SCROLL.test(style);
+    const s = typeof style === "string" ? style : stylePartToString(style);
+    return RGX_OVERFLOW_SCROLL.test(s);
   }
   function getScrollbarClass(cscroll = false, style) {
     return cscroll || hasOverflowStyle(style) ? "custom-scrollbar" : "";
@@ -888,7 +939,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     return value;
   }
   function joinStyle(...parts) {
-    return parts.filter(Boolean).join("; ");
+    const css = parts.map(stylePartToString).filter(Boolean).join("; ");
+    return css ? cssStringToStyle(css) : void 0;
   }
 
   // src/layout/layoutSlotContext.jsx
@@ -1024,12 +1076,12 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       plain && "is-divider--plain",
       className
     ].filter(Boolean).join(" ");
-    const mergedStyle = [
-      `--is-divider-color:${lineColor}`,
-      `margin:${marginCss}`,
-      axis === "horizontal" && titlePlacement !== "center" && `--is-divider-edge:${edgeBasis}`,
+    const mergedStyle = joinStyle(
+      `--is-divider-color: ${lineColor}`,
+      `margin: ${marginCss}`,
+      axis === "horizontal" && titlePlacement !== "center" && `--is-divider-edge: ${edgeBasis}`,
       style
-    ].filter(Boolean).join(";");
+    );
     return /* @__PURE__ */ React.createElement("div", { className: cls, style: mergedStyle, role: "separator", "aria-orientation": axis, ...dataDebug(rest, "divider"), ...rest }, hasText ? axis === "horizontal" ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "is-divider__rail is-divider__rail--before", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("span", { className: "is-divider__content" }, children), /* @__PURE__ */ React.createElement("span", { className: "is-divider__rail is-divider__rail--after", "aria-hidden": "true" })) : /* @__PURE__ */ React.createElement("span", { className: "is-divider__content" }, children) : axis === "horizontal" ? /* @__PURE__ */ React.createElement("span", { className: "is-divider__rail is-divider__rail--solo", "aria-hidden": "true" }) : /* @__PURE__ */ React.createElement("span", { className: "is-divider__rail is-divider__rail--solo-vertical", "aria-hidden": "true" }));
   }
 
@@ -1208,7 +1260,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       {
         ...rest,
         className: ["mimicus-side-panel", "sidebar", "pg-sidebar", "pg-vt-sidebar", drawer && "mimicus-side-panel--drawer pg-sidebar--drawer", rail && "mimicus-side-panel--rail is-collapsed"].filter(Boolean).join(" "),
-        style
+        style: { ...style && typeof style === "object" ? style : {} }
       },
       drawer && onClose && /* @__PURE__ */ React.createElement("div", { className: "mimicus-side-panel__drawer-bar pg-sidebar-drawer-bar" }, /* @__PURE__ */ React.createElement(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onClose, className: "sidebar-toggle-btn", title: closeTitle, style: { width: "auto", marginLeft: "auto" } }, /* @__PURE__ */ React.createElement("iconify-icon", { icon: closeIcon, "aria-hidden": true }))),
       !drawer && onToggle && /* @__PURE__ */ React.createElement("div", { className: ["mimicus-side-panel__header", "pg-sidebar-header", "pg-sidebar-header--panel", rail && "pg-sidebar-header--rail"].filter(Boolean).join(" ") }, /* @__PURE__ */ React.createElement(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onToggle, className: ["sidebar-header-btn", rail ? "sidebar-header-btn--rail" : "sidebar-toggle-btn"].filter(Boolean).join(" "), title: open ? collapseTitle : expandTitle, style: rail ? { width: "100%", justifyContent: "center" } : { flexShrink: 0, width: "auto" } }, /* @__PURE__ */ React.createElement("iconify-icon", { icon: open ? "mdi:menu-open" : "mdi:menu", "aria-hidden": true }))),
@@ -2152,7 +2204,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       border: "none",
       borderTop: `${thickness}px ${borderStyle} ${lineColor}`,
       margin: `${startMargin}px 0 ${endMargin}px`,
-      ...style
+      ...style && typeof style === "object" ? style : {}
     } : {
       display: "inline-block",
       alignSelf: "stretch",
@@ -2164,7 +2216,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       margin: `0 ${startMargin}px 0 ${endMargin}px`,
       verticalAlign: "middle",
       flexShrink: 0,
-      ...style
+      ...style && typeof style === "object" ? style : {}
     };
     return /* @__PURE__ */ React.createElement("span", { className: cls, role: "separator", "aria-orientation": axis, style: mergedStyle, ...rest });
   }
@@ -2183,6 +2235,12 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function GridResponsiveForm({ maxcells, mincells, gap = "1rem", className, style, children, ...gridProps }) {
     return /* @__PURE__ */ React.createElement(BlockLayout, { className: ["mimicus-grid-responsive-form", className].filter(Boolean).join(" "), style }, /* @__PURE__ */ React.createElement(GridResponsiveFormInner, { maxcells, mincells, gap, ...gridProps }, children));
+  }
+
+  // src/components/Icon.jsx
+  function Icon({ icon, className, style }) {
+    if (!icon) return null;
+    return /* @__PURE__ */ React.createElement("iconify-icon", { icon, className, style: style && typeof style === "object" ? style : void 0 });
   }
 
   // src/components/FloatButton.jsx
@@ -2377,11 +2435,11 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     return { "--ct-base": resolveColor(color) };
   }
   function paletteSurfaceTint(color, opts = {}) {
-    const accent = resolveColor(color);
+    const accent2 = resolveColor(color);
     const bg = colorMix(resolveColor(opts.surface ?? "card"), color, opts.cardMix ?? 15);
     const fg = colorMix(bg2font(bg), color, opts.fgMix ?? 40);
     const border = colorMix(bg, color, opts.borderMix ?? 35);
-    return { accent, bg, fg, border };
+    return { accent: accent2, bg, fg, border };
   }
   function joinColorStyle(...parts) {
     return parts.filter(Boolean).join("; ");
@@ -3867,8 +3925,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       });
       root.dataset.value = exclusive ? vals[0] ?? "" : vals.join(",");
     };
-    const initial2 = root.dataset.value ?? btns.find((b) => b.classList.contains("is-active"))?.dataset.mimicusToggle ?? "";
-    setActive(exclusive ? initial2 ? [initial2] : [] : String(initial2).split(",").filter(Boolean));
+    const initial3 = root.dataset.value ?? btns.find((b) => b.classList.contains("is-active"))?.dataset.mimicusToggle ?? "";
+    setActive(exclusive ? initial3 ? [initial3] : [] : String(initial3).split(",").filter(Boolean));
     const cleanups = btns.map((b) => on(b, "click", () => {
       if (b.disabled) return;
       const v = b.dataset.mimicusToggle;
@@ -4771,8 +4829,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     return typeof Page === "function" ? /* @__PURE__ */ React.createElement(Page, null) : Page;
   }
   function SpaRouter({ routes, defaultRoute = "home", children }) {
-    const [nav, setNav] = (0, import_react22.useState)(() => urlState.get());
-    (0, import_react22.useEffect)(() => urlState.subscribe(setNav), []);
+    const [nav, setNav2] = (0, import_react22.useState)(() => urlState.get());
+    (0, import_react22.useEffect)(() => urlState.subscribe(setNav2), []);
     const route = nav.r ?? defaultRoute;
     const navigate = (next) => urlState.setRoute(next);
     const value = (0, import_react22.useMemo)(() => ({ route, navigate, routes, defaultRoute }), [route, routes, defaultRoute]);
@@ -5624,8 +5682,8 @@ ${indent}<\/script>`;
         icon,
         width: size,
         height: size,
-        class: className,
-        style: { display: "inline-flex", verticalAlign: "middle", ...style },
+        className,
+        style: { display: "inline-flex", verticalAlign: "middle", ...style && typeof style === "object" ? style : {} },
         ...rest
       }
     );
@@ -6137,8 +6195,8 @@ ${indent}<\/script>`;
       authUrl
     };
   }
-  function createDemoSession(initial2 = null) {
-    let session = initial2;
+  function createDemoSession(initial3 = null) {
+    let session = initial3;
     const EVENT = "mimicus-demo-session";
     const api = {
       EVENT,
@@ -6207,9 +6265,9 @@ ${indent}<\/script>`;
       category: route.category
     }));
   }
-  function normalizeShellNavRows(shellConfig) {
-    if (shellConfig?.navigation?.rows?.length) return shellConfig.navigation.rows;
-    const legacy = shellConfig?.headerNav;
+  function normalizeShellNavRows(shellConfig2) {
+    if (shellConfig2?.navigation?.rows?.length) return shellConfig2.navigation.rows;
+    const legacy = shellConfig2?.headerNav;
     if (!legacy) return [];
     const rows = [];
     if (legacy.primary) {
@@ -6294,9 +6352,9 @@ ${indent}<\/script>`;
     if (type === "id" && row2.active?.id) return row2.active.id;
     return ctx.route?.category ?? "";
   }
-  function resolveShellNavigation(shellConfig, ctx) {
+  function resolveShellNavigation(shellConfig2, ctx) {
     return {
-      rows: normalizeShellNavRows(shellConfig).map((row2) => ({
+      rows: normalizeShellNavRows(shellConfig2).map((row2) => ({
         id: row2.id ?? row2.tier ?? "nav",
         tier: row2.tier ?? "primary",
         when: row2.when ?? "always",
@@ -6306,8 +6364,8 @@ ${indent}<\/script>`;
       }))
     };
   }
-  function dispatchShellNav(tabId, ctx, shellConfig) {
-    for (const row2 of normalizeShellNavRows(shellConfig)) {
+  function dispatchShellNav(tabId, ctx, shellConfig2) {
+    for (const row2 of normalizeShellNavRows(shellConfig2)) {
       for (const child of row2.children ?? []) {
         if (child.type !== "action" || child.id !== tabId) continue;
         const nav = child.nav ?? child.id;
@@ -6378,10 +6436,2303 @@ ${indent}<\/script>`;
 
   // src/shell/ShellHeaderNav.jsx
   var import_react27 = __require("react");
-  function ShellHeaderNav({ shellConfig, ctx, onTab, className }) {
-    const nav = (0, import_react27.useMemo)(() => resolveShellNavigation(shellConfig, ctx), [shellConfig, ctx]);
-    const handleTab = onTab ?? ((id) => dispatchShellNav(id, ctx, shellConfig));
+  function ShellHeaderNav({ shellConfig: shellConfig2, ctx, onTab, className }) {
+    const nav = (0, import_react27.useMemo)(() => resolveShellNavigation(shellConfig2, ctx), [shellConfig2, ctx]);
+    const handleTab = onTab ?? ((id) => dispatchShellNav(id, ctx, shellConfig2));
     return /* @__PURE__ */ React.createElement(React.Fragment, null, nav.rows.filter((row2) => row2.visible && row2.tabs.length > 0).map((row2) => /* @__PURE__ */ React.createElement(NavTabRow, { key: row2.id, tier: row2.tier, tabs: row2.tabs, value: row2.value, onChange: handleTab, className })));
+  }
+
+  // src/devkit/Playground.jsx
+  var import_react33 = __require("react");
+
+  // src/devkit/core/playgroundData.js
+  var _d = { catalogMeta: { sections: {} }, sectionsMeta: {}, shellConfig: {}, previewTemplates: {}, brand: {} };
+  function configurePlayground(d) {
+    _d = { ..._d, ...d || {} };
+  }
+  function playgroundData() {
+    return _d;
+  }
+
+  // src/devkit/catalog/catalogUi.jsx
+  var import_react28 = __require("react");
+
+  // src/devkit/catalog/catalogSections.js
+  function catalogDef() {
+    return playgroundData().catalogMeta ?? {};
+  }
+  function sectionsDef() {
+    return playgroundData().sectionsMeta ?? {};
+  }
+  function sectionOrder() {
+    return sectionsDef().order ?? Object.keys(catalogDef().sections ?? {});
+  }
+  function sectionMeta2() {
+    return catalogDef().sections ?? sectionsDef().sections ?? {};
+  }
+  function overviewMeta() {
+    return sectionsDef().overview ?? {};
+  }
+  function resolveItemSection(item) {
+    const s = sectionsDef();
+    return item.section ?? s.demoSection?.[item.id] ?? s.legacyCategory?.[item.category] ?? "other";
+  }
+  function sectionLabel(sectionId) {
+    return sectionMeta2()[sectionId]?.label ?? sectionId;
+  }
+  function sectionDescription(sectionId) {
+    return sectionMeta2()[sectionId]?.description ?? "";
+  }
+  function sectionIcon(sectionId) {
+    return sectionMeta2()[sectionId]?.icon ?? "mdi:folder-outline";
+  }
+  function sectionsWithItems(items, filterFn = () => true) {
+    return sectionOrder().filter((sid) => items.some((it) => resolveItemSection(it) === sid && filterFn(it)));
+  }
+  function itemsInSection(items, sectionId, filterFn = () => true) {
+    return items.filter((it) => resolveItemSection(it) === sectionId && filterFn(it));
+  }
+
+  // src/devkit/shared/playgroundKit.js
+  var CSS_LEN_RE = /^(-?\d*\.?\d+)(px|rem|em|%|vh|vw|ch|ex)?$/i;
+  var LAYOUT_PREVIEW_EMOJIS = [...new Intl.Segmenter("en", { granularity: "grapheme" }).segment(
+    "\u{1F602}\u2764\uFE0F\u{1F525}\u{1F60D}\u2728\u{1F389}\u{1F64F}\u{1F44D}\u2B50\u{1F4AF}\u{1F60A}\u{1F60E}\u{1F923}\u{1F622}\u{1F64C}\u{1F480}\u{1F64B}\u{1F64A}\u{1F31F}\u{1F680}\u{1F970}\u{1F618}\u{1F914}\u{1F605}\u{1F61C}\u{1F929}\u{1F631}\u{1F62D}\u{1F621}\u{1F97A}\u{1F634}\u{1F924}\u{1F92F}\u{1F917}\u{1F91D}\u{1F44F}\u{1F648}\u{1F436}\u{1F431}\u{1F984}\u{1F355}\u{1F354}\u{1F35F}\u{1F369}\u{1F366}\u{1F353}\u{1F34E}\u{1F347}\u{1F308}\u2600\uFE0F\u{1F319}"
+  )].map((seg) => seg.segment);
+  var CARD_PREVIEW_SAMPLE_TEXT = "Texto de ejemplo para la vista previa. Sirve \xFAnicamente para ver la tarjeta con contenido; no est\xE1 ligado a los valores del panel.";
+  var CARD_INLINE_SAMPLE_TEXT = "Tarjeta inline";
+  var CARD_INLINE_FLOW_BEFORE = "En el flujo del p\xE1rrafo, ";
+  var CARD_INLINE_FLOW_AFTER = " y el texto contin\xFAa en la misma l\xEDnea cuando hay espacio.";
+  function packCardRelieve(details) {
+    const relieve = Math.round(Number(details?.relieve));
+    return Number.isFinite(relieve) ? relieve : 65;
+  }
+  var colorOptions = [
+    { label: "Ninguno", value: "" },
+    { label: "Primario", value: "primary" },
+    { label: "Design 1", value: "design-1" },
+    { label: "Design 2", value: "design-2" },
+    { label: "Design 3", value: "design-3" },
+    { label: "Info", value: "info" },
+    { label: "\xC9xito", value: "success" },
+    { label: "Aviso", value: "warning" },
+    { label: "Error", value: "error" },
+    { label: "Peligro", value: "danger" },
+    { label: "Neutro", value: "neutral" }
+  ];
+  var iconEnum = {
+    "": "Ninguno",
+    "mdi:gesture-tap": "Tap",
+    "mdi:heart": "Coraz\xF3n",
+    "mdi:star": "Estrella",
+    "mdi:check": "Check",
+    "mdi:alert": "Alerta",
+    "mdi:home": "Inicio"
+  };
+  var MIMICUS_UI = {
+    name: "Mimicus React",
+    tagline: "Design system React",
+    catalogLabel: "Components Overview",
+    author: "Mimicus",
+    description: "Cat\xE1logo y playground interactivo de Mimicus React: primitivas, layouts, navegaci\xF3n e inputs.",
+    catalogLead: "Explora la biblioteca por categor\xEDas. Cada tarjeta abre un demo interactivo con vista previa, ejemplos y referencia de API."
+  };
+  function mimicusPageTitle(suffix) {
+    if (suffix) return `${suffix} \xB7 ${MIMICUS_UI.name}`;
+    return `${MIMICUS_UI.name} \u2014 ${MIMICUS_UI.tagline}`;
+  }
+  function demoSlug(id) {
+    return String(id).replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+  }
+  function optionsToItems(options) {
+    if (Array.isArray(options)) return options.map((o) => [o.label ?? String(o.value ?? ""), o.value]);
+    return Object.entries(options ?? {});
+  }
+  function columnsConfig(count, size = "md") {
+    const n = Math.max(1, Number(count) || 1);
+    if (size === "xs" || size === "sm") return Math.min(2, n);
+    if (size === "lg" || size === "xl") return Math.min(4, n);
+    return Math.min(3, n);
+  }
+  function columnsGridPlayground(size = "md") {
+    return size === "xs" || size === "sm" ? 2 : size === "lg" || size === "xl" ? 4 : 3;
+  }
+  function mergeStyleString(base, extra) {
+    const parts = [base, extra].filter((s) => s && String(s).trim());
+    return parts.length ? parts.join("; ") : void 0;
+  }
+  function parseStyleString(str) {
+    if (!str || typeof str !== "string") return void 0;
+    const out = {};
+    for (const part of str.split(";")) {
+      const idx = part.indexOf(":");
+      if (idx < 1) continue;
+      const key = part.slice(0, idx).trim();
+      const val = part.slice(idx + 1).trim();
+      if (!key || !val) continue;
+      const camel = key.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+      out[camel] = val;
+    }
+    return Object.keys(out).length ? out : void 0;
+  }
+  function normalizeCssLength(raw) {
+    const s = String(raw ?? "").trim();
+    if (!s) return "";
+    const m = s.match(CSS_LEN_RE);
+    if (!m) return s;
+    const n = parseFloat(m[1]);
+    if (!Number.isFinite(n)) return s;
+    const unit = m[2] || "rem";
+    return `${Math.round(n * 100) / 100}${unit}`;
+  }
+  function stepCssLength(raw, delta) {
+    const s = String(raw ?? "").trim();
+    const m = s.match(CSS_LEN_RE);
+    if (!m) return normalizeCssLength(String((parseFloat(s) || 0) + delta));
+    const n = (parseFloat(m[1]) || 0) + delta;
+    return normalizeCssLength(`${n}${m[2] || "rem"}`);
+  }
+  function responsiveGridCols(count) {
+    if (count <= 2) return 2;
+    if (count <= 4) return Math.min(count, 3);
+    if (count <= 6) return 3;
+    return Math.min(4, count);
+  }
+  var filterAttrs = (attrs) => attrs.filter((a) => {
+    if (!a || typeof a.name !== "string") return false;
+    const t = a.type ?? (typeof a.value === "boolean" ? "bool" : typeof a.value === "number" ? "num" : typeof a.value === "string" ? "str" : void 0);
+    if (t === "bind") return true;
+    if (a.value === void 0 || a.value === null) return false;
+    const def = a.default !== void 0 ? a.default : t === "str" ? "" : void 0;
+    if (def !== void 0 && a.value === def) return false;
+    return true;
+  });
+  var renderAttr = (a) => {
+    const t = a.type ?? (typeof a.value === "boolean" ? "bool" : typeof a.value === "number" ? "num" : "str");
+    if (t === "bool") return a.value ? a.name : a.explicitFalse ? `${a.name}={false}` : "";
+    if (t === "bind") return a.value && a.value !== a.name ? `${a.name}={${a.value}}` : `${a.name}={${a.name}}`;
+    if (t === "num") return `${a.name}={${a.value}}`;
+    if (t === "color" || t === "str") return `${a.name}="${a.value}"`;
+    return `${a.name}="${a.value}"`;
+  };
+  var plainHelpers = {
+    txt: (s) => s,
+    pt: (s) => s,
+    comm: (s) => `/* ${s} */`,
+    punc: (s) => s,
+    cl: (s) => s,
+    str: (s) => `"${s}"`,
+    prop: (s) => s,
+    kw: (s) => s
+  };
+  function buildTag(name, attrs = [], opts = {}, bodyFn) {
+    const parts = filterAttrs(attrs).map(renderAttr).filter(Boolean);
+    const open = parts.length ? `<${name} ${parts.join(" ")}>` : `<${name}>`;
+    if (!bodyFn) return `${open} />`;
+    const content = bodyFn(plainHelpers).split("\n").map((l) => l.trim()).filter(Boolean).join("\n  ");
+    if (!content) return `${open}</${name}>`;
+    return `${open}
+  ${content}
+</${name}>`;
+  }
+  var buildJsxTag = buildTag;
+
+  // src/devkit/shell/routing.js
+  var VT_CARD_SOURCE = "pg-vt-card-source";
+  var lastRoute = { category: null, slug: null };
+  function navDepth(route) {
+    if (!route.category) return 0;
+    if (!route.slug) return 1;
+    return 2;
+  }
+  function modeFor(from, to) {
+    const df = navDepth(from);
+    const dt = navDepth(to);
+    if (dt === 0 && df > 0) return "home";
+    if (dt > df) return "forward";
+    if (dt < df) return "back";
+    return "swap";
+  }
+  function supportsViewTransitions() {
+    return typeof document !== "undefined" && "startViewTransition" in document;
+  }
+  function prefersReducedMotion() {
+    return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+  function syncViewTransitionRoute(route) {
+    lastRoute = { category: route.category, slug: route.slug };
+  }
+  function markViewTransitionCardSource(el) {
+    if (!(el instanceof HTMLElement)) return;
+    document.querySelectorAll(`.${VT_CARD_SOURCE}`).forEach((n) => n.classList.remove(VT_CARD_SOURCE));
+    el.classList.add(VT_CARD_SOURCE);
+  }
+  async function flushDom() {
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  }
+  async function runViewTransition(update, nextRoute) {
+    const from = { ...lastRoute };
+    const to = nextRoute ?? from;
+    const mode = modeFor(from, to);
+    const apply = async () => {
+      await Promise.resolve(update());
+      await flushDom();
+    };
+    if (!supportsViewTransitions() || prefersReducedMotion()) {
+      await apply();
+      lastRoute = { category: to.category, slug: to.slug };
+      return;
+    }
+    const root = document.documentElement;
+    root.dataset.vt = mode;
+    if (to.slug) root.dataset.vtSlug = to.slug;
+    else delete root.dataset.vtSlug;
+    try {
+      const vt = document.startViewTransition(apply);
+      await vt.finished;
+    } catch {
+      await apply();
+    } finally {
+      delete root.dataset.vt;
+      delete root.dataset.vtSlug;
+      document.querySelectorAll(`.${VT_CARD_SOURCE}`).forEach((n) => n.classList.remove(VT_CARD_SOURCE));
+      lastRoute = { category: to.category, slug: to.slug };
+    }
+  }
+  function routeFromNav(category, slug = null) {
+    return { category, slug: slug ?? null };
+  }
+  function bootViewTransitionRoute() {
+    syncViewTransitionRoute({ category: null, slug: null });
+  }
+  var URL_STATE_PARAM2 = "s";
+  var STATE_VERSION2 = 1;
+  function initial2() {
+    return { v: STATE_VERSION2 };
+  }
+  function normalize2(raw) {
+    if (!raw || typeof raw !== "object") return initial2();
+    const o = raw;
+    const out = { v: typeof o.v === "number" ? o.v : STATE_VERSION2 };
+    if (typeof o.c === "string" && o.c.trim()) out.c = o.c.trim();
+    if (typeof o.d === "string" && o.d.trim()) out.d = o.d.trim();
+    if (o.e === 1 || o.e === true) out.e = 1;
+    if (o.p === "palette" || o.p === "theme") out.p = "palette";
+    if (out.p === "palette") {
+      delete out.c;
+      delete out.d;
+    }
+    if (out.d && !out.c) delete out.d;
+    return out;
+  }
+  function slimForUrl2(state2) {
+    const out = { v: state2.v ?? STATE_VERSION2 };
+    if (state2.p === "palette") {
+      out.p = "palette";
+      if (state2.e === 1) out.e = 1;
+      return out;
+    }
+    if (state2.c) out.c = state2.c;
+    if (state2.d && state2.c) out.d = state2.d;
+    if (state2.e === 1) out.e = 1;
+    return out;
+  }
+  function mergeState(state2, partial) {
+    if ("c" in partial && !partial.c) return initial2();
+    if (partial.p === "palette") {
+      const next2 = { v: STATE_VERSION2, p: "palette" };
+      if (partial.e === 1 || state2.e === 1) next2.e = 1;
+      return next2;
+    }
+    if (!partial.c) return state2;
+    const next = { v: STATE_VERSION2, c: partial.c };
+    if ("d" in partial) {
+      if (partial.d) next.d = partial.d;
+    } else if (state2.c === partial.c && state2.d) {
+      next.d = state2.d;
+    }
+    if (partial.e === 1) next.e = 1;
+    else if (partial.e === void 0 && state2.e === 1) next.e = 1;
+    return next;
+  }
+  function stateToRoute(state2) {
+    return { category: state2.c ?? null, slug: state2.d ?? null };
+  }
+  function isEmbedView(state2) {
+    return state2.e === 1;
+  }
+  function b64urlEncode2(str) {
+    return btoa(unescape(encodeURIComponent(str))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function b64urlDecode2(str) {
+    let b = String(str).replace(/-/g, "+").replace(/_/g, "/");
+    while (b.length % 4) b += "=";
+    return decodeURIComponent(escape(atob(b)));
+  }
+  function createUrlState2() {
+    let state2 = initial2();
+    const listeners3 = /* @__PURE__ */ new Set();
+    let writeTimer = null;
+    let booted = false;
+    const getSnapshot = () => ({ ...state2 });
+    const readUrl2 = () => {
+      const raw = new URLSearchParams(location.search).get(URL_STATE_PARAM2);
+      if (!raw) return null;
+      try {
+        return normalize2(JSON.parse(b64urlDecode2(raw)));
+      } catch {
+        return null;
+      }
+    };
+    const writeUrl = () => {
+      try {
+        const slimmed = slimForUrl2(state2);
+        const json = JSON.stringify(slimmed);
+        const url = new URL(location.href);
+        if (json === "{}" || json === `{"v":${STATE_VERSION2}}`) url.searchParams.delete(URL_STATE_PARAM2);
+        else url.searchParams.set(URL_STATE_PARAM2, b64urlEncode2(json));
+        url.hash = "";
+        history.replaceState({ pgNav: true }, "", url);
+      } catch (e) {
+        console.warn("urlState: no se pudo escribir ?s=", e);
+      }
+    };
+    const scheduleWrite = () => {
+      if (writeTimer) clearTimeout(writeTimer);
+      writeTimer = setTimeout(writeUrl, 200);
+    };
+    const notify2 = () => {
+      const snap = getSnapshot();
+      listeners3.forEach((fn) => {
+        try {
+          fn(snap);
+        } catch {
+        }
+      });
+    };
+    const api = {
+      get: getSnapshot,
+      merge(partial) {
+        state2 = mergeState(state2, partial);
+        notify2();
+        scheduleWrite();
+        return getSnapshot();
+      },
+      reset() {
+        state2 = initial2();
+        notify2();
+        if (writeTimer) clearTimeout(writeTimer);
+        writeTimer = null;
+        writeUrl();
+        return getSnapshot();
+      },
+      subscribe(fn) {
+        listeners3.add(fn);
+        return () => listeners3.delete(fn);
+      },
+      boot() {
+        if (booted) return getSnapshot();
+        booted = true;
+        state2 = readUrl2() ?? initial2();
+        if (typeof window !== "undefined") {
+          window.addEventListener("popstate", () => {
+            const next = readUrl2() ?? initial2();
+            void runViewTransition(() => {
+              state2 = next;
+              notify2();
+            }, stateToRoute(next));
+          });
+        }
+        return getSnapshot();
+      }
+    };
+    return api;
+  }
+  var urlState2 = createUrlState2();
+  if (typeof window !== "undefined") urlState2.boot();
+  function setPaletteLab() {
+    return urlState2.merge({ p: "palette" });
+  }
+  function setNav(category, slug = null) {
+    if (!category) urlState2.reset();
+    else if (slug) urlState2.merge({ c: category, d: slug });
+    else urlState2.merge({ c: category, d: void 0 });
+    void runViewTransition(() => {
+    }, routeFromNav(category, slug));
+  }
+
+  // src/devkit/catalog/catalogUi.jsx
+  var demoIcons = {
+    Button: "mdi:gesture-tap-button",
+    ButtonIconify: "mdi:button-pointer",
+    FloatButton: "mdi:plus-circle-outline",
+    Fab: "mdi:plus-circle",
+    Switch: "mdi:toggle-switch-outline",
+    CheckboxIcon: "mdi:check-bold",
+    BlockLayout: "mdi:rectangle-outline",
+    Card: "mdi:card-outline",
+    FlexLayout: "mdi:view-week-outline",
+    GridLayout: "mdi:grid",
+    Box: "mdi:checkbox-blank-outline",
+    Container: "mdi:page-layout-body",
+    Stack: "mdi:view-agenda-outline",
+    Space: "mdi:arrow-expand-horizontal",
+    Masonry: "mdi:view-dashboard-variant",
+    ImageList: "mdi:image-multiple-outline",
+    ActionDrawer: "mdi:dock-right",
+    Loading: "mdi:loading",
+    Modal: "mdi:application-outline",
+    Headings: "mdi:format-header-pound",
+    Iconify: "mdi:emoticon-outline",
+    Text: "mdi:format-text",
+    Chip: "mdi:tag-outline",
+    CheckboxChip: "mdi:checkbox-multiple-blank-circle-outline",
+    Dialog: "mdi:message-text-outline",
+    Accordion: "mdi:unfold-more-horizontal",
+    Tabs: "mdi:tab",
+    Toaster: "mdi:bell-badge-outline",
+    Tooltip: "mdi:tooltip-text-outline",
+    CodeBlock: "mdi:code-tags",
+    Anchor: "mdi:anchor",
+    TransferBoard: "mdi:view-column-outline",
+    Splitter: "mdi:arrow-split-vertical",
+    Divider: "mdi:minus",
+    AppLayout: "mdi:view-dashboard-outline",
+    SidePanel: "mdi:dock-left",
+    Separator: "mdi:minus",
+    Alert: "mdi:alert-circle-outline",
+    TipInfo: "mdi:information-outline",
+    FlexOptions: "mdi:dots-horizontal-circle-outline",
+    InvokedFloater: "mdi:message-arrow-right-outline",
+    FloatingComponent: "mdi:arrange-bring-forward",
+    GridResponsiveForm: "mdi:form-select",
+    LabeledSwitch: "mdi:toggle-switch-outline",
+    FpsHistogram: "mdi:chart-timeline-variant-shimmer"
+  };
+  function getDemoIcon(demoId, item) {
+    return item?.definition?.titleIcon ?? demoIcons[demoId] ?? "mdi:circle-small";
+  }
+  var demoStatus = {
+    Button: "approved",
+    ButtonIconify: "approved",
+    CheckboxIcon: "approved",
+    Switch: "approved",
+    Card: "approved",
+    BlockLayout: "pending",
+    FlexLayout: "approved",
+    GridLayout: "approved",
+    Splitter: "approved",
+    Divider: "approved",
+    AppLayout: "approved",
+    SidePanel: "approved",
+    Anchor: "approved",
+    TransferBoard: "approved",
+    Modal: "approved",
+    ActionDrawer: "approved",
+    Loading: "approved",
+    Iconify: "approved",
+    Spinner: "approved",
+    Text: "approved",
+    Headings: "approved",
+    CodeBlock: "approved",
+    Chip: "pending",
+    CheckboxChip: "pending",
+    Dialog: "pending",
+    Accordion: "pending",
+    Tabs: "pending",
+    Toaster: "pending",
+    Tooltip: "pending",
+    Separator: "pending",
+    Alert: "pending",
+    TipInfo: "pending",
+    FlexOptions: "pending",
+    InvokedFloater: "pending",
+    FloatingComponent: "pending",
+    GridResponsiveForm: "pending",
+    LabeledSwitch: "pending",
+    FpsHistogram: "approved",
+    Box: "approved",
+    Container: "approved",
+    Stack: "approved",
+    Space: "approved",
+    Masonry: "approved",
+    ImageList: "approved"
+  };
+  var reviewColorFor = { approved: "success", pending: "warning", rejected: "error" };
+  function statusFor(demoId, item) {
+    return item?.definition?.status ?? demoStatus[demoId];
+  }
+  function statusDotsFor(demoIds, itemsById) {
+    return [...new Set(demoIds.map((id) => statusFor(id, itemsById?.[id])).filter(Boolean).map((s) => reviewColorFor[s]))];
+  }
+  function Badge2({ children, className, style }) {
+    return /* @__PURE__ */ React.createElement("span", { className: ["mimicus-badge", "catalog-badge", className].filter(Boolean).join(" "), style }, children);
+  }
+  var statusColor = { success: "success", warning: "warning", error: "error", info: "info", primary: "primary" };
+  function ReviewStatusDot({ status, color, size = "0.58rem" }) {
+    const token = color ?? (status === "approved" ? "success" : status === "pending" ? "warning" : status === "rejected" ? "error" : "neutral");
+    const c = statusColor[token] ?? token;
+    return /* @__PURE__ */ React.createElement("span", { className: "review-status-dot", style: { width: size, height: size, background: resolveColor(c) }, title: status ?? c, "aria-hidden": true });
+  }
+  var accent = "var(--catalog-sketch-accent, var(--mimicus-primary))";
+  var stroke = "currentColor";
+  var faint = 0.32;
+  function DefaultSketch() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "32", y: "24", width: "56", height: "32", rx: "7", stroke, strokeWidth: "1.3", opacity: faint }), /* @__PURE__ */ React.createElement("circle", { cx: "60", cy: "40", r: "7", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.5" }));
+  }
+  function ButtonSketch() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "14", y: "30", width: "40", height: "16", rx: "5", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("line", { x1: "22", y1: "38", x2: "46", y2: "38", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }), /* @__PURE__ */ React.createElement("rect", { x: "66", y: "30", width: "40", height: "16", rx: "5", stroke, strokeWidth: "1.3", opacity: 0.32 }));
+  }
+  function CardSketch() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "26", y: "16", width: "68", height: "52", rx: "7", stroke, strokeWidth: "1.2", opacity: faint }), /* @__PURE__ */ React.createElement("rect", { x: "26", y: "16", width: "68", height: "14", rx: "7", fill: accent, fillOpacity: "0.25" }), /* @__PURE__ */ React.createElement("line", { x1: "34", y1: "40", x2: "86", y2: "40", stroke, strokeWidth: "1.3", opacity: faint }));
+  }
+  function LayoutSketch() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "18", y: "18", width: "84", height: "44", rx: "6", stroke, strokeWidth: "1.2", opacity: faint }), /* @__PURE__ */ React.createElement("rect", { x: "24", y: "24", width: "28", height: "32", rx: "4", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }), /* @__PURE__ */ React.createElement("rect", { x: "58", y: "24", width: "38", height: "14", rx: "3", stroke, strokeWidth: "1.1", opacity: faint }), /* @__PURE__ */ React.createElement("rect", { x: "58", y: "42", width: "38", height: "14", rx: "3", stroke, strokeWidth: "1.1", opacity: faint }));
+  }
+  function SwitchSketch() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "34", y: "34", width: "52", height: "20", rx: "10", fill: accent, fillOpacity: "0.15", stroke: accent, strokeWidth: "1.4" }), /* @__PURE__ */ React.createElement("circle", { cx: "48", cy: "44", r: "7", fill: accent, fillOpacity: "0.85" }));
+  }
+  function ModalSketch() {
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "22", y: "14", width: "76", height: "52", rx: "6", stroke, strokeWidth: "1.1", opacity: 0.22 }), /* @__PURE__ */ React.createElement("rect", { x: "30", y: "22", width: "60", height: "36", rx: "5", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.3" }), /* @__PURE__ */ React.createElement("line", { x1: "38", y1: "32", x2: "82", y2: "32", stroke, strokeWidth: "1.2", opacity: faint }));
+  }
+  var SKETCHES = {
+    Button: ButtonSketch,
+    ButtonIconify: ButtonSketch,
+    FloatButton: ButtonSketch,
+    Fab: ButtonSketch,
+    Card: CardSketch,
+    FlexLayout: LayoutSketch,
+    GridLayout: LayoutSketch,
+    BlockLayout: LayoutSketch,
+    AppLayout: LayoutSketch,
+    SidePanel: LayoutSketch,
+    Box: LayoutSketch,
+    Container: LayoutSketch,
+    Stack: LayoutSketch,
+    Space: LayoutSketch,
+    Masonry: LayoutSketch,
+    ImageList: LayoutSketch,
+    Switch: SwitchSketch,
+    CheckboxIcon: SwitchSketch,
+    LabeledSwitch: SwitchSketch,
+    Modal: ModalSketch,
+    Dialog: ModalSketch,
+    Alert: ModalSketch
+  };
+  function DemoSketch({ demoId }) {
+    const Inner = SKETCHES[demoId] ?? DefaultSketch;
+    return /* @__PURE__ */ React.createElement("svg", { className: "demo-sketch", viewBox: "0 0 120 80", "aria-hidden": true, fill: "none" }, /* @__PURE__ */ React.createElement(Inner, null));
+  }
+  function CatalogCard({ demoId, displayLabel, status, item, onSelect }) {
+    const handleSelect = (e) => {
+      markViewTransitionCardSource(e.currentTarget);
+      onSelect?.();
+    };
+    return /* @__PURE__ */ React.createElement("button", { type: "button", className: "catalog-card", onClick: handleSelect, title: `Abrir demo ${displayLabel}` }, /* @__PURE__ */ React.createElement("div", { className: "catalog-card__preview" }, /* @__PURE__ */ React.createElement(DemoSketch, { demoId })), /* @__PURE__ */ React.createElement("div", { className: "catalog-card__footer" }, /* @__PURE__ */ React.createElement("span", { className: "catalog-card__name" }, displayLabel), status && /* @__PURE__ */ React.createElement(ReviewStatusDot, { status, size: "0.5rem" })));
+  }
+  function CatalogToc({ sections, counts, activeSection, onSectionClick }) {
+    return /* @__PURE__ */ React.createElement("nav", { className: "catalog-toc", "aria-label": "En esta p\xE1gina" }, /* @__PURE__ */ React.createElement("p", { className: "catalog-toc__label" }, "En esta p\xE1gina"), /* @__PURE__ */ React.createElement("ul", { className: "catalog-toc__list" }, sections.map((sid) => /* @__PURE__ */ React.createElement("li", { key: sid }, /* @__PURE__ */ React.createElement("a", { href: `#section-${sid}`, className: ["catalog-toc__link", activeSection === sid && "is-active"].filter(Boolean).join(" "), onClick: (e) => {
+      e.preventDefault();
+      onSectionClick?.(sid);
+      document.getElementById(`section-${sid}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } }, sectionLabel(sid), /* @__PURE__ */ React.createElement("span", { className: "catalog-toc__count" }, counts[sid] ?? 0))))));
+  }
+  function CatalogHome({
+    items = [],
+    onSelect,
+    onOpenPaletteLab,
+    filterSection = null
+  }) {
+    const [query, setQuery] = (0, import_react28.useState)("");
+    const q = query.trim().toLowerCase();
+    const filtered = (0, import_react28.useMemo)(() => {
+      if (!q) return items;
+      return items.filter((it) => [it.displayLabel, it.id, it.label, sectionLabel(it.section)].some((s) => String(s ?? "").toLowerCase().includes(q)));
+    }, [items, q]);
+    const visibleSections = filterSection ? [filterSection] : sectionsWithItems(filtered);
+    const showHero = !filterSection;
+    const overview = overviewMeta();
+    const heroTitle = filterSection ? sectionLabel(filterSection) : overview.title ?? "Components Overview";
+    const heroLead = filterSection ? sectionDescription(filterSection) : overview.lead ?? MIMICUS_UI.catalogLead;
+    const counts = (0, import_react28.useMemo)(() => Object.fromEntries(visibleSections.map((sid) => [sid, itemsInSection(filtered, sid).length])), [filtered, visibleSections]);
+    return /* @__PURE__ */ React.createElement("div", { className: "catalog-overview" }, !filterSection && visibleSections.length > 1 && /* @__PURE__ */ React.createElement("aside", { className: "catalog-overview__toc" }, /* @__PURE__ */ React.createElement(CatalogToc, { sections: visibleSections, counts, onSectionClick: () => {
+    } })), /* @__PURE__ */ React.createElement("div", { className: "catalog-overview__main catalog-home" }, showHero && /* @__PURE__ */ React.createElement("header", { className: "catalog-overview__hero pg-vt-hero" }, /* @__PURE__ */ React.createElement("p", { className: "catalog-home__kicker mimicus-ui-brand" }, overview.kicker ?? MIMICUS_UI.name), /* @__PURE__ */ React.createElement("h1", { className: "catalog-home__title" }, heroTitle), /* @__PURE__ */ React.createElement("p", { className: "catalog-home__lead" }, heroLead), /* @__PURE__ */ React.createElement("div", { className: "catalog-overview__toolbar" }, /* @__PURE__ */ React.createElement("label", { className: "catalog-search" }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:magnify", className: "catalog-search__icon" }), /* @__PURE__ */ React.createElement("input", { type: "search", className: "catalog-search__input", placeholder: "Buscar componente\u2026", value: query, onChange: (e) => setQuery(e.target.value), "aria-label": "Buscar componente" })), onOpenPaletteLab && /* @__PURE__ */ React.createElement(Button, { variant: "outlined", color: "primary", onClick: onOpenPaletteLab, style: { width: "fit-content", flexShrink: 0 } }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:palette-swatch-outline" }), "Paleta & Look"))), !showHero && filterSection && /* @__PURE__ */ React.createElement("header", { className: "catalog-overview__hero catalog-overview__hero--section pg-vt-hero pg-vt-category" }, /* @__PURE__ */ React.createElement("div", { className: "catalog-section-heading" }, /* @__PURE__ */ React.createElement(Icon, { icon: sectionIcon(filterSection), className: "catalog-section-heading__icon" }), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", { className: "catalog-home__title" }, heroTitle), heroLead && /* @__PURE__ */ React.createElement("p", { className: "catalog-home__lead" }, heroLead)))), visibleSections.map((sid) => {
+      const sectionItems = itemsInSection(filtered, sid);
+      if (!sectionItems.length) return null;
+      return /* @__PURE__ */ React.createElement("section", { key: sid, id: `section-${sid}`, className: "catalog-section", "aria-labelledby": `heading-${sid}` }, !filterSection && /* @__PURE__ */ React.createElement("div", { className: "catalog-section-heading", id: `heading-${sid}` }, /* @__PURE__ */ React.createElement("h2", { className: "catalog-section-heading__title" }, sectionLabel(sid)), /* @__PURE__ */ React.createElement(Badge2, null, sectionItems.length)), /* @__PURE__ */ React.createElement("div", { className: "catalog-grid catalog-grid--overview" }, sectionItems.map((it) => /* @__PURE__ */ React.createElement(CatalogCard, { key: `${it.section}/${it.slug}`, demoId: it.id, displayLabel: it.displayLabel, item: it, status: statusFor(it.id, it), onSelect: () => onSelect?.(it.section, it.slug) }))));
+    }), filtered.length === 0 && /* @__PURE__ */ React.createElement("p", { className: "catalog-home__lead" }, "No hay componentes que coincidan con \xAB", query, "\xBB.")));
+  }
+  function ThemeLab() {
+    return /* @__PURE__ */ React.createElement("div", { className: "catalog-home catalog-overview__main pg-vt-main" }, /* @__PURE__ */ React.createElement("header", { className: "catalog-overview__hero pg-vt-hero" }, /* @__PURE__ */ React.createElement("p", { className: "catalog-home__kicker mimicus-ui-brand" }, MIMICUS_UI.name), /* @__PURE__ */ React.createElement("h1", { className: "catalog-home__title" }, "Paleta & Look"), /* @__PURE__ */ React.createElement("p", { className: "catalog-home__lead" }, "Laboratorio visual de paletas, look & feel y luminancia. Usa los selectores del header para probar combinaciones en tiempo real.")));
+  }
+
+  // src/devkit/shared/driver/driverCore.js
+  var import_react31 = __require("react");
+
+  // src/devkit/shared/demo-shell/demoShellUi.jsx
+  var import_react29 = __require("react");
+  var DemoController = class {
+    constructor() {
+      __publicField(this, "componentName", "Component");
+      __publicField(this, "componentPath");
+      __publicField(this, "previewScale");
+      __publicField(this, "previewStyle");
+    }
+    initialState() {
+      return {};
+    }
+    initialDetails() {
+      return {};
+    }
+    initialDemoConfig() {
+      return {};
+    }
+    fields() {
+      return [];
+    }
+    detailFields() {
+      return [];
+    }
+    demoConfigFields() {
+      return [];
+    }
+    presets() {
+      return [];
+    }
+    tagOpts() {
+      return {};
+    }
+    buildCode(state2, details = {}, demoStyle = "", demoClass = "", demoConfig = {}) {
+      const attrs = [...this.collectAttrs(state2), ...this.extraAttrs(state2, details), ...this.styleClassAttrs(demoStyle, demoClass)];
+      return buildTag(this.componentName, attrs, this.tagOpts(state2, details), this.buildBody ? (h) => this.buildBody(state2, details, h) : void 0);
+    }
+    extraAttrs() {
+      return [];
+    }
+    reset() {
+      return { state: this.initialState(), details: this.initialDetails(), demoConfig: this.initialDemoConfig() };
+    }
+    previewKey(state2, details = {}, demoStyle = "", demoClass = "", extras = [], demoConfig = {}) {
+      return [JSON.stringify(state2), JSON.stringify(details), JSON.stringify(demoConfig), demoStyle, demoClass, ...extras.map((e) => String(e ?? ""))].join("|");
+    }
+    styleClassAttrs(demoStyle, demoClass) {
+      return [
+        { name: "style", value: demoStyle || null, type: "str", default: null },
+        { name: "className", value: demoClass || null, type: "str", default: null }
+      ];
+    }
+    collectAttrs(state2) {
+      const attrs = [];
+      for (const f of this.fields()) this.collectFieldAttrs(state2, f, attrs);
+      return attrs;
+    }
+    collectFieldAttrs(state2, f, attrs) {
+      if (f.kind === "icon-text") return;
+      if (f.kind === "select-enum-row") {
+        for (const sub of f.selects) this.collectFieldAttrs(state2, sub, attrs);
+        return;
+      }
+      if (f.kind === "switch-group") {
+        for (const sw of f.switches) {
+          if (sw.attrOmit) continue;
+          const raw2 = state2[sw.key];
+          const value2 = sw.attrEmit ? sw.attrEmit(raw2) : raw2;
+          attrs.push({ name: sw.attrName ?? String(sw.key), value: value2, type: sw.attrType ?? "bool", default: sw.attrDefault });
+        }
+        return;
+      }
+      if (f.attrOmit) return;
+      const raw = state2[f.key];
+      const value = f.attrEmit ? f.attrEmit(raw) : raw;
+      attrs.push({ name: f.attrName ?? String(f.key), value, type: f.attrType, default: f.attrDefault });
+    }
+  };
+  function ConfigCard({ children, className }) {
+    return /* @__PURE__ */ React.createElement("div", { className: ["pg-demo-config-card", "card-root", className].filter(Boolean).join(" ") }, children);
+  }
+  function InputDecorated({ label, icon, asTitle, children, className }) {
+    const Tag2 = asTitle ? "h3" : "label";
+    return /* @__PURE__ */ React.createElement("div", { className: ["pg-input-decorated", asTitle && "pg-input-decorated--title", className].filter(Boolean).join(" ") }, (label || icon) && /* @__PURE__ */ React.createElement(Tag2, { className: "pg-input-decorated__label" }, icon && /* @__PURE__ */ React.createElement("span", { className: "pg-input-decorated__icon", "aria-hidden": true }, /* @__PURE__ */ React.createElement("iconify-icon", { icon })), label), /* @__PURE__ */ React.createElement("div", { className: "pg-input-decorated__body" }, children));
+  }
+  function PaletteGrid({ label, labelIcon, value, onValueChange, options, name, columns, accent: accent2 = "primary", layout = "chips", getIcon }) {
+    const items = optionsToItems(options);
+    const cols = typeof columns === "number" ? columns : columnsConfig(items.length);
+    const groupName = name || `pg-palette-${label}`;
+    if (layout === "chips") {
+      return /* @__PURE__ */ React.createElement(InputDecorated, { label, icon: labelIcon }, /* @__PURE__ */ React.createElement("div", { className: "pg-palette-chips", style: { display: "flex", flexWrap: "wrap", gap: "0.35rem" } }, items.map(([lbl, val]) => {
+        const selected = String(value ?? "") === String(val ?? "");
+        const icon = getIcon ? getIcon(val) : void 0;
+        return /* @__PURE__ */ React.createElement(Button, { key: `${groupName}-${String(val)}`, type: "button", variant: selected ? "soft" : "text", color: accent2 === "semantic" && val ? val : "primary", shape: "pill", onClick: () => onValueChange?.(val === "" ? void 0 : val), style: { fontSize: "0.78rem" } }, icon && /* @__PURE__ */ React.createElement(Icon, { icon }), lbl || String(val ?? "Ninguno"));
+      })));
+    }
+    return /* @__PURE__ */ React.createElement(InputDecorated, { label, icon: labelIcon }, /* @__PURE__ */ React.createElement("div", { className: "pg-palette-grid", style: { display: "grid", gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gap: "0.35rem", width: "100%" } }, items.map(([lbl, val]) => {
+      const selected = String(value ?? "") === String(val ?? "");
+      return /* @__PURE__ */ React.createElement("label", { key: `${groupName}-${String(val)}`, className: "pg-palette-grid__item", style: { display: "flex", alignItems: "center", gap: "0.35rem", cursor: "pointer" } }, /* @__PURE__ */ React.createElement("input", { type: "radio", name: groupName, checked: selected, onChange: () => onValueChange?.(val === "" ? void 0 : val) }), /* @__PURE__ */ React.createElement("span", null, lbl || String(val ?? "Ninguno")));
+    })));
+  }
+  function orderFields(arr) {
+    const states = [];
+    const rest = [];
+    for (const f of arr) {
+      if (f.kind === "switch" || f.kind === "switch-group") states.push(f);
+      else rest.push(f);
+    }
+    return [...states, ...rest];
+  }
+  function fieldId(f) {
+    if (f.kind === "switch-group" || f.kind === "icon-text") return `${f.kind}-${f.key}`;
+    return `${f.kind}-${String(f.key)}`;
+  }
+  function withNoneOption(options) {
+    const items = optionsToItems(options);
+    const hasNone = items.some(([, v]) => v === "" || v == null);
+    const mapped = items.map(([label, value]) => ({ label, value }));
+    return hasNone ? mapped : [{ label: "", value: "" }, ...mapped];
+  }
+  function SwitchRow({ checked, label, onChange }) {
+    return /* @__PURE__ */ React.createElement("label", { className: "pg-switch-row", style: { display: "inline-flex", alignItems: "center", gap: "0.45rem", cursor: "pointer" } }, /* @__PURE__ */ React.createElement("input", { type: "checkbox", checked: !!checked, onChange: (e) => onChange?.(e.target.checked) }), /* @__PURE__ */ React.createElement("span", null, label));
+  }
+  function ConfigRangeField({ value, min = 0, max = 100, step = 1, onChange }) {
+    const num = Number(value ?? min);
+    const pct = max === min ? 0 : (num - min) / (max - min) * 100;
+    const handle = (e) => onChange(Number(e.target.value));
+    return /* @__PURE__ */ React.createElement("div", { className: "mimicus-slider pg-config-range", style: { width: "100%" } }, /* @__PURE__ */ React.createElement("div", { className: "mimicus-slider__rail" }, /* @__PURE__ */ React.createElement("div", { className: "mimicus-slider__fill", style: { width: `${pct}%` } })), /* @__PURE__ */ React.createElement("input", { type: "range", className: "mimicus-slider__input", min, max, step, value: num, onInput: handle, onChange: handle }), /* @__PURE__ */ React.createElement("span", { className: "mimicus-slider__value" }, num));
+  }
+  function IconTextField({ field, state: state2, patchState }) {
+    const iconVal = state2[field.iconKey] ?? "";
+    const textVal = state2[field.textKey] ?? "";
+    return /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: "0.5rem" } }, /* @__PURE__ */ React.createElement("label", { style: { display: "grid", gap: "0.25rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.8rem", opacity: 0.85 } }, "\xCDcono"), /* @__PURE__ */ React.createElement("select", { value: String(iconVal), onChange: (e) => patchState(String(field.iconKey), e.target.value), style: { width: "100%" } }, Object.entries(iconEnum).map(([k, lbl]) => /* @__PURE__ */ React.createElement("option", { key: k || "none", value: k }, lbl))), iconVal && /* @__PURE__ */ React.createElement(Icon, { icon: String(iconVal) })), /* @__PURE__ */ React.createElement("label", { style: { display: "grid", gap: "0.25rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.8rem", opacity: 0.85 } }, "Texto"), /* @__PURE__ */ React.createElement("input", { type: "text", value: String(textVal), onChange: (e) => patchState(String(field.textKey), e.target.value), style: { width: "100%", boxSizing: "border-box" } }))));
+  }
+  function ConfigCodeField({ value = "", onChange, placeholder, mode, lang, minHeight = "4.5rem", maxHeight = "8.5rem" }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "code-edit-field" }, /* @__PURE__ */ React.createElement(
+      CodeBlock,
+      {
+        className: "code-edit-field__preview pg-demo-config-code",
+        value,
+        onChange,
+        readOnly: false,
+        mode,
+        lang,
+        placeholder,
+        minHeight,
+        maxHeight,
+        lineNumbers: false,
+        lineWrapping: true
+      }
+    ));
+  }
+  function DemoConfigRenderer({ fields, state: state2, onStateChange }) {
+    const typedFields = orderFields(fields ?? []);
+    function patchState(key, value) {
+      const normalized = value === void 0 || value === "" ? null : value;
+      onStateChange?.({ ...state2, [key]: normalized });
+    }
+    return typedFields.map((field) => {
+      const key = fieldId(field);
+      const wrap = (node) => /* @__PURE__ */ React.createElement(ConfigCard, { key }, node);
+      if (field.kind === "palette") {
+        const opts = field.layout === "sideCross" || field.layout === "chips" ? field.options : withNoneOption(field.options);
+        return wrap(/* @__PURE__ */ React.createElement(PaletteGrid, { label: field.label, labelIcon: field.labelIcon, value: state2[field.key], onValueChange: (v) => patchState(String(field.key), v), options: opts, name: field.name ?? `pg-${String(field.key)}`, columns: field.columns, accent: field.accent ?? "primary", layout: field.layout ?? "chips", getIcon: field.getIcon }));
+      }
+      if (field.kind === "color") {
+        return wrap(/* @__PURE__ */ React.createElement(PaletteGrid, { label: field.label, labelIcon: field.labelIcon, value: state2[field.key], onValueChange: (v) => patchState(String(field.key), v), options: colorOptions, name: `pg-color-${String(field.key)}`, layout: "chips" }));
+      }
+      if (field.kind === "switch") {
+        return wrap(/* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon ?? "mdi:tune" }, /* @__PURE__ */ React.createElement(SwitchRow, { checked: state2[field.key], label: field.label, onChange: (v) => patchState(String(field.key), v) })));
+      }
+      if (field.kind === "switch-group") {
+        return wrap(
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: "0.75rem" } }, field.switches.map((sw) => /* @__PURE__ */ React.createElement(SwitchRow, { key: String(sw.key), checked: state2[sw.key], label: sw.label, onChange: (v) => patchState(String(sw.key), v) }))))
+        );
+      }
+      if (field.kind === "text") {
+        if (field.normalize) {
+          const fkey = String(field.key);
+          const normalize3 = field.normalize;
+          return wrap(
+            /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement(
+              "input",
+              {
+                type: "text",
+                className: "input-decorated-number",
+                placeholder: field.placeholder,
+                defaultValue: String(state2[fkey] ?? ""),
+                onBlur: (e) => {
+                  const next = normalize3(e.target.value);
+                  e.target.value = next;
+                  patchState(fkey, next === "" ? void 0 : next);
+                },
+                onKeyDown: (e) => {
+                  if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+                  e.preventDefault();
+                  const next = stepCssLength(e.currentTarget.value, e.key === "ArrowUp" ? 0.5 : -0.5);
+                  e.currentTarget.value = next;
+                  patchState(fkey, next === "" ? void 0 : next);
+                },
+                style: { width: "100%", boxSizing: "border-box" }
+              }
+            ))
+          );
+        }
+        return wrap(
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("input", { type: "text", placeholder: field.placeholder, value: String(state2[field.key] ?? ""), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%", boxSizing: "border-box" } }))
+        );
+      }
+      if (field.kind === "range") {
+        return wrap(
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement(ConfigRangeField, { value: state2[field.key], min: field.min, max: field.max, step: field.step, onChange: (v) => patchState(String(field.key), v) }))
+        );
+      }
+      if (field.kind === "number") {
+        return wrap(
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("input", { type: "number", min: field.min, max: field.max, step: field.step, value: Number(state2[field.key] ?? 0), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%" } }))
+        );
+      }
+      if (field.kind === "select-enum") {
+        const entries = Object.entries(field.enumValue ?? {});
+        return wrap(
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon }, /* @__PURE__ */ React.createElement("select", { value: String(state2[field.key] ?? ""), onChange: (e) => patchState(String(field.key), e.target.value), style: { width: "100%" } }, entries.map(([k, v]) => /* @__PURE__ */ React.createElement("option", { key: k, value: String(v) }, k))))
+        );
+      }
+      if (field.kind === "code") {
+        const fkey = String(field.key);
+        const mode = field.lang === "css" ? "css" : field.mode ?? (field.lang === "html" ? void 0 : field.lang);
+        return wrap(
+          /* @__PURE__ */ React.createElement(InputDecorated, { label: field.label, icon: field.labelIcon ?? "mdi:code-braces" }, /* @__PURE__ */ React.createElement(
+            ConfigCodeField,
+            {
+              value: String(state2[fkey] ?? ""),
+              onChange: (v) => patchState(fkey, v),
+              placeholder: field.placeholder,
+              mode,
+              lang: field.lang,
+              minHeight: field.minHeight ?? "6rem",
+              maxHeight: field.maxHeight ?? "16rem"
+            }
+          ))
+        );
+      }
+      if (field.kind === "icon-text") {
+        return wrap(/* @__PURE__ */ React.createElement(IconTextField, { field, state: state2, patchState }));
+      }
+      return wrap(/* @__PURE__ */ React.createElement("p", { style: { margin: 0, fontSize: "0.85rem", opacity: 0.75 } }, "Campo \xAB", field.kind, "\xBB a\xFAn no soportado en React playground."));
+    });
+  }
+  function ApiTable({ adapter }) {
+    const rows = [];
+    const pushField = (f) => {
+      if (!f || f.kind === "icon-text") return;
+      if (f.kind === "switch-group") {
+        for (const sw of f.switches ?? []) rows.push({ name: sw.attrName ?? sw.key, desc: sw.label, type: sw.attrType ?? "boolean", def: sw.attrDefault ?? "false" });
+        return;
+      }
+      if (f.kind === "select-enum-row") {
+        for (const sub of f.selects ?? []) pushField(sub);
+        return;
+      }
+      rows.push({ name: f.attrName ?? f.key, desc: f.label, type: f.attrType ?? f.kind, def: f.attrDefault ?? "\u2014" });
+    };
+    for (const f of [...adapter?.fields?.() ?? [], ...adapter?.detailFields?.() ?? [], ...adapter?.demoConfigFields?.() ?? []]) pushField(f);
+    if (!rows.length) return null;
+    return /* @__PURE__ */ React.createElement("div", { className: "pg-api-table-wrap" }, /* @__PURE__ */ React.createElement("table", { className: "pg-api-table" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Property"), /* @__PURE__ */ React.createElement("th", null, "Description"), /* @__PURE__ */ React.createElement("th", null, "Type"), /* @__PURE__ */ React.createElement("th", null, "Default"))), /* @__PURE__ */ React.createElement("tbody", null, rows.map((r) => /* @__PURE__ */ React.createElement("tr", { key: String(r.name) }, /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("code", { className: "pg-api-table__prop" }, String(r.name))), /* @__PURE__ */ React.createElement("td", null, r.desc ?? "\u2014"), /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("code", { className: "pg-api-table__type" }, String(r.type))), /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("code", { className: "pg-api-table__default" }, String(r.def))))))));
+  }
+  function AccordionDemo({
+    adapter,
+    title,
+    titleIcon,
+    reviewStatus,
+    flat = false,
+    relieve,
+    className,
+    previewScale,
+    previewStyle,
+    demoId,
+    configBlockCount = 3,
+    state: stateProp,
+    details: detailsProp,
+    demoConfig: demoConfigProp,
+    demoStyle: demoStyleProp,
+    demoClass: demoClassProp,
+    onStateChange,
+    onDetailsChange,
+    onDemoConfigChange,
+    onDemoStyleChange,
+    onDemoClassChange,
+    intro,
+    preview,
+    configExtra
+  }) {
+    const [showCode, setShowCode] = (0, import_react29.useState)(false);
+    const [previewResetKey, setPreviewResetKey] = (0, import_react29.useState)(0);
+    const state2 = stateProp ?? adapter?.initialState?.() ?? {};
+    const details = detailsProp ?? adapter?.initialDetails?.() ?? {};
+    const demoConfig = demoConfigProp ?? adapter?.initialDemoConfig?.() ?? {};
+    const demoStyle = demoStyleProp ?? "";
+    const demoClass = demoClassProp ?? "";
+    const finalTitle = title ?? adapter?.componentName ?? "Demo";
+    const finalCodeStr = adapter ? adapter.buildCode(state2, details, demoStyle, demoClass, demoConfig) : void 0;
+    const previewKey = adapter ? `${previewResetKey}|${adapter.previewKey(state2, details, demoStyle, demoClass, [], demoConfig)}` : String(previewResetKey);
+    const finalPreviewScale = previewScale ?? adapter?.previewScale ?? 1;
+    const finalPreviewStyle = previewStyle ?? adapter?.previewStyle ?? "";
+    const configFields = adapter?.fields?.() ?? [];
+    const detailFields = adapter?.detailFields?.() ?? [];
+    const demoConfigFields = adapter?.demoConfigFields?.() ?? [];
+    const configCols = columnsConfig(configBlockCount + configFields.length + detailFields.length);
+    function handleReset() {
+      if (!adapter) return;
+      onStateChange?.(adapter.initialState());
+      onDetailsChange?.(adapter.initialDetails());
+      onDemoConfigChange?.(adapter.initialDemoConfig());
+      onDemoStyleChange?.("");
+      onDemoClassChange?.("");
+      setPreviewResetKey((k) => k + 1);
+    }
+    const previewStageStyle = (0, import_react29.useMemo)(() => parseStyleString(mergeStyleString("transform-origin: center center", finalPreviewStyle)), [finalPreviewStyle]);
+    const scaleStyle = finalPreviewScale && finalPreviewScale !== 1 ? { transform: `scale(${finalPreviewScale})` } : void 0;
+    const hasApi = [...configFields, ...detailFields, ...demoConfigFields].length > 0;
+    return /* @__PURE__ */ React.createElement("article", { className: ["pg-demo-doc", "pg-vt-demo-morph", className].filter(Boolean).join(" ") }, /* @__PURE__ */ React.createElement("header", { className: "pg-demo-doc__hero" }, /* @__PURE__ */ React.createElement("div", { className: "pg-demo-doc__title-row" }, titleIcon && /* @__PURE__ */ React.createElement(Icon, { icon: titleIcon, className: "pg-demo-doc__icon" }), /* @__PURE__ */ React.createElement("h1", { className: "pg-demo-doc__title" }, finalTitle), reviewStatus && /* @__PURE__ */ React.createElement(ReviewStatusDot, { status: reviewStatus, size: "0.62rem" })), intro && /* @__PURE__ */ React.createElement("div", { className: "pg-demo-doc__intro intro", dangerouslySetInnerHTML: { __html: intro } })), preview && /* @__PURE__ */ React.createElement("section", { className: "pg-demo-doc__section", "aria-labelledby": `${demoId ?? finalTitle}-examples` }, /* @__PURE__ */ React.createElement("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-examples` }, "Examples"), /* @__PURE__ */ React.createElement("div", { className: "pg-demo-example" }, /* @__PURE__ */ React.createElement("div", { className: "pg-demo-example__preview preview-frame pg-vt-preview" }, /* @__PURE__ */ React.createElement("div", { className: "preview-viewport" }, /* @__PURE__ */ React.createElement("div", { className: "preview-scale-track" }, /* @__PURE__ */ React.createElement("div", { className: "preview-stage", style: { ...previewStageStyle, ...scaleStyle }, "data-preview-key": previewKey }, preview({ state: state2, details, demoConfig, previewKey, demoStyle, demoClass }))))), finalCodeStr && /* @__PURE__ */ React.createElement("div", { className: "pg-demo-example__toolbar" }, /* @__PURE__ */ React.createElement(Button, { type: "button", variant: "text", color: "primary", onClick: () => setShowCode((v) => !v) }, /* @__PURE__ */ React.createElement(Icon, { icon: showCode ? "mdi:chevron-up" : "mdi:code-tags" }), showCode ? "Ocultar c\xF3digo" : "Ver c\xF3digo"), /* @__PURE__ */ React.createElement(Button, { type: "button", variant: "text", color: "neutral", onClick: () => {
+      try {
+        navigator.clipboard?.writeText(finalCodeStr);
+      } catch {
+      }
+    } }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:content-copy" }), "Copiar")), finalCodeStr && showCode && /* @__PURE__ */ React.createElement(CodeBlock, { value: finalCodeStr, readOnly: true, lang: "jsx", minHeight: "7rem", maxHeight: "22rem", lineWrapping: true, className: "pg-demo-example__code" }))), hasApi && /* @__PURE__ */ React.createElement("section", { className: "pg-demo-doc__section", "aria-labelledby": `${demoId ?? finalTitle}-api` }, /* @__PURE__ */ React.createElement("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-api` }, "API"), /* @__PURE__ */ React.createElement(ApiTable, { adapter })), adapter && /* @__PURE__ */ React.createElement("section", { className: "pg-demo-doc__section pg-demo-doc__section--playground", "aria-labelledby": `${demoId ?? finalTitle}-playground` }, /* @__PURE__ */ React.createElement("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-playground` }, "Playground"), /* @__PURE__ */ React.createElement(ConfigCard, { className: "pg-demo-config-section demo-config-shell" }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: `repeat(${configCols}, minmax(0, 1fr))`, gap: "0.75rem", width: "100%" } }, /* @__PURE__ */ React.createElement(ConfigCard, null, /* @__PURE__ */ React.createElement(InputDecorated, { label: "style", icon: "mdi:palette-swatch-outline" }, /* @__PURE__ */ React.createElement(ConfigCodeField, { value: demoStyle, onChange: (v) => onDemoStyleChange?.(v), placeholder: "inline style", mode: "css", minHeight: "4.5rem", maxHeight: "8.5rem" }))), /* @__PURE__ */ React.createElement(ConfigCard, null, /* @__PURE__ */ React.createElement(InputDecorated, { label: "className", icon: "mdi:code-braces" }, /* @__PURE__ */ React.createElement(ConfigCodeField, { value: demoClass, onChange: (v) => onDemoClassChange?.(v), placeholder: "clases CSS", minHeight: "4.5rem", maxHeight: "8.5rem" }))), /* @__PURE__ */ React.createElement(DemoConfigRenderer, { fields: configFields, state: state2, onStateChange }), detailFields.length > 0 && /* @__PURE__ */ React.createElement(DemoConfigRenderer, { fields: detailFields, state: details, onStateChange: onDetailsChange }), configExtra), demoConfigFields.length > 0 && /* @__PURE__ */ React.createElement("div", { style: { marginTop: "0.85rem" } }, /* @__PURE__ */ React.createElement(InputDecorated, { asTitle: true, label: "Config de demo", icon: "mdi:television-play" }, /* @__PURE__ */ React.createElement(DemoConfigRenderer, { fields: demoConfigFields, state: demoConfig, onStateChange: onDemoConfigChange }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "flex-end", width: "100%", marginTop: "0.75rem" } }, /* @__PURE__ */ React.createElement(Button, { type: "button", variant: "soft", color: "primary", onClick: handleReset }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:refresh" }), "Reiniciar valores")))));
+  }
+
+  // src/devkit/shared/driver/fieldHydration.js
+  var ENUM_REFS = { iconEnum };
+  var ATTR_EMITS = {
+    emptyToUndefined: (v) => v === "" ? void 0 : v,
+    emptyToNull: (v) => v === "" ? null : v,
+    floorPositive: (v) => Math.max(0, Math.floor(Number(v))) || void 0,
+    colorDefaultNeutral: (v) => !v ? "neutral" : v
+  };
+  var NORMALIZERS = { cssLength: normalizeCssLength };
+  var SIDE_ICON_MAP = {
+    top: "mdi:arrow-up",
+    right: "mdi:arrow-right",
+    bottom: "mdi:arrow-down",
+    left: "mdi:arrow-left",
+    "": "mdi:block-helper"
+  };
+  function hydrateField(raw) {
+    const f = { ...raw };
+    if (typeof f.enumRef === "string") {
+      f.enumValue = ENUM_REFS[f.enumRef] ?? {};
+      delete f.enumRef;
+    }
+    if (typeof f.iconMap === "object" && f.iconMap !== null) {
+      const iconMap = f.iconMap;
+      f.getIcon = (val) => iconMap[String(val ?? "")] ?? iconMap[""] ?? "mdi:block-helper";
+      delete f.iconMap;
+    }
+    if (f.iconMapRef === "drawerSide") {
+      f.getIcon = (val) => SIDE_ICON_MAP[String(val ?? "")] ?? "mdi:block-helper";
+      f.layout = f.layout ?? "sideCross";
+      delete f.iconMapRef;
+    }
+    if (typeof f.attrEmit === "string") f.attrEmit = ATTR_EMITS[f.attrEmit];
+    if (typeof f.normalize === "string") f.normalize = NORMALIZERS[f.normalize];
+    if (f.kind === "select-enum-row" && Array.isArray(f.selects)) f.selects = f.selects.map(hydrateField);
+    return f;
+  }
+  function hydrateFields(fields) {
+    return (fields ?? []).map(hydrateField);
+  }
+
+  // src/devkit/shared/driver/codeStrategies.js
+  var styleAttrs = (demoStyle, demoClass) => [
+    { name: "style", value: demoStyle || null, type: "str", default: null },
+    { name: "className", value: demoClass || null, type: "str", default: null }
+  ];
+  var nClampGrid = (v) => Math.min(50, Math.max(3, Math.round(Number(v)) || 7));
+  var clampFlexItems = (n) => Math.min(50, Math.max(1, Math.round(Number(n)) || 4));
+  function layoutItemSnippet(emoji, useCard) {
+    if (useCard) return buildTag("Card", [{ name: "variant", value: "flat", type: "str" }, { name: "inline", value: true, type: "bool" }], {}, () => emoji);
+    return buildTag("div", [{ name: "style", value: "padding: 0.45rem", type: "str" }], {}, (h) => h.txt(emoji));
+  }
+  function readPaneGrid(demoConfig, pane, fallback) {
+    const prefix = pane === "panel" ? "panel" : "main";
+    return {
+      itemCount: Math.round(Number(demoConfig?.[`${prefix}ItemCount`])) || fallback.items,
+      cells: Math.round(Number(demoConfig?.[`${prefix}Cells`])) || fallback.cells,
+      direction: "column"
+    };
+  }
+  function buildCodeFromStrategy(strategy, ctx, state2, details, demoStyle, demoClass, demoConfig = {}) {
+    const { def, collectAttrs } = ctx;
+    const name = def.component.name;
+    const tagOpts = def.code?.tagOpts ?? {};
+    const opts = def.code?.options ?? {};
+    switch (strategy) {
+      case "icon-text-body": {
+        const iconKey = String(opts.iconKey ?? "icon");
+        const textKey = String(opts.textKey ?? "text");
+        const attrs = [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        return buildTag(name, attrs, tagOpts, () => {
+          const lines = [];
+          const icon = String(details[iconKey] ?? "");
+          const text = String(details[textKey] ?? "");
+          if (icon) lines.push(`<Icon icon="${icon}" />`);
+          if (text.trim()) lines.push(text);
+          return lines.join("\n");
+        });
+      }
+      case "text-body": {
+        const textKey = String(opts.textKey ?? "label");
+        return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts, (h) => h.txt(String(details[textKey] ?? "Texto")));
+      }
+      case "bind-checked-body": {
+        const textKey = String(opts.textKey ?? "label");
+        const attrs = [{ name: "checked", type: "bind", value: "checked" }, ...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        return buildTag(name, attrs, tagOpts, (h) => h.txt(String(details[textKey] ?? "Texto")));
+      }
+      case "checkbox-icon-body": {
+        const attrs = [{ name: "checked", type: "bind", value: "checked" }, ...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        return buildTag("CheckboxIcon", attrs, tagOpts, (h) => h.txt(String(details.previewLabel ?? "Texto")));
+      }
+      case "checkbox-chip-body": {
+        const valueKey = String(opts.valueKey ?? "color");
+        return buildTag("CheckboxChip", [{ name: "value", value: details[valueKey] ?? "primary", type: "str" }, ...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+      }
+      case "transfer-board":
+        return buildTag("TransferBoard", [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+      case "form-entry":
+        return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+      case "layout-items": {
+        const useCard = Boolean(opts.useCard);
+        const n = opts.layout === "flex" ? clampFlexItems(details.itemCount) : nClampGrid(details.itemCount);
+        return buildTag(
+          name,
+          [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)],
+          { multiline: true },
+          () => Array.from({ length: n }, (_, i) => layoutItemSnippet(LAYOUT_PREVIEW_EMOJIS[i % LAYOUT_PREVIEW_EMOJIS.length], useCard)).join("\n")
+        );
+      }
+      case "splitter-layout": {
+        const panel = readPaneGrid(demoConfig, "panel", { items: 2, cells: 1 });
+        const main = readPaneGrid(demoConfig, "main", { items: 4, cells: 2 });
+        const itemLine = (idx) => layoutItemSnippet(LAYOUT_PREVIEW_EMOJIS[idx % LAYOUT_PREVIEW_EMOJIS.length], true);
+        const paneBody = (grid, offset) => buildTag(
+          "GridLayout",
+          [{ name: "cells", value: String(grid.cells), type: "str" }, { name: "gap", value: "0.45rem", type: "str" }],
+          { multiline: true },
+          () => Array.from({ length: grid.itemCount }, (_, i) => itemLine(offset + i)).join("\n")
+        );
+        return buildTag(
+          name,
+          [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)],
+          { multiline: true },
+          () => [buildTag("div", [{ name: "slot", value: "panel", type: "str" }], { multiline: true }, () => paneBody(panel, 0)), paneBody(main, panel.itemCount)].join("\n")
+        );
+      }
+      case "divider-layout": {
+        const attrs = [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        const margin = String(details.orientationMargin ?? "").trim();
+        if (margin) attrs.push({ name: "orientationMargin", value: margin, type: "str" });
+        const showTitle = Boolean(details.showTitle) && String(details.title ?? "").trim();
+        return buildTag(name, attrs, tagOpts, (h) => showTitle ? h.txt(String(details.title)) : "");
+      }
+      case "applayout-pattern": {
+        const variant = String(state2.variant ?? state2.pattern ?? "side");
+        const shellAttrs = [{ name: "variant", value: variant, type: "str" }, ...styleAttrs(demoStyle || "min-height: 18rem;", demoClass)];
+        if (state2.fixedHeader) shellAttrs.push({ name: "fixedHeader", value: true, type: "bool" });
+        if (state2.fixedSider) shellAttrs.push({ name: "fixedSider", value: true, type: "bool" });
+        const slot = (tag, slotName, label) => buildTag(tag, slotName ? [{ name: "slot", value: slotName, type: "str" }] : [], {}, (h) => h.txt(label));
+        const hdr = String(details.headerLabel ?? "Header");
+        const brand = String(details.brandLabel ?? "Brand");
+        const tools = String(details.toolsLabel ?? "Tools");
+        const cnt = String(details.contentLabel ?? "Content");
+        const ftr = String(details.footerLabel ?? "Footer");
+        const sid = String(details.siderLabel ?? "Sider");
+        const headerBlock = [
+          buildTag("AppLayout.Header.Brand", [], {}, (h) => h.txt(brand)),
+          buildTag("AppLayout.Header.Center", [], {}, (h) => h.txt(hdr)),
+          buildTag("AppLayout.Header.Tools", [], {}, (h) => h.txt(tools))
+        ].join("\n");
+        const header = buildTag("AppLayout.Header", [{ name: "slot", value: "header", type: "str" }], { multiline: true }, () => headerBlock);
+        const children = variant === "top" ? [header, slot("AppLayout.Content", null, cnt), slot("AppLayout.Footer", "footer", ftr)] : [header, slot("AppLayout.Sider", "sider", sid), slot("AppLayout.Content", null, cnt), slot("AppLayout.Footer", "footer", ftr)];
+        return buildTag("AppLayout", shellAttrs, tagOpts, () => children.join("\n"));
+      }
+      case "block-layout":
+        return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], { multiline: true }, (h) => h.txt("Contenido del bloque"));
+      case "text-wrap": {
+        const textKey = String(opts.textKey ?? "sampleText");
+        const attrs = [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        return buildTag("Text", attrs, tagOpts, (h) => h.txt(String(details[textKey] ?? "Texto de ejemplo")));
+      }
+      case "headings-all": {
+        const textKey = String(opts.textKey ?? "sampleText");
+        const text = String(details[textKey] ?? "Heading");
+        const attrs = [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        return buildTag(
+          "Headings",
+          attrs,
+          { multiline: true },
+          () => [1, 2, 3, 4, 5, 6].map((l) => buildTag("Typography.Title", [{ name: "level", value: l, type: "num" }, ...attrs], {}, (h) => h.txt(`${text} \u2014 H${l}`))).join("\n")
+        );
+      }
+      case "anchor-nav": {
+        const n = Math.min(8, Math.max(2, Math.round(Number(details.sectionCount)) || 5));
+        const attrs = [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        const links = Array.from({ length: n }, (_, i) => buildTag("Anchor.Link", [{ name: "href", value: `#sec-${i + 1}`, type: "str" }, { name: "title", value: `Secci\xF3n ${i + 1}`, type: "str" }], {}, (h) => h.txt(`Secci\xF3n ${i + 1}`)));
+        return buildTag("Anchor", attrs, { multiline: true }, () => links.join("\n"));
+      }
+      case "nav-tabs": {
+        const n = Math.min(5, Math.max(2, Math.round(Number(details.tabCount)) || 3));
+        const attrs = [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        return buildTag(
+          name,
+          attrs,
+          { multiline: true },
+          () => Array.from({ length: n }, (_, i) => buildTag("TabItem", [{ name: "tabKey", value: `t${i + 1}`, type: "str" }, { name: "label", value: `Tab ${i + 1}`, type: "str" }], { multiline: true }, (h) => h.txt(`Panel ${i + 1}`))).join("\n")
+        );
+      }
+      case "nav-breadcrumbs":
+      case "nav-menu":
+      case "nav-pagination":
+      case "nav-steps":
+      case "nav-drawer":
+      case "nav-bottom-nav":
+      case "nav-link":
+      case "nav-speed-dial":
+      case "nav-dropdown":
+        return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+      case "disp-badge":
+        return buildTag("Badge", [{ name: "count", value: state2.count ?? 5, type: "num" }, { name: "dot", value: Boolean(state2.dot), type: "bool" }, ...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts, (h) => h.txt("\u2026"));
+      case "disp-tag":
+        return buildTag(def.id === "Chip" ? "Chip" : "Tag", [{ name: "variant", value: state2.variant ?? "ghost", type: "str" }, ...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts, (h) => h.txt(String(details.text ?? "Nuevo")));
+      case "disp-collapse":
+        return buildTag(
+          def.id === "Accordion" ? "Accordion" : "Collapse",
+          [{ name: "accordion", value: Boolean(state2.accordion), type: "bool" }, ...styleAttrs(demoStyle, demoClass)],
+          { multiline: true },
+          () => [1, 2].map((i) => buildTag("Collapse.Panel", [{ name: "panelKey", value: String(i), type: "str" }, { name: "header", value: `Panel ${i}`, type: "str" }], { multiline: true }, (h) => h.txt(`Contenido ${i}`))).join("\n")
+        );
+      case "disp-carousel":
+        return buildTag(
+          "Carousel",
+          [{ name: "autoplay", value: Boolean(state2.autoplay), type: "bool" }, { name: "arrows", value: Boolean(state2.arrows), type: "bool" }, ...styleAttrs(demoStyle, demoClass)],
+          { multiline: true },
+          () => [1, 2, 3].map((i) => buildTag("Card", [{ name: "variant", value: "flat", type: "str" }], {}, (h) => h.txt(`Slide ${i}`))).join("\n")
+        );
+      case "disp-table":
+        return buildTag("Table", [{ name: "bordered", value: Boolean(state2.bordered), type: "bool" }, { name: "sortable", value: Boolean(state2.sortable), type: "bool" }, ...styleAttrs(demoStyle, demoClass)], tagOpts);
+      case "disp-timeline":
+        return buildTag(
+          "Timeline",
+          [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)],
+          { multiline: true },
+          () => buildTag("Timeline.Item", [{ name: "label", value: "2024", type: "str" }], {}, (h) => h.txt("Evento"))
+        );
+      case "disp-list":
+        return buildTag(
+          "List",
+          [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)],
+          { multiline: true },
+          () => buildTag("List.Item", [{ name: "button", value: true, type: "bool" }], {}, () => buildTag("List.ItemText", [{ name: "primary", value: "\xCDtem", type: "str" }], {}))
+        );
+      case "disp-avatar":
+      case "disp-calendar":
+      case "disp-descriptions":
+      case "disp-empty":
+      case "disp-qrcode":
+      case "disp-segmented":
+      case "disp-statistic":
+      case "disp-tooltip":
+      case "disp-tour":
+      case "disp-tree":
+        return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+      case "side-panel-pattern": {
+        const open = state2.open !== false;
+        const drawer = Boolean(state2.drawer);
+        return [
+          'import { SidePanel, SidePanelSection } from "@jeff-aporta/mimicus-react";',
+          "",
+          "// Vistas t\xEDpicas desde JSON (playground-shell.json \u2192 views.collapsed / views.expanded)",
+          "const collapsedView = (",
+          '  <SidePanel.View mode="rail" gap="0.35rem">{/* iconos categor\xEDa */}</SidePanel.View>',
+          ");",
+          "const expandedView = (",
+          '  <SidePanel.View mode="expanded" gap="0.25rem">',
+          '    <SidePanelSection icon="mdi:folder-outline" label="Layout" open count={12}>',
+          "      {/* enlaces demo */}",
+          "    </SidePanelSection>",
+          "  </SidePanel.View>",
+          ");",
+          "",
+          `<SidePanel open={${open}} drawer={${drawer}} collapsedView={collapsedView} expandedView={expandedView} />`
+        ].join("\n");
+      }
+      case "contapyme-login": {
+        const attrs = [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)];
+        const setup = [
+          'const session = createOrchestratorSession({ app: "mi-app-front" });',
+          "",
+          "<ContapymeSessionProvider session={session}>",
+          "  <AppLayout.Header.Tools>",
+          "    <LoginButton />",
+          "  </AppLayout.Header.Tools>",
+          "</ContapymeSessionProvider>"
+        ].join("\n");
+        return `import { AppLayout, LoginButton, ContapymeSessionProvider, createOrchestratorSession } from "@jeff-aporta/mimicus-react";
+
+${setup}`;
+      }
+      case "preview":
+        return `// Vista previa interactiva \u2014 ver panel de configuraci\xF3n`;
+      default:
+        return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+    }
+  }
+
+  // src/devkit/shared/driver/previewBuiltins.jsx
+  var import_react30 = __require("react");
+
+  // src/devkit/shared/driver/componentRegistry.js
+  var IMPLEMENTED = {
+    Button,
+    Card,
+    CodeBlock,
+    FloatButton,
+    Fab,
+    IconButton,
+    Text,
+    Headings,
+    Typography,
+    AppLayout,
+    AppLayoutProvider,
+    BlockLayout,
+    FlexLayout,
+    GridLayout,
+    SidePanel,
+    SidePanelSection,
+    Divider,
+    Splitter,
+    Space,
+    Stack,
+    Box,
+    Container,
+    Masonry,
+    ImageList,
+    Separator,
+    GridResponsiveForm,
+    Anchor,
+    Breadcrumbs,
+    Dropdown,
+    Menu,
+    Tabs,
+    TabItem,
+    Pagination,
+    Steps,
+    Step,
+    Drawer,
+    BottomNavigation,
+    BottomNavigationAction,
+    NavLink,
+    SpeedDial,
+    SpeedDialAction,
+    Breadcrumb: Breadcrumbs,
+    Stepper: Steps,
+    Link: NavLink,
+    Form,
+    FormItem,
+    Input,
+    TextField,
+    TextArea,
+    InputNumber,
+    Checkbox,
+    CheckboxIcon,
+    CheckboxChip,
+    Switch,
+    LabeledSwitch,
+    Radio,
+    RadioGroup,
+    Slider,
+    Rate,
+    Rating,
+    Select,
+    AutoComplete,
+    ToggleButton,
+    ToggleButtonGroup,
+    Transfer,
+    TransferList,
+    TransferBoard,
+    Upload,
+    ColorPicker,
+    DatePicker,
+    TimePicker,
+    Cascader,
+    TreeSelect,
+    Mentions,
+    Badge,
+    Tag,
+    Chip,
+    Avatar,
+    AvatarGroup,
+    Carousel,
+    Collapse,
+    CollapsePanel,
+    Accordion,
+    Descriptions,
+    DescriptionsItem,
+    Empty,
+    QRCode,
+    Segmented,
+    Statistic,
+    Table,
+    Timeline,
+    TimelineItem,
+    Tooltip,
+    Tour,
+    Tree,
+    Calendar,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    ListItemAvatar,
+    LoginButton,
+    ContapymeSessionProvider,
+    createOrchestratorSession,
+    createDemoSession
+  };
+  var stubCache = /* @__PURE__ */ new Map();
+  function makeStub(name) {
+    if (stubCache.has(name)) return stubCache.get(name);
+    function StubComponent({ className, style, children, ...rest }) {
+      const label = rest["data-label"] ?? name;
+      return /* @__PURE__ */ React.createElement("div", { className: ["mimicus-preview-stub", className].filter(Boolean).join(" "), style, "data-component": name }, /* @__PURE__ */ React.createElement("div", { className: "mimicus-preview-stub__badge" }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:package-variant" }), " ", label), children && /* @__PURE__ */ React.createElement("div", { className: "mimicus-preview-stub__body" }, children), /* @__PURE__ */ React.createElement("p", { className: "mimicus-preview-stub__hint" }, "Componente pendiente de port a React"));
+    }
+    StubComponent.__mimicusStub = true;
+    StubComponent.displayName = `Stub(${name})`;
+    stubCache.set(name, StubComponent);
+    return StubComponent;
+  }
+  function resolveComponent(name) {
+    return IMPLEMENTED[name] ?? makeStub(name);
+  }
+  function isStubComponent(name) {
+    const C = resolveComponent(name);
+    return C.__mimicusStub === true;
+  }
+
+  // src/devkit/shared/driver/previewBuiltins.jsx
+  function stateForPreview(state2) {
+    const out = {};
+    for (const [k, v] of Object.entries(state2 ?? {})) {
+      if (v === null || v === void 0 || v === "") continue;
+      out[k] = v;
+    }
+    return out;
+  }
+  var LAYOUT_BP_NARROW2 = 768;
+  function useNarrowViewport() {
+    const [narrow, setNarrow] = (0, import_react30.useState)(false);
+    (0, import_react30.useEffect)(() => {
+      const mq = window.matchMedia(`(max-width: ${LAYOUT_BP_NARROW2 - 1}px)`);
+      const sync = () => setNarrow(mq.matches);
+      sync();
+      mq.addEventListener("change", sync);
+      return () => mq.removeEventListener("change", sync);
+    }, []);
+    return narrow;
+  }
+  function LayoutAppPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const variant = state2.variant === "top-side-2" ? "top-side-2" : "side";
+    const narrow = useNarrowViewport();
+    const [siderCollapsed, setSiderCollapsed] = (0, import_react30.useState)(Boolean(state2.siderCollapsed));
+    const shellStyle = parseStyleString(mergeStyleString("width:100%;min-height:clamp(14rem,45vh,20rem);height:clamp(14rem,45vh,20rem);border:1px solid var(--mimicus-border, rgba(255,255,255,0.12));border-radius:0.5rem;overflow:hidden", demoStyle));
+    const siderWidth = Math.round(Number(state2.siderWidth)) || 200;
+    return /* @__PURE__ */ React.createElement("div", { className: ["layout-app-preview", narrow && "layout-app-preview--drawer"].filter(Boolean).join(" "), key: previewKey }, /* @__PURE__ */ React.createElement(AppLayoutProvider, { defaultSiderWidth: `${siderWidth}px` }, /* @__PURE__ */ React.createElement(AppLayout, { variant, fixedHeader: Boolean(state2.fixedHeader), fixedSider: Boolean(state2.fixedSider), responsive: true, responsiveDrawer: narrow, style: shellStyle, className: demoClass }, /* @__PURE__ */ React.createElement(AppLayout.Header, null, /* @__PURE__ */ React.createElement(AppLayout.Header.Brand, null, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.06em" } }, String(details.brandLabel ?? "Brand"))), /* @__PURE__ */ React.createElement(AppLayout.Header.Center, null, /* @__PURE__ */ React.createElement("span", null, String(details.headerLabel ?? "Header"))), /* @__PURE__ */ React.createElement(AppLayout.Header.Tools, null, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.75rem", opacity: 0.85 } }, String(details.toolsLabel ?? "Tools")))), !narrow && /* @__PURE__ */ React.createElement(AppLayout.Sider, { collapsed: siderCollapsed, collapsible: Boolean(state2.siderCollapsible), width: siderWidth, theme: state2.siderTheme === "light" ? "light" : "dark", onCollapse: setSiderCollapsed }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.8rem", fontWeight: 600 } }, String(details.siderLabel ?? "Sider"))), /* @__PURE__ */ React.createElement("div", { className: "pg-shell-main", style: { padding: "0.75rem", flex: "1 1 auto", minHeight: 0, overflow: "auto" } }, String(details.contentLabel ?? "Content")), /* @__PURE__ */ React.createElement(AppLayout.Footer, null, String(details.footerLabel ?? "Footer")))));
+  }
+  function CardPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const inline = Boolean(state2.inline);
+    const relievePacked = packCardRelieve(details);
+    const cardPreviewVariant = ["solid", "flat", "glass"].includes(state2.variant) ? state2.variant : void 0;
+    const cardStyle = parseStyleString(inline ? mergeStyleString("width: fit-content; max-width: min(14rem, 100%); margin: 0 0.2rem; vertical-align: middle; padding: 0.35rem 0.55rem", demoStyle) : mergeStyleString("min-width: min(320px, 100%); max-width: 100%; margin: 0.75rem 0", demoStyle));
+    if (inline) {
+      return /* @__PURE__ */ React.createElement("div", { className: "card-inline-demo card-inline-demo--inline", key: previewKey }, /* @__PURE__ */ React.createElement("p", { className: "card-inline-flow" }, CARD_INLINE_FLOW_BEFORE, /* @__PURE__ */ React.createElement(Card, { inline: true, relieve: relievePacked, variant: cardPreviewVariant, style: cardStyle, className: demoClass }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.85rem", lineHeight: 1.35, whiteSpace: "nowrap" } }, CARD_INLINE_SAMPLE_TEXT)), CARD_INLINE_FLOW_AFTER));
+    }
+    return /* @__PURE__ */ React.createElement("div", { className: "card-inline-demo", key: previewKey }, /* @__PURE__ */ React.createElement("p", { className: "card-block-lead" }, "En modo bloque, la tarjeta interrumpe el p\xE1rrafo y ocupa el ancho disponible."), /* @__PURE__ */ React.createElement(Card, { relieve: relievePacked, variant: cardPreviewVariant, style: cardStyle, className: demoClass }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "0.65rem", width: "100%" } }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:text-box-outline", style: { fontSize: "1.25rem", flexShrink: 0, opacity: 0.88 } }), /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.9rem", lineHeight: 1.45 } }, CARD_PREVIEW_SAMPLE_TEXT))));
+  }
+  function DividerPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const orientation = state2.orientation === "vertical" ? "vertical" : "horizontal";
+    const variant = ["dashed", "dotted", "glow"].includes(String(state2.variant)) ? state2.variant : "solid";
+    const dividerProps = { orientation, variant, titlePlacement: state2.titlePlacement ?? "center", plain: Boolean(state2.plain), size: state2.size ?? "medium", dashed: Boolean(state2.dashed), orientationMargin: String(details.orientationMargin ?? "").trim() || void 0 };
+    const shellStyle = mergeStyleString(`border: ${resolveColor("border")} 1px solid; border-radius: 0.5rem; padding: 0.75rem; box-sizing: border-box`, demoStyle);
+    const showTitle = Boolean(details.showTitle) && String(details.title ?? "").trim();
+    return /* @__PURE__ */ React.createElement(BlockLayout, { key: previewKey }, orientation === "vertical" ? /* @__PURE__ */ React.createElement(FlexLayout, { items: "center", gap: "0.35rem", wrap: true, style: parseStyleString(shellStyle), className: demoClass }, /* @__PURE__ */ React.createElement("span", { style: { color: resolveColor("primary") } }, "Inicio"), /* @__PURE__ */ React.createElement(Divider, { ...dividerProps }), /* @__PURE__ */ React.createElement("span", null, "Cat\xE1logo"), /* @__PURE__ */ React.createElement(Divider, { ...dividerProps, variant: variant === "solid" ? "dotted" : variant }), /* @__PURE__ */ React.createElement("span", null, "Layouts"), /* @__PURE__ */ React.createElement(Divider, { ...dividerProps }), /* @__PURE__ */ React.createElement(Card, { variant: "flat", inline: true, style: { border: `1px solid ${resolveColor("neutral")}` } }, "Demo")) : /* @__PURE__ */ React.createElement(FlexLayout, { direction: "column", gap: "0.35rem", style: parseStyleString(shellStyle), className: demoClass }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.85rem", opacity: 0.9 } }, "Bloque superior con contenido de ejemplo antes del separador."), /* @__PURE__ */ React.createElement(Divider, { ...dividerProps }, showTitle ? String(details.title) : null), /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.85rem", opacity: 0.9 } }, "Bloque inferior: el divider respeta size, variant y titlePlacement."), /* @__PURE__ */ React.createElement(Divider, { ...dividerProps }), /* @__PURE__ */ React.createElement(Card, { variant: "flat", style: { border: `1px solid ${resolveColor("neutral")}`, padding: "0.5rem" } }, "Contenido tras l\xEDnea simple")));
+  }
+  function SplitterPreview({ state: state2, demoConfig, previewKey, demoStyle, demoClass }) {
+    const inline = Boolean(state2.inline);
+    const direction = state2.direction === "vertical" ? "vertical" : "horizontal";
+    const panelCount = Math.round(Number(demoConfig?.panelItemCount)) || 2;
+    const mainCount = Math.round(Number(demoConfig?.mainItemCount)) || 4;
+    const shellStyle = mergeStyleString(inline ? "width: fit-content; max-width: 100%; height: clamp(10rem, 32vh, 16rem)" : "width: 100%; min-height: clamp(12rem, 36vh, 18rem)", demoStyle);
+    const Pane = ({ title, count, cells, offset = 0 }) => /* @__PURE__ */ React.createElement("div", { style: { padding: "0.5rem", height: "100%", boxSizing: "border-box" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "0.75rem", fontWeight: 600, marginBottom: "0.35rem", opacity: 0.85 } }, title), /* @__PURE__ */ React.createElement(GridLayout, { cells: String(cells), gap: "0.35rem" }, Array.from({ length: count }, (_, i) => /* @__PURE__ */ React.createElement(Card, { key: i, variant: "flat", inline: true, style: { padding: "0.35rem", textAlign: "center", minHeight: "2rem" } }, LAYOUT_PREVIEW_EMOJIS[(i + offset) % LAYOUT_PREVIEW_EMOJIS.length]))));
+    const Surround = inline ? "span" : "div";
+    return /* @__PURE__ */ React.createElement(Surround, { className: inline ? "layout-inline-demo layout-inline-demo--inline" : "layout-inline-demo", key: previewKey }, /* @__PURE__ */ React.createElement(Splitter, { inline, direction, panelSize: Math.round(Number(state2.panelSize)) || 240, minSize: Math.round(Number(state2.minSize)) || 160, maxSize: Math.round(Number(state2.maxSize)) || 480, responsive: false, className: demoClass, style: parseStyleString(shellStyle), panel: /* @__PURE__ */ React.createElement(Pane, { title: "Panel", count: panelCount, cells: demoConfig?.panelCells ?? 1 }) }, /* @__PURE__ */ React.createElement(Pane, { title: "Contenido", count: mainCount, cells: demoConfig?.mainCells ?? 2, offset: panelCount })));
+  }
+  var SCROLL_ID = "mimicus-anchor-scroll";
+  function AnchorPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const n = Math.min(8, Math.max(2, Math.round(Number(details.sectionCount)) || 5));
+    const direction = state2.direction === "horizontal" ? "horizontal" : "vertical";
+    const containerSel = `#${SCROLL_ID}`;
+    const links = Array.from({ length: n }, (_, i) => ({ href: `#sec-${i + 1}`, title: `Secci\xF3n ${i + 1}` }));
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-anchor-demo", direction === "horizontal" && "mimicus-anchor-demo--horizontal", "mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Anchor, { direction, affix: Boolean(state2.affix), targetOffset: Math.round(Number(state2.targetOffset)) || 0, bounds: Math.round(Number(state2.bounds)) || 5, container: containerSel, items: links }), /* @__PURE__ */ React.createElement("div", { id: SCROLL_ID, "data-mimicus-anchor-container": true, className: "mimicus-anchor-demo__scroll" }, links.map((l, i) => /* @__PURE__ */ React.createElement("section", { key: l.href, id: l.href.slice(1), className: "mimicus-anchor-demo__section" }, /* @__PURE__ */ React.createElement("strong", null, l.title), /* @__PURE__ */ React.createElement("p", { style: { margin: "0.35rem 0 0", fontSize: "0.85rem", opacity: 0.85 } }, "Contenido de ejemplo para scroll ", state2.affix ? "con scroll spy" : "est\xE1tico", ".")))));
+  }
+  function TabsPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const count = Math.min(5, Math.max(2, Math.round(Number(details.tabCount)) || 3));
+    const items = Array.from({ length: count }, (_, i) => ({ key: `t${i + 1}`, label: `Tab ${i + 1}`, content: /* @__PURE__ */ React.createElement(Card, { variant: "flat", style: { padding: "0.65rem" } }, "Panel ", i + 1) }));
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Tabs, { type: state2.type === "card" ? "card" : "line", tabPosition: state2.tabPosition ?? "top", defaultActiveKey: items[0].key, items }));
+  }
+  function BreadcrumbsPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const items = [{ label: "Inicio", href: "#" }, { label: "Cat\xE1logo", href: "#" }, { label: String(details.currentLabel ?? "Componente") }];
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Breadcrumbs, { separator: state2.separator ?? "/", maxItems: state2.maxItems ? Math.round(Number(state2.maxItems)) : void 0, items }));
+  }
+  function DropdownPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Dropdown, { placement: state2.placement ?? "bottomLeft", trigger: /* @__PURE__ */ React.createElement(Button, { variant: "solid" }, "Men\xFA \u25BE"), menu: /* @__PURE__ */ React.createElement(Menu, null, /* @__PURE__ */ React.createElement(Menu.Item, { itemKey: "1" }, "Perfil"), /* @__PURE__ */ React.createElement(Menu.Item, { itemKey: "2" }, "Ajustes"), /* @__PURE__ */ React.createElement(Menu.Divider, null), /* @__PURE__ */ React.createElement(Menu.Item, { itemKey: "3" }, "Salir")) }));
+  }
+  function MenuPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Menu, { mode: state2.mode === "horizontal" ? "horizontal" : "vertical", selectable: true }, /* @__PURE__ */ React.createElement(Menu.Item, { itemKey: "home" }, "Inicio"), /* @__PURE__ */ React.createElement(Menu.Item, { itemKey: "docs" }, "Documentaci\xF3n"), /* @__PURE__ */ React.createElement(Menu.Divider, null), /* @__PURE__ */ React.createElement(Menu.Item, { itemKey: "about" }, "Acerca de")));
+  }
+  function PaginationPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Pagination, { count: Math.round(Number(state2.count)) || 10, defaultPage: Math.round(Number(state2.defaultPage)) || 1, size: state2.size === "small" ? "small" : void 0, siblingCount: Math.round(Number(state2.siblingCount)) || 1 }));
+  }
+  function StepsPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    const current = Math.max(0, Math.round(Number(state2.current)) || 1);
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Steps, { current, direction: state2.direction === "vertical" ? "vertical" : "horizontal", clickable: Boolean(state2.clickable), items: [
+      { title: "Inicio", description: "Datos b\xE1sicos" },
+      { title: "Proceso", description: "Validaci\xF3n" },
+      { title: "Fin", description: "Confirmaci\xF3n" }
+    ] }));
+  }
+  function DrawerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    const [open, setOpen] = (0, import_react30.useState)(Boolean(state2.defaultOpen));
+    (0, import_react30.useEffect)(() => {
+      setOpen(Boolean(state2.defaultOpen));
+    }, [state2.defaultOpen]);
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-drawer-preview", "mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Button, { variant: "solid", onClick: () => setOpen(true) }, "Abrir drawer"), /* @__PURE__ */ React.createElement(Drawer, { open, placement: state2.placement ?? "left", width: Math.round(Number(state2.width)) || 280, title: "Panel lateral", onClose: () => setOpen(false) }, /* @__PURE__ */ React.createElement("p", { style: { margin: 0, fontSize: "0.9rem" } }, "Contenido del drawer. Clic fuera o Escape para cerrar (controlador vanilla).")));
+  }
+  function BottomNavPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    const icons = ["\u2302", "\u2661", "\u25CE", "\u2630"];
+    const labels = ["Inicio", "Favoritos", "Cerca", "M\xE1s"];
+    const n = Math.min(5, Math.max(3, Math.round(Number(state2.actionCount)) || 4));
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(BottomNavigation, { value: state2.value ?? "0", showLabels: state2.showLabels !== false }, Array.from({ length: n }, (_, i) => /* @__PURE__ */ React.createElement(BottomNavigationAction, { key: i, value: String(i), label: labels[i], icon: /* @__PURE__ */ React.createElement("span", null, icons[i]) }))));
+  }
+  function LinkPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement("p", null, "Ejemplo de ", /* @__PURE__ */ React.createElement(NavLink, { href: "#", underline: state2.underline ?? "hover", color: state2.color ?? "primary" }, "enlace tem\xE1tico"), " en un p\xE1rrafo."));
+  }
+  function SpeedDialPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: { ...parseStyleString(demoStyle), minHeight: "10rem", display: "flex", alignItems: "flex-end", justifyContent: "flex-end", padding: "1rem" } }, /* @__PURE__ */ React.createElement(SpeedDial, { direction: state2.direction ?? "up", ariaLabel: "Acciones r\xE1pidas" }, /* @__PURE__ */ React.createElement(SpeedDialAction, { actionKey: "copy", icon: "\u{1F4CB}", tooltip: "Copiar" }), /* @__PURE__ */ React.createElement(SpeedDialAction, { actionKey: "save", icon: "\u{1F4BE}", tooltip: "Guardar" }), /* @__PURE__ */ React.createElement(SpeedDialAction, { actionKey: "share", icon: "\u2197", tooltip: "Compartir" })));
+  }
+  var DEMO_AUTOCOMPLETE = [{ value: "react", label: "React" }, { value: "svelte", label: "Svelte" }, { value: "vue", label: "Vue" }];
+  var DEMO_TRANSFER = [{ key: "1", title: "Item 1" }, { key: "2", title: "Item 2" }, { key: "3", title: "Item 3" }, { key: "4", title: "Item 4" }];
+  var DEMO_CASCADER = [{ label: "Colombia", value: "co", children: [{ label: "Bogot\xE1", value: "bog" }, { label: "Medell\xEDn", value: "med" }] }, { label: "M\xE9xico", value: "mx", children: [{ label: "CDMX", value: "cdmx" }] }];
+  var DEMO_TREE = [{ title: "General", value: "gen", children: [{ title: "Button", value: "btn" }, { title: "Input", value: "inp" }] }, { title: "Navigation", value: "nav" }];
+  var CHIP_OPTIONS = [{ value: "primary", label: "Primary" }, { value: "success", label: "Success" }, { value: "warning", label: "Warning" }, { value: "danger", label: "Danger" }];
+  function SwitchPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Switch, { checked: state2.checked, disabled: state2.disabled, loading: state2.loading }, details.label ?? "Texto de demostraci\xF3n"));
+  }
+  function CheckboxIconPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(
+      CheckboxIcon,
+      {
+        checked: state2.checked,
+        disabled: state2.disabled,
+        loading: state2.loading,
+        variant: state2.variant,
+        iconChecked: /* @__PURE__ */ React.createElement(Icon, { icon: String(details.previewIconTrue ?? "mdi:check") }),
+        iconUnchecked: /* @__PURE__ */ React.createElement(Icon, { icon: String(details.previewIconFalse ?? "mdi:close") })
+      },
+      details.previewLabel ?? "Texto de demostraci\xF3n"
+    ));
+  }
+  function CheckboxChipPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(CheckboxChip, { value: state2.color ?? "primary", options: CHIP_OPTIONS }));
+  }
+  function LabeledSwitchPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(LabeledSwitch, { label: state2.label ?? "Publicar en cat\xE1logo", checked: state2.checked, readonly: state2.readonly }));
+  }
+  function TransferBoardPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(
+      TransferBoard,
+      {
+        stackCount: Math.round(Number(state2.stackCount)) || 3,
+        stackWidth: Math.round(Number(state2.stackWidth)) || 248,
+        disabled: Boolean(state2.disabled),
+        itemsPerStack: Math.round(Number(details.itemsPerStack)) || 3
+      }
+    ));
+  }
+  function InputPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(FormItem, { label: "Campo de texto" }, /* @__PURE__ */ React.createElement(Input, { size: state2.size ?? "medium", disabled: state2.disabled, allowClear: Boolean(state2.allowClear), placeholder: details.placeholder ?? "Escribe aqu\xED\u2026", status: state2.status })));
+  }
+  function AutoCompletePreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(AutoComplete, { options: DEMO_AUTOCOMPLETE, disabled: state2.disabled, placeholder: "Buscar framework\u2026" }));
+  }
+  function SelectPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Select, { size: state2.size, disabled: state2.disabled, placeholder: "Elige una opci\xF3n", options: DEMO_AUTOCOMPLETE, defaultValue: "react" }));
+  }
+  function SliderPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Slider, { defaultValue: Math.round(Number(state2.defaultValue)) || 40, min: 0, max: 100, disabled: state2.disabled, showValue: true }));
+  }
+  function RatePreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Rate, { defaultValue: 2.5, allowHalf: Boolean(state2.allowHalf), disabled: state2.disabled, size: state2.size }));
+  }
+  function RadioPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(RadioGroup, { direction: state2.direction ?? "horizontal", defaultValue: "a", options: [{ value: "a", label: "Opci\xF3n A" }, { value: "b", label: "Opci\xF3n B" }, { value: "c", label: "Opci\xF3n C", disabled: state2.disabled }] }));
+  }
+  function CheckboxPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Checkbox, { defaultChecked: true, indeterminate: Boolean(state2.indeterminate), disabled: state2.disabled }, "Acepto t\xE9rminos"));
+  }
+  function InputNumberPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(InputNumber, { defaultValue: 3, min: 0, max: 10, step: 1, disabled: state2.disabled }));
+  }
+  function TransferPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Transfer, { dataSource: DEMO_TRANSFER, targetKeys: ["2"], disabled: state2.disabled }));
+  }
+  function UploadPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Upload, { multiple: Boolean(state2.multiple), disabled: state2.disabled }));
+  }
+  function ColorPickerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(ColorPicker, { defaultValue: state2.defaultValue ?? "#1677ff", disabled: state2.disabled }));
+  }
+  function DatePickerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(DatePicker, { disabled: state2.disabled }));
+  }
+  function TimePickerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(TimePicker, { disabled: state2.disabled }));
+  }
+  function CascaderPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Cascader, { options: DEMO_CASCADER, disabled: state2.disabled, placeholder: "Ciudad" }));
+  }
+  function TreeSelectPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(TreeSelect, { treeData: DEMO_TREE, disabled: state2.disabled, placeholder: "Componente" }));
+  }
+  function MentionsPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Mentions, { options: [{ value: "paty", label: "Paty" }, { value: "mimicus", label: "Mimicus" }], disabled: state2.disabled }));
+  }
+  function ToggleButtonPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(ToggleButtonGroup, { exclusive: state2.exclusive !== false, orientation: state2.orientation ?? "horizontal", defaultValue: "web" }, /* @__PURE__ */ React.createElement(ToggleButton, { value: "web" }, "Web"), /* @__PURE__ */ React.createElement(ToggleButton, { value: "android" }, "Android"), /* @__PURE__ */ React.createElement(ToggleButton, { value: "ios" }, "iOS")));
+  }
+  function FormPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Form, { layout: state2.layout ?? "vertical" }, /* @__PURE__ */ React.createElement(FormItem, { label: "Nombre", required: true }, /* @__PURE__ */ React.createElement(Input, { placeholder: "Tu nombre" })), /* @__PURE__ */ React.createElement(FormItem, { label: "Framework" }, /* @__PURE__ */ React.createElement(Select, { options: DEMO_AUTOCOMPLETE, defaultValue: "react" })), /* @__PURE__ */ React.createElement(FormItem, { label: "Notas" }, /* @__PURE__ */ React.createElement(TextArea, { rows: 2, placeholder: details.placeholder ?? "Comentarios" })), /* @__PURE__ */ React.createElement(Button, { variant: "solid", type: "submit" }, "Enviar")));
+  }
+  var DEMO_TABLE_COLS = [{ title: "Nombre", dataIndex: "name", key: "name", sorter: true }, { title: "Edad", dataIndex: "age", key: "age", sorter: true }, { title: "Ciudad", dataIndex: "city", key: "city" }];
+  var DEMO_TABLE_DATA = [{ key: "1", name: "Ana", age: 28, city: "Bogot\xE1" }, { key: "2", name: "Luis", age: 34, city: "Medell\xEDn" }, { key: "3", name: "Sof\xEDa", age: 22, city: "Cali" }];
+  var DEMO_DISPLAY_TREE = [{ key: "0", title: "Ra\xEDz", children: [{ key: "0-0", title: "Hijo A", children: [{ key: "0-0-0", title: "Nieto A1" }] }, { key: "0-1", title: "Hijo B" }] }];
+  function BadgePreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    const count = Math.round(Number(state2.count)) || 5;
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Badge, { count: state2.dot ? void 0 : count, dot: Boolean(state2.dot), showZero: Boolean(state2.showZero), max: Math.round(Number(state2.max)) || 99, color: state2.color ?? "primary" }, /* @__PURE__ */ React.createElement(Button, { variant: "ghost" }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:bell-outline" }))));
+  }
+  function TagPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Tag, { variant: state2.variant ?? "ghost", shape: state2.shape ?? "pill", uppercase: Boolean(state2.upper), color: state2.color, icon: details.icon ? /* @__PURE__ */ React.createElement(Icon, { icon: String(details.icon) }) : void 0 }, details.text ?? "Nuevo"));
+  }
+  function AvatarPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, state2.group ? /* @__PURE__ */ React.createElement(AvatarGroup, { max: Math.round(Number(state2.max)) || 4 }, /* @__PURE__ */ React.createElement(Avatar, { alt: "Ana" }, "A"), /* @__PURE__ */ React.createElement(Avatar, { alt: "Luis" }, "L"), /* @__PURE__ */ React.createElement(Avatar, { alt: "Sof\xEDa" }, "S"), /* @__PURE__ */ React.createElement(Avatar, { alt: "Mar\xEDa" }, "M"), /* @__PURE__ */ React.createElement(Avatar, { alt: "Pedro" }, "P")) : /* @__PURE__ */ React.createElement(Avatar, { size: state2.size ?? "medium", variant: state2.variant ?? "circular", alt: "Remy Sharp" }, state2.withImage ? void 0 : "RS"));
+  }
+  function CarouselPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    const slides = ["#1", "#2", "#3", "#4"].map((n, i) => /* @__PURE__ */ React.createElement(Card, { key: i, variant: "flat", style: { minHeight: "7rem", display: "flex", alignItems: "center", justifyContent: "center", background: `hsl(${i * 70} 45% 35%)` } }, n));
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 24rem", demoStyle)) }, /* @__PURE__ */ React.createElement(Carousel, { autoplay: Boolean(state2.autoplay), arrows: Boolean(state2.arrows), dots: state2.dots !== false, infinite: state2.infinite !== false }, slides));
+  }
+  function CollapsePreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 28rem", demoStyle)) }, /* @__PURE__ */ React.createElement(Collapse, { accordion: Boolean(state2.accordion), defaultActiveKey: state2.accordion ? "1" : ["1"] }, /* @__PURE__ */ React.createElement(CollapsePanel, { panelKey: "1", header: "Panel 1", defaultOpen: true }, "Contenido del primer panel."), /* @__PURE__ */ React.createElement(CollapsePanel, { panelKey: "2", header: "Panel 2" }, "Segundo panel colapsable."), /* @__PURE__ */ React.createElement(CollapsePanel, { panelKey: "3", header: "Panel 3" }, "Tercer panel de ejemplo.")));
+  }
+  function DescriptionsPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Descriptions, { title: "Usuario", bordered: Boolean(state2.bordered), column: Math.round(Number(state2.column)) || 3 }, /* @__PURE__ */ React.createElement(DescriptionsItem, { label: "Nombre" }, "Patricia"), /* @__PURE__ */ React.createElement(DescriptionsItem, { label: "Tel\xE9fono" }, "+57 300 000 0000"), /* @__PURE__ */ React.createElement(DescriptionsItem, { label: "Ciudad" }, "Bogot\xE1"), /* @__PURE__ */ React.createElement(DescriptionsItem, { label: "Rol", span: 2 }, "Administrador")));
+  }
+  function EmptyPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Empty, { description: state2.description ?? "No data", image: state2.image ?? "default" }, state2.showAction && /* @__PURE__ */ React.createElement(Button, { variant: "solid", size: "small" }, "Crear")));
+  }
+  function QRCodePreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(QRCode, { value: details.value ?? "https://mimicus.dev", size: Math.round(Number(state2.size)) || 128, bordered: state2.bordered !== false }));
+  }
+  function SegmentedPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Segmented, { block: Boolean(state2.block), defaultValue: "list", options: [{ value: "list", label: "Lista" }, { value: "kanban", label: "Kanban" }, { value: "grid", label: "Grid" }] }));
+  }
+  function StatisticPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Statistic, { title: state2.title ?? "Balance", value: state2.value ?? 112893, prefix: state2.prefix ?? "$", precision: state2.precision != null ? Math.round(Number(state2.precision)) : void 0, suffix: state2.suffix }));
+  }
+  function TablePreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Table, { columns: DEMO_TABLE_COLS, dataSource: DEMO_TABLE_DATA, bordered: Boolean(state2.bordered), size: state2.size ?? "medium", sortable: Boolean(state2.sortable) }));
+  }
+  function TimelinePreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Timeline, { mode: state2.mode ?? "left", pending: state2.pending ? "Cargando\u2026" : void 0 }, /* @__PURE__ */ React.createElement(TimelineItem, { label: "2024-01", color: "success" }, "Cuenta creada"), /* @__PURE__ */ React.createElement(TimelineItem, { label: "2024-03" }, "Primer login"), /* @__PURE__ */ React.createElement(TimelineItem, { label: "2024-06", color: "error" }, "Intento fallido")));
+  }
+  function TooltipPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("padding: 1.5rem", demoStyle)) }, /* @__PURE__ */ React.createElement(Tooltip, { title: state2.title ?? "Texto de ayuda", placement: state2.placement ?? "top", arrow: Boolean(state2.arrow) }, /* @__PURE__ */ React.createElement(Button, { variant: "solid" }, "Hover me")));
+  }
+  function TourPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview mimicus-tour-demo", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("min-height: 10rem; position: relative", demoStyle)) }, /* @__PURE__ */ React.createElement(Button, { variant: "ghost", "data-tour-a": true, id: "tour-a" }, "Paso 1"), /* @__PURE__ */ React.createElement(Button, { variant: "ghost", "data-tour-b": true, id: "tour-b", style: { marginLeft: "0.5rem" } }, "Paso 2"), /* @__PURE__ */ React.createElement(Tour, { open: Boolean(state2.open), steps: [{ target: "#tour-a", title: "Bienvenida", description: "Primer paso del tour." }, { target: "#tour-b", title: "Siguiente", description: "Segundo objetivo." }] }));
+  }
+  function TreePreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Tree, { treeData: DEMO_DISPLAY_TREE, checkable: Boolean(state2.checkable), defaultExpandAll: state2.defaultExpandAll !== false }));
+  }
+  function CalendarPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(Calendar, { fullscreen: Boolean(state2.fullscreen) }));
+  }
+  function ListPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 22rem", demoStyle)) }, /* @__PURE__ */ React.createElement(List, { dense: Boolean(state2.dense), subheader: state2.subheader ? "Carpetas" : void 0 }, /* @__PURE__ */ React.createElement(ListItem, { button: true }, /* @__PURE__ */ React.createElement(ListItemAvatar, null, /* @__PURE__ */ React.createElement(Avatar, { alt: "F" }, "F")), /* @__PURE__ */ React.createElement(ListItemText, { primary: "Fotos", secondary: "Ene 9, 2024" })), /* @__PURE__ */ React.createElement(ListItem, { button: true }, /* @__PURE__ */ React.createElement(ListItemAvatar, null, /* @__PURE__ */ React.createElement(Avatar, { alt: "W" }, "W")), /* @__PURE__ */ React.createElement(ListItemText, { primary: "Trabajo", secondary: "Ene 7, 2024" })), /* @__PURE__ */ React.createElement(ListItem, { button: true, secondaryAction: /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:chevron-right" }) }, /* @__PURE__ */ React.createElement(ListItemText, { primary: "Vacaciones", secondary: "Jul 20, 2024" }))));
+  }
+  function CodeBlockPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle) }, /* @__PURE__ */ React.createElement(CodeBlock, { value: state2.code ?? details.code ?? "", readOnly: true, minHeight: state2.minHeight ?? "7rem", maxHeight: "18rem", lang: "jsx", lineWrapping: true }));
+  }
+  function SidePanelPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const [open, setOpen] = (0, import_react30.useState)(state2.open !== false);
+    const drawer = Boolean(state2.drawer);
+    (0, import_react30.useEffect)(() => {
+      setOpen(state2.open !== false);
+    }, [state2.open]);
+    const sectionCount = Math.min(6, Math.max(1, Math.round(Number(details.sectionCount)) || 3));
+    const colors = ["primary", "info", "success", "warning", "error", "danger"];
+    const sections = Array.from({ length: sectionCount }, (_, i) => ({
+      id: `sec-${i}`,
+      icon: ["mdi:gesture-tap-button", "mdi:view-grid-outline", "mdi:compass-outline", "mdi:form-select", "mdi:card-text-outline", "mdi:message-alert-outline"][i % 6],
+      label: ["General", "Layout", "Navigation", "Data Entry", "Data Display", "Feedback"][i % 6],
+      color: colors[i % colors.length],
+      count: 4 + i
+    }));
+    const railView = /* @__PURE__ */ React.createElement(SidePanel.View, { mode: "rail", gap: "0.35rem" }, sections.map((s) => /* @__PURE__ */ React.createElement(Button, { key: s.id, variant: "text", shape: "rect", color: s.color, className: "pg-panel-rail__btn", title: s.label, style: { width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem" } }, /* @__PURE__ */ React.createElement(Icon, { icon: s.icon, style: { fontSize: "1.2rem" } }))));
+    const expandedView = /* @__PURE__ */ React.createElement(SidePanel.View, { mode: "expanded", gap: "0.25rem" }, sections.map((s, i) => /* @__PURE__ */ React.createElement(SidePanelSection, { key: s.id, icon: s.icon, label: s.label, color: s.color, open: i === 0, count: s.count, onToggle: () => {
+    }, onHeaderClick: () => {
+    } }, Array.from({ length: 2 }, (_, j) => /* @__PURE__ */ React.createElement(Button, { key: j, variant: "text", shape: "rect", color: s.color, style: { justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" } }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:file-document-outline" }), /* @__PURE__ */ React.createElement("span", { className: "sm-item-text" }, "Demo ", j + 1))))));
+    const shellStyle = parseStyleString(mergeStyleString("width:100%;height:clamp(14rem,42vh,18rem);border:1px solid var(--mimicus-b-color);border-radius:var(--mimicus-ui-radius,0.5rem);overflow:hidden;display:flex", demoStyle));
+    return /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["layout-side-panel-preview", demoClass].filter(Boolean).join(" "), style: shellStyle }, /* @__PURE__ */ React.createElement(SidePanel, { open, drawer, onToggle: drawer ? void 0 : () => setOpen((v) => !v), onClose: drawer ? () => {
+    } : void 0, collapsedView: railView, expandedView, style: { flex: "1 1 auto", minHeight: 0 } }));
+  }
+  function LoginButtonPreview({ previewKey, demoStyle, demoClass }) {
+    const session = (0, import_react30.useMemo)(() => createDemoSession(), []);
+    return /* @__PURE__ */ React.createElement(ContapymeSessionProvider, { session }, /* @__PURE__ */ React.createElement("div", { key: previewKey, className: ["mimicus-login-button-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width:100%;padding:0.65rem 0.75rem;border:1px solid var(--mimicus-b-color);border-radius:var(--mimicus-ui-radius,0.5rem);background:color-mix(in srgb,var(--mimicus-bg-secondary),transparent 8%)", demoStyle)) }, /* @__PURE__ */ React.createElement(FlexLayout, { items: "center", justify: "flex-end", gap: "0.5rem" }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "0.78rem", opacity: 0.75, marginRight: "auto" } }, "AppLayout.Header.Tools"), /* @__PURE__ */ React.createElement(LoginButton, { showPasswordToggle: true, showRemember: true }))));
+  }
+  var previewBuiltins = {
+    card: CardPreview,
+    "layout-app": LayoutAppPreview,
+    "layout-side-panel": SidePanelPreview,
+    "layout-divider": DividerPreview,
+    "layout-splitter": SplitterPreview,
+    "nav-anchor": AnchorPreview,
+    "nav-tabs": TabsPreview,
+    "nav-breadcrumbs": BreadcrumbsPreview,
+    "nav-dropdown": DropdownPreview,
+    "nav-menu": MenuPreview,
+    "nav-pagination": PaginationPreview,
+    "nav-steps": StepsPreview,
+    "nav-drawer": DrawerPreview,
+    "nav-bottom-nav": BottomNavPreview,
+    "nav-link": LinkPreview,
+    "nav-speed-dial": SpeedDialPreview,
+    switch: SwitchPreview,
+    "checkbox-icon": CheckboxIconPreview,
+    "checkbox-chip": CheckboxChipPreview,
+    "cmp-labeled-switch": LabeledSwitchPreview,
+    "cmp-transfer-board": TransferBoardPreview,
+    "form-input": InputPreview,
+    "form-autocomplete": AutoCompletePreview,
+    "form-select": SelectPreview,
+    "form-slider": SliderPreview,
+    "form-rate": RatePreview,
+    "form-radio": RadioPreview,
+    "form-checkbox": CheckboxPreview,
+    "form-input-number": InputNumberPreview,
+    "form-transfer": TransferPreview,
+    "form-upload": UploadPreview,
+    "form-color-picker": ColorPickerPreview,
+    "form-date-picker": DatePickerPreview,
+    "form-time-picker": TimePickerPreview,
+    "form-cascader": CascaderPreview,
+    "form-tree-select": TreeSelectPreview,
+    "form-mentions": MentionsPreview,
+    "form-toggle": ToggleButtonPreview,
+    "form-form": FormPreview,
+    "disp-badge": BadgePreview,
+    "disp-tag": TagPreview,
+    "disp-avatar": AvatarPreview,
+    "disp-carousel": CarouselPreview,
+    "disp-collapse": CollapsePreview,
+    "disp-descriptions": DescriptionsPreview,
+    "disp-empty": EmptyPreview,
+    "disp-qrcode": QRCodePreview,
+    "disp-segmented": SegmentedPreview,
+    "disp-statistic": StatisticPreview,
+    "disp-table": TablePreview,
+    "disp-timeline": TimelinePreview,
+    "disp-tooltip": TooltipPreview,
+    "disp-tour": TourPreview,
+    "disp-tree": TreePreview,
+    "disp-calendar": CalendarPreview,
+    "disp-list": ListPreview,
+    "cmp-code-block": CodeBlockPreview,
+    "contapyme-login": LoginButtonPreview
+  };
+  function PreviewStub({ template, componentName }) {
+    return /* @__PURE__ */ React.createElement("div", { className: "mimicus-preview-stub mimicus-preview-stub--template" }, /* @__PURE__ */ React.createElement("div", { className: "mimicus-preview-stub__badge" }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:television-play" }), " Vista \xAB", template, "\xBB"), /* @__PURE__ */ React.createElement("p", { className: "mimicus-preview-stub__hint" }, "Preview ", /* @__PURE__ */ React.createElement("strong", null, componentName ?? template), " sin plantilla JSON."));
+  }
+  function buildDemoComponentProps(node, ctx) {
+    const { state: state2, details, demoStyle, demoClass, definition } = ctx;
+    const props = { style: parseStyleString(demoStyle), className: demoClass };
+    if (node.passState === true) Object.assign(props, stateForPreview(state2));
+    else if (Array.isArray(node.passState)) {
+      for (const k of node.passState) if (state2[k] != null && state2[k] !== "") props[k] = state2[k];
+    }
+    if (node.gapDefault && !props.gap) props.gap = node.gapDefault;
+    if (node.inline != null) props.inline = node.inline;
+    if (node.className) props.className = [props.className, node.className].filter(Boolean).join(" ");
+    let children;
+    if (node.iconFromDetails && details[node.iconFromDetails]) props.icon = /* @__PURE__ */ React.createElement(Icon, { icon: String(details[node.iconFromDetails]) });
+    if (node.textFromDetails) children = details[node.textFromDetails];
+    if (node.childrenFromDetails) children = details[node.childrenFromDetails];
+    const name = node.name ?? definition?.component?.name;
+    return { Comp: resolveComponent(name), props, children, name };
+  }
+
+  // src/devkit/shared/jsonRenderer.jsx
+  function stackStyle(gap) {
+    return { display: "flex", flexDirection: "column", gap: gap || "0.25rem", width: "100%", minWidth: 0 };
+  }
+  function readCount(ctx, spec) {
+    const raw = spec.countFrom?.startsWith("details.") ? ctx.details?.[spec.countFrom.slice(8)] : spec.countFrom?.startsWith("state.") ? ctx.state?.[spec.countFrom.slice(6)] : ctx.details?.itemCount;
+    const n = Math.round(Number(raw)) || spec.default || 1;
+    return Math.min(spec.max ?? 50, Math.max(spec.min ?? 1, n));
+  }
+  function CatalogCategories({ node, ctx }) {
+    const mode = node.mode || "sections";
+    const categories = sortedCategories(ctx);
+    const { route, catalogItems, sectionOpen, setSectionOpen } = ctx;
+    if (mode === "rail") {
+      return categories.map((cat) => {
+        const color = sectionColorFor(ctx, cat);
+        const active = route.category === cat;
+        const meta = sectionMeta(ctx, cat);
+        return /* @__PURE__ */ React.createElement(Button, { key: cat, variant: active ? "soft" : "text", shape: "rect", color, "data-section-color": color, className: "pg-panel-rail__btn", title: meta.label ?? cat, onClick: () => ctx.onCategory?.(cat), style: { width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem" } }, /* @__PURE__ */ React.createElement(Icon, { icon: meta.icon ?? "mdi:folder-outline", style: { fontSize: "1.2rem" } }));
+      });
+    }
+    if (mode === "tabs") return null;
+    return categories.map((cat) => {
+      const color = sectionColorFor(ctx, cat);
+      const meta = sectionMeta(ctx, cat);
+      const items = catalogItems.filter((it) => (it.section ?? it.category) === cat);
+      return /* @__PURE__ */ React.createElement(SidePanelSection, { key: cat, icon: meta.icon ?? "mdi:folder-outline", label: meta.label ?? cat, color, open: sectionOpen?.[cat], collapsed: false, active: route.category === cat && !route.slug, forceOpen: route.category === cat && !!route.slug, count: items.length, statusDots: statusDotsFor(items.map((it) => it.id)), onToggle: () => setSectionOpen?.((prev) => ({ ...prev, [cat]: !prev[cat] })), onHeaderClick: () => ctx.onCategory?.(cat) }, items.map((it) => {
+        const selected = route.category === cat && route.slug === it.slug;
+        return /* @__PURE__ */ React.createElement(Button, { key: it.slug, variant: selected ? "soft" : "text", shape: "rect", color, onClick: () => ctx.onDemo?.(cat, it.slug), className: "pg-panel-demo-link", title: it.displayLabel, style: { justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" } }, /* @__PURE__ */ React.createElement(Icon, { icon: getDemoIcon(it.id, it) }), /* @__PURE__ */ React.createElement("span", { className: "sm-item-label" }, /* @__PURE__ */ React.createElement("span", { className: "sm-item-text" }, it.displayLabel), statusFor(it.id, it) && /* @__PURE__ */ React.createElement(ReviewStatusDot, { status: statusFor(it.id, it), size: "0.48rem" })));
+      }));
+    });
+  }
+  function PlaygroundJsonPanel({ node, ctx }) {
+    return /* @__PURE__ */ React.createElement(JsonRenderer, { node, ctx });
+  }
+  function JsonRenderer({ node, ctx, keyPrefix = "" }) {
+    if (!node) return null;
+    if (node.type === "builtin") {
+      const Builtin = previewBuiltins[node.id];
+      return Builtin ? /* @__PURE__ */ React.createElement(Builtin, { ...ctx }) : null;
+    }
+    if (node.type === "wrap") {
+      return /* @__PURE__ */ React.createElement("div", { style: parseStyleString(node.style), key: keyPrefix }, /* @__PURE__ */ React.createElement(JsonRenderer, { node: node.child, ctx, keyPrefix: `${keyPrefix}-w` }));
+    }
+    if (node.type === "surround") {
+      const inline = Boolean(ctx.state?.[node.inlineFromState ?? "inline"]);
+      const Tag2 = inline ? "span" : "div";
+      return /* @__PURE__ */ React.createElement(Tag2, { className: inline ? "layout-inline-demo layout-inline-demo--inline" : "layout-inline-demo", key: keyPrefix }, /* @__PURE__ */ React.createElement(JsonRenderer, { node: node.child, ctx, keyPrefix: `${keyPrefix}-s` }));
+    }
+    if (node.type === "repeat") {
+      const count = readCount(ctx, node);
+      return Array.from({ length: count }, (_, i) => /* @__PURE__ */ React.createElement(JsonRenderer, { key: `${keyPrefix}-r${i}`, node: node.child, ctx: { ...ctx, repeatIndex: i }, keyPrefix: `${keyPrefix}-r${i}` }));
+    }
+    if (node.type === "emoji-card") {
+      const i = ctx.repeatIndex ?? 0;
+      const emoji = LAYOUT_PREVIEW_EMOJIS[i % LAYOUT_PREVIEW_EMOJIS.length];
+      const label = node.labelPrefix ? `${node.labelPrefix}${i + 1} ${emoji}` : emoji;
+      return /* @__PURE__ */ React.createElement(Card, { key: keyPrefix, variant: "flat", inline: node.inline !== false, style: parseStyleString(node.cardStyle) }, node.labelPrefix ? label : emoji);
+    }
+    if (node.type === "demo-component") {
+      const inline = node.widthFromInline && Boolean(ctx.state?.inline);
+      const { Comp, props, children } = buildDemoComponentProps(node, ctx);
+      if (!Comp) return null;
+      const style = { ...inline ? { width: "fit-content" } : { width: "100%" }, maxWidth: "100%", ...props.style };
+      const inner = node.children ? /* @__PURE__ */ React.createElement(JsonRenderer, { node: node.children, ctx }) : children;
+      return /* @__PURE__ */ React.createElement(Comp, { ...props, style }, inner);
+    }
+    if (node.type === "stack") {
+      const rendered = (node.children ?? []).flatMap((child, idx) => {
+        if (child.type === "catalog-categories") {
+          const out = CatalogCategories({ node: child, ctx });
+          return Array.isArray(out) ? out : out ? [out] : [];
+        }
+        if (child.type === "separator") return [/* @__PURE__ */ React.createElement("hr", { key: `sep-${idx}`, className: "sidebar-separator" })];
+        return [/* @__PURE__ */ React.createElement(JsonRenderer, { key: child.id || idx, node: child, ctx, keyPrefix: `${keyPrefix}-${idx}` })];
+      });
+      return /* @__PURE__ */ React.createElement("div", { className: node.className, style: stackStyle(node.gap) }, rendered);
+    }
+    if (node.type === "catalog-categories") {
+      const out = CatalogCategories({ node, ctx });
+      return Array.isArray(out) ? /* @__PURE__ */ React.createElement(React.Fragment, null, out) : out;
+    }
+    return null;
+  }
+
+  // src/devkit/shared/driver/previewRenderer.jsx
+  function resolvePreviewNode(definition) {
+    if (definition.preview?.tree) return definition.preview.tree;
+    const previewTemplates = playgroundData().previewTemplates ?? {};
+    const tpl = definition.preview?.template ?? "component";
+    return previewTemplates[tpl] ?? previewTemplates.component;
+  }
+  function PreviewRenderer(props) {
+    const { definition } = props;
+    const node = resolvePreviewNode(definition);
+    const ctx = { ...props, repeatIndex: 0 };
+    if (node?.type === "builtin") {
+      const Builtin = previewBuiltins[node.id];
+      return Builtin ? /* @__PURE__ */ React.createElement(Builtin, { ...props }) : /* @__PURE__ */ React.createElement(PreviewStub, { template: node.id, componentName: definition.component?.name });
+    }
+    const rendered = /* @__PURE__ */ React.createElement(JsonRenderer, { node, ctx });
+    if (rendered) return rendered;
+    return /* @__PURE__ */ React.createElement(PreviewStub, { template: definition.preview?.template, componentName: definition.component?.name });
+  }
+
+  // src/devkit/shared/driver/driverCore.js
+  var JsonDemoAdapter = class extends DemoController {
+    constructor(def) {
+      super();
+      this.def = def;
+      this.componentName = def.component.name;
+      this.componentPath = def.component.path;
+      this.previewScale = def.preview?.scale;
+      this.previewStyle = def.preview?.style;
+      this.hydratedFields = hydrateFields(def.fields);
+      this.hydratedDetailFields = hydrateFields(def.detailFields ?? []);
+      this.hydratedDemoConfigFields = hydrateFields(def.demoConfigFields ?? []);
+    }
+    initialState() {
+      return structuredClone(this.def.state ?? {});
+    }
+    initialDetails() {
+      return structuredClone(this.def.details ?? {});
+    }
+    initialDemoConfig() {
+      return structuredClone(this.def.demoConfig ?? {});
+    }
+    fields() {
+      return this.hydratedFields;
+    }
+    detailFields() {
+      return this.hydratedDetailFields;
+    }
+    demoConfigFields() {
+      return this.hydratedDemoConfigFields;
+    }
+    presets() {
+      return this.def.presets ?? [];
+    }
+    tagOpts() {
+      return this.def.code?.tagOpts ?? {};
+    }
+    buildCode(state2, details = {}, demoStyle = "", demoClass = "", demoConfig = {}) {
+      const strategy = this.def.code?.strategy ?? "default";
+      return buildCodeFromStrategy(strategy, { def: this.def, collectAttrs: (s) => this.collectAttrs(s) }, state2, details, demoStyle, demoClass, demoConfig);
+    }
+  };
+  function createJsonAdapter(def) {
+    return new JsonDemoAdapter(def);
+  }
+  function DemoPage({ definition }) {
+    const adapter = (0, import_react31.useMemo)(() => createJsonAdapter(definition), [definition]);
+    const [state2, setState] = (0, import_react31.useState)(() => adapter.initialState());
+    const [details, setDetails] = (0, import_react31.useState)(() => adapter.initialDetails());
+    const [demoConfig, setDemoConfig] = (0, import_react31.useState)(() => adapter.initialDemoConfig());
+    const [demoStyle, setDemoStyle] = (0, import_react31.useState)("");
+    const [demoClass, setDemoClass] = (0, import_react31.useState)("");
+    const shell = definition.shell ?? {};
+    return /* @__PURE__ */ React.createElement(
+      AccordionDemo,
+      {
+        flat: true,
+        adapter,
+        title: definition.title ?? definition.label,
+        titleIcon: definition.titleIcon,
+        reviewStatus: definition.status,
+        relieve: shell.relieve,
+        configBlockCount: shell.configBlockCount,
+        className: shell.class,
+        previewScale: definition.preview?.scale,
+        previewStyle: definition.preview?.style,
+        demoId: definition.id,
+        state: state2,
+        details,
+        demoConfig,
+        demoStyle,
+        demoClass,
+        onStateChange: setState,
+        onDetailsChange: setDetails,
+        onDemoConfigChange: setDemoConfig,
+        onDemoStyleChange: setDemoStyle,
+        onDemoClassChange: setDemoClass,
+        intro: definition.intro,
+        preview: (ctx) => /* @__PURE__ */ React.createElement("div", { className: "demo-preview-root" }, /* @__PURE__ */ React.createElement(PreviewRenderer, { definition, ...ctx }))
+      }
+    );
+  }
+
+  // src/devkit/shell/playgroundAppLayout.js
+  var PLAYGROUND_LAYOUT_SELECT_OPTIONS = [
+    { id: "side", label: "Panel izquierdo" },
+    { id: "top-side-2", label: "Panel derecho" }
+  ];
+  var PLAYGROUND_APP_LAYOUT_STORAGE_KEY = "pg-app-layout-variant";
+  var layoutVariant = "side";
+  var layoutListeners = /* @__PURE__ */ new Set();
+  function getPlaygroundAppLayoutVariant() {
+    return layoutVariant;
+  }
+  function applyPlaygroundAppLayoutVariant(next) {
+    layoutVariant = normalizePlaygroundAppLayoutVariant(next);
+    if (typeof document !== "undefined") {
+      document.documentElement.dataset.appLayoutVariant = layoutVariant;
+    }
+    try {
+      localStorage.setItem(PLAYGROUND_APP_LAYOUT_STORAGE_KEY, layoutVariant);
+    } catch {
+    }
+    layoutListeners.forEach((fn) => {
+      try {
+        fn(layoutVariant);
+      } catch {
+      }
+    });
+  }
+  function setPlaygroundAppLayoutVariant(next) {
+    const value = normalizePlaygroundAppLayoutVariant(next);
+    if (value === layoutVariant) return;
+    applyPlaygroundAppLayoutVariant(value);
+  }
+  function subscribePlaygroundAppLayoutVariant(fn) {
+    layoutListeners.add(fn);
+    return () => layoutListeners.delete(fn);
+  }
+  function bootPlaygroundAppLayout() {
+    let stored = "side";
+    try {
+      const v = localStorage.getItem(PLAYGROUND_APP_LAYOUT_STORAGE_KEY);
+      if (v) stored = v;
+    } catch {
+    }
+    applyPlaygroundAppLayoutVariant(stored);
+  }
+  function playgroundShellAppLayoutVariant(shellVariant) {
+    return shellVariant === "top-side-2" ? "top-side-2" : "top-side";
+  }
+  if (typeof document !== "undefined") bootPlaygroundAppLayout();
+
+  // src/devkit/shell/shellChrome.jsx
+  var import_react32 = __require("react");
+
+  // src/devkit/shell/resolveShellConfig.js
+  function shellConfig() {
+    return playgroundData().shellConfig ?? {};
+  }
+  function panelSizePx(open) {
+    const s = shellConfig().panel?.size ?? {};
+    const n = open ? s.expanded : s.collapsed;
+    return Number(n) || (open ? 260 : 52);
+  }
+  function panelSizeCss(open) {
+    const s = shellConfig().panel?.size ?? {};
+    const unit = s.unit || "px";
+    return `${panelSizePx(open)}${unit}`;
+  }
+  function panelStorageKey() {
+    return shellConfig().panel?.storageKey || "mimicus:sidebarOpen";
+  }
+  function sectionColors() {
+    return shellConfig().theme?.sectionColors ?? ["primary", "info", "success", "warning", "error", "danger", "color"];
+  }
+
+  // src/devkit/shell/playgroundNav.jsx
+  function PlaygroundBrand({ title, icon = "assets/mimicus-logo.svg", onClick }) {
+    const Tag2 = onClick ? "button" : "div";
+    return /* @__PURE__ */ React.createElement(
+      Tag2,
+      {
+        type: onClick ? "button" : void 0,
+        className: ["pg-app-brand", "mimicus-ui-brand", onClick && "pg-app-brand--clickable"].filter(Boolean).join(" "),
+        onClick,
+        title: onClick ? "Inicio" : title
+      },
+      /* @__PURE__ */ React.createElement("img", { src: icon, alt: "", width: "22", height: "22", className: "pg-app-brand__icon" }),
+      /* @__PURE__ */ React.createElement("span", { className: "pg-app-brand__title" }, title)
+    );
+  }
+
+  // src/devkit/shell/shellChrome.jsx
+  var LAYOUT_BP_NARROW3 = 768;
+  function useNarrowViewport2() {
+    const [narrow, setNarrow] = (0, import_react32.useState)(false);
+    (0, import_react32.useEffect)(() => {
+      const mq = window.matchMedia(`(max-width: ${LAYOUT_BP_NARROW3 - 1}px)`);
+      const sync = () => setNarrow(mq.matches);
+      sync();
+      mq.addEventListener("change", sync);
+      return () => mq.removeEventListener("change", sync);
+    }, []);
+    return narrow;
+  }
+  function usePlaygroundBodyScrollLock(active) {
+    (0, import_react32.useEffect)(() => {
+      if (!active) return void 0;
+      const html = document.documentElement;
+      const body = document.body;
+      const prevHtml = html.style.overflow;
+      const prevBody = body.style.overflow;
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      return () => {
+        html.style.overflow = prevHtml;
+        body.style.overflow = prevBody;
+      };
+    }, [active]);
+  }
+  function FpsCounter({ collapsed = false }) {
+    const [fps, setFps] = (0, import_react32.useState)(60);
+    (0, import_react32.useEffect)(() => {
+      let frames = 0;
+      let last = performance.now();
+      let raf = 0;
+      const tick = (now) => {
+        frames += 1;
+        if (now - last >= 1e3) {
+          setFps(Math.round(frames * 1e3 / (now - last)));
+          frames = 0;
+          last = now;
+        }
+        raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, []);
+    return /* @__PURE__ */ React.createElement("span", { className: "fps-histogram-chip", title: "FPS \xB7 \xFAltimo segundo" }, /* @__PURE__ */ React.createElement("span", { className: "fps-histogram-chip__value" }, fps), !collapsed && /* @__PURE__ */ React.createElement("span", { className: "fps-histogram-chip__unit" }, "FPS"));
+  }
+  function PlaygroundSkinSelect({ label, value, options, onChange, accent: accent2 = "palette" }) {
+    const dataProps = accent2 === "palette" ? { "data-palette": value } : { "data-look": value };
+    return /* @__PURE__ */ React.createElement("div", { className: ["pg-skin-toggle", accent2 === "palette" ? "pg-skin-toggle--palette" : "pg-skin-toggle--look"].join(" "), ...dataProps, title: label }, /* @__PURE__ */ React.createElement("select", { className: "pg-skin-toggle__select", value, onChange: (e) => onChange?.(e.target.value), "aria-label": label }, options.map((o) => /* @__PURE__ */ React.createElement("option", { key: o.id, value: o.id }, o.label))));
+  }
+  function HeaderSkinBar() {
+    const [theme, setTheme] = (0, import_react32.useState)(() => getThemeState());
+    const [look, setLook] = (0, import_react32.useState)(() => getLooknfeelState());
+    const [layout, setLayout] = (0, import_react32.useState)(() => getPlaygroundAppLayoutVariant());
+    (0, import_react32.useEffect)(() => subscribeTheme(setTheme), []);
+    (0, import_react32.useEffect)(() => subscribeLooknfeel(setLook), []);
+    (0, import_react32.useEffect)(() => subscribePlaygroundAppLayoutVariant(setLayout), []);
+    return /* @__PURE__ */ React.createElement("div", { className: "pg-header-skin-bar" }, /* @__PURE__ */ React.createElement(PlaygroundSkinSelect, { label: "Layout", accent: "look", value: layout, options: PLAYGROUND_LAYOUT_SELECT_OPTIONS, onChange: setPlaygroundAppLayoutVariant }), /* @__PURE__ */ React.createElement(PlaygroundSkinSelect, { label: "Paleta", accent: "palette", value: theme.themeColor, options: THEME_COLOR_OPTIONS, onChange: setThemeColor }), /* @__PURE__ */ React.createElement(PlaygroundSkinSelect, { label: "Look n feel", accent: "look", value: look, options: LOOKNFEEL_OPTIONS, onChange: applyLooknfeel }), /* @__PURE__ */ React.createElement(Button, { variant: theme.luminance === "dark" ? "soft" : "text", color: "neutral", shape: "rect", className: "pg-header-skin-bar__theme-btn", onClick: () => setLuminance(theme.luminance === "dark" ? "light" : "dark"), title: theme.luminance === "dark" ? "Modo claro" : "Modo oscuro", style: { width: "auto", minWidth: "2rem", flexShrink: 0 } }, /* @__PURE__ */ React.createElement("span", { "aria-hidden": true }, theme.luminance === "dark" ? "\u2600" : "\u263E")));
+  }
+  function PlaygroundShellHeader({
+    brandTitle,
+    onBrandClick,
+    headerCenter,
+    headerTools,
+    title,
+    headerEnd,
+    shellNavigation,
+    primaryNav,
+    secondaryNav,
+    showShellMenuBtn,
+    menuTitle,
+    onShellMenuClick
+  }) {
+    const center = headerCenter ?? (title ? /* @__PURE__ */ React.createElement("span", { className: "title pg-route-title pg-shell-route-title pg-vt-header" }, title) : null);
+    const tools = headerTools ?? headerEnd;
+    const nav = shellNavigation ?? /* @__PURE__ */ React.createElement(React.Fragment, null, primaryNav, secondaryNav);
+    return /* @__PURE__ */ React.createElement(AppLayout.Header, { barClassName: "pg-shell-toolbar", className: "pg-shell-header-stack pg-content-header" }, /* @__PURE__ */ React.createElement(AppLayout.Header.Brand, null, showShellMenuBtn && /* @__PURE__ */ React.createElement(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onShellMenuClick, className: "sidebar-header-btn pg-shell-menu-btn", title: menuTitle, style: { flexShrink: 0, width: "auto" } }, /* @__PURE__ */ React.createElement(Icon, { icon: "mdi:menu" })), brandTitle && /* @__PURE__ */ React.createElement(PlaygroundBrand, { title: brandTitle, onClick: onBrandClick })), /* @__PURE__ */ React.createElement(AppLayout.Header.Center, null, center), /* @__PURE__ */ React.createElement(AppLayout.Header.Tools, null, tools), nav ? /* @__PURE__ */ React.createElement(AppLayout.Header.Nav, null, nav) : null);
+  }
+  function PlaygroundAppShell({
+    title,
+    brandTitle,
+    onBrandClick,
+    headerCenter,
+    headerTools,
+    headerEnd,
+    shellNavigation,
+    primaryNav,
+    secondaryNav,
+    collapsedPanel,
+    expandedPanel,
+    children,
+    embedMode = false
+  }) {
+    const narrow = useNarrowViewport2();
+    const [open, setOpen] = (0, import_react32.useState)(true);
+    const [drawerOpen, setDrawerOpen] = (0, import_react32.useState)(false);
+    const [variant, setVariant] = (0, import_react32.useState)(() => getPlaygroundAppLayoutVariant());
+    const storageKey = panelStorageKey();
+    usePlaygroundBodyScrollLock(true);
+    (0, import_react32.useEffect)(() => subscribePlaygroundAppLayoutVariant(setVariant), []);
+    (0, import_react32.useEffect)(() => {
+      try {
+        const s = localStorage.getItem(storageKey);
+        if (s !== null) setOpen(s === "1");
+      } catch {
+      }
+    }, [storageKey]);
+    (0, import_react32.useEffect)(() => {
+      try {
+        localStorage.setItem(storageKey, open ? "1" : "0");
+      } catch {
+      }
+    }, [open, storageKey]);
+    (0, import_react32.useEffect)(() => {
+      if (!narrow) setDrawerOpen(false);
+    }, [narrow]);
+    const shellVariant = normalizePlaygroundAppLayoutVariant(variant);
+    const gridVariant = playgroundShellAppLayoutVariant(shellVariant);
+    const showSider = !embedMode;
+    const panelEnd = shellVariant === "top-side-2";
+    const useDrawer = narrow && showSider;
+    const showShellMenuBtn = useDrawer;
+    const toggleSidebar = (0, import_react32.useCallback)(() => setOpen((v) => !v), []);
+    const closeDrawer = (0, import_react32.useCallback)(() => setDrawerOpen(false), []);
+    const onShellMenuClick = (0, import_react32.useCallback)(() => setDrawerOpen((v) => !v), []);
+    const shellClass = [
+      "pg-shell",
+      "pg-playground-shell",
+      `pg-playground-shell--${shellVariant}`,
+      !open && showSider && !useDrawer && "is-collapsed",
+      useDrawer && "pg-playground-shell--drawer",
+      embedMode && "pg-shell--embed"
+    ].filter(Boolean).join(" ");
+    const menuTitle = drawerOpen ? "Cerrar men\xFA" : "Abrir men\xFA";
+    const siderWidth = panelSizeCss(useDrawer ? true : open);
+    const shellStyle = { "--pg-shell-sider-w": siderWidth, "--mimicus-app-layout-sider-w": siderWidth };
+    const shellHeader = /* @__PURE__ */ React.createElement(
+      PlaygroundShellHeader,
+      {
+        brandTitle,
+        onBrandClick,
+        title,
+        headerCenter,
+        headerTools,
+        headerEnd,
+        shellNavigation,
+        primaryNav,
+        secondaryNav,
+        showShellMenuBtn,
+        menuTitle,
+        onShellMenuClick
+      }
+    );
+    if (embedMode) {
+      return /* @__PURE__ */ React.createElement("div", { className: shellClass, style: shellStyle }, /* @__PURE__ */ React.createElement("div", { className: "pg-shell-stage pg-shell-stage--embed" }, /* @__PURE__ */ React.createElement(AppLayout.Header, { className: "pg-content-header" }, /* @__PURE__ */ React.createElement(AppLayout.Header.Center, null, title && /* @__PURE__ */ React.createElement("span", { className: "title pg-route-title" }, title)), /* @__PURE__ */ React.createElement(AppLayout.Header.Tools, null, headerEnd)), /* @__PURE__ */ React.createElement("div", { className: "pg-shell-main custom-scrollbar pg-scrollbar" }, children)));
+    }
+    return /* @__PURE__ */ React.createElement("div", { className: shellClass, style: shellStyle }, useDrawer && drawerOpen && /* @__PURE__ */ React.createElement("button", { type: "button", className: "pg-shell-drawer-backdrop", "aria-label": "Cerrar men\xFA", onClick: closeDrawer }), useDrawer && /* @__PURE__ */ React.createElement("div", { className: ["pg-shell-drawer-panel", panelEnd ? "pg-shell-drawer-panel--right" : "pg-shell-drawer-panel--left", drawerOpen && "is-open"].filter(Boolean).join(" "), "aria-hidden": !drawerOpen }, /* @__PURE__ */ React.createElement(SidePanel, { open: true, drawer: true, collapsedView: collapsedPanel, expandedView: expandedPanel, onClose: closeDrawer })), shellHeader, /* @__PURE__ */ React.createElement(
+      AppLayout,
+      {
+        key: gridVariant,
+        variant: gridVariant,
+        fixedSider: showSider,
+        responsive: true,
+        responsiveDrawer: useDrawer,
+        className: "pg-playground-app-layout mimicus-shell",
+        style: { minHeight: 0, flex: "1 1 auto", ...shellStyle }
+      },
+      showSider && !useDrawer && /* @__PURE__ */ React.createElement(AppLayout.Sider, null, /* @__PURE__ */ React.createElement(SidePanel, { open, onToggle: toggleSidebar, collapsedView: collapsedPanel, expandedView: expandedPanel })),
+      /* @__PURE__ */ React.createElement("div", { className: "pg-shell-main custom-scrollbar pg-scrollbar pg-vt-main" }, children)
+    ));
+  }
+
+  // src/devkit/Playground.jsx
+  function Playground({ catalog = [], catalogMeta, sectionsMeta, shellConfig: shellConfigProp, previewTemplates, brand }) {
+    configurePlayground({ catalogMeta, sectionsMeta, shellConfig: shellConfigProp, previewTemplates, brand });
+    const implementedCatalogItems = (0, import_react33.useMemo)(() => (catalog ?? []).filter((it) => {
+      const name = it.definition?.component?.name ?? it.id;
+      return !isStubComponent(name);
+    }), [catalog]);
+    const implementedSections = (0, import_react33.useMemo)(() => sectionsWithItems(implementedCatalogItems), [implementedCatalogItems]);
+    const [navState, setNavState] = (0, import_react33.useState)(() => urlState2.get());
+    const route = (0, import_react33.useMemo)(() => stateToRoute(navState), [navState]);
+    const [sectionOpen, setSectionOpen] = (0, import_react33.useState)(() => Object.fromEntries(implementedSections.map((s) => [s, true])));
+    (0, import_react33.useEffect)(() => {
+      bootPlaygroundAppLayout();
+      document.documentElement.classList.add("pg-playground-doc");
+      bootViewTransitionRoute();
+      const unsub = urlState2.subscribe((s) => {
+        setNavState(s);
+        syncViewTransitionRoute(stateToRoute(s));
+        document.querySelector(".pg-shell-main")?.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      syncViewTransitionRoute(stateToRoute(urlState2.get()));
+      return () => {
+        unsub();
+        document.documentElement.classList.remove("pg-playground-doc");
+      };
+    }, []);
+    const isPaletteLabView = navState.p === "palette";
+    const embedMode = isEmbedView(navState);
+    const isCatalogView = !isPaletteLabView && route.category == null && route.slug == null;
+    const isSectionView = !isCatalogView && route.category != null && !route.slug;
+    const filteredItems = (0, import_react33.useMemo)(() => {
+      if (!route.category || isCatalogView) return [];
+      const inSection = itemsInSection(implementedCatalogItems, route.category);
+      if (!route.slug) return inSection;
+      return inSection.filter((i) => i.slug === route.slug);
+    }, [route, isCatalogView, implementedCatalogItems]);
+    const routeTitle = isPaletteLabView ? "Paleta & Look" : isCatalogView ? MIMICUS_UI.catalogLabel ?? "Components Overview" : !route.slug ? sectionLabel(route.category) ?? route.category : `${sectionLabel(route.category)} / ${filteredItems[0]?.displayLabel ?? route.slug}`;
+    (0, import_react33.useEffect)(() => {
+      document.title = mimicusPageTitle(routeTitle);
+    }, [routeTitle]);
+    (0, import_react33.useEffect)(() => {
+      if (route.category && route.slug) {
+        setSectionOpen((prev) => ({ ...prev, [route.category]: true }));
+      }
+    }, [route.category, route.slug]);
+    const cfg = shellConfig();
+    const panelCtx = (0, import_react33.useMemo)(() => ({
+      route,
+      catalog: catalogMeta,
+      catalogItems: implementedCatalogItems,
+      categories: implementedSections,
+      sectionOrder: sectionOrder(),
+      sectionColors: sectionColors(),
+      sectionOpen,
+      setSectionOpen,
+      isPaletteLabView,
+      isCatalogView,
+      onHome: () => setNav(null),
+      onPalette: () => setPaletteLab(),
+      onCategory: (cat) => setNav(cat),
+      onDemo: (cat, slug) => setNav(cat, slug),
+      getDemoIcon: (it) => getDemoIcon(it.id, it)
+    }), [route, sectionOpen, isPaletteLabView, isCatalogView, implementedCatalogItems, implementedSections, catalogMeta]);
+    const collapsedPanel = /* @__PURE__ */ React.createElement(PlaygroundJsonPanel, { node: cfg.views?.collapsed, ctx: panelCtx });
+    const expandedPanel = /* @__PURE__ */ React.createElement(PlaygroundJsonPanel, { node: cfg.views?.expanded, ctx: panelCtx });
+    return /* @__PURE__ */ React.createElement(
+      PlaygroundAppShell,
+      {
+        brandTitle: MIMICUS_UI.name,
+        onBrandClick: () => setNav(null),
+        headerCenter: routeTitle ? /* @__PURE__ */ React.createElement("span", { className: "title pg-route-title pg-shell-route-title pg-vt-header" }, routeTitle) : null,
+        headerTools: /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(FpsCounter, null), /* @__PURE__ */ React.createElement(HeaderSkinBar, null)),
+        shellNavigation: /* @__PURE__ */ React.createElement(ShellHeaderNav, { shellConfig: cfg, ctx: panelCtx, onTab: (id) => dispatchShellNav(id, panelCtx, cfg) }),
+        collapsedPanel,
+        expandedPanel,
+        embedMode
+      },
+      isPaletteLabView && /* @__PURE__ */ React.createElement(ThemeLab, null),
+      isCatalogView && /* @__PURE__ */ React.createElement(
+        CatalogHome,
+        {
+          items: implementedCatalogItems,
+          onSelect: (section, slug) => setNav(section, slug),
+          onOpenPaletteLab: () => setPaletteLab()
+        }
+      ),
+      isSectionView && route.category && /* @__PURE__ */ React.createElement(
+        CatalogHome,
+        {
+          filterSection: route.category,
+          items: implementedCatalogItems,
+          onSelect: (section, slug) => setNav(section, slug)
+        }
+      ),
+      !isPaletteLabView && !isCatalogView && !isSectionView && /* @__PURE__ */ React.createElement("div", { className: "pg-vt-demo pg-demo-doc-page" }, filteredItems.map((it) => /* @__PURE__ */ React.createElement(DemoPage, { key: `${it.section}/${it.slug}`, definition: it.definition })), filteredItems.length === 0 && /* @__PURE__ */ React.createElement("p", { className: "catalog-home__lead" }, "No hay demos para esta ruta."))
+    );
   }
 
   // src/index.jsx

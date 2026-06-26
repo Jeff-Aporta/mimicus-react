@@ -1,3 +1,8 @@
+/**
+ * Card — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/card.css
+ * Contenedor base de tarjeta (caja con bordes redondeados).
+ */
 .card-root {
 	box-sizing: border-box;
 	border-radius: 0.5rem;

@@ -1,0 +1,11 @@
+/**
+ * Base (display) — CSS
+ * demo: demo/config/demos/lib/_base.json
+ * llm:  ./_base.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/_base.css
+ * Reglas compartidas del contenedor de previsualización de componentes display.
+ */
+.mimicus-display-preview { width: 100%; max-width: 100%; }
+
+.mimicus-nav-preview.mimicus-display-preview,
+.mimicus-form-preview.mimicus-display-preview { padding: 0.25rem 0; }

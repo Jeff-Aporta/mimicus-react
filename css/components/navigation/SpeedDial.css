@@ -1,0 +1,15 @@
+/**
+ * SpeedDial (navigation) — CSS
+ * demo: demo/config/demos/lib/SpeedDial.json
+ * llm:  ./SpeedDial.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/SpeedDial.css
+ * Botón flotante con acciones que se despliegan en distintas direcciones y tooltip.
+ */
+.mimicus-speed-dial { position: relative; display: inline-flex; flex-direction: column; align-items: center; }
+.mimicus-speed-dial__actions { display: flex; flex-direction: column-reverse; gap: 0.5rem; margin-bottom: 0.5rem; opacity: 0; transform: translateY(0.5rem); pointer-events: none; transition: opacity .2s, transform .2s; }
+.mimicus-speed-dial.is-open .mimicus-speed-dial__actions { opacity: 1; transform: none; pointer-events: auto; }
+.mimicus-speed-dial--left .mimicus-speed-dial__actions, .mimicus-speed-dial--right .mimicus-speed-dial__actions { flex-direction: row; }
+.mimicus-speed-dial__trigger { width: 3.25rem; height: 3.25rem; border-radius: 999px; border: none; background: var(--mimicus-primary, #1677ff); color: var(--mimicus-on-primary); font-size: 1.35rem; cursor: pointer; box-shadow: 0 4px 14px color-mix(in srgb, var(--mimicus-primary, #1677ff) 45%, transparent); }
+.mimicus-speed-dial__action { position: relative; width: 2.5rem; height: 2.5rem; border-radius: 999px; border: none; background: var(--mimicus-surface, #fff); box-shadow: 0 2px 10px rgba(0,0,0,.12); cursor: pointer; display: grid; place-items: center; }
+.mimicus-speed-dial__tooltip { position: absolute; right: calc(100% + 0.5rem); white-space: nowrap; font-size: 0.75rem; padding: 0.2rem 0.45rem; border-radius: 0.25rem; background: rgba(0,0,0,.75); color: #fff; opacity: 0; pointer-events: none; transition: opacity .15s; }
+.mimicus-speed-dial__action:hover .mimicus-speed-dial__tooltip { opacity: 1; }

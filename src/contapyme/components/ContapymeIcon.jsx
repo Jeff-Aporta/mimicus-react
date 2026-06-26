@@ -4,8 +4,8 @@ export function ContapymeIcon({ icon, size = 20, className, style, ...rest }) {
       icon={icon}
       width={size}
       height={size}
-      class={className}
-      style={{ display: "inline-flex", verticalAlign: "middle", ...style }}
+      className={className}
+      style={{ display: "inline-flex", verticalAlign: "middle", ...(style && typeof style === "object" ? style : {}) }}
       {...rest}
     />
   );

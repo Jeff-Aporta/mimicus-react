@@ -1,59 +1,70 @@
-/* Divider — Ant Design + glow neon Mimicus */
+/**
+ * Divider — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/divider.css
+ * Divisor Ant Design (horizontal/vertical) con variante glow neón Mimicus.
+ */
 
 .is-divider {
 	box-sizing: border-box;
-	--is-divider-color: rgba(136, 136, 136, 0.33);
+	--is-divider-color: color-mix(in srgb, var(--mimicus-color) 28%, transparent);
 	--is-divider-edge: 5%;
-}
 
-.is-divider--horizontal {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	clear: both;
-	min-width: 0;
-}
+	&--horizontal {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		clear: both;
+		min-width: 0;
+	}
 
-.is-divider--vertical {
-	display: inline-flex;
-	align-self: stretch;
-	min-height: 1em;
-	height: auto;
-	vertical-align: middle;
-	flex-shrink: 0;
+	&--vertical {
+		display: inline-flex;
+		align-self: stretch;
+		min-height: 1em;
+		height: auto;
+		vertical-align: middle;
+		flex-shrink: 0;
+	}
+
+	&--solid .is-divider__rail { border-style: solid; }
+	&--dashed .is-divider__rail { border-style: dashed; }
+	&--dotted .is-divider__rail { border-style: dotted; }
+
+	&--horizontal .is-divider__rail { border-top-width: 1px; }
+
+	&--horizontal .is-divider__rail--solo,
+	&--horizontal .is-divider__rail--before,
+	&--horizontal .is-divider__rail--after {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	&--horizontal.is-divider--title-start .is-divider__rail--before {
+		flex: 0 1 var(--is-divider-edge);
+	}
+
+	&--horizontal.is-divider--title-end .is-divider__rail--after {
+		flex: 0 1 var(--is-divider-edge);
+	}
+
+	&--vertical .is-divider__rail--solo-vertical {
+		width: 0;
+		height: 100%;
+		min-height: 1em;
+		border-left-width: 1px;
+		align-self: stretch;
+	}
+
+	&--plain .is-divider__content {
+		font-size: 0.875rem;
+		font-weight: 400;
+	}
+
+	&--vertical .is-divider__content { display: none; }
 }
 
 .is-divider__rail {
 	border-color: var(--is-divider-color);
-}
-
-.is-divider--solid .is-divider__rail { border-style: solid; }
-.is-divider--dashed .is-divider__rail { border-style: dashed; }
-.is-divider--dotted .is-divider__rail { border-style: dotted; }
-
-.is-divider--horizontal .is-divider__rail { border-top-width: 1px; }
-
-.is-divider--horizontal .is-divider__rail--solo,
-.is-divider--horizontal .is-divider__rail--before,
-.is-divider--horizontal .is-divider__rail--after {
-	flex: 1 1 auto;
-	min-width: 0;
-}
-
-.is-divider--horizontal.is-divider--title-start .is-divider__rail--before {
-	flex: 0 1 var(--is-divider-edge);
-}
-
-.is-divider--horizontal.is-divider--title-end .is-divider__rail--after {
-	flex: 0 1 var(--is-divider-edge);
-}
-
-.is-divider--vertical .is-divider__rail--solo-vertical {
-	width: 0;
-	height: 100%;
-	min-height: 1em;
-	border-left-width: 1px;
-	align-self: stretch;
 }
 
 .is-divider__content {
@@ -66,13 +77,6 @@
 	color: var(--mimicus-color, inherit);
 	max-width: 100%;
 }
-
-.is-divider--plain .is-divider__content {
-	font-size: 0.875rem;
-	font-weight: 400;
-}
-
-.is-divider--vertical .is-divider__content { display: none; }
 
 html:not([data-looknfeel^="neon-"]) .is-divider--glow.is-divider--horizontal .is-divider__rail {
 	border-top-width: 1px;

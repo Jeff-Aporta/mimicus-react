@@ -1,4 +1,8 @@
-/* Panel JSON — vista rail (colapsado): solo iconos de categoría */
+/**
+ * pg-panel-rail (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/pg-panel-rail.css
+ * Panel JSON — vista rail (colapsado): solo iconos de categoría.
+ */
 
 .pg-sidebar-body--rail {
 	padding: 0;
@@ -16,14 +20,14 @@
 	min-width: 0 !important;
 	padding-inline: 0.2rem !important;
 	border-radius: var(--mimicus-ui-radius, 0.5rem);
-}
 
-.pg-panel-rail__btn :is(.sm-label, .sm-item-text, .sm-title-group, .sm-trail, .fps-histogram-chip__unit) {
-	display: none !important;
-}
+	& :is(.sm-label, .sm-item-text, .sm-title-group, .sm-trail, .fps-histogram-chip__unit) {
+		display: none !important;
+	}
 
-.pg-panel-rail__btn .sm-item-label {
-	gap: 0;
+	& .sm-item-label {
+		gap: 0;
+	}
 }
 
 .pg-playground-shell.is-collapsed .pg-sidebar .sm-section,

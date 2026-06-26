@@ -3,6 +3,12 @@
  * Requiere `data-surface-color` o `--surface-accent` inline para colores arbitrarios.
  */
 
+/* Texto auto-contrastado sobre relleno de acento (bg2font: negro/blanco según luminancia).
+   Úsalo en cualquier superficie rellena con --mimicus-primary para legibilidad en toda paleta/modo. */
+html {
+	--mimicus-on-primary: oklch(from var(--mimicus-primary) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
+}
+
 [data-surface-color="neutral"] { --surface-accent: color-mix(in srgb, var(--mimicus-color) 62%, transparent); }
 
 [data-surface-color="primary"],
@@ -41,12 +47,13 @@ button[data-variant],
 	--bttn-l-ctv-bg: color-mix(in srgb, var(--bttn-clr), transparent 30%);
 	--bttn-txt-hvr-fg: color-mix(in srgb, var(--bttn-ccnt-clr), white 12%);
 	--bttn-txt-ctv-fg: color-mix(in srgb, var(--bttn-ccnt-clr), white 30%);
-	--bttn-sft-bg: color-mix(in srgb, var(--bttn-clr), transparent 15%);
-	--bttn-sft-bg-hvr: color-mix(in srgb, var(--bttn-clr), transparent 30%);
-	--bttn-sft-bg-ctv: color-mix(in srgb, var(--bttn-clr), transparent 45%);
-	--bttn-sft-fnt: color-mix(in srgb, var(--bttn-clr) 15%, var(--mimicus-bg-secondary));
-	--bttn-sft-fnt-hvr: color-mix(in srgb, var(--bttn-clr) 30%, var(--mimicus-bg-secondary));
-	--bttn-sft-fnt-ctv: color-mix(in srgb, var(--bttn-clr) 45%, var(--mimicus-bg-secondary));
+	/* Soft = tinte alpha tenue de acento + texto de acento fuerte (legible sobre la superficie). */
+	--bttn-sft-bg: color-mix(in srgb, var(--bttn-clr) 18%, transparent);
+	--bttn-sft-bg-hvr: color-mix(in srgb, var(--bttn-clr) 28%, transparent);
+	--bttn-sft-bg-ctv: color-mix(in srgb, var(--bttn-clr) 40%, transparent);
+	--bttn-sft-fnt: color-mix(in srgb, var(--bttn-clr) 88%, var(--mimicus-color));
+	--bttn-sft-fnt-hvr: color-mix(in srgb, var(--bttn-clr) 94%, var(--mimicus-color));
+	--bttn-sft-fnt-ctv: var(--bttn-clr);
 }
 
 /* Text/ghost hover en oscuro: fondo teñido sobre chrome (no velo claro sobre transparente). */

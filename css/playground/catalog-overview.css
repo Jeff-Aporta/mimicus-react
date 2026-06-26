@@ -1,4 +1,8 @@
-/* Overview estilo Ant/MUI — grid, TOC y búsqueda */
+/**
+ * catalog-overview (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/catalog-overview.css
+ * Overview estilo Ant/MUI — grid, TOC y búsqueda.
+ */
 
 .catalog-overview {
 	display: grid;
@@ -74,11 +78,11 @@
 	font: inherit;
 	font-size: 0.9rem;
 	outline: none;
-}
 
-.catalog-search__input::placeholder {
-	color: var(--catalog-muted);
-	opacity: 0.85;
+	&::placeholder {
+		color: var(--catalog-muted);
+		opacity: 0.85;
+	}
 }
 
 .catalog-toc {
@@ -115,11 +119,11 @@
 	text-decoration: none;
 	border-bottom: 1px solid transparent;
 	transition: color 0.15s ease;
-}
 
-.catalog-toc__link:hover,
-.catalog-toc__link.is-active {
-	color: var(--mimicus-primary);
+	&:hover,
+	&.is-active {
+		color: var(--mimicus-primary);
+	}
 }
 
 .catalog-toc__count {

@@ -1,0 +1,17 @@
+/**
+ * Tag (display) — CSS
+ * demo: demo/config/demos/lib/Tag.json
+ * llm:  ./Tag.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/Tag.css
+ * Etiqueta compacta con variantes de forma, relleno y cierre.
+ */
+.mimicus-tag { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.15rem 0.55rem; border-radius: 0.35rem; font-size: 0.78rem; line-height: 1.35; border: 1px solid var(--mimicus-border); background: color-mix(in srgb, var(--mimicus-color) 5%, transparent); }
+.mimicus-tag--pill { border-radius: 999px; }
+.mimicus-tag--round { border-radius: 0.65rem; }
+.mimicus-tag--rect { border-radius: 0.2rem; }
+.mimicus-tag--solid { background: var(--mimicus-primary); border-color: transparent; color: var(--mimicus-on-primary); }
+.mimicus-tag--outlined { background: transparent; border-color: var(--mimicus-primary); color: var(--mimicus-primary); }
+.mimicus-tag--ghost { background: color-mix(in srgb, var(--mimicus-color) 7%, transparent); }
+.mimicus-tag--glass { backdrop-filter: blur(8px); background: color-mix(in srgb, var(--mimicus-color) 8%, transparent); }
+.mimicus-tag--upper { text-transform: uppercase; letter-spacing: 0.04em; }
+.mimicus-tag__close { border: 0; background: transparent; cursor: pointer; opacity: 0.7; padding: 0 0.1rem; font-size: 0.9rem; line-height: 1; }

@@ -1,0 +1,23 @@
+/**
+ * Drawer (navigation) — CSS
+ * demo: demo/config/demos/lib/Drawer.json
+ * llm:  ./Drawer.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Drawer.css
+ * Panel deslizante desde cualquier borde con backdrop, header/body/footer y preview embebido.
+ */
+.mimicus-drawer { position: fixed; inset: 0; z-index: 1200; pointer-events: none; }
+.mimicus-drawer.is-open { pointer-events: auto; }
+.mimicus-drawer__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.45); opacity: 0; transition: opacity .25s; }
+.mimicus-drawer.is-open .mimicus-drawer__backdrop { opacity: 1; }
+.mimicus-drawer__panel { position: absolute; top: 0; bottom: 0; width: var(--mimicus-drawer-size, 280px); max-width: 92vw; display: flex; flex-direction: column; background: var(--mimicus-surface, #fff); box-shadow: 0 8px 32px rgba(0,0,0,.18); transition: transform .28s ease; }
+.mimicus-drawer--left .mimicus-drawer__panel { left: 0; transform: translateX(-100%); }
+.mimicus-drawer--right .mimicus-drawer__panel { right: 0; transform: translateX(100%); }
+.mimicus-drawer--top .mimicus-drawer__panel { top: 0; left: 0; right: 0; width: auto; height: var(--mimicus-drawer-size, 280px); transform: translateY(-100%); }
+.mimicus-drawer--bottom .mimicus-drawer__panel { bottom: 0; top: auto; left: 0; right: 0; width: auto; height: var(--mimicus-drawer-size, 280px); transform: translateY(100%); }
+.mimicus-drawer.is-open .mimicus-drawer__panel { transform: translate(0); }
+.mimicus-drawer__header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-bottom: 1px solid var(--mimicus-border, rgba(0,0,0,.08)); font-weight: 600; }
+.mimicus-drawer__close { border: none; background: transparent; font-size: 1.25rem; line-height: 1; cursor: pointer; opacity: 0.65; }
+.mimicus-drawer__body { flex: 1; overflow: auto; padding: 1rem; }
+.mimicus-drawer__footer { padding: 0.75rem 1rem; border-top: 1px solid var(--mimicus-border, rgba(0,0,0,.08)); }
+.mimicus-drawer-preview { position: relative; min-height: 12rem; border: 1px solid var(--mimicus-border, rgba(0,0,0,.1)); border-radius: 0.5rem; overflow: hidden; }
+.mimicus-drawer-preview .mimicus-drawer { position: absolute; }

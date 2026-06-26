@@ -1,4 +1,8 @@
-/* Catálogo — estructura (paridad CatalogHome.svelte) */
+/**
+ * catalog-home (playground) — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/playground/catalog-home.css
+ * Catálogo — estructura (hero, secciones navegables, grid; paridad CatalogHome.svelte).
+ */
 
 .catalog-home {
 	box-sizing: border-box;
@@ -60,22 +64,22 @@
 	cursor: pointer;
 	font: inherit;
 	transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
-}
 
-.catalog-section__nav:hover {
-	border-color: var(--catalog-section-nav-hover-border);
-	background: var(--catalog-section-nav-hover-bg);
-	box-shadow: var(--catalog-section-nav-hover-shadow);
-	transform: translateY(-1px);
-}
+	&:hover {
+		border-color: var(--catalog-section-nav-hover-border);
+		background: var(--catalog-section-nav-hover-bg);
+		box-shadow: var(--catalog-section-nav-hover-shadow);
+		transform: translateY(-1px);
+	}
 
-.catalog-section__nav:focus-visible {
-	outline: 2px solid var(--catalog-section-nav-focus);
-	outline-offset: 2px;
-}
+	&:focus-visible {
+		outline: 2px solid var(--catalog-section-nav-focus);
+		outline-offset: 2px;
+	}
 
-.catalog-section__nav:active {
-	transform: translateY(0);
+	&:active {
+		transform: translateY(0);
+	}
 }
 
 .catalog-section__icon {
@@ -130,10 +134,10 @@
 	.catalog-grid {
 		grid-template-columns: repeat(var(--catalog-grid-cols, 3), minmax(0, 1fr));
 		gap: 1.05rem;
-	}
 
-	.catalog-grid > .catalog-card {
-		max-width: 100%;
+		& > .catalog-card {
+			max-width: 100%;
+		}
 	}
 }
 

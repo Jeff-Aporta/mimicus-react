@@ -1,3 +1,10 @@
+/**
+ * ImageList — isla: layout
+ * demo: demo/config/demos/lib/ImageList.json
+ * llm:  ./ImageList.llm.md
+ * repo: Jeff-Aporta/mimicus-react · src/layout/ImageList.jsx
+ * Cuadrícula de imágenes estilo MUI (standard/masonry/quilted); expone ImageList.Item con cols/rows span.
+ */
 import { joinStyle } from "./layoutHelpers.js";
 
 function resolveGap(gap) {

@@ -1,0 +1,9 @@
+/**
+ * QRCode (display) — CSS
+ * demo: demo/config/demos/lib/QRCode.json
+ * llm:  ./QRCode.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/display/QRCode.css
+ * Contenedor de código QR con variante bordeada.
+ */
+.mimicus-qrcode { display: inline-block; line-height: 0; }
+.mimicus-qrcode--bordered { padding: 0.35rem; border: 1px solid var(--mimicus-border); border-radius: 0.35rem; background: #fff; }

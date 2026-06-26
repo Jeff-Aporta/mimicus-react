@@ -1,0 +1,9 @@
+/**
+ * Base (navigation) — CSS
+ * demo: demo/config/demos/lib/_base.json
+ * llm:  ./_base.llm.md
+ * repo: Jeff-Aporta/mimicus-react · css/components/navigation/_base.css
+ * Contenedor base de los previews de navegación del playground.
+ */
+/* Playground nav previews */
+.mimicus-nav-preview { width: 100%; max-width: 100%; }
