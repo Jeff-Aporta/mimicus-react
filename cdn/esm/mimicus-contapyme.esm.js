@@ -5800,7 +5800,7 @@ function Steps({ current = 0, direction = "horizontal", clickable, items, classN
 }
 Steps.Step = Step;
 var Stepper = Steps;
-function Drawer({ open = false, placement = "left", width = 280, title, footer, className, style, children, onClose, ...rest }) {
+function Drawer({ open = false, placement = "right", width = 280, title, footer, className, style, children, onClose, ...rest }) {
   const ref = useRef7(null);
   useNavBinding(ref, "drawer", [open, placement, width]);
   useEffect12(() => {
@@ -5983,6 +5983,10 @@ function Dialog({
     blockCloseClickRef.current = isBlockCloseClick(e.target);
     onMouseDown?.(e);
   };
+  const isBackdropClick = (target) => {
+    if (target === ref.current) return true;
+    return target instanceof HTMLElement && target.classList.contains("mimicus-action-drawer__wrap");
+  };
   const handleClick = async (e) => {
     onClick?.(e);
     if (loading) return;
@@ -5990,7 +5994,7 @@ function Dialog({
       blockCloseClickRef.current = false;
       return;
     }
-    if (e.target !== ref.current) return;
+    if (!isBackdropClick(e.target)) return;
     if (notClose) {
       const force = await Promise.resolve(onCloseCancel?.(e.nativeEvent));
       if (!force) return;

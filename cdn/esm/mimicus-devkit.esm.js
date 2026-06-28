@@ -4952,7 +4952,7 @@ function Steps({ current = 0, direction = "horizontal", clickable, items, classN
   );
 }
 Steps.Step = Step;
-function Drawer({ open = false, placement = "left", width = 280, title, footer, className, style, children, onClose, ...rest }) {
+function Drawer({ open = false, placement = "right", width = 280, title, footer, className, style, children, onClose, ...rest }) {
   const ref = useRef7(null);
   useNavBinding(ref, "drawer", [open, placement, width]);
   useEffect12(() => {
@@ -5134,6 +5134,10 @@ function Dialog({
     blockCloseClickRef.current = isBlockCloseClick(e.target);
     onMouseDown?.(e);
   };
+  const isBackdropClick = (target) => {
+    if (target === ref.current) return true;
+    return target instanceof HTMLElement && target.classList.contains("mimicus-action-drawer__wrap");
+  };
   const handleClick = async (e) => {
     onClick?.(e);
     if (loading) return;
@@ -5141,7 +5145,7 @@ function Dialog({
       blockCloseClickRef.current = false;
       return;
     }
-    if (e.target !== ref.current) return;
+    if (!isBackdropClick(e.target)) return;
     if (notClose) {
       const force = await Promise.resolve(onCloseCancel?.(e.nativeEvent));
       if (!force) return;
@@ -8227,7 +8231,6 @@ var demoIcons = {
   Text: "mdi:format-text",
   Chip: "mdi:tag-outline",
   CheckboxChip: "mdi:checkbox-multiple-blank-circle-outline",
-  Dialog: "mdi:message-text-outline",
   Accordion: "mdi:unfold-more-horizontal",
   Tabs: "mdi:tab",
   Toaster: "mdi:bell-badge-outline",
@@ -8846,7 +8849,6 @@ var SKETCHES = {
   InvokedFloater: DrawerSketch,
   FloatingComponent: DrawerSketch,
   Modal: ModalSketch,
-  Dialog: ModalSketch,
   Alert: AlertSketch,
   Toaster: AlertSketch,
   TipInfo: AlertSketch,
@@ -9399,21 +9401,57 @@ function DemoConfigRenderer({ fields, state: state2, onStateChange }) {
     ] }));
   });
 }
+function formatApiDefault(value) {
+  if (value === void 0) return "\u2014";
+  if (value === null) return "null";
+  if (typeof value === "boolean") return String(value);
+  if (typeof value === "number") return String(value);
+  if (typeof value === "string") return value === "" ? '""' : value;
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+}
+function resolveApiDefault(field, values, { switchFallback = false } = {}) {
+  if (field.attrDefault !== void 0) return field.attrDefault;
+  if (field.key != null && Object.prototype.hasOwnProperty.call(values, field.key)) return values[field.key];
+  if (switchFallback || field.kind === "switch") return false;
+  return void 0;
+}
 function ApiTable({ adapter }) {
+  const state2 = adapter?.initialState?.() ?? {};
+  const details = adapter?.initialDetails?.() ?? {};
+  const demoConfig = adapter?.initialDemoConfig?.() ?? {};
   const rows = [];
-  const pushField = (f) => {
-    if (!f || f.kind === "icon-text") return;
+  const pushField = (f, values) => {
+    if (!f || f.kind === "icon-text" || f.attrOmit) return;
     if (f.kind === "switch-group") {
-      for (const sw of f.switches ?? []) rows.push({ name: sw.attrName ?? sw.key, desc: sw.label, type: sw.attrType ?? "boolean", def: sw.attrDefault ?? "false" });
+      for (const sw of f.switches ?? []) {
+        if (sw.attrOmit) continue;
+        rows.push({
+          name: sw.attrName ?? sw.key,
+          desc: sw.label,
+          type: sw.attrType ?? "boolean",
+          def: formatApiDefault(resolveApiDefault(sw, values, { switchFallback: true }))
+        });
+      }
       return;
     }
     if (f.kind === "select-enum-row") {
-      for (const sub of f.selects ?? []) pushField(sub);
+      for (const sub of f.selects ?? []) pushField(sub, values);
       return;
     }
-    rows.push({ name: f.attrName ?? f.key, desc: f.label, type: f.attrType ?? f.kind, def: f.attrDefault ?? "\u2014" });
+    rows.push({
+      name: f.attrName ?? f.key,
+      desc: f.label,
+      type: f.attrType ?? f.kind,
+      def: formatApiDefault(resolveApiDefault(f, values))
+    });
   };
-  for (const f of [...adapter?.fields?.() ?? [], ...adapter?.detailFields?.() ?? [], ...adapter?.demoConfigFields?.() ?? []]) pushField(f);
+  for (const f of adapter?.fields?.() ?? []) pushField(f, state2);
+  for (const f of adapter?.detailFields?.() ?? []) pushField(f, details);
+  for (const f of adapter?.demoConfigFields?.() ?? []) pushField(f, demoConfig);
   if (!rows.length) return null;
   return /* @__PURE__ */ jsx49("div", { className: "pg-api-table-wrap", children: /* @__PURE__ */ jsxs30("table", { className: "pg-api-table", children: [
     /* @__PURE__ */ jsx49("thead", { children: /* @__PURE__ */ jsxs30("tr", { children: [
@@ -9781,7 +9819,6 @@ function buildCodeFromStrategy(strategy, ctx, state2, details, demoStyle, demoCl
     case "disp-tree":
       return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
     case "modal":
-    case "dialog":
     case "action-drawer":
     case "loading":
     case "toaster":
@@ -10164,7 +10201,7 @@ function DrawerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
   }, [state2.defaultOpen]);
   return /* @__PURE__ */ jsxs32("div", { className: ["mimicus-drawer-preview", "mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: [
     /* @__PURE__ */ jsx51(Button, { variant: "solid", onClick: () => setOpen(true), children: "Abrir drawer" }),
-    /* @__PURE__ */ jsx51(Drawer, { open, placement: state2.placement ?? "left", width: Math.round(Number(state2.width)) || 280, title: "Panel lateral", onClose: () => setOpen(false), children: /* @__PURE__ */ jsx51("p", { style: { margin: 0, fontSize: "0.9rem" }, children: "Contenido del drawer. Clic fuera o Escape para cerrar (controlador vanilla)." }) })
+    /* @__PURE__ */ jsx51(Drawer, { open, placement: state2.placement ?? "right", width: Math.round(Number(state2.width)) || 280, title: "Panel lateral", onClose: () => setOpen(false), children: /* @__PURE__ */ jsx51("p", { style: { margin: 0, fontSize: "0.9rem" }, children: "Contenido del drawer. Clic fuera o Escape para cerrar (controlador vanilla)." }) })
   ] }, previewKey);
 }
 function BottomNavPreview({ state: state2, previewKey, demoStyle, demoClass }) {
@@ -10512,23 +10549,6 @@ function ModalPreview({ state: state2, details, previewKey, demoStyle, demoClass
   ] });
   return localShell ? /* @__PURE__ */ jsx51("div", { className: ["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey) : /* @__PURE__ */ jsx51("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey);
 }
-function DialogPreview({ state: state2, previewKey, demoStyle, demoClass, details }) {
-  const [open, setOpen] = useState16(false);
-  const scope = state2._scope ?? "global";
-  const localShell = scope === "local";
-  const body = /* @__PURE__ */ jsxs32(Fragment10, { children: [
-    /* @__PURE__ */ jsx51(Button, { variant: "solid", onClick: () => setOpen(true), children: "Abrir dialog" }),
-    /* @__PURE__ */ jsx51(Dialog, { open, notClose: Boolean(state2.notClose), backeffect: state2.backeffect ?? "blur", onClose: () => setOpen(false), ...overlayScopeProps(scope), className: "mimicus-dialog-demo", children: /* @__PURE__ */ jsxs32(Card, { variant: "flat", className: "blockCloseClick", style: { padding: "1rem", minWidth: "16rem" }, children: [
-      /* @__PURE__ */ jsx51("strong", { style: { display: "block", marginBottom: "0.35rem" }, children: details.titulo ?? "Dialog demo" }),
-      /* @__PURE__ */ jsxs32("p", { style: { margin: 0, fontSize: "0.9rem" }, children: [
-        "Di\xE1logo nativo ",
-        /* @__PURE__ */ jsx51("code", { children: "<dialog>" }),
-        " con backdrop configurable."
-      ] })
-    ] }) })
-  ] });
-  return localShell ? /* @__PURE__ */ jsx51("div", { className: ["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey) : /* @__PURE__ */ jsx51("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey);
-}
 function ActionDrawerPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
   const [open, setOpen] = useState16(false);
   const [loading, setLoading] = useState16(false);
@@ -10653,7 +10673,6 @@ var previewBuiltins = {
   "cmp-code-block": CodeBlockPreview,
   "contapyme-login": LoginButtonPreview,
   modal: ModalPreview,
-  dialog: DialogPreview,
   "action-drawer": ActionDrawerPreview,
   loading: LoadingPreview,
   toaster: ToasterPreview,

@@ -22,7 +22,7 @@ const demoIcons = {
   Container: "mdi:page-layout-body", Stack: "mdi:view-agenda-outline", Space: "mdi:arrow-expand-horizontal", Masonry: "mdi:view-dashboard-variant", ImageList: "mdi:image-multiple-outline",
   ActionDrawer: "mdi:dock-right", Loading: "mdi:loading", Modal: "mdi:application-outline", Headings: "mdi:format-header-pound",
   Iconify: "mdi:emoticon-outline", Text: "mdi:format-text", Chip: "mdi:tag-outline", CheckboxChip: "mdi:checkbox-multiple-blank-circle-outline",
-  Dialog: "mdi:message-text-outline", Accordion: "mdi:unfold-more-horizontal", Tabs: "mdi:tab", Toaster: "mdi:bell-badge-outline",
+  Accordion: "mdi:unfold-more-horizontal", Tabs: "mdi:tab", Toaster: "mdi:bell-badge-outline",
   Tooltip: "mdi:tooltip-text-outline", CodeBlock: "mdi:code-tags", Anchor: "mdi:anchor",
   TransferBoard: "mdi:view-column-outline", Splitter: "mdi:arrow-split-vertical", Divider: "mdi:minus", AppLayout: "mdi:view-dashboard-outline", SidePanel: "mdi:dock-left",
   Separator: "mdi:minus", Alert: "mdi:alert-circle-outline", TipInfo: "mdi:information-outline", FlexOptions: "mdi:dots-horizontal-circle-outline",
@@ -774,7 +774,7 @@ const SKETCHES = {
   Steps: StepsSketch, Stepper: StepsSketch, BottomNavigation: BottomNavSketch, SpeedDial: SpeedDialSketch,
   // Overlays
   Drawer: DrawerSketch, ActionDrawer: DrawerSketch, InvokedFloater: DrawerSketch, FloatingComponent: DrawerSketch,
-  Modal: ModalSketch, Dialog: ModalSketch, Alert: AlertSketch, Toaster: AlertSketch, TipInfo: AlertSketch,
+  Modal: ModalSketch, Alert: AlertSketch, Toaster: AlertSketch, TipInfo: AlertSketch,
   Tooltip: TooltipSketch, Tour: TourSketch,
   // Display
   Badge: BadgeSketch, Tag: BadgeSketch, Chip: BadgeSketch, Avatar: AvatarSketch, Table: TableSketch, DataGrid: DataGridSketch,

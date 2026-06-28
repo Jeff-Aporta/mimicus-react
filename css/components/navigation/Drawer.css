@@ -9,7 +9,7 @@
 .mimicus-drawer.is-open { pointer-events: auto; }
 .mimicus-drawer__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.45); opacity: 0; transition: opacity .25s; }
 .mimicus-drawer.is-open .mimicus-drawer__backdrop { opacity: 1; }
-.mimicus-drawer__panel { position: absolute; top: 0; bottom: 0; width: var(--mimicus-drawer-size, 280px); max-width: 92vw; display: flex; flex-direction: column; background: var(--mimicus-surface, #fff); box-shadow: 0 8px 32px rgba(0,0,0,.18); transition: transform .28s ease; }
+.mimicus-drawer__panel { position: absolute; top: 0; bottom: 0; width: var(--mimicus-drawer-size, 280px); max-width: 92vw; display: flex; flex-direction: column; background: var(--mimicus-surface, #fff); box-shadow: 0 8px 32px rgba(0,0,0,.18); transition: transform .28s ease; border-radius: 0; }
 .mimicus-drawer--left .mimicus-drawer__panel { left: 0; transform: translateX(-100%); }
 .mimicus-drawer--right .mimicus-drawer__panel { right: 0; transform: translateX(100%); }
 .mimicus-drawer--top .mimicus-drawer__panel { top: 0; left: 0; right: 0; width: auto; height: var(--mimicus-drawer-size, 280px); transform: translateY(-100%); }

@@ -656,7 +656,7 @@ function Steps({ current = 0, direction = "horizontal", clickable, items, classN
 }
 Steps.Step = Step;
 var Stepper = Steps;
-function Drawer({ open = false, placement = "left", width = 280, title, footer, className, style, children, onClose, ...rest }) {
+function Drawer({ open = false, placement = "right", width = 280, title, footer, className, style, children, onClose, ...rest }) {
   const ref = useRef(null);
   useNavBinding(ref, "drawer", [open, placement, width]);
   useEffect2(() => {

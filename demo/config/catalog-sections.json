@@ -87,7 +87,6 @@
     "Drawer": "overlays",
     "Alert": "overlays",
     "Modal": "overlays",
-    "Dialog": "overlays",
     "ActionDrawer": "overlays",
     "Loading": "overlays",
     "Toaster": "overlays",

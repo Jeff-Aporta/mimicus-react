@@ -312,7 +312,7 @@ export const items = [
         "template": "nav-drawer"
       },
       "state": {
-        "placement": "left",
+        "placement": "right",
         "width": 280,
         "defaultOpen": false
       },
@@ -324,8 +324,8 @@ export const items = [
           "labelIcon": "mdi:dock-left",
           "attrType": "str",
           "enumValue": {
-            "Left": "left",
             "Right": "right",
+            "Left": "left",
             "Top": "top",
             "Bottom": "bottom"
           }

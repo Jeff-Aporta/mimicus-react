@@ -4,7 +4,7 @@
   "label": "FloatingComponent",
   "titleIcon": "mdi:arrange-bring-forward",
   "status": "pending",
-  "intro": "Panel flotante absoluto junto al contenido (p. ej. acciones de fila). Expone <code>FC_KEEP_ALIVE_CTX</code> para menús anidados. En la vista previa, pasa el cursor sobre la <strong>fila resaltada</strong> o activa <code>showfloat</code>.",
+  "intro": "Panel flotante de acciones junto a una fila (p. ej. editar/eliminar en un listado). En la vista previa hay tres filas de ejemplo: la del centro es la interactiva. Pasa el cursor sobre ella o activa <code>showfloat</code>.",
   "component": {
     "name": "FloatingComponent",
     "path": "src/components/overlays/Overlays.tsx"
@@ -18,7 +18,7 @@
     "configBlockCount": 2
   },
   "state": {
-    "showfloat": false,
+    "showfloat": true,
     "rowText": "Factura #1042 — pendiente de revisión",
     "horizontal": "right",
     "vertical": "center"
@@ -69,16 +69,6 @@
       "icon": "mdi:cursor-default-gesture",
       "state": {
         "showfloat": false,
-        "rowText": "Factura #1042 — pendiente de revisión",
-        "horizontal": "right",
-        "vertical": "center"
-      }
-    },
-    {
-      "label": "Siempre visible",
-      "icon": "mdi:eye-outline",
-      "state": {
-        "showfloat": true,
         "rowText": "Fila con panel flotante fijo",
         "horizontal": "right",
         "vertical": "center"

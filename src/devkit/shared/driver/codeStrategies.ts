@@ -190,7 +190,6 @@ export function buildCodeFromStrategy(strategy, ctx, state, details, demoStyle, 
     case "disp-tree":
       return buildTag(name, [...collectAttrs(state), ...styleAttrs(demoStyle, demoClass)], tagOpts);
     case "modal":
-    case "dialog":
     case "action-drawer":
     case "loading":
     case "toaster":

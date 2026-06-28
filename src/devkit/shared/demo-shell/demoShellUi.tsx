@@ -489,21 +489,55 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
   });
 }
 
+function formatApiDefault(value) {
+  if (value === undefined) return "—";
+  if (value === null) return "null";
+  if (typeof value === "boolean") return String(value);
+  if (typeof value === "number") return String(value);
+  if (typeof value === "string") return value === "" ? '""' : value;
+  try { return JSON.stringify(value); } catch { return String(value); }
+}
+
+function resolveApiDefault(field, values, { switchFallback = false } = {}) {
+  if (field.attrDefault !== undefined) return field.attrDefault;
+  if (field.key != null && Object.prototype.hasOwnProperty.call(values, field.key)) return values[field.key];
+  if (switchFallback || field.kind === "switch") return false;
+  return undefined;
+}
+
 export function ApiTable({ adapter }) {
+  const state = adapter?.initialState?.() ?? {};
+  const details = adapter?.initialDetails?.() ?? {};
+  const demoConfig = adapter?.initialDemoConfig?.() ?? {};
   const rows = [];
-  const pushField = (f) => {
-    if (!f || f.kind === "icon-text") return;
+  const pushField = (f, values) => {
+    if (!f || f.kind === "icon-text" || f.attrOmit) return;
     if (f.kind === "switch-group") {
-      for (const sw of f.switches ?? []) rows.push({ name: sw.attrName ?? sw.key, desc: sw.label, type: sw.attrType ?? "boolean", def: sw.attrDefault ?? "false" });
+      for (const sw of f.switches ?? []) {
+        if (sw.attrOmit) continue;
+        rows.push({
+          name: sw.attrName ?? sw.key,
+          desc: sw.label,
+          type: sw.attrType ?? "boolean",
+          def: formatApiDefault(resolveApiDefault(sw, values, { switchFallback: true })),
+        });
+      }
       return;
     }
     if (f.kind === "select-enum-row") {
-      for (const sub of f.selects ?? []) pushField(sub);
+      for (const sub of f.selects ?? []) pushField(sub, values);
       return;
     }
-    rows.push({ name: f.attrName ?? f.key, desc: f.label, type: f.attrType ?? f.kind, def: f.attrDefault ?? "—" });
+    rows.push({
+      name: f.attrName ?? f.key,
+      desc: f.label,
+      type: f.attrType ?? f.kind,
+      def: formatApiDefault(resolveApiDefault(f, values)),
+    });
   };
-  for (const f of [...(adapter?.fields?.() ?? []), ...(adapter?.detailFields?.() ?? []), ...(adapter?.demoConfigFields?.() ?? [])]) pushField(f);
+  for (const f of adapter?.fields?.() ?? []) pushField(f, state);
+  for (const f of adapter?.detailFields?.() ?? []) pushField(f, details);
+  for (const f of adapter?.demoConfigFields?.() ?? []) pushField(f, demoConfig);
   if (!rows.length) return null;
   return (
     <div className="pg-api-table-wrap">

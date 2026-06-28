@@ -14,7 +14,7 @@ import {
   ToggleButton, ToggleButtonGroup, Transfer, TransferBoard, Upload, ColorPicker, DatePicker, TimePicker, Cascader, TreeSelect, Mentions,
   Badge, Tag, Avatar, AvatarGroup, Carousel, Collapse, CollapsePanel, Descriptions, DescriptionsItem, Empty, QRCode, Segmented, Statistic, Table, Timeline, TimelineItem, Tooltip, Tour, Tree, Calendar, List, ListItem, ListItemText, ListItemIcon, ListItemAvatar,
   LoginButton, ContapymeSessionProvider, createDemoSession, SidePanel, SidePanelSection, DataGrid,
-  Dialog, Modal, ActionDrawer, Loading, Toaster, toastSuccess, toastError, toastLoading, Alert, TipInfo, InvokedFloater, FloatingComponent,
+  Modal, ActionDrawer, Loading, Toaster, toastSuccess, toastError, toastLoading, Alert, TipInfo, InvokedFloater, FloatingComponent,
 } from "../../_ui.ts";
 import { Icon } from "../../../components/Icon.tsx";
 import {
@@ -239,7 +239,7 @@ function DrawerPreview({ state, previewKey, demoStyle, demoClass }) {
   return (
     <div key={previewKey} className={["mimicus-drawer-preview", "mimicus-nav-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
       <Button variant="solid" onClick={() => setOpen(true)}>Abrir drawer</Button>
-      <Drawer open={open} placement={state.placement ?? "left"} width={Math.round(Number(state.width)) || 280} title="Panel lateral" onClose={() => setOpen(false)}>
+      <Drawer open={open} placement={state.placement ?? "right"} width={Math.round(Number(state.width)) || 280} title="Panel lateral" onClose={() => setOpen(false)}>
         <p style={{ margin: 0, fontSize: "0.9rem" }}>Contenido del drawer. Clic fuera o Escape para cerrar (controlador vanilla).</p>
       </Drawer>
     </div>
@@ -825,28 +825,6 @@ function ModalPreview({ state, details, previewKey, demoStyle, demoClass }) {
   );
 }
 
-function DialogPreview({ state, previewKey, demoStyle, demoClass, details }) {
-  const [open, setOpen] = useState(false);
-  const scope = state._scope ?? "global";
-  const localShell = scope === "local";
-  const body = (
-    <>
-      <Button variant="solid" onClick={() => setOpen(true)}>Abrir dialog</Button>
-      <Dialog open={open} notClose={Boolean(state.notClose)} backeffect={state.backeffect ?? "blur"} onClose={() => setOpen(false)} {...overlayScopeProps(scope)} className="mimicus-dialog-demo">
-        <Card variant="flat" className="blockCloseClick" style={{ padding: "1rem", minWidth: "16rem" }}>
-          <strong style={{ display: "block", marginBottom: "0.35rem" }}>{details.titulo ?? "Dialog demo"}</strong>
-          <p style={{ margin: 0, fontSize: "0.9rem" }}>Diálogo nativo <code>&lt;dialog&gt;</code> con backdrop configurable.</p>
-        </Card>
-      </Dialog>
-    </>
-  );
-  return localShell ? (
-    <div key={previewKey} className={["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
-  ) : (
-    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
-  );
-}
-
 function ActionDrawerPreview({ state, details, previewKey, demoStyle, demoClass }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -928,9 +906,20 @@ function InvokedFloaterPreview({ state, previewKey, demoStyle, demoClass }) {
 }
 
 function FloatingComponentPreview({ state, previewKey, demoStyle, demoClass }) {
+  const showfloat = Boolean(state.showfloat);
+  const rowText = state.rowText ?? "Factura #1042 — pendiente de revisión";
   return (
     <div key={previewKey} className={["mimicus-floating-component-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("width: 100%", demoStyle))}>
-      <FloatingComponent showfloat={Boolean(state.showfloat)} rowText={state.rowText} horizontal={state.horizontal ?? "right"} vertical={state.vertical ?? "center"} />
+      <p className="mimicus-floating-component-preview__hint">
+        {showfloat ? "Panel de acciones fijado con showfloat." : "Pasa el cursor sobre la fila resaltada para editar o eliminar."}
+      </p>
+      <div className="mimicus-floating-component-preview__list" role="list">
+        <div className="mimicus-floating-component-preview__row" role="listitem">Factura #1041 — pagada</div>
+        <div className="mimicus-floating-component-preview__row mimicus-floating-component-preview__row--active" role="listitem">
+          <FloatingComponent showfloat={showfloat} rowText={rowText} horizontal={state.horizontal ?? "right"} vertical={state.vertical ?? "center"} />
+        </div>
+        <div className="mimicus-floating-component-preview__row" role="listitem">Factura #1043 — borrador</div>
+      </div>
     </div>
   );
 }
@@ -996,7 +985,6 @@ export const previewBuiltins = {
   "cmp-code-block": CodeBlockPreview,
   "contapyme-login": LoginButtonPreview,
   modal: ModalPreview,
-  dialog: DialogPreview,
   "action-drawer": ActionDrawerPreview,
   loading: LoadingPreview,
   toaster: ToasterPreview,

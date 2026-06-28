@@ -229,7 +229,7 @@ export const Stepper = Steps;
 export interface DrawerProps extends BaseProps {
   open?: boolean; placement?: string; width?: number | string; title?: ReactNode; footer?: ReactNode; onClose?: () => void; [key: string]: unknown;
 }
-export function Drawer({ open = false, placement = "left", width = 280, title, footer, className, style, children, onClose, ...rest }: DrawerProps) {
+export function Drawer({ open = false, placement = "right", width = 280, title, footer, className, style, children, onClose, ...rest }: DrawerProps) {
   const ref = useRef<HTMLDivElement>(null);
   useNavBinding(ref, "drawer", [open, placement, width]);
   useEffect(() => {

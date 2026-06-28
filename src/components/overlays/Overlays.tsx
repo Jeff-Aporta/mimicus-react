@@ -9,6 +9,7 @@ import type { CSSProperties, HTMLAttributes, MouseEvent, ReactNode } from "react
 import { Card } from "../Card.tsx";
 import { Icon } from "../Icon.tsx";
 import { Button } from "../Button.tsx";
+import { Icon } from "../Icon.tsx";
 import { IconButton } from "../FloatButton.tsx";
 import { Tooltip } from "../display/Display.tsx";
 
@@ -83,6 +84,11 @@ export function Dialog({
     onMouseDown?.(e);
   };
 
+  const isBackdropClick = (target: EventTarget | null) => {
+    if (target === ref.current) return true;
+    return target instanceof HTMLElement && target.classList.contains("mimicus-action-drawer__wrap");
+  };
+
   const handleClick = async (e: MouseEvent<HTMLDialogElement>) => {
     onClick?.(e);
     if (loading) return;
@@ -90,7 +96,7 @@ export function Dialog({
       blockCloseClickRef.current = false;
       return;
     }
-    if (e.target !== ref.current) return;
+    if (!isBackdropClick(e.target)) return;
     if (notClose) {
       const force = await Promise.resolve(onCloseCancel?.(e.nativeEvent));
       if (!force) return;
@@ -381,16 +387,19 @@ export function FloatingComponent({
   const visible = showfloat || hover;
   return (
     <div
-      className={cx("mimicus-floating-component", className)}
+      className={cx("mimicus-floating-component", visible && "is-active", className)}
       style={style}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="mimicus-floating-component__row">{rowText}</div>
+      <div className="mimicus-floating-component__row">
+        <span className="mimicus-floating-component__row-text">{rowText}</span>
+        {!visible && <span className="mimicus-floating-component__row-hint" aria-hidden="true">Acciones</span>}
+      </div>
       {visible && (
         <div className={cx("mimicus-floating-component__panel", `h-${horizontal}`, `v-${vertical}`)}>
-          <Button variant="text" icon="mdi:pencil-outline">Editar</Button>
-          <Button variant="text" icon="mdi:delete-outline">Eliminar</Button>
+          <Button variant="text" icon={<Icon icon="mdi:pencil-outline" />}>Editar</Button>
+          <Button variant="text" icon={<Icon icon="mdi:delete-outline" />}>Eliminar</Button>
         </div>
       )}
     </div>
