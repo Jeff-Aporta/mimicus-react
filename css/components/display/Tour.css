@@ -21,7 +21,9 @@
 .mimicus-tour__overlay {
 	position: fixed;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.45);
+	background: rgba(0, 0, 0, 0.55);
+	backdrop-filter: brightness(0.72);
+	-webkit-backdrop-filter: brightness(0.72);
 	z-index: 90;
 }
 
@@ -81,9 +83,11 @@
 	position: relative;
 	z-index: 96;
 	outline: 2px solid var(--mimicus-primary);
-	outline-offset: 2px;
-	border-radius: 0.25rem;
-	box-shadow: 0 0 0 4px color-mix(in srgb, var(--mimicus-primary), transparent 72%);
+	outline-offset: 3px;
+	border-radius: 0.35rem;
+	box-shadow:
+		0 0 0 4px color-mix(in srgb, var(--mimicus-primary), transparent 68%),
+		0 0 20px color-mix(in srgb, var(--mimicus-primary), transparent 55%);
 }
 
 /* Preview local — overlay y tarjeta acotados al escenario del demo */
@@ -114,6 +118,9 @@
 .mimicus-tour-demo .mimicus-tour__overlay {
 	position: absolute;
 	inset: 0;
+	background: rgba(0, 0, 0, 0.62);
+	backdrop-filter: brightness(0.65);
+	-webkit-backdrop-filter: brightness(0.65);
 }
 
 .mimicus-tour-demo .mimicus-tour__card {

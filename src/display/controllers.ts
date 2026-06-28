@@ -325,7 +325,7 @@ export function bindTour(root: HTMLElement): BinderResult {
     if (descEl) descEl.textContent = step?.dataset.description ?? "";
     clearTargets();
     if (target) target.classList.add("mimicus-tour-target");
-    placeCard(target);
+    requestAnimationFrame(() => placeCard(target));
     if (prev) prev.disabled = idx <= 0;
     if (next) next.textContent = idx >= steps.length - 1 ? "Finalizar" : "Siguiente";
   };

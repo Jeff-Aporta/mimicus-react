@@ -1977,7 +1977,7 @@ function bindTour(root) {
     if (descEl) descEl.textContent = step?.dataset.description ?? "";
     clearTargets();
     if (target) target.classList.add("mimicus-tour-target");
-    placeCard(target);
+    requestAnimationFrame(() => placeCard(target));
     if (prev) prev.disabled = idx <= 0;
     if (next) next.textContent = idx >= steps.length - 1 ? "Finalizar" : "Siguiente";
   };
@@ -2340,7 +2340,7 @@ function Tour({ steps = [], open = false, className, style, ...rest }) {
   const ref = useRef3(null);
   useDisplayBinding(ref, "tour", [open, steps.length]);
   return /* @__PURE__ */ jsxs8("div", { ...rest, ref, className: cx("mimicus-tour", open && "is-active", className), style, "data-mimicus-display": "tour", "data-open": open ? "true" : "false", children: [
-    /* @__PURE__ */ jsx12("div", { className: "mimicus-tour__overlay", "data-mimicus-tour-overlay": true, hidden: true }),
+    /* @__PURE__ */ jsx12("div", { className: "mimicus-tour__overlay", "data-mimicus-tour-overlay": true, hidden: !open }),
     steps.map((s, i) => /* @__PURE__ */ jsx12("div", { "data-mimicus-tour-step": true, "data-target": s.target, "data-title": s.title, "data-description": s.description, hidden: true }, i)),
     /* @__PURE__ */ jsxs8("div", { className: "mimicus-tour__card", "data-mimicus-tour-card": true, children: [
       /* @__PURE__ */ jsx12("button", { type: "button", className: "mimicus-tour__close", "data-mimicus-tour-close": true, "aria-label": "Cerrar", children: "\xD7" }),

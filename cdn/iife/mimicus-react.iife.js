@@ -1986,7 +1986,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       if (descEl) descEl.textContent = step?.dataset.description ?? "";
       clearTargets();
       if (target) target.classList.add("mimicus-tour-target");
-      placeCard(target);
+      requestAnimationFrame(() => placeCard(target));
       if (prev) prev.disabled = idx <= 0;
       if (next) next.textContent = idx >= steps.length - 1 ? "Finalizar" : "Siguiente";
     };
@@ -2349,7 +2349,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const ref = (0, import_react10.useRef)(null);
     useDisplayBinding(ref, "tour", [open, steps.length]);
     return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { ...rest, ref, className: cx("mimicus-tour", open && "is-active", className), style, "data-mimicus-display": "tour", "data-open": open ? "true" : "false", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "mimicus-tour__overlay", "data-mimicus-tour-overlay": true, hidden: true }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "mimicus-tour__overlay", "data-mimicus-tour-overlay": true, hidden: !open }),
       steps.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { "data-mimicus-tour-step": true, "data-target": s.target, "data-title": s.title, "data-description": s.description, hidden: true }, i)),
       /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mimicus-tour__card", "data-mimicus-tour-card": true, children: [
         /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("button", { type: "button", className: "mimicus-tour__close", "data-mimicus-tour-close": true, "aria-label": "Cerrar", children: "\xD7" }),

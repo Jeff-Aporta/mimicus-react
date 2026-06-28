@@ -175,13 +175,13 @@
 	margin-inline: auto;
 }
 
-.preview-frame .preview-stage .demo-preview-root > :is(.mimicus-overlay-preview, .mimicus-overlay-preview--local, .layout-side-panel-preview) {
+.preview-frame .preview-stage .demo-preview-root > :is(.mimicus-overlay-preview, .mimicus-overlay-preview--local, .layout-side-panel-preview, .mimicus-tour-demo) {
 	width: 100%;
 	max-width: 100%;
 }
 
 .preview-frame .preview-stage .mimicus-nav-preview:not(.layout-app-preview),
-.preview-frame .preview-stage .mimicus-display-preview:not(.layout-app-preview),
+.preview-frame .preview-stage .mimicus-display-preview:not(.layout-app-preview):not(.mimicus-tour-demo),
 .preview-frame .preview-stage .mimicus-form-preview {
 	width: fit-content;
 	max-width: min(100%, 28rem);

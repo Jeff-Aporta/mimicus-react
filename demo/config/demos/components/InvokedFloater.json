@@ -16,4 +16,4 @@
       { "kind": "select-enum", "key": "trigger", "label": "trigger", "labelIcon": "mdi:gesture-tap", "enumValue": { "click": "click", "hover": "hover", "contextmenu": "contextmenu", "manual": "manual" } }
    ]
 }
-
+
