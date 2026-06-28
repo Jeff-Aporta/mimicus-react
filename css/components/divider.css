@@ -78,7 +78,7 @@
 	max-width: 100%;
 }
 
-html:not([data-looknfeel^="neon-"]) .is-divider--glow.is-divider--horizontal .is-divider__rail {
+html:not([data-looknfeel="neon"]) .is-divider--glow.is-divider--horizontal .is-divider__rail {
 	border-top-width: 1px;
 	border-style: solid;
 	height: auto;
@@ -87,7 +87,7 @@ html:not([data-looknfeel^="neon-"]) .is-divider--glow.is-divider--horizontal .is
 	opacity: 1;
 }
 
-html[data-looknfeel^="neon-"] .is-divider--glow.is-divider--horizontal .is-divider__rail {
+html[data-looknfeel="neon"] .is-divider--glow.is-divider--horizontal .is-divider__rail {
 	border-top: none;
 	height: 2px;
 	background: linear-gradient(90deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);
@@ -95,7 +95,7 @@ html[data-looknfeel^="neon-"] .is-divider--glow.is-divider--horizontal .is-divid
 	opacity: 0.92;
 }
 
-html[data-looknfeel^="neon-"] .is-divider--glow.is-divider--vertical .is-divider__rail--solo-vertical {
+html[data-looknfeel="neon"] .is-divider--glow.is-divider--vertical .is-divider__rail--solo-vertical {
 	border-left: none;
 	width: 2px;
 	background: linear-gradient(180deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);

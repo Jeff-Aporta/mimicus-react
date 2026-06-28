@@ -5,7 +5,7 @@
  */
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
-import { ContapymeIcon } from "./ContapymeIcon.tsx";
+import { GlassHeaderBand } from "../../components/GlassHeaderBand.tsx";
 
 export interface LoginDialogProps {
   open?: boolean;
@@ -45,16 +45,15 @@ export function LoginDialog({ open, busy, title = "Iniciar sesión", icon = "mdi
   return (
     <dialog ref={ref} className="mimicus-login-dialog isa-login-dialog" aria-labelledby="mimicus-login-dialog-title">
       <div className="mimicus-login-dialog__card isa-login-card mimicus-glass-card">
-        <header className="mimicus-login-dialog__header isa-login-header">
-          <span className="mimicus-login-dialog__icon-box" aria-hidden>
-            <ContapymeIcon icon={icon} size={22} />
-          </span>
-          <div className="mimicus-login-dialog__titles">
-            <h2 id="mimicus-login-dialog-title" className="mimicus-login-dialog__title">{title}</h2>
-            <p className="mimicus-login-dialog__subtitle">Use su usuario y contraseña de la organización.</p>
-          </div>
+        <GlassHeaderBand
+          title={title}
+          titleId="mimicus-login-dialog-title"
+          subtitle="Use su usuario y contraseña de la organización."
+          icon={icon}
+          className="mimicus-login-dialog__header isa-login-header"
+        >
           <button type="button" className="mimicus-login-dialog__close" aria-label="Cerrar" disabled={busy} onClick={() => !busy && onClose?.()}>×</button>
-        </header>
+        </GlassHeaderBand>
         <div className="mimicus-login-dialog__body">{children}</div>
         {footer && <footer className="mimicus-login-dialog__footer">{footer}</footer>}
       </div>

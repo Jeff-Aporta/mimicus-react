@@ -5,7 +5,7 @@
    "titleIcon": "mdi:bell-badge-outline",
    "status": "pending",
    "intro": "Notificaciones toast (svelte-french-toast): éxito, error y carga. Incluye el proveedor <code>Toaster</code> y helpers <code>toastSuccess</code> / <code>toastError</code>.",
-   "component": { "name": "Toaster", "path": "src/lib/overlays/Toaster.svelte" },
+   "component": { "name": "Toaster", "path": "src/components/overlays/Overlays.tsx" },
    "preview": { "template": "toaster" },
    "state": {},
    "code": { "strategy": "toaster" }

@@ -5,7 +5,7 @@
    "titleIcon": "mdi:dock-bottom",
    "status": "approved",
    "intro": "Panel lateral o inferior que desliza sobre el contenido; ideal para acciones secundarias sin abandonar la vista.",
-   "component": { "name": "ActionDrawer", "path": "src/lib/overlays/ActionDrawer.svelte" },
+   "component": { "name": "ActionDrawer", "path": "src/components/overlays/Overlays.tsx" },
    "preview": { "template": "action-drawer" },
    "state": { "side": "right", "_scope": "global" },
    "details": { "bSimularLoading": false },

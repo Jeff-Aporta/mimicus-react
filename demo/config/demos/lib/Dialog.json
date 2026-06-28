@@ -7,7 +7,7 @@
   "intro": "Diálogo nativo <code>&lt;dialog&gt;</code> con scope global/local, blur de fondo y cierre por backdrop o tecla Escape.",
   "component": {
     "name": "Dialog",
-    "path": "src/lib/overlays/Dialog.svelte"
+    "path": "src/components/overlays/Overlays.tsx"
   },
   "preview": {
     "template": "dialog"

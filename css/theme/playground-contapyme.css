@@ -222,19 +222,19 @@ html[data-looknfeel="contapyme"] .demo-panel-body label.translate {
 	opacity: 1 !important;
 }
 
-html:not([data-looknfeel^="neon-"]) .mimicus-autocomplete__panel {
+html:not([data-looknfeel="neon"]) .mimicus-autocomplete__panel {
 	background: var(--mimicus-bg-secondary) !important;
 	border-color: var(--mimicus-b-color) !important;
 	color: var(--mimicus-color);
 	box-shadow: 0 8px 24px color-mix(in srgb, var(--mimicus-color), transparent 88%);
 }
 
-html:not([data-looknfeel^="neon-"]) .mimicus-autocomplete__option {
+html:not([data-looknfeel="neon"]) .mimicus-autocomplete__option {
 	color: var(--mimicus-color);
 }
 
-html:not([data-looknfeel^="neon-"]) .mimicus-autocomplete__option--active,
-html:not([data-looknfeel^="neon-"]) .mimicus-autocomplete__option:hover {
+html:not([data-looknfeel="neon"]) .mimicus-autocomplete__option--active,
+html:not([data-looknfeel="neon"]) .mimicus-autocomplete__option:hover {
 	background: color-mix(in srgb, var(--mimicus-primary), transparent 88%);
 	color: var(--mimicus-color);
 }
@@ -275,4 +275,43 @@ html[data-looknfeel="contapyme"] .demo-panel-body .checkbox-chip__pill[data-vari
 
 html[data-looknfeel="contapyme"] .demo-panel-body .checkbox-chip__pill[data-variant="solid"] {
 	font-weight: 600;
+}
+
+/* Playground shell — nav, sidebar links y theme toggle (plano ContaPyme) */
+html[data-looknfeel="contapyme"] .pg-nav-row {
+	border-top-color: var(--mimicus-b-color);
+}
+
+html[data-looknfeel="contapyme"] .pg-playground-shell .pg-nav-tab[data-variant="soft"] {
+	box-shadow: none !important;
+	border-radius: var(--mimicus-ui-radius, 0.35rem);
+}
+
+html[data-looknfeel="contapyme"] .pg-playground-shell .pg-nav-tab[data-variant="text"] {
+	border-radius: var(--mimicus-ui-radius, 0.35rem);
+}
+
+html[data-looknfeel="contapyme"] .pg-playground-shell .pg-nav-row--secondary .pg-nav-tab.is-active::after,
+html[data-looknfeel="contapyme"] .pg-playground-shell .pg-nav-row--secondary .pg-nav-tab[aria-selected="true"]::after {
+	background: var(--mimicus-primary);
+}
+
+html[data-looknfeel="contapyme"] .pg-panel-demo-link[data-variant="text"],
+html[data-looknfeel="contapyme"] .pg-panel-demo-link[data-variant="soft"] {
+	border-radius: calc(var(--mimicus-ui-radius, 0.5rem) - 0.08rem);
+	box-shadow: none !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-header-skin-bar__theme-btn[data-variant="soft"],
+html[data-looknfeel="contapyme"] .pg-content-header .pg-header-skin-bar__theme-btn[data-variant="text"] {
+	background: color-mix(in srgb, var(--mimicus-color) 6%, var(--mimicus-bg-secondary)) !important;
+	border: 1px solid var(--mimicus-b-color) !important;
+	box-shadow: none !important;
+	color: var(--mimicus-color) !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-header-skin-bar__theme-btn[data-variant="soft"]:not(:disabled):hover,
+html[data-looknfeel="contapyme"] .pg-content-header .pg-header-skin-bar__theme-btn[data-variant="text"]:not(:disabled):hover {
+	background: color-mix(in srgb, var(--mimicus-primary) 10%, var(--mimicus-bg-secondary)) !important;
+	border-color: color-mix(in srgb, var(--mimicus-primary) 35%, var(--mimicus-b-color)) !important;
 }

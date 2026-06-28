@@ -2,6 +2,8 @@ export {
   sortedCategories,
   sectionMeta,
   sectionColorFor,
+  sectionColorSlotFor,
+  sectionAccentColorFor,
   resolveCategoryTabDescriptors,
   resolveCatalogDemoTabDescriptors,
   normalizeShellNavRows,

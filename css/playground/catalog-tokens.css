@@ -17,7 +17,10 @@
 	--catalog-section-nav-focus: color-mix(in srgb, var(--mimicus-primary), transparent 30%);
 	--catalog-section-icon: var(--mimicus-primary);
 	--catalog-card-bg: var(--mimicus-bg-secondary);
+	--catalog-card-bg-gradient: none;
 	--catalog-card-bg-image: none;
+	--catalog-card-inset: none;
+	--catalog-card-footer-bg: transparent;
 	--catalog-card-bg-size: 100% 100%;
 	--catalog-card-bg-position: 50% 42%;
 	--catalog-card-border: var(--pg-field-border, var(--mimicus-b-color));
@@ -28,6 +31,7 @@
 	--catalog-card-hover-transform: translateY(-1px);
 	--catalog-card-focus: color-mix(in srgb, var(--mimicus-primary), transparent 25%);
 	--catalog-card-preview-bg: color-mix(in srgb, var(--mimicus-primary), transparent 94%);
+	--catalog-card-preview-gradient: none;
 	--catalog-card-preview-backdrop: none;
 	--catalog-card-preview-border: var(--pg-field-border, var(--mimicus-b-color));
 	--catalog-card-preview-color: color-mix(in srgb, var(--mimicus-color), transparent 38%);

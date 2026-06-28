@@ -12,8 +12,8 @@ export interface AppLayoutSlots {
 
 /** Solo panel lateral en el playground (izquierda / derecha). */
 export const PLAYGROUND_APP_LAYOUT_OPTIONS: Option[] = [
-  { id: "side", label: "Panel izquierdo" },
-  { id: "top-side-2", label: "Panel derecho" },
+  { id: "side", label: "Panel izquierdo", icon: "mdi:dock-left" },
+  { id: "top-side-2", label: "Panel derecho", icon: "mdi:dock-right" },
 ];
 
 export const APP_LAYOUT_VARIANT_OPTIONS: Option[] = [

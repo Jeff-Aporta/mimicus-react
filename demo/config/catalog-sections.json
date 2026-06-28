@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "order": ["general", "layout", "navigation", "data-entry", "data-display", "feedback", "contapyme-context", "other"],
+  "order": ["general", "layout", "navigation", "data-entry", "data-display", "overlays", "feedback", "contapyme-context", "other"],
   "overview": {
     "title": "Components Overview",
     "kicker": "Mimicus React",
@@ -32,6 +32,11 @@
       "description": "Presentación de contenido: badges, tablas, listas, carruseles, árbol y estados vacíos.",
       "icon": "mdi:card-text-outline"
     },
+    "overlays": {
+      "label": "Overlays",
+      "description": "Capas modales y flotantes: modal, drawer, tooltip, toast, loading y paneles anclados.",
+      "icon": "mdi:layers-outline"
+    },
     "feedback": {
       "label": "Feedback",
       "description": "Estado y capas modales: alertas, diálogos, carga y notificaciones.",
@@ -49,7 +54,6 @@
     }
   },
   "demoSection": {
-    "Alert": "feedback",
     "FlexOptions": "data-entry",
     "LabeledSwitch": "data-entry",
     "Switch": "data-entry",
@@ -78,8 +82,18 @@
     "Statistic": "data-display",
     "Table": "data-display",
     "Timeline": "data-display",
-    "Tooltip": "data-display",
-    "Tour": "data-display",
+    "Tooltip": "overlays",
+    "Tour": "overlays",
+    "Drawer": "overlays",
+    "Alert": "overlays",
+    "Modal": "overlays",
+    "Dialog": "overlays",
+    "ActionDrawer": "overlays",
+    "Loading": "overlays",
+    "Toaster": "overlays",
+    "TipInfo": "overlays",
+    "InvokedFloater": "overlays",
+    "FloatingComponent": "overlays",
     "Tree": "data-display",
     "List": "data-display",
     "Accordion": "data-display",
@@ -94,7 +108,7 @@
     "Containers": "data-display",
     "Primitives": "data-display",
     "Typography": "data-display",
-    "Overlays": "feedback",
+    "Overlays": "overlays",
     "Gráficas": "other",
     "ContaPyme": "contapyme-context"
   }

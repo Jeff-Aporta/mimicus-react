@@ -5,9 +5,10 @@
  */
 
 :root {
-	--pg-config-section-bg: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-primary) 3%);
-	--pg-config-section-border: color-mix(in srgb, var(--mimicus-b-color), transparent 28%);
-	--pg-config-section-shadow: 0 1px 3px color-mix(in srgb, var(--mimicus-color), transparent 92%);
+	--pg-config-section-bg: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 72%);
+	--pg-config-section-border: color-mix(in srgb, var(--mimicus-b-color), transparent 42%);
+	--pg-config-section-shadow: 0 1px 3px color-mix(in srgb, var(--mimicus-color), transparent 94%);
+	--pg-config-section-backdrop: blur(12px) saturate(145%);
 	--pg-config-field-bg: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-primary) 5%);
 	--pg-config-field-border: color-mix(in srgb, var(--mimicus-b-color), transparent 38%);
 	--pg-config-field-shadow: none;
@@ -30,12 +31,14 @@
 }
 
 /* ── Contenedor sección ── */
-.demo-config-shell .pg-demo-config-section.card-root {
+.demo-config-shell.pg-demo-config-section.card-root {
 	background: var(--pg-config-section-bg) !important;
 	border: 1px solid var(--pg-config-section-border) !important;
 	box-shadow: var(--pg-config-section-shadow) !important;
 	border-radius: var(--pg-config-section-radius, 0.65em) !important;
 	padding: 0.75em 0.8em 1em !important;
+	backdrop-filter: var(--pg-config-section-backdrop, none);
+	-webkit-backdrop-filter: var(--pg-config-section-backdrop, none);
 }
 
 .demo-panel-body .pg-demo-config-section .input-decorated-label.mimicus-title {
@@ -86,6 +89,30 @@
 	min-height: 1.85em;
 	padding-inline: 0.25em;
 	font-size: 0.92em;
+}
+
+.demo-config-shell .pg-input-decorated--row-between {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.65em;
+	width: 100%;
+	min-width: 0;
+}
+
+.demo-config-shell .pg-input-decorated--row-between > .pg-input-decorated__label {
+	flex: 1 1 auto;
+	min-width: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: 0 !important;
+	justify-content: flex-start;
+}
+
+.demo-config-shell .pg-input-decorated--row-between > .pg-input-decorated__body {
+	flex: 0 0 auto;
+	min-width: 0;
 }
 
 /* Input nativo dentro del tile — superficie plana, sin borde propio */
@@ -283,11 +310,29 @@
 	}
 }
 
+.demo-config-shell .pg-palette-grid--side-cross .pg-palette-grid__spatial-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 0;
+}
+
+.demo-config-shell .pg-palette-grid--side-cross .pg-palette-grid__spatial-cell--empty {
+	min-height: 1.85em;
+	pointer-events: none;
+}
+
+.demo-config-shell .pg-palette-grid .button-block,
+.demo-config-shell .pg-palette-chips .button-block {
+	min-width: 0;
+}
+
 /* ══════════════ contapyme ══════════════ */
 html[data-looknfeel="contapyme"] {
-	--pg-config-section-bg: var(--lkf-texture-panel, var(--mimicus-bg-secondary));
-	--pg-config-section-border: var(--lkf-texture-border-panel, color-mix(in srgb, var(--mimicus-b-color), transparent 28%));
+	--pg-config-section-bg: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 58%);
+	--pg-config-section-border: var(--lkf-texture-border-panel, color-mix(in srgb, var(--mimicus-b-color), transparent 38%));
 	--pg-config-section-shadow: var(--lkf-texture-shadow-panel, none);
+	--pg-config-section-backdrop: blur(8px) saturate(130%);
 	--pg-config-field-bg: var(--lkf-texture-card, color-mix(in srgb, var(--mimicus-bg-readonly), var(--mimicus-bg-secondary) 40%));
 	--pg-config-field-border: var(--lkf-texture-border-card, color-mix(in srgb, var(--mimicus-b-color), transparent 38%));
 	--pg-config-field-shadow: var(--lkf-texture-shadow-card, none);
@@ -295,13 +340,14 @@ html[data-looknfeel="contapyme"] {
 }
 
 /* ══════════════ neon-glass ══════════════ */
-html[data-looknfeel^="neon-"] {
-	--pg-config-section-bg: var(--lkf-texture-panel, color-mix(in srgb, var(--isa-glass-bg-dark), transparent 52%));
-	--pg-config-section-border: var(--lkf-texture-border-panel, color-mix(in srgb, var(--neon-cyan), transparent 68%));
-	--pg-config-section-shadow: var(--lkf-texture-shadow-panel,
-		0 0 0 1px color-mix(in srgb, var(--neon-blue), transparent 78%),
-		0 0 22px color-mix(in srgb, var(--mimicus-design-active-1, var(--neon-blue)), transparent 74%),
-		0 0 44px color-mix(in srgb, var(--neon-purple), transparent 86%));
+html[data-looknfeel="neon"] {
+	--pg-config-section-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 78%);
+	--pg-config-section-border: color-mix(in srgb, var(--neon-cyan), transparent 80%);
+	--pg-config-section-shadow:
+		0 0 0 1px color-mix(in srgb, var(--neon-blue), transparent 88%),
+		0 0 36px color-mix(in srgb, var(--mimicus-design-active-1, var(--neon-blue)), transparent 92%),
+		inset 0 1px 0 color-mix(in srgb, var(--neon-cyan), transparent 94%);
+	--pg-config-section-backdrop: blur(20px) saturate(175%);
 	--pg-config-field-bg: var(--lkf-texture-card, color-mix(in srgb, var(--isa-glass-bg-dark), transparent 58%));
 	--pg-config-field-border: var(--lkf-texture-border-card, color-mix(in srgb, var(--neon-cyan), transparent 68%));
 	--pg-config-field-shadow: var(--lkf-texture-shadow-card,
@@ -320,13 +366,14 @@ html[data-looknfeel^="neon-"] {
 	--pg-config-input-backdrop: blur(calc(var(--lkf-texture-blur) - 2px)) saturate(150%);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] {
-	--pg-config-section-bg: var(--lkf-texture-panel, color-mix(in srgb, var(--isa-glass-bg-light), transparent 42%));
-	--pg-config-section-border: var(--lkf-texture-border-panel, color-mix(in srgb, var(--mimicus-primary), transparent 74%));
-	--pg-config-section-shadow: var(--lkf-texture-shadow-panel,
-		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 84%),
-		0 0 18px color-mix(in srgb, var(--neon-blue), transparent 88%),
-		0 0 32px color-mix(in srgb, var(--neon-cyan), transparent 92%));
+html[data-luminance="light"][data-looknfeel="neon"] {
+	--pg-config-section-bg: color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 74%);
+	--pg-config-section-border: color-mix(in srgb, var(--mimicus-primary), transparent 82%);
+	--pg-config-section-shadow:
+		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 90%),
+		0 0 28px color-mix(in srgb, var(--neon-blue), transparent 94%),
+		inset 0 1px 0 color-mix(in srgb, var(--neon-cyan), transparent 96%);
+	--pg-config-section-backdrop: blur(20px) saturate(170%);
 	--pg-config-field-bg: var(--lkf-texture-card, color-mix(in srgb, var(--isa-glass-bg-light), transparent 38%));
 	--pg-config-field-border: var(--lkf-texture-border-card, color-mix(in srgb, var(--mimicus-primary), transparent 74%));
 	--pg-config-field-shadow: var(--lkf-texture-shadow-card,
@@ -336,25 +383,36 @@ html[data-luminance="light"][data-looknfeel^="neon-"] {
 	--pg-config-input-shadow: 0 0 12px color-mix(in srgb, var(--neon-blue), transparent 92%);
 }
 
-/* Card flat emite background-color opaco inline — glass neon alineado al preview-frame */
-html[data-looknfeel^="neon-"] .demo-config-shell .pg-demo-config-section.card-root {
+/* Sección playground — glass neon; tiles de campo — flat sin blur (variante data-pg-config) */
+html[data-looknfeel="neon"] .demo-config-shell.pg-demo-config-section.card-root[data-variant="glass"],
+html[data-looknfeel="neon"] .demo-config-shell.pg-demo-config-section.card-root[data-pg-config="section"] {
 	background: var(--pg-config-section-bg) !important;
 	background-color: var(--pg-config-section-bg) !important;
 	border: 1px solid var(--pg-config-section-border) !important;
 	border-color: var(--pg-config-section-border) !important;
 	box-shadow: var(--pg-config-section-shadow) !important;
-	backdrop-filter: blur(12px) saturate(155%);
-	-webkit-backdrop-filter: blur(12px) saturate(155%);
+	backdrop-filter: var(--pg-config-section-backdrop, blur(20px) saturate(175%));
+	-webkit-backdrop-filter: var(--pg-config-section-backdrop, blur(20px) saturate(175%));
 }
 
-html[data-looknfeel^="neon-"] .demo-config-shell .pg-demo-config-card.card-root {
+html[data-looknfeel="neon"] .demo-config-shell .pg-demo-config-card.card-root[data-variant="flat"],
+html[data-looknfeel="neon"] .demo-config-shell .pg-demo-config-card.card-root[data-pg-config="field"] {
+	--pg-config-field-bg: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 82%);
+	--pg-config-field-border: color-mix(in srgb, var(--neon-cyan), transparent 84%);
+	--pg-config-field-shadow: none;
 	background: var(--pg-config-field-bg) !important;
 	background-color: var(--pg-config-field-bg) !important;
 	border: 1px solid var(--pg-config-field-border) !important;
 	border-color: var(--pg-config-field-border) !important;
 	box-shadow: var(--pg-config-field-shadow) !important;
-	backdrop-filter: blur(12px) saturate(155%);
-	-webkit-backdrop-filter: blur(12px) saturate(155%);
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+}
+
+html[data-luminance="light"][data-looknfeel="neon"] .demo-config-shell .pg-demo-config-card.card-root[data-variant="flat"],
+html[data-luminance="light"][data-looknfeel="neon"] .demo-config-shell .pg-demo-config-card.card-root[data-pg-config="field"] {
+	--pg-config-field-bg: color-mix(in srgb, var(--mimicus-glass-bg-light), transparent 78%);
+	--pg-config-field-border: color-mix(in srgb, var(--mimicus-primary), transparent 84%);
 }
 
 /* Chips en config — blend en pg-component-blend.css */

@@ -6,12 +6,10 @@
  * Estado/selector del variant de AppLayout del shell del playground (persistido en localStorage).
  */
 import { normalizePlaygroundAppLayoutVariant } from "../_ui.ts";
+import { PLAYGROUND_APP_LAYOUT_OPTIONS } from "../../layout/app-layout/appLayoutVariants.ts";
 
-/** Opciones del selector Layout (fuente única en devkit; no depender del CDN desactualizado). */
-export const PLAYGROUND_LAYOUT_SELECT_OPTIONS = [
-  { id: "side", label: "Panel izquierdo" },
-  { id: "top-side-2", label: "Panel derecho" },
-];
+/** Opciones del selector Layout (misma fuente que AppLayout / presets del demo). */
+export const PLAYGROUND_LAYOUT_SELECT_OPTIONS = PLAYGROUND_APP_LAYOUT_OPTIONS;
 
 export const PLAYGROUND_APP_LAYOUT_STORAGE_KEY = "pg-app-layout-variant";
 

@@ -7,7 +7,7 @@
   "intro": "Etiqueta de campo con icono de ayuda: tooltip flotante (<code>InvokedFloater</code>) o modal. <code>kind</code> info/warn.",
   "component": {
     "name": "TipInfo",
-    "path": "src/components/overlays/TipInfo.svelte"
+    "path": "src/components/overlays/Overlays.tsx"
   },
   "preview": {
     "template": "cmp-tip-info"

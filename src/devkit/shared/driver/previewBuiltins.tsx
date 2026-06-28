@@ -14,6 +14,7 @@ import {
   ToggleButton, ToggleButtonGroup, Transfer, TransferBoard, Upload, ColorPicker, DatePicker, TimePicker, Cascader, TreeSelect, Mentions,
   Badge, Tag, Avatar, AvatarGroup, Carousel, Collapse, CollapsePanel, Descriptions, DescriptionsItem, Empty, QRCode, Segmented, Statistic, Table, Timeline, TimelineItem, Tooltip, Tour, Tree, Calendar, List, ListItem, ListItemText, ListItemIcon, ListItemAvatar,
   LoginButton, ContapymeSessionProvider, createDemoSession, SidePanel, SidePanelSection, DataGrid,
+  Dialog, Modal, ActionDrawer, Loading, Toaster, toastSuccess, toastError, toastLoading, Alert, TipInfo, InvokedFloater, FloatingComponent,
 } from "../../_ui.ts";
 import { Icon } from "../../../components/Icon.tsx";
 import {
@@ -622,9 +623,9 @@ function TooltipPreview({ state, previewKey, demoStyle, demoClass }) {
 
 function TourPreview({ state, previewKey, demoStyle, demoClass }) {
   return (
-    <div key={previewKey} className={["mimicus-display-preview mimicus-tour-demo", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("min-height: 10rem; position: relative", demoStyle))}>
+    <div key={previewKey} className={["mimicus-display-preview mimicus-tour-demo", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("min-height: 12rem", demoStyle))}>
       <Button variant="ghost" data-tour-a id="tour-a">Paso 1</Button>
-      <Button variant="ghost" data-tour-b id="tour-b" style={{ marginLeft: "0.5rem" }}>Paso 2</Button>
+      <Button variant="ghost" data-tour-b id="tour-b">Paso 2</Button>
       <Tour open={Boolean(state.open)} steps={[{ target: "#tour-a", title: "Bienvenida", description: "Primer paso del tour." }, { target: "#tour-b", title: "Siguiente", description: "Segundo objetivo." }]} />
     </div>
   );
@@ -780,6 +781,160 @@ function DataGridPreview({ state, previewKey, demoStyle, demoClass }) {
   );
 }
 
+function overlayScopeProps(scope) {
+  return { _scope: scope === "local" ? "local" : "global" };
+}
+
+function ModalPreview({ state, details, previewKey, demoStyle, demoClass }) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const scope = state._scope ?? "global";
+  const localShell = scope === "local";
+  useEffect(() => {
+    if (!open || !details.bSimularLoading) { setLoading(false); return undefined; }
+    setLoading(true);
+    const t = window.setTimeout(() => setLoading(false), 5000);
+    return () => window.clearTimeout(t);
+  }, [open, details.bSimularLoading]);
+  const title = details.bTituloPorSlot !== false && (details.titulo || details.icono) ? (
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+      {details.icono && <Icon icon={String(details.icono)} />}
+      {details.titulo ?? "Modal"}
+    </span>
+  ) : undefined;
+  const body = (
+    <>
+      <Button variant="solid" onClick={() => setOpen(true)}>Abrir modal</Button>
+      <Modal
+        open={open}
+        loading={loading}
+        variant={state.variant ?? "solid"}
+        showCloseHeader={state.showCloseHeader !== false}
+        title={title}
+        onClose={() => setOpen(false)}
+        {...overlayScopeProps(scope)}
+      >
+        <p style={{ margin: 0, maxWidth: "22rem" }}>Contenido del modal. Clic fuera o Escape para cerrar (salvo <code>notClose</code>).</p>
+      </Modal>
+    </>
+  );
+  return localShell ? (
+    <div key={previewKey} className={["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
+  ) : (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
+  );
+}
+
+function DialogPreview({ state, previewKey, demoStyle, demoClass, details }) {
+  const [open, setOpen] = useState(false);
+  const scope = state._scope ?? "global";
+  const localShell = scope === "local";
+  const body = (
+    <>
+      <Button variant="solid" onClick={() => setOpen(true)}>Abrir dialog</Button>
+      <Dialog open={open} notClose={Boolean(state.notClose)} backeffect={state.backeffect ?? "blur"} onClose={() => setOpen(false)} {...overlayScopeProps(scope)} className="mimicus-dialog-demo">
+        <Card variant="flat" className="blockCloseClick" style={{ padding: "1rem", minWidth: "16rem" }}>
+          <strong style={{ display: "block", marginBottom: "0.35rem" }}>{details.titulo ?? "Dialog demo"}</strong>
+          <p style={{ margin: 0, fontSize: "0.9rem" }}>Diálogo nativo <code>&lt;dialog&gt;</code> con backdrop configurable.</p>
+        </Card>
+      </Dialog>
+    </>
+  );
+  return localShell ? (
+    <div key={previewKey} className={["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
+  ) : (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
+  );
+}
+
+function ActionDrawerPreview({ state, details, previewKey, demoStyle, demoClass }) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const scope = state._scope ?? "global";
+  const side = state.side ?? "right";
+  useEffect(() => {
+    if (!open || !details.bSimularLoading) { setLoading(false); return undefined; }
+    setLoading(true);
+    const t = window.setTimeout(() => setLoading(false), 5000);
+    return () => window.clearTimeout(t);
+  }, [open, details.bSimularLoading]);
+  const body = (
+    <>
+      <Button variant="solid" onClick={() => setOpen(true)}>Abrir action drawer</Button>
+      <ActionDrawer open={open} loading={loading} side={side} onClose={() => setOpen(false)} {...overlayScopeProps(scope)}>
+        <strong style={{ display: "block", marginBottom: "0.35rem" }}>Acciones secundarias</strong>
+        <p style={{ margin: 0, fontSize: "0.9rem" }}>Panel deslizante desde <code>{side}</code>.</p>
+      </ActionDrawer>
+    </>
+  );
+  return scope === "local" ? (
+    <div key={previewKey} className={["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
+  ) : (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>{body}</div>
+  );
+}
+
+function LoadingPreview({ state, previewKey, demoStyle, demoClass, demoConfig }) {
+  const [open, setOpen] = useState(false);
+  const autoCloseSec = Number(demoConfig?.autoCloseSec) || 3;
+  useEffect(() => {
+    if (!open) return undefined;
+    const t = window.setTimeout(() => setOpen(false), autoCloseSec * 1000);
+    return () => window.clearTimeout(t);
+  }, [open, autoCloseSec]);
+  return (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
+      <Button variant="solid" onClick={() => setOpen(true)}>Mostrar loading</Button>
+      <Loading open={open} color={state.color} onClose={() => setOpen(false)} />
+    </div>
+  );
+}
+
+function ToasterPreview({ previewKey, demoStyle, demoClass }) {
+  return (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("flex-direction: column; gap: 0.5rem", demoStyle))}>
+      <Toaster />
+      <Button variant="solid" color="success" onClick={() => toastSuccess("Operación completada")}>toastSuccess</Button>
+      <Button variant="solid" color="error" onClick={() => toastError("Ha ocurrido un error")}>toastError</Button>
+      <Button variant="outlined" onClick={() => { const id = toastLoading("Procesando…"); window.setTimeout(() => toastRemove(id), 2500); }}>toastLoading</Button>
+    </div>
+  );
+}
+
+function AlertPreview({ state, details, previewKey, demoStyle, demoClass }) {
+  return (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
+      <Alert color={state.color ?? "info"} title={state.title} inline={Boolean(state.inline)} style={{ width: state.inline ? undefined : "100%", maxWidth: "28rem" }}>
+        {details.body ?? "Texto descriptivo del alert."}
+      </Alert>
+    </div>
+  );
+}
+
+function TipInfoPreview({ state, previewKey, demoStyle, demoClass }) {
+  return (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
+      <TipInfo label={state.label} descripcion={state.descripcion} kind={state.kind ?? "info"} trigger={state.trigger ?? "click"} useModal={Boolean(state.useModal)} />
+    </div>
+  );
+}
+
+function InvokedFloaterPreview({ state, previewKey, demoStyle, demoClass }) {
+  return (
+    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
+      <InvokedFloater anchorLabel={state.anchorLabel} panelText={state.panelText} side={state.side ?? "bottom"} align={state.align ?? "center"} trigger={state.trigger ?? "click"} />
+    </div>
+  );
+}
+
+function FloatingComponentPreview({ state, previewKey, demoStyle, demoClass }) {
+  return (
+    <div key={previewKey} className={["mimicus-floating-component-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("width: 100%", demoStyle))}>
+      <FloatingComponent showfloat={Boolean(state.showfloat)} rowText={state.rowText} horizontal={state.horizontal ?? "right"} vertical={state.vertical ?? "center"} />
+    </div>
+  );
+}
+
 export const previewBuiltins = {
   card: CardPreview,
   datagrid: DataGridPreview,
@@ -840,6 +995,15 @@ export const previewBuiltins = {
   "disp-list": ListPreview,
   "cmp-code-block": CodeBlockPreview,
   "contapyme-login": LoginButtonPreview,
+  modal: ModalPreview,
+  dialog: DialogPreview,
+  "action-drawer": ActionDrawerPreview,
+  loading: LoadingPreview,
+  toaster: ToasterPreview,
+  "cmp-alert": AlertPreview,
+  "cmp-tip-info": TipInfoPreview,
+  "cmp-invoked-floater": InvokedFloaterPreview,
+  "cmp-floating-component": FloatingComponentPreview,
 };
 
 export function PreviewStub({ template, componentName }) {

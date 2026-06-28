@@ -43,6 +43,10 @@ import {
   Tooltip, Tour, Tree, Calendar, List, ListItem, ListItemText, ListItemIcon, ListItemAvatar,
 } from "./components/display/Display.tsx";
 import {
+  Dialog, Modal, ActionDrawer, Loading, Toaster, toastSuccess, toastError, toastLoading, toastRemove,
+  Alert, TipInfo, InvokedFloater, FloatingComponent,
+} from "./components/overlays/Overlays.tsx";
+import {
   Form, FormItem, Input, TextField, TextArea, InputNumber, Checkbox, CheckboxIcon, CheckboxChip,
   Switch, LabeledSwitch, Radio, RadioGroup, Slider, Rate, Rating, Select, AutoComplete,
   ToggleButton, ToggleButtonGroup, Transfer, TransferList, TransferBoard, Upload, ColorPicker,
@@ -154,6 +158,7 @@ export {
   Fab,
   IconButton,
   Card,
+  TitleCard,
   CodeBlock,
   CodeMirrorPanel,
   Typography,
@@ -213,6 +218,19 @@ export {
   ListItemText,
   ListItemIcon,
   ListItemAvatar,
+  Dialog,
+  Modal,
+  ActionDrawer,
+  Loading,
+  Toaster,
+  toastSuccess,
+  toastError,
+  toastLoading,
+  toastRemove,
+  Alert,
+  TipInfo,
+  InvokedFloater,
+  FloatingComponent,
   Form,
   FormItem,
   Input,

@@ -15,7 +15,7 @@
 	border-radius: var(--catalog-card-radius, 0.5rem);
 	overflow: hidden;
 	background-color: var(--catalog-card-bg);
-	background-image: var(--catalog-card-bg-image);
+	background-image: var(--catalog-card-bg-gradient, var(--catalog-card-bg-image, none));
 	background-size: var(--catalog-card-bg-size, 100% 100%);
 	background-position: var(--catalog-card-bg-position, 50% 42%);
 	background-repeat: no-repeat;
@@ -40,6 +40,58 @@
 	}
 }
 
+/* Neon-glass — paridad GlassCard / isa-sw-glass (superficie agnóstica vía tokens) */
+html[data-looknfeel="neon"] .catalog-card {
+	position: relative;
+	overflow: hidden;
+	will-change: transform;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		pointer-events: none;
+		z-index: 1;
+		background-image: var(--catalog-card-glass-sheen, none);
+		box-shadow: var(--catalog-card-inset, none);
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 0;
+		width: 3px;
+		border-radius: inherit 0 0 inherit;
+		background: linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--sm-accent, var(--neon-blue, var(--mimicus-primary))) 72%, transparent),
+			color-mix(in srgb, var(--sm-accent, var(--neon-purple, var(--mimicus-primary))) 48%, transparent)
+		);
+		opacity: 0.55;
+		pointer-events: none;
+		z-index: 3;
+		transition: opacity 0.2s ease, width 0.2s ease;
+	}
+
+	&:hover::after {
+		opacity: 0.92;
+		width: 4px;
+	}
+
+	&:hover .demo-sketch {
+		color: var(--sm-accent, var(--catalog-sketch-accent));
+		filter: drop-shadow(0 0 10px color-mix(in srgb, var(--sm-accent, var(--catalog-sketch-accent)) 38%, transparent));
+	}
+
+	&:hover .mimicus-title-card .mimicus-glass-header__icon {
+		box-shadow:
+			0 4px 18px color-mix(in srgb, var(--mgh-accent, var(--sm-accent, var(--neon-blue, var(--mimicus-primary)))) 48%, transparent),
+			0 0 22px color-mix(in srgb, var(--sm-accent, var(--neon-cyan, var(--mimicus-primary))) 18%, transparent);
+	}
+}
+
 .catalog-card__preview {
 	display: flex;
 	align-items: center;
@@ -48,7 +100,8 @@
 	min-height: 5rem;
 	aspect-ratio: 16 / 8;
 	padding: 0.35rem 0.45rem;
-	background: var(--catalog-card-preview-bg);
+	background-color: var(--catalog-card-preview-bg);
+	background-image: var(--catalog-card-preview-gradient, none);
 	backdrop-filter: var(--catalog-card-preview-backdrop, none);
 	-webkit-backdrop-filter: var(--catalog-card-preview-backdrop, none);
 	border-bottom: 1px solid var(--catalog-card-preview-border);
@@ -59,29 +112,22 @@
 		max-width: 10.5rem;
 		height: auto;
 		max-height: 100%;
+		transition: color 0.2s ease, filter 0.2s ease;
 	}
 }
 
-.catalog-card__footer {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 0.35rem;
-	flex: 0 0 auto;
-	min-width: 0;
-	min-height: 1.65rem;
-	padding: 0.32rem 0.55rem;
-	font-size: 0.78rem;
-	color: var(--catalog-card-footer-fg);
+html[data-looknfeel="neon"] .catalog-card__preview {
+	position: relative;
+	z-index: 0;
 }
 
-.catalog-card__name {
-	font-weight: 600;
-	letter-spacing: 0.01em;
+html[data-looknfeel="neon"] .catalog-card .mimicus-title-card {
+	position: relative;
+	z-index: 2;
+}
+
+.catalog-card .mimicus-title-card .mimicus-glass-header__title {
 	color: var(--catalog-card-name-fg);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 .demo-sketch {

@@ -6,6 +6,8 @@
  * Resolución de secciones del catálogo (orden, meta, label/desc/icon) leyendo de playgroundData() en runtime.
  */
 import { playgroundData } from "../core/playgroundData.ts";
+import { sectionColors } from "../shell/resolveShellConfig.ts";
+import { sectionAccentByIndex, sectionAccentSlot } from "./sectionAccentPalette.ts";
 
 function catalogDef() { return playgroundData().catalogMeta ?? {}; }
 function sectionsDef() { return playgroundData().sectionsMeta ?? {}; }
@@ -37,6 +39,21 @@ export function sectionDescription(sectionId) {
 
 export function sectionIcon(sectionId) {
   return sectionMeta()[sectionId]?.icon ?? "mdi:folder-outline";
+}
+
+export function sectionAccentIndex(sectionId) {
+  const i = sectionOrder().indexOf(sectionId);
+  return i >= 0 ? i : 0;
+}
+
+/** Color de acento (hsl/hex) — libre por sección, máximo contraste entre contiguas. */
+export function sectionAccentColor(sectionId) {
+  return sectionAccentByIndex(sectionAccentIndex(sectionId), sectionColors());
+}
+
+/** Slot estable para data-section-color (accent-0, accent-1…). */
+export function sectionColorToken(sectionId) {
+  return sectionAccentSlot(sectionAccentIndex(sectionId));
 }
 
 export function sectionsWithItems(items, filterFn = () => true) {

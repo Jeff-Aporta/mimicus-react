@@ -57,6 +57,8 @@ import {
 
 import { panelSizeCss, panelStorageKey } from "./resolveShellConfig.ts";
 
+import { designSchemeColorCount, designSchemeForThemeColor } from "../../theme/constants.ts";
+
 import { PlaygroundBrand } from "./playgroundNav.tsx";
 
 
@@ -183,6 +185,16 @@ export function FpsCounter({ collapsed = false }) {
 
 
 
+function paletteColorCountChip(paletteId) {
+  const count = designSchemeColorCount(designSchemeForThemeColor(paletteId));
+  const schemeLabel = count === 1 ? "Mono" : count === 2 ? "Dual" : "Tríada";
+  return (
+    <span className="pg-skin-palette-chip" title={schemeLabel} aria-label={`${count} ${count === 1 ? "color" : "colores"} (${schemeLabel})`}>
+      {count}
+    </span>
+  );
+}
+
 export function PlaygroundSkinSelect({ label, value, options, onChange, accent = "palette" }) {
 
   const dataProps = accent === "palette" ? { "data-palette": value } : { "data-look": value };
@@ -191,6 +203,7 @@ export function PlaygroundSkinSelect({ label, value, options, onChange, accent =
     value: o.id,
     label: o.label,
     icon: o.icon ? <iconify-icon icon={o.icon} /> : undefined,
+    suffix: accent === "palette" ? paletteColorCountChip(o.id) : undefined,
   }));
 
   return (
@@ -231,7 +244,7 @@ export function HeaderSkinBar() {
 
       <PlaygroundSkinSelect label="Look n feel" accent="look" value={look} options={LOOKNFEEL_OPTIONS} onChange={applyLooknfeel} />
 
-      <Button variant={theme.luminance === "dark" ? "soft" : "text"} color="neutral" shape="rect" className="pg-header-skin-bar__theme-btn" onClick={() => setLuminance(theme.luminance === "dark" ? "light" : "dark")} title={theme.luminance === "dark" ? "Modo claro" : "Modo oscuro"} style={{ flexShrink: 0 }}>
+      <Button variant={theme.luminance === "dark" ? "soft" : "text"} color="neutral" shape="rect" className="pg-header-skin-bar__theme-btn" onClick={() => setLuminance(theme.luminance === "dark" ? "light" : "dark")} title={theme.luminance === "dark" ? "Modo claro" : "Modo oscuro"} aria-label={theme.luminance === "dark" ? "Modo claro" : "Modo oscuro"}>
 
         <span aria-hidden>{theme.luminance === "dark" ? "☀" : "☾"}</span>
 

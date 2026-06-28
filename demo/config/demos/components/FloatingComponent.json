@@ -7,7 +7,7 @@
   "intro": "Panel flotante absoluto junto al contenido (p. ej. acciones de fila). Expone <code>FC_KEEP_ALIVE_CTX</code> para menús anidados. En la vista previa, pasa el cursor sobre la <strong>fila resaltada</strong> o activa <code>showfloat</code>.",
   "component": {
     "name": "FloatingComponent",
-    "path": "src/components/overlays/FloatingComponent.svelte"
+    "path": "src/components/overlays/Overlays.tsx"
   },
   "preview": {
     "template": "cmp-floating-component",

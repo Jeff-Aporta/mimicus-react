@@ -1,0 +1,101 @@
+/**
+ * Scrollbars homogéneas — 7px, track transparente.
+ * Chromium: solo ::-webkit-scrollbar (scrollbar-width:thin anula el ancho custom).
+ * Firefox: scrollbar-width:thin vía @supports not selector(::-webkit-scrollbar).
+ */
+
+html,
+.mimicus-ui-root,
+.pg-playground-shell {
+	--pg-scrollbar-size: 7px;
+}
+
+:is(
+	html,
+	.mimicus-ui-root,
+	.pg-playground-shell,
+	.pg-playground-shell *
+)::-webkit-scrollbar {
+	width: var(--pg-scrollbar-size, 7px);
+	height: var(--pg-scrollbar-size, 7px);
+}
+
+:is(
+	html,
+	.mimicus-ui-root,
+	.pg-playground-shell,
+	.pg-playground-shell *
+)::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+:is(
+	html,
+	.mimicus-ui-root,
+	.pg-playground-shell,
+	.pg-playground-shell *
+)::-webkit-scrollbar-thumb {
+	background: var(--pg-scrollbar-thumb);
+	border-radius: 999px;
+}
+
+:is(
+	html,
+	.mimicus-ui-root,
+	.pg-playground-shell,
+	.pg-playground-shell *
+)::-webkit-scrollbar-thumb:hover {
+	background: var(--pg-scrollbar-thumb-hover);
+}
+
+:is(
+	html,
+	.mimicus-ui-root,
+	.pg-playground-shell,
+	.pg-playground-shell *
+)::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+.pg-playground-shell :is(
+	.pg-shell-main,
+	.pg-sidebar-body,
+	.pg-top-nav,
+	.pg-nav-row__scroller,
+	.custom-scrollbar,
+	.pg-scrollbar
+) {
+	scrollbar-color: var(--pg-scrollbar-thumb) transparent;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	html,
+	.mimicus-ui-root,
+	.pg-playground-shell :is(
+		.pg-shell-main,
+		.pg-sidebar-body,
+		.pg-top-nav,
+		.pg-nav-row__scroller,
+		.custom-scrollbar,
+		.pg-scrollbar
+	) {
+		scrollbar-width: thin;
+	}
+}
+
+.mimicus-scrollbar--hidden,
+.mimicus-side-panel__body--rail,
+.mimicus-app-layout-sider--collapsed .mimicus-app-layout-sider__body,
+.pg-sidebar-body--rail {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.mimicus-scrollbar--hidden::-webkit-scrollbar,
+.mimicus-side-panel__body--rail::-webkit-scrollbar,
+.mimicus-app-layout-sider--collapsed .mimicus-app-layout-sider__body::-webkit-scrollbar,
+.pg-sidebar-body--rail::-webkit-scrollbar {
+	display: none;
+	width: 0;
+	height: 0;
+}

@@ -4,28 +4,54 @@
  * Acento por sección — fondos/texto con alpha (nav tabs + rail + coherencia visual).
  */
 
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+.pg-playground-shell :is(
+	.pg-nav-tab,
+	.pg-panel-rail__btn,
+	.pg-panel-demo-link,
+	.catalog-card,
+	.mimicus-title-card
+)[data-section-color],
+.catalog-section[data-section-color] {
 	--sm-accent: var(--mimicus-design-active-1, var(--mimicus-primary));
+	--sm-accent-fg: oklch(from var(--sm-accent) l calc(c * 0.5) h);
 	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 22%, transparent);
 	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 11%, transparent);
-	--pg-accent-fg-selected: color-mix(in srgb, var(--sm-accent) 94%, var(--pg-sidebar-fg, var(--mimicus-color)) 6%);
-	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 78%, var(--sm-accent) 22%);
+	--pg-accent-fg-selected: color-mix(in srgb, var(--sm-accent-fg, var(--sm-accent)) 94%, var(--pg-sidebar-fg, var(--mimicus-color)) 6%);
+	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 78%, var(--sm-accent-fg, var(--sm-accent)) 22%);
 	--pg-accent-border-selected: color-mix(in srgb, var(--sm-accent) 38%, transparent);
 	--pg-accent-ring-selected: color-mix(in srgb, var(--sm-accent) 16%, transparent);
 }
 
-html[data-luminance="dark"] .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+html[data-luminance="dark"] .pg-playground-shell :is(
+	.pg-nav-tab,
+	.pg-panel-rail__btn,
+	.pg-panel-demo-link,
+	.catalog-card,
+	.mimicus-title-card
+)[data-section-color] {
 	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 28%, transparent);
 	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 14%, transparent);
-	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 72%, var(--sm-accent) 28%);
+	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 72%, var(--sm-accent-fg, var(--sm-accent)) 28%);
 }
 
-html[data-luminance="light"] .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+html[data-luminance="light"] .pg-playground-shell :is(
+	.pg-nav-tab,
+	.pg-panel-rail__btn,
+	.pg-panel-demo-link,
+	.catalog-card,
+	.mimicus-title-card
+)[data-section-color] {
 	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 18%, transparent);
 	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 9%, transparent);
 }
 
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn) {
+.pg-playground-shell :is(
+	.pg-nav-tab,
+	.pg-panel-rail__btn,
+	.pg-panel-demo-link,
+	.catalog-card,
+	.catalog-card__footer.mimicus-glass-header
+) {
 	&[data-section-color="primary"] { --sm-accent: var(--mimicus-primary); }
 	&[data-section-color="info"] { --sm-accent: var(--mimicus-info); }
 	&[data-section-color="success"] { --sm-accent: var(--mimicus-success); }
@@ -36,7 +62,13 @@ html[data-luminance="light"] .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rai
 }
 
 /* Seleccionado — tinte alpha sobre chrome (no bloque sólido) */
-.pg-playground-shell :is(.pg-nav-tab, .pg-panel-rail__btn)[data-section-color] {
+.pg-playground-shell :is(
+	.pg-nav-tab,
+	.pg-panel-rail__btn,
+	.pg-panel-demo-link,
+	.catalog-card,
+	.mimicus-title-card
+)[data-section-color] {
 	&[data-variant="soft"] {
 		background: var(--pg-accent-bg-selected) !important;
 		color: var(--pg-accent-fg-selected) !important;
@@ -69,4 +101,21 @@ html[data-luminance="light"] .pg-playground-shell :is(.pg-nav-tab, .pg-panel-rai
 	&[data-variant="text"]:not(:disabled):hover :is(iconify-icon, .iconify) {
 		color: var(--pg-accent-fg-selected) !important;
 	}
+}
+
+/* Glass header en tarjetas — acento heredado de la sección */
+.pg-playground-shell .mimicus-title-card[data-section-color] {
+	--mgh-accent: var(--sm-accent);
+}
+
+.catalog-card[data-section-color] {
+	--catalog-sketch-accent: var(--sm-accent);
+	--catalog-card-hover-border: color-mix(in srgb, var(--sm-accent) 42%, var(--catalog-card-border));
+	--catalog-card-hover-shadow: 0 4px 18px color-mix(in srgb, var(--sm-accent) 28%, transparent);
+	--catalog-card-focus: color-mix(in srgb, var(--sm-accent) 35%, transparent);
+}
+
+.catalog-card[data-section-color] .catalog-card__preview {
+	background-color: color-mix(in srgb, var(--sm-accent) 9%, var(--catalog-card-preview-bg));
+	--catalog-card-preview-border: color-mix(in srgb, var(--sm-accent) 18%, var(--catalog-card-preview-border, var(--mimicus-b-color)));
 }

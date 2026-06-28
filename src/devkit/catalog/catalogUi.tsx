@@ -7,9 +7,9 @@
  */
 import { useMemo, useState } from "react";
 import { Button, Input } from "../_ui.ts";
-import { resolveColor } from "../_ui.ts";
 import { Icon } from "../../components/Icon.tsx";
-import { itemsInSection, overviewMeta, sectionDescription, sectionIcon, sectionLabel, sectionsWithItems } from "./catalogSections.ts";
+import { TitleCard } from "../../components/TitleCard.tsx";
+import { itemsInSection, overviewMeta, sectionAccentColor, sectionColorToken, sectionDescription, sectionIcon, sectionLabel, sectionsWithItems } from "./catalogSections.ts";
 import { MIMICUS_UI } from "../shared/playgroundKit.ts";
 import { markViewTransitionCardSource } from "../shell/routing.ts";
 
@@ -32,36 +32,6 @@ const demoIcons = {
 
 export function getDemoIcon(demoId, item) {
   return item?.definition?.titleIcon ?? demoIcons[demoId] ?? "mdi:circle-small";
-}
-
-const demoStatus = {
-  Button: "approved", ButtonIconify: "approved", CheckboxIcon: "approved", Switch: "approved", Card: "approved", BlockLayout: "pending",
-  FlexLayout: "approved", GridLayout: "approved", Splitter: "approved", Divider: "approved", AppLayout: "approved", SidePanel: "approved", Anchor: "approved",
-  TransferBoard: "approved", Modal: "approved", ActionDrawer: "approved", Loading: "approved", Iconify: "approved", Spinner: "approved",
-  Text: "approved", Headings: "approved", CodeBlock: "approved", Chip: "pending", CheckboxChip: "pending", Dialog: "pending", Accordion: "pending", Tabs: "pending",
-  Toaster: "pending", Tooltip: "pending", Separator: "pending", Alert: "pending", TipInfo: "pending",
-  FlexOptions: "pending", InvokedFloater: "pending", FloatingComponent: "pending", GridResponsiveForm: "pending", LabeledSwitch: "pending", FpsHistogram: "approved",
-  Box: "approved", Container: "approved", Stack: "approved", Space: "approved", Masonry: "approved", ImageList: "approved",
-};
-
-const reviewColorFor = { approved: "success", pending: "warning", rejected: "error" };
-
-export function statusFor(demoId, item) { return item?.definition?.status ?? demoStatus[demoId]; }
-export function statusDotFor(demoId, item) { const s = statusFor(demoId, item); return s ? reviewColorFor[s] : undefined; }
-export function statusDotsFor(demoIds, itemsById) {
-  return [...new Set(demoIds.map((id) => statusFor(id, itemsById?.[id])).filter(Boolean).map((s) => reviewColorFor[s]))];
-}
-
-export function Badge({ children, className, style }) {
-  return <span className={["mimicus-badge", "catalog-badge", className].filter(Boolean).join(" ")} style={style}>{children}</span>;
-}
-
-const statusColor = { success: "success", warning: "warning", error: "error", info: "info", primary: "primary" };
-
-export function ReviewStatusDot({ status, color, size = "0.58rem" }) {
-  const token = color ?? (status === "approved" ? "success" : status === "pending" ? "warning" : status === "rejected" ? "error" : "neutral");
-  const c = statusColor[token] ?? token;
-  return <span className="review-status-dot" style={{ width: size, height: size, background: resolveColor(c) }} title={status ?? c} aria-hidden />;
 }
 
 const accent = "var(--catalog-sketch-accent, var(--mimicus-primary))";
@@ -824,40 +794,30 @@ export function DemoSketch({ demoId }) {
   );
 }
 
-export function CatalogCard({ demoId, displayLabel, status, item, onSelect }) {
+export function CatalogCard({ demoId, displayLabel, sectionId, onSelect }) {
+  const sectionSlot = sectionColorToken(sectionId);
+  const accent = sectionAccentColor(sectionId);
+  const accentStyle = { "--sm-accent": accent };
+
   const handleSelect = (e) => {
     markViewTransitionCardSource(e.currentTarget);
     onSelect?.();
   };
 
   return (
-    <button type="button" className="catalog-card" onClick={handleSelect} title={`Abrir demo ${displayLabel}`}>
+    <button
+      type="button"
+      className="catalog-card"
+      data-section-color={sectionSlot}
+      style={accentStyle}
+      onClick={handleSelect}
+      title={`Abrir demo ${displayLabel}`}
+    >
       <div className="catalog-card__preview">
         <DemoSketch demoId={demoId} />
       </div>
-      <div className="catalog-card__footer">
-        <span className="catalog-card__name">{displayLabel}</span>
-        {status && <ReviewStatusDot status={status} size="0.5rem" />}
-      </div>
+      <TitleCard title={displayLabel} icon={getDemoIcon(demoId)} sectionColor={accent} />
     </button>
-  );
-}
-
-function CatalogToc({ sections, counts, activeSection, onSectionClick }) {
-  return (
-    <nav className="catalog-toc" aria-label="En esta página">
-      <p className="catalog-toc__label">En esta página</p>
-      <ul className="catalog-toc__list">
-        {sections.map((sid) => (
-          <li key={sid}>
-            <a href={`#section-${sid}`} className={["catalog-toc__link", activeSection === sid && "is-active"].filter(Boolean).join(" ")} onClick={(e) => { e.preventDefault(); onSectionClick?.(sid); document.getElementById(`section-${sid}`)?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
-              {sectionLabel(sid)}
-              <span className="catalog-toc__count">{counts[sid] ?? 0}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
   );
 }
 
@@ -881,16 +841,8 @@ export function CatalogHome({
   const heroTitle = filterSection ? sectionLabel(filterSection) : (overview.title ?? "Components Overview");
   const heroLead = filterSection ? sectionDescription(filterSection) : (overview.lead ?? MIMICUS_UI.catalogLead);
 
-  const counts = useMemo(() => Object.fromEntries(visibleSections.map((sid) => [sid, itemsInSection(filtered, sid).length])), [filtered, visibleSections]);
-
   return (
     <div className="catalog-overview">
-      {!filterSection && visibleSections.length > 1 && (
-        <aside className="catalog-overview__toc">
-          <CatalogToc sections={visibleSections} counts={counts} onSectionClick={() => {}} />
-        </aside>
-      )}
-
       <div className="catalog-overview__main catalog-home">
         {showHero && (
           <header className="catalog-overview__hero pg-vt-hero">
@@ -933,17 +885,25 @@ export function CatalogHome({
         {visibleSections.map((sid) => {
           const sectionItems = itemsInSection(filtered, sid);
           if (!sectionItems.length) return null;
+          const accent = sectionAccentColor(sid);
+          const sectionSlot = sectionColorToken(sid);
           return (
-            <section key={sid} id={`section-${sid}`} className="catalog-section" aria-labelledby={`heading-${sid}`}>
+            <section
+              key={sid}
+              id={`section-${sid}`}
+              className="catalog-section"
+              data-section-color={sectionSlot}
+              style={{ "--sm-accent": accent }}
+              aria-labelledby={`heading-${sid}`}
+            >
               {!filterSection && (
                 <div className="catalog-section-heading" id={`heading-${sid}`}>
                   <h2 className="catalog-section-heading__title">{sectionLabel(sid)}</h2>
-                  <Badge>{sectionItems.length}</Badge>
                 </div>
               )}
               <div className="catalog-grid catalog-grid--overview">
                 {sectionItems.map((it) => (
-                  <CatalogCard key={`${it.section}/${it.slug}`} demoId={it.id} displayLabel={it.displayLabel} item={it} status={statusFor(it.id, it)} onSelect={() => onSelect?.(it.section, it.slug)} />
+                  <CatalogCard key={`${it.section}/${it.slug}`} sectionId={sid} demoId={it.id} displayLabel={it.displayLabel} onSelect={() => onSelect?.(it.section, it.slug)} />
                 ))}
               </div>
             </section>

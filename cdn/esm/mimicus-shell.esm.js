@@ -8,27 +8,38 @@ function sortedCategories(ctx) {
 function sectionMeta(ctx, sectionId) {
   return ctx.catalog?.sections?.[sectionId] ?? ctx.catalog?.categories?.[sectionId] ?? {};
 }
+function sectionAccentIndexFor(ctx, categoryId) {
+  const i = sortedCategories(ctx).indexOf(categoryId);
+  return i >= 0 ? i : 0;
+}
+function sectionAccentColorFor(ctx, categoryId) {
+  const palette = ctx.sectionAccentColors ?? ctx.sectionColors ?? ["var(--mimicus-primary)"];
+  const i = sectionAccentIndexFor(ctx, categoryId);
+  return palette[i % palette.length];
+}
+function sectionColorSlotFor(ctx, categoryId) {
+  return `accent-${sectionAccentIndexFor(ctx, categoryId)}`;
+}
 function sectionColorFor(ctx, categoryId) {
-  const categories = sortedCategories(ctx);
-  const i = categories.indexOf(categoryId);
-  const palette = ctx.sectionColors ?? ["primary"];
-  return palette[i >= 0 ? i % palette.length : 0];
+  return sectionAccentColorFor(ctx, categoryId);
 }
 function resolveCategoryTabDescriptors(ctx) {
   return sortedCategories(ctx).map((cat) => {
     const meta = sectionMeta(ctx, cat);
-    return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), kind: "category" };
+    return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), colorSlot: sectionColorSlotFor(ctx, cat), kind: "category" };
   });
 }
 function resolveCatalogDemoTabDescriptors(ctx) {
   const { route, catalogItems } = ctx;
   if (!route?.category) return [];
   const color = sectionColorFor(ctx, route.category);
+  const colorSlot = sectionColorSlotFor(ctx, route.category);
   return catalogItems.filter((it) => (it.section ?? it.category) === route.category).map((it) => ({
     id: it.slug,
     label: it.displayLabel ?? it.slug,
     icon: ctx.getDemoIcon?.(it) ?? it.icon ?? it.definition?.titleIcon ?? "mdi:file-document-outline",
     color,
+    colorSlot,
     kind: "demo",
     category: route.category
   }));
@@ -159,7 +170,257 @@ import { useEffect, useRef } from "react";
 // src/components/Button.tsx
 import { useState } from "react";
 
+// src/theme/palette-catalog.json
+var palette_catalog_default = [
+  {
+    id: "grafito",
+    label: "Grafito",
+    icon: "mdi:square",
+    scheme: "mono",
+    note: "gris pizarra fr\xEDo",
+    aliases: []
+  },
+  {
+    id: "menta",
+    label: "Menta",
+    icon: "mdi:sprout",
+    scheme: "mono",
+    note: "verde menta / agua fresca",
+    aliases: []
+  },
+  {
+    id: "vulcano",
+    label: "Vulcano",
+    icon: "mdi:fire",
+    scheme: "mono",
+    note: "grises volc\xE1nicos",
+    aliases: []
+  },
+  {
+    id: "carbon",
+    label: "Carb\xF3n",
+    icon: "mdi:hexagon-outline",
+    scheme: "mono",
+    note: "carb\xF3n neutro",
+    aliases: []
+  },
+  {
+    id: "plata",
+    label: "Plata",
+    icon: "mdi:brightness-6",
+    scheme: "mono",
+    note: "plata azulada",
+    aliases: []
+  },
+  {
+    id: "humo",
+    label: "Humo",
+    icon: "mdi:smoke",
+    scheme: "mono",
+    note: "gris c\xE1lido humo",
+    aliases: []
+  },
+  {
+    id: "marfil",
+    label: "Marfil",
+    icon: "mdi:feather",
+    scheme: "mono",
+    note: "marfil c\xE1lido",
+    aliases: []
+  },
+  {
+    id: "azabache",
+    label: "Azabache",
+    icon: "mdi:circle-slice-8",
+    scheme: "mono",
+    note: "negro azulado",
+    aliases: []
+  },
+  {
+    id: "nieve",
+    label: "Nieve",
+    icon: "mdi:snowflake",
+    scheme: "mono",
+    note: "blanco helado",
+    aliases: []
+  },
+  {
+    id: "piedra",
+    label: "Piedra",
+    icon: "mdi:wall",
+    scheme: "mono",
+    note: "piedra tostada",
+    aliases: []
+  },
+  {
+    id: "oceano",
+    label: "Oc\xE9ano",
+    icon: "mdi:waves",
+    scheme: "dual",
+    note: "teal + cielo",
+    aliases: []
+  },
+  {
+    id: "ambar",
+    label: "\xC1mbar",
+    icon: "mdi:weather-sunny",
+    scheme: "dual",
+    note: "\xE1mbar + oro",
+    aliases: []
+  },
+  {
+    id: "indigo",
+    label: "\xCDndigo",
+    icon: "mdi:moon-waning-crescent",
+    scheme: "dual",
+    note: "\xEDndigo + violeta",
+    aliases: []
+  },
+  {
+    id: "tierra",
+    label: "Tierra",
+    icon: "mdi:terrain",
+    scheme: "dual",
+    note: "marr\xF3n + ocre",
+    aliases: []
+  },
+  {
+    id: "cobre",
+    label: "Cobre",
+    icon: "mdi:gold",
+    scheme: "dual",
+    note: "cobre + turquesa",
+    aliases: []
+  },
+  {
+    id: "oliva",
+    label: "Oliva",
+    icon: "mdi:fruit-grapes",
+    scheme: "dual",
+    note: "oliva + oro",
+    aliases: []
+  },
+  {
+    id: "glaciar",
+    label: "Glaciar",
+    icon: "mdi:snowflake-variant",
+    scheme: "dual",
+    note: "hielo + azul profundo",
+    aliases: []
+  },
+  {
+    id: "bosque",
+    label: "Bosque",
+    icon: "mdi:tree",
+    scheme: "dual",
+    note: "verde bosque + musgo",
+    aliases: []
+  },
+  {
+    id: "medianoche",
+    label: "Medianoche",
+    icon: "mdi:weather-night",
+    scheme: "dual",
+    note: "navy + cian",
+    aliases: []
+  },
+  {
+    id: "ciruela",
+    label: "Ciruela",
+    icon: "mdi:flower-tulip-outline",
+    scheme: "dual",
+    note: "ciruela + rosa",
+    aliases: []
+  },
+  {
+    id: "hues-dodgerblue",
+    label: "Dodger",
+    icon: "mdi:palette-swatch",
+    scheme: "triad",
+    note: "azul dodger ContaPyme",
+    aliases: [
+      "contapyme"
+    ]
+  },
+  {
+    id: "natural",
+    label: "Natural",
+    icon: "mdi:leaf",
+    scheme: "triad",
+    note: "verde + azul + naranja",
+    aliases: []
+  },
+  {
+    id: "coral",
+    label: "Coral",
+    icon: "mdi:flower-tulip",
+    scheme: "triad",
+    note: "coral + melocot\xF3n + violeta",
+    aliases: []
+  },
+  {
+    id: "lavanda",
+    label: "Lavanda",
+    icon: "mdi:flower",
+    scheme: "triad",
+    note: "violeta + rosa + cian",
+    aliases: []
+  },
+  {
+    id: "cereza",
+    label: "Cereza",
+    icon: "mdi:fruit-cherries",
+    scheme: "triad",
+    note: "cereza + rosa + violeta",
+    aliases: []
+  },
+  {
+    id: "fucsia",
+    label: "Fucsia",
+    icon: "mdi:star-four-points",
+    scheme: "triad",
+    note: "magenta + rosa + \xEDndigo",
+    aliases: []
+  },
+  {
+    id: "aurora",
+    label: "Aurora",
+    icon: "mdi:aurora",
+    scheme: "triad",
+    note: "verde + cian + rosa",
+    aliases: []
+  },
+  {
+    id: "tropico",
+    label: "Tr\xF3pico",
+    icon: "mdi:palm-tree",
+    scheme: "triad",
+    note: "amarillo + verde + azul",
+    aliases: []
+  },
+  {
+    id: "electrico",
+    label: "El\xE9ctrico",
+    icon: "mdi:flash",
+    scheme: "triad",
+    note: "magenta + cian + amarillo",
+    aliases: []
+  },
+  {
+    id: "crepusculo",
+    label: "Crep\xFAsculo",
+    icon: "mdi:weather-sunset",
+    scheme: "triad",
+    note: "violeta + naranja + azul",
+    aliases: []
+  }
+];
+
 // src/theme/constants.ts
+var THEME_COLOR_OPTIONS = palette_catalog_default.map(({ id, label, icon }) => ({ id, label, icon }));
+var THEME_COLOR_DESIGN_SCHEME = Object.fromEntries(
+  palette_catalog_default.map((p) => [p.id, p.scheme])
+);
 var LOOKNFEEL_OPTIONS = [
   { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
   { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
@@ -320,7 +581,7 @@ function Button({
     "data-glass-active": isGlassVariant(variant) && glassActive ? "true" : void 0,
     ...surfaceStyle,
     className: cls,
-    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
+    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style, ...style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
   const extractChildIcon = (nodes) => {
@@ -371,6 +632,8 @@ function NavTabRow({ tabs = [], value, onChange, tier = "primary", className, ta
     const selected = value === tab.id;
     const label = tab.label || tab.title || tab.id;
     const tabColor = tab.color ?? "primary";
+    const isSectionTab = tab.kind !== "action" && !tab.id?.startsWith("__");
+    const tabStyle = isSectionTab ? { "--sm-accent": tabColor } : void 0;
     const onClick = (e) => {
       if (tab.disabled) return;
       if (tabHref && (e.ctrlKey || e.metaKey || e.button === 1)) {
@@ -394,7 +657,8 @@ function NavTabRow({ tabs = [], value, onChange, tier = "primary", className, ta
         shape: "rect",
         color: tabColor,
         className: ["pg-nav-tab", selected && "is-active"].filter(Boolean).join(" "),
-        "data-section-color": tab.kind === "action" || tab.id?.startsWith("__") ? void 0 : tabColor,
+        "data-section-color": isSectionTab ? tab.colorSlot ?? tabColor : void 0,
+        style: tabStyle,
         title: tab.disabled ? tab.disabledTitle || "No disponible" : String(label),
         onClick,
         onAuxClick: onClick,
@@ -426,6 +690,7 @@ export {
   resolveNavRowValue,
   resolveShellNavigation,
   sectionColorFor,
+  sectionColorSlotFor,
   sectionMeta,
   sortedCategories
 };

@@ -12,3 +12,4 @@ export * from "../category/layout.js";
 export * from "../category/forms.js";
 export * from "../category/display.js";
 export * from "../category/navigation.js";
+export * from "../category/overlays.js";

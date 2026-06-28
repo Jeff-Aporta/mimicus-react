@@ -57,7 +57,7 @@ export function DemoPage({ definition }) {
 
   return (
     <AccordionDemo
-      flat adapter={adapter} title={definition.title ?? definition.label} titleIcon={definition.titleIcon} reviewStatus={definition.status}
+      flat adapter={adapter} title={definition.title ?? definition.label} titleIcon={definition.titleIcon}
       relieve={shell.relieve} configBlockCount={shell.configBlockCount} className={shell.class} previewScale={definition.preview?.scale} previewStyle={definition.preview?.style}
       demoId={definition.id} state={state} details={details} demoConfig={demoConfig} demoStyle={demoStyle} demoClass={demoClass}
       onStateChange={setState} onDetailsChange={setDetails} onDemoConfigChange={setDemoConfig} onDemoStyleChange={setDemoStyle} onDemoClassChange={setDemoClass}

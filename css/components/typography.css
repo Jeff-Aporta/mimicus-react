@@ -43,7 +43,7 @@
 	width: 100%;
 }
 
-html[data-looknfeel^="neon-"] .mimicus-typography-link {
+html[data-looknfeel="neon"] .mimicus-typography-link {
 	text-shadow: 0 0 12px color-mix(in srgb, var(--mimicus-primary), transparent 70%);
 }
 

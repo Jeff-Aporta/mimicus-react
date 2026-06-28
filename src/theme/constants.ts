@@ -1,18 +1,7 @@
+import paletteCatalog from "./palette-catalog.json";
+
 export type Luminance = "light" | "dark";
-export type ThemeColor =
-  | "hues-dodgerblue"
-  | "vulcano"
-  | "natural"
-  | "coral"
-  | "oceano"
-  | "lavanda"
-  | "ambar"
-  | "cereza"
-  | "grafito"
-  | "menta"
-  | "indigo"
-  | "tierra"
-  | "fucsia";
+export type ThemeColor = (typeof paletteCatalog)[number]["id"];
 export type DesignScheme = "mono" | "dual" | "triad";
 export type Looknfeel = "contapyme" | "neon";
 
@@ -39,21 +28,7 @@ export const LEGACY_THEME_COLOR_MAP: Record<string, ThemeColor> = {
   magenta: "fucsia",
 };
 
-export const THEME_COLOR_OPTIONS: Option<ThemeColor>[] = [
-  { id: "hues-dodgerblue", label: "Dodger", icon: "mdi:palette-swatch" },
-  { id: "vulcano", label: "Vulcano", icon: "mdi:fire" },
-  { id: "natural", label: "Natural", icon: "mdi:leaf" },
-  { id: "coral", label: "Coral", icon: "mdi:flower-tulip" },
-  { id: "oceano", label: "Océano", icon: "mdi:waves" },
-  { id: "lavanda", label: "Lavanda", icon: "mdi:flower" },
-  { id: "ambar", label: "Ámbar", icon: "mdi:weather-sunny" },
-  { id: "cereza", label: "Cereza", icon: "mdi:fruit-cherries" },
-  { id: "grafito", label: "Grafito", icon: "mdi:square" },
-  { id: "menta", label: "Menta", icon: "mdi:sprout" },
-  { id: "indigo", label: "Índigo", icon: "mdi:moon-waning-crescent" },
-  { id: "tierra", label: "Tierra", icon: "mdi:terrain" },
-  { id: "fucsia", label: "Fucsia", icon: "mdi:star-four-points" },
-];
+export const THEME_COLOR_OPTIONS: Option<ThemeColor>[] = paletteCatalog.map(({ id, label, icon }) => ({ id, label, icon }));
 
 export const DESIGN_SCHEME_OPTIONS: Option<DesignScheme>[] = [
   { id: "mono", label: "Mono", icon: "mdi:circle" },
@@ -62,21 +37,9 @@ export const DESIGN_SCHEME_OPTIONS: Option<DesignScheme>[] = [
 ];
 
 /** Scheme preferido por cada paleta. La paleta manda, no el look n feel. */
-export const THEME_COLOR_DESIGN_SCHEME: Record<ThemeColor, DesignScheme> = {
-  "hues-dodgerblue": "triad",
-  vulcano: "dual",
-  natural: "triad",
-  coral: "triad",
-  oceano: "dual",
-  lavanda: "triad",
-  ambar: "dual",
-  cereza: "triad",
-  grafito: "mono",
-  menta: "mono",
-  indigo: "dual",
-  tierra: "dual",
-  fucsia: "triad",
-};
+export const THEME_COLOR_DESIGN_SCHEME = Object.fromEntries(
+  paletteCatalog.map((p) => [p.id, p.scheme]),
+) as Record<ThemeColor, DesignScheme>;
 
 export const LOOKNFEEL_STORAGE_KEY = "looknfeel";
 export const LOOKNFEEL_DEFAULT: Looknfeel = "contapyme";
@@ -132,6 +95,12 @@ export function normalizeLooknfeel(value: unknown): Looknfeel {
 
 export function designSchemeForThemeColor(value: string): DesignScheme {
   return THEME_COLOR_DESIGN_SCHEME[value as ThemeColor] ?? "mono";
+}
+
+export function designSchemeColorCount(scheme: DesignScheme): 1 | 2 | 3 {
+  if (scheme === "mono") return 1;
+  if (scheme === "dual") return 2;
+  return 3;
 }
 
 export function readLuminanceFromDom(): Luminance {

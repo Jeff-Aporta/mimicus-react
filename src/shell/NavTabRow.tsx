@@ -4,7 +4,7 @@
  * Fila de tabs del shell — datos desde `resolveShellNavigation` (JSON).
  */
 import { useEffect, useRef } from "react";
-import type { MouseEvent, ReactNode } from "react";
+import type { CSSProperties, MouseEvent, ReactNode } from "react";
 import { Button } from "../components/Button.tsx";
 
 // Tab proviene del JSON del shell (resolveShellNavigation), forma heterogénea; `any` puntual.
@@ -13,6 +13,7 @@ export interface NavTab {
   label?: ReactNode;
   title?: ReactNode;
   color?: string;
+  colorSlot?: string;
   icon?: string;
   kind?: string;
   disabled?: boolean;
@@ -46,6 +47,8 @@ export function NavTabRow({ tabs = [], value, onChange, tier = "primary", classN
           const selected = value === tab.id;
           const label = tab.label || tab.title || tab.id;
           const tabColor = tab.color ?? "primary";
+          const isSectionTab = tab.kind !== "action" && !tab.id?.startsWith("__");
+          const tabStyle = isSectionTab ? ({ "--sm-accent": tabColor } as CSSProperties) : undefined;
           const onClick = (e: MouseEvent<HTMLElement>) => {
             if (tab.disabled) return;
             if (tabHref && (e.ctrlKey || e.metaKey || e.button === 1)) {
@@ -69,7 +72,8 @@ export function NavTabRow({ tabs = [], value, onChange, tier = "primary", classN
               shape="rect"
               color={tabColor}
               className={["pg-nav-tab", selected && "is-active"].filter(Boolean).join(" ")}
-              data-section-color={tab.kind === "action" || tab.id?.startsWith("__") ? undefined : tabColor}
+              data-section-color={isSectionTab ? (tab.colorSlot ?? tabColor) : undefined}
+              style={tabStyle}
               title={tab.disabled ? tab.disabledTitle || "No disponible" : String(label)}
               onClick={onClick}
               onAuxClick={onClick}

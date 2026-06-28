@@ -37,7 +37,8 @@
     "./looknfeel/neon.css": "./cdn/css/mimicus-looknfeel-neon.css"
   },
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "gen:palettes": "node scripts/gen-theme-palettes-css.mjs",
+    "build": "npm run gen:palettes && node scripts/build.mjs",
     "build:demo": "node scripts/gen-catalog-items.mjs && node scripts/build-demo.mjs && node scripts/patch-demo-index.mjs",
     "build:all": "npm run build && npm run build:demo"
   },

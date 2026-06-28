@@ -1,18 +1,27 @@
 /* Radius unificado — ContaPyme y neon-glass */
 
 html[data-looknfeel="contapyme"],
-html[data-looknfeel^="neon-"] {
+html[data-looknfeel="neon"] {
 	--mimicus-ui-radius: 0.5rem;
-	--mimicus-ui-glass-radius: 0.5rem;
-	--mimicus-glass-radius: 0.5rem;
 	--mimicus-field-radius: 0.5rem;
 	--pg-config-field-radius: 0.5rem;
 	--pg-config-input-radius: 0.5rem;
 	--pg-config-section-radius: 0.5rem;
+}
+
+html[data-looknfeel="contapyme"] {
+	--mimicus-ui-glass-radius: 0.5rem;
+	--mimicus-glass-radius: 0.5rem;
 	--catalog-card-radius: 0.5rem;
 }
 
+html[data-looknfeel="neon"] {
+	--catalog-card-radius: 0.75rem;
+	--mimicus-ui-glass-radius: 0.75rem;
+	--mimicus-glass-radius: 0.75rem;
+}
+
 html[data-looknfeel="contapyme"] :is(.demo-panel.pg-glass-demo, .accordion.pg-glass-accordion),
-html[data-looknfeel^="neon-"] :is(.demo-panel.pg-glass-demo, .accordion.pg-glass-accordion) {
+html[data-looknfeel="neon"] :is(.demo-panel.pg-glass-demo, .accordion.pg-glass-accordion) {
 	border-radius: var(--mimicus-ui-radius);
 }

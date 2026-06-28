@@ -16,7 +16,257 @@ function Icon({ icon, className, style }) {
 // src/components/Button.tsx
 import { useState } from "react";
 
+// src/theme/palette-catalog.json
+var palette_catalog_default = [
+  {
+    id: "grafito",
+    label: "Grafito",
+    icon: "mdi:square",
+    scheme: "mono",
+    note: "gris pizarra fr\xEDo",
+    aliases: []
+  },
+  {
+    id: "menta",
+    label: "Menta",
+    icon: "mdi:sprout",
+    scheme: "mono",
+    note: "verde menta / agua fresca",
+    aliases: []
+  },
+  {
+    id: "vulcano",
+    label: "Vulcano",
+    icon: "mdi:fire",
+    scheme: "mono",
+    note: "grises volc\xE1nicos",
+    aliases: []
+  },
+  {
+    id: "carbon",
+    label: "Carb\xF3n",
+    icon: "mdi:hexagon-outline",
+    scheme: "mono",
+    note: "carb\xF3n neutro",
+    aliases: []
+  },
+  {
+    id: "plata",
+    label: "Plata",
+    icon: "mdi:brightness-6",
+    scheme: "mono",
+    note: "plata azulada",
+    aliases: []
+  },
+  {
+    id: "humo",
+    label: "Humo",
+    icon: "mdi:smoke",
+    scheme: "mono",
+    note: "gris c\xE1lido humo",
+    aliases: []
+  },
+  {
+    id: "marfil",
+    label: "Marfil",
+    icon: "mdi:feather",
+    scheme: "mono",
+    note: "marfil c\xE1lido",
+    aliases: []
+  },
+  {
+    id: "azabache",
+    label: "Azabache",
+    icon: "mdi:circle-slice-8",
+    scheme: "mono",
+    note: "negro azulado",
+    aliases: []
+  },
+  {
+    id: "nieve",
+    label: "Nieve",
+    icon: "mdi:snowflake",
+    scheme: "mono",
+    note: "blanco helado",
+    aliases: []
+  },
+  {
+    id: "piedra",
+    label: "Piedra",
+    icon: "mdi:wall",
+    scheme: "mono",
+    note: "piedra tostada",
+    aliases: []
+  },
+  {
+    id: "oceano",
+    label: "Oc\xE9ano",
+    icon: "mdi:waves",
+    scheme: "dual",
+    note: "teal + cielo",
+    aliases: []
+  },
+  {
+    id: "ambar",
+    label: "\xC1mbar",
+    icon: "mdi:weather-sunny",
+    scheme: "dual",
+    note: "\xE1mbar + oro",
+    aliases: []
+  },
+  {
+    id: "indigo",
+    label: "\xCDndigo",
+    icon: "mdi:moon-waning-crescent",
+    scheme: "dual",
+    note: "\xEDndigo + violeta",
+    aliases: []
+  },
+  {
+    id: "tierra",
+    label: "Tierra",
+    icon: "mdi:terrain",
+    scheme: "dual",
+    note: "marr\xF3n + ocre",
+    aliases: []
+  },
+  {
+    id: "cobre",
+    label: "Cobre",
+    icon: "mdi:gold",
+    scheme: "dual",
+    note: "cobre + turquesa",
+    aliases: []
+  },
+  {
+    id: "oliva",
+    label: "Oliva",
+    icon: "mdi:fruit-grapes",
+    scheme: "dual",
+    note: "oliva + oro",
+    aliases: []
+  },
+  {
+    id: "glaciar",
+    label: "Glaciar",
+    icon: "mdi:snowflake-variant",
+    scheme: "dual",
+    note: "hielo + azul profundo",
+    aliases: []
+  },
+  {
+    id: "bosque",
+    label: "Bosque",
+    icon: "mdi:tree",
+    scheme: "dual",
+    note: "verde bosque + musgo",
+    aliases: []
+  },
+  {
+    id: "medianoche",
+    label: "Medianoche",
+    icon: "mdi:weather-night",
+    scheme: "dual",
+    note: "navy + cian",
+    aliases: []
+  },
+  {
+    id: "ciruela",
+    label: "Ciruela",
+    icon: "mdi:flower-tulip-outline",
+    scheme: "dual",
+    note: "ciruela + rosa",
+    aliases: []
+  },
+  {
+    id: "hues-dodgerblue",
+    label: "Dodger",
+    icon: "mdi:palette-swatch",
+    scheme: "triad",
+    note: "azul dodger ContaPyme",
+    aliases: [
+      "contapyme"
+    ]
+  },
+  {
+    id: "natural",
+    label: "Natural",
+    icon: "mdi:leaf",
+    scheme: "triad",
+    note: "verde + azul + naranja",
+    aliases: []
+  },
+  {
+    id: "coral",
+    label: "Coral",
+    icon: "mdi:flower-tulip",
+    scheme: "triad",
+    note: "coral + melocot\xF3n + violeta",
+    aliases: []
+  },
+  {
+    id: "lavanda",
+    label: "Lavanda",
+    icon: "mdi:flower",
+    scheme: "triad",
+    note: "violeta + rosa + cian",
+    aliases: []
+  },
+  {
+    id: "cereza",
+    label: "Cereza",
+    icon: "mdi:fruit-cherries",
+    scheme: "triad",
+    note: "cereza + rosa + violeta",
+    aliases: []
+  },
+  {
+    id: "fucsia",
+    label: "Fucsia",
+    icon: "mdi:star-four-points",
+    scheme: "triad",
+    note: "magenta + rosa + \xEDndigo",
+    aliases: []
+  },
+  {
+    id: "aurora",
+    label: "Aurora",
+    icon: "mdi:aurora",
+    scheme: "triad",
+    note: "verde + cian + rosa",
+    aliases: []
+  },
+  {
+    id: "tropico",
+    label: "Tr\xF3pico",
+    icon: "mdi:palm-tree",
+    scheme: "triad",
+    note: "amarillo + verde + azul",
+    aliases: []
+  },
+  {
+    id: "electrico",
+    label: "El\xE9ctrico",
+    icon: "mdi:flash",
+    scheme: "triad",
+    note: "magenta + cian + amarillo",
+    aliases: []
+  },
+  {
+    id: "crepusculo",
+    label: "Crep\xFAsculo",
+    icon: "mdi:weather-sunset",
+    scheme: "triad",
+    note: "violeta + naranja + azul",
+    aliases: []
+  }
+];
+
 // src/theme/constants.ts
+var THEME_COLOR_OPTIONS = palette_catalog_default.map(({ id, label, icon }) => ({ id, label, icon }));
+var THEME_COLOR_DESIGN_SCHEME = Object.fromEntries(
+  palette_catalog_default.map((p) => [p.id, p.scheme])
+);
 var LOOKNFEEL_OPTIONS = [
   { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
   { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
@@ -187,7 +437,7 @@ function Button({
     "data-glass-active": isGlassVariant(variant) && glassActive ? "true" : void 0,
     ...surfaceStyle,
     className: cls,
-    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
+    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style, ...style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx2("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
   const extractChildIcon = (nodes) => {
@@ -502,6 +752,59 @@ function Card({
   );
 }
 
+// src/components/GlassHeaderBand.tsx
+import { jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
+function GlassHeaderBand({
+  title,
+  titleId,
+  icon = "mdi:circle-small",
+  subtitle,
+  compact = false,
+  className = "",
+  as: Tag = "header",
+  sectionColor,
+  children
+}) {
+  const rootClass = ["mimicus-glass-header", compact && "mimicus-glass-header--compact", className].filter(Boolean).join(" ");
+  const accentStyle = sectionColor ? { "--sm-accent": resolveColor(sectionColor) } : void 0;
+  return /* @__PURE__ */ jsxs3(Tag, { className: rootClass, "data-section-color": sectionColor || void 0, style: accentStyle, children: [
+    icon !== false && icon ? /* @__PURE__ */ jsx5("span", { className: "mimicus-glass-header__icon", "aria-hidden": true, children: /* @__PURE__ */ jsx5(Icon, { icon }) }) : null,
+    /* @__PURE__ */ jsxs3("div", { className: "mimicus-glass-header__body", children: [
+      /* @__PURE__ */ jsx5("span", { id: titleId, className: "mimicus-glass-header__title", children: title }),
+      subtitle ? /* @__PURE__ */ jsx5("span", { className: "mimicus-glass-header__subtitle", children: subtitle }) : null
+    ] }),
+    children ? /* @__PURE__ */ jsx5("div", { className: "mimicus-glass-header__tools", children }) : null
+  ] });
+}
+
+// src/components/TitleCard.tsx
+import { jsx as jsx6 } from "react/jsx-runtime";
+function TitleCard({
+  title,
+  titleId,
+  icon = "mdi:circle-small",
+  subtitle,
+  sectionColor,
+  className = "",
+  as = "div",
+  children
+}) {
+  return /* @__PURE__ */ jsx6(
+    GlassHeaderBand,
+    {
+      as,
+      compact: true,
+      title,
+      titleId,
+      icon,
+      subtitle,
+      sectionColor,
+      className: ["mimicus-title-card", className].filter(Boolean).join(" "),
+      children
+    }
+  );
+}
+
 // src/components/CodeBlock.tsx
 import { useEffect as useEffect3, useRef as useRef2, useState as useState3 } from "react";
 
@@ -706,7 +1009,7 @@ function subscribeTheme(fn) {
 }
 
 // src/components/CodeBlock.tsx
-import { jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
+import { jsx as jsx7, jsxs as jsxs4 } from "react/jsx-runtime";
 function cx(...p) {
   return p.filter(Boolean).join(" ");
 }
@@ -829,14 +1132,14 @@ function CodeBlock({
     }
   }
   if (!cmReady) {
-    return /* @__PURE__ */ jsxs3("div", { className: panelClass, style, children: [
-      /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { "aria-label": copyTitle, onClick: () => copyEditorText(value), title: copyTitle, children: "\u29C9" }) }),
-      /* @__PURE__ */ jsx5("pre", { className: "mimicus-cm-fallback", style: hostStyle, children: value || placeholder })
+    return /* @__PURE__ */ jsxs4("div", { className: panelClass, style, children: [
+      /* @__PURE__ */ jsx7("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx7(IconButton, { "aria-label": copyTitle, onClick: () => copyEditorText(value), title: copyTitle, children: "\u29C9" }) }),
+      /* @__PURE__ */ jsx7("pre", { className: "mimicus-cm-fallback", style: hostStyle, children: value || placeholder })
     ] });
   }
-  return /* @__PURE__ */ jsxs3("div", { className: panelClass, style, children: [
-    /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { className: "mimicus-cm-panel__copy", "aria-label": copyTitle, title: copied ? "Copiado" : copyTitle, onClick: handleCopy, children: copied ? "\u2713" : "\u29C9" }) }),
-    /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-host", ref: hostRef, style: hostStyle })
+  return /* @__PURE__ */ jsxs4("div", { className: panelClass, style, children: [
+    /* @__PURE__ */ jsx7("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx7(IconButton, { className: "mimicus-cm-panel__copy", "aria-label": copyTitle, title: copied ? "Copiado" : copyTitle, onClick: handleCopy, children: copied ? "\u2713" : "\u29C9" }) }),
+    /* @__PURE__ */ jsx7("div", { className: "mimicus-cm-host", ref: hostRef, style: hostStyle })
   ] });
 }
 var CodeMirrorPanel = CodeBlock;
@@ -890,7 +1193,7 @@ function typographyClass(parts) {
 }
 
 // src/components/typography/Typography.tsx
-import { jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
 function TypographyText({
   color,
   variant = "body1",
@@ -911,36 +1214,36 @@ function TypographyText({
   const spec = buildTypographyStyle({ color, variant: v, style, lines, ellipsis });
   const Tag = component ?? (v.startsWith("h") ? v : v === "body1" || v === "body2" ? "p" : "span");
   const mods = [strong && "mimicus-typography--strong", italic && "mimicus-typography--italic", underline && "mimicus-typography--underline", del && "mimicus-typography--delete", disabled && "mimicus-typography--disabled"].filter(Boolean);
-  return /* @__PURE__ */ jsx6(Tag, { ...rest, ...spec, className: typographyClass([`mimicus-typography-${v}`, ...mods, className]), "data-variant": v, "aria-disabled": disabled || void 0, children });
+  return /* @__PURE__ */ jsx8(Tag, { ...rest, ...spec, className: typographyClass([`mimicus-typography-${v}`, ...mods, className]), "data-variant": v, "aria-disabled": disabled || void 0, children });
 }
 function TypographyTitle({ level = 1, color, lines = 0, ellipsis, className, style, children, ...rest }) {
   const variant = levelToVariant(level);
   const spec = buildTypographyStyle({ color, variant, style, lines, ellipsis });
   const Tag = variant;
-  return /* @__PURE__ */ jsx6(Tag, { ...rest, ...spec, className: typographyClass([`mimicus-typography-${variant}`, "mimicus-typography-title", className]), "data-level": level, "data-variant": variant, children });
+  return /* @__PURE__ */ jsx8(Tag, { ...rest, ...spec, className: typographyClass([`mimicus-typography-${variant}`, "mimicus-typography-title", className]), "data-level": level, "data-variant": variant, children });
 }
 function TypographyParagraph(props) {
-  return /* @__PURE__ */ jsx6(TypographyText, { ...props, variant: props.variant ?? "body1", component: "p", className: ["mimicus-typography-paragraph", props.className].filter(Boolean).join(" ") });
+  return /* @__PURE__ */ jsx8(TypographyText, { ...props, variant: props.variant ?? "body1", component: "p", className: ["mimicus-typography-paragraph", props.className].filter(Boolean).join(" ") });
 }
 function TypographyLink({ href, color = "primary", target, rel, className, style, children, disabled, ...rest }) {
   const spec = buildTypographyStyle({ color, variant: "body1", style, lines: 0, ellipsis: false });
   if (target === "_blank" && !rel) rel = "noopener noreferrer";
-  return /* @__PURE__ */ jsx6("a", { ...rest, href: disabled ? void 0 : href, target, rel, ...spec, className: typographyClass(["mimicus-typography-link", disabled && "mimicus-typography--disabled", className]), "aria-disabled": disabled || void 0, children });
+  return /* @__PURE__ */ jsx8("a", { ...rest, href: disabled ? void 0 : href, target, rel, ...spec, className: typographyClass(["mimicus-typography-link", disabled && "mimicus-typography--disabled", className]), "aria-disabled": disabled || void 0, children });
 }
 function Text({ sampleText, children, ...rest }) {
   const content = children ?? sampleText;
-  return /* @__PURE__ */ jsx6(TypographyText, { ...rest, children: content });
+  return /* @__PURE__ */ jsx8(TypographyText, { ...rest, children: content });
 }
 function Headings({ color, lines = 0, sampleText, children, className, style }) {
   const text = children ?? sampleText ?? "Heading";
-  return /* @__PURE__ */ jsx6("div", { className: ["mimicus-typography-headings-demo", className].filter(Boolean).join(" "), style, children: [1, 2, 3, 4, 5, 6].map((level) => /* @__PURE__ */ jsxs4(TypographyTitle, { level, color, lines, children: [
+  return /* @__PURE__ */ jsx8("div", { className: ["mimicus-typography-headings-demo", className].filter(Boolean).join(" "), style, children: [1, 2, 3, 4, 5, 6].map((level) => /* @__PURE__ */ jsxs5(TypographyTitle, { level, color, lines, children: [
     text,
     " \u2014 H",
     level
   ] }, level)) });
 }
 function TypographyRoot(props) {
-  return /* @__PURE__ */ jsx6(TypographyText, { ...props });
+  return /* @__PURE__ */ jsx8(TypographyText, { ...props });
 }
 var Typography = Object.assign(TypographyRoot, {
   Text: TypographyText,
@@ -959,6 +1262,7 @@ export {
   Icon,
   IconButton,
   Text,
+  TitleCard,
   Typography,
   copyEditorText,
   destroyCodeMirror,

@@ -1,0 +1,10 @@
+/**
+ * title-card — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/title-card.css
+ * TitleCard — banda título compacta (paridad footer catálogo / tarjetas glass).
+ */
+
+.mimicus-title-card {
+	flex: 0 0 auto;
+	min-width: 0;
+}

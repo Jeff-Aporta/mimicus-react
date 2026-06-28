@@ -19,7 +19,7 @@
 	--sm-blend-glow: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 22%, transparent);
 }
 
-/* Distribución del header de sección: icono · título(+dots) · chip de cantidad a la derecha */
+/* Distribución del header de sección: icono · título · chip de cantidad a la derecha */
 .pg-sidebar .sm-section > div > :is(button, .button-wrap) > .button-content {
 	flex: 1 1 auto;
 	width: 100%;
@@ -34,12 +34,6 @@
 	gap: 0.4em;
 	min-width: 0;
 }
-.pg-sidebar .sm-section .sm-status-dots {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.22rem;
-	flex-shrink: 0;
-}
 .pg-sidebar .sm-section .sm-trail {
 	margin-left: auto;
 	display: inline-flex;
@@ -47,18 +41,18 @@
 	flex-shrink: 0;
 }
 .pg-sidebar .sm-section .sm-trail .mimicus-badge {
-	min-width: 1.4rem;
-	padding: 0.05rem 0.4rem;
-	font-size: 0.66rem;
-	font-weight: 700;
+	min-width: 1.4em;
+	padding: 0.05em 0.38em;
+	font-size: 0.66em;
+	font-weight: 600;
 	font-variant-numeric: tabular-nums;
-	background: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 18%, transparent);
-	color: var(--sm-blend-fg-strong);
-	border: 1px solid color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 32%, transparent);
+	background: color-mix(in oklch, var(--sm-chrome) 86%, var(--sm-accent, var(--mimicus-primary)) 14%);
+	color: var(--sm-blend-fg);
+	border: 1px solid color-mix(in oklch, var(--sm-blend-border), transparent 58%);
+	box-shadow: none;
 }
-/* Demo-links: gap icono↔label y dot de estado */
+/* Demo-links: gap icono↔label */
 .pg-sidebar .sm-section .sm-item-label { gap: 0.4em; }
-.pg-sidebar .sm-section .sm-item-label .review-status-dot { margin-left: 0.15rem; }
 
 /* Oscuro — hover sidebar: más acento en fondo, texto sobre chrome (evita blanco sobre gris claro). */
 html[data-luminance="dark"] .pg-sidebar .sm-section {

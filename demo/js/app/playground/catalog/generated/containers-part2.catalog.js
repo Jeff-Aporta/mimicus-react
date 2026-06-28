@@ -1,7 +1,7 @@
 /** Auto-generado — Containers (parte 2/2) */
 export const items = [
   {
-    "section": "data-display",
+    "section": "overlays",
     "category": "Containers",
     "slug": "tour",
     "id": "Tour",

@@ -9,6 +9,8 @@ html.pg-playground-doc body {
 	overflow: hidden !important;
 	height: 100vh;
 	margin: 0;
+	background-color: var(--mimicus-bg-primary);
+	color: var(--mimicus-color);
 }
 
 html.pg-playground-doc #root {
@@ -19,7 +21,9 @@ html.pg-playground-doc #root {
 
 .pg-playground-shell {
 	z-index: 1;
-	background: var(--pg-shell-surface, var(--lkf-texture-surface, var(--mimicus-bg-primary)));
+	background-color: var(--mimicus-bg-primary);
+	background-image: var(--pg-shell-surface, var(--lkf-texture-surface, none));
+	color: var(--mimicus-color);
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -27,8 +31,10 @@ html.pg-playground-doc #root {
 	min-width: 0;
 	position: fixed;
 	inset: 0;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	overflow: hidden;
 	--pg-shell-header-h: 2.5rem;
 	--pg-shell-sider-w: 260px;
 	--pg-shell-sider-rail-w: 3.25rem;
@@ -67,7 +73,9 @@ html.pg-playground-doc #root {
 	}
 
 	& .fps-histogram-chip {
-		padding: 0.1rem 0.35rem;
+		height: calc(var(--pg-shell-header-h) - 0.45rem);
+		padding-block: 0;
+		padding-inline: 0.35rem;
 		font-size: 0.64rem;
 	}
 
@@ -137,17 +145,21 @@ html.pg-playground-doc #root {
 	flex-wrap: nowrap;
 	gap: 0.35rem;
 	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 	min-height: var(--pg-shell-header-h);
 	height: var(--pg-shell-header-h);
 	padding: 0 clamp(0.5rem, 2.5vw, 1rem);
-	overflow: visible;
+	overflow: hidden;
 }
 
 .pg-shell-header-stack .pg-shell-toolbar,
 .mimicus-app-layout-header__bar {
 	display: grid;
-	grid-template-columns: auto minmax(0, 1fr) minmax(0, max-content);
+	grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.35fr);
 	align-items: center;
+	box-sizing: border-box;
+	max-width: 100%;
 }
 
 .pg-shell-header-stack .pg-shell-toolbar__brand,
@@ -171,18 +183,19 @@ html.pg-playground-doc #root {
 .pg-shell-header-stack .pg-shell-toolbar__tools,
 .pg-shell-header-stack .mimicus-app-layout-header__tools {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: flex-end;
-	justify-self: end;
+	justify-self: stretch;
 	gap: 0.25rem;
 	min-width: 0;
 	max-width: 100%;
-	overflow: visible clip;
+	overflow: hidden;
 	flex-wrap: nowrap;
-	overflow-y: visible;
-	flex-wrap: nowrap;
+	flex: 1 1 auto;
+	flex-shrink: 1;
+	box-sizing: border-box;
+	padding-inline-end: 0;
 	-webkit-overflow-scrolling: touch;
-	scrollbar-width: thin;
 }
 
 .pg-shell-toolbar__fill {
@@ -529,42 +542,30 @@ html.pg-playground-doc #root {
 	white-space: nowrap;
 }
 
-.pg-header-skin-bar {
-	flex-shrink: 1;
-	min-width: 0;
-	max-width: 100%;
-	box-sizing: border-box;
-	margin-left: 0.15rem;
-	display: inline-flex;
-	align-items: center;
-	gap: 0.35rem;
-	flex-wrap: nowrap;
-	overflow: hidden;
-
-	& > .button-wrap,
-	& > .pg-header-skin-bar__theme-btn,
-	& > button.pg-header-skin-bar__theme-btn {
-		flex: 0 0 auto;
-	}
-
-	& .pg-skin-toggle {
-		min-width: 0;
-	}
-}
-
 .fps-histogram-chip {
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	gap: 0.2rem;
+	box-sizing: border-box;
 	padding: 0.15rem 0.45rem;
 	border-radius: 999px;
 	font-size: 0.68rem;
 	font-weight: 700;
 	font-variant-numeric: tabular-nums;
+	line-height: 1;
 	background: color-mix(in srgb, var(--mimicus-success), transparent 82%);
 	color: color-mix(in srgb, var(--mimicus-success), var(--mimicus-color) 35%);
 	border: 1px solid color-mix(in srgb, var(--mimicus-success), transparent 55%);
 	flex-shrink: 0;
+}
+
+.pg-shell-header-stack .pg-shell-toolbar__tools .fps-histogram-chip,
+.pg-shell-header-stack .mimicus-app-layout-header__tools .fps-histogram-chip {
+	align-self: stretch;
+	height: calc(var(--pg-shell-header-h) - 0.45rem);
+	min-height: 0;
+	padding-block: 0;
 }
 
 .fps-histogram-chip__value {
@@ -575,12 +576,6 @@ html.pg-playground-doc #root {
 	font-size: 0.58rem;
 	opacity: 0.85;
 	font-weight: 600;
-}
-
-.review-status-dot {
-	display: inline-block;
-	border-radius: 50%;
-	flex-shrink: 0;
 }
 
 .mimicus-badge {

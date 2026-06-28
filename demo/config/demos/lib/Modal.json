@@ -7,7 +7,7 @@
   "intro": "Diálogo modal centrado: título por slot o mínimo, cierre en cabecera, scope global/local (como ActionDrawer) e inclusión de modales anidados.",
   "component": {
     "name": "Modal",
-    "path": "src/lib/overlays/Modal.svelte"
+    "path": "src/components/overlays/Overlays.tsx"
   },
   "preview": {
     "template": "modal"

@@ -45,13 +45,13 @@ html[data-looknfeel="contapyme"] {
 }
 
 /* neon-glass */
-html[data-looknfeel^="neon-"] {
+html[data-looknfeel="neon"] {
 	--pg-intro-link: color-mix(in srgb, var(--neon-cyan, var(--mimicus-primary)), var(--pg-text, var(--mimicus-color)) 22%);
 	--pg-intro-link-hover: var(--neon-cyan, var(--mimicus-primary));
 	--pg-intro-link-underline: color-mix(in srgb, var(--neon-cyan, var(--mimicus-primary)), transparent 58%);
 	--pg-intro-strong: var(--pg-text, var(--mimicus-color));
 }
 
-html[data-looknfeel^="neon-"] :is(.demo-panel-body, .accordion-body) .intro a:hover {
+html[data-looknfeel="neon"] :is(.demo-panel-body, .accordion-body) .intro a:hover {
 	text-shadow: 0 0 16px color-mix(in srgb, var(--neon-cyan, var(--mimicus-primary)), transparent 62%);
 }

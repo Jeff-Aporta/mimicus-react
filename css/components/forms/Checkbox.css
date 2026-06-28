@@ -14,26 +14,47 @@
 .mimicus-checkbox.is-indeterminate .mimicus-checkbox__box::after { content: ""; width: 0.55em; height: 2px; border: none; background: #fff; transform: none; margin: 0; }
 .mimicus-checkbox.is-disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* ── CheckboxIcon: iconos Iconify por estado (sin dibujado manual) ── */
+/* ── CheckboxIcon: icono único con flip horizontal al cambiar estado (igual que Switch) ── */
 .mimicus-checkbox--icon .mimicus-checkbox__box { display: none; }
-.mimicus-checkbox__icons { position: relative; width: 1.35em; height: 1.35em; display: inline-flex; align-items: center; justify-content: center; }
-.mimicus-checkbox__icon {
-	position: absolute; inset: 0;
-	display: grid; place-items: center;
-	transition: opacity 0.2s, transform 0.2s;
-	font-size: 1.25em;
+
+.mimicus-checkbox__icon-box {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.35em;
 	line-height: 0;
-	color: var(--cb-off-fg, var(--mimicus-text, #555));
+	flex-shrink: 0;
+	color: var(--cb-off-fg, color-mix(in oklch, var(--mimicus-color, currentColor), transparent 35%));
+	transition: color 0.18s ease, opacity 0.18s ease;
 }
-.mimicus-checkbox__icon > iconify-icon { font-size: 1em; color: inherit; line-height: 0; }
-.mimicus-checkbox__icon--on { opacity: 0; color: var(--cb-on-fg, var(--mimicus-primary, #1677ff)); }
-.mimicus-checkbox.is-checked .mimicus-checkbox__icon--on { opacity: 1; }
-.mimicus-checkbox.is-checked .mimicus-checkbox__icon--off { opacity: 0; }
+
+.mimicus-checkbox__icon-box iconify-icon {
+	display: inline-block;
+	font-size: inherit;
+	width: 1em;
+	height: 1em;
+	line-height: 0;
+	transition: transform 0.22s ease;
+	transform: scaleX(1);
+}
+
+.mimicus-checkbox--icon:not(.is-checked) .mimicus-checkbox__icon-box iconify-icon {
+	transform: scaleX(-1);
+}
+
+.mimicus-checkbox--icon.is-checked .mimicus-checkbox__icon-box {
+	color: var(--cb-on-fg, var(--mimicus-primary, #1677ff));
+}
+
+.mimicus-checkbox--icon.is-loading .mimicus-checkbox__icon-box iconify-icon {
+	animation: mimicus-switch-pulse 1s infinite;
+}
 
 /* Variante glass: fondo translúcido cuando está checked */
-.mimicus-checkbox--icon.mimicus-checkbox--glass.is-checked .mimicus-checkbox__icons {
+.mimicus-checkbox--icon.mimicus-checkbox--glass.is-checked .mimicus-checkbox__icon-box {
 	background: linear-gradient(145deg, color-mix(in srgb, var(--mimicus-primary) 22%, transparent), color-mix(in srgb, var(--mimicus-primary) 6%, transparent));
 	border-radius: 0.35em;
+	padding: 0.12em;
 	backdrop-filter: blur(8px) saturate(140%);
 	-webkit-backdrop-filter: blur(8px) saturate(140%);
 }

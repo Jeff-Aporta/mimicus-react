@@ -5,11 +5,10 @@
  * repo: Jeff-Aporta/mimicus-react · src/devkit/shared/demo-shell/demoShellUi.tsx
  * UI del shell de un demo: DemoController, renderer de campos de config y AccordionDemo.
  */
-import { Button, CodeBlock, Switch, Input, Select, InputNumber, Radio, Slider } from "../../_ui.ts";
+import { Button, CodeBlock, Switch, Input, InputNumber, Slider } from "../../_ui.ts";
 import { useEffect, useMemo, useState } from "react";
 import { buildTag, colorOptions, columnsConfig, iconEnum, mergeStyleString, optionsToItems, parseStyleString, stepCssLength, defaultOptionIcon, NONE_ICON, COLOR_ICONS } from "../playgroundKit.ts";
 import { Icon } from "../../../components/Icon.tsx";
-import { ReviewStatusDot } from "../../catalog/catalogUi.tsx";
 
 export class DemoController {
   componentName = "Component";
@@ -76,12 +75,25 @@ export class DemoController {
   }
 }
 
-export function ConfigCard({ children, className }) {
-  return <div className={["pg-demo-config-card", "card-root", className].filter(Boolean).join(" ")}>{children}</div>;
+export function ConfigCard({ children, className, variant = "field" }) {
+  const isSection = variant === "section";
+  return (
+    <div
+      className={[
+        isSection ? "pg-demo-config-section demo-config-shell" : "pg-demo-config-card",
+        "card-root",
+        className,
+      ].filter(Boolean).join(" ")}
+      data-variant={isSection ? "glass" : "flat"}
+      data-pg-config={variant}
+    >
+      {children}
+    </div>
+  );
 }
 
-export function InputDecorated({ label, icon, asTitle, info, infoTitle, children, className }) {
-  const Tag = asTitle ? "h3" : "label";
+export function InputDecorated({ label, icon, asTitle, info, infoTitle, children, className, rowBetween }) {
+  const Tag = asTitle ? "h3" : rowBetween ? "div" : "label";
   const [open, setOpen] = useState(false);
   const hasInfo = Boolean(info && String(info).trim());
   useEffect(() => {
@@ -91,7 +103,7 @@ export function InputDecorated({ label, icon, asTitle, info, infoTitle, children
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
   return (
-    <div className={["pg-input-decorated", asTitle && "pg-input-decorated--title", className].filter(Boolean).join(" ")}>
+    <div className={["pg-input-decorated", asTitle && "pg-input-decorated--title", rowBetween && "pg-input-decorated--row-between", className].filter(Boolean).join(" ")}>
       {(label || icon || hasInfo) && (
         <Tag className="pg-input-decorated__label">
           {icon && <span className="pg-input-decorated__icon" aria-hidden><iconify-icon icon={icon} /></span>}
@@ -128,43 +140,67 @@ export function InputDecorated({ label, icon, asTitle, info, infoTitle, children
   );
 }
 
+const SIDE_CROSS_SLOTS = [null, "top", null, "left", "", "right", null, "bottom", null];
+
+function paletteOptionIcon(val, getIcon) {
+  const isNone = val === "" || val == null;
+  if (isNone) return NONE_ICON;
+  return getIcon ? getIcon(val) : undefined;
+}
+
+function PaletteOptionButton({ lbl, val, selected, accent, getIcon, showLabel, onPick }) {
+  const isNone = val === "" || val == null;
+  const icon = paletteOptionIcon(val, getIcon);
+  const title = isNone ? "Ninguno" : (lbl || String(val ?? "Ninguno"));
+  const color = accent === "semantic" && val ? val : "primary";
+  return (
+    <Button type="button" variant={selected ? "soft" : "text"} color={color} shape="pill" block onClick={() => onPick?.(isNone ? undefined : val)} title={title} style={{ justifyContent: "center", paddingBlock: "0.2em", paddingInline: showLabel && !isNone ? "0.55em" : "0.4em", minHeight: "1.85em", gap: "0.35em", minWidth: 0 }}>
+      {icon && <Icon icon={icon} />}
+      {showLabel && !isNone && (lbl || val) != null && String(lbl || val) !== "" && <span>{lbl || String(val ?? "Ninguno")}</span>}
+    </Button>
+  );
+}
+
 export function PaletteGrid({ label, labelIcon, value, onValueChange, options, name, columns, accent = "primary", layout = "chips", getIcon }) {
   const items = optionsToItems(options);
   const cols = typeof columns === "number" ? columns : columnsConfig(items.length);
   const groupName = name || `pg-palette-${label}`;
 
+  function pick(val) {
+    onValueChange?.(val === "" || val == null ? undefined : val);
+  }
+
+  function renderOption(lbl, val, showLabel) {
+    const selected = String(value ?? "") === String(val ?? "");
+    return <PaletteOptionButton key={`${groupName}-${String(val)}`} lbl={lbl} val={val} selected={selected} accent={accent} getIcon={getIcon} showLabel={showLabel} onPick={pick} />;
+  }
+
+  if (layout === "sideCross") {
+    const byVal = Object.fromEntries(items.map(([lbl, val]) => [String(val ?? ""), [lbl, val]]));
+    return (
+      <div className="pg-palette-grid pg-palette-grid--side-cross" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "0.35em", width: "100%" }}>
+        {SIDE_CROSS_SLOTS.map((slotVal, idx) => {
+          if (slotVal === null) return <span key={`side-cross-empty-${idx}`} className="pg-palette-grid__spatial-cell pg-palette-grid__spatial-cell--empty" aria-hidden />;
+          const pair = byVal[String(slotVal ?? "")];
+          if (!pair) return <span key={`side-cross-miss-${idx}`} className="pg-palette-grid__spatial-cell pg-palette-grid__spatial-cell--empty" aria-hidden />;
+          const [lbl, val] = pair;
+          return <div key={`side-cross-${String(val)}`} className="pg-palette-grid__spatial-cell">{renderOption(lbl, val, true)}</div>;
+        })}
+      </div>
+    );
+  }
+
   if (layout === "chips") {
     return (
       <div className="pg-palette-chips" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(5.25em, 1fr))", gap: "0.35em", width: "100%" }}>
-        {items.map(([lbl, val]) => {
-          const selected = String(value ?? "") === String(val ?? "");
-          const isNone = val === "" || val == null;
-          const icon = isNone ? NONE_ICON : (getIcon ? getIcon(val) : undefined);
-          const showLabel = !isNone && (lbl || val);
-          return (
-            <Button key={`${groupName}-${String(val)}`} type="button" variant={selected ? "soft" : "text"} color={accent === "semantic" && val ? val : "primary"} shape="pill" block onClick={() => onValueChange?.(val === "" ? undefined : val)} title={isNone ? "Ninguno" : (lbl || String(val ?? "Ninguno"))} style={{ justifyContent: "center", paddingBlock: "0.2em", paddingInline: isNone ? "0.4em" : "0.6em", minHeight: "1.8em", gap: isNone ? 0 : "0.35em" }}>
-              {icon && <Icon icon={icon} />}
-              {showLabel && <span>{lbl || String(val ?? "Ninguno")}</span>}
-            </Button>
-          );
-        })}
+        {items.map(([lbl, val]) => renderOption(lbl, val, true))}
       </div>
     );
   }
 
   return (
     <div className="pg-palette-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gap: "0.35em", width: "100%" }}>
-      {items.map(([lbl, val]) => {
-        const selected = String(value ?? "") === String(val ?? "");
-        const isNone = val === "" || val == null;
-        const icon = isNone ? NONE_ICON : undefined;
-        return (
-          <Radio key={`${groupName}-${String(val)}`} className="pg-palette-grid__item" name={groupName} value={String(val ?? "")} checked={selected} onChange={() => onValueChange?.(val === "" ? undefined : val)} title={isNone ? "Ninguno" : (lbl || String(val ?? "Ninguno"))}>
-            {icon && <Icon icon={icon} />}
-            {!isNone && <span style={{ marginInlineStart: "0.35em" }}>{lbl || String(val ?? "Ninguno")}</span>}
-          </Radio>
-        );
-      })}
+      {items.map(([lbl, val]) => renderOption(lbl, val, true))}
     </div>
   );
 }
@@ -347,10 +383,8 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
     if (field.kind === "switch") {
       const d = decorate(field, { icon: field.labelIcon ?? "mdi:tune" });
       return wrap(
-        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
-          <div className="pg-field-cluster">
-            <SwitchRow checked={state[field.key]} label={field.label} onChange={(v) => patchState(String(field.key), v)} iconOn={field.iconOn ?? field.icon ?? "mdi:check"} iconOff={field.iconOff ?? field.icon ?? "mdi:circle-outline"} colorOn={field.colorOn ?? "var(--mimicus-success, #2e9e5a)"} colorOff={field.colorOff ?? "var(--mimicus-color)"} />
-          </div>
+        <InputDecorated rowBetween label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
+          <SwitchRow checked={state[field.key]} onChange={(v) => patchState(String(field.key), v)} iconOn={field.iconOn ?? field.icon ?? "mdi:check"} iconOff={field.iconOff ?? field.icon ?? "mdi:circle-outline"} colorOn={field.colorOn ?? "var(--mimicus-success, #2e9e5a)"} colorOff={field.colorOff ?? "var(--mimicus-color)"} />
         </InputDecorated>,
       );
     }
@@ -418,12 +452,12 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
     }
 
     if (field.kind === "select-enum") {
-      const entries = Object.entries(field.enumValue ?? {});
       const d = decorate(field, { icon: field.labelIcon });
       return wrap(
         <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
-          <Select value={String(state[field.key] ?? "")} onChange={(v) => patchState(String(field.key), v)}
-            options={entries.map(([k, v]) => ({ value: String(v), label: k }))} />
+          <div className="pg-field-cluster">
+            <PaletteGrid value={state[field.key]} onValueChange={(v) => patchState(String(field.key), v)} options={field.enumValue ?? {}} name={`pg-${String(field.key)}`} layout="chips" accent="primary" getIcon={field.getIcon ?? ((v) => defaultOptionIcon(field.key, v))} />
+          </div>
         </InputDecorated>,
       );
     }
@@ -491,7 +525,7 @@ export function ApiTable({ adapter }) {
 }
 
 export function AccordionDemo({
-  adapter, title, titleIcon, reviewStatus, flat = false, relieve, className, previewScale, previewStyle, demoId, configBlockCount = 3,
+  adapter, title, titleIcon, flat = false, relieve, className, previewScale, previewStyle, demoId, configBlockCount = 3,
   state: stateProp, details: detailsProp, demoConfig: demoConfigProp, demoStyle: demoStyleProp, demoClass: demoClassProp,
   onStateChange, onDetailsChange, onDemoConfigChange, onDemoStyleChange, onDemoClassChange, intro, preview, configExtra,
 }) {
@@ -535,7 +569,6 @@ export function AccordionDemo({
         <div className="pg-demo-doc__title-row">
           {titleIcon && <Icon icon={titleIcon} className="pg-demo-doc__icon" />}
           <h1 className="pg-demo-doc__title">{finalTitle}</h1>
-          {reviewStatus && <ReviewStatusDot status={reviewStatus} size="0.62rem" />}
         </div>
         {intro && <div className="pg-demo-doc__intro intro" dangerouslySetInnerHTML={{ __html: intro }} />}
       </header>
@@ -575,7 +608,7 @@ export function AccordionDemo({
       {adapter && (
         <section className="pg-demo-doc__section pg-demo-doc__section--playground" aria-labelledby={`${demoId ?? finalTitle}-playground`}>
           <h2 className="pg-demo-doc__section-title" id={`${demoId ?? finalTitle}-playground`}>Playground</h2>
-          <ConfigCard className="pg-demo-config-section demo-config-shell">
+          <ConfigCard variant="section">
             <div style={{ display: "grid", gridTemplateColumns: `repeat(${configCols}, minmax(0, 1fr))`, gap: "0.75rem", width: "100%", alignItems: "start" }}>
               <ConfigCard>
                 <InputDecorated label="style" icon="mdi:palette-swatch-outline" info="Estilos CSS inline que se aplican directamente al contenedor del demo. Útil para ajustes rápidos sin modificar la hoja de estilos global." infoTitle="Estilo inline">

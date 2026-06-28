@@ -129,7 +129,7 @@ export function Button({
     "data-glass-active": isGlassVariant(variant) && glassActive ? "true" : undefined,
     ...surfaceStyle,
     className: cls,
-    style: { width: block ? "100%" : "fit-content", maxWidth: block ? undefined : "100%", ...surfaceStyle.style } as CSSProperties,
+    style: { width: block ? "100%" : "fit-content", maxWidth: block ? undefined : "100%", ...surfaceStyle.style, ...style } as CSSProperties,
   };
 
   const iconNode = (icon || isLoading) && (isLoading ? <span className="mimicus-text-icon mimicus-btn-spinner" aria-hidden>…</span> : icon);

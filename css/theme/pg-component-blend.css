@@ -115,26 +115,26 @@
 }
 
 /* neon — glow en chips de config (outlined / solid) */
-html[data-looknfeel^="neon-"][data-luminance="dark"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
+html[data-looknfeel="neon"][data-luminance="dark"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
 	box-shadow:
 		inset 0 0 0 1px color-mix(in oklab, var(--cmp-accent) 32%, var(--cmp-chrome) 68%),
 		0 0 8px color-mix(in oklab, var(--cmp-accent) 18%, transparent) !important;
 }
-html[data-looknfeel^="neon-"][data-luminance="light"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
+html[data-looknfeel="neon"][data-luminance="light"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
 	box-shadow:
 		inset 0 0 0 1px color-mix(in oklab, var(--cmp-accent) 28%, var(--cmp-chrome) 72%),
 		0 0 6px color-mix(in oklab, var(--cmp-accent) 16%, transparent) !important;
 }
 
 /* neon dark: el chip "solid" emite luz (no sombra interior oscura) */
-html[data-looknfeel^="neon-"][data-luminance="dark"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
+html[data-looknfeel="neon"][data-luminance="dark"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
 	border-color: color-mix(in oklab, var(--cmp-accent) 65%, transparent) !important;
 	box-shadow:
 		inset 0 1px 0 color-mix(in oklab, white 28%, transparent),
 		0 0 14px color-mix(in oklab, var(--cmp-accent) 38%, transparent),
 		0 0 28px color-mix(in oklab, var(--cmp-accent) 24%, transparent) !important;
 }
-html[data-looknfeel^="neon-"][data-luminance="light"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
+html[data-looknfeel="neon"][data-luminance="light"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
 	border-color: color-mix(in oklab, var(--cmp-accent) 70%, var(--cmp-chrome) 30%) !important;
 	box-shadow:
 		inset 0 0 0 1px color-mix(in oklab, white 32%, transparent),

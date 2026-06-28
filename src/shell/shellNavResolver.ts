@@ -33,17 +33,31 @@ export function sectionMeta(ctx: ShellNavCtx, sectionId: string): any {
   return ctx.catalog?.sections?.[sectionId] ?? ctx.catalog?.categories?.[sectionId] ?? {};
 }
 
+export function sectionAccentIndexFor(ctx: ShellNavCtx, categoryId: string): number {
+  const i = sortedCategories(ctx).indexOf(categoryId);
+  return i >= 0 ? i : 0;
+}
+
+export function sectionAccentColorFor(ctx: ShellNavCtx, categoryId: string): string {
+  const palette: string[] = ctx.sectionAccentColors ?? ctx.sectionColors ?? ["var(--mimicus-primary)"];
+  const i = sectionAccentIndexFor(ctx, categoryId);
+  return palette[i % palette.length];
+}
+
+/** Slot estable (accent-N) para data-section-color. */
+export function sectionColorSlotFor(ctx: ShellNavCtx, categoryId: string): string {
+  return `accent-${sectionAccentIndexFor(ctx, categoryId)}`;
+}
+
+/** Color de acento para superficies (Button, tarjetas). */
 export function sectionColorFor(ctx: ShellNavCtx, categoryId: string): string {
-  const categories = sortedCategories(ctx);
-  const i = categories.indexOf(categoryId);
-  const palette: string[] = ctx.sectionColors ?? ["primary"];
-  return palette[i >= 0 ? i % palette.length : 0];
+  return sectionAccentColorFor(ctx, categoryId);
 }
 
 export function resolveCategoryTabDescriptors(ctx: ShellNavCtx): NavTab[] {
   return sortedCategories(ctx).map((cat) => {
     const meta = sectionMeta(ctx, cat);
-    return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), kind: "category" };
+    return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), colorSlot: sectionColorSlotFor(ctx, cat), kind: "category" };
   });
 }
 
@@ -51,6 +65,7 @@ export function resolveCatalogDemoTabDescriptors(ctx: ShellNavCtx): NavTab[] {
   const { route, catalogItems } = ctx;
   if (!route?.category) return [];
   const color = sectionColorFor(ctx, route.category);
+  const colorSlot = sectionColorSlotFor(ctx, route.category);
   return catalogItems
     .filter((it: any) => (it.section ?? it.category) === route.category)
     .map((it: any) => ({
@@ -58,6 +73,7 @@ export function resolveCatalogDemoTabDescriptors(ctx: ShellNavCtx): NavTab[] {
       label: it.displayLabel ?? it.slug,
       icon: ctx.getDemoIcon?.(it) ?? it.icon ?? it.definition?.titleIcon ?? "mdi:file-document-outline",
       color,
+      colorSlot,
       kind: "demo",
       category: route.category,
     }));

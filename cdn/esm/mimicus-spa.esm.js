@@ -136,7 +136,257 @@ function getSpaRoute() {
 // src/components/Button.tsx
 import { useState } from "react";
 
+// src/theme/palette-catalog.json
+var palette_catalog_default = [
+  {
+    id: "grafito",
+    label: "Grafito",
+    icon: "mdi:square",
+    scheme: "mono",
+    note: "gris pizarra fr\xEDo",
+    aliases: []
+  },
+  {
+    id: "menta",
+    label: "Menta",
+    icon: "mdi:sprout",
+    scheme: "mono",
+    note: "verde menta / agua fresca",
+    aliases: []
+  },
+  {
+    id: "vulcano",
+    label: "Vulcano",
+    icon: "mdi:fire",
+    scheme: "mono",
+    note: "grises volc\xE1nicos",
+    aliases: []
+  },
+  {
+    id: "carbon",
+    label: "Carb\xF3n",
+    icon: "mdi:hexagon-outline",
+    scheme: "mono",
+    note: "carb\xF3n neutro",
+    aliases: []
+  },
+  {
+    id: "plata",
+    label: "Plata",
+    icon: "mdi:brightness-6",
+    scheme: "mono",
+    note: "plata azulada",
+    aliases: []
+  },
+  {
+    id: "humo",
+    label: "Humo",
+    icon: "mdi:smoke",
+    scheme: "mono",
+    note: "gris c\xE1lido humo",
+    aliases: []
+  },
+  {
+    id: "marfil",
+    label: "Marfil",
+    icon: "mdi:feather",
+    scheme: "mono",
+    note: "marfil c\xE1lido",
+    aliases: []
+  },
+  {
+    id: "azabache",
+    label: "Azabache",
+    icon: "mdi:circle-slice-8",
+    scheme: "mono",
+    note: "negro azulado",
+    aliases: []
+  },
+  {
+    id: "nieve",
+    label: "Nieve",
+    icon: "mdi:snowflake",
+    scheme: "mono",
+    note: "blanco helado",
+    aliases: []
+  },
+  {
+    id: "piedra",
+    label: "Piedra",
+    icon: "mdi:wall",
+    scheme: "mono",
+    note: "piedra tostada",
+    aliases: []
+  },
+  {
+    id: "oceano",
+    label: "Oc\xE9ano",
+    icon: "mdi:waves",
+    scheme: "dual",
+    note: "teal + cielo",
+    aliases: []
+  },
+  {
+    id: "ambar",
+    label: "\xC1mbar",
+    icon: "mdi:weather-sunny",
+    scheme: "dual",
+    note: "\xE1mbar + oro",
+    aliases: []
+  },
+  {
+    id: "indigo",
+    label: "\xCDndigo",
+    icon: "mdi:moon-waning-crescent",
+    scheme: "dual",
+    note: "\xEDndigo + violeta",
+    aliases: []
+  },
+  {
+    id: "tierra",
+    label: "Tierra",
+    icon: "mdi:terrain",
+    scheme: "dual",
+    note: "marr\xF3n + ocre",
+    aliases: []
+  },
+  {
+    id: "cobre",
+    label: "Cobre",
+    icon: "mdi:gold",
+    scheme: "dual",
+    note: "cobre + turquesa",
+    aliases: []
+  },
+  {
+    id: "oliva",
+    label: "Oliva",
+    icon: "mdi:fruit-grapes",
+    scheme: "dual",
+    note: "oliva + oro",
+    aliases: []
+  },
+  {
+    id: "glaciar",
+    label: "Glaciar",
+    icon: "mdi:snowflake-variant",
+    scheme: "dual",
+    note: "hielo + azul profundo",
+    aliases: []
+  },
+  {
+    id: "bosque",
+    label: "Bosque",
+    icon: "mdi:tree",
+    scheme: "dual",
+    note: "verde bosque + musgo",
+    aliases: []
+  },
+  {
+    id: "medianoche",
+    label: "Medianoche",
+    icon: "mdi:weather-night",
+    scheme: "dual",
+    note: "navy + cian",
+    aliases: []
+  },
+  {
+    id: "ciruela",
+    label: "Ciruela",
+    icon: "mdi:flower-tulip-outline",
+    scheme: "dual",
+    note: "ciruela + rosa",
+    aliases: []
+  },
+  {
+    id: "hues-dodgerblue",
+    label: "Dodger",
+    icon: "mdi:palette-swatch",
+    scheme: "triad",
+    note: "azul dodger ContaPyme",
+    aliases: [
+      "contapyme"
+    ]
+  },
+  {
+    id: "natural",
+    label: "Natural",
+    icon: "mdi:leaf",
+    scheme: "triad",
+    note: "verde + azul + naranja",
+    aliases: []
+  },
+  {
+    id: "coral",
+    label: "Coral",
+    icon: "mdi:flower-tulip",
+    scheme: "triad",
+    note: "coral + melocot\xF3n + violeta",
+    aliases: []
+  },
+  {
+    id: "lavanda",
+    label: "Lavanda",
+    icon: "mdi:flower",
+    scheme: "triad",
+    note: "violeta + rosa + cian",
+    aliases: []
+  },
+  {
+    id: "cereza",
+    label: "Cereza",
+    icon: "mdi:fruit-cherries",
+    scheme: "triad",
+    note: "cereza + rosa + violeta",
+    aliases: []
+  },
+  {
+    id: "fucsia",
+    label: "Fucsia",
+    icon: "mdi:star-four-points",
+    scheme: "triad",
+    note: "magenta + rosa + \xEDndigo",
+    aliases: []
+  },
+  {
+    id: "aurora",
+    label: "Aurora",
+    icon: "mdi:aurora",
+    scheme: "triad",
+    note: "verde + cian + rosa",
+    aliases: []
+  },
+  {
+    id: "tropico",
+    label: "Tr\xF3pico",
+    icon: "mdi:palm-tree",
+    scheme: "triad",
+    note: "amarillo + verde + azul",
+    aliases: []
+  },
+  {
+    id: "electrico",
+    label: "El\xE9ctrico",
+    icon: "mdi:flash",
+    scheme: "triad",
+    note: "magenta + cian + amarillo",
+    aliases: []
+  },
+  {
+    id: "crepusculo",
+    label: "Crep\xFAsculo",
+    icon: "mdi:weather-sunset",
+    scheme: "triad",
+    note: "violeta + naranja + azul",
+    aliases: []
+  }
+];
+
 // src/theme/constants.ts
+var THEME_COLOR_OPTIONS = palette_catalog_default.map(({ id, label, icon }) => ({ id, label, icon }));
+var THEME_COLOR_DESIGN_SCHEME = Object.fromEntries(
+  palette_catalog_default.map((p) => [p.id, p.scheme])
+);
 var LOOKNFEEL_OPTIONS = [
   { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
   { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
@@ -297,7 +547,7 @@ function Button({
     "data-glass-active": isGlassVariant(variant) && glassActive ? "true" : void 0,
     ...surfaceStyle,
     className: cls,
-    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
+    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style, ...style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
   const extractChildIcon = (nodes) => {

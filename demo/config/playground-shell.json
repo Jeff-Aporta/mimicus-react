@@ -45,7 +45,5 @@
       }
     ]
   },
-  "theme": {
-    "sectionColors": ["primary", "info", "success", "warning", "error", "danger", "color"]
-  }
+  "theme": {}
 }

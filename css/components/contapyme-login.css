@@ -29,45 +29,7 @@
   }
 
   &__header {
-    display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1rem 1rem 0.85rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 35%);
-    background: linear-gradient(90deg, color-mix(in srgb, var(--mimicus-primary), transparent 78%), transparent 72%);
-    border-left: 4px solid var(--mimicus-primary, #1e90ff);
-  }
-
-  &__icon-box {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    border-radius: var(--mimicus-ui-radius, 0.5rem);
-    background: linear-gradient(145deg, color-mix(in srgb, var(--mimicus-primary), transparent 55%), color-mix(in srgb, var(--mimicus-info, #5eb3ff), transparent 70%));
-    color: #fff;
-    flex-shrink: 0;
-  }
-
-  &__titles {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  &__title {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  &__subtitle {
-    margin: 0.2rem 0 0;
-    font-size: 0.78rem;
-    opacity: 0.82;
-    line-height: 1.35;
   }
 
   &__close {
@@ -197,7 +159,7 @@ html[data-looknfeel="contapyme"] .mimicus-login-dialog__card {
   backdrop-filter: none;
 }
 
-html[data-looknfeel^="neon-"] .mimicus-login-dialog__card {
+html[data-looknfeel="neon"] .mimicus-login-dialog__card {
   border-color: color-mix(in srgb, var(--neon-cyan, var(--mimicus-primary)), transparent 68%);
   box-shadow: var(--mimicus-glass-shadow-dark);
 }

@@ -180,26 +180,53 @@ function bindTooltip(root) {
   };
   const placement = root.dataset.placement ?? "top";
   let open = false;
+  let hideTimer = null;
+  const clearHideTimer = () => {
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  };
   const show = () => {
+    clearHideTimer();
+    if (open) return;
     open = true;
     root.classList.add("is-open");
     tip.hidden = false;
+    tip.setAttribute("aria-hidden", "false");
     tip.dataset.placement = placement;
   };
   const hide = () => {
+    clearHideTimer();
+    if (!open) return;
     open = false;
     root.classList.remove("is-open");
-    tip.hidden = true;
+    hideTimer = setTimeout(() => {
+      if (!open) {
+        tip.hidden = true;
+        tip.setAttribute("aria-hidden", "true");
+      }
+      hideTimer = null;
+    }, 120);
+  };
+  const scheduleHide = () => {
+    clearHideTimer();
+    hideTimer = setTimeout(hide, 60);
   };
   hide();
   const cleanups = [
-    on(trigger, "mouseenter", show),
-    on(trigger, "focus", show),
-    on(trigger, "mouseleave", hide),
-    on(trigger, "blur", hide),
+    on(root, "pointerenter", show),
+    on(root, "pointerleave", scheduleHide),
+    on(root, "focusin", show),
+    on(root, "focusout", (e) => {
+      const next = e.relatedTarget;
+      if (next && root.contains(next)) return;
+      scheduleHide();
+    }),
     on(root, "keydown", (e) => {
       if (e.key === "Escape" && open) hide();
-    })
+    }),
+    () => clearHideTimer()
   ];
   return () => cleanups.forEach((fn) => fn());
 }
@@ -338,43 +365,67 @@ function bindTour(root) {
   const prev = qs("[data-mimicus-tour-prev]", root);
   const next = qs("[data-mimicus-tour-next]", root);
   const close = qs("[data-mimicus-tour-close]", root);
+  const scope = root.closest(".mimicus-tour-demo");
+  const local = Boolean(scope);
   let idx = 0;
-  let open = parseBool(root.dataset.open);
+  const clearTargets = () => {
+    qsa(".mimicus-tour-target", document).forEach((el) => el.classList.remove("mimicus-tour-target"));
+  };
+  const resetCard = () => {
+    if (!card) return;
+    card.style.top = "";
+    card.style.left = "";
+    card.style.right = "";
+    card.style.bottom = "";
+    card.style.transform = "";
+    card.style.position = local ? "absolute" : "fixed";
+  };
+  const placeCard = (target) => {
+    if (!card) return;
+    resetCard();
+    const box = local && scope ? scope.getBoundingClientRect() : { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+    if (!target) {
+      card.style.top = "50%";
+      card.style.left = "50%";
+      card.style.transform = "translate(-50%, -50%)";
+      return;
+    }
+    const rect = target.getBoundingClientRect();
+    const top = rect.bottom - box.top + 8;
+    let left = rect.left - box.left;
+    const maxLeft = Math.max(8, box.width - card.offsetWidth - 8);
+    left = Math.max(8, Math.min(left, maxLeft));
+    card.style.top = `${Math.max(8, top)}px`;
+    card.style.left = `${left}px`;
+  };
   const paint = () => {
-    open = parseBool(root.dataset.open);
+    const open = parseBool(root.dataset.open);
     if (!open || !steps.length) {
       root.classList.remove("is-active");
       if (overlay) overlay.hidden = true;
+      clearTargets();
       return;
     }
     root.classList.add("is-active");
-    if (overlay) overlay.hidden = false;
+    if (overlay) {
+      overlay.hidden = false;
+      overlay.style.position = local ? "absolute" : "fixed";
+    }
     const step = steps[idx];
     const targetSel = step?.dataset.target;
-    const target = targetSel ? qs(targetSel, root) ?? qs(targetSel, document) : null;
+    const target = targetSel ? qs(targetSel, scope ?? root) ?? qs(targetSel, document) : null;
     steps.forEach((s, i) => s.classList.toggle("is-current", i === idx));
     if (titleEl) titleEl.textContent = step?.dataset.title ?? "";
     if (descEl) descEl.textContent = step?.dataset.description ?? "";
-    if (card && target) {
-      const rect = target.getBoundingClientRect();
-      card.style.position = "fixed";
-      card.style.top = `${rect.bottom + 8}px`;
-      card.style.left = `${rect.left}px`;
-      target.classList.add("mimicus-tour-target");
-      steps.forEach((s, i) => {
-        if (i !== idx) {
-          const sel = s.dataset.target;
-          const el = sel ? qs(sel, root) ?? qs(sel, document) : null;
-          el?.classList.remove("mimicus-tour-target");
-        }
-      });
-    }
+    clearTargets();
+    if (target) target.classList.add("mimicus-tour-target");
+    placeCard(target);
     if (prev) prev.disabled = idx <= 0;
     if (next) next.textContent = idx >= steps.length - 1 ? "Finalizar" : "Siguiente";
   };
   const end = () => {
     root.dataset.open = "false";
-    qsa(".mimicus-tour-target", root).forEach((el) => el.classList.remove("mimicus-tour-target"));
+    clearTargets();
     paint();
     emit(root, "mimicus-tour-close");
   };
@@ -394,7 +445,8 @@ function bindTour(root) {
       }
     }),
     on(close, "click", end),
-    on(overlay, "click", end)
+    on(overlay, "click", end),
+    () => clearTargets()
   ];
 }
 var BINDERS = {
@@ -729,7 +781,7 @@ function Tooltip({ title, placement = "top", arrow, children, className, ...rest
 function Tour({ steps = [], open = false, className, style, ...rest }) {
   const ref = useRef(null);
   useDisplayBinding(ref, "tour", [open, steps.length]);
-  return /* @__PURE__ */ jsxs("div", { ...rest, ref, className: cx("mimicus-tour", open && "is-active", className), style, "data-mimicus-display": "tour", "data-open": open, children: [
+  return /* @__PURE__ */ jsxs("div", { ...rest, ref, className: cx("mimicus-tour", open && "is-active", className), style, "data-mimicus-display": "tour", "data-open": open ? "true" : "false", children: [
     /* @__PURE__ */ jsx("div", { className: "mimicus-tour__overlay", "data-mimicus-tour-overlay": true, hidden: true }),
     steps.map((s, i) => /* @__PURE__ */ jsx("div", { "data-mimicus-tour-step": true, "data-target": s.target, "data-title": s.title, "data-description": s.description, hidden: true }, i)),
     /* @__PURE__ */ jsxs("div", { className: "mimicus-tour__card", "data-mimicus-tour-card": true, children: [

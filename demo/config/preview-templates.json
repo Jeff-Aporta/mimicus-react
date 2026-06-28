@@ -176,5 +176,14 @@
   "disp-calendar": { "type": "builtin", "id": "disp-calendar" },
   "disp-list": { "type": "builtin", "id": "disp-list" },
   "datagrid": { "type": "builtin", "id": "datagrid" },
-  "cmp-code-block": { "type": "builtin", "id": "cmp-code-block" }
+  "cmp-code-block": { "type": "builtin", "id": "cmp-code-block" },
+  "modal": { "type": "builtin", "id": "modal" },
+  "dialog": { "type": "builtin", "id": "dialog" },
+  "action-drawer": { "type": "builtin", "id": "action-drawer" },
+  "loading": { "type": "builtin", "id": "loading" },
+  "toaster": { "type": "builtin", "id": "toaster" },
+  "cmp-alert": { "type": "builtin", "id": "cmp-alert" },
+  "cmp-tip-info": { "type": "builtin", "id": "cmp-tip-info" },
+  "cmp-invoked-floater": { "type": "builtin", "id": "cmp-invoked-floater" },
+  "cmp-floating-component": { "type": "builtin", "id": "cmp-floating-component" }
 }

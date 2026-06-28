@@ -1,0 +1,103 @@
+/**
+ * glass-header — CSS
+ * repo: Jeff-Aporta/mimicus-react · css/components/glass-header.css
+ * Banda header neon-glass reutilizable (paridad LoginHeaderBand / isa-sw dialog).
+ */
+
+.mimicus-glass-header {
+	--mgh-accent: var(--mimicus-primary);
+	--mgh-gap: 0.65rem;
+	--mgh-min-height: 4rem;
+	--mgh-pad-block: 0.85rem;
+	--mgh-pad-inline: 1rem;
+	--mgh-icon-size: 2.625rem;
+	--mgh-icon-radius: 0.65rem;
+	--mgh-icon-fg: #fff;
+	--mgh-bg: linear-gradient(90deg, color-mix(in srgb, var(--mgh-accent) 22%, transparent), transparent 72%);
+	--mgh-edge-bottom: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 35%);
+	--mgh-edge-top: none;
+	--mgh-backdrop: none;
+	--mgh-inset: none;
+	--mgh-title-size: 1.25rem;
+	--mgh-title-weight: 700;
+	--mgh-title-tracking: -0.02em;
+
+	display: flex;
+	align-items: center;
+	gap: var(--mgh-gap);
+	min-height: var(--mgh-min-height);
+	padding: var(--mgh-pad-block) var(--mgh-pad-inline);
+	border-bottom: var(--mgh-edge-bottom);
+	border-top: var(--mgh-edge-top);
+	border-left: 4px solid var(--mgh-accent);
+	background: var(--mgh-bg);
+	backdrop-filter: var(--mgh-backdrop);
+	-webkit-backdrop-filter: var(--mgh-backdrop);
+	box-shadow: var(--mgh-inset);
+	color: var(--mgh-fg, var(--mimicus-color, inherit));
+}
+
+.mimicus-glass-header--compact {
+	--mgh-min-height: 2.35rem;
+	--mgh-pad-block: 0.42rem;
+	--mgh-pad-inline: 0.55rem;
+	--mgh-gap: 0.42rem;
+	--mgh-icon-size: 1.35rem;
+	--mgh-icon-radius: 50%;
+	--mgh-title-size: 0.78rem;
+	--mgh-title-weight: 600;
+	--mgh-title-tracking: 0.01em;
+	--mgh-edge-bottom: none;
+	--mgh-edge-top: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 42%);
+}
+
+.mimicus-glass-header__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--mgh-icon-size);
+	height: var(--mgh-icon-size);
+	border-radius: var(--mgh-icon-radius);
+	flex-shrink: 0;
+	color: var(--mgh-icon-fg);
+	background: linear-gradient(
+		135deg,
+		var(--mgh-accent),
+		color-mix(in srgb, var(--mgh-accent) 60%, transparent)
+	);
+	box-shadow: var(
+		--mgh-icon-shadow,
+		0 3px 12px color-mix(in srgb, var(--mgh-accent) 40%, transparent)
+	);
+	font-size: calc(var(--mgh-icon-size) * 0.52);
+}
+
+.mimicus-glass-header__body {
+	flex: 1 1 auto;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+}
+
+.mimicus-glass-header__title {
+	font-size: var(--mgh-title-size);
+	font-weight: var(--mgh-title-weight);
+	letter-spacing: var(--mgh-title-tracking);
+	line-height: 1.2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: var(--mgh-title-fg, inherit);
+}
+
+.mimicus-glass-header__subtitle {
+	font-size: 0.78rem;
+	line-height: 1.35;
+	opacity: 0.82;
+}
+
+.mimicus-glass-header__tools {
+	flex: 0 0 auto;
+	margin-inline-start: auto;
+}

@@ -100,6 +100,7 @@ export function Playground({ catalog = [], catalogMeta, sectionsMeta, shellConfi
     categories: implementedSections,
     sectionOrder: sectionOrder(),
     sectionColors: sectionColors(),
+    sectionAccentColors: sectionColors(),
     sectionOpen,
     setSectionOpen,
     isPaletteLabView,

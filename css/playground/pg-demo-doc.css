@@ -151,8 +151,8 @@
 }
 
 .pg-demo-doc__section--playground .pg-demo-config-section {
-	border: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 28%);
-	border-radius: var(--mimicus-ui-radius, 0.55rem);
-	padding: 0.85rem;
-	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 8%);
+	/* Glass en pg-demo-config.css — sin capa opaca duplicada */
+	background: transparent;
+	border: none;
+	padding: 0;
 }

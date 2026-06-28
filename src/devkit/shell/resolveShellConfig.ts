@@ -6,6 +6,7 @@
  * Accesores a la config del shell (panel, storage, colores de sección) leyendo de playgroundData().
  */
 import { playgroundData } from "../core/playgroundData.ts";
+import { DEFAULT_SECTION_ACCENT_PALETTE } from "../catalog/sectionAccentPalette.ts";
 
 export function shellConfig() {
   return playgroundData().shellConfig ?? {};
@@ -28,5 +29,7 @@ export function panelStorageKey() {
 }
 
 export function sectionColors() {
-  return shellConfig().theme?.sectionColors ?? ["primary", "info", "success", "warning", "error", "danger", "color"];
+  const custom = shellConfig().theme?.sectionColors;
+  if (Array.isArray(custom) && custom.length) return custom;
+  return DEFAULT_SECTION_ACCENT_PALETTE;
 }

@@ -189,6 +189,16 @@ export function buildCodeFromStrategy(strategy, ctx, state, details, demoStyle, 
     case "disp-tour":
     case "disp-tree":
       return buildTag(name, [...collectAttrs(state), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+    case "modal":
+    case "dialog":
+    case "action-drawer":
+    case "loading":
+    case "toaster":
+    case "cmp-alert":
+    case "cmp-tip-info":
+    case "cmp-invoked-floater":
+    case "cmp-floating-component":
+      return buildTag(name, [...collectAttrs(state), ...styleAttrs(demoStyle, demoClass)], tagOpts);
     case "side-panel-pattern": {
       const open = state.open !== false;
       const drawer = Boolean(state.drawer);

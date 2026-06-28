@@ -1,26 +1,26 @@
-/* Superficies neon — looks `neon-mono` · `neon-dual` · `neon-triad` (`data-looknfeel^="neon-"`). */
+/* Superficies neon — look `data-looknfeel="neon"`. */
 
-html[data-looknfeel^="neon-"] [data-variant] {
+html[data-looknfeel="neon"] [data-variant] {
 	--ng-accent: var(--bttn-clr, var(--bdg-clr, var(--mimicus-primary)));
 }
 
 /* Card — sombras neón (anula relieve gris inline de Card.svelte) */
-html[data-looknfeel^="neon-"] .card-root {
+html[data-looknfeel="neon"] .card-root {
 	box-shadow: var(--mimicus-glass-shadow-dark) !important;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root {
+html[data-luminance="light"][data-looknfeel="neon"] .card-root {
 	box-shadow: var(--mimicus-glass-shadow-light) !important;
 }
 
-html[data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+html[data-looknfeel="neon"] .card-root[data-variant="flat"] {
 	box-shadow:
 		0 0 0 1px color-mix(in srgb, var(--neon-cyan), transparent 72%),
 		0 0 20px color-mix(in srgb, var(--neon-blue), transparent 78%),
 		0 0 36px color-mix(in srgb, var(--neon-purple), transparent 84%) !important;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+html[data-luminance="light"][data-looknfeel="neon"] .card-root[data-variant="flat"] {
 	box-shadow:
 		0 0 0 1px color-mix(in srgb, var(--mimicus-primary), transparent 82%),
 		0 0 16px color-mix(in srgb, var(--neon-blue), transparent 84%),
@@ -28,29 +28,29 @@ html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="f
 }
 
 /* Card */
-html[data-looknfeel^="neon-"] .card-root[data-variant="solid"],
-html[data-looknfeel^="neon-"] .card-root[data-variant="flat"],
-html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+html[data-looknfeel="neon"] .card-root[data-variant="solid"]:not(.mimicus-action-drawer__card),
+html[data-looknfeel="neon"] .card-root[data-variant="flat"],
+html[data-looknfeel="neon"] .card-root[data-variant="glass"] {
 	border-radius: var(--mimicus-ui-radius, 0.5rem);
 	-webkit-backdrop-filter: blur(12px) saturate(150%);
 	backdrop-filter: blur(12px) saturate(150%);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="solid"],
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"],
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+html[data-luminance="light"][data-looknfeel="neon"] .card-root[data-variant="solid"]:not(.mimicus-action-drawer__card),
+html[data-luminance="light"][data-looknfeel="neon"] .card-root[data-variant="flat"],
+html[data-luminance="light"][data-looknfeel="neon"] .card-root[data-variant="glass"] {
 	border-color: var(--mimicus-glass-border-light) !important;
 	box-shadow: var(--mimicus-glass-shadow-light) !important;
 }
 
-html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="solid"],
-html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="flat"],
-html[data-luminance="dark"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+html[data-luminance="dark"][data-looknfeel="neon"] .card-root[data-variant="solid"]:not(.mimicus-action-drawer__card),
+html[data-luminance="dark"][data-looknfeel="neon"] .card-root[data-variant="flat"],
+html[data-luminance="dark"][data-looknfeel="neon"] .card-root[data-variant="glass"] {
 	border-color: var(--mimicus-glass-border-dark) !important;
 	box-shadow: var(--mimicus-glass-shadow-dark) !important;
 }
 
-html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+html[data-looknfeel="neon"] .card-root[data-variant="glass"] {
 	background: linear-gradient(
 		165deg,
 		color-mix(in srgb, var(--neon-blue), transparent 90%),
@@ -59,7 +59,7 @@ html[data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
 	border: 1px solid var(--mimicus-glass-border-dark) !important;
 }
 
-html[data-looknfeel^="neon-"] .card-root[data-variant="solid"] {
+html[data-looknfeel="neon"] .card-root[data-variant="solid"]:not(.mimicus-action-drawer__card) {
 	background: linear-gradient(
 		145deg,
 		color-mix(in srgb, var(--neon-blue), transparent 94%),
@@ -68,26 +68,26 @@ html[data-looknfeel^="neon-"] .card-root[data-variant="solid"] {
 	border: 1px solid var(--mimicus-glass-border-dark) !important;
 }
 
-html[data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+html[data-looknfeel="neon"] .card-root[data-variant="flat"] {
 	background: color-mix(in srgb, var(--mimicus-glass-bg-dark), transparent 38%) !important;
 	border: 1px solid color-mix(in srgb, var(--mimicus-glass-border-dark), transparent 28%) !important;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="glass"] {
+html[data-luminance="light"][data-looknfeel="neon"] .card-root[data-variant="glass"] {
 	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 94%), color-mix(in srgb, var(--mimicus-bg-secondary), transparent 14%)) !important;
 	border-color: var(--mimicus-glass-border-light) !important;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="solid"] {
+html[data-luminance="light"][data-looknfeel="neon"] .card-root[data-variant="solid"]:not(.mimicus-action-drawer__card) {
 	background: linear-gradient(145deg, color-mix(in srgb, var(--neon-blue), transparent 96%), color-mix(in srgb, var(--mimicus-bg-secondary), transparent 12%)) !important;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .card-root[data-variant="flat"] {
+html[data-luminance="light"][data-looknfeel="neon"] .card-root[data-variant="flat"] {
 	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 32%) !important;
 }
 
 /* CheckboxIcon / Switch */
-html[data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt {
+html[data-looknfeel="neon"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt {
 	padding: 0.2rem 0.55rem;
 	border-radius: 999px;
 	-webkit-backdrop-filter: blur(8px) saturate(140%);
@@ -100,17 +100,17 @@ html[data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"] .lbl-cnt
 	);
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt {
+html[data-luminance="light"][data-looknfeel="neon"] label.checkbox-icon[data-variant="glass"] .lbl-cntnt {
 	background: linear-gradient(145deg, color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 5%, transparent), color-mix(in srgb, var(--mimicus-bg-secondary), transparent 10%));
 	border-color: color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 22%, var(--mimicus-b-color));
 }
 
-html[data-looknfeel^="neon-"] label.checkbox-icon[data-variant="glass"]:has(input:checked) .lbl-cntnt {
+html[data-looknfeel="neon"] label.checkbox-icon[data-variant="glass"]:has(input:checked) .lbl-cntnt {
 	box-shadow: 0 0 14px color-mix(in srgb, var(--c-tr, var(--mimicus-primary)) 32%, transparent);
 }
 
 /* Divider glow — fallback fuera de neon-glass */
-html:not([data-looknfeel^="neon-"]) .mimicus-divider--glow.mimicus-divider--horizontal .mimicus-divider__rail {
+html:not([data-looknfeel="neon"]) .mimicus-divider--glow.mimicus-divider--horizontal .mimicus-divider__rail {
 	border-top-width: 1px;
 	border-style: solid;
 	height: auto;
@@ -119,7 +119,7 @@ html:not([data-looknfeel^="neon-"]) .mimicus-divider--glow.mimicus-divider--hori
 	opacity: 1;
 }
 
-html:not([data-looknfeel^="neon-"]) .mimicus-divider--glow.mimicus-divider--vertical .mimicus-divider__rail--solo-vertical {
+html:not([data-looknfeel="neon"]) .mimicus-divider--glow.mimicus-divider--vertical .mimicus-divider__rail--solo-vertical {
 	border-left-width: 1px;
 	width: 0;
 	background: none;
@@ -127,7 +127,7 @@ html:not([data-looknfeel^="neon-"]) .mimicus-divider--glow.mimicus-divider--vert
 	opacity: 1;
 }
 
-html[data-looknfeel^="neon-"] .mimicus-divider--glow.mimicus-divider--horizontal .mimicus-divider__rail {
+html[data-looknfeel="neon"] .mimicus-divider--glow.mimicus-divider--horizontal .mimicus-divider__rail {
 	border-top: none;
 	height: 2px;
 	background: linear-gradient(90deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);
@@ -135,7 +135,7 @@ html[data-looknfeel^="neon-"] .mimicus-divider--glow.mimicus-divider--horizontal
 	opacity: 0.92;
 }
 
-html[data-looknfeel^="neon-"] .mimicus-divider--glow.mimicus-divider--vertical .mimicus-divider__rail--solo-vertical {
+html[data-looknfeel="neon"] .mimicus-divider--glow.mimicus-divider--vertical .mimicus-divider__rail--solo-vertical {
 	border-left: none;
 	width: 2px;
 	background: linear-gradient(180deg, transparent, var(--neon-cyan, #00e5ff), var(--neon-blue, #1e90ff), var(--neon-purple, #6366f1), transparent);
@@ -143,8 +143,136 @@ html[data-looknfeel^="neon-"] .mimicus-divider--glow.mimicus-divider--vertical .
 	opacity: 0.92;
 }
 
-html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-divider--glow .mimicus-divider__rail,
-html[data-luminance="light"][data-looknfeel^="neon-"] .mimicus-divider--glow .mimicus-divider__rail--solo-vertical {
+html[data-luminance="light"][data-looknfeel="neon"] .mimicus-divider--glow .mimicus-divider__rail,
+html[data-luminance="light"][data-looknfeel="neon"] .mimicus-divider--glow .mimicus-divider__rail--solo-vertical {
 	box-shadow: 0 0 8px color-mix(in srgb, var(--neon-blue, #1e90ff) 22%, transparent);
 	opacity: 0.85;
+}
+
+/* Alert — glass neon translúcido con degradados por semántica */
+html[data-looknfeel="neon"] .mimicus-alert {
+	backdrop-filter: blur(14px) saturate(170%);
+	-webkit-backdrop-filter: blur(14px) saturate(170%);
+	border-width: 1px;
+	border-style: solid;
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--info {
+	border-color: color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 52%) !important;
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 74%),
+		color-mix(in srgb, var(--neon-blue, var(--mimicus-primary)), transparent 80%) 44%,
+		color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 84%)
+	) !important;
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 76%),
+		0 0 22px color-mix(in srgb, var(--neon-blue, var(--mimicus-primary)), transparent 82%),
+		0 0 38px color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 90%),
+		inset 0 1px 0 color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 84%);
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--success {
+	border-color: color-mix(in srgb, var(--neon-green, var(--mimicus-success)), transparent 50%) !important;
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-sage, var(--mimicus-success)), transparent 72%),
+		color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 78%) 46%,
+		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 84%)
+	) !important;
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--neon-green, var(--mimicus-success)), transparent 74%),
+		0 0 22px color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 80%),
+		0 0 36px color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 90%),
+		inset 0 1px 0 color-mix(in srgb, var(--neon-sage, var(--mimicus-success)), transparent 82%);
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--warning {
+	border-color: color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 48%) !important;
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 70%),
+		color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 76%) 42%,
+		color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 84%)
+	) !important;
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 72%),
+		0 0 22px color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 78%),
+		0 0 36px color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 88%),
+		inset 0 1px 0 color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 80%);
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--error {
+	border-color: color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 48%) !important;
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 72%),
+		color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 78%) 44%,
+		color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 84%)
+	) !important;
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 72%),
+		0 0 22px color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 78%),
+		0 0 38px color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 88%),
+		inset 0 1px 0 color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 80%);
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--info .mimicus-alert__icon {
+	color: var(--neon-cyan, var(--mimicus-info));
+	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 48%));
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--success .mimicus-alert__icon {
+	color: var(--neon-green, var(--mimicus-success));
+	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 46%));
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--warning .mimicus-alert__icon {
+	color: var(--neon-amber, var(--mimicus-warning));
+	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 44%));
+}
+
+html[data-looknfeel="neon"] .mimicus-alert--error .mimicus-alert__icon {
+	color: var(--neon-rose, var(--mimicus-error));
+	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 44%));
+}
+
+html[data-looknfeel="neon"] .mimicus-alert__title {
+	text-shadow: 0 0 18px color-mix(in srgb, currentColor, transparent 72%);
+}
+
+html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--info {
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 58%),
+		color-mix(in srgb, var(--neon-blue, var(--mimicus-primary)), transparent 64%) 44%,
+		color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 70%)
+	) !important;
+}
+
+html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--success {
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-sage, var(--mimicus-success)), transparent 56%),
+		color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 62%) 46%,
+		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 68%)
+	) !important;
+}
+
+html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--warning {
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 54%),
+		color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 60%) 42%,
+		color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 68%)
+	) !important;
+}
+
+html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--error {
+	background: linear-gradient(
+		128deg,
+		color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 56%),
+		color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 62%) 44%,
+		color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 70%)
+	) !important;
 }

@@ -5,7 +5,7 @@
    "titleIcon": "mdi:loading",
    "status": "approved",
    "intro": "Indicador a pantalla completa durante operaciones largas; color coherente con la paleta.",
-   "component": { "name": "Loading", "path": "src/lib/overlays/Loading.svelte" },
+   "component": { "name": "Loading", "path": "src/components/overlays/Overlays.tsx" },
    "preview": { "template": "loading" },
    "state": { "color": null },
    "demoConfig": { "autoCloseSec": 3 },

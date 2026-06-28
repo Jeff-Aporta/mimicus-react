@@ -17,6 +17,7 @@ import {
   Badge, Tag, Chip, Avatar, AvatarGroup, Carousel, Collapse, CollapsePanel, Accordion,
   Descriptions, DescriptionsItem, Empty, QRCode, Segmented, Statistic, Table, Timeline, TimelineItem,
   Tooltip, Tour, Tree, Calendar, List, ListItem, ListItemText, ListItemIcon, ListItemAvatar,
+  Dialog, Modal, ActionDrawer, Loading, Toaster, toastSuccess, toastError, toastLoading, toastRemove, Alert, TipInfo, InvokedFloater, FloatingComponent,
   LoginButton, ContapymeSessionProvider, createOrchestratorSession, createDemoSession,
   SidePanel, SidePanelSection, DataGrid,
 } from "../../_ui.ts";
@@ -36,6 +37,7 @@ const IMPLEMENTED = {
   Badge, Tag, Chip, Avatar, AvatarGroup, Carousel, Collapse, CollapsePanel, Accordion,
   Descriptions, DescriptionsItem, Empty, QRCode, Segmented, Statistic, Table, Timeline, TimelineItem,
   Tooltip, Tour, Tree, Calendar, List, ListItem, ListItemText, ListItemIcon, ListItemAvatar,
+  Dialog, Modal, ActionDrawer, Loading, Toaster, toastSuccess, toastError, toastLoading, toastRemove, Alert, TipInfo, InvokedFloater, FloatingComponent,
   LoginButton, ContapymeSessionProvider, createOrchestratorSession, createDemoSession,
   DataGrid,
 };

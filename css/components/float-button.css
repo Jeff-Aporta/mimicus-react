@@ -112,7 +112,7 @@
 	}
 }
 
-html[data-looknfeel^="neon-"] .mimicus-float-btn[data-type="primary"] {
+html[data-looknfeel="neon"] .mimicus-float-btn[data-type="primary"] {
 	background: linear-gradient(145deg, color-mix(in srgb, var(--mimicus-primary) 55%, transparent), color-mix(in srgb, var(--mimicus-primary) 22%, rgba(15, 34, 54, 0.45)));
 	border: 1px solid color-mix(in srgb, var(--mimicus-primary) 58%, transparent);
 	box-shadow: 0 0 18px color-mix(in srgb, var(--mimicus-primary) 32%, transparent);

@@ -19,6 +19,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     APP_LAYOUT_VARIANT_OPTIONS: () => APP_LAYOUT_VARIANT_OPTIONS,
     AUTH_DEFAULTS: () => AUTH_DEFAULTS,
     Accordion: () => Accordion,
+    ActionDrawer: () => ActionDrawer,
+    Alert: () => Alert,
     Anchor: () => Anchor,
     AppLayout: () => AppLayout,
     AppLayoutProvider: () => AppLayoutProvider,
@@ -65,6 +67,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     DemoPage: () => DemoPage,
     Descriptions: () => Descriptions,
     DescriptionsItem: () => DescriptionsItem,
+    Dialog: () => Dialog,
     Divider: () => Divider,
     Drawer: () => Drawer,
     Dropdown: () => Dropdown,
@@ -72,6 +75,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     Fab: () => Fab,
     FlexLayout: () => FlexLayout,
     FloatButton: () => FloatButton,
+    FloatingComponent: () => FloatingComponent,
     Form: () => Form,
     FormItem: () => FormItem,
     GridLayout: () => GridLayout,
@@ -82,6 +86,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     ImageList: () => ImageList,
     Input: () => Input,
     InputNumber: () => InputNumber,
+    InvokedFloater: () => InvokedFloater,
     JsonDemoAdapter: () => JsonDemoAdapter,
     JsonRenderer: () => JsonRenderer,
     LAYOUT_PREVIEW_EMOJIS: () => LAYOUT_PREVIEW_EMOJIS,
@@ -101,6 +106,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     ListItemAvatar: () => ListItemAvatar,
     ListItemIcon: () => ListItemIcon,
     ListItemText: () => ListItemText,
+    Loading: () => Loading,
     LoginButton: () => LoginButton,
     LoginDialog: () => LoginDialog,
     LoginFormActions: () => LoginFormActions,
@@ -113,6 +119,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     Mentions: () => Mentions,
     Menu: () => Menu,
     MimicusSidebar: () => MimicusSidebar,
+    Modal: () => Modal,
     NEON_LOOKNFEELS: () => NEON_LOOKNFEELS,
     NavLink: () => NavLink,
     NavTabRow: () => NavTabRow,
@@ -160,6 +167,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     TimePicker: () => TimePicker,
     Timeline: () => Timeline,
     TimelineItem: () => TimelineItem,
+    TipInfo: () => TipInfo,
+    Toaster: () => Toaster,
     ToggleButton: () => ToggleButton,
     ToggleButtonGroup: () => ToggleButtonGroup,
     Tooltip: () => Tooltip,
@@ -207,6 +216,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     cycleSort: () => cycleSort,
     defaultIterceroFromTerceros: () => defaultIterceroFromTerceros,
     demoSlug: () => demoSlug,
+    designSchemeColorCount: () => designSchemeColorCount,
     designSchemeForThemeColor: () => designSchemeForThemeColor,
     destroyCodeMirror: () => destroyCodeMirror,
     dispatchShellNav: () => dispatchShellNav,
@@ -311,6 +321,10 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     subscribeLooknfeel: () => subscribeLooknfeel,
     subscribeTheme: () => subscribeTheme,
     surfaceVariantAttrs: () => surfaceVariantAttrs,
+    toastError: () => toastError,
+    toastLoading: () => toastLoading,
+    toastRemove: () => toastRemove2,
+    toastSuccess: () => toastSuccess,
     toggleRowSelection: () => toggleRowSelection,
     uniqueValues: () => uniqueValues,
     urlState: () => urlState,
@@ -329,8 +343,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
 
   // src/layout/app-layout/appLayoutVariants.ts
   var PLAYGROUND_APP_LAYOUT_OPTIONS = [
-    { id: "side", label: "Panel izquierdo" },
-    { id: "top-side-2", label: "Panel derecho" }
+    { id: "side", label: "Panel izquierdo", icon: "mdi:dock-left" },
+    { id: "top-side-2", label: "Panel derecho", icon: "mdi:dock-right" }
   ];
   var APP_LAYOUT_VARIANT_OPTIONS = [
     ...PLAYGROUND_APP_LAYOUT_OPTIONS,
@@ -456,6 +470,252 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   // src/components/Button.tsx
   var import_react2 = __require("react");
 
+  // src/theme/palette-catalog.json
+  var palette_catalog_default = [
+    {
+      id: "grafito",
+      label: "Grafito",
+      icon: "mdi:square",
+      scheme: "mono",
+      note: "gris pizarra fr\xEDo",
+      aliases: []
+    },
+    {
+      id: "menta",
+      label: "Menta",
+      icon: "mdi:sprout",
+      scheme: "mono",
+      note: "verde menta / agua fresca",
+      aliases: []
+    },
+    {
+      id: "vulcano",
+      label: "Vulcano",
+      icon: "mdi:fire",
+      scheme: "mono",
+      note: "grises volc\xE1nicos",
+      aliases: []
+    },
+    {
+      id: "carbon",
+      label: "Carb\xF3n",
+      icon: "mdi:hexagon-outline",
+      scheme: "mono",
+      note: "carb\xF3n neutro",
+      aliases: []
+    },
+    {
+      id: "plata",
+      label: "Plata",
+      icon: "mdi:brightness-6",
+      scheme: "mono",
+      note: "plata azulada",
+      aliases: []
+    },
+    {
+      id: "humo",
+      label: "Humo",
+      icon: "mdi:smoke",
+      scheme: "mono",
+      note: "gris c\xE1lido humo",
+      aliases: []
+    },
+    {
+      id: "marfil",
+      label: "Marfil",
+      icon: "mdi:feather",
+      scheme: "mono",
+      note: "marfil c\xE1lido",
+      aliases: []
+    },
+    {
+      id: "azabache",
+      label: "Azabache",
+      icon: "mdi:circle-slice-8",
+      scheme: "mono",
+      note: "negro azulado",
+      aliases: []
+    },
+    {
+      id: "nieve",
+      label: "Nieve",
+      icon: "mdi:snowflake",
+      scheme: "mono",
+      note: "blanco helado",
+      aliases: []
+    },
+    {
+      id: "piedra",
+      label: "Piedra",
+      icon: "mdi:wall",
+      scheme: "mono",
+      note: "piedra tostada",
+      aliases: []
+    },
+    {
+      id: "oceano",
+      label: "Oc\xE9ano",
+      icon: "mdi:waves",
+      scheme: "dual",
+      note: "teal + cielo",
+      aliases: []
+    },
+    {
+      id: "ambar",
+      label: "\xC1mbar",
+      icon: "mdi:weather-sunny",
+      scheme: "dual",
+      note: "\xE1mbar + oro",
+      aliases: []
+    },
+    {
+      id: "indigo",
+      label: "\xCDndigo",
+      icon: "mdi:moon-waning-crescent",
+      scheme: "dual",
+      note: "\xEDndigo + violeta",
+      aliases: []
+    },
+    {
+      id: "tierra",
+      label: "Tierra",
+      icon: "mdi:terrain",
+      scheme: "dual",
+      note: "marr\xF3n + ocre",
+      aliases: []
+    },
+    {
+      id: "cobre",
+      label: "Cobre",
+      icon: "mdi:gold",
+      scheme: "dual",
+      note: "cobre + turquesa",
+      aliases: []
+    },
+    {
+      id: "oliva",
+      label: "Oliva",
+      icon: "mdi:fruit-grapes",
+      scheme: "dual",
+      note: "oliva + oro",
+      aliases: []
+    },
+    {
+      id: "glaciar",
+      label: "Glaciar",
+      icon: "mdi:snowflake-variant",
+      scheme: "dual",
+      note: "hielo + azul profundo",
+      aliases: []
+    },
+    {
+      id: "bosque",
+      label: "Bosque",
+      icon: "mdi:tree",
+      scheme: "dual",
+      note: "verde bosque + musgo",
+      aliases: []
+    },
+    {
+      id: "medianoche",
+      label: "Medianoche",
+      icon: "mdi:weather-night",
+      scheme: "dual",
+      note: "navy + cian",
+      aliases: []
+    },
+    {
+      id: "ciruela",
+      label: "Ciruela",
+      icon: "mdi:flower-tulip-outline",
+      scheme: "dual",
+      note: "ciruela + rosa",
+      aliases: []
+    },
+    {
+      id: "hues-dodgerblue",
+      label: "Dodger",
+      icon: "mdi:palette-swatch",
+      scheme: "triad",
+      note: "azul dodger ContaPyme",
+      aliases: [
+        "contapyme"
+      ]
+    },
+    {
+      id: "natural",
+      label: "Natural",
+      icon: "mdi:leaf",
+      scheme: "triad",
+      note: "verde + azul + naranja",
+      aliases: []
+    },
+    {
+      id: "coral",
+      label: "Coral",
+      icon: "mdi:flower-tulip",
+      scheme: "triad",
+      note: "coral + melocot\xF3n + violeta",
+      aliases: []
+    },
+    {
+      id: "lavanda",
+      label: "Lavanda",
+      icon: "mdi:flower",
+      scheme: "triad",
+      note: "violeta + rosa + cian",
+      aliases: []
+    },
+    {
+      id: "cereza",
+      label: "Cereza",
+      icon: "mdi:fruit-cherries",
+      scheme: "triad",
+      note: "cereza + rosa + violeta",
+      aliases: []
+    },
+    {
+      id: "fucsia",
+      label: "Fucsia",
+      icon: "mdi:star-four-points",
+      scheme: "triad",
+      note: "magenta + rosa + \xEDndigo",
+      aliases: []
+    },
+    {
+      id: "aurora",
+      label: "Aurora",
+      icon: "mdi:aurora",
+      scheme: "triad",
+      note: "verde + cian + rosa",
+      aliases: []
+    },
+    {
+      id: "tropico",
+      label: "Tr\xF3pico",
+      icon: "mdi:palm-tree",
+      scheme: "triad",
+      note: "amarillo + verde + azul",
+      aliases: []
+    },
+    {
+      id: "electrico",
+      label: "El\xE9ctrico",
+      icon: "mdi:flash",
+      scheme: "triad",
+      note: "magenta + cian + amarillo",
+      aliases: []
+    },
+    {
+      id: "crepusculo",
+      label: "Crep\xFAsculo",
+      icon: "mdi:weather-sunset",
+      scheme: "triad",
+      note: "violeta + naranja + azul",
+      aliases: []
+    }
+  ];
+
   // src/theme/constants.ts
   var LUMINANCE_STORAGE_KEY = "theme-luminance";
   var THEME_COLOR_STORAGE_KEY = "theme-color";
@@ -472,41 +732,15 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     mint: "menta",
     magenta: "fucsia"
   };
-  var THEME_COLOR_OPTIONS = [
-    { id: "hues-dodgerblue", label: "Dodger", icon: "mdi:palette-swatch" },
-    { id: "vulcano", label: "Vulcano", icon: "mdi:fire" },
-    { id: "natural", label: "Natural", icon: "mdi:leaf" },
-    { id: "coral", label: "Coral", icon: "mdi:flower-tulip" },
-    { id: "oceano", label: "Oc\xE9ano", icon: "mdi:waves" },
-    { id: "lavanda", label: "Lavanda", icon: "mdi:flower" },
-    { id: "ambar", label: "\xC1mbar", icon: "mdi:weather-sunny" },
-    { id: "cereza", label: "Cereza", icon: "mdi:fruit-cherries" },
-    { id: "grafito", label: "Grafito", icon: "mdi:square" },
-    { id: "menta", label: "Menta", icon: "mdi:sprout" },
-    { id: "indigo", label: "\xCDndigo", icon: "mdi:moon-waning-crescent" },
-    { id: "tierra", label: "Tierra", icon: "mdi:terrain" },
-    { id: "fucsia", label: "Fucsia", icon: "mdi:star-four-points" }
-  ];
+  var THEME_COLOR_OPTIONS = palette_catalog_default.map(({ id, label, icon }) => ({ id, label, icon }));
   var DESIGN_SCHEME_OPTIONS = [
     { id: "mono", label: "Mono", icon: "mdi:circle" },
     { id: "dual", label: "Dual", icon: "mdi:circle-half-full" },
     { id: "triad", label: "Tr\xEDada", icon: "mdi:triangle-outline" }
   ];
-  var THEME_COLOR_DESIGN_SCHEME = {
-    "hues-dodgerblue": "triad",
-    vulcano: "dual",
-    natural: "triad",
-    coral: "triad",
-    oceano: "dual",
-    lavanda: "triad",
-    ambar: "dual",
-    cereza: "triad",
-    grafito: "mono",
-    menta: "mono",
-    indigo: "dual",
-    tierra: "dual",
-    fucsia: "triad"
-  };
+  var THEME_COLOR_DESIGN_SCHEME = Object.fromEntries(
+    palette_catalog_default.map((p) => [p.id, p.scheme])
+  );
   var LOOKNFEEL_STORAGE_KEY = "looknfeel";
   var LOOKNFEEL_DEFAULT = "contapyme";
   var NEON_LOOKNFEELS = ["neon"];
@@ -549,6 +783,11 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function designSchemeForThemeColor(value) {
     return THEME_COLOR_DESIGN_SCHEME[value] ?? "mono";
+  }
+  function designSchemeColorCount(scheme) {
+    if (scheme === "mono") return 1;
+    if (scheme === "dual") return 2;
+    return 3;
   }
   function readLuminanceFromDom() {
     if (typeof document === "undefined") return "light";
@@ -692,7 +931,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       "data-glass-active": isGlassVariant(variant) && glassActive ? "true" : void 0,
       ...surfaceStyle,
       className: cls,
-      style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
+      style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style, ...style }
     };
     const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
     const extractChildIcon = (nodes) => {
@@ -1508,26 +1747,53 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     };
     const placement = root.dataset.placement ?? "top";
     let open = false;
+    let hideTimer = null;
+    const clearHideTimer = () => {
+      if (hideTimer) {
+        clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    };
     const show = () => {
+      clearHideTimer();
+      if (open) return;
       open = true;
       root.classList.add("is-open");
       tip.hidden = false;
+      tip.setAttribute("aria-hidden", "false");
       tip.dataset.placement = placement;
     };
     const hide = () => {
+      clearHideTimer();
+      if (!open) return;
       open = false;
       root.classList.remove("is-open");
-      tip.hidden = true;
+      hideTimer = setTimeout(() => {
+        if (!open) {
+          tip.hidden = true;
+          tip.setAttribute("aria-hidden", "true");
+        }
+        hideTimer = null;
+      }, 120);
+    };
+    const scheduleHide = () => {
+      clearHideTimer();
+      hideTimer = setTimeout(hide, 60);
     };
     hide();
     const cleanups = [
-      on(trigger, "mouseenter", show),
-      on(trigger, "focus", show),
-      on(trigger, "mouseleave", hide),
-      on(trigger, "blur", hide),
+      on(root, "pointerenter", show),
+      on(root, "pointerleave", scheduleHide),
+      on(root, "focusin", show),
+      on(root, "focusout", (e) => {
+        const next = e.relatedTarget;
+        if (next && root.contains(next)) return;
+        scheduleHide();
+      }),
       on(root, "keydown", (e) => {
         if (e.key === "Escape" && open) hide();
-      })
+      }),
+      () => clearHideTimer()
     ];
     return () => cleanups.forEach((fn) => fn());
   }
@@ -1666,43 +1932,67 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const prev = qs("[data-mimicus-tour-prev]", root);
     const next = qs("[data-mimicus-tour-next]", root);
     const close = qs("[data-mimicus-tour-close]", root);
+    const scope = root.closest(".mimicus-tour-demo");
+    const local = Boolean(scope);
     let idx = 0;
-    let open = parseBool(root.dataset.open);
+    const clearTargets = () => {
+      qsa(".mimicus-tour-target", document).forEach((el) => el.classList.remove("mimicus-tour-target"));
+    };
+    const resetCard = () => {
+      if (!card) return;
+      card.style.top = "";
+      card.style.left = "";
+      card.style.right = "";
+      card.style.bottom = "";
+      card.style.transform = "";
+      card.style.position = local ? "absolute" : "fixed";
+    };
+    const placeCard = (target) => {
+      if (!card) return;
+      resetCard();
+      const box = local && scope ? scope.getBoundingClientRect() : { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+      if (!target) {
+        card.style.top = "50%";
+        card.style.left = "50%";
+        card.style.transform = "translate(-50%, -50%)";
+        return;
+      }
+      const rect = target.getBoundingClientRect();
+      const top = rect.bottom - box.top + 8;
+      let left = rect.left - box.left;
+      const maxLeft = Math.max(8, box.width - card.offsetWidth - 8);
+      left = Math.max(8, Math.min(left, maxLeft));
+      card.style.top = `${Math.max(8, top)}px`;
+      card.style.left = `${left}px`;
+    };
     const paint = () => {
-      open = parseBool(root.dataset.open);
+      const open = parseBool(root.dataset.open);
       if (!open || !steps.length) {
         root.classList.remove("is-active");
         if (overlay) overlay.hidden = true;
+        clearTargets();
         return;
       }
       root.classList.add("is-active");
-      if (overlay) overlay.hidden = false;
+      if (overlay) {
+        overlay.hidden = false;
+        overlay.style.position = local ? "absolute" : "fixed";
+      }
       const step = steps[idx];
       const targetSel = step?.dataset.target;
-      const target = targetSel ? qs(targetSel, root) ?? qs(targetSel, document) : null;
+      const target = targetSel ? qs(targetSel, scope ?? root) ?? qs(targetSel, document) : null;
       steps.forEach((s, i) => s.classList.toggle("is-current", i === idx));
       if (titleEl) titleEl.textContent = step?.dataset.title ?? "";
       if (descEl) descEl.textContent = step?.dataset.description ?? "";
-      if (card && target) {
-        const rect = target.getBoundingClientRect();
-        card.style.position = "fixed";
-        card.style.top = `${rect.bottom + 8}px`;
-        card.style.left = `${rect.left}px`;
-        target.classList.add("mimicus-tour-target");
-        steps.forEach((s, i) => {
-          if (i !== idx) {
-            const sel = s.dataset.target;
-            const el = sel ? qs(sel, root) ?? qs(sel, document) : null;
-            el?.classList.remove("mimicus-tour-target");
-          }
-        });
-      }
+      clearTargets();
+      if (target) target.classList.add("mimicus-tour-target");
+      placeCard(target);
       if (prev) prev.disabled = idx <= 0;
       if (next) next.textContent = idx >= steps.length - 1 ? "Finalizar" : "Siguiente";
     };
     const end = () => {
       root.dataset.open = "false";
-      qsa(".mimicus-tour-target", root).forEach((el) => el.classList.remove("mimicus-tour-target"));
+      clearTargets();
       paint();
       emit(root, "mimicus-tour-close");
     };
@@ -1722,7 +2012,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
         }
       }),
       on(close, "click", end),
-      on(overlay, "click", end)
+      on(overlay, "click", end),
+      () => clearTargets()
     ];
   }
   var BINDERS = {
@@ -2057,7 +2348,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   function Tour({ steps = [], open = false, className, style, ...rest }) {
     const ref = (0, import_react10.useRef)(null);
     useDisplayBinding(ref, "tour", [open, steps.length]);
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { ...rest, ref, className: cx("mimicus-tour", open && "is-active", className), style, "data-mimicus-display": "tour", "data-open": open, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { ...rest, ref, className: cx("mimicus-tour", open && "is-active", className), style, "data-mimicus-display": "tour", "data-open": open ? "true" : "false", children: [
       /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "mimicus-tour__overlay", "data-mimicus-tour-overlay": true, hidden: true }),
       steps.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { "data-mimicus-tour-step": true, "data-target": s.target, "data-title": s.title, "data-description": s.description, hidden: true }, i)),
       /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mimicus-tour__card", "data-mimicus-tour-card": true, children: [
@@ -2144,9 +2435,6 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
 
   // src/layout/panels/SidePanelSection.tsx
   var import_jsx_runtime13 = __require("react/jsx-runtime");
-  function StatusDot({ color, size = "0.48rem" }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "mimicus-side-panel-section__status-dot", style: { width: size, height: size, borderRadius: "50%", background: resolveColor(color), display: "inline-block", flexShrink: 0 }, "aria-hidden": true });
-  }
   function PanelIcon({ icon, style }) {
     if (!icon) return null;
     return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("iconify-icon", { icon, style: { fontSize: "1.1rem", flexShrink: 0, ...style }, "aria-hidden": true });
@@ -2158,24 +2446,20 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     active,
     forceOpen,
     count,
-    statusDots = [],
     color = "primary",
+    colorSlot,
     collapsed,
     onToggle,
     onHeaderClick,
     children
   }) {
-    const statusDotsUnique = [...new Set(statusDots)];
     const accentStyle = { "--sm-accent": resolveColor(color) };
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: ["mimicus-side-panel-section", "sm-section", collapsed && "is-collapsed", open && !collapsed && "is-open", active && "is-active"].filter(Boolean).join(" "), style: accentStyle, "data-section-color": color, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: ["mimicus-side-panel-section", "sm-section", collapsed && "is-collapsed", open && !collapsed && "is-open", active && "is-active"].filter(Boolean).join(" "), style: accentStyle, "data-section-color": colorSlot ?? color, children: [
       /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { style: { display: "flex", alignItems: "stretch", gap: "0.1rem", width: "100%" }, children: [
         /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(Button, { variant: active ? "soft" : "text", shape: "rect", color, onClick: onHeaderClick, style: { flex: "1 1 auto", minWidth: 0, justifyContent: collapsed ? "center" : "flex-start", fontSize: "0.78rem", fontWeight: 600 }, title: typeof label === "string" ? label : void 0, children: [
           /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(PanelIcon, { icon, style: collapsed ? { fontSize: "1.2rem" } : void 0 }),
           !collapsed && /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("span", { className: "sm-title-group", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "sm-label", children: label }),
-              statusDotsUnique.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "sm-status-dots", children: statusDotsUnique.map((dotColor) => /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(StatusDot, { color: dotColor }, dotColor)) })
-            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "sm-title-group", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "sm-label", children: label }) }),
             count != null && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "sm-trail", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Badge, { children: count }) })
           ] })
         ] }),
@@ -4468,14 +4752,283 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     }, deps);
   }
 
-  // src/components/forms/Forms.tsx
+  // src/components/overlays/Overlays.tsx
   var import_react21 = __require("react");
   var import_jsx_runtime27 = __require("react/jsx-runtime");
   function cx4(...p) {
     return p.filter(Boolean).join(" ");
   }
+  function Dialog({
+    open = false,
+    loading = false,
+    notClose = false,
+    lockViewportScroll = true,
+    backeffect = "blur",
+    _scope = "global",
+    className,
+    style,
+    children,
+    onCloseCancel,
+    onClose,
+    onClick,
+    onMouseDown,
+    ...rest
+  }) {
+    const ref = (0, import_react21.useRef)(null);
+    const blockCloseClickRef = (0, import_react21.useRef)(false);
+    const scope = _scope === "local" ? "local" : "global";
+    const lockScroll = scope === "global" && lockViewportScroll;
+    (0, import_react21.useEffect)(() => {
+      const el = ref.current;
+      if (!el) return void 0;
+      const onDialogCancel = async (e) => {
+        e.preventDefault();
+        if (loading) return;
+        if (notClose) {
+          const force = await Promise.resolve(onCloseCancel?.(e));
+          if (!force) return;
+        }
+        onClose?.();
+      };
+      el.addEventListener("cancel", onDialogCancel);
+      if (open) {
+        if (scope === "local") {
+          if (!el.open) el.show();
+        } else if (!el.open) el.showModal();
+      } else if (el.open) el.close();
+      return () => el.removeEventListener("cancel", onDialogCancel);
+    }, [open, loading, notClose, onClose, onCloseCancel, scope]);
+    (0, import_react21.useEffect)(() => {
+      if (!open || !lockScroll) return void 0;
+      const prev = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = "hidden";
+      return () => {
+        document.documentElement.style.overflow = prev;
+      };
+    }, [open, lockScroll]);
+    const isBlockCloseClick = (target) => target instanceof HTMLElement && Boolean(target.closest(".blockCloseClick"));
+    const handleMouseDown = (e) => {
+      blockCloseClickRef.current = isBlockCloseClick(e.target);
+      onMouseDown?.(e);
+    };
+    const handleClick = async (e) => {
+      onClick?.(e);
+      if (loading) return;
+      if (isBlockCloseClick(e.target) || blockCloseClickRef.current) {
+        blockCloseClickRef.current = false;
+        return;
+      }
+      if (e.target !== ref.current) return;
+      if (notClose) {
+        const force = await Promise.resolve(onCloseCancel?.(e.nativeEvent));
+        if (!force) return;
+      }
+      onClose?.();
+    };
+    if (!open) return null;
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+      "dialog",
+      {
+        ref,
+        ...rest,
+        className: cx4("mimicus-dialog", "is-dialog", loading && "loading", lockScroll && "lockViewportScroll", className),
+        style,
+        "data-scope": scope,
+        "data-backeffect": backeffect,
+        onMouseDown: handleMouseDown,
+        onClick: handleClick,
+        children
+      }
+    );
+  }
+  function Modal({
+    bshow,
+    open,
+    showCloseHeader = true,
+    variant = "solid",
+    title,
+    loading,
+    notClose,
+    className,
+    style,
+    children,
+    onClose,
+    ...dialogProps
+  }) {
+    const isOpen = open ?? bshow ?? false;
+    const close = (0, import_react21.useCallback)(() => onClose?.(), [onClose]);
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Dialog, { ...dialogProps, open: isOpen, loading, notClose, className: cx4("is-modal", className), onClose: close, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Card, { variant, id: "modal-window", className: "blockCloseClick mimicus-modal__card", style: { padding: 0, border: "none", ...style }, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mimicus-modal__layout", children: [
+      (title || showCloseHeader) && /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("header", { className: "mimicus-modal__header", children: [
+        title && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-modal__title", children: title }),
+        showCloseHeader && !notClose && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(IconButton, { variant: "text", icon: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Icon, { icon: "mdi:close" }), "aria-label": "Cerrar", disabled: loading || notClose, onClick: close })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: cx4("mimicus-modal__content", loading && "loading"), children })
+    ] }) }) });
+  }
+  var DRAWER_SIDE_ALIGN = {
+    right: { justifyContent: "flex-end" },
+    bottom: { alignItems: "flex-end" },
+    left: { justifyContent: "flex-start" },
+    top: { alignItems: "flex-start" }
+  };
+  function ActionDrawer({
+    bshow,
+    open,
+    side = "right",
+    className,
+    style,
+    children,
+    onClose,
+    ...dialogProps
+  }) {
+    const isOpen = open ?? bshow ?? false;
+    const placement = side ?? "right";
+    const close = (0, import_react21.useCallback)(() => onClose?.(), [onClose]);
+    const isLR = placement === "left" || placement === "right";
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Dialog, { ...dialogProps, open: isOpen, className: cx4("is-action-drawer", className), onClose: close, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+      "div",
+      {
+        className: cx4("mimicus-action-drawer__wrap", `mimicus-action-drawer__wrap--${placement}`),
+        style: { ...DRAWER_SIDE_ALIGN[placement], ...style },
+        children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+          Card,
+          {
+            variant: "solid",
+            className: cx4("blockCloseClick", "mimicus-action-drawer__card", isLR ? "is-lr" : "is-tb"),
+            style: { padding: 0, border: "none" },
+            children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-action-drawer__body", children })
+          }
+        )
+      }
+    ) });
+  }
+  function Loading({ bShow, bshow, open, color, className, style, children, onClose, ...dialogProps }) {
+    const isOpen = open ?? bshow ?? bShow ?? false;
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Dialog, { ...dialogProps, open: isOpen, loading: true, notClose: true, className: cx4("is-loading", className), onClose, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-loading__panel", style, "data-color": color ?? void 0, children: children ?? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-loading__spinner", "aria-hidden": true }) }) });
+  }
+  var toastListeners = /* @__PURE__ */ new Set();
+  var toastItems = [];
+  function emitToasts() {
+    toastListeners.forEach((fn) => fn([...toastItems]));
+  }
+  function pushToast(message, kind, duration) {
+    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    toastItems = [...toastItems, { id, message, kind, duration }];
+    emitToasts();
+    if (duration > 0 && duration < 999999999) {
+      window.setTimeout(() => toastRemove2(id), duration);
+    }
+    return id;
+  }
+  function toastSuccess(message, duration = 3e3) {
+    return pushToast(message, "success", duration);
+  }
+  function toastError(message, duration = 5e3) {
+    return pushToast(message, "error", duration);
+  }
+  function toastLoading(message, duration = 999999999) {
+    return pushToast(message, "loading", duration);
+  }
+  function toastRemove2(id) {
+    toastItems = toastItems.filter((t) => t.id !== id);
+    emitToasts();
+  }
+  function Toaster() {
+    const [items, setItems] = (0, import_react21.useState)([]);
+    (0, import_react21.useEffect)(() => {
+      toastListeners.add(setItems);
+      setItems([...toastItems]);
+      return () => {
+        toastListeners.delete(setItems);
+      };
+    }, []);
+    if (!items.length) return null;
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-toaster", "aria-live": "polite", children: items.map((t) => /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: cx4("mimicus-toast", `mimicus-toast--${t.kind}`), children: [
+      t.kind === "loading" && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-toast__spinner", "aria-hidden": true }),
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { children: t.message }),
+      t.kind !== "loading" && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-toast__close", "aria-label": "Cerrar", onClick: () => toastRemove2(t.id), children: "\xD7" })
+    ] }, t.id)) });
+  }
+  function Alert({ color = "info", title, inline, className, style, children, ...rest }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { ...rest, className: cx4("mimicus-alert", `mimicus-alert--${color}`, inline && "mimicus-alert--inline", className), style, role: "alert", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Icon, { icon: color === "error" ? "mdi:alert-circle" : color === "warning" ? "mdi:alert" : color === "success" ? "mdi:check-circle" : "mdi:information", className: "mimicus-alert__icon", "aria-hidden": true }),
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mimicus-alert__content", children: [
+        title && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("strong", { className: "mimicus-alert__title", children: title }),
+        children && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-alert__body", children })
+      ] })
+    ] });
+  }
+  function TipInfo({ label, descripcion, kind = "info", trigger = "click", useModal = false, className, style }) {
+    const [modalOpen, setModalOpen] = (0, import_react21.useState)(false);
+    const icon = kind === "warn" ? "mdi:alert-circle-outline" : "mdi:information-outline";
+    const triggerBtn = /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: cx4("mimicus-tip-info__btn", `mimicus-tip-info__btn--${kind}`), "aria-label": "Ayuda", onClick: useModal ? () => setModalOpen(true) : void 0, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Icon, { icon }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: cx4("mimicus-tip-info", className), style, children: [
+      label && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-tip-info__label", children: label }),
+      useModal ? triggerBtn : /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Tooltip, { title: descripcion, placement: "top", children: triggerBtn }),
+      useModal && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Modal, { open: modalOpen, title: label ?? "Ayuda", onClose: () => setModalOpen(false), _scope: "global", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { style: { margin: 0 }, children: descripcion }) })
+    ] });
+  }
+  function InvokedFloater({
+    anchorLabel = "Abrir panel",
+    panelText = "Contenido del floater",
+    side = "bottom",
+    align = "center",
+    trigger = "click",
+    className,
+    style
+  }) {
+    const [open, setOpen] = (0, import_react21.useState)(trigger === "manual");
+    const anchorRef = (0, import_react21.useRef)(null);
+    const openPanel = () => setOpen(true);
+    const closePanel = () => setOpen(false);
+    const anchorProps = trigger === "hover" ? { onMouseEnter: openPanel, onMouseLeave: closePanel } : trigger === "contextmenu" ? { onContextMenu: (e) => {
+      e.preventDefault();
+      openPanel();
+    } } : { onClick: () => setOpen((v) => !v) };
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: cx4("mimicus-invoked-floater", className), style, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { ref: anchorRef, type: "button", className: "mimicus-invoked-floater__anchor", ...anchorProps, children: anchorLabel }),
+      open && /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: cx4("mimicus-invoked-floater__panel", `is-${side}`, `align-${align}`), role: "dialog", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { style: { margin: 0 }, children: panelText }),
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Button, { variant: "text", onClick: closePanel, children: "Cerrar" })
+      ] })
+    ] });
+  }
+  function FloatingComponent({
+    showfloat = false,
+    rowText = "Fila de ejemplo",
+    horizontal = "right",
+    vertical = "center",
+    className,
+    style
+  }) {
+    const [hover, setHover] = (0, import_react21.useState)(false);
+    const visible = showfloat || hover;
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+      "div",
+      {
+        className: cx4("mimicus-floating-component", className),
+        style,
+        onMouseEnter: () => setHover(true),
+        onMouseLeave: () => setHover(false),
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-floating-component__row", children: rowText }),
+          visible && /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: cx4("mimicus-floating-component__panel", `h-${horizontal}`, `v-${vertical}`), children: [
+            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Button, { variant: "text", icon: "mdi:pencil-outline", children: "Editar" }),
+            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Button, { variant: "text", icon: "mdi:delete-outline", children: "Eliminar" })
+          ] })
+        ]
+      }
+    );
+  }
+
+  // src/components/forms/Forms.tsx
+  var import_react22 = __require("react");
+  var import_jsx_runtime28 = __require("react/jsx-runtime");
+  function cx5(...p) {
+    return p.filter(Boolean).join(" ");
+  }
   function useCtrl(value, defaultValue, onChange) {
-    const [inner, setInner] = (0, import_react21.useState)(defaultValue);
+    const [inner, setInner] = (0, import_react22.useState)(defaultValue);
     const v = value ?? inner;
     const set = (next) => {
       if (value === void 0) setInner(next);
@@ -4484,17 +5037,17 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     return [v, set];
   }
   function FormItem({ label, required, help, error, children, className, layout = "vertical", ...rest }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("label", { ...rest, className: cx4("mimicus-form-item", `mimicus-form-item--${layout}`, error && "has-error", className), children: [
-      label && /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: "mimicus-form-item__label", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("label", { ...rest, className: cx5("mimicus-form-item", `mimicus-form-item--${layout}`, error && "has-error", className), children: [
+      label && /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("span", { className: "mimicus-form-item__label", children: [
         label,
-        required && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-form-item__req", children: "*" })
+        required && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-form-item__req", children: "*" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-form-item__control", children }),
-      (help || error) && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-form-item__extra", children: error ?? help })
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-form-item__control", children }),
+      (help || error) && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-form-item__extra", children: error ?? help })
     ] });
   }
   function Form({ layout = "vertical", className, style, children, ...rest }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("form", { ...rest, className: cx4("mimicus-form", `mimicus-form--${layout}`, className), style, onSubmit: (e) => e.preventDefault(), children });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("form", { ...rest, className: cx5("mimicus-form", `mimicus-form--${layout}`, className), style, onSubmit: (e) => e.preventDefault(), children });
   }
   Form.Item = FormItem;
   function Input({
@@ -4514,9 +5067,9 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     ...rest
   }) {
     const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: cx4("mimicus-input", status && `is-${status}`, disabled && "is-disabled", className), style, children: [
-      prefix && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-input__affix mimicus-input__prefix", children: prefix }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("span", { className: cx5("mimicus-input", status && `is-${status}`, disabled && "is-disabled", className), style, children: [
+      prefix && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-input__affix mimicus-input__prefix", children: prefix }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
         "input",
         {
           ...rest,
@@ -4529,19 +5082,19 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           onChange: (e) => set(e.target.value)
         }
       ),
-      allowClear && val && !disabled && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-input__clear", "aria-label": "Limpiar", onClick: () => set(""), children: "\xD7" }),
-      suffix && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-input__affix mimicus-input__suffix", children: suffix })
+      allowClear && val && !disabled && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-input__clear", "aria-label": "Limpiar", onClick: () => set(""), children: "\xD7" }),
+      suffix && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-input__affix mimicus-input__suffix", children: suffix })
     ] });
   }
   var TextField = Input;
   function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, className, style, ...rest }) {
     const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
       "textarea",
       {
         ...rest,
         rows,
-        className: cx4("mimicus-textarea", autoSize && "mimicus-textarea--autosize", className),
+        className: cx5("mimicus-textarea", autoSize && "mimicus-textarea--autosize", className),
         style,
         value: val ?? "",
         onChange: (e) => set(e.target.value)
@@ -4549,14 +5102,14 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     );
   }
   function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, disabled, className, style, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const [val, set] = useCtrl(value, defaultValue, onChange);
     useFormBinding(ref, "input-number", [min, max, step, val]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
       "span",
       {
         ref,
-        className: cx4("mimicus-input-number", disabled && "is-disabled", className),
+        className: cx5("mimicus-input-number", disabled && "is-disabled", className),
         style,
         "data-min": min,
         "data-max": max,
@@ -4564,8 +5117,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
         "data-value": val,
         "data-mimicus-form": "input-number",
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-input-number__btn", "data-mimicus-input-number-dec": true, disabled, tabIndex: -1, children: "\u2212" }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-input-number__btn", "data-mimicus-input-number-dec": true, disabled, tabIndex: -1, children: "\u2212" }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
             "input",
             {
               ...rest,
@@ -4577,7 +5130,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
               onChange: (e) => set(Number(e.target.value) || 0)
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-input-number__btn", "data-mimicus-input-number-inc": true, disabled, tabIndex: -1, children: "+" })
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-input-number__btn", "data-mimicus-input-number-inc": true, disabled, tabIndex: -1, children: "+" })
         ]
       }
     );
@@ -4595,9 +5148,9 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     ...rest
   }) {
     const [on2, set] = useCtrl(checked, defaultChecked, onChange);
-    const id = (0, import_react21.useId)();
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("label", { className: cx4("mimicus-checkbox", on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    const id = (0, import_react22.useId)();
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("label", { className: cx5("mimicus-checkbox", on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
         "input",
         {
           ...rest,
@@ -4609,59 +5162,65 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           onChange: (e) => set(e.target.checked)
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-checkbox__box", "aria-hidden": true }),
-      children != null && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-checkbox__label", children })
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-checkbox__box", "aria-hidden": true }),
+      children != null && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-checkbox__label", children })
     ] });
   }
   function resolveIconNode(icon) {
     if (icon == null || icon === "") return null;
-    if (typeof icon === "string") return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("iconify-icon", { icon });
+    if (typeof icon === "string") return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("iconify-icon", { icon });
     return icon;
   }
   function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, colorChecked, colorUnchecked, className, ...rest }) {
     const surface = mergeSurfaceStyle(color, { variant: variant ?? "solid" });
-    const onNode = resolveIconNode(iconChecked ?? icon) ?? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("iconify-icon", { icon: "mdi:check" });
-    const offNode = resolveIconNode(iconUnchecked) ?? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("iconify-icon", { icon: "" });
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
-      Checkbox,
+    const [on2, set] = useCtrl(checked, defaultChecked ?? false, onChange);
+    const id = (0, import_react22.useId)();
+    const onNode = resolveIconNode(iconChecked ?? icon) ?? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("iconify-icon", { icon: "mdi:check" });
+    const offNode = resolveIconNode(iconUnchecked) ?? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("iconify-icon", { icon: "mdi:circle-outline" });
+    const activeNode = on2 ? onNode : offNode;
+    const fgVar = on2 ? "--cb-on-fg" : "--cb-off-fg";
+    const fgValue = on2 ? colorChecked : colorUnchecked;
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
+      "label",
       {
-        ...rest,
-        checked,
-        defaultChecked,
-        onChange,
-        disabled,
-        loading,
-        className: cx4("mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", className),
-        style: {
-          ...surface.style,
-          "--cb-on-fg": colorChecked || void 0,
-          "--cb-off-fg": colorUnchecked || void 0
-        },
+        className: cx5("mimicus-checkbox", "mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", className),
+        style: { ...surface.style, "--cb-on-fg": colorChecked || void 0, "--cb-off-fg": colorUnchecked || void 0 },
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: "mimicus-checkbox__icons", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--on", "aria-hidden": true, children: onNode }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--off", "aria-hidden": true, children: offNode })
-          ] }),
-          children
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
+            "input",
+            {
+              ...rest,
+              id,
+              type: "checkbox",
+              className: "mimicus-checkbox__native",
+              checked: Boolean(on2),
+              disabled: disabled || loading,
+              onChange: (e) => set(e.target.checked)
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: cx5("mimicus-checkbox__icon-box", on2 && "is-on"), style: fgValue ? { [fgVar]: fgValue } : void 0, "aria-hidden": true, children: activeNode }),
+          children != null && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-checkbox__label", children })
         ]
       }
     );
   }
   function CheckboxChip({ value, options, onChange, className, style }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(ToggleButtonGroup, { exclusive: true, value, onChange, className: cx4("mimicus-checkbox-chip", className), style, children: options?.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(ToggleButton, { value: opt.value, icon: opt.icon, children: opt.label ?? opt.value }, opt.value)) });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(ToggleButtonGroup, { exclusive: true, value, onChange, className: cx5("mimicus-checkbox-chip", className), style, children: options?.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(ToggleButton, { value: opt.value, icon: opt.icon, children: opt.label ?? opt.value }, opt.value)) });
   }
   function resolveIcon(icon) {
     if (icon == null || icon === "") return null;
-    if (typeof icon === "string") return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("iconify-icon", { icon });
+    if (typeof icon === "string") return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("iconify-icon", { icon });
     return icon;
   }
   function Switch({ checked, defaultChecked = false, onChange, disabled, loading, icon, iconOn, iconOff, colorOn, colorOff, children, className, style, ...rest }) {
     const [on2, set] = useCtrl(checked, defaultChecked, onChange);
-    const onIcon = resolveIcon(iconOn ?? icon);
-    const offIcon = resolveIcon(iconOff ?? icon);
-    const hasIcons = onIcon != null || offIcon != null;
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("label", { className: cx4("mimicus-switch", on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", hasIcons && "has-icons", className), style, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    const activeIcon = resolveIcon(iconOn ?? icon ?? "mdi:toggle-switch");
+    const offIcon = resolveIcon(iconOff ?? icon ?? "mdi:toggle-switch-outline");
+    const activeNode = on2 ? activeIcon : offIcon;
+    const fgVar = on2 ? "--sw-on-fg" : "--sw-off-fg";
+    const fgValue = on2 ? colorOn : colorOff;
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("label", { className: cx5("mimicus-switch", on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", className), style, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
         "input",
         {
           ...rest,
@@ -4673,26 +5232,24 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           onChange: (e) => set(e.target.checked)
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
         "span",
         {
-          className: "mimicus-switch__track",
-          style: on2 ? colorOn ? { "--sw-on-fg": colorOn } : void 0 : colorOff ? { "--sw-off-fg": colorOff } : void 0,
-          children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: "mimicus-switch__thumb", children: [
-            onIcon && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-switch__icon mimicus-switch__icon--on", "aria-hidden": true, children: onIcon }),
-            offIcon && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-switch__icon mimicus-switch__icon--off", "aria-hidden": true, children: offIcon })
-          ] })
+          className: cx5("mimicus-switch__icon-box", on2 && "is-on"),
+          style: fgValue ? { [fgVar]: fgValue } : void 0,
+          "aria-hidden": true,
+          children: activeNode
         }
       ),
-      children != null && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-switch__label", children })
+      children != null && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-switch__label", children })
     ] });
   }
   function LabeledSwitch({ label, checked, defaultChecked, onChange, readonly, ...rest }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(FormItem, { label, layout: "horizontal", className: "mimicus-labeled-switch", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Switch, { checked, defaultChecked, onChange, disabled: readonly, ...rest }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(FormItem, { label, layout: "horizontal", className: "mimicus-labeled-switch", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Switch, { checked, defaultChecked, onChange, disabled: readonly, ...rest }) });
   }
   function Radio({ value, checked, defaultChecked, onChange, disabled, children, className, name, ...rest }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("label", { className: cx4("mimicus-radio", checked && "is-checked", disabled && "is-disabled", className), children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("label", { className: cx5("mimicus-radio", checked && "is-checked", disabled && "is-disabled", className), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
         "input",
         {
           ...rest,
@@ -4706,15 +5263,15 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           onChange
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-radio__dot", "aria-hidden": true }),
-      children != null && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-radio__label", children })
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-radio__dot", "aria-hidden": true }),
+      children != null && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-radio__label", children })
     ] });
   }
   function RadioGroup({ value, defaultValue, onChange, name, direction = "horizontal", options, children, className, style, ...rest }) {
-    const groupName = (0, import_react21.useId)();
+    const groupName = (0, import_react22.useId)();
     const [val, set] = useCtrl(value, defaultValue, onChange);
     const resolvedName = name ?? groupName;
-    const body = children ?? options?.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    const body = children ?? options?.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
       Radio,
       {
         name: resolvedName,
@@ -4726,24 +5283,24 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       },
       opt.value
     ));
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { ...rest, role: "radiogroup", className: cx4("mimicus-radio-group", `mimicus-radio-group--${direction}`, className), style, "data-value": val, children: body });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { ...rest, role: "radiogroup", className: cx5("mimicus-radio-group", `mimicus-radio-group--${direction}`, className), style, "data-value": val, children: body });
   }
   function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 1, disabled, vertical, className, style, showValue, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const [val, set] = useCtrl(value, defaultValue, onChange);
     useFormBinding(ref, "slider", [min, max, step]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
       "div",
       {
         ref,
         ...rest,
-        className: cx4("mimicus-slider", vertical && "mimicus-slider--vertical", disabled && "is-disabled", className),
+        className: cx5("mimicus-slider", vertical && "mimicus-slider--vertical", disabled && "is-disabled", className),
         style,
         "data-value": val,
         "data-mimicus-form": "slider",
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-slider__rail", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-slider__fill", "data-mimicus-slider-fill": true }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-slider__rail", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-slider__fill", "data-mimicus-slider-fill": true }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
             "input",
             {
               type: "range",
@@ -4758,22 +5315,22 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
               onChange: (e) => set(Number(e.target.value))
             }
           ),
-          showValue && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-slider__value", "data-mimicus-slider-value": true, children: val })
+          showValue && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-slider__value", "data-mimicus-slider-value": true, children: val })
         ]
       }
     );
   }
   function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "\u2605", className, style, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const [val, set] = useCtrl(value, defaultValue, onChange);
     useFormBinding(ref, "rate", [count, allowHalf, allowClear, val, disabled]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
       "div",
       {
         ref,
         ...rest,
         role: "radiogroup",
-        className: cx4("mimicus-rate", disabled && "is-disabled", className),
+        className: cx5("mimicus-rate", disabled && "is-disabled", className),
         style,
         "data-count": count,
         "data-value": val,
@@ -4782,46 +5339,83 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
         "data-allow-clear": allowClear ? "true" : "false",
         "data-disabled": disabled ? "true" : void 0,
         "data-mimicus-form": "rate",
-        children: Array.from({ length: count }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-rate__star", "data-mimicus-rate-star": i + 1, disabled, "aria-label": `${i + 1} estrellas`, children: character }, i))
+        children: Array.from({ length: count }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-rate__star", "data-mimicus-rate-star": i + 1, disabled, "aria-label": `${i + 1} estrellas`, children: character }, i))
       }
     );
   }
   var Rating = Rate;
   function Select({ value, defaultValue, onChange, options, placeholder, disabled, size = "medium", className, style, children, ...rest }) {
     const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-    const [open, setOpen] = (0, import_react21.useState)(false);
-    const rootRef = (0, import_react21.useRef)(null);
-    const dialogRef = (0, import_react21.useRef)(null);
-    const triggerRef = (0, import_react21.useRef)(null);
+    const [open, setOpen] = (0, import_react22.useState)(false);
+    const rootRef = (0, import_react22.useRef)(null);
+    const dialogRef = (0, import_react22.useRef)(null);
+    const triggerRef = (0, import_react22.useRef)(null);
+    const refocusTriggerAfterPickRef = (0, import_react22.useRef)(false);
+    const pickOption = (next) => {
+      refocusTriggerAfterPickRef.current = true;
+      set(next);
+      setOpen(false);
+    };
     const isStructured = Array.isArray(options) && options.every((o) => o && typeof o === "object" && "value" in o);
     const items = isStructured ? options : [];
     const current = items.find((o) => String(o.value) === String(val));
     const fallbackLabel = children ? void 0 : items.find((o) => String(o.value) === String(val))?.label;
-    (0, import_react21.useEffect)(() => {
+    const enabledItems = items.filter((o) => !o.disabled);
+    const stepSelect = (dir) => {
+      if (!enabledItems.length) return;
+      const i = enabledItems.findIndex((o) => String(o.value) === String(val));
+      const nextIdx = i < 0 ? dir === 1 ? 0 : enabledItems.length - 1 : (i + dir + enabledItems.length) % enabledItems.length;
+      set(enabledItems[nextIdx].value);
+    };
+    const onSelectKeyStep = (e) => {
+      if (disabled) return;
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        stepSelect(1);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        stepSelect(-1);
+      } else if (e.key === "Enter" && open) {
+        e.preventDefault();
+        pickOption(String(val ?? ""));
+      }
+    };
+    (0, import_react22.useLayoutEffect)(() => {
       if (!open) return;
       const dlg = dialogRef.current;
       const trg = triggerRef.current;
       if (!dlg || !trg) return;
       const place = () => {
         const r = trg.getBoundingClientRect();
-        const margin = 6;
-        const desiredLeft = r.left;
-        const desiredTop = r.bottom + margin;
-        const panelWidth = Math.max(r.width, 180);
-        const maxLeft = window.innerWidth - panelWidth - 8;
-        dlg.style.setProperty("--mimicus-select-left", `${Math.max(8, Math.min(desiredLeft, maxLeft))}px`);
-        dlg.style.setProperty("--mimicus-select-top", `${desiredTop}px`);
-        dlg.style.setProperty("--mimicus-select-min-w", `${r.width}px`);
+        const w = Math.round(r.width);
+        const left = Math.round(r.left);
+        const top = Math.round(r.bottom) - 1;
+        const maxLeft = window.innerWidth - w - 8;
+        const x = `${Math.max(8, Math.min(left, maxLeft))}px`;
+        dlg.style.setProperty("--mimicus-select-w", `${w}px`);
+        dlg.style.setProperty("--mimicus-select-left", x);
+        dlg.style.setProperty("--mimicus-select-top", `${top}px`);
+        const panel = dlg.querySelector(".mimicus-select__panel");
+        if (rootRef.current) dlg.style.fontSize = getComputedStyle(rootRef.current).fontSize;
+        if (panel) {
+          panel.style.width = `${w}px`;
+          panel.style.minWidth = `${w}px`;
+          panel.style.maxWidth = `${w}px`;
+          panel.style.left = x;
+          panel.style.top = `${top}px`;
+        }
       };
       place();
+      const raf = requestAnimationFrame(place);
       window.addEventListener("resize", place);
       window.addEventListener("scroll", place, true);
       return () => {
+        cancelAnimationFrame(raf);
         window.removeEventListener("resize", place);
         window.removeEventListener("scroll", place, true);
       };
     }, [open]);
-    (0, import_react21.useEffect)(() => {
+    (0, import_react22.useEffect)(() => {
       const dlg = dialogRef.current;
       if (!dlg) return;
       if (open) {
@@ -4830,11 +5424,14 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
         dlg.close();
       }
     }, [open]);
-    (0, import_react21.useEffect)(() => {
-      if (!open && document.activeElement && triggerRef.current && document.activeElement !== triggerRef.current) {
-      }
-    }, [open]);
-    (0, import_react21.useEffect)(() => {
+    (0, import_react22.useEffect)(() => {
+      if (open || !refocusTriggerAfterPickRef.current) return;
+      refocusTriggerAfterPickRef.current = false;
+      const btn = triggerRef.current;
+      if (!btn) return;
+      requestAnimationFrame(() => btn.focus());
+    }, [open, val]);
+    (0, import_react22.useEffect)(() => {
       if (!open) return;
       function onKey(e) {
         if (e.key === "Escape") setOpen(false);
@@ -4843,23 +5440,23 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       return () => document.removeEventListener("keydown", onKey);
     }, [open]);
     if (!isStructured) {
-      return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: cx4("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: [
-          placeholder && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { value: "", children: placeholder }),
-          children ?? options?.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { value: opt.value, disabled: opt.disabled, children: opt.label }, opt.value))
+      return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("span", { className: cx5("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: [
+          placeholder && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("option", { value: "", children: placeholder }),
+          children ?? options?.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("option", { value: opt.value, disabled: opt.disabled, children: opt.label }, opt.value))
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
       ] });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
       "span",
       {
         ref: rootRef,
-        className: cx4("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", open && "is-open", className),
+        className: cx5("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", open && "is-open", className),
         style,
         "data-value": val ?? "",
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
             "button",
             {
               ref: triggerRef,
@@ -4869,16 +5466,18 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
               "aria-haspopup": "dialog",
               "aria-expanded": open,
               onClick: () => !disabled && setOpen((o) => !o),
+              onKeyDown: onSelectKeyStep,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("span", { className: "mimicus-select__value", children: [
-                  current?.icon && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-select__icon", "aria-hidden": true, children: current.icon }),
-                  /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-select__label", children: current?.label ?? placeholder ?? "" })
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("span", { className: "mimicus-select__value", children: [
+                  current?.icon && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__icon", "aria-hidden": true, children: current.icon }),
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__label", children: current?.label ?? placeholder ?? "" }),
+                  current?.suffix && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__suffix", children: current.suffix })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
               ]
             }
           ),
-          open && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+          open && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
             "dialog",
             {
               ref: dialogRef,
@@ -4889,32 +5488,29 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
                 e.preventDefault();
                 setOpen(false);
               },
+              onKeyDown: onSelectKeyStep,
               onClick: (e) => {
                 const panel = dialogRef.current?.querySelector(".mimicus-select__panel");
                 if (panel && !panel.contains(e.target)) setOpen(false);
               },
-              children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("ul", { role: "listbox", className: "mimicus-select__panel", "data-mimicus-select-panel": true, onClick: (e) => e.stopPropagation(), children: [
-                placeholder && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { role: "option", "aria-selected": !val, className: cx4("mimicus-select__option", !val && "is-selected"), onClick: () => {
-                  set("");
-                  setOpen(false);
-                }, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-select__label", children: placeholder }) }),
+              children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("ul", { role: "listbox", className: "mimicus-select__panel", "data-mimicus-select-panel": true, onClick: (e) => e.stopPropagation(), children: [
+                placeholder && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { role: "option", "aria-selected": !val, className: cx5("mimicus-select__option", !val && "is-selected"), onClick: () => pickOption(""), children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__label", children: placeholder }) }),
                 items.map((opt) => {
                   const selected = String(opt.value) === String(val);
-                  return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+                  return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
                     "li",
                     {
                       role: "option",
                       "aria-selected": selected,
                       "aria-disabled": opt.disabled,
-                      className: cx4("mimicus-select__option", selected && "is-selected", opt.disabled && "is-disabled"),
+                      className: cx5("mimicus-select__option", selected && "is-selected", opt.disabled && "is-disabled"),
                       onClick: () => {
-                        if (opt.disabled) return;
-                        set(opt.value);
-                        setOpen(false);
+                        if (!opt.disabled) pickOption(String(opt.value));
                       },
                       children: [
-                        opt.icon && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-select__icon", "aria-hidden": true, children: opt.icon }),
-                        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-select__label", children: opt.label ?? opt.value })
+                        opt.icon && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__icon", "aria-hidden": true, children: opt.icon }),
+                        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__label", children: opt.label ?? opt.value }),
+                        opt.suffix && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-select__suffix", children: opt.suffix })
                       ]
                     },
                     String(opt.value)
@@ -4923,18 +5519,18 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
               ] })
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("select", { ...rest, tabIndex: -1, "aria-hidden": true, className: "mimicus-select__native mimicus-select__native--sr", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: items.map((o) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { value: String(o.value), children: typeof fallbackLabel === "string" ? fallbackLabel : "" }, String(o.value))) })
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("select", { ...rest, tabIndex: -1, "aria-hidden": true, className: "mimicus-select__native mimicus-select__native--sr", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: items.map((o) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("option", { value: String(o.value), children: typeof fallbackLabel === "string" ? fallbackLabel : "" }, String(o.value))) })
         ]
       }
     );
   }
   function AutoComplete({ options = [], value, defaultValue, onChange, onSelect, placeholder, disabled, className, style, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     useFormBinding(ref, "autocomplete", [options.length]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { ref, className: cx4("mimicus-autocomplete", disabled && "is-disabled", className), style, "data-mimicus-form": "autocomplete", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Input, { ...rest, value: val, onChange: set, placeholder, disabled }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-autocomplete__panel", "data-mimicus-autocomplete-panel": true, role: "listbox", hidden: true, children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { ref, className: cx5("mimicus-autocomplete", disabled && "is-disabled", className), style, "data-mimicus-form": "autocomplete", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Input, { ...rest, value: val, onChange: set, placeholder, disabled }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-autocomplete__panel", "data-mimicus-autocomplete-panel": true, role: "listbox", hidden: true, children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
         "button",
         {
           type: "button",
@@ -4954,44 +5550,44 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   function ToggleButton({ value, selected, onChange, disabled, children, icon, className, ...rest }) {
     const on2 = selected ?? rest["aria-pressed"] === "true";
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
       "button",
       {
         ...rest,
         type: "button",
-        className: cx4("mimicus-toggle-btn", on2 && "is-active", className),
+        className: cx5("mimicus-toggle-btn", on2 && "is-active", className),
         "data-mimicus-toggle": value,
         "aria-pressed": on2 ? "true" : "false",
         disabled,
         onClick: () => onChange?.(!on2),
         children: [
-          icon && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-toggle-btn__icon", "aria-hidden": true, children: icon }),
+          icon && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-toggle-btn__icon", "aria-hidden": true, children: icon }),
           children
         ]
       }
     );
   }
   function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", children, className, style, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const [val, set] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
     const normalized = exclusive ? val : Array.isArray(val) ? val.join(",") : val;
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
       "div",
       {
         ref,
         ...rest,
         role: "group",
-        className: cx4("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, className),
+        className: cx5("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, className),
         style,
         "data-exclusive": exclusive ? "true" : "false",
         "data-value": normalized,
         "data-mimicus-form": "toggle-group",
-        children: import_react21.Children.map(children, (child) => {
+        children: import_react22.Children.map(children, (child) => {
           const node = child;
           if (!node?.props) return child;
           const v = node.props.value;
           const active = exclusive ? val === v : Array.isArray(val) ? val.includes(v) : String(val).split(",").includes(v);
-          return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(ToggleButton, { ...node.props, selected: active, onChange: () => {
+          return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(ToggleButton, { ...node.props, selected: active, onChange: () => {
             if (exclusive) set(v);
             else {
               const arr = Array.isArray(val) ? [...val] : String(val || "").split(",").filter(Boolean);
@@ -5003,31 +5599,31 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     );
   }
   function Transfer({ dataSource, targetKeys, onChange, titles = ["Origen", "Destino"], disabled, className, style }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const left = (dataSource ?? []).filter((d) => !(targetKeys ?? []).includes(d.key));
     const right = (dataSource ?? []).filter((d) => (targetKeys ?? []).includes(d.key));
     useFormBinding(ref, "transfer", [left.length, right.length, disabled]);
-    const Item = ({ item }) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { className: "mimicus-transfer__item", "data-mimicus-transfer-item": true, "data-key": item.key, children: item.title });
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+    const Item = ({ item }) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { className: "mimicus-transfer__item", "data-mimicus-transfer-item": true, "data-key": item.key, children: item.title });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
       "div",
       {
         ref,
-        className: cx4("mimicus-transfer", disabled && "is-disabled", className),
+        className: cx5("mimicus-transfer", disabled && "is-disabled", className),
         style,
         "data-disabled": disabled ? "true" : void 0,
         "data-mimicus-form": "transfer",
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mimicus-transfer__panel", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-transfer__title", children: titles[0] }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("ul", { className: "mimicus-transfer__list", "data-mimicus-transfer-left": true, children: left.map((item) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Item, { item }, item.key)) })
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mimicus-transfer__panel", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-transfer__title", children: titles[0] }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mimicus-transfer__list", "data-mimicus-transfer-left": true, children: left.map((item) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Item, { item }, item.key)) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mimicus-transfer__actions", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-transfer__action", "data-mimicus-transfer-action": "toRight", children: "\u203A" }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-transfer__action", "data-mimicus-transfer-action": "toLeft", children: "\u2039" })
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mimicus-transfer__actions", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-transfer__action", "data-mimicus-transfer-action": "toRight", children: "\u203A" }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-transfer__action", "data-mimicus-transfer-action": "toLeft", children: "\u2039" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mimicus-transfer__panel", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-transfer__title", children: titles[1] }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("ul", { className: "mimicus-transfer__list", "data-mimicus-transfer-right": true, children: right.map((item) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Item, { item }, item.key)) })
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mimicus-transfer__panel", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-transfer__title", children: titles[1] }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mimicus-transfer__list", "data-mimicus-transfer-right": true, children: right.map((item) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Item, { item }, item.key)) })
           ] })
         ]
       }
@@ -5035,23 +5631,23 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
   var TransferList = Transfer;
   function TransferBoard({ stackCount = 3, stackWidth = 248, disabled, itemsPerStack = 3, className, style }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     useFormBinding(ref, "transfer-board", [stackCount, stackWidth, disabled, itemsPerStack]);
-    const stacks = Array.from({ length: stackCount }, (_, s) => /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mimicus-transfer-board__stack", "data-mimicus-transfer-stack": true, style: { width: stackWidth }, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mimicus-transfer-board__stack-title", children: [
+    const stacks = Array.from({ length: stackCount }, (_, s) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mimicus-transfer-board__stack", "data-mimicus-transfer-stack": true, style: { width: stackWidth }, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mimicus-transfer-board__stack-title", children: [
         "Stack ",
         s + 1
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("ul", { className: "mimicus-transfer-board__list", "data-mimicus-transfer-list": true, children: Array.from({ length: itemsPerStack }, (_2, i) => /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("li", { className: "mimicus-transfer-board__card", "data-mimicus-transfer-item": true, draggable: !disabled, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mimicus-transfer-board__list", "data-mimicus-transfer-list": true, children: Array.from({ length: itemsPerStack }, (_2, i) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("li", { className: "mimicus-transfer-board__card", "data-mimicus-transfer-item": true, draggable: !disabled, children: [
         "Tarjeta ",
         s * itemsPerStack + i + 1
       ] }, i)) })
     ] }, s));
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
       "div",
       {
         ref,
-        className: cx4("mimicus-transfer-board", disabled && "is-disabled", className),
+        className: cx5("mimicus-transfer-board", disabled && "is-disabled", className),
         style,
         "data-disabled": disabled ? "true" : void 0,
         "data-mimicus-form": "transfer-board",
@@ -5060,51 +5656,51 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     );
   }
   function Upload({ accept, multiple, disabled, children, className, style, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     useFormBinding(ref, "upload", [accept, multiple]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { ref, className: cx4("mimicus-upload", disabled && "is-disabled", className), style, "data-mimicus-form": "upload", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("label", { className: "mimicus-upload__trigger", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("input", { ...rest, type: "file", className: "mimicus-upload__native", accept, multiple, disabled }),
-        children ?? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-upload__btn", children: "Subir archivo" })
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { ref, className: cx5("mimicus-upload", disabled && "is-disabled", className), style, "data-mimicus-form": "upload", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("label", { className: "mimicus-upload__trigger", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("input", { ...rest, type: "file", className: "mimicus-upload__native", accept, multiple, disabled }),
+        children ?? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-upload__btn", children: "Subir archivo" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("ul", { className: "mimicus-upload__list", "data-mimicus-upload-list": true })
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mimicus-upload__list", "data-mimicus-upload-list": true })
     ] });
   }
   function ColorPicker({ value = "#1677ff", defaultValue, onChange, disabled, className, style, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const [val, set] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
     useFormBinding(ref, "color-picker", [val]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
       "div",
       {
         ref,
-        className: cx4("mimicus-color-picker", disabled && "is-disabled", className),
+        className: cx5("mimicus-color-picker", disabled && "is-disabled", className),
         style,
         "data-value": val,
         "data-mimicus-form": "color-picker",
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-color-picker__swatch", "data-mimicus-color-swatch": true, style: { background: val } }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("input", { ...rest, type: "color", value: val, disabled, onChange: (e) => set(e.target.value) }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("code", { className: "mimicus-color-picker__hex", "data-mimicus-color-hex": true, children: val })
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-color-picker__swatch", "data-mimicus-color-swatch": true, style: { background: val } }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("input", { ...rest, type: "color", value: val, disabled, onChange: (e) => set(e.target.value) }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("code", { className: "mimicus-color-picker__hex", "data-mimicus-color-hex": true, children: val })
         ]
       }
     );
   }
   function DatePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
     const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Input, { ...rest, type: "date", className: cx4("mimicus-date-picker", className), style, value: val, disabled, onChange: set });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Input, { ...rest, type: "date", className: cx5("mimicus-date-picker", className), style, value: val, disabled, onChange: set });
   }
   function TimePicker({ value, defaultValue, onChange, disabled, className, style, ...rest }) {
     const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Input, { ...rest, type: "time", className: cx4("mimicus-time-picker", className), style, value: val, disabled, onChange: set });
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Input, { ...rest, type: "time", className: cx5("mimicus-time-picker", className), style, value: val, disabled, onChange: set });
   }
   function Cascader({ options = [], value, onChange, placeholder = "Seleccionar", disabled, className, style }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     useFormBinding(ref, "cascader", [options.length]);
     const flat = options.flatMap((o) => o.children ? o.children.map((c) => ({ ...c, parent: o.label })) : [o]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { ref, className: cx4("mimicus-cascader", disabled && "is-disabled", className), style, "data-value": value, "data-mimicus-form": "cascader", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-cascader__trigger", "data-mimicus-cascader-trigger": true, disabled, children: placeholder }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-cascader__panel", "data-mimicus-cascader-panel": true, hidden: true, children: flat.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { ref, className: cx5("mimicus-cascader", disabled && "is-disabled", className), style, "data-value": value, "data-mimicus-form": "cascader", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-cascader__trigger", "data-mimicus-cascader-trigger": true, disabled, children: placeholder }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-cascader__panel", "data-mimicus-cascader-panel": true, hidden: true, children: flat.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
         "button",
         {
           type: "button",
@@ -5120,25 +5716,25 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     ] });
   }
   function TreeSelect({ treeData = [], value, onChange, placeholder = "Seleccionar", disabled, className, style }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     useFormBinding(ref, "tree-select", [treeData.length]);
-    const Node = ({ node, depth = 0 }) => /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("li", { className: "mimicus-tree-select__node", "data-mimicus-tree-node": true, "data-value": node.value, "data-label": node.title, style: { paddingLeft: `${depth * 0.75}rem` }, children: [
-      node.children?.length ? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-tree-select__toggle", "data-mimicus-tree-toggle": true, children: "\u25B8" }) : /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-tree-select__spacer" }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "mimicus-tree-select__label", children: node.title }),
-      node.children?.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("ul", { className: "mimicus-tree-select__children", "data-mimicus-tree-children": true, hidden: true, children: node.children.map((c) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Node, { node: c, depth: depth + 1 }, c.value ?? c.title)) })
+    const Node = ({ node, depth = 0 }) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("li", { className: "mimicus-tree-select__node", "data-mimicus-tree-node": true, "data-value": node.value, "data-label": node.title, style: { paddingLeft: `${depth * 0.75}rem` }, children: [
+      node.children?.length ? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-tree-select__toggle", "data-mimicus-tree-toggle": true, children: "\u25B8" }) : /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-tree-select__spacer" }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mimicus-tree-select__label", children: node.title }),
+      node.children?.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mimicus-tree-select__children", "data-mimicus-tree-children": true, hidden: true, children: node.children.map((c) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Node, { node: c, depth: depth + 1 }, c.value ?? c.title)) })
     ] });
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { ref, className: cx4("mimicus-tree-select", disabled && "is-disabled", className), style, "data-value": value, "data-mimicus-form": "tree-select", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "mimicus-tree-select__trigger", "data-mimicus-tree-trigger": true, disabled, children: placeholder }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-tree-select__panel", "data-mimicus-tree-panel": true, hidden: true, children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("ul", { className: "mimicus-tree-select__tree", children: treeData.map((n) => /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Node, { node: n }, n.value ?? n.title)) }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { ref, className: cx5("mimicus-tree-select", disabled && "is-disabled", className), style, "data-value": value, "data-mimicus-form": "tree-select", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: "mimicus-tree-select__trigger", "data-mimicus-tree-trigger": true, disabled, children: placeholder }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-tree-select__panel", "data-mimicus-tree-panel": true, hidden: true, children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ul", { className: "mimicus-tree-select__tree", children: treeData.map((n) => /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Node, { node: n }, n.value ?? n.title)) }) })
     ] });
   }
   function Mentions({ options = [], value, defaultValue, onChange, rows = 3, placeholder, disabled, className, style, ...rest }) {
-    const ref = (0, import_react21.useRef)(null);
+    const ref = (0, import_react22.useRef)(null);
     const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
     useFormBinding(ref, "mentions", [options.length]);
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { ref, className: cx4("mimicus-mentions", disabled && "is-disabled", className), style, "data-mimicus-form": "mentions", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(TextArea, { ...rest, rows, value: val, onChange: set, placeholder: placeholder ?? "Escribe @ para mencionar", disabled }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "mimicus-mentions__panel", "data-mimicus-mentions-panel": true, hidden: true, children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("button", { type: "button", className: "mimicus-mentions__option", "data-mimicus-mentions-option": true, "data-value": opt.value ?? opt, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { ref, className: cx5("mimicus-mentions", disabled && "is-disabled", className), style, "data-mimicus-form": "mentions", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(TextArea, { ...rest, rows, value: val, onChange: set, placeholder: placeholder ?? "Escribe @ para mencionar", disabled }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mimicus-mentions__panel", "data-mimicus-mentions-panel": true, hidden: true, children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("button", { type: "button", className: "mimicus-mentions__option", "data-mimicus-mentions-option": true, "data-value": opt.value ?? opt, children: [
         "@",
         opt.label ?? opt
       ] }, opt.value ?? opt)) })
@@ -5146,7 +5742,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/datagrid/react/DataGrid.tsx
-  var import_react27 = __require("react");
+  var import_react28 = __require("react");
 
   // src/datagrid/core/valueFormatter.ts
   function getCellValue(col, node) {
@@ -5474,7 +6070,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/datagrid/react/useGridModel.ts
-  var import_react22 = __require("react");
+  var import_react23 = __require("react");
 
   // src/datagrid/core/pipeline/sorting.ts
   function defaultCompare(a, b, type) {
@@ -5806,29 +6402,29 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
 
   // src/datagrid/react/useGridModel.ts
   function useGridModel(options) {
-    const ref = (0, import_react22.useRef)(null);
+    const ref = (0, import_react23.useRef)(null);
     if (ref.current == null) ref.current = createGridModel(options);
     const api = ref.current;
-    const state2 = (0, import_react22.useSyncExternalStore)(api.subscribe, api.getState, api.getState);
-    (0, import_react22.useEffect)(() => {
+    const state2 = (0, import_react23.useSyncExternalStore)(api.subscribe, api.getState, api.getState);
+    (0, import_react23.useEffect)(() => {
       api.setRows(options.rows ?? []);
     }, [api, options.rows]);
-    (0, import_react22.useEffect)(() => {
+    (0, import_react23.useEffect)(() => {
       api.setColumnDefs(options.columns ?? []);
     }, [api, options.columns]);
-    (0, import_react22.useEffect)(() => {
+    (0, import_react23.useEffect)(() => {
       if (options.quickFilter != null) api.setQuickFilter(options.quickFilter);
     }, [api, options.quickFilter]);
     return { api, state: state2 };
   }
 
   // src/datagrid/react/GridHeader.tsx
-  var import_react23 = __require("react");
-  var import_jsx_runtime28 = __require("react/jsx-runtime");
+  var import_react24 = __require("react");
+  var import_jsx_runtime29 = __require("react/jsx-runtime");
   var sortIcon = { asc: "mdi:arrow-up", desc: "mdi:arrow-down" };
   function GridHeader(props) {
     const { columns, sortModel, selectionMode, headerCheckbox, totalWidth, headerHeight, pinStyles, checkPinStyle, filteredCols, onSort, onToggleAll, onResize, onReorder, onMenu } = props;
-    const drag = (0, import_react23.useRef)(null);
+    const drag = (0, import_react24.useRef)(null);
     const startResize = (col) => (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -5856,13 +6452,13 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       if (drag.current && drag.current !== col.colId) onReorder(drag.current, col.colId);
       drag.current = null;
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mim-dg__header", style: { width: totalWidth, height: headerHeight }, role: "row", children: [
-      selectionMode !== "none" && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "mim-dg__cell mim-dg__cell--check mim-dg__head-cell is-pinned is-pinned-left", style: checkPinStyle, role: "columnheader", children: selectionMode === "multiple" && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", { type: "button", className: `mim-dg__checkbox mim-dg__checkbox--${headerCheckbox}`, "aria-label": "Seleccionar todo", onClick: onToggleAll, children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Icon, { icon: headerCheckbox === "all" ? "mdi:checkbox-marked" : headerCheckbox === "some" ? "mdi:minus-box" : "mdi:checkbox-blank-outline" }) }) }),
+    return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mim-dg__header", style: { width: totalWidth, height: headerHeight }, role: "row", children: [
+      selectionMode !== "none" && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mim-dg__cell mim-dg__cell--check mim-dg__head-cell is-pinned is-pinned-left", style: checkPinStyle, role: "columnheader", children: selectionMode === "multiple" && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("button", { type: "button", className: `mim-dg__checkbox mim-dg__checkbox--${headerCheckbox}`, "aria-label": "Seleccionar todo", onClick: onToggleAll, children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Icon, { icon: headerCheckbox === "all" ? "mdi:checkbox-marked" : headerCheckbox === "some" ? "mdi:minus-box" : "mdi:checkbox-blank-outline" }) }) }),
       columns.map((col) => {
         const idx = sortModel.findIndex((s) => s.colId === col.colId);
         const dir = idx >= 0 ? sortModel[idx].dir : null;
         const pinClass = col.pinned ? ` is-pinned is-pinned-${col.pinned}` : "";
-        return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
+        return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
           "div",
           {
             className: `mim-dg__cell mim-dg__cell--${col.align} mim-dg__head-cell${col.sortable ? " is-sortable" : ""}${dir ? " is-sorted" : ""}${pinClass}${col.def.headerClass ? ` ${col.def.headerClass}` : ""}`,
@@ -5875,11 +6471,11 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
             onDrop: onDrop(col),
             onClick: handleSort(col),
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mim-dg__head-label", children: col.headerName }),
-              filteredCols.has(col.colId) && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Icon, { icon: "mdi:filter", className: "mim-dg__filter-icon" }),
-              dir && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Icon, { icon: sortIcon[dir], className: "mim-dg__sort-icon" }),
-              dir && sortModel.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mim-dg__sort-order", children: idx + 1 }),
-              /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "mim-dg__head-label", children: col.headerName }),
+              filteredCols.has(col.colId) && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Icon, { icon: "mdi:filter", className: "mim-dg__filter-icon" }),
+              dir && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Icon, { icon: sortIcon[dir], className: "mim-dg__sort-icon" }),
+              dir && sortModel.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "mim-dg__sort-order", children: idx + 1 }),
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
                 "button",
                 {
                   type: "button",
@@ -5890,10 +6486,10 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
                     const r = e.currentTarget.getBoundingClientRect();
                     onMenu(col, r.left, r.bottom);
                   },
-                  children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Icon, { icon: "mdi:dots-vertical" })
+                  children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Icon, { icon: "mdi:dots-vertical" })
                 }
               ),
-              col.resizable && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "mim-dg__resizer", onPointerDown: startResize(col), role: "separator", "aria-orientation": "vertical" })
+              col.resizable && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "mim-dg__resizer", onPointerDown: startResize(col), role: "separator", "aria-orientation": "vertical" })
             ]
           },
           col.colId
@@ -5903,7 +6499,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/datagrid/react/cellRenderers.tsx
-  var import_jsx_runtime29 = __require("react/jsx-runtime");
+  var import_jsx_runtime30 = __require("react/jsx-runtime");
   var registry = /* @__PURE__ */ new Map();
   function registerCellRenderer(name, renderer) {
     registry.set(name, renderer);
@@ -5911,12 +6507,12 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   function getCellRenderer(name) {
     return name ? registry.get(name) : void 0;
   }
-  registerCellRenderer("boolean", ({ value }) => /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: value ? "mim-dg-bool mim-dg-bool--on" : "mim-dg-bool mim-dg-bool--off", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Icon, { icon: value ? "mdi:check-circle" : "mdi:close-circle-outline" }) }));
-  registerCellRenderer("tag", ({ formatted }) => /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "mim-dg-tag", children: formatted }));
-  registerCellRenderer("link", ({ formatted, value }) => /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { className: "mim-dg-link", href: typeof value === "string" ? value : "#", children: formatted }));
+  registerCellRenderer("boolean", ({ value }) => /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: value ? "mim-dg-bool mim-dg-bool--on" : "mim-dg-bool mim-dg-bool--off", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Icon, { icon: value ? "mdi:check-circle" : "mdi:close-circle-outline" }) }));
+  registerCellRenderer("tag", ({ formatted }) => /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "mim-dg-tag", children: formatted }));
+  registerCellRenderer("link", ({ formatted, value }) => /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("a", { className: "mim-dg-link", href: typeof value === "string" ? value : "#", children: formatted }));
 
   // src/datagrid/react/GridCell.tsx
-  var import_jsx_runtime30 = __require("react/jsx-runtime");
+  var import_jsx_runtime31 = __require("react/jsx-runtime");
   function GridCell({ column, node, pinStyle }) {
     const value = getCellValue(column, node);
     const formatted = formatCellValue(column, value, node);
@@ -5924,43 +6520,43 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const extra = typeof column.def.cellClass === "function" ? column.def.cellClass(value, node.data) : column.def.cellClass;
     const content = renderer ? renderer({ value, formatted, data: node.data, node, column }) : formatted;
     const pinClass = column.pinned ? ` is-pinned is-pinned-${column.pinned}` : "";
-    return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
       "div",
       {
         className: `mim-dg__cell mim-dg__cell--${column.align}${pinClass}${extra ? ` ${extra}` : ""}`,
         style: { width: column.width, ...pinStyle },
         role: "gridcell",
         title: typeof content === "string" ? content : void 0,
-        children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "mim-dg__cell-inner", children: content })
+        children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "mim-dg__cell-inner", children: content })
       }
     );
   }
 
   // src/datagrid/react/GridBody.tsx
-  var import_jsx_runtime31 = __require("react/jsx-runtime");
+  var import_jsx_runtime32 = __require("react/jsx-runtime");
   var INDENT = 18;
   function GridBody(props) {
     const { rows, columns, rowHeight, topPad, totalHeight, totalWidth, selection, selectionMode, focusedId, pinStyles, checkPinStyle, onRowSelect, onToggleGroup } = props;
     const aggCols = columns.filter((c) => c.aggFunc && !c.hide);
-    return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "mim-dg__body", style: { height: totalHeight, width: totalWidth }, role: "rowgroup", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "mim-dg__rows", style: { transform: `translateY(${topPad}px)` }, children: rows.map((dr) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "mim-dg__body", style: { height: totalHeight, width: totalWidth }, role: "rowgroup", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "mim-dg__rows", style: { transform: `translateY(${topPad}px)` }, children: rows.map((dr) => {
       if (dr.kind === "group") {
-        return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
+        return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
           "div",
           {
             className: `mim-dg__row mim-dg__group-row${focusedId === dr.id ? " is-focused" : ""}`,
             style: { height: rowHeight },
             role: "row",
             onClick: () => onToggleGroup(dr.id),
-            children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "mim-dg__group-cell", style: { paddingLeft: 8 + dr.level * INDENT }, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Icon, { icon: dr.expanded ? "mdi:chevron-down" : "mdi:chevron-right", className: "mim-dg__group-chevron" }),
-              /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "mim-dg__group-label", children: dr.label }),
-              /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("span", { className: "mim-dg__group-count", children: [
+            children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "mim-dg__group-cell", style: { paddingLeft: 8 + dr.level * INDENT }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Icon, { icon: dr.expanded ? "mdi:chevron-down" : "mdi:chevron-right", className: "mim-dg__group-chevron" }),
+              /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", { className: "mim-dg__group-label", children: dr.label }),
+              /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("span", { className: "mim-dg__group-count", children: [
                 "(",
                 dr.count.toLocaleString(),
                 ")"
               ] }),
-              aggCols.map((c) => dr.agg[c.colId] != null && /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("span", { className: "mim-dg__group-agg", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("b", { children: [
+              aggCols.map((c) => dr.agg[c.colId] != null && /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("span", { className: "mim-dg__group-agg", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("b", { children: [
                   c.headerName,
                   ":"
                 ] }),
@@ -5974,7 +6570,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       }
       const node = dr.node;
       const selected = selection.has(node.id);
-      return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(
+      return /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(
         "div",
         {
           className: `mim-dg__row${selected ? " is-selected" : ""}${focusedId === node.id ? " is-focused" : ""}${node.index % 2 ? " is-odd" : ""}`,
@@ -5983,8 +6579,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           "aria-selected": selected,
           onClick: selectionMode !== "none" ? (e) => onRowSelect(node, e) : void 0,
           children: [
-            selectionMode !== "none" && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "mim-dg__cell mim-dg__cell--check is-pinned is-pinned-left", style: checkPinStyle, role: "gridcell", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: `mim-dg__checkbox mim-dg__checkbox--${selected ? "all" : "none"}`, children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Icon, { icon: selected ? "mdi:checkbox-marked" : "mdi:checkbox-blank-outline" }) }) }),
-            columns.map((col) => /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(GridCell, { column: col, node, pinStyle: pinStyles[col.colId] }, col.colId))
+            selectionMode !== "none" && /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "mim-dg__cell mim-dg__cell--check is-pinned is-pinned-left", style: checkPinStyle, role: "gridcell", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", { className: `mim-dg__checkbox mim-dg__checkbox--${selected ? "all" : "none"}`, children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Icon, { icon: selected ? "mdi:checkbox-marked" : "mdi:checkbox-blank-outline" }) }) }),
+            columns.map((col) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(GridCell, { column: col, node, pinStyle: pinStyles[col.colId] }, col.colId))
           ]
         },
         node.id
@@ -5993,36 +6589,36 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/datagrid/react/GridFooter.tsx
-  var import_jsx_runtime32 = __require("react/jsx-runtime");
+  var import_jsx_runtime33 = __require("react/jsx-runtime");
   function GridFooter(props) {
     const { page, pageSize, totalRows, selectedCount, pagination, onPage } = props;
     const pageCount = Math.max(1, Math.ceil(totalRows / pageSize));
     const range = buildPageRange(pageCount, page + 1, 1);
     const from = totalRows === 0 ? 0 : page * pageSize + 1;
     const to = pagination ? Math.min(totalRows, (page + 1) * pageSize) : totalRows;
-    return /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "mim-dg__footer", role: "row", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("span", { className: "mim-dg__count", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "mim-dg__footer", role: "row", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("span", { className: "mim-dg__count", children: [
         from.toLocaleString(),
         "\u2013",
         to.toLocaleString(),
         " de ",
         totalRows.toLocaleString(),
-        selectedCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("span", { className: "mim-dg__count-sel", children: [
+        selectedCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("span", { className: "mim-dg__count-sel", children: [
           " \xB7 ",
           selectedCount.toLocaleString(),
           " seleccionadas"
         ] })
       ] }),
-      pagination && /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "mim-dg__pager", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("button", { type: "button", className: "mim-dg__pager-btn", disabled: page <= 0, "aria-label": "Anterior", onClick: () => onPage(page - 1), children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Icon, { icon: "mdi:chevron-left" }) }),
-        range.items.map((it) => it.type === "ellipsis" ? /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", { className: "mim-dg__pager-gap", children: "\u2026" }, it.key) : /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("button", { type: "button", className: `mim-dg__pager-btn${it.page === page + 1 ? " is-active" : ""}`, onClick: () => onPage(it.page - 1), children: it.page }, it.key)),
-        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("button", { type: "button", className: "mim-dg__pager-btn", disabled: page >= pageCount - 1, "aria-label": "Siguiente", onClick: () => onPage(page + 1), children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Icon, { icon: "mdi:chevron-right" }) })
+      pagination && /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "mim-dg__pager", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("button", { type: "button", className: "mim-dg__pager-btn", disabled: page <= 0, "aria-label": "Anterior", onClick: () => onPage(page - 1), children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Icon, { icon: "mdi:chevron-left" }) }),
+        range.items.map((it) => it.type === "ellipsis" ? /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("span", { className: "mim-dg__pager-gap", children: "\u2026" }, it.key) : /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("button", { type: "button", className: `mim-dg__pager-btn${it.page === page + 1 ? " is-active" : ""}`, onClick: () => onPage(it.page - 1), children: it.page }, it.key)),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("button", { type: "button", className: "mim-dg__pager-btn", disabled: page >= pageCount - 1, "aria-label": "Siguiente", onClick: () => onPage(page + 1), children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Icon, { icon: "mdi:chevron-right" }) })
       ] })
     ] });
   }
 
   // src/datagrid/react/GridToolbar.tsx
-  var import_jsx_runtime33 = __require("react/jsx-runtime");
+  var import_jsx_runtime34 = __require("react/jsx-runtime");
   var DENSITIES = [
     { key: "compact", icon: "mdi:view-headline", label: "Compacta" },
     { key: "normal", icon: "mdi:view-sequential", label: "Normal" },
@@ -6030,27 +6626,27 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   ];
   function GridToolbar(props) {
     const { quickFilter, onQuickFilter, density, onDensity, onExport, showQuickFilter = true, showDensity = true, showExport = true } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "mim-dg__toolbar", role: "toolbar", children: [
-      showQuickFilter && /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("label", { className: "mim-dg__quick", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Icon, { icon: "mdi:magnify", className: "mim-dg__quick-icon" }),
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("input", { type: "search", className: "mim-dg__quick-input", placeholder: "Buscar\u2026", value: quickFilter, onChange: (e) => onQuickFilter(e.target.value) })
+    return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "mim-dg__toolbar", role: "toolbar", children: [
+      showQuickFilter && /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("label", { className: "mim-dg__quick", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:magnify", className: "mim-dg__quick-icon" }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("input", { type: "search", className: "mim-dg__quick-input", placeholder: "Buscar\u2026", value: quickFilter, onChange: (e) => onQuickFilter(e.target.value) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "mim-dg__toolbar-spacer" }),
-      showDensity && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "mim-dg__density", role: "group", "aria-label": "Densidad", children: DENSITIES.map((d) => /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("button", { type: "button", className: `mim-dg__density-btn${density === d.key ? " is-active" : ""}`, title: d.label, "aria-label": d.label, "aria-pressed": density === d.key, onClick: () => onDensity(d.key), children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Icon, { icon: d.icon }) }, d.key)) }),
-      showExport && /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("button", { type: "button", className: "mim-dg__tool-btn", onClick: onExport, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Icon, { icon: "mdi:file-delimited-outline" }),
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "mim-dg__toolbar-spacer" }),
+      showDensity && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "mim-dg__density", role: "group", "aria-label": "Densidad", children: DENSITIES.map((d) => /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("button", { type: "button", className: `mim-dg__density-btn${density === d.key ? " is-active" : ""}`, title: d.label, "aria-label": d.label, "aria-pressed": density === d.key, onClick: () => onDensity(d.key), children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: d.icon }) }, d.key)) }),
+      showExport && /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("button", { type: "button", className: "mim-dg__tool-btn", onClick: onExport, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:file-delimited-outline" }),
         "Exportar CSV"
       ] })
     ] });
   }
 
   // src/datagrid/react/GroupPanel.tsx
-  var import_react24 = __require("react");
-  var import_jsx_runtime34 = __require("react/jsx-runtime");
+  var import_react25 = __require("react");
+  var import_jsx_runtime35 = __require("react/jsx-runtime");
   var COL_DND_TYPE = "application/x-mim-col";
   function GroupPanel(props) {
     const { columns, rowGroupCols, onAdd, onRemove, onExpandAll, onCollapseAll } = props;
-    const [over, setOver] = (0, import_react24.useState)(false);
+    const [over, setOver] = (0, import_react25.useState)(false);
     const byId = new Map(columns.map((c) => [c.colId, c]));
     const onDrop = (e) => {
       e.preventDefault();
@@ -6059,7 +6655,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       if (colId) onAdd(colId);
     };
     const chipDragStart = (colId) => (e) => e.dataTransfer.setData(COL_DND_TYPE, colId);
-    return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(
       "div",
       {
         className: `mim-dg__group-panel${over ? " is-over" : ""}${rowGroupCols.length ? " has-groups" : ""}`,
@@ -6071,22 +6667,22 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
         onDragLeave: () => setOver(false),
         onDrop,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:group", className: "mim-dg__group-panel-icon" }),
-          rowGroupCols.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "mim-dg__group-hint", children: "Arrastra una columna aqu\xED para agrupar por sus valores" }),
+          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:group", className: "mim-dg__group-panel-icon" }),
+          rowGroupCols.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("span", { className: "mim-dg__group-hint", children: "Arrastra una columna aqu\xED para agrupar por sus valores" }),
           rowGroupCols.map((colId, i) => {
             const col = byId.get(colId);
-            return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("span", { className: "mim-dg__group-chip-wrap", children: [
-              i > 0 && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:chevron-right", className: "mim-dg__group-chip-arrow" }),
-              /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("span", { className: "mim-dg__group-chip", draggable: true, onDragStart: chipDragStart(colId), children: [
-                /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:drag-vertical", className: "mim-dg__group-chip-grip" }),
-                /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "mim-dg__group-chip-label", children: col?.headerName ?? colId }),
-                /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("button", { type: "button", className: "mim-dg__group-chip-x", "aria-label": `Quitar ${col?.headerName ?? colId}`, onClick: () => onRemove(colId), children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:close" }) })
+            return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("span", { className: "mim-dg__group-chip-wrap", children: [
+              i > 0 && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:chevron-right", className: "mim-dg__group-chip-arrow" }),
+              /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("span", { className: "mim-dg__group-chip", draggable: true, onDragStart: chipDragStart(colId), children: [
+                /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:drag-vertical", className: "mim-dg__group-chip-grip" }),
+                /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("span", { className: "mim-dg__group-chip-label", children: col?.headerName ?? colId }),
+                /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("button", { type: "button", className: "mim-dg__group-chip-x", "aria-label": `Quitar ${col?.headerName ?? colId}`, onClick: () => onRemove(colId), children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:close" }) })
               ] })
             ] }, colId);
           }),
-          rowGroupCols.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("span", { className: "mim-dg__group-panel-actions", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("button", { type: "button", className: "mim-dg__group-panel-btn", title: "Expandir todo", onClick: onExpandAll, children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:unfold-more-horizontal" }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("button", { type: "button", className: "mim-dg__group-panel-btn", title: "Colapsar todo", onClick: onCollapseAll, children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Icon, { icon: "mdi:unfold-less-horizontal" }) })
+          rowGroupCols.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("span", { className: "mim-dg__group-panel-actions", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("button", { type: "button", className: "mim-dg__group-panel-btn", title: "Expandir todo", onClick: onExpandAll, children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:unfold-more-horizontal" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("button", { type: "button", className: "mim-dg__group-panel-btn", title: "Colapsar todo", onClick: onCollapseAll, children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:unfold-less-horizontal" }) })
           ] })
         ]
       }
@@ -6094,12 +6690,12 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/datagrid/react/HeaderMenu.tsx
-  var import_react25 = __require("react");
-  var import_jsx_runtime35 = __require("react/jsx-runtime");
+  var import_react26 = __require("react");
+  var import_jsx_runtime36 = __require("react/jsx-runtime");
   function HeaderMenu(props) {
     const { column, x, y, onClose, onSort, onPin, onHide, onAutosize, onFilter, onToggleRowGroup, isGrouped } = props;
-    const ref = (0, import_react25.useRef)(null);
-    (0, import_react25.useEffect)(() => {
+    const ref = (0, import_react26.useRef)(null);
+    (0, import_react26.useEffect)(() => {
       const close = (e) => {
         if (ref.current && !ref.current.contains(e.target)) onClose();
       };
@@ -6115,60 +6711,60 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       fn();
       onClose();
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { ref, className: "mim-dg__menu pg-scrollbar", style: { left: x, top: y }, role: "menu", children: [
-      column.sortable && /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(import_jsx_runtime35.Fragment, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "asc")), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:sort-ascending" }),
+    return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { ref, className: "mim-dg__menu pg-scrollbar", style: { left: x, top: y }, role: "menu", children: [
+      column.sortable && /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "asc")), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:sort-ascending" }),
           "Ordenar ascendente"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "desc")), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:sort-descending" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "desc")), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:sort-descending" }),
           "Ordenar descendente"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, null)), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:sort-variant-remove" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, null)), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:sort-variant-remove" }),
           "Quitar orden"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "mim-dg__menu-sep" })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mim-dg__menu-sep" })
       ] }),
-      column.filterType && /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(import_jsx_runtime35.Fragment, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onFilter(column)), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:filter-outline" }),
+      column.filterType && /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onFilter(column)), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:filter-outline" }),
           "Filtrar\u2026"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "mim-dg__menu-sep" })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mim-dg__menu-sep" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "left")), children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:pin" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "left")), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:pin" }),
         "Fijar a la izquierda"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "right")), children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:pin" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "right")), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:pin" }),
         "Fijar a la derecha"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, null)), children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:pin-off-outline" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, null)), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:pin-off-outline" }),
         "No fijar"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "mim-dg__menu-sep" }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onAutosize(column.colId)), children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:arrow-expand-horizontal" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mim-dg__menu-sep" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onAutosize(column.colId)), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:arrow-expand-horizontal" }),
         "Autoajustar ancho"
       ] }),
-      column.enableRowGroup && /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onToggleRowGroup(column.colId)), children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: isGrouped ? "mdi:ungroup" : "mdi:group" }),
+      column.enableRowGroup && /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onToggleRowGroup(column.colId)), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: isGrouped ? "mdi:ungroup" : "mdi:group" }),
         isGrouped ? "Quitar agrupaci\xF3n" : "Agrupar por esta columna"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onHide(column.colId)), children: [
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Icon, { icon: "mdi:eye-off-outline" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onHide(column.colId)), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: "mdi:eye-off-outline" }),
         "Ocultar columna"
       ] })
     ] });
   }
 
   // src/datagrid/react/FilterPopover.tsx
-  var import_react26 = __require("react");
-  var import_jsx_runtime36 = __require("react/jsx-runtime");
+  var import_react27 = __require("react");
+  var import_jsx_runtime37 = __require("react/jsx-runtime");
   var TEXT_OPS = [
     { v: "contains", t: "Contiene" },
     { v: "notContains", t: "No contiene" },
@@ -6199,8 +6795,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   function FilterPopover(props) {
     const { column, filter, uniqueValues: uniqueValues2, x, y, onApply, onClose } = props;
     const type = column.filterType ?? "text";
-    const ref = (0, import_react26.useRef)(null);
-    (0, import_react26.useEffect)(() => {
+    const ref = (0, import_react27.useRef)(null);
+    (0, import_react27.useEffect)(() => {
       const onDoc = (e) => {
         if (ref.current && !ref.current.contains(e.target)) onClose();
       };
@@ -6211,17 +6807,17 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const nf = filter?.type === "number" ? filter : null;
     const df = filter?.type === "date" ? filter : null;
     const sf = filter?.type === "set" ? filter : null;
-    const [textOp, setTextOp] = (0, import_react26.useState)(tf?.op ?? "contains");
-    const [textVal, setTextVal] = (0, import_react26.useState)(tf?.value ?? "");
-    const [numOp, setNumOp] = (0, import_react26.useState)(nf?.op ?? "eq");
-    const [numVal, setNumVal] = (0, import_react26.useState)(nf?.value != null ? String(nf.value) : "");
-    const [numTo, setNumTo] = (0, import_react26.useState)(nf?.to != null ? String(nf.to) : "");
-    const [dateOp, setDateOp] = (0, import_react26.useState)(df?.op ?? "eq");
-    const [dateVal, setDateVal] = (0, import_react26.useState)(df?.value ?? "");
-    const [dateTo, setDateTo] = (0, import_react26.useState)(df?.to ?? "");
-    const [setSel, setSetSel] = (0, import_react26.useState)(new Set(sf?.values ?? uniqueValues2));
-    const [setSearch, setSetSearch] = (0, import_react26.useState)("");
-    const shownVals = (0, import_react26.useMemo)(() => uniqueValues2.filter((v) => v.toLowerCase().includes(setSearch.toLowerCase())), [uniqueValues2, setSearch]);
+    const [textOp, setTextOp] = (0, import_react27.useState)(tf?.op ?? "contains");
+    const [textVal, setTextVal] = (0, import_react27.useState)(tf?.value ?? "");
+    const [numOp, setNumOp] = (0, import_react27.useState)(nf?.op ?? "eq");
+    const [numVal, setNumVal] = (0, import_react27.useState)(nf?.value != null ? String(nf.value) : "");
+    const [numTo, setNumTo] = (0, import_react27.useState)(nf?.to != null ? String(nf.to) : "");
+    const [dateOp, setDateOp] = (0, import_react27.useState)(df?.op ?? "eq");
+    const [dateVal, setDateVal] = (0, import_react27.useState)(df?.value ?? "");
+    const [dateTo, setDateTo] = (0, import_react27.useState)(df?.to ?? "");
+    const [setSel, setSetSel] = (0, import_react27.useState)(new Set(sf?.values ?? uniqueValues2));
+    const [setSearch, setSetSearch] = (0, import_react27.useState)("");
+    const shownVals = (0, import_react27.useMemo)(() => uniqueValues2.filter((v) => v.toLowerCase().includes(setSearch.toLowerCase())), [uniqueValues2, setSearch]);
     const needsValue = (op) => op !== "blank" && op !== "notBlank";
     const apply = () => {
       if (type === "text") onApply(textOp && (textVal || !needsValue(textOp)) ? { type: "text", op: textOp, value: textVal } : null);
@@ -6243,41 +6839,41 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       else n.add(v);
       return n;
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { ref, className: "mim-dg__filter pg-scrollbar", style: { left: x, top: y }, role: "dialog", "aria-label": `Filtrar ${column.headerName}`, children: [
-      type === "text" && /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("select", { className: "mim-dg__filter-field", value: textOp, onChange: (e) => setTextOp(e.target.value), children: TEXT_OPS.map((o) => /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("option", { value: o.v, children: o.t }, o.v)) }),
-        needsValue(textOp) && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: textVal, onChange: (e) => setTextVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() })
+    return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { ref, className: "mim-dg__filter pg-scrollbar", style: { left: x, top: y }, role: "dialog", "aria-label": `Filtrar ${column.headerName}`, children: [
+      type === "text" && /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime37.Fragment, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("select", { className: "mim-dg__filter-field", value: textOp, onChange: (e) => setTextOp(e.target.value), children: TEXT_OPS.map((o) => /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("option", { value: o.v, children: o.t }, o.v)) }),
+        needsValue(textOp) && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("input", { className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: textVal, onChange: (e) => setTextVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() })
       ] }),
-      type === "number" && /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("select", { className: "mim-dg__filter-field", value: numOp, onChange: (e) => setNumOp(e.target.value), children: NUM_OPS.map((o) => /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("option", { value: o.v, children: o.t }, o.v)) }),
-        needsValue(numOp) && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: numVal, onChange: (e) => setNumVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() }),
-        numOp === "inRange" && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Hasta\u2026", value: numTo, onChange: (e) => setNumTo(e.target.value) })
+      type === "number" && /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime37.Fragment, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("select", { className: "mim-dg__filter-field", value: numOp, onChange: (e) => setNumOp(e.target.value), children: NUM_OPS.map((o) => /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("option", { value: o.v, children: o.t }, o.v)) }),
+        needsValue(numOp) && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: numVal, onChange: (e) => setNumVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() }),
+        numOp === "inRange" && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Hasta\u2026", value: numTo, onChange: (e) => setNumTo(e.target.value) })
       ] }),
-      type === "date" && /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("select", { className: "mim-dg__filter-field", value: dateOp, onChange: (e) => setDateOp(e.target.value), children: DATE_OPS.map((o) => /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("option", { value: o.v, children: o.t }, o.v)) }),
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { type: "date", className: "mim-dg__filter-field", value: dateVal, onChange: (e) => setDateVal(e.target.value) }),
-        dateOp === "inRange" && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { type: "date", className: "mim-dg__filter-field", value: dateTo, onChange: (e) => setDateTo(e.target.value) })
+      type === "date" && /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime37.Fragment, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("select", { className: "mim-dg__filter-field", value: dateOp, onChange: (e) => setDateOp(e.target.value), children: DATE_OPS.map((o) => /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("option", { value: o.v, children: o.t }, o.v)) }),
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("input", { type: "date", className: "mim-dg__filter-field", value: dateVal, onChange: (e) => setDateVal(e.target.value) }),
+        dateOp === "inRange" && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("input", { type: "date", className: "mim-dg__filter-field", value: dateTo, onChange: (e) => setDateTo(e.target.value) })
       ] }),
-      type === "set" && /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { className: "mim-dg__filter-field", placeholder: "Buscar valores\u2026", value: setSearch, onChange: (e) => setSetSearch(e.target.value) }),
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mim-dg__filter-actions-row", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(new Set(uniqueValues2)), children: "Todo" }),
-          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(/* @__PURE__ */ new Set()), children: "Nada" })
+      type === "set" && /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime37.Fragment, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("input", { className: "mim-dg__filter-field", placeholder: "Buscar valores\u2026", value: setSearch, onChange: (e) => setSetSearch(e.target.value) }),
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "mim-dg__filter-actions-row", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(new Set(uniqueValues2)), children: "Todo" }),
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(/* @__PURE__ */ new Set()), children: "Nada" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mim-dg__filter-set pg-scrollbar", children: shownVals.map((v) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("label", { className: "mim-dg__filter-set-item", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "button", className: `mim-dg__checkbox mim-dg__checkbox--${setSel.has(v) ? "all" : "none"}`, onClick: () => toggleVal(v), children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Icon, { icon: setSel.has(v) ? "mdi:checkbox-marked" : "mdi:checkbox-blank-outline" }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { children: v || "(vac\xEDo)" })
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: "mim-dg__filter-set pg-scrollbar", children: shownVals.map((v) => /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("label", { className: "mim-dg__filter-set-item", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("button", { type: "button", className: `mim-dg__checkbox mim-dg__checkbox--${setSel.has(v) ? "all" : "none"}`, onClick: () => toggleVal(v), children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Icon, { icon: setSel.has(v) ? "mdi:checkbox-marked" : "mdi:checkbox-blank-outline" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("span", { children: v || "(vac\xEDo)" })
         ] }, v)) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mim-dg__filter-actions", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "button", className: "mim-dg__tool-btn", onClick: clear, children: "Limpiar" }),
-        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "button", className: "mim-dg__tool-btn is-primary", onClick: apply, children: "Aplicar" })
+      /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "mim-dg__filter-actions", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("button", { type: "button", className: "mim-dg__tool-btn", onClick: clear, children: "Limpiar" }),
+        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("button", { type: "button", className: "mim-dg__tool-btn is-primary", onClick: apply, children: "Aplicar" })
       ] })
     ] });
   }
 
   // src/datagrid/react/DataGrid.tsx
-  var import_jsx_runtime37 = __require("react/jsx-runtime");
+  var import_jsx_runtime38 = __require("react/jsx-runtime");
   var DENSITY_ROW = { compact: 32, normal: 40, comfortable: 52 };
   function DataGrid(props) {
     const {
@@ -6296,24 +6892,24 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       onSelectionChange
     } = props;
     const headerHeight = props.headerHeight ?? 44;
-    const [density, setDensity] = (0, import_react27.useState)(props.density ?? "normal");
+    const [density, setDensity] = (0, import_react28.useState)(props.density ?? "normal");
     const rowHeight = props.rowHeight ?? DENSITY_ROW[density];
-    const options = (0, import_react27.useMemo)(
+    const options = (0, import_react28.useMemo)(
       () => ({ columns, rows, getRowId, selectionMode, pagination, pageSize, density, rowGroupCols: props.rowGroupCols }),
       [columns, rows, getRowId, selectionMode, pagination, pageSize, density, props.rowGroupCols]
     );
     const { api, state: state2 } = useGridModel(options);
-    (0, import_react27.useEffect)(() => {
+    (0, import_react28.useEffect)(() => {
       api.setDensity(density);
     }, [api, density]);
-    const viewportRef = (0, import_react27.useRef)(null);
-    const [scrollTop, setScrollTop] = (0, import_react27.useState)(0);
-    const [size, setSize] = (0, import_react27.useState)({ width: 0, height: 0 });
-    const [menu, setMenu] = (0, import_react27.useState)(null);
-    const [filterPop, setFilterPop] = (0, import_react27.useState)(null);
-    const [focusRow, setFocusRow] = (0, import_react27.useState)(-1);
-    const lastRangeFrom = (0, import_react27.useRef)(null);
-    (0, import_react27.useLayoutEffect)(() => {
+    const viewportRef = (0, import_react28.useRef)(null);
+    const [scrollTop, setScrollTop] = (0, import_react28.useState)(0);
+    const [size, setSize] = (0, import_react28.useState)({ width: 0, height: 0 });
+    const [menu, setMenu] = (0, import_react28.useState)(null);
+    const [filterPop, setFilterPop] = (0, import_react28.useState)(null);
+    const [focusRow, setFocusRow] = (0, import_react28.useState)(-1);
+    const lastRangeFrom = (0, import_react28.useRef)(null);
+    (0, import_react28.useLayoutEffect)(() => {
       const el = viewportRef.current;
       if (!el || typeof ResizeObserver === "undefined") return void 0;
       const ro = new ResizeObserver(() => setSize({ width: el.clientWidth, height: el.clientHeight }));
@@ -6321,18 +6917,18 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       setSize({ width: el.clientWidth, height: el.clientHeight });
       return () => ro.disconnect();
     }, []);
-    const onScroll = (0, import_react27.useCallback)((e) => setScrollTop(e.currentTarget.scrollTop), []);
+    const onScroll = (0, import_react28.useCallback)((e) => setScrollTop(e.currentTarget.scrollTop), []);
     const dataRows = pagination ? state2.pageDisplayRows : state2.displayRows;
     const leafRows = pagination ? state2.pageRows : state2.displayedRows;
     const checkColWidth = selectionMode === "none" ? 0 : 44;
     const layout = orderedForLayout(state2.columns);
-    const flat = (0, import_react27.useMemo)(() => {
+    const flat = (0, import_react28.useMemo)(() => {
       const merged = [...layout.left, ...layout.center, ...layout.right];
       const available = Math.max(0, size.width - checkColWidth);
       return applyFlex(merged, available);
     }, [layout.left, layout.center, layout.right, size.width, checkColWidth]);
     const totalWidth = flat.reduce((s, c) => s + c.width, 0) + checkColWidth;
-    const { pinStyles, checkPinStyle } = (0, import_react27.useMemo)(() => {
+    const { pinStyles, checkPinStyle } = (0, import_react28.useMemo)(() => {
       const styles = {};
       let lx = checkColWidth;
       for (const c of flat) if (c.pinned === "left") {
@@ -6353,18 +6949,18 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const viewportHeight = Math.max(0, size.height - headerHeight);
     const win = rowWindow(dataRows.length, rowHeight, scrollTop, viewportHeight);
     const visible = dataRows.slice(win.startIndex, win.endIndex);
-    const orderedIds = (0, import_react27.useMemo)(() => leafRows.map((r) => r.id), [leafRows]);
+    const orderedIds = (0, import_react28.useMemo)(() => leafRows.map((r) => r.id), [leafRows]);
     const headerCheckbox = headerCheckboxState(state2.selection, leafRows);
-    const filteredCols = (0, import_react27.useMemo)(() => new Set(Object.keys(state2.filterModel)), [state2.filterModel]);
-    const groupedSet = (0, import_react27.useMemo)(() => new Set(state2.rowGroupCols), [state2.rowGroupCols]);
-    const emit2 = (0, import_react27.useCallback)((next) => {
+    const filteredCols = (0, import_react28.useMemo)(() => new Set(Object.keys(state2.filterModel)), [state2.filterModel]);
+    const groupedSet = (0, import_react28.useMemo)(() => new Set(state2.rowGroupCols), [state2.rowGroupCols]);
+    const emit2 = (0, import_react28.useCallback)((next) => {
       api.setSelection(next);
       if (onSelectionChange) {
         const map = new Map(state2.displayedRows.map((r) => [r.id, r]));
         onSelectionChange([...next], [...next].map((id) => map.get(id)).filter(Boolean));
       }
     }, [api, onSelectionChange, state2.displayedRows]);
-    const onRowSelect = (0, import_react27.useCallback)((node, e) => {
+    const onRowSelect = (0, import_react28.useCallback)((node, e) => {
       const next = toggleRowSelection(
         state2.selection,
         node.id,
@@ -6374,29 +6970,29 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       if (!e.shiftKey) lastRangeFrom.current = node.id;
       emit2(next);
     }, [state2.selection, selectionMode, orderedIds, emit2]);
-    const onToggleAll = (0, import_react27.useCallback)(() => emit2(headerCheckbox === "all" ? clearSelection() : selectAll(leafRows)), [emit2, headerCheckbox, leafRows]);
-    const onToggleGroup = (0, import_react27.useCallback)((groupId) => api.toggleGroup(groupId), [api]);
-    const onToggleRowGroup = (0, import_react27.useCallback)((colId) => {
+    const onToggleAll = (0, import_react28.useCallback)(() => emit2(headerCheckbox === "all" ? clearSelection() : selectAll(leafRows)), [emit2, headerCheckbox, leafRows]);
+    const onToggleGroup = (0, import_react28.useCallback)((groupId) => api.toggleGroup(groupId), [api]);
+    const onToggleRowGroup = (0, import_react28.useCallback)((colId) => {
       if (groupedSet.has(colId)) api.removeRowGroupCol(colId);
       else api.addRowGroupCol(colId);
     }, [api, groupedSet]);
-    const onSort = (0, import_react27.useCallback)((colId, additive) => api.toggleSort(colId, additive), [api]);
-    const onResize = (0, import_react27.useCallback)((colId, width) => api.resizeColumn(colId, width), [api]);
-    const onReorder = (0, import_react27.useCallback)((colId, targetColId) => {
+    const onSort = (0, import_react28.useCallback)((colId, additive) => api.toggleSort(colId, additive), [api]);
+    const onResize = (0, import_react28.useCallback)((colId, width) => api.resizeColumn(colId, width), [api]);
+    const onReorder = (0, import_react28.useCallback)((colId, targetColId) => {
       const toIndex = state2.columns.findIndex((c) => c.colId === targetColId);
       if (toIndex >= 0) api.reorderColumn(colId, toIndex);
     }, [api, state2.columns]);
-    const onMenu = (0, import_react27.useCallback)((col, x, y) => setMenu({ col, x, y }), []);
-    const onMenuSort = (0, import_react27.useCallback)((colId, dir) => {
+    const onMenu = (0, import_react28.useCallback)((col, x, y) => setMenu({ col, x, y }), []);
+    const onMenuSort = (0, import_react28.useCallback)((colId, dir) => {
       const others = state2.sortModel.filter((sm) => sm.colId !== colId);
       api.setSortModel(dir ? [...others, { colId, dir }] : others);
     }, [api, state2.sortModel]);
-    const onPage = (0, import_react27.useCallback)((p) => {
+    const onPage = (0, import_react28.useCallback)((p) => {
       api.setPage(p);
       setScrollTop(0);
       if (viewportRef.current) viewportRef.current.scrollTop = 0;
     }, [api]);
-    const onExport = (0, import_react27.useCallback)(() => {
+    const onExport = (0, import_react28.useCallback)(() => {
       const sel = state2.selection;
       const csv = rowsToCsv(state2.columns, state2.displayedRows, { onlySelected: sel.size > 0, selection: sel });
       if (typeof document === "undefined") return;
@@ -6408,13 +7004,13 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       a.click();
       URL.revokeObjectURL(url);
     }, [state2.columns, state2.displayedRows, state2.selection, exportFileName]);
-    const onFilterOpen = (0, import_react27.useCallback)((col) => {
+    const onFilterOpen = (0, import_react28.useCallback)((col) => {
       setFilterPop({ col, x: menu?.x ?? 120, y: menu?.y ?? 120 });
       setMenu(null);
     }, [menu]);
-    const onFilterApply = (0, import_react27.useCallback)((colId, filter) => api.setFilter(colId, filter), [api]);
-    const popUnique = (0, import_react27.useMemo)(() => filterPop ? uniqueValues(api.getAllRows(), filterPop.col) : [], [filterPop, api]);
-    const scrollRowIntoView = (0, import_react27.useCallback)((idx) => {
+    const onFilterApply = (0, import_react28.useCallback)((colId, filter) => api.setFilter(colId, filter), [api]);
+    const popUnique = (0, import_react28.useMemo)(() => filterPop ? uniqueValues(api.getAllRows(), filterPop.col) : [], [filterPop, api]);
+    const scrollRowIntoView = (0, import_react28.useCallback)((idx) => {
       const el = viewportRef.current;
       if (!el) return;
       const top = idx * rowHeight;
@@ -6422,7 +7018,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       if (top < el.scrollTop) el.scrollTop = top;
       else if (bottom > el.scrollTop + viewportHeight) el.scrollTop = bottom - viewportHeight;
     }, [rowHeight, viewportHeight]);
-    const onKeyDown = (0, import_react27.useCallback)((e) => {
+    const onKeyDown = (0, import_react28.useCallback)((e) => {
       const last = dataRows.length - 1;
       const move = (idx) => {
         const c = Math.max(0, Math.min(last, idx));
@@ -6453,8 +7049,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
       }
     }, [dataRows, leafRows, focusRow, viewportHeight, rowHeight, selectionMode, state2.selection, emit2, api, scrollRowIntoView]);
     const focusedId = focusRow >= 0 && focusRow < dataRows.length ? dataRows[focusRow].kind === "group" ? dataRows[focusRow].id : dataRows[focusRow].node.id : null;
-    return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: `mim-dg${className ? ` ${className}` : ""}`, "data-density": density, style: { height, ...style }, children: [
-      toolbar && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { className: `mim-dg${className ? ` ${className}` : ""}`, "data-density": density, style: { height, ...style }, children: [
+      toolbar && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
         GridToolbar,
         {
           quickFilter: state2.quickFilter,
@@ -6464,7 +7060,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           onExport
         }
       ),
-      rowGroupPanel && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+      rowGroupPanel && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
         GroupPanel,
         {
           columns: flat,
@@ -6475,8 +7071,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           onCollapseAll: () => api.collapseAllGroups()
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "mim-dg__viewport pg-scrollbar", ref: viewportRef, onScroll, onKeyDown, tabIndex: 0, role: "grid", "aria-rowcount": state2.totalRows, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { className: "mim-dg__viewport pg-scrollbar", ref: viewportRef, onScroll, onKeyDown, tabIndex: 0, role: "grid", "aria-rowcount": state2.totalRows, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
           GridHeader,
           {
             columns: flat,
@@ -6495,7 +7091,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
             onMenu
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
           GridBody,
           {
             rows: visible,
@@ -6514,8 +7110,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           }
         )
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(GridFooter, { page: state2.page, pageSize: state2.pageSize, totalRows: state2.totalRows, selectedCount: state2.selection.size, pagination, onPage }),
-      menu && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(GridFooter, { page: state2.page, pageSize: state2.pageSize, totalRows: state2.totalRows, selectedCount: state2.selection.size, pagination, onPage }),
+      menu && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
         HeaderMenu,
         {
           column: menu.col,
@@ -6531,7 +7127,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
           isGrouped: groupedSet.has(menu.col.colId)
         }
       ),
-      filterPop && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+      filterPop && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
         FilterPopover,
         {
           column: filterPop.col,
@@ -6547,7 +7143,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/theme/ThemeProvider.tsx
-  var import_react28 = __require("react");
+  var import_react29 = __require("react");
 
   // src/theme/looknfeelEngine.ts
   var looknfeel = LOOKNFEEL_DEFAULT;
@@ -6591,8 +7187,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
 
   // src/theme/ThemeProvider.tsx
   function useTheme() {
-    const [theme, setTheme] = (0, import_react28.useState)(() => getThemeState());
-    (0, import_react28.useEffect)(() => {
+    const [theme, setTheme] = (0, import_react29.useState)(() => getThemeState());
+    (0, import_react29.useEffect)(() => {
       const off = subscribeTheme(setTheme);
       return () => {
         off();
@@ -6601,8 +7197,8 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     return theme;
   }
   function useLooknfeel() {
-    const [look, setLook] = (0, import_react28.useState)(() => getLooknfeelState());
-    (0, import_react28.useEffect)(() => {
+    const [look, setLook] = (0, import_react29.useState)(() => getLooknfeelState());
+    (0, import_react29.useEffect)(() => {
       const off = subscribeLooknfeel(setLook);
       return () => {
         off();
@@ -6617,7 +7213,7 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/spa/SpaRouter.tsx
-  var import_react29 = __require("react");
+  var import_react30 = __require("react");
 
   // src/spa/urlState.ts
   var URL_STATE_PARAM = "s";
@@ -6752,10 +7348,10 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
   }
 
   // src/spa/SpaRouter.tsx
-  var import_jsx_runtime38 = __require("react/jsx-runtime");
-  var SpaContext = (0, import_react29.createContext)({ route: null, navigate: setSpaRoute, routes: {}, defaultRoute: "home" });
+  var import_jsx_runtime39 = __require("react/jsx-runtime");
+  var SpaContext = (0, import_react30.createContext)({ route: null, navigate: setSpaRoute, routes: {}, defaultRoute: "home" });
   function useSpa() {
-    return (0, import_react29.useContext)(SpaContext);
+    return (0, import_react30.useContext)(SpaContext);
   }
   function useSpaRoute() {
     const { route, defaultRoute } = useSpa();
@@ -6765,11 +7361,11 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     const route = useSpaRoute() ?? defaultRoute;
     const Page = routes[route] ?? routes[defaultRoute] ?? fallback;
     if (!Page) return null;
-    return typeof Page === "function" ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Page, {}) : Page;
+    return typeof Page === "function" ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Page, {}) : Page;
   }
   function SpaRouter({ routes, defaultRoute = "home", children }) {
-    const [nav, setNav2] = (0, import_react29.useState)(() => urlState.get());
-    (0, import_react29.useEffect)(() => {
+    const [nav, setNav2] = (0, import_react30.useState)(() => urlState.get());
+    (0, import_react30.useEffect)(() => {
       const off = urlState.subscribe(setNav2);
       return () => {
         off();
@@ -6777,13 +7373,13 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     }, []);
     const route = nav.r ?? defaultRoute;
     const navigate = (next) => urlState.setRoute(next);
-    const value = (0, import_react29.useMemo)(() => ({ route, navigate, routes, defaultRoute }), [route, routes, defaultRoute]);
-    return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(SpaContext.Provider, { value, children });
+    const value = (0, import_react30.useMemo)(() => ({ route, navigate, routes, defaultRoute }), [route, routes, defaultRoute]);
+    return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(SpaContext.Provider, { value, children });
   }
   function SpaNavLink({ route, children, className, variant = "text", ...rest }) {
     const { route: active, navigate } = useSpa();
     const isActive = active === route;
-    return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
       Button,
       {
         ...rest,
@@ -6796,9 +7392,9 @@ var require=function(m){if(m==="react")return globalThis.React;if(m==="react-dom
     );
   }
   function MimicusSidebar({ title, children, className, ...rest }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("nav", { ...rest, className: ["mimicus-sidebar", className].filter(Boolean).join(" "), children: [
-      title != null && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { className: "mimicus-sidebar-header pg-sidebar-header", children: title }),
-      /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { className: "mimicus-sidebar-body pg-sidebar-body", children })
+    return /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)("nav", { ...rest, className: ["mimicus-sidebar", className].filter(Boolean).join(" "), children: [
+      title != null && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", { className: "mimicus-sidebar-header pg-sidebar-header", children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", { className: "mimicus-sidebar-body pg-sidebar-body", children })
     ] });
   }
 
@@ -7463,7 +8059,7 @@ ${indent}<\/script>`;
   }
 
   // src/contapyme/components/LoginButton.tsx
-  var import_react32 = __require("react");
+  var import_react33 = __require("react");
 
   // src/contapyme/auth/loginCredentials.ts
   var STORAGE_KEY = "jeffaporta:login-creds";
@@ -7593,15 +8189,15 @@ ${indent}<\/script>`;
   }
 
   // src/contapyme/auth/sessionContext.tsx
-  var import_react30 = __require("react");
-  var import_jsx_runtime39 = __require("react/jsx-runtime");
-  var ContapymeSessionContext = (0, import_react30.createContext)(null);
+  var import_react31 = __require("react");
+  var import_jsx_runtime40 = __require("react/jsx-runtime");
+  var ContapymeSessionContext = (0, import_react31.createContext)(null);
   function ContapymeSessionProvider({ session, children }) {
-    const value = (0, import_react30.useMemo)(() => session ?? null, [session]);
-    return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(ContapymeSessionContext.Provider, { value, children });
+    const value = (0, import_react31.useMemo)(() => session ?? null, [session]);
+    return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(ContapymeSessionContext.Provider, { value, children });
   }
   function useContapymeSession() {
-    return (0, import_react30.useContext)(ContapymeSessionContext);
+    return (0, import_react31.useContext)(ContapymeSessionContext);
   }
   function resolveContapymeSession({ session, ns } = {}) {
     if (session?.login) return session;
@@ -7622,9 +8218,9 @@ ${indent}<\/script>`;
   }
 
   // src/contapyme/components/ContapymeIcon.tsx
-  var import_jsx_runtime40 = __require("react/jsx-runtime");
+  var import_jsx_runtime41 = __require("react/jsx-runtime");
   function ContapymeIcon({ icon, size = 20, className, style, ...rest }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
       "iconify-icon",
       {
         icon,
@@ -7638,11 +8234,38 @@ ${indent}<\/script>`;
   }
 
   // src/contapyme/components/LoginDialog.tsx
-  var import_react31 = __require("react");
-  var import_jsx_runtime41 = __require("react/jsx-runtime");
+  var import_react32 = __require("react");
+
+  // src/components/GlassHeaderBand.tsx
+  var import_jsx_runtime42 = __require("react/jsx-runtime");
+  function GlassHeaderBand({
+    title,
+    titleId,
+    icon = "mdi:circle-small",
+    subtitle,
+    compact = false,
+    className = "",
+    as: Tag2 = "header",
+    sectionColor,
+    children
+  }) {
+    const rootClass = ["mimicus-glass-header", compact && "mimicus-glass-header--compact", className].filter(Boolean).join(" ");
+    const accentStyle = sectionColor ? { "--sm-accent": resolveColor(sectionColor) } : void 0;
+    return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)(Tag2, { className: rootClass, "data-section-color": sectionColor || void 0, style: accentStyle, children: [
+      icon !== false && icon ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("span", { className: "mimicus-glass-header__icon", "aria-hidden": true, children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Icon, { icon }) }) : null,
+      /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { className: "mimicus-glass-header__body", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("span", { id: titleId, className: "mimicus-glass-header__title", children: title }),
+        subtitle ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("span", { className: "mimicus-glass-header__subtitle", children: subtitle }) : null
+      ] }),
+      children ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { className: "mimicus-glass-header__tools", children }) : null
+    ] });
+  }
+
+  // src/contapyme/components/LoginDialog.tsx
+  var import_jsx_runtime43 = __require("react/jsx-runtime");
   function LoginDialog({ open, busy, title = "Iniciar sesi\xF3n", icon = "mdi:account-key-outline", onClose, children, footer }) {
-    const ref = (0, import_react31.useRef)(null);
-    (0, import_react31.useEffect)(() => {
+    const ref = (0, import_react32.useRef)(null);
+    (0, import_react32.useEffect)(() => {
       const el = ref.current;
       if (!el) return void 0;
       const onDialogCancel = (e) => {
@@ -7654,7 +8277,7 @@ ${indent}<\/script>`;
       else if (!open && el.open) el.close();
       return () => el.removeEventListener("cancel", onDialogCancel);
     }, [open, busy, onClose]);
-    (0, import_react31.useEffect)(() => {
+    (0, import_react32.useEffect)(() => {
       if (!open) return void 0;
       const onKey = (e) => {
         if (e.key === "Escape" && !busy) onClose?.();
@@ -7662,17 +8285,20 @@ ${indent}<\/script>`;
       window.addEventListener("keydown", onKey);
       return () => window.removeEventListener("keydown", onKey);
     }, [open, busy, onClose]);
-    return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("dialog", { ref, className: "mimicus-login-dialog isa-login-dialog", "aria-labelledby": "mimicus-login-dialog-title", children: /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "mimicus-login-dialog__card isa-login-card mimicus-glass-card", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("header", { className: "mimicus-login-dialog__header isa-login-header", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("span", { className: "mimicus-login-dialog__icon-box", "aria-hidden": true, children: /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(ContapymeIcon, { icon, size: 22 }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "mimicus-login-dialog__titles", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("h2", { id: "mimicus-login-dialog-title", className: "mimicus-login-dialog__title", children: title }),
-          /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("p", { className: "mimicus-login-dialog__subtitle", children: "Use su usuario y contrase\xF1a de la organizaci\xF3n." })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("button", { type: "button", className: "mimicus-login-dialog__close", "aria-label": "Cerrar", disabled: busy, onClick: () => !busy && onClose?.(), children: "\xD7" })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "mimicus-login-dialog__body", children }),
-      footer && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("footer", { className: "mimicus-login-dialog__footer", children: footer })
+    return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("dialog", { ref, className: "mimicus-login-dialog isa-login-dialog", "aria-labelledby": "mimicus-login-dialog-title", children: /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)("div", { className: "mimicus-login-dialog__card isa-login-card mimicus-glass-card", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+        GlassHeaderBand,
+        {
+          title,
+          titleId: "mimicus-login-dialog-title",
+          subtitle: "Use su usuario y contrase\xF1a de la organizaci\xF3n.",
+          icon,
+          className: "mimicus-login-dialog__header isa-login-header",
+          children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("button", { type: "button", className: "mimicus-login-dialog__close", "aria-label": "Cerrar", disabled: busy, onClick: () => !busy && onClose?.(), children: "\xD7" })
+        }
+      ),
+      /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("div", { className: "mimicus-login-dialog__body", children }),
+      footer && /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("footer", { className: "mimicus-login-dialog__footer", children: footer })
     ] }) });
   }
 
@@ -7691,7 +8317,7 @@ ${indent}<\/script>`;
   var LOGIN_REMEMBER_LABEL = "Recordarme";
 
   // src/contapyme/components/LoginFormFields.tsx
-  var import_jsx_runtime42 = __require("react/jsx-runtime");
+  var import_jsx_runtime44 = __require("react/jsx-runtime");
   function LoginFormFields({
     user,
     setUser,
@@ -7712,10 +8338,10 @@ ${indent}<\/script>`;
   }) {
     const empresaOptions = Array.isArray(terceros) ? terceros : [];
     const needsEmpresa = empresaOptions.length > 0;
-    return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)(Stack, { spacing: "0.75rem", className: "mimicus-login-form", children: [
-      err ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { className: "mimicus-login-form__alert", role: "alert", children: err }) : null,
-      needsEmpresa ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { className: "mimicus-login-form__info", children: "Seleccione la empresa con la que desea ingresar." }) : null,
-      /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(FormItem, { label: "Usuario", help: CONTAPYME_LOGIN_ID_HELPER, children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(Stack, { spacing: "0.75rem", className: "mimicus-login-form", children: [
+      err ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("div", { className: "mimicus-login-form__alert", role: "alert", children: err }) : null,
+      needsEmpresa ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("div", { className: "mimicus-login-form__info", children: "Seleccione la empresa con la que desea ingresar." }) : null,
+      /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(FormItem, { label: "Usuario", help: CONTAPYME_LOGIN_ID_HELPER, children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
         Input,
         {
           value: user,
@@ -7735,7 +8361,7 @@ ${indent}<\/script>`;
           }
         }
       ) }),
-      /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(FormItem, { label: "Contrase\xF1a", children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(FormItem, { label: "Contrase\xF1a", children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
         Input,
         {
           type: showPasswordToggle && showPass ? "text" : "password",
@@ -7743,7 +8369,7 @@ ${indent}<\/script>`;
           onChange: (e) => setPass(e.target.value),
           autoComplete: "current-password",
           disabled: busy,
-          suffix: showPasswordToggle ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+          suffix: showPasswordToggle ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
             Button,
             {
               type: "button",
@@ -7754,7 +8380,7 @@ ${indent}<\/script>`;
               title: showPass ? "Ocultar contrase\xF1a" : "Mostrar contrase\xF1a",
               onClick: () => setShowPass((v) => !v),
               style: { width: "auto", minWidth: "2rem", padding: "0 0.35rem" },
-              children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(ContapymeIcon, { icon: showPass ? "mdi:eye-off-outline" : "mdi:eye-outline", size: 18 })
+              children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(ContapymeIcon, { icon: showPass ? "mdi:eye-off-outline" : "mdi:eye-outline", size: 18 })
             }
           ) : null,
           onKeyDown: (e) => {
@@ -7765,7 +8391,7 @@ ${indent}<\/script>`;
           }
         }
       ) }),
-      needsEmpresa ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(FormItem, { label: "Empresa", children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+      needsEmpresa ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(FormItem, { label: "Empresa", children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
         Select,
         {
           value: selectedItercero,
@@ -7777,18 +8403,18 @@ ${indent}<\/script>`;
           }))
         }
       ) }) : null,
-      showRemember ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Checkbox, { checked: remember, onChange: setRemember, disabled: busy, children: LOGIN_REMEMBER_LABEL }) : null
+      showRemember ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(Checkbox, { checked: remember, onChange: setRemember, disabled: busy, children: LOGIN_REMEMBER_LABEL }) : null
     ] });
   }
   function LoginFormActions({ busy, canSubmit, onCancel, onSubmit, showCancel = true }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { className: "mimicus-login-form__actions", children: [
-      showCancel ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Button, { type: "button", variant: "text", color: "neutral", shape: "rect", disabled: busy, onClick: onCancel, style: { width: "auto" }, children: "Cancelar" }) : null,
-      /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Button, { type: "button", variant: "solid", color: "primary", shape: "rect", disabled: busy || !canSubmit, loading: busy, onClick: onSubmit, style: { width: "auto" }, children: "Iniciar sesi\xF3n" })
+    return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)("div", { className: "mimicus-login-form__actions", children: [
+      showCancel ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(Button, { type: "button", variant: "text", color: "neutral", shape: "rect", disabled: busy, onClick: onCancel, style: { width: "auto" }, children: "Cancelar" }) : null,
+      /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(Button, { type: "button", variant: "solid", color: "primary", shape: "rect", disabled: busy || !canSubmit, loading: busy, onClick: onSubmit, style: { width: "auto" }, children: "Iniciar sesi\xF3n" })
     ] });
   }
 
   // src/contapyme/components/LoginButton.tsx
-  var import_jsx_runtime43 = __require("react/jsx-runtime");
+  var import_jsx_runtime45 = __require("react/jsx-runtime");
   function sessionView(auth) {
     const s = auth.current?.() ?? auth.getSession?.();
     if (!s) return null;
@@ -7826,25 +8452,25 @@ ${indent}<\/script>`;
       throw new Error("LoginButton: provea session (createOrchestratorSession), ContapymeSessionProvider o window[ns].Session");
     }
     const authEvt = auth.EVENT;
-    const [openInternal, setOpenInternal] = (0, import_react32.useState)(false);
+    const [openInternal, setOpenInternal] = (0, import_react33.useState)(false);
     const open = loginOpenProp != null ? loginOpenProp : openInternal;
     const setOpen = onLoginOpenChange || setOpenInternal;
-    const [user, setUser] = (0, import_react32.useState)("");
-    const [pass, setPass] = (0, import_react32.useState)("");
-    const [remember, setRemember] = (0, import_react32.useState)(true);
-    const [showPass, setShowPass] = (0, import_react32.useState)(false);
-    const [err, setErr] = (0, import_react32.useState)("");
-    const [busy, setBusy] = (0, import_react32.useState)(false);
-    const [terceros, setTerceros] = (0, import_react32.useState)([]);
-    const [selectedItercero, setSelectedItercero] = (0, import_react32.useState)("");
-    const [, tick] = (0, import_react32.useState)(0);
-    (0, import_react32.useEffect)(() => {
+    const [user, setUser] = (0, import_react33.useState)("");
+    const [pass, setPass] = (0, import_react33.useState)("");
+    const [remember, setRemember] = (0, import_react33.useState)(true);
+    const [showPass, setShowPass] = (0, import_react33.useState)(false);
+    const [err, setErr] = (0, import_react33.useState)("");
+    const [busy, setBusy] = (0, import_react33.useState)(false);
+    const [terceros, setTerceros] = (0, import_react33.useState)([]);
+    const [selectedItercero, setSelectedItercero] = (0, import_react33.useState)("");
+    const [, tick] = (0, import_react33.useState)(0);
+    (0, import_react33.useEffect)(() => {
       if (!authEvt || typeof window === "undefined") return void 0;
       const onAuth = () => tick((n) => n + 1);
       window.addEventListener(authEvt, onAuth);
       return () => window.removeEventListener(authEvt, onAuth);
     }, [authEvt]);
-    (0, import_react32.useEffect)(() => {
+    (0, import_react33.useEffect)(() => {
       if (!open) return;
       const saved = readLoginCredentials();
       setUser(saved.username || "");
@@ -7854,7 +8480,7 @@ ${indent}<\/script>`;
       setTerceros([]);
       setSelectedItercero("");
     }, [open]);
-    const submit = (0, import_react32.useCallback)(async () => {
+    const submit = (0, import_react33.useCallback)(async () => {
       if (!user.trim() || !pass) {
         setErr("Usuario y contrase\xF1a requeridos");
         return;
@@ -7899,7 +8525,7 @@ ${indent}<\/script>`;
         setBusy(false);
       }
     }, [auth, user, pass, remember, showRemember, terceros.length, selectedItercero, setOpen, onLoggedIn, onToast]);
-    const logout = (0, import_react32.useCallback)(() => {
+    const logout = (0, import_react33.useCallback)(() => {
       auth.logout?.();
       tick((n) => n + 1);
       defaultToast("info", "Sesi\xF3n cerrada", onToast);
@@ -7908,31 +8534,31 @@ ${indent}<\/script>`;
     if (logged?.username) {
       const loggedAny = logged;
       const label = resolveSessionHeaderLabel(loggedAny.displayName, logged.username, logged.username);
-      return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("span", { className: [wrapClass, "mimicus-login-button", "mimicus-login-button--session", className].filter(Boolean).join(" "), style, children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(FlexLayout, { items: "center", gap: "0.35rem", className: btnClass, children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+      return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("span", { className: [wrapClass, "mimicus-login-button", "mimicus-login-button--session", className].filter(Boolean).join(" "), style, children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(FlexLayout, { items: "center", gap: "0.35rem", className: btnClass, children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
         Dropdown,
         {
           placement: "bottomRight",
-          trigger: /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(Button, { type: "button", variant: "soft", color: "primary", shape: "rect", className: "header-session-chip mimicus-login-button__chip", style: { width: "auto" }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(ContapymeIcon, { icon: "mdi:account-circle-outline", size: 18 }),
-            /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("span", { children: label })
+          trigger: /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(Button, { type: "button", variant: "soft", color: "primary", shape: "rect", className: "header-session-chip mimicus-login-button__chip", style: { width: "auto" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(ContapymeIcon, { icon: "mdi:account-circle-outline", size: 18 }),
+            /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("span", { children: label })
           ] }),
-          menu: /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(Menu, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(Menu.Item, { disabled: true, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("span", { className: "mimicus-login-button__menu-user", children: logged.username }),
-              loggedAny.role ? /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("span", { className: "mimicus-login-button__menu-role", children: loggedAny.role }) : null
+          menu: /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(Menu, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(Menu.Item, { disabled: true, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("span", { className: "mimicus-login-button__menu-user", children: logged.username }),
+              loggedAny.role ? /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("span", { className: "mimicus-login-button__menu-role", children: loggedAny.role }) : null
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Menu.Divider, {}),
-            /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(Menu.Item, { onClick: logout, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(ContapymeIcon, { icon: "mdi:logout", size: 16 }),
+            /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Menu.Divider, {}),
+            /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(Menu.Item, { onClick: logout, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(ContapymeIcon, { icon: "mdi:logout", size: 16 }),
               "Cerrar sesi\xF3n"
             ] })
           ] })
         }
       ) }) });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)("span", { className: [wrapClass, "mimicus-login-button", className].filter(Boolean).join(" "), style, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(FlexLayout, { items: "center", gap: "0.35rem", className: btnClass, children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Button, { type: "button", variant: "outlined", color: "neutral", shape: "rect", onClick: () => setOpen(true), style: { width: "auto" }, className: "mimicus-login-button__trigger", children: "Iniciar sesi\xF3n" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)("span", { className: [wrapClass, "mimicus-login-button", className].filter(Boolean).join(" "), style, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(FlexLayout, { items: "center", gap: "0.35rem", className: btnClass, children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Button, { type: "button", variant: "outlined", color: "neutral", shape: "rect", onClick: () => setOpen(true), style: { width: "auto" }, className: "mimicus-login-button__trigger", children: "Iniciar sesi\xF3n" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
         LoginDialog,
         {
           open,
@@ -7943,7 +8569,7 @@ ${indent}<\/script>`;
               setShowPass(false);
             }
           },
-          footer: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+          footer: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
             LoginFormActions,
             {
               busy,
@@ -7955,7 +8581,7 @@ ${indent}<\/script>`;
               onSubmit: submit
             }
           ),
-          children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+          children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
             LoginFormFields,
             {
               user,
@@ -8229,27 +8855,38 @@ ${indent}<\/script>`;
   function sectionMeta(ctx, sectionId) {
     return ctx.catalog?.sections?.[sectionId] ?? ctx.catalog?.categories?.[sectionId] ?? {};
   }
+  function sectionAccentIndexFor(ctx, categoryId) {
+    const i = sortedCategories(ctx).indexOf(categoryId);
+    return i >= 0 ? i : 0;
+  }
+  function sectionAccentColorFor(ctx, categoryId) {
+    const palette = ctx.sectionAccentColors ?? ctx.sectionColors ?? ["var(--mimicus-primary)"];
+    const i = sectionAccentIndexFor(ctx, categoryId);
+    return palette[i % palette.length];
+  }
+  function sectionColorSlotFor(ctx, categoryId) {
+    return `accent-${sectionAccentIndexFor(ctx, categoryId)}`;
+  }
   function sectionColorFor(ctx, categoryId) {
-    const categories = sortedCategories(ctx);
-    const i = categories.indexOf(categoryId);
-    const palette = ctx.sectionColors ?? ["primary"];
-    return palette[i >= 0 ? i % palette.length : 0];
+    return sectionAccentColorFor(ctx, categoryId);
   }
   function resolveCategoryTabDescriptors(ctx) {
     return sortedCategories(ctx).map((cat) => {
       const meta = sectionMeta(ctx, cat);
-      return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), kind: "category" };
+      return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), colorSlot: sectionColorSlotFor(ctx, cat), kind: "category" };
     });
   }
   function resolveCatalogDemoTabDescriptors(ctx) {
     const { route, catalogItems } = ctx;
     if (!route?.category) return [];
     const color = sectionColorFor(ctx, route.category);
+    const colorSlot = sectionColorSlotFor(ctx, route.category);
     return catalogItems.filter((it) => (it.section ?? it.category) === route.category).map((it) => ({
       id: it.slug,
       label: it.displayLabel ?? it.slug,
       icon: ctx.getDemoIcon?.(it) ?? it.icon ?? it.definition?.titleIcon ?? "mdi:file-document-outline",
       color,
+      colorSlot,
       kind: "demo",
       category: route.category
     }));
@@ -8375,20 +9012,22 @@ ${indent}<\/script>`;
   }
 
   // src/shell/NavTabRow.tsx
-  var import_react33 = __require("react");
-  var import_jsx_runtime44 = __require("react/jsx-runtime");
+  var import_react34 = __require("react");
+  var import_jsx_runtime46 = __require("react/jsx-runtime");
   function NavTabRow({ tabs = [], value, onChange, tier = "primary", className, tabHref }) {
     const secondary = tier === "secondary";
-    const scrollerRef = (0, import_react33.useRef)(null);
-    (0, import_react33.useEffect)(() => {
+    const scrollerRef = (0, import_react34.useRef)(null);
+    (0, import_react34.useEffect)(() => {
       if (!value || !scrollerRef.current) return;
       const active = scrollerRef.current.querySelector(".pg-nav-tab.is-active, .pg-nav-tab[aria-selected='true']");
       active?.scrollIntoView?.({ block: "nearest", inline: "nearest", behavior: "smooth" });
     }, [value, tabs.length]);
-    return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("div", { className: ["pg-nav-row", secondary ? "pg-nav-row--secondary" : "pg-nav-row--primary", className].filter(Boolean).join(" "), role: "tablist", children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("div", { ref: scrollerRef, className: "pg-nav-row__scroller custom-scrollbar", children: tabs.map((tab) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { className: ["pg-nav-row", secondary ? "pg-nav-row--secondary" : "pg-nav-row--primary", className].filter(Boolean).join(" "), role: "tablist", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { ref: scrollerRef, className: "pg-nav-row__scroller custom-scrollbar", children: tabs.map((tab) => {
       const selected = value === tab.id;
       const label = tab.label || tab.title || tab.id;
       const tabColor = tab.color ?? "primary";
+      const isSectionTab = tab.kind !== "action" && !tab.id?.startsWith("__");
+      const tabStyle = isSectionTab ? { "--sm-accent": tabColor } : void 0;
       const onClick = (e) => {
         if (tab.disabled) return;
         if (tabHref && (e.ctrlKey || e.metaKey || e.button === 1)) {
@@ -8401,7 +9040,7 @@ ${indent}<\/script>`;
         }
         onChange?.(tab.id, tab);
       };
-      return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+      return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
         Button,
         {
           type: "button",
@@ -8412,12 +9051,13 @@ ${indent}<\/script>`;
           shape: "rect",
           color: tabColor,
           className: ["pg-nav-tab", selected && "is-active"].filter(Boolean).join(" "),
-          "data-section-color": tab.kind === "action" || tab.id?.startsWith("__") ? void 0 : tabColor,
+          "data-section-color": isSectionTab ? tab.colorSlot ?? tabColor : void 0,
+          style: tabStyle,
           title: tab.disabled ? tab.disabledTitle || "No disponible" : String(label),
           onClick,
           onAuxClick: onClick,
-          icon: tab.icon ? /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("iconify-icon", { className: "pg-nav-tab__icon", icon: tab.disabled ? "mdi:lock-outline" : tab.icon, "aria-hidden": true }) : void 0,
-          children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("span", { className: "pg-nav-tab__label", children: label })
+          icon: tab.icon ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("iconify-icon", { className: "pg-nav-tab__icon", icon: tab.disabled ? "mdi:lock-outline" : tab.icon, "aria-hidden": true }) : void 0,
+          children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "pg-nav-tab__label", children: label })
         },
         tab.id
       );
@@ -8425,16 +9065,16 @@ ${indent}<\/script>`;
   }
 
   // src/shell/ShellHeaderNav.tsx
-  var import_react34 = __require("react");
-  var import_jsx_runtime45 = __require("react/jsx-runtime");
+  var import_react35 = __require("react");
+  var import_jsx_runtime47 = __require("react/jsx-runtime");
   function ShellHeaderNav({ shellConfig: shellConfig2, ctx, onTab, className }) {
-    const nav = (0, import_react34.useMemo)(() => resolveShellNavigation(shellConfig2, ctx), [shellConfig2, ctx]);
+    const nav = (0, import_react35.useMemo)(() => resolveShellNavigation(shellConfig2, ctx), [shellConfig2, ctx]);
     const handleTab = onTab ?? ((id) => dispatchShellNav(id, ctx, shellConfig2));
-    return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(import_jsx_runtime45.Fragment, { children: nav.rows.filter((row2) => row2.visible && row2.tabs.length > 0).map((row2) => /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(NavTabRow, { tier: row2.tier, tabs: row2.tabs, value: row2.value, onChange: handleTab, className }, row2.id)) });
+    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_jsx_runtime47.Fragment, { children: nav.rows.filter((row2) => row2.visible && row2.tabs.length > 0).map((row2) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(NavTabRow, { tier: row2.tier, tabs: row2.tabs, value: row2.value, onChange: handleTab, className }, row2.id)) });
   }
 
   // src/devkit/Playground.tsx
-  var import_react41 = __require("react");
+  var import_react42 = __require("react");
 
   // src/devkit/core/playgroundData.ts
   var _d = { catalogMeta: { sections: {} }, sectionsMeta: {}, shellConfig: {}, previewTemplates: {}, brand: {} };
@@ -8446,7 +9086,77 @@ ${indent}<\/script>`;
   }
 
   // src/devkit/catalog/catalogUi.tsx
-  var import_react36 = __require("react");
+  var import_react37 = __require("react");
+
+  // src/components/TitleCard.tsx
+  var import_jsx_runtime48 = __require("react/jsx-runtime");
+  function TitleCard2({
+    title,
+    titleId,
+    icon = "mdi:circle-small",
+    subtitle,
+    sectionColor,
+    className = "",
+    as = "div",
+    children
+  }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(
+      GlassHeaderBand,
+      {
+        as,
+        compact: true,
+        title,
+        titleId,
+        icon,
+        subtitle,
+        sectionColor,
+        className: ["mimicus-title-card", className].filter(Boolean).join(" "),
+        children
+      }
+    );
+  }
+
+  // src/devkit/catalog/sectionAccentPalette.ts
+  var GOLDEN_HUE = 137.508;
+  function buildSectionAccentPalette(count = 12) {
+    return Array.from({ length: count }, (_, i) => {
+      const h = Math.round(i * GOLDEN_HUE % 360);
+      const s = 70 + i % 3 * 5;
+      const l = 50 + i % 2 * 6;
+      return `hsl(${h} ${s}% ${l}%)`;
+    });
+  }
+  var DEFAULT_SECTION_ACCENT_PALETTE = buildSectionAccentPalette(12);
+  function sectionAccentByIndex(index, palette = DEFAULT_SECTION_ACCENT_PALETTE) {
+    if (index < 0) return palette[0];
+    return palette[index % palette.length];
+  }
+  function sectionAccentSlot(index) {
+    return `accent-${index >= 0 ? index : 0}`;
+  }
+
+  // src/devkit/shell/resolveShellConfig.ts
+  function shellConfig() {
+    return playgroundData().shellConfig ?? {};
+  }
+  function panelSizePx(open) {
+    const s = shellConfig().panel?.size ?? {};
+    const n = open ? s.expanded : s.collapsed;
+    return Number(n) || (open ? 260 : 52);
+  }
+  function panelSizeCss(open) {
+    const s = shellConfig().panel?.size ?? {};
+    const unit = s.unit || "px";
+    return `${panelSizePx(open)}${unit}`;
+  }
+  function panelStorageKey() {
+    return shellConfig().panel?.storageKey || "mimicus:sidebarOpen";
+  }
+  function sectionColors() {
+    const custom = shellConfig().theme?.sectionColors;
+    if (Array.isArray(custom) && custom.length) return custom;
+    return DEFAULT_SECTION_ACCENT_PALETTE;
+  }
 
   // src/devkit/catalog/catalogSections.ts
   function catalogDef() {
@@ -8476,6 +9186,16 @@ ${indent}<\/script>`;
   }
   function sectionIcon(sectionId) {
     return sectionMeta2()[sectionId]?.icon ?? "mdi:folder-outline";
+  }
+  function sectionAccentIndex(sectionId) {
+    const i = sectionOrder().indexOf(sectionId);
+    return i >= 0 ? i : 0;
+  }
+  function sectionAccentColor(sectionId) {
+    return sectionAccentByIndex(sectionAccentIndex(sectionId), sectionColors());
+  }
+  function sectionColorToken(sectionId) {
+    return sectionAccentSlot(sectionAccentIndex(sectionId));
   }
   function sectionsWithItems(items, filterFn = () => true) {
     return sectionOrder().filter((sid) => items.some((it) => resolveItemSection(it) === sid && filterFn(it)));
@@ -8896,7 +9616,7 @@ ${indent}<\/script>`;
   }
 
   // src/devkit/catalog/catalogUi.tsx
-  var import_jsx_runtime46 = __require("react/jsx-runtime");
+  var import_jsx_runtime49 = __require("react/jsx-runtime");
   var demoIcons = {
     Button: "mdi:gesture-tap-button",
     ButtonIconify: "mdi:button-pointer",
@@ -8947,577 +9667,515 @@ ${indent}<\/script>`;
   function getDemoIcon(demoId, item) {
     return item?.definition?.titleIcon ?? demoIcons[demoId] ?? "mdi:circle-small";
   }
-  var demoStatus = {
-    Button: "approved",
-    ButtonIconify: "approved",
-    CheckboxIcon: "approved",
-    Switch: "approved",
-    Card: "approved",
-    BlockLayout: "pending",
-    FlexLayout: "approved",
-    GridLayout: "approved",
-    Splitter: "approved",
-    Divider: "approved",
-    AppLayout: "approved",
-    SidePanel: "approved",
-    Anchor: "approved",
-    TransferBoard: "approved",
-    Modal: "approved",
-    ActionDrawer: "approved",
-    Loading: "approved",
-    Iconify: "approved",
-    Spinner: "approved",
-    Text: "approved",
-    Headings: "approved",
-    CodeBlock: "approved",
-    Chip: "pending",
-    CheckboxChip: "pending",
-    Dialog: "pending",
-    Accordion: "pending",
-    Tabs: "pending",
-    Toaster: "pending",
-    Tooltip: "pending",
-    Separator: "pending",
-    Alert: "pending",
-    TipInfo: "pending",
-    FlexOptions: "pending",
-    InvokedFloater: "pending",
-    FloatingComponent: "pending",
-    GridResponsiveForm: "pending",
-    LabeledSwitch: "pending",
-    FpsHistogram: "approved",
-    Box: "approved",
-    Container: "approved",
-    Stack: "approved",
-    Space: "approved",
-    Masonry: "approved",
-    ImageList: "approved"
-  };
-  var reviewColorFor = { approved: "success", pending: "warning", rejected: "error" };
-  function statusFor(demoId, item) {
-    return item?.definition?.status ?? demoStatus[demoId];
-  }
-  function statusDotsFor(demoIds, itemsById) {
-    return [...new Set(demoIds.map((id) => statusFor(id, itemsById?.[id])).filter(Boolean).map((s) => reviewColorFor[s]))];
-  }
-  function Badge2({ children, className, style }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: ["mimicus-badge", "catalog-badge", className].filter(Boolean).join(" "), style, children });
-  }
-  var statusColor = { success: "success", warning: "warning", error: "error", info: "info", primary: "primary" };
-  function ReviewStatusDot({ status, color, size = "0.58rem" }) {
-    const token = color ?? (status === "approved" ? "success" : status === "pending" ? "warning" : status === "rejected" ? "error" : "neutral");
-    const c = statusColor[token] ?? token;
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "review-status-dot", style: { width: size, height: size, background: resolveColor(c) }, title: status ?? c, "aria-hidden": true });
-  }
   var accent = "var(--catalog-sketch-accent, var(--mimicus-primary))";
   var stroke = "currentColor";
   var faint = 0.32;
   function DefaultSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "32", y: "24", width: "56", height: "32", rx: "7", stroke, strokeWidth: "1.3", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "7", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.5" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "32", y: "24", width: "56", height: "32", rx: "7", stroke, strokeWidth: "1.3", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "7", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.5" })
     ] });
   }
   function ButtonSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "14", y: "30", width: "40", height: "16", rx: "5", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.5" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "22", y1: "38", x2: "46", y2: "38", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "66", y: "30", width: "40", height: "16", rx: "5", stroke, strokeWidth: "1.3", opacity: 0.32 })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "14", y: "30", width: "40", height: "16", rx: "5", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.5" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "22", y1: "38", x2: "46", y2: "38", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "66", y: "30", width: "40", height: "16", rx: "5", stroke, strokeWidth: "1.3", opacity: 0.32 })
     ] });
   }
   function FloatButtonSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "18", y: "16", width: "84", height: "48", rx: "6", stroke, strokeWidth: "1.1", opacity: 0.22 }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "86", cy: "52", r: "11", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.5" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "86", y1: "47", x2: "86", y2: "57", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "81", y1: "52", x2: "91", y2: "52", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "18", y: "16", width: "84", height: "48", rx: "6", stroke, strokeWidth: "1.1", opacity: 0.22 }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "86", cy: "52", r: "11", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.5" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "86", y1: "47", x2: "86", y2: "57", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "81", y1: "52", x2: "91", y2: "52", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" })
     ] });
   }
   function LinkSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "30", y1: "44", x2: "74", y2: "44", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M52 34 h22 a6 6 0 0 1 0 12 h-10", stroke: accent, strokeWidth: "1.5", fill: "none", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M68 34 h-22 a6 6 0 0 0 0 12 h10", stroke, strokeWidth: "1.4", fill: "none", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "30", y1: "44", x2: "74", y2: "44", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M52 34 h22 a6 6 0 0 1 0 12 h-10", stroke: accent, strokeWidth: "1.5", fill: "none", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M68 34 h-22 a6 6 0 0 0 0 12 h10", stroke, strokeWidth: "1.4", fill: "none", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function CardSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "26", y: "16", width: "68", height: "52", rx: "7", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "26", y: "16", width: "68", height: "14", rx: "7", fill: accent, fillOpacity: "0.25" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "34", y1: "40", x2: "86", y2: "40", stroke, strokeWidth: "1.3", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "26", y: "16", width: "68", height: "52", rx: "7", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "26", y: "16", width: "68", height: "14", rx: "7", fill: accent, fillOpacity: "0.25" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "34", y1: "40", x2: "86", y2: "40", stroke, strokeWidth: "1.3", opacity: faint })
     ] });
   }
   function BoxSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "30", y: "20", width: "60", height: "40", rx: "5", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "38", y: "28", width: "44", height: "24", rx: "3", stroke, strokeWidth: "1.2", opacity: faint, strokeDasharray: "3 3" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "30", y: "20", width: "60", height: "40", rx: "5", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "38", y: "28", width: "44", height: "24", rx: "3", stroke, strokeWidth: "1.2", opacity: faint, strokeDasharray: "3 3" })
     ] });
   }
   function ContainerSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "14", y: "16", width: "92", height: "48", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "22", width: "52", height: "36", rx: "4", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "28", y1: "16", x2: "28", y2: "64", stroke, strokeWidth: "1", opacity: 0.22, strokeDasharray: "3 3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "92", y1: "16", x2: "92", y2: "64", stroke, strokeWidth: "1", opacity: 0.22, strokeDasharray: "3 3" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "14", y: "16", width: "92", height: "48", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "22", width: "52", height: "36", rx: "4", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "28", y1: "16", x2: "28", y2: "64", stroke, strokeWidth: "1", opacity: 0.22, strokeDasharray: "3 3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "92", y1: "16", x2: "92", y2: "64", stroke, strokeWidth: "1", opacity: 0.22, strokeDasharray: "3 3" })
     ] });
   }
   function GridSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_jsx_runtime46.Fragment, { children: [26, 50, 74].map(
-      (x) => [22, 46].map((y) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x, y, width: "18", height: "14", rx: "3", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.2" }, `${x}-${y}`))
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_jsx_runtime49.Fragment, { children: [26, 50, 74].map(
+      (x) => [22, 46].map((y) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x, y, width: "18", height: "14", rx: "3", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.2" }, `${x}-${y}`))
     ) });
   }
   function MasonrySketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "26", y: "20", width: "20", height: "24", rx: "3", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "26", y: "48", width: "20", height: "14", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "50", y: "20", width: "20", height: "14", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "50", y: "38", width: "20", height: "24", rx: "3", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "74", y: "20", width: "20", height: "20", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "74", y: "44", width: "20", height: "18", rx: "3", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.2" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "26", y: "20", width: "20", height: "24", rx: "3", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "26", y: "48", width: "20", height: "14", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "50", y: "20", width: "20", height: "14", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "50", y: "38", width: "20", height: "24", rx: "3", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "74", y: "20", width: "20", height: "20", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "74", y: "44", width: "20", height: "18", rx: "3", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.2" })
     ] });
   }
   function ImageListSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
       [26, 50, 74].map(
-        (x) => [22, 46].map((y) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x, y, width: "18", height: "14", rx: "2", fill: accent, fillOpacity: "0.1", stroke: accent, strokeWidth: "1.1" }, `${x}-${y}`))
+        (x) => [22, 46].map((y) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x, y, width: "18", height: "14", rx: "2", fill: accent, fillOpacity: "0.1", stroke: accent, strokeWidth: "1.1" }, `${x}-${y}`))
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "32", cy: "28", r: "2.2", fill: accent }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M28 36 l5 -5 l4 4 l3 -3 l4 4", stroke: accent, strokeWidth: "1.2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "32", cy: "28", r: "2.2", fill: accent }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M28 36 l5 -5 l4 4 l3 -3 l4 4", stroke: accent, strokeWidth: "1.2", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   function FlexSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "18", y: "18", width: "84", height: "44", rx: "6", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "24", y: "26", width: "20", height: "28", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "50", y: "26", width: "20", height: "28", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "76", y: "26", width: "20", height: "28", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "18", y: "18", width: "84", height: "44", rx: "6", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "24", y: "26", width: "20", height: "28", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "50", y: "26", width: "20", height: "28", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "76", y: "26", width: "20", height: "28", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" })
     ] });
   }
   function StackSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "20", width: "52", height: "11", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "35", width: "52", height: "11", rx: "3", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "50", width: "52", height: "11", rx: "3", stroke, strokeWidth: "1.2", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "20", width: "52", height: "11", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "35", width: "52", height: "11", rx: "3", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "50", width: "52", height: "11", rx: "3", stroke, strokeWidth: "1.2", opacity: faint })
     ] });
   }
   function SpaceSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "22", y: "32", width: "18", height: "16", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "80", y: "32", width: "18", height: "16", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "44", y1: "40", x2: "76", y2: "40", stroke, strokeWidth: "1.2", opacity: faint, strokeDasharray: "3 3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M48 36 l-4 4 l4 4 M72 36 l4 4 l-4 4", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "22", y: "32", width: "18", height: "16", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "80", y: "32", width: "18", height: "16", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "44", y1: "40", x2: "76", y2: "40", stroke, strokeWidth: "1.2", opacity: faint, strokeDasharray: "3 3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M48 36 l-4 4 l4 4 M72 36 l4 4 l-4 4", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   function AppShellSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "16", y: "16", width: "88", height: "48", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "16", y: "16", width: "88", height: "11", rx: "5", fill: accent, fillOpacity: "0.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "16", y: "27", width: "22", height: "37", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "46", y1: "36", x2: "96", y2: "36", stroke, strokeWidth: "1.1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "46", y1: "46", x2: "96", y2: "46", stroke, strokeWidth: "1.1", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "16", y: "16", width: "88", height: "48", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "16", y: "16", width: "88", height: "11", rx: "5", fill: accent, fillOpacity: "0.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "16", y: "27", width: "22", height: "37", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "46", y1: "36", x2: "96", y2: "36", stroke, strokeWidth: "1.1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "46", y1: "46", x2: "96", y2: "46", stroke, strokeWidth: "1.1", opacity: faint })
     ] });
   }
   function SplitterSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "18", y: "20", width: "84", height: "40", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "60", y1: "20", x2: "60", y2: "60", stroke: accent, strokeWidth: "1.6" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "6", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M50 36 l-4 4 l4 4 M70 36 l4 4 l-4 4", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "18", y: "20", width: "84", height: "40", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "60", y1: "20", x2: "60", y2: "60", stroke: accent, strokeWidth: "1.6" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "6", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M50 36 l-4 4 l4 4 M70 36 l4 4 l-4 4", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   function DividerSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "26", y1: "30", x2: "94", y2: "30", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "26", y1: "40", x2: "94", y2: "40", stroke: accent, strokeWidth: "1.8", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "26", y1: "50", x2: "94", y2: "50", stroke, strokeWidth: "1.2", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "26", y1: "30", x2: "94", y2: "30", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "26", y1: "40", x2: "94", y2: "40", stroke: accent, strokeWidth: "1.8", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "26", y1: "50", x2: "94", y2: "50", stroke, strokeWidth: "1.2", opacity: faint })
     ] });
   }
   function SwitchSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "34", width: "52", height: "20", rx: "10", fill: accent, fillOpacity: "0.15", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "48", cy: "44", r: "7", fill: accent, fillOpacity: "0.85" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "34", width: "52", height: "20", rx: "10", fill: accent, fillOpacity: "0.15", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "48", cy: "44", r: "7", fill: accent, fillOpacity: "0.85" })
     ] });
   }
   function ToggleButtonSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "24", y: "32", width: "72", height: "18", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "24", y: "32", width: "36", height: "18", rx: "5", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "60", y1: "32", x2: "60", y2: "50", stroke, strokeWidth: "1.1", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "24", y: "32", width: "72", height: "18", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "24", y: "32", width: "36", height: "18", rx: "5", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "60", y1: "32", x2: "60", y2: "50", stroke, strokeWidth: "1.1", opacity: faint })
     ] });
   }
   function CheckboxChipSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "26", y: "32", width: "68", height: "18", rx: "9", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "37", cy: "41", r: "5", fill: accent, fillOpacity: "0.3", stroke: accent, strokeWidth: "1.3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M34.5 41 l1.8 1.8 l3.2 -3.6", stroke: accent, strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "48", y1: "41", x2: "86", y2: "41", stroke, strokeWidth: "1.4", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "26", y: "32", width: "68", height: "18", rx: "9", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "37", cy: "41", r: "5", fill: accent, fillOpacity: "0.3", stroke: accent, strokeWidth: "1.3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M34.5 41 l1.8 1.8 l3.2 -3.6", stroke: accent, strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "48", y1: "41", x2: "86", y2: "41", stroke, strokeWidth: "1.4", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function CheckRadioSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "30", y: "28", width: "16", height: "16", rx: "3", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M33.5 36 l3 3 l6 -7", stroke: accent, strokeWidth: "1.7", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "78", cy: "36", r: "9", stroke, strokeWidth: "1.4", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "78", cy: "36", r: "4", fill: accent, fillOpacity: "0.85" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "30", y1: "54", x2: "90", y2: "54", stroke, strokeWidth: "1.2", opacity: 0.2 })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "30", y: "28", width: "16", height: "16", rx: "3", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M33.5 36 l3 3 l6 -7", stroke: accent, strokeWidth: "1.7", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "78", cy: "36", r: "9", stroke, strokeWidth: "1.4", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "78", cy: "36", r: "4", fill: accent, fillOpacity: "0.85" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "30", y1: "54", x2: "90", y2: "54", stroke, strokeWidth: "1.2", opacity: 0.2 })
     ] });
   }
   function InputSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "32", width: "80", height: "18", rx: "4", stroke: accent, strokeWidth: "1.4", fill: accent, fillOpacity: "0.06" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "28", y1: "41", x2: "28", y2: "41", stroke: accent, strokeWidth: "0" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "27", y: "36", width: "1.6", height: "10", rx: "1", fill: accent }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "33", y1: "41", x2: "70", y2: "41", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "32", width: "80", height: "18", rx: "4", stroke: accent, strokeWidth: "1.4", fill: accent, fillOpacity: "0.06" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "28", y1: "41", x2: "28", y2: "41", stroke: accent, strokeWidth: "0" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "27", y: "36", width: "1.6", height: "10", rx: "1", fill: accent }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "33", y1: "41", x2: "70", y2: "41", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function InputNumberSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "32", width: "80", height: "18", rx: "4", stroke: accent, strokeWidth: "1.4", fill: accent, fillOpacity: "0.06" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "28", y1: "41", x2: "60", y2: "41", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "84", y1: "32", x2: "84", y2: "50", stroke, strokeWidth: "1.1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M88 39 l3 -3 l3 3 M88 43 l3 3 l3 -3", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "32", width: "80", height: "18", rx: "4", stroke: accent, strokeWidth: "1.4", fill: accent, fillOpacity: "0.06" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "28", y1: "41", x2: "60", y2: "41", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "84", y1: "32", x2: "84", y2: "50", stroke, strokeWidth: "1.1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M88 39 l3 -3 l3 3 M88 43 l3 3 l3 -3", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   function SelectSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "28", width: "80", height: "18", rx: "4", stroke: accent, strokeWidth: "1.4", fill: accent, fillOpacity: "0.06" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "28", y1: "37", x2: "68", y2: "37", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M85 34 l4 4 l4 -4", stroke: accent, strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "50", width: "80", height: "12", rx: "3", fill: accent, fillOpacity: "0.1", stroke, strokeWidth: "1", opacity: 0.5 })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "28", width: "80", height: "18", rx: "4", stroke: accent, strokeWidth: "1.4", fill: accent, fillOpacity: "0.06" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "28", y1: "37", x2: "68", y2: "37", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M85 34 l4 4 l4 -4", stroke: accent, strokeWidth: "1.5", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "50", width: "80", height: "12", rx: "3", fill: accent, fillOpacity: "0.1", stroke, strokeWidth: "1", opacity: 0.5 })
     ] });
   }
   function CalendarSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "28", y: "20", width: "64", height: "44", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "28", y: "20", width: "64", height: "12", rx: "5", fill: accent, fillOpacity: "0.22" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "40", y1: "16", x2: "40", y2: "24", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "80", y1: "16", x2: "80", y2: "24", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" }),
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "28", y: "20", width: "64", height: "44", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "28", y: "20", width: "64", height: "12", rx: "5", fill: accent, fillOpacity: "0.22" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "40", y1: "16", x2: "40", y2: "24", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "80", y1: "16", x2: "80", y2: "24", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" }),
       [38, 50, 62, 74].map(
-        (x) => [40, 52].map((y) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: x, cy: y, r: "2.2", fill: x === 50 && y === 52 ? accent : stroke, opacity: x === 50 && y === 52 ? 1 : faint }, `${x}-${y}`))
+        (x) => [40, 52].map((y) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: x, cy: y, r: "2.2", fill: x === 50 && y === 52 ? accent : stroke, opacity: x === 50 && y === 52 ? 1 : faint }, `${x}-${y}`))
       )
     ] });
   }
   function TimeSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "22", stroke, strokeWidth: "1.3", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "60", y1: "40", x2: "60", y2: "26", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "60", y1: "40", x2: "72", y2: "44", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "2.4", fill: accent })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "22", stroke, strokeWidth: "1.3", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "60", y1: "40", x2: "60", y2: "26", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "60", y1: "40", x2: "72", y2: "44", stroke: accent, strokeWidth: "1.7", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "2.4", fill: accent })
     ] });
   }
   function ColorPickerSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "30", y: "20", width: "60", height: "36", rx: "5", stroke, strokeWidth: "1.2", opacity: faint, fill: accent, fillOpacity: "0.1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "56", cy: "36", r: "7", fill: accent, fillOpacity: "0.5", stroke: accent, strokeWidth: "1.3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "30", y: "60", width: "60", height: "6", rx: "3", fill: accent, fillOpacity: "0.25", stroke: accent, strokeWidth: "1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "70", cy: "63", r: "3.5", fill: accent, stroke, strokeWidth: "1" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "30", y: "20", width: "60", height: "36", rx: "5", stroke, strokeWidth: "1.2", opacity: faint, fill: accent, fillOpacity: "0.1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "56", cy: "36", r: "7", fill: accent, fillOpacity: "0.5", stroke: accent, strokeWidth: "1.3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "30", y: "60", width: "60", height: "6", rx: "3", fill: accent, fillOpacity: "0.25", stroke: accent, strokeWidth: "1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "70", cy: "63", r: "3.5", fill: accent, stroke, strokeWidth: "1" })
     ] });
   }
   function SliderSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "24", y1: "40", x2: "96", y2: "40", stroke, strokeWidth: "1.4", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "24", y1: "40", x2: "64", y2: "40", stroke: accent, strokeWidth: "2", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "64", cy: "40", r: "7", fill: accent, fillOpacity: "0.25", stroke: accent, strokeWidth: "1.6" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "24", y1: "40", x2: "96", y2: "40", stroke, strokeWidth: "1.4", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "24", y1: "40", x2: "64", y2: "40", stroke: accent, strokeWidth: "2", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "64", cy: "40", r: "7", fill: accent, fillOpacity: "0.25", stroke: accent, strokeWidth: "1.6" })
     ] });
   }
   function RateSketch() {
-    const star = (cx5, on2) => `M${cx5} 32 l2.4 5 l5.4 .6 l-4 3.7 l1.1 5.3 l-4.9 -2.7 l-4.9 2.7 l1.1 -5.3 l-4 -3.7 l5.4 -.6 z`;
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: star(36), fill: accent, fillOpacity: "0.7", stroke: accent, strokeWidth: "1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: star(60), fill: accent, fillOpacity: "0.7", stroke: accent, strokeWidth: "1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: star(84), fill: "none", stroke, strokeWidth: "1.2", opacity: faint })
+    const star = (cx6, on2) => `M${cx6} 32 l2.4 5 l5.4 .6 l-4 3.7 l1.1 5.3 l-4.9 -2.7 l-4.9 2.7 l1.1 -5.3 l-4 -3.7 l5.4 -.6 z`;
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: star(36), fill: accent, fillOpacity: "0.7", stroke: accent, strokeWidth: "1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: star(60), fill: accent, fillOpacity: "0.7", stroke: accent, strokeWidth: "1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: star(84), fill: "none", stroke, strokeWidth: "1.2", opacity: faint })
     ] });
   }
   function UploadSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "26", y: "22", width: "68", height: "40", rx: "6", stroke: accent, strokeWidth: "1.4", strokeDasharray: "4 3", fill: accent, fillOpacity: "0.06" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M60 52 l0 -18 M52 40 l8 -8 l8 8", stroke: accent, strokeWidth: "1.7", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "26", y: "22", width: "68", height: "40", rx: "6", stroke: accent, strokeWidth: "1.4", strokeDasharray: "4 3", fill: accent, fillOpacity: "0.06" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M60 52 l0 -18 M52 40 l8 -8 l8 8", stroke: accent, strokeWidth: "1.7", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   function TransferSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "22", width: "32", height: "36", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "68", y: "22", width: "32", height: "36", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "25", y: "28", width: "22", height: "6", rx: "2", fill: accent, fillOpacity: "0.3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "73", y: "28", width: "22", height: "6", rx: "2", fill: accent, fillOpacity: "0.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M55 36 l8 0 M60 33 l4 3 l-4 3", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M65 46 l-8 0 M60 43 l-4 3 l4 3", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "22", width: "32", height: "36", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "68", y: "22", width: "32", height: "36", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "25", y: "28", width: "22", height: "6", rx: "2", fill: accent, fillOpacity: "0.3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "73", y: "28", width: "22", height: "6", rx: "2", fill: accent, fillOpacity: "0.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M55 36 l8 0 M60 33 l4 3 l-4 3", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M65 46 l-8 0 M60 43 l-4 3 l4 3", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   function FormSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "24", y: "16", width: "72", height: "48", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "32", y1: "26", x2: "52", y2: "26", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "32", y: "30", width: "56", height: "9", rx: "2", stroke: accent, strokeWidth: "1.2", fill: accent, fillOpacity: "0.06" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "32", y1: "46", x2: "48", y2: "46", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "32", y: "50", width: "30", height: "9", rx: "2", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.2" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "24", y: "16", width: "72", height: "48", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "32", y1: "26", x2: "52", y2: "26", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "32", y: "30", width: "56", height: "9", rx: "2", stroke: accent, strokeWidth: "1.2", fill: accent, fillOpacity: "0.06" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "32", y1: "46", x2: "48", y2: "46", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "32", y: "50", width: "30", height: "9", rx: "2", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.2" })
     ] });
   }
   function TextSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "26", y1: "28", x2: "94", y2: "28", stroke, strokeWidth: "1.6", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "26", y1: "38", x2: "86", y2: "38", stroke, strokeWidth: "1.6", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "26", y1: "48", x2: "90", y2: "48", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "26", y1: "58", x2: "60", y2: "58", stroke, strokeWidth: "1.6", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "26", y1: "28", x2: "94", y2: "28", stroke, strokeWidth: "1.6", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "26", y1: "38", x2: "86", y2: "38", stroke, strokeWidth: "1.6", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "26", y1: "48", x2: "90", y2: "48", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "26", y1: "58", x2: "60", y2: "58", stroke, strokeWidth: "1.6", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function HeadingsSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("text", { x: "30", y: "48", fontSize: "34", fontWeight: "700", fill: accent, fillOpacity: "0.85", fontFamily: "sans-serif", children: "H" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "58", y1: "30", x2: "92", y2: "30", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "58", y1: "42", x2: "86", y2: "42", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "58", y1: "54", x2: "90", y2: "54", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("text", { x: "30", y: "48", fontSize: "34", fontWeight: "700", fill: accent, fillOpacity: "0.85", fontFamily: "sans-serif", children: "H" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "58", y1: "30", x2: "92", y2: "30", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "58", y1: "42", x2: "86", y2: "42", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "58", y1: "54", x2: "90", y2: "54", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function CodeBlockSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "22", y: "20", width: "76", height: "40", rx: "5", stroke, strokeWidth: "1.2", opacity: faint, fill: accent, fillOpacity: "0.05" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M44 32 l-7 8 l7 8 M76 32 l7 8 l-7 8", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "56", y1: "30", x2: "64", y2: "50", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "22", y: "20", width: "76", height: "40", rx: "5", stroke, strokeWidth: "1.2", opacity: faint, fill: accent, fillOpacity: "0.05" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M44 32 l-7 8 l7 8 M76 32 l7 8 l-7 8", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "56", y1: "30", x2: "64", y2: "50", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" })
     ] });
   }
   function TabsSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "24", width: "80", height: "36", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "24", width: "28", height: "13", rx: "5", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "48", y1: "37", x2: "100", y2: "37", stroke, strokeWidth: "1.1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "56", y1: "31", x2: "70", y2: "31", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "80", y1: "31", x2: "94", y2: "31", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "24", width: "80", height: "36", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "24", width: "28", height: "13", rx: "5", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "48", y1: "37", x2: "100", y2: "37", stroke, strokeWidth: "1.1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "56", y1: "31", x2: "70", y2: "31", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "80", y1: "31", x2: "94", y2: "31", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function MenuSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "20", width: "52", height: "44", rx: "5", stroke, strokeWidth: "1.2", opacity: faint, fill: accent, fillOpacity: "0.05" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "20", width: "52", height: "12", rx: "5", fill: accent, fillOpacity: "0.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "42", y1: "42", x2: "78", y2: "42", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "42", y1: "52", x2: "70", y2: "52", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "20", width: "52", height: "44", rx: "5", stroke, strokeWidth: "1.2", opacity: faint, fill: accent, fillOpacity: "0.05" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "20", width: "52", height: "12", rx: "5", fill: accent, fillOpacity: "0.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "42", y1: "42", x2: "78", y2: "42", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "42", y1: "52", x2: "70", y2: "52", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function BreadcrumbSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "22", y1: "40", x2: "40", y2: "40", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M46 35 l5 5 l-5 5", stroke, strokeWidth: "1.3", fill: "none", opacity: faint, strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "56", y1: "40", x2: "72", y2: "40", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M78 35 l5 5 l-5 5", stroke, strokeWidth: "1.3", fill: "none", opacity: faint, strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "88", y1: "40", x2: "98", y2: "40", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "22", y1: "40", x2: "40", y2: "40", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M46 35 l5 5 l-5 5", stroke, strokeWidth: "1.3", fill: "none", opacity: faint, strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "56", y1: "40", x2: "72", y2: "40", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M78 35 l5 5 l-5 5", stroke, strokeWidth: "1.3", fill: "none", opacity: faint, strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "88", y1: "40", x2: "98", y2: "40", stroke, strokeWidth: "1.5", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function PaginationSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_jsx_runtime46.Fragment, { children: [26, 46, 66, 86].map((x, i) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x, y: "32", width: "16", height: "16", rx: "4", fill: i === 1 ? accent : "none", fillOpacity: i === 1 ? 0.22 : 0, stroke: i === 1 ? accent : stroke, strokeWidth: i === 1 ? 1.4 : 1.2, opacity: i === 1 ? 1 : faint }, x)) });
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_jsx_runtime49.Fragment, { children: [26, 46, 66, 86].map((x, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x, y: "32", width: "16", height: "16", rx: "4", fill: i === 1 ? accent : "none", fillOpacity: i === 1 ? 0.22 : 0, stroke: i === 1 ? accent : stroke, strokeWidth: i === 1 ? 1.4 : 1.2, opacity: i === 1 ? 1 : faint }, x)) });
   }
   function StepsSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "30", y1: "40", x2: "90", y2: "40", stroke, strokeWidth: "1.3", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "30", cy: "40", r: "6", fill: accent, fillOpacity: "0.3", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M27.5 40 l1.8 1.8 l3.2 -3.6", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "6", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "90", cy: "40", r: "6", stroke, strokeWidth: "1.3", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "30", y1: "40", x2: "90", y2: "40", stroke, strokeWidth: "1.3", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "30", cy: "40", r: "6", fill: accent, fillOpacity: "0.3", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M27.5 40 l1.8 1.8 l3.2 -3.6", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "6", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "90", cy: "40", r: "6", stroke, strokeWidth: "1.3", opacity: faint })
     ] });
   }
   function BottomNavSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "18", y: "20", width: "84", height: "40", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "18", y1: "48", x2: "102", y2: "48", stroke, strokeWidth: "1.1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "38", cy: "54", r: "3", fill: accent }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "54", r: "3", fill: stroke, opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "82", cy: "54", r: "3", fill: stroke, opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "18", y: "20", width: "84", height: "40", rx: "5", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "18", y1: "48", x2: "102", y2: "48", stroke, strokeWidth: "1.1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "38", cy: "54", r: "3", fill: accent }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "54", r: "3", fill: stroke, opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "82", cy: "54", r: "3", fill: stroke, opacity: faint })
     ] });
   }
   function SpeedDialSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "84", cy: "56", r: "10", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.5" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "84", y1: "51", x2: "84", y2: "61", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "79", y1: "56", x2: "89", y2: "56", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "84", cy: "34", r: "5", stroke, strokeWidth: "1.3", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "62", cy: "48", r: "5", stroke, strokeWidth: "1.3", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "84", y1: "46", x2: "84", y2: "39", stroke, strokeWidth: "1", opacity: 0.25, strokeDasharray: "2 2" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "84", cy: "56", r: "10", fill: accent, fillOpacity: "0.22", stroke: accent, strokeWidth: "1.5" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "84", y1: "51", x2: "84", y2: "61", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "79", y1: "56", x2: "89", y2: "56", stroke: accent, strokeWidth: "1.6", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "84", cy: "34", r: "5", stroke, strokeWidth: "1.3", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "62", cy: "48", r: "5", stroke, strokeWidth: "1.3", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "84", y1: "46", x2: "84", y2: "39", stroke, strokeWidth: "1", opacity: 0.25, strokeDasharray: "2 2" })
     ] });
   }
   function DrawerSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "18", y: "18", width: "84", height: "44", rx: "5", stroke, strokeWidth: "1.1", opacity: 0.22 }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "66", y: "18", width: "36", height: "44", rx: "5", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "74", y1: "30", x2: "94", y2: "30", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "74", y1: "40", x2: "90", y2: "40", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "18", y: "18", width: "84", height: "44", rx: "5", stroke, strokeWidth: "1.1", opacity: 0.22 }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "66", y: "18", width: "36", height: "44", rx: "5", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "74", y1: "30", x2: "94", y2: "30", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "74", y1: "40", x2: "90", y2: "40", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function ModalSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "22", y: "14", width: "76", height: "52", rx: "6", stroke, strokeWidth: "1.1", opacity: 0.22 }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "30", y: "22", width: "60", height: "36", rx: "5", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "38", y1: "32", x2: "82", y2: "32", stroke, strokeWidth: "1.2", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "22", y: "14", width: "76", height: "52", rx: "6", stroke, strokeWidth: "1.1", opacity: 0.22 }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "30", y: "22", width: "60", height: "36", rx: "5", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "38", y1: "32", x2: "82", y2: "32", stroke, strokeWidth: "1.2", opacity: faint })
     ] });
   }
   function AlertSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "22", y: "30", width: "76", height: "20", rx: "5", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "34", cy: "40", r: "6", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "34", y1: "37", x2: "34", y2: "41", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "34", cy: "44", r: "0.9", fill: accent }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "46", y1: "40", x2: "88", y2: "40", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "22", y: "30", width: "76", height: "20", rx: "5", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "34", cy: "40", r: "6", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "34", y1: "37", x2: "34", y2: "41", stroke: accent, strokeWidth: "1.5", strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "34", cy: "44", r: "0.9", fill: accent }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "46", y1: "40", x2: "88", y2: "40", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function TooltipSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "22", width: "52", height: "22", rx: "5", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M54 44 l6 7 l6 -7 z", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "42", y1: "33", x2: "78", y2: "33", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "58", r: "3", stroke, strokeWidth: "1.2", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "22", width: "52", height: "22", rx: "5", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M54 44 l6 7 l6 -7 z", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "42", y1: "33", x2: "78", y2: "33", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "58", r: "3", stroke, strokeWidth: "1.2", opacity: faint })
     ] });
   }
   function TourSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "18", y: "18", width: "84", height: "44", rx: "5", stroke, strokeWidth: "1.1", opacity: 0.22 }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "40", cy: "40", r: "11", stroke: accent, strokeWidth: "1.5", strokeDasharray: "3 2", fill: accent, fillOpacity: "0.08" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "58", y: "32", width: "38", height: "18", rx: "4", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "64", y1: "41", x2: "90", y2: "41", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "18", y: "18", width: "84", height: "44", rx: "5", stroke, strokeWidth: "1.1", opacity: 0.22 }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "40", cy: "40", r: "11", stroke: accent, strokeWidth: "1.5", strokeDasharray: "3 2", fill: accent, fillOpacity: "0.08" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "58", y: "32", width: "38", height: "18", rx: "4", fill: accent, fillOpacity: "0.14", stroke: accent, strokeWidth: "1.3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "64", y1: "41", x2: "90", y2: "41", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function BadgeSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "30", y: "34", width: "40", height: "16", rx: "8", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "38", y1: "42", x2: "62", y2: "42", stroke: accent, strokeWidth: "1.4", opacity: 0.6, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "78", cy: "30", r: "7", fill: accent, fillOpacity: "0.85" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "78", cy: "30", r: "7", stroke, strokeWidth: "1.1", opacity: 0.2 })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "30", y: "34", width: "40", height: "16", rx: "8", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "38", y1: "42", x2: "62", y2: "42", stroke: accent, strokeWidth: "1.4", opacity: 0.6, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "78", cy: "30", r: "7", fill: accent, fillOpacity: "0.85" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "78", cy: "30", r: "7", stroke, strokeWidth: "1.1", opacity: 0.2 })
     ] });
   }
   function AvatarSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "20", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "34", r: "6", fill: accent, fillOpacity: "0.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M48 54 a12 10 0 0 1 24 0", fill: accent, fillOpacity: "0.3" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "20", fill: accent, fillOpacity: "0.12", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "34", r: "6", fill: accent, fillOpacity: "0.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M48 54 a12 10 0 0 1 24 0", fill: accent, fillOpacity: "0.3" })
     ] });
   }
   function TableSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "20", width: "80", height: "40", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "20", width: "80", height: "11", fill: accent, fillOpacity: "0.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "20", y1: "42", x2: "100", y2: "42", stroke, strokeWidth: "1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "46", y1: "20", x2: "46", y2: "60", stroke, strokeWidth: "1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "73", y1: "20", x2: "73", y2: "60", stroke, strokeWidth: "1", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "20", width: "80", height: "40", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "20", width: "80", height: "11", fill: accent, fillOpacity: "0.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "20", y1: "42", x2: "100", y2: "42", stroke, strokeWidth: "1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "46", y1: "20", x2: "46", y2: "60", stroke, strokeWidth: "1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "73", y1: "20", x2: "73", y2: "60", stroke, strokeWidth: "1", opacity: faint })
     ] });
   }
   function DataGridSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "16", y: "18", width: "88", height: "46", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "16", y: "18", width: "88", height: "11", fill: accent, fillOpacity: "0.22" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "16", y: "18", width: "16", height: "46", fill: accent, fillOpacity: "0.08" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "32", y1: "18", x2: "32", y2: "64", stroke: accent, strokeWidth: "1.1", opacity: "0.5" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "58", y1: "18", x2: "58", y2: "64", stroke, strokeWidth: "1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "82", y1: "18", x2: "82", y2: "64", stroke, strokeWidth: "1", opacity: faint }),
-      [40, 51, 62].map((y) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "16", y1: y, x2: "104", y2: y, stroke, strokeWidth: "0.9", opacity: faint }, y)),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M88 21 l3 3 l3 -3", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "20", y: "33", width: "8", height: "4", rx: "1", fill: accent, fillOpacity: "0.6" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "16", y: "18", width: "88", height: "46", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "16", y: "18", width: "88", height: "11", fill: accent, fillOpacity: "0.22" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "16", y: "18", width: "16", height: "46", fill: accent, fillOpacity: "0.08" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "32", y1: "18", x2: "32", y2: "64", stroke: accent, strokeWidth: "1.1", opacity: "0.5" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "58", y1: "18", x2: "58", y2: "64", stroke, strokeWidth: "1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "82", y1: "18", x2: "82", y2: "64", stroke, strokeWidth: "1", opacity: faint }),
+      [40, 51, 62].map((y) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "16", y1: y, x2: "104", y2: y, stroke, strokeWidth: "0.9", opacity: faint }, y)),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M88 21 l3 3 l3 -3", stroke: accent, strokeWidth: "1.3", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "20", y: "33", width: "8", height: "4", rx: "1", fill: accent, fillOpacity: "0.6" })
     ] });
   }
   function ListSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_jsx_runtime46.Fragment, { children: [26, 38, 50].map((y) => /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("g", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "32", cy: y, r: "3", fill: accent, fillOpacity: "0.7" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "42", y1: y, x2: "92", y2: y, stroke, strokeWidth: "1.4", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_jsx_runtime49.Fragment, { children: [26, 38, 50].map((y) => /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("g", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "32", cy: y, r: "3", fill: accent, fillOpacity: "0.7" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "42", y1: y, x2: "92", y2: y, stroke, strokeWidth: "1.4", opacity: faint, strokeLinecap: "round" })
     ] }, y)) });
   }
   function TreeSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "26", y: "24", width: "14", height: "9", rx: "2", fill: accent, fillOpacity: "0.3", stroke: accent, strokeWidth: "1.2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M33 33 v8 h10 M33 41 v8 h10", stroke, strokeWidth: "1.2", opacity: faint, fill: "none" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "46", y: "37", width: "14", height: "9", rx: "2", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "46", y: "45", width: "14", height: "9", rx: "2", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "66", y: "24", width: "26", height: "9", rx: "2", stroke, strokeWidth: "1.2", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "26", y: "24", width: "14", height: "9", rx: "2", fill: accent, fillOpacity: "0.3", stroke: accent, strokeWidth: "1.2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M33 33 v8 h10 M33 41 v8 h10", stroke, strokeWidth: "1.2", opacity: faint, fill: "none" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "46", y: "37", width: "14", height: "9", rx: "2", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "46", y: "45", width: "14", height: "9", rx: "2", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "66", y: "24", width: "26", height: "9", rx: "2", stroke, strokeWidth: "1.2", opacity: faint })
     ] });
   }
   function TimelineSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "36", y1: "20", x2: "36", y2: "60", stroke, strokeWidth: "1.3", opacity: faint }),
-      [26, 40, 54].map((y, i) => /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("g", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "36", cy: y, r: "4", fill: i === 0 ? accent : "none", fillOpacity: i === 0 ? 0.4 : 0, stroke: accent, strokeWidth: "1.4" }),
-        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "46", y1: y, x2: i === 0 ? 90 : 78, y2: y, stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "36", y1: "20", x2: "36", y2: "60", stroke, strokeWidth: "1.3", opacity: faint }),
+      [26, 40, 54].map((y, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("g", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "36", cy: y, r: "4", fill: i === 0 ? accent : "none", fillOpacity: i === 0 ? 0.4 : 0, stroke: accent, strokeWidth: "1.4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "46", y1: y, x2: i === 0 ? 90 : 78, y2: y, stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
       ] }, y))
     ] });
   }
   function AccordionSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "24", y: "20", width: "72", height: "14", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M84 25 l4 4 l4 -4", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "24", y: "38", width: "72", height: "22", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "32", y1: "46", x2: "80", y2: "46", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "32", y1: "53", x2: "68", y2: "53", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "24", y: "20", width: "72", height: "14", rx: "3", fill: accent, fillOpacity: "0.18", stroke: accent, strokeWidth: "1.3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M84 25 l4 4 l4 -4", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "24", y: "38", width: "72", height: "22", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "32", y1: "46", x2: "80", y2: "46", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "32", y1: "53", x2: "68", y2: "53", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function CarouselSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "40", y: "24", width: "40", height: "32", rx: "4", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "24", y: "30", width: "14", height: "20", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "82", y: "30", width: "14", height: "20", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "54", cy: "62", r: "2", fill: accent }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "62", r: "2", fill: stroke, opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "66", cy: "62", r: "2", fill: stroke, opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "40", y: "24", width: "40", height: "32", rx: "4", fill: accent, fillOpacity: "0.16", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "24", y: "30", width: "14", height: "20", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "82", y: "30", width: "14", height: "20", rx: "3", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "54", cy: "62", r: "2", fill: accent }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "62", r: "2", fill: stroke, opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "66", cy: "62", r: "2", fill: stroke, opacity: faint })
     ] });
   }
   function StatisticSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "30", y1: "26", x2: "58", y2: "26", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("text", { x: "29", y: "48", fontSize: "20", fontWeight: "700", fill: accent, fillOpacity: "0.85", fontFamily: "sans-serif", children: "1.2K" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M76 50 l6 -8 l5 4 l8 -12", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M95 34 l0 5 l-5 0", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "30", y1: "26", x2: "58", y2: "26", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("text", { x: "29", y: "48", fontSize: "20", fontWeight: "700", fill: accent, fillOpacity: "0.85", fontFamily: "sans-serif", children: "1.2K" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M76 50 l6 -8 l5 4 l8 -12", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M95 34 l0 5 l-5 0", stroke: accent, strokeWidth: "1.4", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   function QRCodeSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "20", width: "14", height: "14", rx: "2", stroke: accent, strokeWidth: "1.6" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "72", y: "20", width: "14", height: "14", rx: "2", stroke: accent, strokeWidth: "1.6" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "34", y: "46", width: "14", height: "14", rx: "2", stroke: accent, strokeWidth: "1.6" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "38", y: "24", width: "6", height: "6", fill: accent, fillOpacity: "0.7" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "72", y: "46", width: "5", height: "5", fill: stroke, opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "81", y: "46", width: "5", height: "5", fill: accent, fillOpacity: "0.5" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "72", y: "55", width: "5", height: "5", fill: accent, fillOpacity: "0.5" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "81", y: "55", width: "5", height: "5", fill: stroke, opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "20", width: "14", height: "14", rx: "2", stroke: accent, strokeWidth: "1.6" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "72", y: "20", width: "14", height: "14", rx: "2", stroke: accent, strokeWidth: "1.6" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "34", y: "46", width: "14", height: "14", rx: "2", stroke: accent, strokeWidth: "1.6" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "38", y: "24", width: "6", height: "6", fill: accent, fillOpacity: "0.7" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "72", y: "46", width: "5", height: "5", fill: stroke, opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "81", y: "46", width: "5", height: "5", fill: accent, fillOpacity: "0.5" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "72", y: "55", width: "5", height: "5", fill: accent, fillOpacity: "0.5" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "81", y: "55", width: "5", height: "5", fill: stroke, opacity: faint })
     ] });
   }
   function EmptySketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("ellipse", { cx: "60", cy: "56", rx: "26", ry: "5", fill: stroke, opacity: 0.14 }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "40", y: "28", width: "40", height: "24", rx: "4", stroke: accent, strokeWidth: "1.4", strokeDasharray: "4 3", fill: accent, fillOpacity: "0.06" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "48", y1: "40", x2: "72", y2: "40", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("ellipse", { cx: "60", cy: "56", rx: "26", ry: "5", fill: stroke, opacity: 0.14 }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "40", y: "28", width: "40", height: "24", rx: "4", stroke: accent, strokeWidth: "1.4", strokeDasharray: "4 3", fill: accent, fillOpacity: "0.06" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "48", y1: "40", x2: "72", y2: "40", stroke, strokeWidth: "1.2", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function DescriptionsSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "22", y: "22", width: "76", height: "36", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "56", y1: "22", x2: "56", y2: "58", stroke, strokeWidth: "1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "22", y1: "34", x2: "98", y2: "34", stroke, strokeWidth: "1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "22", y1: "46", x2: "98", y2: "46", stroke, strokeWidth: "1", opacity: faint }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "28", y1: "28", x2: "48", y2: "28", stroke: accent, strokeWidth: "1.3", opacity: 0.6, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "28", y1: "40", x2: "48", y2: "40", stroke: accent, strokeWidth: "1.3", opacity: 0.6, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "62", y1: "28", x2: "90", y2: "28", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "62", y1: "40", x2: "84", y2: "40", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "22", y: "22", width: "76", height: "36", rx: "4", stroke, strokeWidth: "1.2", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "56", y1: "22", x2: "56", y2: "58", stroke, strokeWidth: "1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "22", y1: "34", x2: "98", y2: "34", stroke, strokeWidth: "1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "22", y1: "46", x2: "98", y2: "46", stroke, strokeWidth: "1", opacity: faint }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "28", y1: "28", x2: "48", y2: "28", stroke: accent, strokeWidth: "1.3", opacity: 0.6, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "28", y1: "40", x2: "48", y2: "40", stroke: accent, strokeWidth: "1.3", opacity: 0.6, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "62", y1: "28", x2: "90", y2: "28", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "62", y1: "40", x2: "84", y2: "40", stroke, strokeWidth: "1.3", opacity: faint, strokeLinecap: "round" })
     ] });
   }
   function LoadingSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "16", stroke, strokeWidth: "2.4", opacity: 0.2 }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M60 24 a16 16 0 0 1 16 16", stroke: accent, strokeWidth: "2.6", fill: "none", strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "16", stroke, strokeWidth: "2.4", opacity: 0.2 }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M60 24 a16 16 0 0 1 16 16", stroke: accent, strokeWidth: "2.6", fill: "none", strokeLinecap: "round" })
     ] });
   }
   function FpsHistogramSketch() {
     const bars = [14, 22, 12, 28, 18, 24, 10, 20];
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      bars.map((h, i) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: 26 + i * 9, y: 58 - h, width: "6", height: h, rx: "1.5", fill: accent, fillOpacity: i % 2 ? 0.3 : 0.55, stroke: accent, strokeWidth: "0.8" }, i)),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "24", y1: "58", x2: "98", y2: "58", stroke, strokeWidth: "1.2", opacity: faint })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      bars.map((h, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: 26 + i * 9, y: 58 - h, width: "6", height: h, rx: "1.5", fill: accent, fillOpacity: i % 2 ? 0.3 : 0.55, stroke: accent, strokeWidth: "0.8" }, i)),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "24", y1: "58", x2: "98", y2: "58", stroke, strokeWidth: "1.2", opacity: faint })
     ] });
   }
   function IconifySketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "60", cy: "40", r: "20", stroke: accent, strokeWidth: "1.5", fill: accent, fillOpacity: "0.08" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "53", cy: "36", r: "2.4", fill: accent }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("circle", { cx: "67", cy: "36", r: "2.4", fill: accent }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M51 47 a10 8 0 0 0 18 0", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "60", cy: "40", r: "20", stroke: accent, strokeWidth: "1.5", fill: accent, fillOpacity: "0.08" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "53", cy: "36", r: "2.4", fill: accent }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("circle", { cx: "67", cy: "36", r: "2.4", fill: accent }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M51 47 a10 8 0 0 0 18 0", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round" })
     ] });
   }
   function LoginButtonSketch() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(import_jsx_runtime46.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("rect", { x: "22", y: "30", width: "56", height: "18", rx: "5", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.4" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("line", { x1: "30", y1: "39", x2: "58", y2: "39", stroke: accent, strokeWidth: "1.4", opacity: 0.6, strokeLinecap: "round" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("path", { d: "M82 33 l8 6 l-8 6 M74 39 l14 0", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("rect", { x: "22", y: "30", width: "56", height: "18", rx: "5", fill: accent, fillOpacity: "0.2", stroke: accent, strokeWidth: "1.4" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("line", { x1: "30", y1: "39", x2: "58", y2: "39", stroke: accent, strokeWidth: "1.4", opacity: 0.6, strokeLinecap: "round" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("path", { d: "M82 33 l8 6 l-8 6 M74 39 l14 0", stroke: accent, strokeWidth: "1.6", fill: "none", strokeLinecap: "round", strokeLinejoin: "round" })
     ] });
   }
   var SKETCHES = {
@@ -9635,33 +10293,31 @@ ${indent}<\/script>`;
   };
   function DemoSketch({ demoId }) {
     const Inner = SKETCHES[demoId] ?? DefaultSketch;
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("svg", { className: "demo-sketch", viewBox: "0 0 120 80", "aria-hidden": true, fill: "none", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Inner, {}) });
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("svg", { className: "demo-sketch", viewBox: "0 0 120 80", "aria-hidden": true, fill: "none", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Inner, {}) });
   }
-  function CatalogCard({ demoId, displayLabel, status, item, onSelect }) {
+  function CatalogCard({ demoId, displayLabel, sectionId, onSelect }) {
+    const sectionSlot = sectionColorToken(sectionId);
+    const accent2 = sectionAccentColor(sectionId);
+    const accentStyle = { "--sm-accent": accent2 };
     const handleSelect = (e) => {
       markViewTransitionCardSource(e.currentTarget);
       onSelect?.();
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("button", { type: "button", className: "catalog-card", onClick: handleSelect, title: `Abrir demo ${displayLabel}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { className: "catalog-card__preview", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(DemoSketch, { demoId }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "catalog-card__footer", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "catalog-card__name", children: displayLabel }),
-        status && /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(ReviewStatusDot, { status, size: "0.5rem" })
-      ] })
-    ] });
-  }
-  function CatalogToc({ sections, counts, activeSection, onSectionClick }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("nav", { className: "catalog-toc", "aria-label": "En esta p\xE1gina", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "catalog-toc__label", children: "En esta p\xE1gina" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("ul", { className: "catalog-toc__list", children: sections.map((sid) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("a", { href: `#section-${sid}`, className: ["catalog-toc__link", activeSection === sid && "is-active"].filter(Boolean).join(" "), onClick: (e) => {
-        e.preventDefault();
-        onSectionClick?.(sid);
-        document.getElementById(`section-${sid}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, children: [
-        sectionLabel(sid),
-        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "catalog-toc__count", children: counts[sid] ?? 0 })
-      ] }) }, sid)) })
-    ] });
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+      "button",
+      {
+        type: "button",
+        className: "catalog-card",
+        "data-section-color": sectionSlot,
+        style: accentStyle,
+        onClick: handleSelect,
+        title: `Abrir demo ${displayLabel}`,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "catalog-card__preview", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(DemoSketch, { demoId }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TitleCard2, { title: displayLabel, icon: getDemoIcon(demoId), sectionColor: accent2 })
+        ]
+      }
+    );
   }
   function CatalogHome({
     items = [],
@@ -9669,9 +10325,9 @@ ${indent}<\/script>`;
     onOpenPaletteLab,
     filterSection = null
   }) {
-    const [query, setQuery] = (0, import_react36.useState)("");
+    const [query, setQuery] = (0, import_react37.useState)("");
     const q = query.trim().toLowerCase();
-    const filtered = (0, import_react36.useMemo)(() => {
+    const filtered = (0, import_react37.useMemo)(() => {
       if (!q) return items;
       return items.filter((it) => [it.displayLabel, it.id, it.label, sectionLabel(it.section)].some((s) => String(s ?? "").toLowerCase().includes(q)));
     }, [items, q]);
@@ -9680,75 +10336,80 @@ ${indent}<\/script>`;
     const overview = overviewMeta();
     const heroTitle = filterSection ? sectionLabel(filterSection) : overview.title ?? "Components Overview";
     const heroLead = filterSection ? sectionDescription(filterSection) : overview.lead ?? MIMICUS_UI.catalogLead;
-    const counts = (0, import_react36.useMemo)(() => Object.fromEntries(visibleSections.map((sid) => [sid, itemsInSection(filtered, sid).length])), [filtered, visibleSections]);
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "catalog-overview", children: [
-      !filterSection && visibleSections.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("aside", { className: "catalog-overview__toc", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(CatalogToc, { sections: visibleSections, counts, onSectionClick: () => {
-      } }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "catalog-overview__main catalog-home", children: [
-        showHero && /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("header", { className: "catalog-overview__hero pg-vt-hero", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "catalog-home__kicker mimicus-ui-brand", children: overview.kicker ?? MIMICUS_UI.name }),
-          /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h1", { className: "catalog-home__title", children: heroTitle }),
-          /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "catalog-home__lead", children: heroLead }),
-          /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "catalog-overview__toolbar", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
-              Input,
-              {
-                className: "catalog-search",
-                type: "search",
-                placeholder: "Buscar componente\u2026",
-                "aria-label": "Buscar componente",
-                value: query,
-                onChange: (v) => setQuery(v),
-                allowClear: true,
-                prefix: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Icon, { icon: "mdi:magnify", className: "catalog-search__icon" })
-              }
-            ),
-            onOpenPaletteLab && /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(Button, { variant: "outlined", color: "primary", onClick: onOpenPaletteLab, style: { width: "fit-content", flexShrink: 0 }, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Icon, { icon: "mdi:palette-swatch-outline" }),
-              "Paleta & Look"
-            ] })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "catalog-overview", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "catalog-overview__main catalog-home", children: [
+      showHero && /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("header", { className: "catalog-overview__hero pg-vt-hero", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "catalog-home__kicker mimicus-ui-brand", children: overview.kicker ?? MIMICUS_UI.name }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("h1", { className: "catalog-home__title", children: heroTitle }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "catalog-home__lead", children: heroLead }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "catalog-overview__toolbar", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(
+            Input,
+            {
+              className: "catalog-search",
+              type: "search",
+              placeholder: "Buscar componente\u2026",
+              "aria-label": "Buscar componente",
+              value: query,
+              onChange: (v) => setQuery(v),
+              allowClear: true,
+              prefix: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: "mdi:magnify", className: "catalog-search__icon" })
+            }
+          ),
+          onOpenPaletteLab && /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Button, { variant: "outlined", color: "primary", onClick: onOpenPaletteLab, style: { width: "fit-content", flexShrink: 0 }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: "mdi:palette-swatch-outline" }),
+            "Paleta & Look"
           ] })
-        ] }),
-        !showHero && filterSection && /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("header", { className: "catalog-overview__hero catalog-overview__hero--section pg-vt-hero pg-vt-category", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "catalog-section-heading", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Icon, { icon: sectionIcon(filterSection), className: "catalog-section-heading__icon" }),
-          /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h1", { className: "catalog-home__title", children: heroTitle }),
-            heroLead && /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "catalog-home__lead", children: heroLead })
-          ] })
-        ] }) }),
-        visibleSections.map((sid) => {
-          const sectionItems = itemsInSection(filtered, sid);
-          if (!sectionItems.length) return null;
-          return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("section", { id: `section-${sid}`, className: "catalog-section", "aria-labelledby": `heading-${sid}`, children: [
-            !filterSection && /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "catalog-section-heading", id: `heading-${sid}`, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h2", { className: "catalog-section-heading__title", children: sectionLabel(sid) }),
-              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Badge2, { children: sectionItems.length })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { className: "catalog-grid catalog-grid--overview", children: sectionItems.map((it) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(CatalogCard, { demoId: it.id, displayLabel: it.displayLabel, item: it, status: statusFor(it.id, it), onSelect: () => onSelect?.(it.section, it.slug) }, `${it.section}/${it.slug}`)) })
-          ] }, sid);
-        }),
-        filtered.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("p", { className: "catalog-home__lead", children: [
-          "No hay componentes que coincidan con \xAB",
-          query,
-          "\xBB."
         ] })
+      ] }),
+      !showHero && filterSection && /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("header", { className: "catalog-overview__hero catalog-overview__hero--section pg-vt-hero pg-vt-category", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "catalog-section-heading", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: sectionIcon(filterSection), className: "catalog-section-heading__icon" }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("h1", { className: "catalog-home__title", children: heroTitle }),
+          heroLead && /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "catalog-home__lead", children: heroLead })
+        ] })
+      ] }) }),
+      visibleSections.map((sid) => {
+        const sectionItems = itemsInSection(filtered, sid);
+        if (!sectionItems.length) return null;
+        const accent2 = sectionAccentColor(sid);
+        const sectionSlot = sectionColorToken(sid);
+        return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+          "section",
+          {
+            id: `section-${sid}`,
+            className: "catalog-section",
+            "data-section-color": sectionSlot,
+            style: { "--sm-accent": accent2 },
+            "aria-labelledby": `heading-${sid}`,
+            children: [
+              !filterSection && /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "catalog-section-heading", id: `heading-${sid}`, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("h2", { className: "catalog-section-heading__title", children: sectionLabel(sid) }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "catalog-grid catalog-grid--overview", children: sectionItems.map((it) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(CatalogCard, { sectionId: sid, demoId: it.id, displayLabel: it.displayLabel, onSelect: () => onSelect?.(it.section, it.slug) }, `${it.section}/${it.slug}`)) })
+            ]
+          },
+          sid
+        );
+      }),
+      filtered.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("p", { className: "catalog-home__lead", children: [
+        "No hay componentes que coincidan con \xAB",
+        query,
+        "\xBB."
       ] })
-    ] });
+    ] }) });
   }
   function ThemeLab() {
-    return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { className: "catalog-home catalog-overview__main pg-vt-main", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("header", { className: "catalog-overview__hero pg-vt-hero", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "catalog-home__kicker mimicus-ui-brand", children: MIMICUS_UI.name }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("h1", { className: "catalog-home__title", children: "Paleta & Look" }),
-      /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "catalog-home__lead", children: "Laboratorio visual de paletas, look & feel y luminancia. Usa los selectores del header para probar combinaciones en tiempo real." })
+    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "catalog-home catalog-overview__main pg-vt-main", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("header", { className: "catalog-overview__hero pg-vt-hero", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "catalog-home__kicker mimicus-ui-brand", children: MIMICUS_UI.name }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("h1", { className: "catalog-home__title", children: "Paleta & Look" }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "catalog-home__lead", children: "Laboratorio visual de paletas, look & feel y luminancia. Usa los selectores del header para probar combinaciones en tiempo real." })
     ] }) });
   }
 
   // src/devkit/shared/driver/driverCore.tsx
-  var import_react39 = __require("react");
+  var import_react40 = __require("react");
 
   // src/devkit/shared/demo-shell/demoShellUi.tsx
-  var import_react37 = __require("react");
-  var import_jsx_runtime47 = __require("react/jsx-runtime");
+  var import_react38 = __require("react");
+  var import_jsx_runtime50 = __require("react/jsx-runtime");
   var DemoController = class {
     constructor() {
       this.componentName = "Component";
@@ -9822,44 +10483,138 @@ ${indent}<\/script>`;
       attrs.push({ name: f.attrName ?? String(f.key), value, type: f.attrType, default: f.attrDefault });
     }
   };
-  function ConfigCard({ children, className }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: ["pg-demo-config-card", "card-root", className].filter(Boolean).join(" "), children });
+  function ConfigCard({ children, className, variant = "field" }) {
+    const isSection = variant === "section";
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
+      "div",
+      {
+        className: [
+          isSection ? "pg-demo-config-section demo-config-shell" : "pg-demo-config-card",
+          "card-root",
+          className
+        ].filter(Boolean).join(" "),
+        "data-variant": isSection ? "glass" : "flat",
+        "data-pg-config": variant,
+        children
+      }
+    );
   }
-  function InputDecorated({ label, icon, asTitle, children, className }) {
-    const Tag2 = asTitle ? "h3" : "label";
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: ["pg-input-decorated", asTitle && "pg-input-decorated--title", className].filter(Boolean).join(" "), children: [
-      (label || icon) && /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(Tag2, { className: "pg-input-decorated__label", children: [
-        icon && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("span", { className: "pg-input-decorated__icon", "aria-hidden": true, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("iconify-icon", { icon }) }),
-        label
+  function InputDecorated({ label, icon, asTitle, info, infoTitle, children, className, rowBetween }) {
+    const Tag2 = asTitle ? "h3" : rowBetween ? "div" : "label";
+    const [open, setOpen] = (0, import_react38.useState)(false);
+    const hasInfo = Boolean(info && String(info).trim());
+    (0, import_react38.useEffect)(() => {
+      if (!open) return;
+      const onKey = (e) => {
+        if (e.key === "Escape") setOpen(false);
+      };
+      document.addEventListener("keydown", onKey);
+      return () => document.removeEventListener("keydown", onKey);
+    }, [open]);
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: ["pg-input-decorated", asTitle && "pg-input-decorated--title", rowBetween && "pg-input-decorated--row-between", className].filter(Boolean).join(" "), children: [
+      (label || icon || hasInfo) && /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Tag2, { className: "pg-input-decorated__label", children: [
+        icon && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "pg-input-decorated__icon", "aria-hidden": true, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("iconify-icon", { icon }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "pg-input-decorated__label-text", children: label }),
+        hasInfo && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
+          "button",
+          {
+            type: "button",
+            className: "pg-input-decorated__info",
+            "aria-label": `M\xE1s informaci\xF3n sobre ${label || "esta secci\xF3n"}`,
+            title: `M\xE1s informaci\xF3n sobre ${label || "esta secci\xF3n"}`,
+            onClick: (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setOpen(true);
+            },
+            children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("iconify-icon", { icon: "mdi:information-outline" })
+          }
+        )
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "pg-input-decorated__body", children })
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-input-decorated__body", children }),
+      hasInfo && open && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-input-decorated__info-overlay", role: "dialog", "aria-modal": "true", "aria-label": infoTitle || label || "Informaci\xF3n", onClick: () => setOpen(false), children: /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "pg-input-decorated__info-card", onClick: (e) => e.stopPropagation(), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("header", { className: "pg-input-decorated__info-card-header", children: [
+          icon && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("iconify-icon", { icon }),
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("h4", { children: infoTitle || label }),
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("button", { type: "button", className: "pg-input-decorated__info-close", "aria-label": "Cerrar", onClick: () => setOpen(false), children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("iconify-icon", { icon: "mdi:close" }) })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-input-decorated__info-body", dangerouslySetInnerHTML: { __html: String(info) } })
+      ] }) })
+    ] });
+  }
+  var SIDE_CROSS_SLOTS = [null, "top", null, "left", "", "right", null, "bottom", null];
+  function paletteOptionIcon(val, getIcon) {
+    const isNone = val === "" || val == null;
+    if (isNone) return NONE_ICON;
+    return getIcon ? getIcon(val) : void 0;
+  }
+  function PaletteOptionButton({ lbl, val, selected, accent: accent2, getIcon, showLabel, onPick }) {
+    const isNone = val === "" || val == null;
+    const icon = paletteOptionIcon(val, getIcon);
+    const title = isNone ? "Ninguno" : lbl || String(val ?? "Ninguno");
+    const color = accent2 === "semantic" && val ? val : "primary";
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Button, { type: "button", variant: selected ? "soft" : "text", color, shape: "pill", block: true, onClick: () => onPick?.(isNone ? void 0 : val), title, style: { justifyContent: "center", paddingBlock: "0.2em", paddingInline: showLabel && !isNone ? "0.55em" : "0.4em", minHeight: "1.85em", gap: "0.35em", minWidth: 0 }, children: [
+      icon && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon }),
+      showLabel && !isNone && (lbl || val) != null && String(lbl || val) !== "" && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { children: lbl || String(val ?? "Ninguno") })
     ] });
   }
   function PaletteGrid({ label, labelIcon, value, onValueChange, options, name, columns, accent: accent2 = "primary", layout = "chips", getIcon }) {
     const items = optionsToItems(options);
     const cols = typeof columns === "number" ? columns : columnsConfig(items.length);
     const groupName = name || `pg-palette-${label}`;
-    if (layout === "chips") {
-      return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label, icon: labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "pg-palette-chips", style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(5.25rem, 1fr))", gap: "0.35rem", width: "100%" }, children: items.map(([lbl, val]) => {
-        const selected = String(value ?? "") === String(val ?? "");
-        const isNone = val === "" || val == null;
-        const icon = isNone ? NONE_ICON : getIcon ? getIcon(val) : void 0;
-        const showLabel = !isNone && (lbl || val);
-        return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(Button, { type: "button", variant: selected ? "soft" : "text", color: accent2 === "semantic" && val ? val : "primary", shape: "pill", block: true, onClick: () => onValueChange?.(val === "" ? void 0 : val), title: isNone ? "Ninguno" : lbl || String(val ?? "Ninguno"), style: { justifyContent: "center", paddingBlock: "0.2rem", paddingInline: isNone ? "0.4rem" : "0.6rem", minHeight: "1.8rem", gap: isNone ? 0 : "0.35rem" }, children: [
-          icon && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon }),
-          showLabel && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("span", { children: lbl || String(val ?? "Ninguno") })
-        ] }, `${groupName}-${String(val)}`);
-      }) }) });
+    function pick(val) {
+      onValueChange?.(val === "" || val == null ? void 0 : val);
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label, icon: labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "pg-palette-grid", style: { display: "grid", gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gap: "0.35rem", width: "100%" }, children: items.map(([lbl, val]) => {
+    function renderOption(lbl, val, showLabel) {
       const selected = String(value ?? "") === String(val ?? "");
-      const isNone = val === "" || val == null;
-      const icon = isNone ? NONE_ICON : void 0;
-      return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(Radio, { className: "pg-palette-grid__item", name: groupName, value: String(val ?? ""), checked: selected, onChange: () => onValueChange?.(val === "" ? void 0 : val), title: isNone ? "Ninguno" : lbl || String(val ?? "Ninguno"), children: [
-        icon && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon }),
-        !isNone && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("span", { style: { marginInlineStart: "0.35rem" }, children: lbl || String(val ?? "Ninguno") })
-      ] }, `${groupName}-${String(val)}`);
-    }) }) });
+      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(PaletteOptionButton, { lbl, val, selected, accent: accent2, getIcon, showLabel, onPick: pick }, `${groupName}-${String(val)}`);
+    }
+    if (layout === "sideCross") {
+      const byVal = Object.fromEntries(items.map(([lbl, val]) => [String(val ?? ""), [lbl, val]]));
+      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-palette-grid pg-palette-grid--side-cross", style: { display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "0.35em", width: "100%" }, children: SIDE_CROSS_SLOTS.map((slotVal, idx) => {
+        if (slotVal === null) return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "pg-palette-grid__spatial-cell pg-palette-grid__spatial-cell--empty", "aria-hidden": true }, `side-cross-empty-${idx}`);
+        const pair = byVal[String(slotVal ?? "")];
+        if (!pair) return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "pg-palette-grid__spatial-cell pg-palette-grid__spatial-cell--empty", "aria-hidden": true }, `side-cross-miss-${idx}`);
+        const [lbl, val] = pair;
+        return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-palette-grid__spatial-cell", children: renderOption(lbl, val, true) }, `side-cross-${String(val)}`);
+      }) });
+    }
+    if (layout === "chips") {
+      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-palette-chips", style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(5.25em, 1fr))", gap: "0.35em", width: "100%" }, children: items.map(([lbl, val]) => renderOption(lbl, val, true)) });
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-palette-grid", style: { display: "grid", gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gap: "0.35em", width: "100%" }, children: items.map(([lbl, val]) => renderOption(lbl, val, true)) });
+  }
+  function fieldInfo(field) {
+    if (field.info) return { title: field.infoTitle || field.label, body: field.info };
+    const key = String(field.key || "").toLowerCase();
+    const kind = String(field.kind || "");
+    const map = {
+      variant: { title: "Variante visual", body: "Cambia el aspecto del componente: <code>solid</code> (fondo lleno), <code>outlined</code> (s\xF3lo borde), <code>text</code> (sin fondo, transparente), <code>ghost</code> (vidrio transl\xFAcido), <code>soft</code> (tinte accent al 15%), <code>dashed</code> (borde discontinuo) y <code>glass</code> (efecto glass con backdrop-filter)." },
+      shape: { title: "Forma del borde", body: "Define el radio del borde: <code>round</code> (esquinas redondeadas suaves), <code>rect</code> (recto, 0px), <code>pill</code> (c\xE1psula, radio total) y <code>circle</code> (c\xEDrculo perfecto cuando el contenido es s\xF3lo un icono)." },
+      size: { title: "Tama\xF1o", body: "Escala interna del componente. En Mimicus UI el tama\xF1o es contextual: depende del <code>font-size</code> del contenedor (unidades <code>em</code>)." },
+      color: { title: "Color de acento", body: "Color sem\xE1ntico que tintar\xE1 el componente. Puede ser un color del sistema (<code>primary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>info</code>, <code>neutral</code>) o un valor custom." },
+      icon: { title: "\xCDcono", body: "\xCDcono Iconify que se mostrar\xE1. Escribe el nombre (<code>mdi:check</code>) o elige uno de las opciones." },
+      iconplacement: { title: "Posici\xF3n del \xEDcono", body: "Define si el \xEDcono aparece al inicio (<code>start</code>) o al final (<code>end</code>) del texto." },
+      htmltype: { title: "Tipo HTML", body: "Atributo <code>type</code> nativo del bot\xF3n: <code>button</code>, <code>submit</code> o <code>reset</code>." },
+      block: { title: "block", body: "Hace que el componente ocupe todo el ancho disponible." },
+      danger: { title: "danger", body: "Aplica el color sem\xE1ntico <code>danger</code> (rojo), t\xEDpicamente para acciones destructivas." },
+      ghost: { title: "ghost", body: "Fondo transl\xFAcido (vidrio) en hover/active; en idle se ve como <code>outlined</code>." },
+      dashed: { title: "dashed", body: "Borde discontinuo en lugar de s\xF3lido." },
+      disabled: { title: "disabled", body: "Deshabilita la interacci\xF3n y aplica opacidad reducida." },
+      loading: { title: "loading", body: "Muestra un indicador de progreso y bloquea clicks mientras dura la operaci\xF3n." }
+    };
+    if (map[key]) return map[key];
+    if (kind === "switch") return { title: field.label, body: `Interruptor booleano. Cuando est\xE1 <code>true</code> activa el flag <code>${field.key}</code>.` };
+    if (kind === "switch-group") return { title: field.label, body: `Grupo de interruptores booleanos. Cada toggle activa un flag independiente del componente.` };
+    if (kind === "palette") return { title: field.label, body: `Selector de paleta. Elige una de las opciones disponibles; el componente adoptar\xE1 la variante visual correspondiente.` };
+    if (kind === "select-enum") return { title: field.label, body: `Selector enumerado. Elige uno de los valores disponibles para <code>${field.key}</code>.` };
+    if (kind === "number") return { title: field.label, body: `Valor num\xE9rico entre el m\xEDnimo y m\xE1ximo definidos.` };
+    if (kind === "range") return { title: field.label, body: `Rango num\xE9rico continuo (slider).` };
+    if (kind === "text") return { title: field.label, body: `Entrada de texto libre.` };
+    if (kind === "color") return { title: field.label, body: `Selector de color. Acepta cualquier valor CSS (hex, rgb, hsl, oklch, named).` };
+    if (kind === "code") return { title: field.label, body: `Editor de c\xF3digo inline. \xDAtil para estilos CSS o clases personalizadas.` };
+    if (kind === "icon-text") return { title: field.label, body: `Combina un \xEDcono Iconify con un texto libre.` };
+    return null;
   }
   function orderFields(arr) {
     const states = [];
@@ -9881,14 +10636,14 @@ ${indent}<\/script>`;
     return hasNone ? mapped : [{ label: "", value: "" }, ...mapped];
   }
   function SwitchRow({ checked, label, onChange, iconOn, iconOff, colorOn, colorOff }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
       Switch,
       {
         className: "pg-switch-row",
         checked: !!checked,
         onChange: (v) => onChange?.(v),
-        iconOn: iconOn ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon: iconOn }) : void 0,
-        iconOff: iconOff ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon: iconOff ?? iconOn ?? "mdi:circle-outline" }) : void 0,
+        iconOn: iconOn ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: iconOn }) : void 0,
+        iconOff: iconOff ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: iconOff ?? iconOn ?? "mdi:circle-outline" }) : void 0,
         colorOn,
         colorOff,
         children: label
@@ -9897,31 +10652,30 @@ ${indent}<\/script>`;
   }
   function ConfigRangeField({ value, min = 0, max = 100, step = 1, onChange }) {
     const num = Number(value ?? min);
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Slider, { className: "pg-config-range", min, max, step, value: num, onChange: (v) => onChange(Number(v)), showValue: true, style: { width: "100%" } });
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Slider, { className: "pg-config-range", min, max, step, value: num, onChange: (v) => onChange(Number(v)), showValue: true, style: { width: "100%" } });
   }
   function IconTextField({ field, state: state2, patchState }) {
     const iconVal = state2[field.iconKey] ?? "";
     const textVal = state2[field.textKey] ?? "";
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { style: { display: "grid", gap: "0.6rem" }, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { style: { display: "grid", gap: "0.6em" }, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: "\xCDcono", icon: "mdi:emoticon-outline", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-field-cluster", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
         PaletteGrid,
         {
-          label: "\xCDcono",
           value: String(iconVal),
           onValueChange: (v) => patchState(String(field.iconKey), v),
           options: Object.entries(iconEnum).map(([val, lbl]) => ({ label: lbl, value: val })),
           layout: "chips",
           getIcon: (v) => v ? String(v) : void 0
         }
-      ),
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("label", { className: "pg-icon-text-field__text", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("span", { className: "pg-input-decorated__label", children: "Texto" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Input, { value: String(textVal), onChange: (v) => patchState(String(field.textKey), v), prefix: iconVal ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon: String(iconVal) }) : void 0 })
+      ) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("label", { className: "pg-icon-text-field__text", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "pg-input-decorated__label", children: "Texto" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Input, { value: String(textVal), onChange: (v) => patchState(String(field.textKey), v), prefix: iconVal ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: String(iconVal) }) : void 0 })
       ] })
     ] }) });
   }
-  function ConfigCodeField({ value = "", onChange, placeholder, mode, lang, minHeight = "4.5rem", maxHeight = "8.5rem" }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "code-edit-field", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+  function ConfigCodeField({ value = "", onChange, placeholder, mode, lang, minHeight = "4.5em", maxHeight = "8.5em" }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "code-edit-field", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
       CodeBlock,
       {
         className: "code-edit-field__preview pg-demo-config-code",
@@ -9944,30 +10698,50 @@ ${indent}<\/script>`;
       const normalized = value === void 0 || value === "" ? null : value;
       onStateChange?.({ ...state2, [key]: normalized });
     }
+    function decorate(field, props = {}) {
+      const info = fieldInfo(field);
+      return {
+        label: field.label,
+        icon: props.icon ?? field.labelIcon,
+        info: info?.body,
+        infoTitle: info?.title
+      };
+    }
     return typedFields.map((field) => {
       const key = fieldId(field);
-      const wrap = (node) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ConfigCard, { children: node }, key);
+      const wrap = (node) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ConfigCard, { children: node }, key);
       if (field.kind === "palette") {
         const opts = field.layout === "sideCross" || field.layout === "chips" ? field.options : withNoneOption(field.options);
-        return wrap(/* @__PURE__ */ (0, import_jsx_runtime47.jsx)(PaletteGrid, { label: field.label, labelIcon: field.labelIcon, value: state2[field.key], onValueChange: (v) => patchState(String(field.key), v), options: opts, name: field.name ?? `pg-${String(field.key)}`, columns: field.columns, accent: field.accent ?? "primary", layout: field.layout ?? "chips", getIcon: field.getIcon ?? ((v) => defaultOptionIcon(field.key, v)) }));
+        const d = decorate(field, { icon: field.labelIcon });
+        return wrap(
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-field-cluster", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(PaletteGrid, { value: state2[field.key], onValueChange: (v) => patchState(String(field.key), v), options: opts, name: field.name ?? `pg-${String(field.key)}`, columns: field.columns, accent: field.accent ?? "primary", layout: field.layout ?? "chips", getIcon: field.getIcon ?? ((v) => defaultOptionIcon(field.key, v)) }) }) })
+        );
       }
       if (field.kind === "color") {
-        return wrap(/* @__PURE__ */ (0, import_jsx_runtime47.jsx)(PaletteGrid, { label: field.label, labelIcon: field.labelIcon, value: state2[field.key], onValueChange: (v) => patchState(String(field.key), v), options: colorOptions, name: `pg-color-${String(field.key)}`, layout: "chips", accent: "semantic", getIcon: (v) => COLOR_ICONS[String(v)] }));
+        const d = decorate(field, { icon: field.labelIcon });
+        return wrap(
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-field-cluster", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(PaletteGrid, { value: state2[field.key], onValueChange: (v) => patchState(String(field.key), v), options: colorOptions, name: `pg-color-${String(field.key)}`, layout: "chips", accent: "semantic", getIcon: (v) => COLOR_ICONS[String(v)] }) }) })
+        );
       }
       if (field.kind === "switch") {
-        return wrap(/* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon ?? "mdi:tune", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(SwitchRow, { checked: state2[field.key], label: field.label, onChange: (v) => patchState(String(field.key), v), iconOn: field.iconOn ?? field.icon ?? "mdi:check", iconOff: field.iconOff ?? field.icon ?? "mdi:circle-outline", colorOn: field.colorOn ?? "var(--mimicus-success, #2e9e5a)", colorOff: field.colorOff ?? "var(--mimicus-color)" }) }));
+        const d = decorate(field, { icon: field.labelIcon ?? "mdi:tune" });
+        return wrap(
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { rowBetween: true, label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(SwitchRow, { checked: state2[field.key], onChange: (v) => patchState(String(field.key), v), iconOn: field.iconOn ?? field.icon ?? "mdi:check", iconOff: field.iconOff ?? field.icon ?? "mdi:circle-outline", colorOn: field.colorOn ?? "var(--mimicus-success, #2e9e5a)", colorOff: field.colorOff ?? "var(--mimicus-color)" }) })
+        );
       }
       if (field.kind === "switch-group") {
+        const d = decorate(field, { icon: field.labelIcon });
         return wrap(
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(7.5rem, 1fr))", gap: "0.35rem 0.75rem", width: "100%" }, children: field.switches.map((sw) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(SwitchRow, { checked: state2[sw.key], label: sw.label, onChange: (v) => patchState(String(sw.key), v), iconOn: sw.iconOn ?? sw.icon ?? "mdi:check", iconOff: sw.iconOff ?? sw.icon ?? "mdi:circle-outline", colorOn: sw.colorOn ?? "var(--mimicus-success, #2e9e5a)", colorOff: sw.colorOff ?? "var(--mimicus-color)" }, String(sw.key))) }) })
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-field-cluster", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(7.5em, 1fr))", gap: "0.35em 0.75em", width: "100%" }, children: field.switches.map((sw) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(SwitchRow, { checked: state2[sw.key], label: sw.label, onChange: (v) => patchState(String(sw.key), v), iconOn: sw.iconOn ?? sw.icon ?? "mdi:check", iconOff: sw.iconOff ?? sw.icon ?? "mdi:circle-outline", colorOn: sw.colorOn ?? "var(--mimicus-success, #2e9e5a)", colorOff: sw.colorOff ?? "var(--mimicus-color)" }, String(sw.key))) }) }) })
         );
       }
       if (field.kind === "text") {
         if (field.normalize) {
           const fkey = String(field.key);
           const normalize3 = field.normalize;
+          const d2 = decorate(field, { icon: field.labelIcon });
           return wrap(
-            /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d2.label, icon: d2.icon, info: d2.info, infoTitle: d2.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
               Input,
               {
                 className: "input-decorated-number",
@@ -9988,38 +10762,35 @@ ${indent}<\/script>`;
             ) })
           );
         }
+        const d = decorate(field, { icon: field.labelIcon });
         return wrap(
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Input, { placeholder: field.placeholder, value: String(state2[field.key] ?? ""), onChange: (v) => patchState(String(field.key), v) }) })
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Input, { placeholder: field.placeholder, value: String(state2[field.key] ?? ""), onChange: (v) => patchState(String(field.key), v) }) })
         );
       }
       if (field.kind === "range") {
+        const d = decorate(field, { icon: field.labelIcon });
         return wrap(
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ConfigRangeField, { value: state2[field.key], min: field.min, max: field.max, step: field.step, onChange: (v) => patchState(String(field.key), v) }) })
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ConfigRangeField, { value: state2[field.key], min: field.min, max: field.max, step: field.step, onChange: (v) => patchState(String(field.key), v) }) })
         );
       }
       if (field.kind === "number") {
+        const d = decorate(field, { icon: field.labelIcon });
         return wrap(
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputNumber, { min: field.min, max: field.max, step: field.step, value: Number(state2[field.key] ?? 0), onChange: (v) => patchState(String(field.key), v) }) })
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputNumber, { min: field.min, max: field.max, step: field.step, value: Number(state2[field.key] ?? 0), onChange: (v) => patchState(String(field.key), v) }) })
         );
       }
       if (field.kind === "select-enum") {
-        const entries = Object.entries(field.enumValue ?? {});
+        const d = decorate(field, { icon: field.labelIcon });
         return wrap(
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
-            Select,
-            {
-              value: String(state2[field.key] ?? ""),
-              onChange: (v) => patchState(String(field.key), v),
-              options: entries.map(([k, v]) => ({ value: String(v), label: k }))
-            }
-          ) })
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-field-cluster", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(PaletteGrid, { value: state2[field.key], onValueChange: (v) => patchState(String(field.key), v), options: field.enumValue ?? {}, name: `pg-${String(field.key)}`, layout: "chips", accent: "primary", getIcon: field.getIcon ?? ((v) => defaultOptionIcon(field.key, v)) }) }) })
         );
       }
       if (field.kind === "code") {
         const fkey = String(field.key);
         const mode = field.lang === "css" ? "css" : field.mode ?? (field.lang === "html" ? void 0 : field.lang);
+        const d = decorate(field, { icon: field.labelIcon ?? "mdi:code-braces" });
         return wrap(
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: field.label, icon: field.labelIcon ?? "mdi:code-braces", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: d.label, icon: d.icon, info: d.info, infoTitle: d.infoTitle, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
             ConfigCodeField,
             {
               value: String(state2[fkey] ?? ""),
@@ -10027,16 +10798,16 @@ ${indent}<\/script>`;
               placeholder: field.placeholder,
               mode,
               lang: field.lang,
-              minHeight: field.minHeight ?? "6rem",
-              maxHeight: field.maxHeight ?? "16rem"
+              minHeight: field.minHeight ?? "6em",
+              maxHeight: field.maxHeight ?? "16em"
             }
           ) })
         );
       }
       if (field.kind === "icon-text") {
-        return wrap(/* @__PURE__ */ (0, import_jsx_runtime47.jsx)(IconTextField, { field, state: state2, patchState }));
+        return wrap(/* @__PURE__ */ (0, import_jsx_runtime50.jsx)(IconTextField, { field, state: state2, patchState }));
       }
-      return wrap(/* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("p", { style: { margin: 0, fontSize: "0.85rem", opacity: 0.75 }, children: [
+      return wrap(/* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("p", { style: { margin: 0, fontSize: "0.85rem", opacity: 0.75 }, children: [
         "Campo \xAB",
         field.kind,
         "\xBB a\xFAn no soportado en React playground."
@@ -10059,18 +10830,18 @@ ${indent}<\/script>`;
     };
     for (const f of [...adapter?.fields?.() ?? [], ...adapter?.detailFields?.() ?? [], ...adapter?.demoConfigFields?.() ?? []]) pushField(f);
     if (!rows.length) return null;
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "pg-api-table-wrap", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("table", { className: "pg-api-table", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("tr", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("th", { children: "Property" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("th", { children: "Description" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("th", { children: "Type" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("th", { children: "Default" })
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-api-table-wrap", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("table", { className: "pg-api-table", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("tr", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("th", { children: "Property" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("th", { children: "Description" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("th", { children: "Type" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("th", { children: "Default" })
       ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("tbody", { children: rows.map((r) => /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("tr", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("td", { children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("code", { className: "pg-api-table__prop", children: String(r.name) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("td", { children: r.desc ?? "\u2014" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("td", { children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("code", { className: "pg-api-table__type", children: String(r.type) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("td", { children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("code", { className: "pg-api-table__default", children: String(r.def) }) })
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("tbody", { children: rows.map((r) => /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("tr", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("td", { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("code", { className: "pg-api-table__prop", children: String(r.name) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("td", { children: r.desc ?? "\u2014" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("td", { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("code", { className: "pg-api-table__type", children: String(r.type) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("td", { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("code", { className: "pg-api-table__default", children: String(r.def) }) })
       ] }, String(r.name))) })
     ] }) });
   }
@@ -10078,7 +10849,6 @@ ${indent}<\/script>`;
     adapter,
     title,
     titleIcon,
-    reviewStatus,
     flat = false,
     relieve,
     className,
@@ -10100,8 +10870,8 @@ ${indent}<\/script>`;
     preview,
     configExtra
   }) {
-    const [showCode, setShowCode] = (0, import_react37.useState)(false);
-    const [previewResetKey, setPreviewResetKey] = (0, import_react37.useState)(0);
+    const [showCode, setShowCode] = (0, import_react38.useState)(false);
+    const [previewResetKey, setPreviewResetKey] = (0, import_react38.useState)(0);
     const state2 = stateProp ?? adapter?.initialState?.() ?? {};
     const details = detailsProp ?? adapter?.initialDetails?.() ?? {};
     const demoConfig = demoConfigProp ?? adapter?.initialDemoConfig?.() ?? {};
@@ -10125,59 +10895,58 @@ ${indent}<\/script>`;
       onDemoClassChange?.("");
       setPreviewResetKey((k) => k + 1);
     }
-    const previewStageStyle = (0, import_react37.useMemo)(() => parseStyleString(mergeStyleString("transform-origin: center center", finalPreviewStyle)), [finalPreviewStyle]);
+    const previewStageStyle = (0, import_react38.useMemo)(() => parseStyleString(mergeStyleString("transform-origin: center center", finalPreviewStyle)), [finalPreviewStyle]);
     const scaleStyle = finalPreviewScale && finalPreviewScale !== 1 ? { transform: `scale(${finalPreviewScale})` } : void 0;
     const hasApi = [...configFields, ...detailFields, ...demoConfigFields].length > 0;
-    return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("article", { className: ["pg-demo-doc", "pg-vt-demo-morph", className].filter(Boolean).join(" "), children: [
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("header", { className: "pg-demo-doc__hero", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "pg-demo-doc__title-row", children: [
-          titleIcon && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon: titleIcon, className: "pg-demo-doc__icon" }),
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h1", { className: "pg-demo-doc__title", children: finalTitle }),
-          reviewStatus && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ReviewStatusDot, { status: reviewStatus, size: "0.62rem" })
+    return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("article", { className: ["pg-demo-doc", "pg-vt-demo-morph", className].filter(Boolean).join(" "), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("header", { className: "pg-demo-doc__hero", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "pg-demo-doc__title-row", children: [
+          titleIcon && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: titleIcon, className: "pg-demo-doc__icon" }),
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("h1", { className: "pg-demo-doc__title", children: finalTitle })
         ] }),
-        intro && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "pg-demo-doc__intro intro", dangerouslySetInnerHTML: { __html: intro } })
+        intro && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-demo-doc__intro intro", dangerouslySetInnerHTML: { __html: intro } })
       ] }),
-      preview && /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("section", { className: "pg-demo-doc__section", "aria-labelledby": `${demoId ?? finalTitle}-examples`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-examples`, children: "Examples" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "pg-demo-example", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "pg-demo-example__preview preview-frame pg-vt-preview", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "preview-viewport", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "preview-scale-track", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "preview-stage", style: { ...previewStageStyle, ...scaleStyle }, "data-preview-key": previewKey, children: preview({ state: state2, details, demoConfig, previewKey, demoStyle, demoClass }) }) }) }) }),
-          finalCodeStr && /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "pg-demo-example__toolbar", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(Button, { type: "button", variant: "text", color: "primary", onClick: () => setShowCode((v) => !v), children: [
-              /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon: showCode ? "mdi:chevron-up" : "mdi:code-tags" }),
+      preview && /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("section", { className: "pg-demo-doc__section", "aria-labelledby": `${demoId ?? finalTitle}-examples`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-examples`, children: "Examples" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "pg-demo-example", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "pg-demo-example__preview preview-frame pg-vt-preview", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "preview-viewport", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "preview-scale-track", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "preview-stage", style: { ...previewStageStyle, ...scaleStyle }, "data-preview-key": previewKey, children: preview({ state: state2, details, demoConfig, previewKey, demoStyle, demoClass }) }) }) }) }),
+          finalCodeStr && /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "pg-demo-example__toolbar", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Button, { type: "button", variant: "text", color: "primary", onClick: () => setShowCode((v) => !v), children: [
+              /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: showCode ? "mdi:chevron-up" : "mdi:code-tags" }),
               showCode ? "Ocultar c\xF3digo" : "Ver c\xF3digo"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(Button, { type: "button", variant: "text", color: "neutral", onClick: () => {
+            /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Button, { type: "button", variant: "text", color: "neutral", onClick: () => {
               try {
                 navigator.clipboard?.writeText(finalCodeStr);
               } catch {
               }
             }, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon: "mdi:content-copy" }),
+              /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: "mdi:content-copy" }),
               "Copiar"
             ] })
           ] }),
-          finalCodeStr && showCode && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(CodeBlock, { value: finalCodeStr, readOnly: true, lang: "jsx", minHeight: "7rem", maxHeight: "22rem", lineWrapping: true, className: "pg-demo-example__code" })
+          finalCodeStr && showCode && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(CodeBlock, { value: finalCodeStr, readOnly: true, lang: "jsx", minHeight: "7em", maxHeight: "22em", lineWrapping: true, className: "pg-demo-example__code" })
         ] })
       ] }),
-      adapter && /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("section", { className: "pg-demo-doc__section pg-demo-doc__section--playground", "aria-labelledby": `${demoId ?? finalTitle}-playground`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-playground`, children: "Playground" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(ConfigCard, { className: "pg-demo-config-section demo-config-shell", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { style: { display: "grid", gridTemplateColumns: `repeat(${configCols}, minmax(0, 1fr))`, gap: "0.75rem", width: "100%", alignItems: "start" }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ConfigCard, { children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { label: "style", icon: "mdi:palette-swatch-outline", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ConfigCodeField, { value: demoStyle, onChange: (v) => onDemoStyleChange?.(v), placeholder: "inline style", mode: "css", minHeight: "4.5rem", maxHeight: "8.5rem" }) }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(DemoConfigRenderer, { fields: configFields, state: state2, onStateChange }),
-            detailFields.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(DemoConfigRenderer, { fields: detailFields, state: details, onStateChange: onDetailsChange }),
+      adapter && /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("section", { className: "pg-demo-doc__section pg-demo-doc__section--playground", "aria-labelledby": `${demoId ?? finalTitle}-playground`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-playground`, children: "Playground" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(ConfigCard, { variant: "section", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { style: { display: "grid", gridTemplateColumns: `repeat(${configCols}, minmax(0, 1fr))`, gap: "0.75rem", width: "100%", alignItems: "start" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ConfigCard, { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { label: "style", icon: "mdi:palette-swatch-outline", info: "Estilos CSS inline que se aplican directamente al contenedor del demo. \xDAtil para ajustes r\xE1pidos sin modificar la hoja de estilos global.", infoTitle: "Estilo inline", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ConfigCodeField, { value: demoStyle, onChange: (v) => onDemoStyleChange?.(v), placeholder: "inline style", mode: "css", minHeight: "4.5em", maxHeight: "8.5em" }) }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(DemoConfigRenderer, { fields: configFields, state: state2, onStateChange }),
+            detailFields.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(DemoConfigRenderer, { fields: detailFields, state: details, onStateChange: onDetailsChange }),
             configExtra
           ] }),
-          demoConfigFields.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { style: { marginTop: "0.85rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(InputDecorated, { asTitle: true, label: "Config de demo", icon: "mdi:television-play", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(DemoConfigRenderer, { fields: demoConfigFields, state: demoConfig, onStateChange: onDemoConfigChange }) }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { style: { display: "flex", justifyContent: "flex-end", width: "100%", marginTop: "0.75rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(Button, { type: "button", variant: "soft", color: "primary", onClick: handleReset, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(Icon, { icon: "mdi:refresh" }),
+          demoConfigFields.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { style: { marginTop: "0.85rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(InputDecorated, { asTitle: true, label: "Config de demo", icon: "mdi:television-play", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(DemoConfigRenderer, { fields: demoConfigFields, state: demoConfig, onStateChange: onDemoConfigChange }) }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { style: { display: "flex", justifyContent: "flex-end", width: "100%", marginTop: "0.75rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Button, { type: "button", variant: "soft", color: "primary", onClick: handleReset, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: "mdi:refresh" }),
             "Reiniciar valores"
           ] }) })
         ] })
       ] }),
-      hasApi && /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("section", { className: "pg-demo-doc__section", "aria-labelledby": `${demoId ?? finalTitle}-api`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-api`, children: "API" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ApiTable, { adapter })
+      hasApi && /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("section", { className: "pg-demo-doc__section", "aria-labelledby": `${demoId ?? finalTitle}-api`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("h2", { className: "pg-demo-doc__section-title", id: `${demoId ?? finalTitle}-api`, children: "API" }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ApiTable, { adapter })
       ] })
     ] });
   }
@@ -10426,6 +11195,16 @@ ${indent}<\/script>`;
       case "disp-tour":
       case "disp-tree":
         return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
+      case "modal":
+      case "dialog":
+      case "action-drawer":
+      case "loading":
+      case "toaster":
+      case "cmp-alert":
+      case "cmp-tip-info":
+      case "cmp-invoked-floater":
+      case "cmp-floating-component":
+        return buildTag(name, [...collectAttrs(state2), ...styleAttrs(demoStyle, demoClass)], tagOpts);
       case "side-panel-pattern": {
         const open = state2.open !== false;
         const drawer = Boolean(state2.drawer);
@@ -10489,10 +11268,10 @@ ${setup}`;
   }
 
   // src/devkit/shared/driver/previewBuiltins.tsx
-  var import_react38 = __require("react");
+  var import_react39 = __require("react");
 
   // src/devkit/shared/driver/componentRegistry.tsx
-  var import_jsx_runtime48 = __require("react/jsx-runtime");
+  var import_jsx_runtime51 = __require("react/jsx-runtime");
   var IMPLEMENTED = {
     Button,
     Card,
@@ -10595,6 +11374,19 @@ ${setup}`;
     ListItemText,
     ListItemIcon,
     ListItemAvatar,
+    Dialog,
+    Modal,
+    ActionDrawer,
+    Loading,
+    Toaster,
+    toastSuccess,
+    toastError,
+    toastLoading,
+    toastRemove: toastRemove2,
+    Alert,
+    TipInfo,
+    InvokedFloater,
+    FloatingComponent,
     LoginButton,
     ContapymeSessionProvider,
     createOrchestratorSession,
@@ -10606,14 +11398,14 @@ ${setup}`;
     if (stubCache.has(name)) return stubCache.get(name);
     function StubComponent({ className, style, children, ...rest }) {
       const label = rest["data-label"] ?? name;
-      return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: ["mimicus-preview-stub", className].filter(Boolean).join(" "), style, "data-component": name, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "mimicus-preview-stub__badge", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(Icon, { icon: "mdi:package-variant" }),
+      return /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("div", { className: ["mimicus-preview-stub", className].filter(Boolean).join(" "), style, "data-component": name, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("div", { className: "mimicus-preview-stub__badge", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(Icon, { icon: "mdi:package-variant" }),
           " ",
           label
         ] }),
-        children && /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", { className: "mimicus-preview-stub__body", children }),
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("p", { className: "mimicus-preview-stub__hint", children: "Componente pendiente de port a React" })
+        children && /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("div", { className: "mimicus-preview-stub__body", children }),
+        /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("p", { className: "mimicus-preview-stub__hint", children: "Componente pendiente de port a React" })
       ] });
     }
     StubComponent.__mimicusStub = true;
@@ -10630,7 +11422,7 @@ ${setup}`;
   }
 
   // src/devkit/shared/driver/previewBuiltins.tsx
-  var import_jsx_runtime49 = __require("react/jsx-runtime");
+  var import_jsx_runtime52 = __require("react/jsx-runtime");
   function stateForPreview(state2) {
     const out = {};
     for (const [k, v] of Object.entries(state2 ?? {})) {
@@ -10641,8 +11433,8 @@ ${setup}`;
   }
   var LAYOUT_BP_NARROW2 = 768;
   function useNarrowViewport() {
-    const [narrow, setNarrow] = (0, import_react38.useState)(false);
-    (0, import_react38.useEffect)(() => {
+    const [narrow, setNarrow] = (0, import_react39.useState)(false);
+    (0, import_react39.useEffect)(() => {
       const mq = window.matchMedia(`(max-width: ${LAYOUT_BP_NARROW2 - 1}px)`);
       const sync = () => setNarrow(mq.matches);
       sync();
@@ -10654,18 +11446,18 @@ ${setup}`;
   function LayoutAppPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
     const variant = state2.variant === "top-side-2" ? "top-side-2" : "side";
     const narrow = useNarrowViewport();
-    const [siderCollapsed, setSiderCollapsed] = (0, import_react38.useState)(Boolean(state2.siderCollapsed));
+    const [siderCollapsed, setSiderCollapsed] = (0, import_react39.useState)(Boolean(state2.siderCollapsed));
     const shellStyle = parseStyleString(mergeStyleString("width:100%;min-height:clamp(14rem,45vh,20rem);height:clamp(14rem,45vh,20rem);border:1px solid var(--mimicus-border, rgba(255,255,255,0.12));border-radius:0.5rem;overflow:hidden", demoStyle));
     const siderWidth = Math.round(Number(state2.siderWidth)) || 200;
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["layout-app-preview", narrow && "layout-app-preview--drawer"].filter(Boolean).join(" "), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(AppLayoutProvider, { defaultSiderWidth: `${siderWidth}px`, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(AppLayout, { variant, fixedHeader: Boolean(state2.fixedHeader), fixedSider: Boolean(state2.fixedSider), responsive: true, responsiveDrawer: narrow, style: shellStyle, className: demoClass, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(AppLayout.Header, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(AppLayout.Header.Brand, { children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.06em" }, children: String(details.brandLabel ?? "Brand") }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(AppLayout.Header.Center, { children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { children: String(details.headerLabel ?? "Header") }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(AppLayout.Header.Tools, { children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { fontSize: "0.75rem", opacity: 0.85 }, children: String(details.toolsLabel ?? "Tools") }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["layout-app-preview", narrow && "layout-app-preview--drawer"].filter(Boolean).join(" "), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(AppLayoutProvider, { defaultSiderWidth: `${siderWidth}px`, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(AppLayout, { variant, fixedHeader: Boolean(state2.fixedHeader), fixedSider: Boolean(state2.fixedSider), responsive: true, responsiveDrawer: narrow, style: shellStyle, className: demoClass, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(AppLayout.Header, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(AppLayout.Header.Brand, { children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.06em" }, children: String(details.brandLabel ?? "Brand") }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(AppLayout.Header.Center, { children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { children: String(details.headerLabel ?? "Header") }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(AppLayout.Header.Tools, { children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { fontSize: "0.75rem", opacity: 0.85 }, children: String(details.toolsLabel ?? "Tools") }) })
       ] }),
-      !narrow && /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(AppLayout.Sider, { collapsed: siderCollapsed, collapsible: Boolean(state2.siderCollapsible), width: siderWidth, theme: state2.siderTheme === "light" ? "light" : "dark", onCollapse: setSiderCollapsed, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { fontSize: "0.8rem", fontWeight: 600 }, children: String(details.siderLabel ?? "Sider") }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "pg-shell-main", style: { padding: "0.75rem", flex: "1 1 auto", minHeight: 0, overflow: "auto" }, children: String(details.contentLabel ?? "Content") }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(AppLayout.Footer, { children: String(details.footerLabel ?? "Footer") })
+      !narrow && /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(AppLayout.Sider, { collapsed: siderCollapsed, collapsible: Boolean(state2.siderCollapsible), width: siderWidth, theme: state2.siderTheme === "light" ? "light" : "dark", onCollapse: setSiderCollapsed, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { fontSize: "0.8rem", fontWeight: 600 }, children: String(details.siderLabel ?? "Sider") }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "pg-shell-main", style: { padding: "0.75rem", flex: "1 1 auto", minHeight: 0, overflow: "auto" }, children: String(details.contentLabel ?? "Content") }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(AppLayout.Footer, { children: String(details.footerLabel ?? "Footer") })
     ] }) }) }, previewKey);
   }
   function CardPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
@@ -10674,17 +11466,17 @@ ${setup}`;
     const cardPreviewVariant = ["solid", "flat", "glass"].includes(state2.variant) ? state2.variant : void 0;
     const cardStyle = parseStyleString(inline ? mergeStyleString("width: fit-content; max-width: min(14rem, 100%); margin: 0 0.2rem; vertical-align: middle; padding: 0.35rem 0.55rem", demoStyle) : mergeStyleString("min-width: min(320px, 100%); max-width: 100%; margin: 0.75rem 0", demoStyle));
     if (inline) {
-      return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "card-inline-demo card-inline-demo--inline", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("p", { className: "card-inline-flow", children: [
+      return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "card-inline-demo card-inline-demo--inline", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { className: "card-inline-flow", children: [
         CARD_INLINE_FLOW_BEFORE,
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Card, { inline: true, relieve: relievePacked, variant: cardPreviewVariant, style: cardStyle, className: demoClass, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { fontSize: "0.85rem", lineHeight: 1.35, whiteSpace: "nowrap" }, children: CARD_INLINE_SAMPLE_TEXT }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Card, { inline: true, relieve: relievePacked, variant: cardPreviewVariant, style: cardStyle, className: demoClass, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { fontSize: "0.85rem", lineHeight: 1.35, whiteSpace: "nowrap" }, children: CARD_INLINE_SAMPLE_TEXT }) }),
         CARD_INLINE_FLOW_AFTER
       ] }) }, previewKey);
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "card-inline-demo", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "card-block-lead", children: "En modo bloque, la tarjeta interrumpe el p\xE1rrafo y ocupa el ancho disponible." }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Card, { relieve: relievePacked, variant: cardPreviewVariant, style: cardStyle, className: demoClass, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { style: { display: "flex", gap: "0.65rem", width: "100%" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: "mdi:text-box-outline", style: { fontSize: "1.25rem", flexShrink: 0, opacity: 0.88 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { fontSize: "0.9rem", lineHeight: 1.45 }, children: CARD_PREVIEW_SAMPLE_TEXT })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: "card-inline-demo", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("p", { className: "card-block-lead", children: "En modo bloque, la tarjeta interrumpe el p\xE1rrafo y ocupa el ancho disponible." }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Card, { relieve: relievePacked, variant: cardPreviewVariant, style: cardStyle, className: demoClass, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { style: { display: "flex", gap: "0.65rem", width: "100%" }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: "mdi:text-box-outline", style: { fontSize: "1.25rem", flexShrink: 0, opacity: 0.88 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { fontSize: "0.9rem", lineHeight: 1.45 }, children: CARD_PREVIEW_SAMPLE_TEXT })
       ] }) })
     ] }, previewKey);
   }
@@ -10694,20 +11486,20 @@ ${setup}`;
     const dividerProps = { orientation, variant, titlePlacement: state2.titlePlacement ?? "center", plain: Boolean(state2.plain), dashed: Boolean(state2.dashed), orientationMargin: String(details.orientationMargin ?? "").trim() || void 0 };
     const shellStyle = mergeStyleString(`border: ${resolveColor("border")} 1px solid; border-radius: 0.5rem; padding: 0.75rem; box-sizing: border-box`, demoStyle);
     const showTitle = Boolean(details.showTitle) && String(details.title ?? "").trim();
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(BlockLayout, { children: orientation === "vertical" ? /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(FlexLayout, { items: "center", gap: "0.35rem", wrap: true, style: parseStyleString(shellStyle), className: demoClass, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { color: resolveColor("primary") }, children: "Inicio" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Divider, { ...dividerProps }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { children: "Cat\xE1logo" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Divider, { ...dividerProps, variant: variant === "solid" ? "dotted" : variant }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { children: "Layouts" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Divider, { ...dividerProps }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Card, { variant: "flat", inline: true, style: { border: `1px solid ${resolveColor("neutral")}` }, children: "Demo" })
-    ] }) : /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(FlexLayout, { direction: "column", gap: "0.35rem", style: parseStyleString(shellStyle), className: demoClass, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { fontSize: "0.85rem", opacity: 0.9 }, children: "Bloque superior con contenido de ejemplo antes del separador." }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Divider, { ...dividerProps, children: showTitle ? String(details.title) : null }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { style: { fontSize: "0.85rem", opacity: 0.9 }, children: "Bloque inferior: el divider respeta size, variant y titlePlacement." }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Divider, { ...dividerProps }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Card, { variant: "flat", style: { border: `1px solid ${resolveColor("neutral")}`, padding: "0.5rem" }, children: "Contenido tras l\xEDnea simple" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(BlockLayout, { children: orientation === "vertical" ? /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(FlexLayout, { items: "center", gap: "0.35rem", wrap: true, style: parseStyleString(shellStyle), className: demoClass, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { color: resolveColor("primary") }, children: "Inicio" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Divider, { ...dividerProps }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { children: "Cat\xE1logo" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Divider, { ...dividerProps, variant: variant === "solid" ? "dotted" : variant }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { children: "Layouts" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Divider, { ...dividerProps }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Card, { variant: "flat", inline: true, style: { border: `1px solid ${resolveColor("neutral")}` }, children: "Demo" })
+    ] }) : /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(FlexLayout, { direction: "column", gap: "0.35rem", style: parseStyleString(shellStyle), className: demoClass, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { fontSize: "0.85rem", opacity: 0.9 }, children: "Bloque superior con contenido de ejemplo antes del separador." }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Divider, { ...dividerProps, children: showTitle ? String(details.title) : null }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { style: { fontSize: "0.85rem", opacity: 0.9 }, children: "Bloque inferior: el divider respeta size, variant y titlePlacement." }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Divider, { ...dividerProps }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Card, { variant: "flat", style: { border: `1px solid ${resolveColor("neutral")}`, padding: "0.5rem" }, children: "Contenido tras l\xEDnea simple" })
     ] }) }, previewKey);
   }
   function SplitterPreview({ state: state2, demoConfig, previewKey, demoStyle, demoClass }) {
@@ -10716,12 +11508,12 @@ ${setup}`;
     const panelCount = Math.round(Number(demoConfig?.panelItemCount)) || 2;
     const mainCount = Math.round(Number(demoConfig?.mainItemCount)) || 4;
     const shellStyle = mergeStyleString(inline ? "width: fit-content; max-width: 100%; height: clamp(10rem, 32vh, 16rem)" : "width: 100%; min-height: clamp(12rem, 36vh, 18rem)", demoStyle);
-    const Pane = ({ title, count, cells, offset = 0 }) => /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { style: { padding: "0.5rem", height: "100%", boxSizing: "border-box" }, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { style: { fontSize: "0.75rem", fontWeight: 600, marginBottom: "0.35rem", opacity: 0.85 }, children: title }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(GridLayout, { cells: String(cells), gap: "0.35rem", children: Array.from({ length: count }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Card, { variant: "flat", inline: true, style: { padding: "0.35rem", textAlign: "center", minHeight: "2rem" }, children: LAYOUT_PREVIEW_EMOJIS[(i + offset) % LAYOUT_PREVIEW_EMOJIS.length] }, i)) })
+    const Pane = ({ title, count, cells, offset = 0 }) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { style: { padding: "0.5rem", height: "100%", boxSizing: "border-box" }, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { style: { fontSize: "0.75rem", fontWeight: 600, marginBottom: "0.35rem", opacity: 0.85 }, children: title }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(GridLayout, { cells: String(cells), gap: "0.35rem", children: Array.from({ length: count }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Card, { variant: "flat", inline: true, style: { padding: "0.35rem", textAlign: "center", minHeight: "2rem" }, children: LAYOUT_PREVIEW_EMOJIS[(i + offset) % LAYOUT_PREVIEW_EMOJIS.length] }, i)) })
     ] });
     const Surround = inline ? "span" : "div";
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Surround, { className: inline ? "layout-inline-demo layout-inline-demo--inline" : "layout-inline-demo", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Splitter, { inline, direction, panelSize: Math.round(Number(state2.panelSize)) || 240, minSize: Math.round(Number(state2.minSize)) || 160, maxSize: Math.round(Number(state2.maxSize)) || 480, responsive: false, className: demoClass, style: parseStyleString(shellStyle), panel: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Pane, { title: "Panel", count: panelCount, cells: demoConfig?.panelCells ?? 1 }), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Pane, { title: "Contenido", count: mainCount, cells: demoConfig?.mainCells ?? 2, offset: panelCount }) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Surround, { className: inline ? "layout-inline-demo layout-inline-demo--inline" : "layout-inline-demo", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Splitter, { inline, direction, panelSize: Math.round(Number(state2.panelSize)) || 240, minSize: Math.round(Number(state2.minSize)) || 160, maxSize: Math.round(Number(state2.maxSize)) || 480, responsive: false, className: demoClass, style: parseStyleString(shellStyle), panel: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Pane, { title: "Panel", count: panelCount, cells: demoConfig?.panelCells ?? 1 }), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Pane, { title: "Contenido", count: mainCount, cells: demoConfig?.mainCells ?? 2, offset: panelCount }) }) }, previewKey);
   }
   var SCROLL_ID = "mimicus-anchor-scroll";
   function AnchorPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
@@ -10729,11 +11521,11 @@ ${setup}`;
     const direction = state2.direction === "horizontal" ? "horizontal" : "vertical";
     const containerSel = `#${SCROLL_ID}`;
     const links = Array.from({ length: n }, (_, i) => ({ href: `#sec-${i + 1}`, title: `Secci\xF3n ${i + 1}` }));
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: ["mimicus-anchor-demo", direction === "horizontal" && "mimicus-anchor-demo--horizontal", "mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Anchor, { direction, affix: Boolean(state2.affix), targetOffset: Math.round(Number(state2.targetOffset)) || 0, bounds: Math.round(Number(state2.bounds)) || 5, container: containerSel, items: links }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { id: SCROLL_ID, "data-mimicus-anchor-container": true, className: "mimicus-anchor-demo__scroll", children: links.map((l, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("section", { id: l.href.slice(1), className: "mimicus-anchor-demo__section", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("strong", { children: l.title }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("p", { style: { margin: "0.35rem 0 0", fontSize: "0.85rem", opacity: 0.85 }, children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: ["mimicus-anchor-demo", direction === "horizontal" && "mimicus-anchor-demo--horizontal", "mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Anchor, { direction, affix: Boolean(state2.affix), targetOffset: Math.round(Number(state2.targetOffset)) || 0, bounds: Math.round(Number(state2.bounds)) || 5, container: containerSel, items: links }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { id: SCROLL_ID, "data-mimicus-anchor-container": true, className: "mimicus-anchor-demo__scroll", children: links.map((l, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("section", { id: l.href.slice(1), className: "mimicus-anchor-demo__section", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("strong", { children: l.title }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { style: { margin: "0.35rem 0 0", fontSize: "0.85rem", opacity: 0.85 }, children: [
           "Contenido de ejemplo para scroll ",
           state2.affix ? "con scroll spy" : "est\xE1tico",
           "."
@@ -10743,71 +11535,71 @@ ${setup}`;
   }
   function TabsPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
     const count = Math.min(5, Math.max(2, Math.round(Number(details.tabCount)) || 3));
-    const items = Array.from({ length: count }, (_, i) => ({ key: `t${i + 1}`, label: `Tab ${i + 1}`, content: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Card, { variant: "flat", style: { padding: "0.65rem" }, children: [
+    const items = Array.from({ length: count }, (_, i) => ({ key: `t${i + 1}`, label: `Tab ${i + 1}`, content: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Card, { variant: "flat", style: { padding: "0.65rem" }, children: [
       "Panel ",
       i + 1
     ] }) }));
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Tabs, { type: state2.type === "card" ? "card" : "line", tabPosition: state2.tabPosition ?? "top", defaultActiveKey: items[0].key, items }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Tabs, { type: state2.type === "card" ? "card" : "line", tabPosition: state2.tabPosition ?? "top", defaultActiveKey: items[0].key, items }) }, previewKey);
   }
   function BreadcrumbsPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
     const items = [{ label: "Inicio", href: "#" }, { label: "Cat\xE1logo", href: "#" }, { label: String(details.currentLabel ?? "Componente") }];
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Breadcrumbs, { separator: state2.separator ?? "/", maxItems: state2.maxItems ? Math.round(Number(state2.maxItems)) : void 0, items }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Breadcrumbs, { separator: state2.separator ?? "/", maxItems: state2.maxItems ? Math.round(Number(state2.maxItems)) : void 0, items }) }, previewKey);
   }
   function DropdownPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Dropdown, { placement: state2.placement ?? "bottomLeft", trigger: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "solid", children: "Men\xFA \u25BE" }), menu: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Menu, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Item, { itemKey: "1", children: "Perfil" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Item, { itemKey: "2", children: "Ajustes" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Divider, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Item, { itemKey: "3", children: "Salir" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Dropdown, { placement: state2.placement ?? "bottomLeft", trigger: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", children: "Men\xFA \u25BE" }), menu: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Menu, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Item, { itemKey: "1", children: "Perfil" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Item, { itemKey: "2", children: "Ajustes" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Divider, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Item, { itemKey: "3", children: "Salir" })
     ] }) }) }, previewKey);
   }
   function MenuPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Menu, { mode: state2.mode === "horizontal" ? "horizontal" : "vertical", selectable: true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Item, { itemKey: "home", children: "Inicio" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Item, { itemKey: "docs", children: "Documentaci\xF3n" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Divider, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Menu.Item, { itemKey: "about", children: "Acerca de" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Menu, { mode: state2.mode === "horizontal" ? "horizontal" : "vertical", selectable: true, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Item, { itemKey: "home", children: "Inicio" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Item, { itemKey: "docs", children: "Documentaci\xF3n" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Divider, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Menu.Item, { itemKey: "about", children: "Acerca de" })
     ] }) }, previewKey);
   }
   function PaginationPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Pagination, { count: Math.round(Number(state2.count)) || 10, defaultPage: Math.round(Number(state2.defaultPage)) || 1, siblingCount: Math.round(Number(state2.siblingCount)) || 1 }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Pagination, { count: Math.round(Number(state2.count)) || 10, defaultPage: Math.round(Number(state2.defaultPage)) || 1, siblingCount: Math.round(Number(state2.siblingCount)) || 1 }) }, previewKey);
   }
   function StepsPreview({ state: state2, previewKey, demoStyle, demoClass }) {
     const current = Math.max(0, Math.round(Number(state2.current)) || 1);
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Steps, { current, direction: state2.direction === "vertical" ? "vertical" : "horizontal", clickable: Boolean(state2.clickable), items: [
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Steps, { current, direction: state2.direction === "vertical" ? "vertical" : "horizontal", clickable: Boolean(state2.clickable), items: [
       { title: "Inicio", description: "Datos b\xE1sicos" },
       { title: "Proceso", description: "Validaci\xF3n" },
       { title: "Fin", description: "Confirmaci\xF3n" }
     ] }) }, previewKey);
   }
   function DrawerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    const [open, setOpen] = (0, import_react38.useState)(Boolean(state2.defaultOpen));
-    (0, import_react38.useEffect)(() => {
+    const [open, setOpen] = (0, import_react39.useState)(Boolean(state2.defaultOpen));
+    (0, import_react39.useEffect)(() => {
       setOpen(Boolean(state2.defaultOpen));
     }, [state2.defaultOpen]);
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: ["mimicus-drawer-preview", "mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "solid", onClick: () => setOpen(true), children: "Abrir drawer" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Drawer, { open, placement: state2.placement ?? "left", width: Math.round(Number(state2.width)) || 280, title: "Panel lateral", onClose: () => setOpen(false), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { style: { margin: 0, fontSize: "0.9rem" }, children: "Contenido del drawer. Clic fuera o Escape para cerrar (controlador vanilla)." }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: ["mimicus-drawer-preview", "mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", onClick: () => setOpen(true), children: "Abrir drawer" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Drawer, { open, placement: state2.placement ?? "left", width: Math.round(Number(state2.width)) || 280, title: "Panel lateral", onClose: () => setOpen(false), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("p", { style: { margin: 0, fontSize: "0.9rem" }, children: "Contenido del drawer. Clic fuera o Escape para cerrar (controlador vanilla)." }) })
     ] }, previewKey);
   }
   function BottomNavPreview({ state: state2, previewKey, demoStyle, demoClass }) {
     const icons = ["\u2302", "\u2661", "\u25CE", "\u2630"];
     const labels = ["Inicio", "Favoritos", "Cerca", "M\xE1s"];
     const n = Math.min(5, Math.max(3, Math.round(Number(state2.actionCount)) || 4));
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(BottomNavigation, { value: state2.value ?? "0", showLabels: state2.showLabels !== false, children: Array.from({ length: n }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(BottomNavigationAction, { value: String(i), label: labels[i], icon: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { children: icons[i] }) }, i)) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(BottomNavigation, { value: state2.value ?? "0", showLabels: state2.showLabels !== false, children: Array.from({ length: n }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(BottomNavigationAction, { value: String(i), label: labels[i], icon: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("span", { children: icons[i] }) }, i)) }) }, previewKey);
   }
   function LinkPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("p", { children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { children: [
       "Ejemplo de ",
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(NavLink, { href: "#", underline: state2.underline ?? "hover", color: state2.color ?? "primary", children: "enlace tem\xE1tico" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(NavLink, { href: "#", underline: state2.underline ?? "hover", color: state2.color ?? "primary", children: "enlace tem\xE1tico" }),
       " en un p\xE1rrafo."
     ] }) }, previewKey);
   }
   function SpeedDialPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: { ...parseStyleString(demoStyle), minHeight: "10rem", display: "flex", alignItems: "flex-end", justifyContent: "flex-end", padding: "1rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(SpeedDial, { direction: state2.direction ?? "up", ariaLabel: "Acciones r\xE1pidas", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SpeedDialAction, { actionKey: "copy", icon: "\u{1F4CB}", tooltip: "Copiar" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SpeedDialAction, { actionKey: "save", icon: "\u{1F4BE}", tooltip: "Guardar" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SpeedDialAction, { actionKey: "share", icon: "\u2197", tooltip: "Compartir" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-nav-preview", demoClass].filter(Boolean).join(" "), style: { ...parseStyleString(demoStyle), minHeight: "10rem", display: "flex", alignItems: "flex-end", justifyContent: "flex-end", padding: "1rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(SpeedDial, { direction: state2.direction ?? "up", ariaLabel: "Acciones r\xE1pidas", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SpeedDialAction, { actionKey: "copy", icon: "\u{1F4CB}", tooltip: "Copiar" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SpeedDialAction, { actionKey: "save", icon: "\u{1F4BE}", tooltip: "Guardar" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SpeedDialAction, { actionKey: "share", icon: "\u2197", tooltip: "Compartir" })
     ] }) }, previewKey);
   }
   var DEMO_AUTOCOMPLETE = [{ value: "react", label: "React" }, { value: "svelte", label: "Svelte" }, { value: "vue", label: "Vue" }];
@@ -10816,30 +11608,30 @@ ${setup}`;
   var DEMO_TREE = [{ title: "General", value: "gen", children: [{ title: "Button", value: "btn" }, { title: "Input", value: "inp" }] }, { title: "Navigation", value: "nav" }];
   var CHIP_OPTIONS = [{ value: "primary", label: "Primary" }, { value: "success", label: "Success" }, { value: "warning", label: "Warning" }, { value: "danger", label: "Danger" }];
   function SwitchPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Switch, { checked: state2.checked, disabled: state2.disabled, loading: state2.loading, children: details.label ?? "Texto de demostraci\xF3n" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Switch, { checked: state2.checked, disabled: state2.disabled, loading: state2.loading, children: details.label ?? "Texto de demostraci\xF3n" }) }, previewKey);
   }
   function CheckboxIconPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
       CheckboxIcon,
       {
         checked: state2.checked,
         disabled: state2.disabled,
         loading: state2.loading,
         variant: state2.variant,
-        iconChecked: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: String(details.previewIconTrue ?? "mdi:check") }),
-        iconUnchecked: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: String(details.previewIconFalse ?? "mdi:close") }),
+        iconChecked: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: String(details.previewIconTrue ?? "mdi:check") }),
+        iconUnchecked: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: String(details.previewIconFalse ?? "mdi:close") }),
         children: details.previewLabel ?? "Texto de demostraci\xF3n"
       }
     ) }, previewKey);
   }
   function CheckboxChipPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(CheckboxChip, { value: state2.color ?? "primary", options: CHIP_OPTIONS }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(CheckboxChip, { value: state2.color ?? "primary", options: CHIP_OPTIONS }) }, previewKey);
   }
   function LabeledSwitchPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(LabeledSwitch, { label: state2.label ?? "Publicar en cat\xE1logo", checked: state2.checked, readonly: state2.readonly }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(LabeledSwitch, { label: state2.label ?? "Publicar en cat\xE1logo", checked: state2.checked, readonly: state2.readonly }) }, previewKey);
   }
   function TransferBoardPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
       TransferBoard,
       {
         stackCount: Math.round(Number(state2.stackCount)) || 3,
@@ -10850,66 +11642,66 @@ ${setup}`;
     ) }, previewKey);
   }
   function InputPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(FormItem, { label: "Campo de texto", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Input, { disabled: state2.disabled, allowClear: Boolean(state2.allowClear), placeholder: details.placeholder ?? "Escribe aqu\xED\u2026", status: state2.status }) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(FormItem, { label: "Campo de texto", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Input, { disabled: state2.disabled, allowClear: Boolean(state2.allowClear), placeholder: details.placeholder ?? "Escribe aqu\xED\u2026", status: state2.status }) }) }, previewKey);
   }
   function AutoCompletePreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(AutoComplete, { options: DEMO_AUTOCOMPLETE, disabled: state2.disabled, placeholder: "Buscar framework\u2026" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(AutoComplete, { options: DEMO_AUTOCOMPLETE, disabled: state2.disabled, placeholder: "Buscar framework\u2026" }) }, previewKey);
   }
   function SelectPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Select, { disabled: state2.disabled, placeholder: "Elige una opci\xF3n", options: DEMO_AUTOCOMPLETE, defaultValue: "react" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Select, { disabled: state2.disabled, placeholder: "Elige una opci\xF3n", options: DEMO_AUTOCOMPLETE, defaultValue: "react" }) }, previewKey);
   }
   function SliderPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Slider, { defaultValue: Math.round(Number(state2.defaultValue)) || 40, min: 0, max: 100, disabled: state2.disabled, showValue: true }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Slider, { defaultValue: Math.round(Number(state2.defaultValue)) || 40, min: 0, max: 100, disabled: state2.disabled, showValue: true }) }, previewKey);
   }
   function RatePreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Rate, { defaultValue: 2.5, allowHalf: Boolean(state2.allowHalf), disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Rate, { defaultValue: 2.5, allowHalf: Boolean(state2.allowHalf), disabled: state2.disabled }) }, previewKey);
   }
   function RadioPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(RadioGroup, { direction: state2.direction ?? "horizontal", defaultValue: "a", options: [{ value: "a", label: "Opci\xF3n A" }, { value: "b", label: "Opci\xF3n B" }, { value: "c", label: "Opci\xF3n C", disabled: state2.disabled }] }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(RadioGroup, { direction: state2.direction ?? "horizontal", defaultValue: "a", options: [{ value: "a", label: "Opci\xF3n A" }, { value: "b", label: "Opci\xF3n B" }, { value: "c", label: "Opci\xF3n C", disabled: state2.disabled }] }) }, previewKey);
   }
   function CheckboxPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Checkbox, { defaultChecked: true, indeterminate: Boolean(state2.indeterminate), disabled: state2.disabled, children: "Acepto t\xE9rminos" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Checkbox, { defaultChecked: true, indeterminate: Boolean(state2.indeterminate), disabled: state2.disabled, children: "Acepto t\xE9rminos" }) }, previewKey);
   }
   function InputNumberPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(InputNumber, { defaultValue: 3, min: 0, max: 10, step: 1, disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(InputNumber, { defaultValue: 3, min: 0, max: 10, step: 1, disabled: state2.disabled }) }, previewKey);
   }
   function TransferPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Transfer, { dataSource: DEMO_TRANSFER, targetKeys: ["2"], disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Transfer, { dataSource: DEMO_TRANSFER, targetKeys: ["2"], disabled: state2.disabled }) }, previewKey);
   }
   function UploadPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Upload, { multiple: Boolean(state2.multiple), disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Upload, { multiple: Boolean(state2.multiple), disabled: state2.disabled }) }, previewKey);
   }
   function ColorPickerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ColorPicker, { defaultValue: state2.defaultValue ?? "#1677ff", disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ColorPicker, { defaultValue: state2.defaultValue ?? "#1677ff", disabled: state2.disabled }) }, previewKey);
   }
   function DatePickerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(DatePicker, { disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(DatePicker, { disabled: state2.disabled }) }, previewKey);
   }
   function TimePickerPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TimePicker, { disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(TimePicker, { disabled: state2.disabled }) }, previewKey);
   }
   function CascaderPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Cascader, { options: DEMO_CASCADER, disabled: state2.disabled, placeholder: "Ciudad" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Cascader, { options: DEMO_CASCADER, disabled: state2.disabled, placeholder: "Ciudad" }) }, previewKey);
   }
   function TreeSelectPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TreeSelect, { treeData: DEMO_TREE, disabled: state2.disabled, placeholder: "Componente" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(TreeSelect, { treeData: DEMO_TREE, disabled: state2.disabled, placeholder: "Componente" }) }, previewKey);
   }
   function MentionsPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Mentions, { options: [{ value: "paty", label: "Paty" }, { value: "mimicus", label: "Mimicus" }], disabled: state2.disabled }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Mentions, { options: [{ value: "paty", label: "Paty" }, { value: "mimicus", label: "Mimicus" }], disabled: state2.disabled }) }, previewKey);
   }
   function ToggleButtonPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(ToggleButtonGroup, { exclusive: state2.exclusive !== false, orientation: state2.orientation ?? "horizontal", defaultValue: "web", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ToggleButton, { value: "web", children: "Web" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ToggleButton, { value: "android", children: "Android" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ToggleButton, { value: "ios", children: "iOS" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(ToggleButtonGroup, { exclusive: state2.exclusive !== false, orientation: state2.orientation ?? "horizontal", defaultValue: "web", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ToggleButton, { value: "web", children: "Web" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ToggleButton, { value: "android", children: "Android" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ToggleButton, { value: "ios", children: "iOS" })
     ] }) }, previewKey);
   }
   function FormPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Form, { layout: state2.layout ?? "vertical", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(FormItem, { label: "Nombre", required: true, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Input, { placeholder: "Tu nombre" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(FormItem, { label: "Framework", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Select, { options: DEMO_AUTOCOMPLETE, defaultValue: "react" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(FormItem, { label: "Notas", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TextArea, { rows: 2, placeholder: details.placeholder ?? "Comentarios" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "solid", type: "submit", children: "Enviar" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-form-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Form, { layout: state2.layout ?? "vertical", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(FormItem, { label: "Nombre", required: true, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Input, { placeholder: "Tu nombre" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(FormItem, { label: "Framework", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Select, { options: DEMO_AUTOCOMPLETE, defaultValue: "react" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(FormItem, { label: "Notas", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(TextArea, { rows: 2, placeholder: details.placeholder ?? "Comentarios" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", type: "submit", children: "Enviar" })
     ] }) }, previewKey);
   }
   var DEMO_TABLE_COLS = [{ title: "Nombre", dataIndex: "name", key: "name", sorter: true }, { title: "Edad", dataIndex: "age", key: "age", sorter: true }, { title: "Ciudad", dataIndex: "city", key: "city" }];
@@ -10917,97 +11709,97 @@ ${setup}`;
   var DEMO_DISPLAY_TREE = [{ key: "0", title: "Ra\xEDz", children: [{ key: "0-0", title: "Hijo A", children: [{ key: "0-0-0", title: "Nieto A1" }] }, { key: "0-1", title: "Hijo B" }] }];
   function BadgePreview({ state: state2, previewKey, demoStyle, demoClass }) {
     const count = Math.round(Number(state2.count)) || 5;
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Badge, { count: state2.dot ? void 0 : count, dot: Boolean(state2.dot), showZero: Boolean(state2.showZero), max: Math.round(Number(state2.max)) || 99, color: state2.color ?? "primary", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "ghost", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: "mdi:bell-outline" }) }) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Badge, { count: state2.dot ? void 0 : count, dot: Boolean(state2.dot), showZero: Boolean(state2.showZero), max: Math.round(Number(state2.max)) || 99, color: state2.color ?? "primary", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "ghost", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: "mdi:bell-outline" }) }) }) }, previewKey);
   }
   function TagPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Tag, { variant: state2.variant ?? "ghost", shape: state2.shape ?? "pill", uppercase: Boolean(state2.upper), color: state2.color, icon: details.icon ? /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: String(details.icon) }) : void 0, children: details.text ?? "Nuevo" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Tag, { variant: state2.variant ?? "ghost", shape: state2.shape ?? "pill", uppercase: Boolean(state2.upper), color: state2.color, icon: details.icon ? /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: String(details.icon) }) : void 0, children: details.text ?? "Nuevo" }) }, previewKey);
   }
   function AvatarPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: state2.group ? /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(AvatarGroup, { max: Math.round(Number(state2.max)) || 4, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { alt: "Ana", children: "A" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { alt: "Luis", children: "L" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { alt: "Sof\xEDa", children: "S" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { alt: "Mar\xEDa", children: "M" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { alt: "Pedro", children: "P" })
-    ] }) : /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { variant: state2.variant ?? "circular", alt: "Remy Sharp", children: state2.withImage ? void 0 : "RS" }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: state2.group ? /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(AvatarGroup, { max: Math.round(Number(state2.max)) || 4, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { alt: "Ana", children: "A" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { alt: "Luis", children: "L" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { alt: "Sof\xEDa", children: "S" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { alt: "Mar\xEDa", children: "M" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { alt: "Pedro", children: "P" })
+    ] }) : /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { variant: state2.variant ?? "circular", alt: "Remy Sharp", children: state2.withImage ? void 0 : "RS" }) }, previewKey);
   }
   function CarouselPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    const slides = ["#1", "#2", "#3", "#4"].map((n, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Card, { variant: "flat", style: { minHeight: "7rem", display: "flex", alignItems: "center", justifyContent: "center", background: `hsl(${i * 70} 45% 35%)` }, children: n }, i));
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 24rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Carousel, { autoplay: Boolean(state2.autoplay), arrows: Boolean(state2.arrows), dots: state2.dots !== false, infinite: state2.infinite !== false, children: slides }) }, previewKey);
+    const slides = ["#1", "#2", "#3", "#4"].map((n, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Card, { variant: "flat", style: { minHeight: "7rem", display: "flex", alignItems: "center", justifyContent: "center", background: `hsl(${i * 70} 45% 35%)` }, children: n }, i));
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 24rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Carousel, { autoplay: Boolean(state2.autoplay), arrows: Boolean(state2.arrows), dots: state2.dots !== false, infinite: state2.infinite !== false, children: slides }) }, previewKey);
   }
   function CollapsePreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 28rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Collapse, { accordion: Boolean(state2.accordion), defaultActiveKey: state2.accordion ? "1" : ["1"], children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(CollapsePanel, { panelKey: "1", header: "Panel 1", defaultOpen: true, children: "Contenido del primer panel." }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(CollapsePanel, { panelKey: "2", header: "Panel 2", children: "Segundo panel colapsable." }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(CollapsePanel, { panelKey: "3", header: "Panel 3", children: "Tercer panel de ejemplo." })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 28rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Collapse, { accordion: Boolean(state2.accordion), defaultActiveKey: state2.accordion ? "1" : ["1"], children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(CollapsePanel, { panelKey: "1", header: "Panel 1", defaultOpen: true, children: "Contenido del primer panel." }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(CollapsePanel, { panelKey: "2", header: "Panel 2", children: "Segundo panel colapsable." }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(CollapsePanel, { panelKey: "3", header: "Panel 3", children: "Tercer panel de ejemplo." })
     ] }) }, previewKey);
   }
   function DescriptionsPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Descriptions, { title: "Usuario", bordered: Boolean(state2.bordered), column: Math.round(Number(state2.column)) || 3, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(DescriptionsItem, { label: "Nombre", children: "Patricia" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(DescriptionsItem, { label: "Tel\xE9fono", children: "+57 300 000 0000" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(DescriptionsItem, { label: "Ciudad", children: "Bogot\xE1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(DescriptionsItem, { label: "Rol", span: 2, children: "Administrador" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Descriptions, { title: "Usuario", bordered: Boolean(state2.bordered), column: Math.round(Number(state2.column)) || 3, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(DescriptionsItem, { label: "Nombre", children: "Patricia" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(DescriptionsItem, { label: "Tel\xE9fono", children: "+57 300 000 0000" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(DescriptionsItem, { label: "Ciudad", children: "Bogot\xE1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(DescriptionsItem, { label: "Rol", span: 2, children: "Administrador" })
     ] }) }, previewKey);
   }
   function EmptyPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Empty, { description: state2.description ?? "No data", image: state2.image ?? "default", children: state2.showAction && /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "solid", children: "Crear" }) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Empty, { description: state2.description ?? "No data", image: state2.image ?? "default", children: state2.showAction && /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", children: "Crear" }) }) }, previewKey);
   }
   function QRCodePreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(QRCode, { value: details.value ?? "https://mimicus.dev", size: Math.round(Number(state2.size)) || 128, bordered: state2.bordered !== false }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(QRCode, { value: details.value ?? "https://mimicus.dev", size: Math.round(Number(state2.size)) || 128, bordered: state2.bordered !== false }) }, previewKey);
   }
   function SegmentedPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Segmented, { block: Boolean(state2.block), defaultValue: "list", options: [{ value: "list", label: "Lista" }, { value: "kanban", label: "Kanban" }, { value: "grid", label: "Grid" }] }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Segmented, { block: Boolean(state2.block), defaultValue: "list", options: [{ value: "list", label: "Lista" }, { value: "kanban", label: "Kanban" }, { value: "grid", label: "Grid" }] }) }, previewKey);
   }
   function StatisticPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Statistic, { title: state2.title ?? "Balance", value: state2.value ?? 112893, prefix: state2.prefix ?? "$", precision: state2.precision != null ? Math.round(Number(state2.precision)) : void 0, suffix: state2.suffix }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Statistic, { title: state2.title ?? "Balance", value: state2.value ?? 112893, prefix: state2.prefix ?? "$", precision: state2.precision != null ? Math.round(Number(state2.precision)) : void 0, suffix: state2.suffix }) }, previewKey);
   }
   function TablePreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Table, { columns: DEMO_TABLE_COLS, dataSource: DEMO_TABLE_DATA, bordered: Boolean(state2.bordered), sortable: Boolean(state2.sortable) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Table, { columns: DEMO_TABLE_COLS, dataSource: DEMO_TABLE_DATA, bordered: Boolean(state2.bordered), sortable: Boolean(state2.sortable) }) }, previewKey);
   }
   function TimelinePreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Timeline, { mode: state2.mode ?? "left", pending: state2.pending ? "Cargando\u2026" : void 0, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TimelineItem, { label: "2024-01", color: "success", children: "Cuenta creada" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TimelineItem, { label: "2024-03", children: "Primer login" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TimelineItem, { label: "2024-06", color: "error", children: "Intento fallido" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Timeline, { mode: state2.mode ?? "left", pending: state2.pending ? "Cargando\u2026" : void 0, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(TimelineItem, { label: "2024-01", color: "success", children: "Cuenta creada" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(TimelineItem, { label: "2024-03", children: "Primer login" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(TimelineItem, { label: "2024-06", color: "error", children: "Intento fallido" })
     ] }) }, previewKey);
   }
   function TooltipPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("padding: 1.5rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Tooltip, { title: state2.title ?? "Texto de ayuda", placement: state2.placement ?? "top", arrow: Boolean(state2.arrow), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "solid", children: "Hover me" }) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("padding: 1.5rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Tooltip, { title: state2.title ?? "Texto de ayuda", placement: state2.placement ?? "top", arrow: Boolean(state2.arrow), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", children: "Hover me" }) }) }, previewKey);
   }
   function TourPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: ["mimicus-display-preview mimicus-tour-demo", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("min-height: 10rem; position: relative", demoStyle)), children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "ghost", "data-tour-a": true, id: "tour-a", children: "Paso 1" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "ghost", "data-tour-b": true, id: "tour-b", style: { marginLeft: "0.5rem" }, children: "Paso 2" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Tour, { open: Boolean(state2.open), steps: [{ target: "#tour-a", title: "Bienvenida", description: "Primer paso del tour." }, { target: "#tour-b", title: "Siguiente", description: "Segundo objetivo." }] })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: ["mimicus-display-preview mimicus-tour-demo", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("min-height: 12rem", demoStyle)), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "ghost", "data-tour-a": true, id: "tour-a", children: "Paso 1" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "ghost", "data-tour-b": true, id: "tour-b", children: "Paso 2" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Tour, { open: Boolean(state2.open), steps: [{ target: "#tour-a", title: "Bienvenida", description: "Primer paso del tour." }, { target: "#tour-b", title: "Siguiente", description: "Segundo objetivo." }] })
     ] }, previewKey);
   }
   function TreePreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Tree, { treeData: DEMO_DISPLAY_TREE, checkable: Boolean(state2.checkable), defaultExpandAll: state2.defaultExpandAll !== false }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Tree, { treeData: DEMO_DISPLAY_TREE, checkable: Boolean(state2.checkable), defaultExpandAll: state2.defaultExpandAll !== false }) }, previewKey);
   }
   function CalendarPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Calendar, { fullscreen: Boolean(state2.fullscreen) }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Calendar, { fullscreen: Boolean(state2.fullscreen) }) }, previewKey);
   }
   function ListPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 22rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(List, { dense: Boolean(state2.dense), subheader: state2.subheader ? "Carpetas" : void 0, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(ListItem, { button: true, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ListItemAvatar, { children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { alt: "F", children: "F" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ListItemText, { primary: "Fotos", secondary: "Ene 9, 2024" })
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("max-width: 22rem", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(List, { dense: Boolean(state2.dense), subheader: state2.subheader ? "Carpetas" : void 0, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(ListItem, { button: true, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ListItemAvatar, { children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { alt: "F", children: "F" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ListItemText, { primary: "Fotos", secondary: "Ene 9, 2024" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(ListItem, { button: true, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ListItemAvatar, { children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Avatar, { alt: "W", children: "W" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ListItemText, { primary: "Trabajo", secondary: "Ene 7, 2024" })
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(ListItem, { button: true, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ListItemAvatar, { children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Avatar, { alt: "W", children: "W" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ListItemText, { primary: "Trabajo", secondary: "Ene 7, 2024" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ListItem, { button: true, secondaryAction: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: "mdi:chevron-right" }), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ListItemText, { primary: "Vacaciones", secondary: "Jul 20, 2024" }) })
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ListItem, { button: true, secondaryAction: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: "mdi:chevron-right" }), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ListItemText, { primary: "Vacaciones", secondary: "Jul 20, 2024" }) })
     ] }) }, previewKey);
   }
   function CodeBlockPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(CodeBlock, { value: state2.code ?? details.code ?? "", readOnly: true, minHeight: state2.minHeight ?? "7rem", maxHeight: "18rem", lang: "jsx", lineWrapping: true }) }, previewKey);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(CodeBlock, { value: state2.code ?? details.code ?? "", readOnly: true, minHeight: state2.minHeight ?? "7rem", maxHeight: "18rem", lang: "jsx", lineWrapping: true }) }, previewKey);
   }
   function SidePanelPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
-    const [open, setOpen] = (0, import_react38.useState)(state2.open !== false);
+    const [open, setOpen] = (0, import_react39.useState)(state2.open !== false);
     const drawer = Boolean(state2.drawer);
-    (0, import_react38.useEffect)(() => {
+    (0, import_react39.useEffect)(() => {
       setOpen(state2.open !== false);
     }, [state2.open]);
     const sectionCount = Math.min(6, Math.max(1, Math.round(Number(details.sectionCount)) || 3));
@@ -11019,23 +11811,23 @@ ${setup}`;
       color: colors[i % colors.length],
       count: 4 + i
     }));
-    const railView = /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SidePanel.View, { mode: "rail", gap: "0.35rem", children: sections.map((s) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Button, { variant: "text", shape: "rect", color: s.color, className: "pg-panel-rail__btn", title: s.label, style: { width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: s.icon, style: { fontSize: "1.2rem" } }) }, s.id)) });
-    const expandedView = /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SidePanel.View, { mode: "expanded", gap: "0.25rem", children: sections.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SidePanelSection, { icon: s.icon, label: s.label, color: s.color, open: i === 0, count: s.count, onToggle: () => {
+    const railView = /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SidePanel.View, { mode: "rail", gap: "0.35rem", children: sections.map((s) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "text", shape: "rect", color: s.color, className: "pg-panel-rail__btn", title: s.label, style: { width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: s.icon, style: { fontSize: "1.2rem" } }) }, s.id)) });
+    const expandedView = /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SidePanel.View, { mode: "expanded", gap: "0.25rem", children: sections.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SidePanelSection, { icon: s.icon, label: s.label, color: s.color, open: i === 0, count: s.count, onToggle: () => {
     }, onHeaderClick: () => {
-    }, children: Array.from({ length: 2 }, (_, j) => /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Button, { variant: "text", shape: "rect", color: s.color, style: { justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" }, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: "mdi:file-document-outline" }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("span", { className: "sm-item-text", children: [
+    }, children: Array.from({ length: 2 }, (_, j) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Button, { variant: "text", shape: "rect", color: s.color, style: { justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" }, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: "mdi:file-document-outline" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("span", { className: "sm-item-text", children: [
         "Demo ",
         j + 1
       ] })
     ] }, j)) }, s.id)) });
     const shellStyle = parseStyleString(mergeStyleString("width:100%;height:clamp(14rem,42vh,18rem);border:1px solid var(--mimicus-b-color);border-radius:var(--mimicus-ui-radius,0.5rem);overflow:hidden;display:flex", demoStyle));
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["layout-side-panel-preview", demoClass].filter(Boolean).join(" "), style: shellStyle, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SidePanel, { open, drawer, onToggle: drawer ? void 0 : () => setOpen((v) => !v), onClose: drawer ? () => {
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["layout-side-panel-preview", demoClass].filter(Boolean).join(" "), style: shellStyle, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SidePanel, { open, drawer, onToggle: drawer ? void 0 : () => setOpen((v) => !v), onClose: drawer ? () => {
     } : void 0, collapsedView: railView, expandedView, style: { flex: "1 1 auto", minHeight: 0 } }) }, previewKey);
   }
   function LoginButtonPreview({ previewKey, demoStyle, demoClass }) {
-    const session = (0, import_react38.useMemo)(() => createDemoSession(), []);
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(ContapymeSessionProvider, { session, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-login-button-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width:100%;padding:0.65rem 0.75rem;border:1px solid var(--mimicus-b-color);border-radius:var(--mimicus-ui-radius,0.5rem);background:color-mix(in srgb,var(--mimicus-bg-secondary),transparent 8%)", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(FlexLayout, { items: "center", justify: "flex-end", gap: "0.5rem", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(LoginButton, { showPasswordToggle: true, showRemember: true }) }) }, previewKey) });
+    const session = (0, import_react39.useMemo)(() => createDemoSession(), []);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(ContapymeSessionProvider, { session, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-login-button-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width:100%;padding:0.65rem 0.75rem;border:1px solid var(--mimicus-b-color);border-radius:var(--mimicus-ui-radius,0.5rem);background:color-mix(in srgb,var(--mimicus-bg-secondary),transparent 8%)", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(FlexLayout, { items: "center", justify: "flex-end", gap: "0.5rem", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(LoginButton, { showPasswordToggle: true, showRemember: true }) }) }, previewKey) });
   }
   var DG_CATS = ["Papeler\xEDa", "Tecnolog\xEDa", "Aseo", "Cafeter\xEDa", "Mobiliario", "Empaques"];
   var DG_REGS = ["Andina", "Caribe", "Pac\xEDfica", "Orinoqu\xEDa"];
@@ -11073,9 +11865,9 @@ ${setup}`;
   ];
   function DataGridPreview({ state: state2, previewKey, demoStyle, demoClass }) {
     const rowCount = Math.max(0, Math.round(Number(state2.rowCount)) || 1e3);
-    const rows = (0, import_react38.useMemo)(() => buildDataGridRows(rowCount), [rowCount]);
-    const rowGroupCols = (0, import_react38.useMemo)(() => state2.groupBy ? [state2.groupBy] : [], [state2.groupBy]);
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width:100%", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(
+    const rows = (0, import_react39.useMemo)(() => buildDataGridRows(rowCount), [rowCount]);
+    const rowGroupCols = (0, import_react39.useMemo)(() => state2.groupBy ? [state2.groupBy] : [], [state2.groupBy]);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-display-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width:100%", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
       DataGrid,
       {
         columns: DG_COLUMNS,
@@ -11091,6 +11883,129 @@ ${setup}`;
         height: Math.round(Number(state2.height)) || 460
       }
     ) }, previewKey);
+  }
+  function overlayScopeProps(scope) {
+    return { _scope: scope === "local" ? "local" : "global" };
+  }
+  function ModalPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const [open, setOpen] = (0, import_react39.useState)(false);
+    const [loading, setLoading] = (0, import_react39.useState)(false);
+    const scope = state2._scope ?? "global";
+    const localShell = scope === "local";
+    (0, import_react39.useEffect)(() => {
+      if (!open || !details.bSimularLoading) {
+        setLoading(false);
+        return void 0;
+      }
+      setLoading(true);
+      const t = window.setTimeout(() => setLoading(false), 5e3);
+      return () => window.clearTimeout(t);
+    }, [open, details.bSimularLoading]);
+    const title = details.bTituloPorSlot !== false && (details.titulo || details.icono) ? /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("span", { style: { display: "inline-flex", alignItems: "center", gap: "0.4rem" }, children: [
+      details.icono && /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: String(details.icono) }),
+      details.titulo ?? "Modal"
+    ] }) : void 0;
+    const body = /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(import_jsx_runtime52.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", onClick: () => setOpen(true), children: "Abrir modal" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+        Modal,
+        {
+          open,
+          loading,
+          variant: state2.variant ?? "solid",
+          showCloseHeader: state2.showCloseHeader !== false,
+          title,
+          onClose: () => setOpen(false),
+          ...overlayScopeProps(scope),
+          children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { style: { margin: 0, maxWidth: "22rem" }, children: [
+            "Contenido del modal. Clic fuera o Escape para cerrar (salvo ",
+            /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("code", { children: "notClose" }),
+            ")."
+          ] })
+        }
+      )
+    ] });
+    return localShell ? /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey) : /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey);
+  }
+  function DialogPreview({ state: state2, previewKey, demoStyle, demoClass, details }) {
+    const [open, setOpen] = (0, import_react39.useState)(false);
+    const scope = state2._scope ?? "global";
+    const localShell = scope === "local";
+    const body = /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(import_jsx_runtime52.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", onClick: () => setOpen(true), children: "Abrir dialog" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Dialog, { open, notClose: Boolean(state2.notClose), backeffect: state2.backeffect ?? "blur", onClose: () => setOpen(false), ...overlayScopeProps(scope), className: "mimicus-dialog-demo", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Card, { variant: "flat", className: "blockCloseClick", style: { padding: "1rem", minWidth: "16rem" }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("strong", { style: { display: "block", marginBottom: "0.35rem" }, children: details.titulo ?? "Dialog demo" }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { style: { margin: 0, fontSize: "0.9rem" }, children: [
+          "Di\xE1logo nativo ",
+          /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("code", { children: "<dialog>" }),
+          " con backdrop configurable."
+        ] })
+      ] }) })
+    ] });
+    return localShell ? /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey) : /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey);
+  }
+  function ActionDrawerPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    const [open, setOpen] = (0, import_react39.useState)(false);
+    const [loading, setLoading] = (0, import_react39.useState)(false);
+    const scope = state2._scope ?? "global";
+    const side = state2.side ?? "right";
+    (0, import_react39.useEffect)(() => {
+      if (!open || !details.bSimularLoading) {
+        setLoading(false);
+        return void 0;
+      }
+      setLoading(true);
+      const t = window.setTimeout(() => setLoading(false), 5e3);
+      return () => window.clearTimeout(t);
+    }, [open, details.bSimularLoading]);
+    const body = /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(import_jsx_runtime52.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", onClick: () => setOpen(true), children: "Abrir action drawer" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(ActionDrawer, { open, loading, side, onClose: () => setOpen(false), ...overlayScopeProps(scope), children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("strong", { style: { display: "block", marginBottom: "0.35rem" }, children: "Acciones secundarias" }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { style: { margin: 0, fontSize: "0.9rem" }, children: [
+          "Panel deslizante desde ",
+          /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("code", { children: side }),
+          "."
+        ] })
+      ] })
+    ] });
+    return scope === "local" ? /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview--local", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey) : /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: body }, previewKey);
+  }
+  function LoadingPreview({ state: state2, previewKey, demoStyle, demoClass, demoConfig }) {
+    const [open, setOpen] = (0, import_react39.useState)(false);
+    const autoCloseSec = Number(demoConfig?.autoCloseSec) || 3;
+    (0, import_react39.useEffect)(() => {
+      if (!open) return void 0;
+      const t = window.setTimeout(() => setOpen(false), autoCloseSec * 1e3);
+      return () => window.clearTimeout(t);
+    }, [open, autoCloseSec]);
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", onClick: () => setOpen(true), children: "Mostrar loading" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Loading, { open, color: state2.color, onClose: () => setOpen(false) })
+    ] }, previewKey);
+  }
+  function ToasterPreview({ previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("flex-direction: column; gap: 0.5rem", demoStyle)), children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Toaster, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", color: "success", onClick: () => toastSuccess("Operaci\xF3n completada"), children: "toastSuccess" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "solid", color: "error", onClick: () => toastError("Ha ocurrido un error"), children: "toastError" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { variant: "outlined", onClick: () => {
+        const id = toastLoading("Procesando\u2026");
+        window.setTimeout(() => toastRemove(id), 2500);
+      }, children: "toastLoading" })
+    ] }, previewKey);
+  }
+  function AlertPreview({ state: state2, details, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Alert, { color: state2.color ?? "info", title: state2.title, inline: Boolean(state2.inline), style: { width: state2.inline ? void 0 : "100%", maxWidth: "28rem" }, children: details.body ?? "Texto descriptivo del alert." }) }, previewKey);
+  }
+  function TipInfoPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(TipInfo, { label: state2.label, descripcion: state2.descripcion, kind: state2.kind ?? "info", trigger: state2.trigger ?? "click", useModal: Boolean(state2.useModal) }) }, previewKey);
+  }
+  function InvokedFloaterPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(InvokedFloater, { anchorLabel: state2.anchorLabel, panelText: state2.panelText, side: state2.side ?? "bottom", align: state2.align ?? "center", trigger: state2.trigger ?? "click" }) }, previewKey);
+  }
+  function FloatingComponentPreview({ state: state2, previewKey, demoStyle, demoClass }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: ["mimicus-floating-component-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width: 100%", demoStyle)), children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(FloatingComponent, { showfloat: Boolean(state2.showfloat), rowText: state2.rowText, horizontal: state2.horizontal ?? "right", vertical: state2.vertical ?? "center" }) }, previewKey);
   }
   var previewBuiltins = {
     card: CardPreview,
@@ -11151,19 +12066,28 @@ ${setup}`;
     "disp-calendar": CalendarPreview,
     "disp-list": ListPreview,
     "cmp-code-block": CodeBlockPreview,
-    "contapyme-login": LoginButtonPreview
+    "contapyme-login": LoginButtonPreview,
+    modal: ModalPreview,
+    dialog: DialogPreview,
+    "action-drawer": ActionDrawerPreview,
+    loading: LoadingPreview,
+    toaster: ToasterPreview,
+    "cmp-alert": AlertPreview,
+    "cmp-tip-info": TipInfoPreview,
+    "cmp-invoked-floater": InvokedFloaterPreview,
+    "cmp-floating-component": FloatingComponentPreview
   };
   function PreviewStub({ template, componentName }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "mimicus-preview-stub mimicus-preview-stub--template", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "mimicus-preview-stub__badge", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: "mdi:television-play" }),
+    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: "mimicus-preview-stub mimicus-preview-stub--template", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: "mimicus-preview-stub__badge", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: "mdi:television-play" }),
         " Vista \xAB",
         template,
         "\xBB"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("p", { className: "mimicus-preview-stub__hint", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("p", { className: "mimicus-preview-stub__hint", children: [
         "Preview ",
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("strong", { children: componentName ?? template }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("strong", { children: componentName ?? template }),
         " sin plantilla JSON."
       ] })
     ] });
@@ -11179,7 +12103,7 @@ ${setup}`;
     if (node.inline != null) props.inline = node.inline;
     if (node.className) props.className = [props.className, node.className].filter(Boolean).join(" ");
     let children;
-    if (node.iconFromDetails && details[node.iconFromDetails]) props.icon = /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(Icon, { icon: String(details[node.iconFromDetails]) });
+    if (node.iconFromDetails && details[node.iconFromDetails]) props.icon = /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Icon, { icon: String(details[node.iconFromDetails]) });
     if (node.textFromDetails) children = details[node.textFromDetails];
     if (node.childrenFromDetails) children = details[node.childrenFromDetails];
     const name = node.name ?? definition?.component?.name;
@@ -11187,7 +12111,7 @@ ${setup}`;
   }
 
   // src/devkit/shared/jsonRenderer.tsx
-  var import_jsx_runtime50 = __require("react/jsx-runtime");
+  var import_jsx_runtime53 = __require("react/jsx-runtime");
   function stackStyle(gap) {
     return { display: "flex", flexDirection: "column", gap: gap || "0.25rem", width: "100%", minWidth: 0 };
   }
@@ -11203,59 +12127,61 @@ ${setup}`;
     if (mode === "rail") {
       return categories.map((cat) => {
         const color = sectionColorFor(ctx, cat);
+        const colorSlot = sectionColorSlotFor(ctx, cat);
         const active = route.category === cat;
         const meta = sectionMeta(ctx, cat);
-        return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Button, { variant: active ? "soft" : "text", shape: "rect", color, "data-section-color": color, className: "pg-panel-rail__btn", title: meta.label ?? cat, onClick: () => ctx.onCategory?.(cat), style: { width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem" }, children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: meta.icon ?? "mdi:folder-outline", style: { fontSize: "1.2rem" } }) }, cat);
+        return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Button, { variant: active ? "soft" : "text", shape: "rect", color, "data-section-color": colorSlot, className: "pg-panel-rail__btn", title: meta.label ?? cat, onClick: () => ctx.onCategory?.(cat), style: { width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem", "--sm-accent": color }, children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Icon, { icon: meta.icon ?? "mdi:folder-outline", style: { fontSize: "1.2rem" } }) }, cat);
       });
     }
     if (mode === "tabs") return null;
     return categories.map((cat) => {
       const color = sectionColorFor(ctx, cat);
+      const colorSlot = sectionColorSlotFor(ctx, cat);
       const meta = sectionMeta(ctx, cat);
       const items = catalogItems.filter((it) => (it.section ?? it.category) === cat);
-      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(SidePanelSection, { icon: meta.icon ?? "mdi:folder-outline", label: meta.label ?? cat, color, open: sectionOpen?.[cat], collapsed: false, active: route.category === cat && !route.slug, forceOpen: route.category === cat && !!route.slug, count: items.length, statusDots: statusDotsFor(items.map((it) => it.id)), onToggle: () => setSectionOpen?.((prev) => ({ ...prev, [cat]: !prev[cat] })), onHeaderClick: () => ctx.onCategory?.(cat), children: items.map((it) => {
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(SidePanelSection, { icon: meta.icon ?? "mdi:folder-outline", label: meta.label ?? cat, color, colorSlot, open: sectionOpen?.[cat], collapsed: false, active: route.category === cat && !route.slug, forceOpen: route.category === cat && !!route.slug, count: items.length, onToggle: () => setSectionOpen?.((prev) => ({ ...prev, [cat]: !prev[cat] })), onHeaderClick: () => ctx.onCategory?.(cat), children: items.map((it) => {
         const selected = route.category === cat && route.slug === it.slug;
-        return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Button, { variant: selected ? "soft" : "text", shape: "rect", color, onClick: () => ctx.onDemo?.(cat, it.slug), className: "pg-panel-demo-link", title: it.displayLabel, style: { justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" }, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Icon, { icon: getDemoIcon(it.id, it) }),
-          /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "sm-item-label", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "sm-item-text", children: it.displayLabel }) })
+        return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(Button, { variant: selected ? "soft" : "text", shape: "rect", color, "data-section-color": colorSlot, onClick: () => ctx.onDemo?.(cat, it.slug), className: "pg-panel-demo-link", title: it.displayLabel, style: { justifyContent: "flex-start", fontSize: "0.85rem", width: "100%", "--sm-accent": color }, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Icon, { icon: getDemoIcon(it.id, it) }),
+          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "sm-item-label", children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "sm-item-text", children: it.displayLabel }) })
         ] }, it.slug);
       }) }, cat);
     });
   }
   function PlaygroundJsonPanel({ node, ctx }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(JsonRenderer, { node, ctx });
+    return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(JsonRenderer, { node, ctx });
   }
   function JsonRenderer({ node, ctx, keyPrefix = "" }) {
     if (!node) return null;
     if (node.type === "builtin") {
       const Builtin = previewBuiltins[node.id];
-      return Builtin ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Builtin, { ...ctx }) : null;
+      return Builtin ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Builtin, { ...ctx }) : null;
     }
     if (node.type === "wrap") {
-      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { style: parseStyleString(node.style), children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(JsonRenderer, { node: node.child, ctx, keyPrefix: `${keyPrefix}-w` }) }, keyPrefix);
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { style: parseStyleString(node.style), children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(JsonRenderer, { node: node.child, ctx, keyPrefix: `${keyPrefix}-w` }) }, keyPrefix);
     }
     if (node.type === "surround") {
       const inline = Boolean(ctx.state?.[node.inlineFromState ?? "inline"]);
       const Tag2 = inline ? "span" : "div";
-      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Tag2, { className: inline ? "layout-inline-demo layout-inline-demo--inline" : "layout-inline-demo", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(JsonRenderer, { node: node.child, ctx, keyPrefix: `${keyPrefix}-s` }) }, keyPrefix);
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Tag2, { className: inline ? "layout-inline-demo layout-inline-demo--inline" : "layout-inline-demo", children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(JsonRenderer, { node: node.child, ctx, keyPrefix: `${keyPrefix}-s` }) }, keyPrefix);
     }
     if (node.type === "repeat") {
       const count = readCount(ctx, node);
-      return Array.from({ length: count }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(JsonRenderer, { node: node.child, ctx: { ...ctx, repeatIndex: i }, keyPrefix: `${keyPrefix}-r${i}` }, `${keyPrefix}-r${i}`));
+      return Array.from({ length: count }, (_, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(JsonRenderer, { node: node.child, ctx: { ...ctx, repeatIndex: i }, keyPrefix: `${keyPrefix}-r${i}` }, `${keyPrefix}-r${i}`));
     }
     if (node.type === "emoji-card") {
       const i = ctx.repeatIndex ?? 0;
       const emoji = LAYOUT_PREVIEW_EMOJIS[i % LAYOUT_PREVIEW_EMOJIS.length];
       const label = node.labelPrefix ? `${node.labelPrefix}${i + 1} ${emoji}` : emoji;
-      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Card, { variant: "flat", inline: node.inline !== false, style: parseStyleString(node.cardStyle), children: node.labelPrefix ? label : emoji }, keyPrefix);
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Card, { variant: "flat", inline: node.inline !== false, style: parseStyleString(node.cardStyle), children: node.labelPrefix ? label : emoji }, keyPrefix);
     }
     if (node.type === "demo-component") {
       const inline = node.widthFromInline && Boolean(ctx.state?.inline);
       const { Comp, props, children } = buildDemoComponentProps(node, ctx);
       if (!Comp) return null;
       const style = { ...inline ? { width: "fit-content" } : { width: "100%" }, maxWidth: "100%", ...props.style };
-      const inner = node.children ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(JsonRenderer, { node: node.children, ctx }) : children;
-      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Comp, { ...props, style, children: inner });
+      const inner = node.children ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(JsonRenderer, { node: node.children, ctx }) : children;
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Comp, { ...props, style, children: inner });
     }
     if (node.type === "stack") {
       const rendered = (node.children ?? []).flatMap((child, idx) => {
@@ -11263,20 +12189,20 @@ ${setup}`;
           const out = CatalogCategories({ node: child, ctx });
           return Array.isArray(out) ? out : out ? [out] : [];
         }
-        if (child.type === "separator") return [/* @__PURE__ */ (0, import_jsx_runtime50.jsx)("hr", { className: "sidebar-separator" }, `sep-${idx}`)];
-        return [/* @__PURE__ */ (0, import_jsx_runtime50.jsx)(JsonRenderer, { node: child, ctx, keyPrefix: `${keyPrefix}-${idx}` }, child.id || idx)];
+        if (child.type === "separator") return [/* @__PURE__ */ (0, import_jsx_runtime53.jsx)("hr", { className: "sidebar-separator" }, `sep-${idx}`)];
+        return [/* @__PURE__ */ (0, import_jsx_runtime53.jsx)(JsonRenderer, { node: child, ctx, keyPrefix: `${keyPrefix}-${idx}` }, child.id || idx)];
       });
-      return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: node.className, style: stackStyle(node.gap), children: rendered });
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: node.className, style: stackStyle(node.gap), children: rendered });
     }
     if (node.type === "catalog-categories") {
       const out = CatalogCategories({ node, ctx });
-      return Array.isArray(out) ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(import_jsx_runtime50.Fragment, { children: out }) : out;
+      return Array.isArray(out) ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_jsx_runtime53.Fragment, { children: out }) : out;
     }
     return null;
   }
 
   // src/devkit/shared/driver/previewRenderer.tsx
-  var import_jsx_runtime51 = __require("react/jsx-runtime");
+  var import_jsx_runtime54 = __require("react/jsx-runtime");
   function resolvePreviewNode(definition) {
     if (definition.preview?.tree) return definition.preview.tree;
     const previewTemplates = playgroundData().previewTemplates ?? {};
@@ -11289,15 +12215,15 @@ ${setup}`;
     const ctx = { ...props, repeatIndex: 0 };
     if (node?.type === "builtin") {
       const Builtin = previewBuiltins[node.id];
-      return Builtin ? /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(Builtin, { ...props }) : /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(PreviewStub, { template: node.id, componentName: definition.component?.name });
+      return Builtin ? /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(Builtin, { ...props }) : /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(PreviewStub, { template: node.id, componentName: definition.component?.name });
     }
-    const rendered = /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(JsonRenderer, { node, ctx });
+    const rendered = /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(JsonRenderer, { node, ctx });
     if (rendered) return rendered;
-    return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(PreviewStub, { template: definition.preview?.template, componentName: definition.component?.name });
+    return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(PreviewStub, { template: definition.preview?.template, componentName: definition.component?.name });
   }
 
   // src/devkit/shared/driver/driverCore.tsx
-  var import_jsx_runtime52 = __require("react/jsx-runtime");
+  var import_jsx_runtime55 = __require("react/jsx-runtime");
   var JsonDemoAdapter = class extends DemoController {
     constructor(def) {
       super();
@@ -11343,21 +12269,20 @@ ${setup}`;
     return new JsonDemoAdapter(def);
   }
   function DemoPage({ definition }) {
-    const adapter = (0, import_react39.useMemo)(() => createJsonAdapter(definition), [definition]);
-    const [state2, setState] = (0, import_react39.useState)(() => adapter.initialState());
-    const [details, setDetails] = (0, import_react39.useState)(() => adapter.initialDetails());
-    const [demoConfig, setDemoConfig] = (0, import_react39.useState)(() => adapter.initialDemoConfig());
-    const [demoStyle, setDemoStyle] = (0, import_react39.useState)("");
-    const [demoClass, setDemoClass] = (0, import_react39.useState)("");
+    const adapter = (0, import_react40.useMemo)(() => createJsonAdapter(definition), [definition]);
+    const [state2, setState] = (0, import_react40.useState)(() => adapter.initialState());
+    const [details, setDetails] = (0, import_react40.useState)(() => adapter.initialDetails());
+    const [demoConfig, setDemoConfig] = (0, import_react40.useState)(() => adapter.initialDemoConfig());
+    const [demoStyle, setDemoStyle] = (0, import_react40.useState)("");
+    const [demoClass, setDemoClass] = (0, import_react40.useState)("");
     const shell = definition.shell ?? {};
-    return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
       AccordionDemo,
       {
         flat: true,
         adapter,
         title: definition.title ?? definition.label,
         titleIcon: definition.titleIcon,
-        reviewStatus: definition.status,
         relieve: shell.relieve,
         configBlockCount: shell.configBlockCount,
         className: shell.class,
@@ -11375,16 +12300,13 @@ ${setup}`;
         onDemoStyleChange: setDemoStyle,
         onDemoClassChange: setDemoClass,
         intro: definition.intro,
-        preview: (ctx) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "demo-preview-root", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(PreviewRenderer, { definition, ...ctx }) })
+        preview: (ctx) => /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("div", { className: "demo-preview-root", children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(PreviewRenderer, { definition, ...ctx }) })
       }
     );
   }
 
   // src/devkit/shell/playgroundAppLayout.ts
-  var PLAYGROUND_LAYOUT_SELECT_OPTIONS = [
-    { id: "side", label: "Panel izquierdo" },
-    { id: "top-side-2", label: "Panel derecho" }
-  ];
+  var PLAYGROUND_LAYOUT_SELECT_OPTIONS = PLAYGROUND_APP_LAYOUT_OPTIONS;
   var PLAYGROUND_APP_LAYOUT_STORAGE_KEY = "pg-app-layout-variant";
   var layoutVariant = "side";
   var layoutListeners = /* @__PURE__ */ new Set();
@@ -11431,34 +12353,13 @@ ${setup}`;
   if (typeof document !== "undefined") bootPlaygroundAppLayout();
 
   // src/devkit/shell/shellChrome.tsx
-  var import_react40 = __require("react");
-
-  // src/devkit/shell/resolveShellConfig.ts
-  function shellConfig() {
-    return playgroundData().shellConfig ?? {};
-  }
-  function panelSizePx(open) {
-    const s = shellConfig().panel?.size ?? {};
-    const n = open ? s.expanded : s.collapsed;
-    return Number(n) || (open ? 260 : 52);
-  }
-  function panelSizeCss(open) {
-    const s = shellConfig().panel?.size ?? {};
-    const unit = s.unit || "px";
-    return `${panelSizePx(open)}${unit}`;
-  }
-  function panelStorageKey() {
-    return shellConfig().panel?.storageKey || "mimicus:sidebarOpen";
-  }
-  function sectionColors() {
-    return shellConfig().theme?.sectionColors ?? ["primary", "info", "success", "warning", "error", "danger", "color"];
-  }
+  var import_react41 = __require("react");
 
   // src/devkit/shell/playgroundNav.tsx
-  var import_jsx_runtime53 = __require("react/jsx-runtime");
+  var import_jsx_runtime56 = __require("react/jsx-runtime");
   function PlaygroundBrand({ title, icon = "assets/mimicus-logo.svg", onClick }) {
     const Tag2 = onClick ? "button" : "div";
-    return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)(
       Tag2,
       {
         type: onClick ? "button" : void 0,
@@ -11466,19 +12367,19 @@ ${setup}`;
         onClick,
         title: onClick ? "Inicio" : title,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("img", { src: icon, alt: "", width: "22", height: "22", className: "pg-app-brand__icon" }),
-          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "pg-app-brand__title", children: title })
+          /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("img", { src: icon, alt: "", width: "22", height: "22", className: "pg-app-brand__icon" }),
+          /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("span", { className: "pg-app-brand__title", children: title })
         ]
       }
     );
   }
 
   // src/devkit/shell/shellChrome.tsx
-  var import_jsx_runtime54 = __require("react/jsx-runtime");
+  var import_jsx_runtime57 = __require("react/jsx-runtime");
   var LAYOUT_BP_NARROW3 = 768;
   function useNarrowViewport2() {
-    const [narrow, setNarrow] = (0, import_react40.useState)(false);
-    (0, import_react40.useEffect)(() => {
+    const [narrow, setNarrow] = (0, import_react41.useState)(false);
+    (0, import_react41.useEffect)(() => {
       const mq = window.matchMedia(`(max-width: ${LAYOUT_BP_NARROW3 - 1}px)`);
       const sync = () => setNarrow(mq.matches);
       sync();
@@ -11488,7 +12389,7 @@ ${setup}`;
     return narrow;
   }
   function usePlaygroundBodyScrollLock(active) {
-    (0, import_react40.useEffect)(() => {
+    (0, import_react41.useEffect)(() => {
       if (!active) return void 0;
       const html = document.documentElement;
       const body = document.body;
@@ -11503,8 +12404,8 @@ ${setup}`;
     }, [active]);
   }
   function FpsCounter({ collapsed = false }) {
-    const [fps, setFps] = (0, import_react40.useState)(60);
-    (0, import_react40.useEffect)(() => {
+    const [fps, setFps] = (0, import_react41.useState)(60);
+    (0, import_react41.useEffect)(() => {
       let frames = 0;
       let last = performance.now();
       let raf = 0;
@@ -11520,32 +12421,38 @@ ${setup}`;
       raf = requestAnimationFrame(tick);
       return () => cancelAnimationFrame(raf);
     }, []);
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("span", { className: "fps-histogram-chip", title: "FPS \xB7 \xFAltimo segundo", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { className: "fps-histogram-chip__value", children: fps }),
-      !collapsed && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { className: "fps-histogram-chip__unit", children: "FPS" })
+    return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("span", { className: "fps-histogram-chip", title: "FPS \xB7 \xFAltimo segundo", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("span", { className: "fps-histogram-chip__value", children: fps }),
+      !collapsed && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("span", { className: "fps-histogram-chip__unit", children: "FPS" })
     ] });
+  }
+  function paletteColorCountChip(paletteId) {
+    const count = designSchemeColorCount(designSchemeForThemeColor(paletteId));
+    const schemeLabel = count === 1 ? "Mono" : count === 2 ? "Dual" : "Tr\xEDada";
+    return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("span", { className: "pg-skin-palette-chip", title: schemeLabel, "aria-label": `${count} ${count === 1 ? "color" : "colores"} (${schemeLabel})`, children: count });
   }
   function PlaygroundSkinSelect({ label, value, options, onChange, accent: accent2 = "palette" }) {
     const dataProps = accent2 === "palette" ? { "data-palette": value } : { "data-look": value };
     const selectOptions = options.map((o) => ({
       value: o.id,
       label: o.label,
-      icon: o.icon ? /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("iconify-icon", { icon: o.icon }) : void 0
+      icon: o.icon ? /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("iconify-icon", { icon: o.icon }) : void 0,
+      suffix: accent2 === "palette" ? paletteColorCountChip(o.id) : void 0
     }));
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: ["pg-skin-toggle", accent2 === "palette" ? "pg-skin-toggle--palette" : "pg-skin-toggle--look"].join(" "), ...dataProps, title: label, children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(Select, { className: "pg-skin-toggle__select", size: "small", value, options: selectOptions, onChange: (v) => onChange?.(v), "aria-label": label }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: ["pg-skin-toggle", accent2 === "palette" ? "pg-skin-toggle--palette" : "pg-skin-toggle--look"].join(" "), ...dataProps, title: label, children: /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(Select, { className: "pg-skin-toggle__select", size: "small", value, options: selectOptions, onChange: (v) => onChange?.(v), "aria-label": label }) });
   }
   function HeaderSkinBar() {
-    const [theme, setTheme] = (0, import_react40.useState)(() => getThemeState());
-    const [look, setLook] = (0, import_react40.useState)(() => getLooknfeelState());
-    const [layout, setLayout] = (0, import_react40.useState)(() => getPlaygroundAppLayoutVariant());
-    (0, import_react40.useEffect)(() => subscribeTheme(setTheme), []);
-    (0, import_react40.useEffect)(() => subscribeLooknfeel(setLook), []);
-    (0, import_react40.useEffect)(() => subscribePlaygroundAppLayoutVariant(setLayout), []);
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "pg-header-skin-bar", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(PlaygroundSkinSelect, { label: "Layout", accent: "look", value: layout, options: PLAYGROUND_LAYOUT_SELECT_OPTIONS, onChange: setPlaygroundAppLayoutVariant }),
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(PlaygroundSkinSelect, { label: "Paleta", accent: "palette", value: theme.themeColor, options: THEME_COLOR_OPTIONS, onChange: setThemeColor }),
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(PlaygroundSkinSelect, { label: "Look n feel", accent: "look", value: look, options: LOOKNFEEL_OPTIONS, onChange: applyLooknfeel }),
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(Button, { variant: theme.luminance === "dark" ? "soft" : "text", color: "neutral", shape: "rect", className: "pg-header-skin-bar__theme-btn", onClick: () => setLuminance(theme.luminance === "dark" ? "light" : "dark"), title: theme.luminance === "dark" ? "Modo claro" : "Modo oscuro", style: { flexShrink: 0 }, children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { "aria-hidden": true, children: theme.luminance === "dark" ? "\u2600" : "\u263E" }) })
+    const [theme, setTheme] = (0, import_react41.useState)(() => getThemeState());
+    const [look, setLook] = (0, import_react41.useState)(() => getLooknfeelState());
+    const [layout, setLayout] = (0, import_react41.useState)(() => getPlaygroundAppLayoutVariant());
+    (0, import_react41.useEffect)(() => subscribeTheme(setTheme), []);
+    (0, import_react41.useEffect)(() => subscribeLooknfeel(setLook), []);
+    (0, import_react41.useEffect)(() => subscribePlaygroundAppLayoutVariant(setLayout), []);
+    return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "pg-header-skin-bar", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(PlaygroundSkinSelect, { label: "Layout", accent: "look", value: layout, options: PLAYGROUND_LAYOUT_SELECT_OPTIONS, onChange: setPlaygroundAppLayoutVariant }),
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(PlaygroundSkinSelect, { label: "Paleta", accent: "palette", value: theme.themeColor, options: THEME_COLOR_OPTIONS, onChange: setThemeColor }),
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(PlaygroundSkinSelect, { label: "Look n feel", accent: "look", value: look, options: LOOKNFEEL_OPTIONS, onChange: applyLooknfeel }),
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(Button, { variant: theme.luminance === "dark" ? "soft" : "text", color: "neutral", shape: "rect", className: "pg-header-skin-bar__theme-btn", onClick: () => setLuminance(theme.luminance === "dark" ? "light" : "dark"), title: theme.luminance === "dark" ? "Modo claro" : "Modo oscuro", "aria-label": theme.luminance === "dark" ? "Modo claro" : "Modo oscuro", children: /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("span", { "aria-hidden": true, children: theme.luminance === "dark" ? "\u2600" : "\u263E" }) })
     ] });
   }
   function PlaygroundShellHeader({
@@ -11562,20 +12469,20 @@ ${setup}`;
     menuTitle,
     onShellMenuClick
   }) {
-    const center = headerCenter ?? (title ? /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { className: "title pg-route-title pg-shell-route-title pg-vt-header", children: title }) : null);
+    const center = headerCenter ?? (title ? /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("span", { className: "title pg-route-title pg-shell-route-title pg-vt-header", children: title }) : null);
     const tools = headerTools ?? headerEnd;
-    const nav = shellNavigation ?? /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(import_jsx_runtime54.Fragment, { children: [
+    const nav = shellNavigation ?? /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)(import_jsx_runtime57.Fragment, { children: [
       primaryNav,
       secondaryNav
     ] });
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(AppLayout.Header, { barClassName: "pg-shell-toolbar", className: "pg-shell-header-stack pg-content-header", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(AppLayout.Header.Brand, { children: [
-        showShellMenuBtn && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onShellMenuClick, className: "sidebar-header-btn pg-shell-menu-btn", title: menuTitle, style: { flexShrink: 0, width: "auto" }, children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(Icon, { icon: "mdi:menu" }) }),
-        brandTitle && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(PlaygroundBrand, { title: brandTitle, onClick: onBrandClick })
+    return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)(AppLayout.Header, { barClassName: "pg-shell-toolbar", className: "pg-shell-header-stack pg-content-header", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)(AppLayout.Header.Brand, { children: [
+        showShellMenuBtn && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onShellMenuClick, className: "sidebar-header-btn pg-shell-menu-btn", title: menuTitle, style: { flexShrink: 0, width: "auto" }, children: /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(Icon, { icon: "mdi:menu" }) }),
+        brandTitle && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(PlaygroundBrand, { title: brandTitle, onClick: onBrandClick })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(AppLayout.Header.Center, { children: center }),
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(AppLayout.Header.Tools, { children: tools }),
-      nav ? /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(AppLayout.Header.Nav, { children: nav }) : null
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AppLayout.Header.Center, { children: center }),
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AppLayout.Header.Tools, { children: tools }),
+      nav ? /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AppLayout.Header.Nav, { children: nav }) : null
     ] });
   }
   function PlaygroundAppShell({
@@ -11594,26 +12501,26 @@ ${setup}`;
     embedMode = false
   }) {
     const narrow = useNarrowViewport2();
-    const [open, setOpen] = (0, import_react40.useState)(true);
-    const [drawerOpen, setDrawerOpen] = (0, import_react40.useState)(false);
-    const [variant, setVariant] = (0, import_react40.useState)(() => getPlaygroundAppLayoutVariant());
+    const [open, setOpen] = (0, import_react41.useState)(true);
+    const [drawerOpen, setDrawerOpen] = (0, import_react41.useState)(false);
+    const [variant, setVariant] = (0, import_react41.useState)(() => getPlaygroundAppLayoutVariant());
     const storageKey = panelStorageKey();
     usePlaygroundBodyScrollLock(true);
-    (0, import_react40.useEffect)(() => subscribePlaygroundAppLayoutVariant(setVariant), []);
-    (0, import_react40.useEffect)(() => {
+    (0, import_react41.useEffect)(() => subscribePlaygroundAppLayoutVariant(setVariant), []);
+    (0, import_react41.useEffect)(() => {
       try {
         const s = localStorage.getItem(storageKey);
         if (s !== null) setOpen(s === "1");
       } catch {
       }
     }, [storageKey]);
-    (0, import_react40.useEffect)(() => {
+    (0, import_react41.useEffect)(() => {
       try {
         localStorage.setItem(storageKey, open ? "1" : "0");
       } catch {
       }
     }, [open, storageKey]);
-    (0, import_react40.useEffect)(() => {
+    (0, import_react41.useEffect)(() => {
       if (!narrow) setDrawerOpen(false);
     }, [narrow]);
     const shellVariant = normalizePlaygroundAppLayoutVariant(variant);
@@ -11622,9 +12529,9 @@ ${setup}`;
     const panelEnd = shellVariant === "top-side-2";
     const useDrawer = narrow && showSider;
     const showShellMenuBtn = useDrawer;
-    const toggleSidebar = (0, import_react40.useCallback)(() => setOpen((v) => !v), []);
-    const closeDrawer = (0, import_react40.useCallback)(() => setDrawerOpen(false), []);
-    const onShellMenuClick = (0, import_react40.useCallback)(() => setDrawerOpen((v) => !v), []);
+    const toggleSidebar = (0, import_react41.useCallback)(() => setOpen((v) => !v), []);
+    const closeDrawer = (0, import_react41.useCallback)(() => setDrawerOpen(false), []);
+    const onShellMenuClick = (0, import_react41.useCallback)(() => setDrawerOpen((v) => !v), []);
     const shellClass = [
       "pg-shell",
       "pg-playground-shell",
@@ -11636,7 +12543,7 @@ ${setup}`;
     const menuTitle = drawerOpen ? "Cerrar men\xFA" : "Abrir men\xFA";
     const siderWidth = panelSizeCss(useDrawer ? true : open);
     const shellStyle = { "--pg-shell-sider-w": siderWidth, "--mimicus-app-layout-sider-w": siderWidth };
-    const shellHeader = /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
+    const shellHeader = /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(
       PlaygroundShellHeader,
       {
         brandTitle,
@@ -11654,19 +12561,19 @@ ${setup}`;
       }
     );
     if (embedMode) {
-      return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: shellClass, style: shellStyle, children: /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "pg-shell-stage pg-shell-stage--embed", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(AppLayout.Header, { className: "pg-content-header", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(AppLayout.Header.Center, { children: title && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { className: "title pg-route-title", children: title }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(AppLayout.Header.Tools, { children: headerEnd })
+      return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: shellClass, style: shellStyle, children: /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "pg-shell-stage pg-shell-stage--embed", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)(AppLayout.Header, { className: "pg-content-header", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AppLayout.Header.Center, { children: title && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("span", { className: "title pg-route-title", children: title }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AppLayout.Header.Tools, { children: headerEnd })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "pg-shell-main custom-scrollbar pg-scrollbar", children })
+        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: "pg-shell-main custom-scrollbar pg-scrollbar", children })
       ] }) });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: shellClass, style: shellStyle, children: [
-      useDrawer && drawerOpen && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("button", { type: "button", className: "pg-shell-drawer-backdrop", "aria-label": "Cerrar men\xFA", onClick: closeDrawer }),
-      useDrawer && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: ["pg-shell-drawer-panel", panelEnd ? "pg-shell-drawer-panel--right" : "pg-shell-drawer-panel--left", drawerOpen && "is-open"].filter(Boolean).join(" "), "aria-hidden": !drawerOpen, children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(SidePanel, { open: true, drawer: true, collapsedView: collapsedPanel, expandedView: expandedPanel, onClose: closeDrawer }) }),
+    return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: shellClass, style: shellStyle, children: [
+      useDrawer && drawerOpen && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", className: "pg-shell-drawer-backdrop", "aria-label": "Cerrar men\xFA", onClick: closeDrawer }),
+      useDrawer && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: ["pg-shell-drawer-panel", panelEnd ? "pg-shell-drawer-panel--right" : "pg-shell-drawer-panel--left", drawerOpen && "is-open"].filter(Boolean).join(" "), "aria-hidden": !drawerOpen, children: /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(SidePanel, { open: true, drawer: true, collapsedView: collapsedPanel, expandedView: expandedPanel, onClose: closeDrawer }) }),
       shellHeader,
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)(
         AppLayout,
         {
           variant: gridVariant,
@@ -11676,8 +12583,8 @@ ${setup}`;
           className: "pg-playground-app-layout mimicus-shell",
           style: { minHeight: 0, flex: "1 1 auto", ...shellStyle },
           children: [
-            showSider && !useDrawer && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(AppLayout.Sider, { children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(SidePanel, { open, onToggle: toggleSidebar, collapsedView: collapsedPanel, expandedView: expandedPanel }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "pg-shell-main custom-scrollbar pg-scrollbar pg-vt-main", children })
+            showSider && !useDrawer && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AppLayout.Sider, { children: /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(SidePanel, { open, onToggle: toggleSidebar, collapsedView: collapsedPanel, expandedView: expandedPanel }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: "pg-shell-main custom-scrollbar pg-scrollbar pg-vt-main", children })
           ]
         },
         gridVariant
@@ -11686,18 +12593,18 @@ ${setup}`;
   }
 
   // src/devkit/Playground.tsx
-  var import_jsx_runtime55 = __require("react/jsx-runtime");
+  var import_jsx_runtime58 = __require("react/jsx-runtime");
   function Playground({ catalog = [], catalogMeta, sectionsMeta, shellConfig: shellConfigProp, previewTemplates, brand }) {
     configurePlayground({ catalogMeta, sectionsMeta, shellConfig: shellConfigProp, previewTemplates, brand });
-    const implementedCatalogItems = (0, import_react41.useMemo)(() => (catalog ?? []).filter((it) => {
+    const implementedCatalogItems = (0, import_react42.useMemo)(() => (catalog ?? []).filter((it) => {
       const name = it.definition?.component?.name ?? it.id;
       return !isStubComponent(name);
     }), [catalog]);
-    const implementedSections = (0, import_react41.useMemo)(() => sectionsWithItems(implementedCatalogItems), [implementedCatalogItems]);
-    const [navState, setNavState] = (0, import_react41.useState)(() => urlState2.get());
-    const route = (0, import_react41.useMemo)(() => stateToRoute(navState), [navState]);
-    const [sectionOpen, setSectionOpen] = (0, import_react41.useState)(() => Object.fromEntries(implementedSections.map((s) => [s, true])));
-    (0, import_react41.useEffect)(() => {
+    const implementedSections = (0, import_react42.useMemo)(() => sectionsWithItems(implementedCatalogItems), [implementedCatalogItems]);
+    const [navState, setNavState] = (0, import_react42.useState)(() => urlState2.get());
+    const route = (0, import_react42.useMemo)(() => stateToRoute(navState), [navState]);
+    const [sectionOpen, setSectionOpen] = (0, import_react42.useState)(() => Object.fromEntries(implementedSections.map((s) => [s, true])));
+    (0, import_react42.useEffect)(() => {
       bootPlaygroundAppLayout();
       document.documentElement.classList.add("pg-playground-doc");
       bootViewTransitionRoute();
@@ -11716,29 +12623,30 @@ ${setup}`;
     const embedMode = isEmbedView(navState);
     const isCatalogView = !isPaletteLabView && route.category == null && route.slug == null;
     const isSectionView = !isCatalogView && route.category != null && !route.slug;
-    const filteredItems = (0, import_react41.useMemo)(() => {
+    const filteredItems = (0, import_react42.useMemo)(() => {
       if (!route.category || isCatalogView) return [];
       const inSection = itemsInSection(implementedCatalogItems, route.category);
       if (!route.slug) return inSection;
       return inSection.filter((i) => i.slug === route.slug);
     }, [route, isCatalogView, implementedCatalogItems]);
     const routeTitle = isPaletteLabView ? "Paleta & Look" : isCatalogView ? MIMICUS_UI.catalogLabel ?? "Components Overview" : !route.slug ? sectionLabel(route.category) ?? route.category : `${sectionLabel(route.category)} / ${filteredItems[0]?.displayLabel ?? route.slug}`;
-    (0, import_react41.useEffect)(() => {
+    (0, import_react42.useEffect)(() => {
       document.title = mimicusPageTitle(routeTitle);
     }, [routeTitle]);
-    (0, import_react41.useEffect)(() => {
+    (0, import_react42.useEffect)(() => {
       if (route.category && route.slug) {
         setSectionOpen((prev) => ({ ...prev, [route.category]: true }));
       }
     }, [route.category, route.slug]);
     const cfg = shellConfig();
-    const panelCtx = (0, import_react41.useMemo)(() => ({
+    const panelCtx = (0, import_react42.useMemo)(() => ({
       route,
       catalog: catalogMeta,
       catalogItems: implementedCatalogItems,
       categories: implementedSections,
       sectionOrder: sectionOrder(),
       sectionColors: sectionColors(),
+      sectionAccentColors: sectionColors(),
       sectionOpen,
       setSectionOpen,
       isPaletteLabView,
@@ -11749,25 +12657,25 @@ ${setup}`;
       onDemo: (cat, slug) => setNav(cat, slug),
       getDemoIcon: (it) => getDemoIcon(it.id, it)
     }), [route, sectionOpen, isPaletteLabView, isCatalogView, implementedCatalogItems, implementedSections, catalogMeta]);
-    const collapsedPanel = /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(PlaygroundJsonPanel, { node: cfg.views?.collapsed, ctx: panelCtx });
-    const expandedPanel = /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(PlaygroundJsonPanel, { node: cfg.views?.expanded, ctx: panelCtx });
-    return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)(
+    const collapsedPanel = /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(PlaygroundJsonPanel, { node: cfg.views?.collapsed, ctx: panelCtx });
+    const expandedPanel = /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(PlaygroundJsonPanel, { node: cfg.views?.expanded, ctx: panelCtx });
+    return /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)(
       PlaygroundAppShell,
       {
         brandTitle: MIMICUS_UI.name,
         onBrandClick: () => setNav(null),
-        headerCenter: routeTitle ? /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("span", { className: "title pg-route-title pg-shell-route-title pg-vt-header", children: routeTitle }) : null,
-        headerTools: /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)(import_jsx_runtime55.Fragment, { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(FpsCounter, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(HeaderSkinBar, {})
+        headerCenter: routeTitle ? /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("span", { className: "title pg-route-title pg-shell-route-title pg-vt-header", children: routeTitle }) : null,
+        headerTools: /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)(import_jsx_runtime58.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(FpsCounter, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(HeaderSkinBar, {})
         ] }),
-        shellNavigation: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(ShellHeaderNav, { shellConfig: cfg, ctx: panelCtx, onTab: (id) => dispatchShellNav(id, panelCtx, cfg) }),
+        shellNavigation: /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(ShellHeaderNav, { shellConfig: cfg, ctx: panelCtx, onTab: (id) => dispatchShellNav(id, panelCtx, cfg) }),
         collapsedPanel,
         expandedPanel,
         embedMode,
         children: [
-          isPaletteLabView && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(ThemeLab, {}),
-          isCatalogView && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+          isPaletteLabView && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(ThemeLab, {}),
+          isCatalogView && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(
             CatalogHome,
             {
               items: implementedCatalogItems,
@@ -11775,7 +12683,7 @@ ${setup}`;
               onOpenPaletteLab: () => setPaletteLab()
             }
           ),
-          isSectionView && route.category && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+          isSectionView && route.category && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(
             CatalogHome,
             {
               filterSection: route.category,
@@ -11783,9 +12691,9 @@ ${setup}`;
               onSelect: (section, slug) => setNav(section, slug)
             }
           ),
-          !isPaletteLabView && !isCatalogView && !isSectionView && /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "pg-vt-demo pg-demo-doc-page", children: [
-            filteredItems.map((it) => /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(DemoPage, { definition: it.definition }, `${it.section}/${it.slug}`)),
-            filteredItems.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("p", { className: "catalog-home__lead", children: "No hay demos para esta ruta." })
+          !isPaletteLabView && !isCatalogView && !isSectionView && /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("div", { className: "pg-vt-demo pg-demo-doc-page", children: [
+            filteredItems.map((it) => /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(DemoPage, { definition: it.definition }, `${it.section}/${it.slug}`)),
+            filteredItems.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("p", { className: "catalog-home__lead", children: "No hay demos para esta ruta." })
           ] })
         ]
       }

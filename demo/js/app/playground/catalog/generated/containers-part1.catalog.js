@@ -46,7 +46,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Containers",
     "slug": "alert",
     "id": "Alert",
@@ -58,11 +58,11 @@ export const items = [
       "category": "Containers",
       "label": "Alert",
       "titleIcon": "mdi:alert-circle-outline",
-      "status": "pending",
+      "status": "approved",
       "intro": "Callout semántico sobre <code>Card</code>: icono, título opcional y cuerpo con color <code>info</code>/<code>success</code>/<code>warning</code>/<code>error</code>. Portado desde capacitación ContaPymeU.",
       "component": {
         "name": "Alert",
-        "path": "src/components/containers/Alert.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "cmp-alert"
@@ -107,7 +107,10 @@ export const items = [
           "label": "Cuerpo",
           "labelIcon": "mdi:text"
         }
-      ]
+      ],
+      "code": {
+        "strategy": "cmp-alert"
+      }
     }
   },
   {
@@ -921,7 +924,7 @@ export const items = [
     }
   },
   {
-    "section": "data-display",
+    "section": "overlays",
     "category": "Containers",
     "slug": "tooltip",
     "id": "Tooltip",

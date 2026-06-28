@@ -3,12 +3,12 @@
  * repo: Jeff-Aporta/mimicus-react · src/components/forms/Forms.tsx
  * Monolito de componentes de formulario (Input, Select, Checkbox, Switch, Radio, Slider, etc.).
  */
-import { Children, useEffect, useId, useRef, useState } from "react";
-import type { CSSProperties, ReactElement, ReactNode } from "react";
+import { Children, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import type { CSSProperties, KeyboardEvent, ReactElement, ReactNode } from "react";
 import { mergeSurfaceStyle } from "../../lib/surfaceColor.ts";
 import { useFormBinding } from "../../forms/useFormBinding.ts";
 
-interface Option { value: string; label?: ReactNode; disabled?: boolean; icon?: ReactNode }
+interface Option { value: string; label?: ReactNode; disabled?: boolean; icon?: ReactNode; suffix?: ReactNode }
 interface BaseProps { className?: string; style?: CSSProperties; children?: ReactNode }
 
 function cx(...p: unknown[]): string { return p.filter(Boolean).join(" "); }
@@ -135,22 +135,23 @@ function resolveIconNode(icon: string | ReactNode | undefined): ReactNode {
 }
 export function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, colorChecked, colorUnchecked, className, ...rest }: CheckboxIconProps) {
   const surface = mergeSurfaceStyle(color, { variant: variant ?? "solid" });
+  const [on, set] = useCtrl(checked, defaultChecked ?? false, onChange);
+  const id = useId();
   const onNode = resolveIconNode(iconChecked ?? icon) ?? <iconify-icon icon="mdi:check" />;
-  const offNode = resolveIconNode(iconUnchecked) ?? <iconify-icon icon="" />;
+  const offNode = resolveIconNode(iconUnchecked) ?? <iconify-icon icon="mdi:circle-outline" />;
+  const activeNode = on ? onNode : offNode;
+  const fgVar = on ? "--cb-on-fg" : "--cb-off-fg";
+  const fgValue = on ? colorChecked : colorUnchecked;
   return (
-    <Checkbox {...rest} checked={checked} defaultChecked={defaultChecked} onChange={onChange} disabled={disabled} loading={loading}
-      className={cx("mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", className)}
-      style={{
-        ...surface.style,
-        "--cb-on-fg": colorChecked || undefined,
-        "--cb-off-fg": colorUnchecked || undefined,
-      } as CSSProperties}>
-      <span className="mimicus-checkbox__icons">
-        <span className="mimicus-checkbox__icon mimicus-checkbox__icon--on" aria-hidden>{onNode}</span>
-        <span className="mimicus-checkbox__icon mimicus-checkbox__icon--off" aria-hidden>{offNode}</span>
+    <label className={cx("mimicus-checkbox", "mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", on && "is-checked", disabled && "is-disabled", loading && "is-loading", className)}
+      style={{ ...surface.style, "--cb-on-fg": colorChecked || undefined, "--cb-off-fg": colorUnchecked || undefined } as CSSProperties}>
+      <input {...rest} id={id} type="checkbox" className="mimicus-checkbox__native" checked={Boolean(on)} disabled={disabled || loading}
+        onChange={(e) => set(e.target.checked)} />
+      <span className={cx("mimicus-checkbox__icon-box", on && "is-on")} style={fgValue ? { [fgVar]: fgValue } as CSSProperties : undefined} aria-hidden>
+        {activeNode}
       </span>
-      {children}
-    </Checkbox>
+      {children != null && <span className="mimicus-checkbox__label">{children}</span>}
+    </label>
   );
 }
 
@@ -304,40 +305,80 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
   const rootRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const refocusTriggerAfterPickRef = useRef(false);
+
+  const pickOption = (next: string) => {
+    refocusTriggerAfterPickRef.current = true;
+    set(next);
+    setOpen(false);
+  };
 
   // Fallback nativo cuando options llega como strings simples o sólo `children` (compatibilidad).
   const isStructured = Array.isArray(options) && options.every((o) => o && typeof o === "object" && "value" in (o as object));
   const items: Option[] = isStructured ? (options as Option[]) : [];
   const current = items.find((o) => String(o.value) === String(val));
   const fallbackLabel = children ? undefined : items.find((o) => String(o.value) === String(val))?.label;
+  const enabledItems = items.filter((o) => !o.disabled);
 
-  // Posiciona el panel flotante debajo del trigger, manteniéndolo en viewport.
-  useEffect(() => {
+  const stepSelect = (dir: 1 | -1) => {
+    if (!enabledItems.length) return;
+    const i = enabledItems.findIndex((o) => String(o.value) === String(val));
+    const nextIdx = i < 0
+      ? (dir === 1 ? 0 : enabledItems.length - 1)
+      : (i + dir + enabledItems.length) % enabledItems.length;
+    set(enabledItems[nextIdx].value);
+  };
+
+  const onSelectKeyStep = (e: KeyboardEvent) => {
+    if (disabled) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); stepSelect(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); stepSelect(-1); }
+    else if (e.key === "Enter" && open) {
+      e.preventDefault();
+      pickOption(String(val ?? ""));
+    }
+  };
+
+  // Posiciona el panel pegado al trigger (mismo ancho, sin gap).
+  useLayoutEffect(() => {
     if (!open) return;
     const dlg = dialogRef.current;
     const trg = triggerRef.current;
     if (!dlg || !trg) return;
+
     const place = () => {
       const r = trg.getBoundingClientRect();
-      const margin = 0;
-      const desiredLeft = r.left;
-      const desiredTop = r.bottom + margin;
-      const panelWidth = Math.max(r.width, 180);
-      const maxLeft = window.innerWidth - panelWidth - 8;
-      dlg.style.setProperty("--mimicus-select-left", `${Math.max(8, Math.min(desiredLeft, maxLeft))}px`);
-      dlg.style.setProperty("--mimicus-select-top", `${desiredTop}px`);
-      dlg.style.setProperty("--mimicus-select-min-w", `${r.width}px`);
+      const w = Math.round(r.width);
+      const left = Math.round(r.left);
+      const top = Math.round(r.bottom) - 1;
+      const maxLeft = window.innerWidth - w - 8;
+      const x = `${Math.max(8, Math.min(left, maxLeft))}px`;
+      dlg.style.setProperty("--mimicus-select-w", `${w}px`);
+      dlg.style.setProperty("--mimicus-select-left", x);
+      dlg.style.setProperty("--mimicus-select-top", `${top}px`);
+      const panel = dlg.querySelector(".mimicus-select__panel") as HTMLElement | null;
+      if (rootRef.current) dlg.style.fontSize = getComputedStyle(rootRef.current).fontSize;
+      if (panel) {
+        panel.style.width = `${w}px`;
+        panel.style.minWidth = `${w}px`;
+        panel.style.maxWidth = `${w}px`;
+        panel.style.left = x;
+        panel.style.top = `${top}px`;
+      }
     };
+
     place();
+    const raf = requestAnimationFrame(place);
     window.addEventListener("resize", place);
     window.addEventListener("scroll", place, true);
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener("resize", place);
       window.removeEventListener("scroll", place, true);
     };
   }, [open]);
 
-  // Abre/cierra el <dialog> nativo (top-layer + backdrop + focus trap + Escape gratis).
+  // showModal en useEffect evita que el click de apertura caiga en el backdrop y cierre al instante.
   useEffect(() => {
     const dlg = dialogRef.current;
     if (!dlg) return;
@@ -348,13 +389,14 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
     }
   }, [open]);
 
-  // Cuando se desmonta el <dialog> (open=false), pierde el foco que tenía → lo devolvemos al trigger.
+  // Tras elegir en el panel, devolver foco al trigger para ↑/↓ sin reabrir.
   useEffect(() => {
-    if (!open && document.activeElement && triggerRef.current && document.activeElement !== triggerRef.current) {
-      // No forzamos foco para no interrumpir otros flujos (preview inputs, etc.).
-      // El <dialog> se desmonta limpio, así que no hay backdrop residual ni focus atrapado.
-    }
-  }, [open]);
+    if (open || !refocusTriggerAfterPickRef.current) return;
+    refocusTriggerAfterPickRef.current = false;
+    const btn = triggerRef.current;
+    if (!btn) return;
+    requestAnimationFrame(() => btn.focus());
+  }, [open, val]);
 
   // Cierre al pulsar Escape (defensa adicional; <dialog> ya lo hace).
   useEffect(() => {
@@ -393,10 +435,12 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => !disabled && setOpen((o) => !o)}
+        onKeyDown={onSelectKeyStep}
       >
         <span className="mimicus-select__value">
           {current?.icon && <span className="mimicus-select__icon" aria-hidden>{current.icon}</span>}
           <span className="mimicus-select__label">{current?.label ?? placeholder ?? ""}</span>
+          {current?.suffix && <span className="mimicus-select__suffix">{current.suffix}</span>}
         </span>
         <span className="mimicus-select__arrow" aria-hidden>▾</span>
       </button>
@@ -407,6 +451,7 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
         data-mimicus-select-dialog
         onClose={() => setOpen(false)}
         onCancel={(e) => { e.preventDefault(); setOpen(false); }}
+        onKeyDown={onSelectKeyStep}
         onClick={(e) => {
           // Click en el backdrop (::backdrop o fuera del panel) cierra.
           const panel = dialogRef.current?.querySelector(".mimicus-select__panel") as HTMLElement | null;
@@ -415,7 +460,7 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
       >
         <ul role="listbox" className="mimicus-select__panel" data-mimicus-select-panel onClick={(e) => e.stopPropagation()}>
           {placeholder && (
-            <li role="option" aria-selected={!val} className={cx("mimicus-select__option", !val && "is-selected")} onClick={() => { set(""); setOpen(false); }}>
+            <li role="option" aria-selected={!val} className={cx("mimicus-select__option", !val && "is-selected")} onClick={() => pickOption("")}>
               <span className="mimicus-select__label">{placeholder}</span>
             </li>
           )}
@@ -428,14 +473,11 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
                 aria-selected={selected}
                 aria-disabled={opt.disabled}
                 className={cx("mimicus-select__option", selected && "is-selected", opt.disabled && "is-disabled")}
-                onClick={() => {
-                  if (opt.disabled) return;
-                  set(opt.value);
-                  setOpen(false);
-                }}
+                onClick={() => { if (!opt.disabled) pickOption(String(opt.value)); }}
               >
                 {opt.icon && <span className="mimicus-select__icon" aria-hidden>{opt.icon}</span>}
                 <span className="mimicus-select__label">{opt.label ?? opt.value}</span>
+                {opt.suffix && <span className="mimicus-select__suffix">{opt.suffix}</span>}
               </li>
             );
           })}

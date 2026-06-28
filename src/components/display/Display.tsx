@@ -329,7 +329,7 @@ export function Tour({ steps = [], open = false, className, style, ...rest }: To
   const ref = useRef(null);
   useDisplayBinding(ref, "tour", [open, steps.length]);
   return (
-    <div {...rest} ref={ref} className={cx("mimicus-tour", open && "is-active", className)} style={style} data-mimicus-display="tour" data-open={open}>
+    <div {...rest} ref={ref} className={cx("mimicus-tour", open && "is-active", className)} style={style} data-mimicus-display="tour" data-open={open ? "true" : "false"}>
       <div className="mimicus-tour__overlay" data-mimicus-tour-overlay hidden />
       {steps.map((s, i) => <div key={i} data-mimicus-tour-step data-target={s.target} data-title={s.title} data-description={s.description} hidden />)}
       <div className="mimicus-tour__card" data-mimicus-tour-card>

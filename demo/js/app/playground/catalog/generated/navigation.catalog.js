@@ -290,7 +290,7 @@ export const items = [
     }
   },
   {
-    "section": "navigation",
+    "section": "overlays",
     "category": "Navigation",
     "slug": "drawer",
     "id": "Drawer",

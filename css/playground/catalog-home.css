@@ -46,6 +46,19 @@
 
 .catalog-section {
 	margin-bottom: 2.35rem;
+	padding: 1rem clamp(0.65rem, 1.5vw, 1rem) 1.35rem;
+	border-radius: var(--mimicus-ui-radius, 0.75rem);
+	background: linear-gradient(
+		165deg,
+		color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 11%, transparent) 0%,
+		color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 4%, transparent) 42%,
+		transparent 100%
+	);
+	border: 1px solid color-mix(in srgb, var(--sm-accent, var(--mimicus-b-color)) 16%, transparent);
+}
+
+.catalog-section[data-section-color] .catalog-section-heading__title {
+	color: color-mix(in srgb, var(--sm-accent-fg, var(--sm-accent)) 78%, var(--catalog-fg));
 }
 
 .catalog-section__nav {

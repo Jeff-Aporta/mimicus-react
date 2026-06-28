@@ -4,7 +4,14 @@
  * Control nativo estilizado o dropdown custom (icon + label por opción).
  */
 
-.mimicus-select { position: relative; display: inline-flex; width: 100%; max-width: 100%; }
+.mimicus-select {
+	position: relative;
+	display: inline-flex;
+	width: 100%;
+	max-width: 100%;
+	font-size: var(--mimicus-select-font-size, 1em);
+	line-height: var(--mimicus-select-line-height, 1.25);
+}
 .mimicus-select__native { width: 100%; appearance: none; min-height: 2.25em; padding: 0.35em 2em 0.35em 0.65em; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); background: var(--mimicus-field-bg); font: inherit; cursor: pointer; }
 .mimicus-select__native:focus { outline: none; border-color: var(--mimicus-primary, #1677ff); box-shadow: 0 0 0 3px var(--mimicus-field-focus); }
 .mimicus-select__arrow { position: absolute; right: 0.55em; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.55; font-size: 0.75em; transition: transform 0.18s ease; }
@@ -33,11 +40,17 @@
 }
 .mimicus-select__trigger:hover { border-color: color-mix(in srgb, var(--mimicus-primary, #1677ff) 38%, var(--mimicus-field-border)); }
 .mimicus-select__trigger:focus-visible { outline: none; border-color: var(--mimicus-primary, #1677ff); box-shadow: 0 0 0 3px var(--mimicus-field-focus); }
-.mimicus-select.is-open .mimicus-select__trigger { border-color: var(--mimicus-primary, #1677ff); }
+.mimicus-select.is-open .mimicus-select__trigger {
+	border-color: var(--mimicus-primary, #1677ff);
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-color: transparent;
+}
 
 .mimicus-select__value { display: inline-flex; align-items: center; gap: 0.45em; min-width: 0; flex: 1; overflow: hidden; }
 .mimicus-select__icon { display: inline-flex; align-items: center; flex-shrink: 0; font-size: 1.05em; color: var(--mimicus-primary, #1677ff); }
-.mimicus-select__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mimicus-select__label { min-width: 0; flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mimicus-select__suffix { display: inline-flex; align-items: center; flex: 0 0 auto; margin-inline-start: auto; }
 
 /* ── Dialog flotante (overlay con backdrop) ── */
 .mimicus-select__dialog {
@@ -52,6 +65,7 @@
 	border: 0;
 	background: transparent;
 	color: inherit;
+	font: inherit;
 	overflow: hidden;
 	pointer-events: none; /* deja pasar clicks al backdrop */
 	visibility: hidden;
@@ -76,47 +90,64 @@
 	position: fixed;
 	left: var(--mimicus-select-left, 50%);
 	top: var(--mimicus-select-top, 50%);
-	min-width: var(--mimicus-select-min-w, 12rem);
-	max-width: min(28rem, calc(100vw - 1rem));
-	width: max-content;
+	width: var(--mimicus-select-w, auto);
+	min-width: var(--mimicus-select-w, 12em);
+	max-width: var(--mimicus-select-w, min(28em, calc(100vw - 1em)));
+	box-sizing: border-box;
 	max-height: 300px;
-	padding: 0.3em;
-	border-radius: calc(var(--mimicus-field-radius) + 0.25em);
-	background: var(--mimicus-bg-elevated, color-mix(in oklab, var(--mimicus-field-bg), var(--mimicus-bg-primary) 22%));
-	border: 1px solid color-mix(in oklab, var(--mimicus-primary, #1677ff) 22%, var(--mimicus-field-border));
+	margin: 0;
+	padding: 0.25em;
+	list-style: none;
+	font: inherit;
+	border-radius: 0 0 calc(var(--mimicus-field-radius) + 0.2em) calc(var(--mimicus-field-radius) + 0.2em);
+	--mimicus-select-panel-bg: var(--mimicus-bg-elevated, var(--mimicus-bg-secondary));
+	background: var(--lkf-texture-panel, var(--mimicus-select-panel-bg));
+	background-color: var(--mimicus-select-panel-bg);
+	border: 1px solid color-mix(in oklab, var(--mimicus-primary, #1677ff) 18%, var(--mimicus-field-border));
+	border-top: 0;
 	box-shadow:
-		0 1px 2px color-mix(in srgb, var(--mimicus-color) 18%, transparent),
-		0 12px 40px color-mix(in srgb, var(--mimicus-color) 32%, transparent),
-		0 0 0 1px color-mix(in oklab, var(--mimicus-primary, #1677ff) 14%, transparent);
-	transform-origin: top left;
-	animation: mimicus-select-panel-in 0.16s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+		0 4px 16px color-mix(in srgb, var(--mimicus-color) 24%, transparent),
+		0 0 0 1px color-mix(in oklab, var(--mimicus-primary, #1677ff) 10%, transparent);
+	transform-origin: top center;
+	animation: mimicus-select-panel-in 0.12s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+	margin-block-start: 0;
 	overflow: auto;
-}
-
-@keyframes mimicus-select-backdrop-in {
-	from { opacity: 0; }
-	to { opacity: 1; }
+	color: var(--mimicus-color);
 }
 
 @keyframes mimicus-select-panel-in {
-	from { opacity: 0; transform: translateY(-4px) scale(0.98); }
-	to { opacity: 1; transform: translateY(0) scale(1); }
+	from { opacity: 0; transform: scaleY(0.98); }
+	to { opacity: 1; transform: scaleY(1); }
 }
 
 .mimicus-select__option {
-	display: flex; align-items: center; gap: 0.5em;
-	padding: 0.4em 0.55em;
+	display: flex; align-items: center; gap: 0.45em;
+	padding: 0.35em 0.5em;
 	border-radius: calc(var(--mimicus-field-radius) - 0.05em);
 	cursor: pointer;
 	color: inherit;
+	font: inherit;
 	transition: background 0.12s ease, color 0.12s ease;
 }
 .mimicus-select__option:hover,
-.mimicus-select__option:focus-visible { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 14%, transparent); outline: none; }
-.mimicus-select__option.is-selected { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 22%, transparent); font-weight: 600; }
+.mimicus-select__option:focus-visible {
+	--mimicus-select-opt-bg: color-mix(in oklab, var(--mimicus-select-panel-bg) 86%, var(--mimicus-primary, #1677ff) 14%);
+	background: var(--mimicus-select-opt-bg);
+	color: oklch(from var(--mimicus-select-opt-bg) calc((sign(0.62 - l) + 1) / 2 * 100%) 0 h / 1);
+	outline: none;
+}
+.mimicus-select__option.is-selected {
+	--mimicus-select-opt-bg: color-mix(in oklab, var(--mimicus-select-panel-bg) 72%, var(--mimicus-primary, #1677ff) 28%);
+	background: var(--mimicus-select-opt-bg);
+	color: oklch(from var(--mimicus-select-opt-bg) calc((sign(0.62 - l) + 1) / 2 * 100%) 0 h / 1);
+	font-weight: 600;
+}
 .mimicus-select__option.is-disabled { opacity: 0.45; cursor: not-allowed; }
 .mimicus-select__option .mimicus-select__icon { color: var(--mimicus-primary, #1677ff); }
+.mimicus-select__option .mimicus-select__label { flex: 1 1 auto; min-width: 0; }
+.mimicus-select__option .mimicus-select__suffix { flex: 0 0 auto; margin-inline-start: auto; }
 
-/* ── Tamaños ── */
-.mimicus-select--small .mimicus-select__trigger { min-height: 1.9em; padding: 0.25em 1.8em 0.25em 0.55em; font-size: 0.85em; }
+/* ── Tamaños (wrapper --mimicus-select-font-size; trigger y panel heredan) ── */
+.mimicus-select--small { --mimicus-select-font-size: 0.85em; }
+.mimicus-select--small .mimicus-select__trigger { min-height: 1.9em; padding: 0.25em 1.8em 0.25em 0.55em; }
 .mimicus-select--medium .mimicus-select__trigger { min-height: 2.25em; }

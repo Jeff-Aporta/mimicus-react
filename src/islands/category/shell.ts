@@ -6,7 +6,7 @@
  * Barras de navegación de aplicación y resolución de nav.
  */
 export {
-  NavTabRow, ShellHeaderNav, sortedCategories, sectionMeta, sectionColorFor,
+  NavTabRow, ShellHeaderNav, sortedCategories, sectionMeta, sectionColorFor, sectionColorSlotFor,
   resolveCategoryTabDescriptors, resolveCatalogDemoTabDescriptors, normalizeShellNavRows,
   evaluateNavWhen, resolveNavRowTabs, resolveNavRowValue, resolveShellNavigation, dispatchShellNav,
 } from "../../shell/index.ts";

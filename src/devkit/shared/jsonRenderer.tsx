@@ -7,9 +7,9 @@
  */
 import { Card } from "../_ui.ts";
 import { Button } from "../_ui.ts";
-import { getDemoIcon, ReviewStatusDot, statusDotsFor, statusFor } from "../catalog/catalogUi.tsx";
+import { getDemoIcon } from "../catalog/catalogUi.tsx";
 import { Icon } from "../../components/Icon.tsx";
-import { SidePanelSection, sectionColorFor, sortedCategories, sectionMeta } from "../_ui.ts";
+import { SidePanelSection, sectionColorFor, sectionColorSlotFor, sortedCategories, sectionMeta } from "../_ui.ts";
 import { LAYOUT_PREVIEW_EMOJIS, parseStyleString } from "./playgroundKit.ts";
 import { buildDemoComponentProps, previewBuiltins } from "./driver/previewBuiltins.tsx";
 
@@ -31,10 +31,11 @@ function CatalogCategories({ node, ctx }) {
   if (mode === "rail") {
     return categories.map((cat) => {
       const color = sectionColorFor(ctx, cat);
+      const colorSlot = sectionColorSlotFor(ctx, cat);
       const active = route.category === cat;
       const meta = sectionMeta(ctx, cat);
       return (
-        <Button key={cat} variant={active ? "soft" : "text"} shape="rect" color={color} data-section-color={color} className="pg-panel-rail__btn" title={meta.label ?? cat} onClick={() => ctx.onCategory?.(cat)} style={{ width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem" }}>
+        <Button key={cat} variant={active ? "soft" : "text"} shape="rect" color={color} data-section-color={colorSlot} className="pg-panel-rail__btn" title={meta.label ?? cat} onClick={() => ctx.onCategory?.(cat)} style={{ width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem", "--sm-accent": color }}>
           <Icon icon={meta.icon ?? "mdi:folder-outline"} style={{ fontSize: "1.2rem" }} />
         </Button>
       );
@@ -45,14 +46,15 @@ function CatalogCategories({ node, ctx }) {
 
   return categories.map((cat) => {
     const color = sectionColorFor(ctx, cat);
+    const colorSlot = sectionColorSlotFor(ctx, cat);
     const meta = sectionMeta(ctx, cat);
     const items = catalogItems.filter((it) => (it.section ?? it.category) === cat);
     return (
-      <SidePanelSection key={cat} icon={meta.icon ?? "mdi:folder-outline"} label={meta.label ?? cat} color={color} open={sectionOpen?.[cat]} collapsed={false} active={route.category === cat && !route.slug} forceOpen={route.category === cat && !!route.slug} count={items.length} statusDots={statusDotsFor(items.map((it) => it.id))} onToggle={() => setSectionOpen?.((prev) => ({ ...prev, [cat]: !prev[cat] }))} onHeaderClick={() => ctx.onCategory?.(cat)}>
+      <SidePanelSection key={cat} icon={meta.icon ?? "mdi:folder-outline"} label={meta.label ?? cat} color={color} colorSlot={colorSlot} open={sectionOpen?.[cat]} collapsed={false} active={route.category === cat && !route.slug} forceOpen={route.category === cat && !!route.slug} count={items.length} onToggle={() => setSectionOpen?.((prev) => ({ ...prev, [cat]: !prev[cat] }))} onHeaderClick={() => ctx.onCategory?.(cat)}>
         {items.map((it) => {
           const selected = route.category === cat && route.slug === it.slug;
           return (
-            <Button key={it.slug} variant={selected ? "soft" : "text"} shape="rect" color={color} onClick={() => ctx.onDemo?.(cat, it.slug)} className="pg-panel-demo-link" title={it.displayLabel} style={{ justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" }}>
+            <Button key={it.slug} variant={selected ? "soft" : "text"} shape="rect" color={color} data-section-color={colorSlot} onClick={() => ctx.onDemo?.(cat, it.slug)} className="pg-panel-demo-link" title={it.displayLabel} style={{ justifyContent: "flex-start", fontSize: "0.85rem", width: "100%", "--sm-accent": color }}>
               <Icon icon={getDemoIcon(it.id, it)} />
               <span className="sm-item-label"><span className="sm-item-text">{it.displayLabel}</span></span>
             </Button>

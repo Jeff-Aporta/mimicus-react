@@ -1,7 +1,7 @@
 /** Auto-generado — Overlays */
 export const items = [
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "action-drawer",
     "id": "ActionDrawer",
@@ -17,7 +17,7 @@ export const items = [
       "intro": "Panel lateral o inferior que desliza sobre el contenido; ideal para acciones secundarias sin abandonar la vista.",
       "component": {
         "name": "ActionDrawer",
-        "path": "src/lib/overlays/ActionDrawer.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "action-drawer"
@@ -74,7 +74,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "dialog",
     "id": "Dialog",
@@ -90,7 +90,7 @@ export const items = [
       "intro": "Diálogo nativo <code>&lt;dialog&gt;</code> con scope global/local, blur de fondo y cierre por backdrop o tecla Escape.",
       "component": {
         "name": "Dialog",
-        "path": "src/lib/overlays/Dialog.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "dialog"
@@ -142,7 +142,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "floating-component",
     "id": "FloatingComponent",
@@ -158,7 +158,7 @@ export const items = [
       "intro": "Panel flotante absoluto junto al contenido (p. ej. acciones de fila). Expone <code>FC_KEEP_ALIVE_CTX</code> para menús anidados. En la vista previa, pasa el cursor sobre la <strong>fila resaltada</strong> o activa <code>showfloat</code>.",
       "component": {
         "name": "FloatingComponent",
-        "path": "src/components/overlays/FloatingComponent.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "cmp-floating-component",
@@ -260,7 +260,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "invoked-floater",
     "id": "InvokedFloater",
@@ -276,7 +276,7 @@ export const items = [
       "intro": "Popover anclado con <code>Dialog</code> nativo: posicionamiento viewport-aware, triggers click/hover/contextmenu y cierre exterior.",
       "component": {
         "name": "InvokedFloater",
-        "path": "src/components/overlays/InvokedFloater.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "cmp-invoked-floater"
@@ -340,7 +340,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "loading",
     "id": "Loading",
@@ -356,7 +356,7 @@ export const items = [
       "intro": "Indicador a pantalla completa durante operaciones largas; color coherente con la paleta.",
       "component": {
         "name": "Loading",
-        "path": "src/lib/overlays/Loading.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "loading"
@@ -393,7 +393,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "modal",
     "id": "Modal",
@@ -409,7 +409,7 @@ export const items = [
       "intro": "Diálogo modal centrado: título por slot o mínimo, cierre en cabecera, scope global/local (como ActionDrawer) e inclusión de modales anidados.",
       "component": {
         "name": "Modal",
-        "path": "src/lib/overlays/Modal.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "modal"
@@ -493,7 +493,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "tip-info",
     "id": "TipInfo",
@@ -509,7 +509,7 @@ export const items = [
       "intro": "Etiqueta de campo con icono de ayuda: tooltip flotante (<code>InvokedFloater</code>) o modal. <code>kind</code> info/warn.",
       "component": {
         "name": "TipInfo",
-        "path": "src/components/overlays/TipInfo.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "cmp-tip-info"
@@ -568,7 +568,7 @@ export const items = [
     }
   },
   {
-    "section": "feedback",
+    "section": "overlays",
     "category": "Overlays",
     "slug": "toaster",
     "id": "Toaster",
@@ -584,7 +584,7 @@ export const items = [
       "intro": "Notificaciones toast (svelte-french-toast): éxito, error y carga. Incluye el proveedor <code>Toaster</code> y helpers <code>toastSuccess</code> / <code>toastError</code>.",
       "component": {
         "name": "Toaster",
-        "path": "src/lib/overlays/Toaster.svelte"
+        "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
         "template": "toaster"

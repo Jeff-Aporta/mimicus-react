@@ -3,8 +3,8 @@ import { Children as Children2, isValidElement as isValidElement2, useMemo as us
 
 // src/layout/app-layout/appLayoutVariants.ts
 var PLAYGROUND_APP_LAYOUT_OPTIONS = [
-  { id: "side", label: "Panel izquierdo" },
-  { id: "top-side-2", label: "Panel derecho" }
+  { id: "side", label: "Panel izquierdo", icon: "mdi:dock-left" },
+  { id: "top-side-2", label: "Panel derecho", icon: "mdi:dock-right" }
 ];
 var APP_LAYOUT_VARIANT_OPTIONS = [
   ...PLAYGROUND_APP_LAYOUT_OPTIONS,
@@ -123,7 +123,257 @@ function resolveColor(color, defaultColor = "") {
 // src/components/Button.tsx
 import { useState as useState2 } from "react";
 
+// src/theme/palette-catalog.json
+var palette_catalog_default = [
+  {
+    id: "grafito",
+    label: "Grafito",
+    icon: "mdi:square",
+    scheme: "mono",
+    note: "gris pizarra fr\xEDo",
+    aliases: []
+  },
+  {
+    id: "menta",
+    label: "Menta",
+    icon: "mdi:sprout",
+    scheme: "mono",
+    note: "verde menta / agua fresca",
+    aliases: []
+  },
+  {
+    id: "vulcano",
+    label: "Vulcano",
+    icon: "mdi:fire",
+    scheme: "mono",
+    note: "grises volc\xE1nicos",
+    aliases: []
+  },
+  {
+    id: "carbon",
+    label: "Carb\xF3n",
+    icon: "mdi:hexagon-outline",
+    scheme: "mono",
+    note: "carb\xF3n neutro",
+    aliases: []
+  },
+  {
+    id: "plata",
+    label: "Plata",
+    icon: "mdi:brightness-6",
+    scheme: "mono",
+    note: "plata azulada",
+    aliases: []
+  },
+  {
+    id: "humo",
+    label: "Humo",
+    icon: "mdi:smoke",
+    scheme: "mono",
+    note: "gris c\xE1lido humo",
+    aliases: []
+  },
+  {
+    id: "marfil",
+    label: "Marfil",
+    icon: "mdi:feather",
+    scheme: "mono",
+    note: "marfil c\xE1lido",
+    aliases: []
+  },
+  {
+    id: "azabache",
+    label: "Azabache",
+    icon: "mdi:circle-slice-8",
+    scheme: "mono",
+    note: "negro azulado",
+    aliases: []
+  },
+  {
+    id: "nieve",
+    label: "Nieve",
+    icon: "mdi:snowflake",
+    scheme: "mono",
+    note: "blanco helado",
+    aliases: []
+  },
+  {
+    id: "piedra",
+    label: "Piedra",
+    icon: "mdi:wall",
+    scheme: "mono",
+    note: "piedra tostada",
+    aliases: []
+  },
+  {
+    id: "oceano",
+    label: "Oc\xE9ano",
+    icon: "mdi:waves",
+    scheme: "dual",
+    note: "teal + cielo",
+    aliases: []
+  },
+  {
+    id: "ambar",
+    label: "\xC1mbar",
+    icon: "mdi:weather-sunny",
+    scheme: "dual",
+    note: "\xE1mbar + oro",
+    aliases: []
+  },
+  {
+    id: "indigo",
+    label: "\xCDndigo",
+    icon: "mdi:moon-waning-crescent",
+    scheme: "dual",
+    note: "\xEDndigo + violeta",
+    aliases: []
+  },
+  {
+    id: "tierra",
+    label: "Tierra",
+    icon: "mdi:terrain",
+    scheme: "dual",
+    note: "marr\xF3n + ocre",
+    aliases: []
+  },
+  {
+    id: "cobre",
+    label: "Cobre",
+    icon: "mdi:gold",
+    scheme: "dual",
+    note: "cobre + turquesa",
+    aliases: []
+  },
+  {
+    id: "oliva",
+    label: "Oliva",
+    icon: "mdi:fruit-grapes",
+    scheme: "dual",
+    note: "oliva + oro",
+    aliases: []
+  },
+  {
+    id: "glaciar",
+    label: "Glaciar",
+    icon: "mdi:snowflake-variant",
+    scheme: "dual",
+    note: "hielo + azul profundo",
+    aliases: []
+  },
+  {
+    id: "bosque",
+    label: "Bosque",
+    icon: "mdi:tree",
+    scheme: "dual",
+    note: "verde bosque + musgo",
+    aliases: []
+  },
+  {
+    id: "medianoche",
+    label: "Medianoche",
+    icon: "mdi:weather-night",
+    scheme: "dual",
+    note: "navy + cian",
+    aliases: []
+  },
+  {
+    id: "ciruela",
+    label: "Ciruela",
+    icon: "mdi:flower-tulip-outline",
+    scheme: "dual",
+    note: "ciruela + rosa",
+    aliases: []
+  },
+  {
+    id: "hues-dodgerblue",
+    label: "Dodger",
+    icon: "mdi:palette-swatch",
+    scheme: "triad",
+    note: "azul dodger ContaPyme",
+    aliases: [
+      "contapyme"
+    ]
+  },
+  {
+    id: "natural",
+    label: "Natural",
+    icon: "mdi:leaf",
+    scheme: "triad",
+    note: "verde + azul + naranja",
+    aliases: []
+  },
+  {
+    id: "coral",
+    label: "Coral",
+    icon: "mdi:flower-tulip",
+    scheme: "triad",
+    note: "coral + melocot\xF3n + violeta",
+    aliases: []
+  },
+  {
+    id: "lavanda",
+    label: "Lavanda",
+    icon: "mdi:flower",
+    scheme: "triad",
+    note: "violeta + rosa + cian",
+    aliases: []
+  },
+  {
+    id: "cereza",
+    label: "Cereza",
+    icon: "mdi:fruit-cherries",
+    scheme: "triad",
+    note: "cereza + rosa + violeta",
+    aliases: []
+  },
+  {
+    id: "fucsia",
+    label: "Fucsia",
+    icon: "mdi:star-four-points",
+    scheme: "triad",
+    note: "magenta + rosa + \xEDndigo",
+    aliases: []
+  },
+  {
+    id: "aurora",
+    label: "Aurora",
+    icon: "mdi:aurora",
+    scheme: "triad",
+    note: "verde + cian + rosa",
+    aliases: []
+  },
+  {
+    id: "tropico",
+    label: "Tr\xF3pico",
+    icon: "mdi:palm-tree",
+    scheme: "triad",
+    note: "amarillo + verde + azul",
+    aliases: []
+  },
+  {
+    id: "electrico",
+    label: "El\xE9ctrico",
+    icon: "mdi:flash",
+    scheme: "triad",
+    note: "magenta + cian + amarillo",
+    aliases: []
+  },
+  {
+    id: "crepusculo",
+    label: "Crep\xFAsculo",
+    icon: "mdi:weather-sunset",
+    scheme: "triad",
+    note: "violeta + naranja + azul",
+    aliases: []
+  }
+];
+
 // src/theme/constants.ts
+var THEME_COLOR_OPTIONS = palette_catalog_default.map(({ id, label, icon }) => ({ id, label, icon }));
+var THEME_COLOR_DESIGN_SCHEME = Object.fromEntries(
+  palette_catalog_default.map((p) => [p.id, p.scheme])
+);
 var LOOKNFEEL_OPTIONS = [
   { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
   { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
@@ -248,7 +498,7 @@ function Button({
     "data-glass-active": isGlassVariant(variant) && glassActive ? "true" : void 0,
     ...surfaceStyle,
     className: cls,
-    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
+    style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style, ...style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx2("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
   const extractChildIcon = (nodes) => {
@@ -1042,26 +1292,53 @@ function bindTooltip(root) {
   };
   const placement = root.dataset.placement ?? "top";
   let open = false;
+  let hideTimer = null;
+  const clearHideTimer = () => {
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  };
   const show = () => {
+    clearHideTimer();
+    if (open) return;
     open = true;
     root.classList.add("is-open");
     tip.hidden = false;
+    tip.setAttribute("aria-hidden", "false");
     tip.dataset.placement = placement;
   };
   const hide = () => {
+    clearHideTimer();
+    if (!open) return;
     open = false;
     root.classList.remove("is-open");
-    tip.hidden = true;
+    hideTimer = setTimeout(() => {
+      if (!open) {
+        tip.hidden = true;
+        tip.setAttribute("aria-hidden", "true");
+      }
+      hideTimer = null;
+    }, 120);
+  };
+  const scheduleHide = () => {
+    clearHideTimer();
+    hideTimer = setTimeout(hide, 60);
   };
   hide();
   const cleanups = [
-    on(trigger, "mouseenter", show),
-    on(trigger, "focus", show),
-    on(trigger, "mouseleave", hide),
-    on(trigger, "blur", hide),
+    on(root, "pointerenter", show),
+    on(root, "pointerleave", scheduleHide),
+    on(root, "focusin", show),
+    on(root, "focusout", (e) => {
+      const next = e.relatedTarget;
+      if (next && root.contains(next)) return;
+      scheduleHide();
+    }),
     on(root, "keydown", (e) => {
       if (e.key === "Escape" && open) hide();
-    })
+    }),
+    () => clearHideTimer()
   ];
   return () => cleanups.forEach((fn) => fn());
 }
@@ -1200,43 +1477,67 @@ function bindTour(root) {
   const prev = qs("[data-mimicus-tour-prev]", root);
   const next = qs("[data-mimicus-tour-next]", root);
   const close = qs("[data-mimicus-tour-close]", root);
+  const scope = root.closest(".mimicus-tour-demo");
+  const local = Boolean(scope);
   let idx = 0;
-  let open = parseBool(root.dataset.open);
+  const clearTargets = () => {
+    qsa(".mimicus-tour-target", document).forEach((el) => el.classList.remove("mimicus-tour-target"));
+  };
+  const resetCard = () => {
+    if (!card) return;
+    card.style.top = "";
+    card.style.left = "";
+    card.style.right = "";
+    card.style.bottom = "";
+    card.style.transform = "";
+    card.style.position = local ? "absolute" : "fixed";
+  };
+  const placeCard = (target) => {
+    if (!card) return;
+    resetCard();
+    const box = local && scope ? scope.getBoundingClientRect() : { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+    if (!target) {
+      card.style.top = "50%";
+      card.style.left = "50%";
+      card.style.transform = "translate(-50%, -50%)";
+      return;
+    }
+    const rect = target.getBoundingClientRect();
+    const top = rect.bottom - box.top + 8;
+    let left = rect.left - box.left;
+    const maxLeft = Math.max(8, box.width - card.offsetWidth - 8);
+    left = Math.max(8, Math.min(left, maxLeft));
+    card.style.top = `${Math.max(8, top)}px`;
+    card.style.left = `${left}px`;
+  };
   const paint = () => {
-    open = parseBool(root.dataset.open);
+    const open = parseBool(root.dataset.open);
     if (!open || !steps.length) {
       root.classList.remove("is-active");
       if (overlay) overlay.hidden = true;
+      clearTargets();
       return;
     }
     root.classList.add("is-active");
-    if (overlay) overlay.hidden = false;
+    if (overlay) {
+      overlay.hidden = false;
+      overlay.style.position = local ? "absolute" : "fixed";
+    }
     const step = steps[idx];
     const targetSel = step?.dataset.target;
-    const target = targetSel ? qs(targetSel, root) ?? qs(targetSel, document) : null;
+    const target = targetSel ? qs(targetSel, scope ?? root) ?? qs(targetSel, document) : null;
     steps.forEach((s, i) => s.classList.toggle("is-current", i === idx));
     if (titleEl) titleEl.textContent = step?.dataset.title ?? "";
     if (descEl) descEl.textContent = step?.dataset.description ?? "";
-    if (card && target) {
-      const rect = target.getBoundingClientRect();
-      card.style.position = "fixed";
-      card.style.top = `${rect.bottom + 8}px`;
-      card.style.left = `${rect.left}px`;
-      target.classList.add("mimicus-tour-target");
-      steps.forEach((s, i) => {
-        if (i !== idx) {
-          const sel = s.dataset.target;
-          const el = sel ? qs(sel, root) ?? qs(sel, document) : null;
-          el?.classList.remove("mimicus-tour-target");
-        }
-      });
-    }
+    clearTargets();
+    if (target) target.classList.add("mimicus-tour-target");
+    placeCard(target);
     if (prev) prev.disabled = idx <= 0;
     if (next) next.textContent = idx >= steps.length - 1 ? "Finalizar" : "Siguiente";
   };
   const end = () => {
     root.dataset.open = "false";
-    qsa(".mimicus-tour-target", root).forEach((el) => el.classList.remove("mimicus-tour-target"));
+    clearTargets();
     paint();
     emit(root, "mimicus-tour-close");
   };
@@ -1256,7 +1557,8 @@ function bindTour(root) {
       }
     }),
     on(close, "click", end),
-    on(overlay, "click", end)
+    on(overlay, "click", end),
+    () => clearTargets()
   ];
 }
 var BINDERS = {
@@ -1420,9 +1722,6 @@ List.ItemAvatar = ListItemAvatar;
 
 // src/layout/panels/SidePanelSection.tsx
 import { Fragment as Fragment3, jsx as jsx13, jsxs as jsxs9 } from "react/jsx-runtime";
-function StatusDot({ color, size = "0.48rem" }) {
-  return /* @__PURE__ */ jsx13("span", { className: "mimicus-side-panel-section__status-dot", style: { width: size, height: size, borderRadius: "50%", background: resolveColor(color), display: "inline-block", flexShrink: 0 }, "aria-hidden": true });
-}
 function PanelIcon({ icon, style }) {
   if (!icon) return null;
   return /* @__PURE__ */ jsx13("iconify-icon", { icon, style: { fontSize: "1.1rem", flexShrink: 0, ...style }, "aria-hidden": true });
@@ -1434,24 +1733,20 @@ function SidePanelSection({
   active,
   forceOpen,
   count,
-  statusDots = [],
   color = "primary",
+  colorSlot,
   collapsed,
   onToggle,
   onHeaderClick,
   children
 }) {
-  const statusDotsUnique = [...new Set(statusDots)];
   const accentStyle = { "--sm-accent": resolveColor(color) };
-  return /* @__PURE__ */ jsxs9("div", { className: ["mimicus-side-panel-section", "sm-section", collapsed && "is-collapsed", open && !collapsed && "is-open", active && "is-active"].filter(Boolean).join(" "), style: accentStyle, "data-section-color": color, children: [
+  return /* @__PURE__ */ jsxs9("div", { className: ["mimicus-side-panel-section", "sm-section", collapsed && "is-collapsed", open && !collapsed && "is-open", active && "is-active"].filter(Boolean).join(" "), style: accentStyle, "data-section-color": colorSlot ?? color, children: [
     /* @__PURE__ */ jsxs9("div", { style: { display: "flex", alignItems: "stretch", gap: "0.1rem", width: "100%" }, children: [
       /* @__PURE__ */ jsxs9(Button, { variant: active ? "soft" : "text", shape: "rect", color, onClick: onHeaderClick, style: { flex: "1 1 auto", minWidth: 0, justifyContent: collapsed ? "center" : "flex-start", fontSize: "0.78rem", fontWeight: 600 }, title: typeof label === "string" ? label : void 0, children: [
         /* @__PURE__ */ jsx13(PanelIcon, { icon, style: collapsed ? { fontSize: "1.2rem" } : void 0 }),
         !collapsed && /* @__PURE__ */ jsxs9(Fragment3, { children: [
-          /* @__PURE__ */ jsxs9("span", { className: "sm-title-group", children: [
-            /* @__PURE__ */ jsx13("span", { className: "sm-label", children: label }),
-            statusDotsUnique.length > 0 && /* @__PURE__ */ jsx13("span", { className: "sm-status-dots", children: statusDotsUnique.map((dotColor) => /* @__PURE__ */ jsx13(StatusDot, { color: dotColor }, dotColor)) })
-          ] }),
+          /* @__PURE__ */ jsx13("span", { className: "sm-title-group", children: /* @__PURE__ */ jsx13("span", { className: "sm-label", children: label }) }),
           count != null && /* @__PURE__ */ jsx13("span", { className: "sm-trail", children: /* @__PURE__ */ jsx13(Badge, { children: count }) })
         ] })
       ] }),
