@@ -16,7 +16,6 @@ export interface FloatButtonBaseProps extends Omit<HTMLAttributes<HTMLElement>, 
   content?: ReactNode;
   type?: "default" | "primary";
   shape?: "circle" | "square";
-  size?: "small" | "medium" | "large";
   href?: string;
   target?: string;
   tooltip?: ReactNode;
@@ -32,7 +31,6 @@ function FloatButtonBase({
   children,
   type = "default",
   shape = "circle",
-  size = "large",
   href,
   target,
   tooltip,
@@ -61,7 +59,6 @@ function FloatButtonBase({
   const dataProps = {
     "data-type": type,
     "data-shape": shape,
-    "data-size": size,
     ...surface,
     className: cls,
     style: surface.style,
@@ -231,7 +228,6 @@ export function Fab(props: FabProps) {
 }
 
 export interface IconButtonProps extends Omit<HTMLAttributes<HTMLElement>, "color"> {
-  size?: "small" | "medium" | "large";
   color?: string;
   variant?: string;
   style?: CSSProperties;
@@ -240,14 +236,12 @@ export interface IconButtonProps extends Omit<HTMLAttributes<HTMLElement>, "colo
 }
 
 /** Botón solo icono — convención MUI IconButton */
-export function IconButton({ size = "medium", color, variant = "text", className, style, children, icon, ...rest }: IconButtonProps) {
-  const mappedSize = size === "small" ? "small" : size === "large" ? "large" : "medium";
+export function IconButton({ color, variant = "text", className, style, children, icon, ...rest }: IconButtonProps) {
   return (
     <Button
       {...rest}
       variant={variant}
       color={color}
-      size={mappedSize}
       shape="circle"
       icon={icon ?? children}
       className={["mimicus-icon-btn", className].filter(Boolean).join(" ")}

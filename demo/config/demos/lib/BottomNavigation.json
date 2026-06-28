@@ -5,15 +5,44 @@
   "titleIcon": "mdi:dock-bottom",
   "status": "approved",
   "intro": "Barra inferior MUI <code>BottomNavigation</code>: 3–5 destinos con icono y etiqueta opcional.",
-  "component": { "name": "BottomNavigation", "path": "src/components/navigation/Navigation.jsx" },
-  "preview": { "template": "nav-bottom-nav" },
-  "state": { "value": "0", "showLabels": true },
-  "details": { "actionCount": 4 },
+  "component": {
+    "name": "BottomNavigation",
+    "path": "src/components/navigation/Navigation.jsx"
+  },
+  "preview": {
+    "template": "nav-bottom-nav"
+  },
+  "state": {
+    "value": "0",
+    "showLabels": true
+  },
+  "details": {
+    "actionCount": 4
+  },
   "fields": [
-    { "kind": "switch", "key": "showLabels", "label": "showLabels", "labelIcon": "mdi:label-outline" }
+    {
+      "kind": "switch",
+      "key": "showLabels",
+      "label": "showLabels",
+      "labelIcon": "mdi:label-outline",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
   ],
   "detailFields": [
-    { "kind": "number", "key": "actionCount", "label": "Acciones", "labelIcon": "mdi:numeric", "min": 3, "max": 5, "step": 1 }
+    {
+      "kind": "number",
+      "key": "actionCount",
+      "label": "Acciones",
+      "labelIcon": "mdi:numeric",
+      "min": 3,
+      "max": 5,
+      "step": 1
+    }
   ],
-  "code": { "strategy": "nav-bottom-nav" }
+  "code": {
+    "strategy": "nav-bottom-nav"
+  }
 }

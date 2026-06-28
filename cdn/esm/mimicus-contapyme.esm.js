@@ -21,43 +21,53 @@ var LEGACY_THEME_COLOR_MAP = {
   magenta: "fucsia"
 };
 var THEME_COLOR_OPTIONS = [
-  { id: "hues-dodgerblue", label: "Dodger" },
-  { id: "vulcano", label: "Vulcano" },
-  { id: "natural", label: "Natural" },
-  { id: "coral", label: "Coral" },
-  { id: "oceano", label: "Oc\xE9ano" },
-  { id: "lavanda", label: "Lavanda" },
-  { id: "ambar", label: "\xC1mbar" },
-  { id: "cereza", label: "Cereza" },
-  { id: "grafito", label: "Grafito" },
-  { id: "menta", label: "Menta" },
-  { id: "indigo", label: "\xCDndigo" },
-  { id: "tierra", label: "Tierra" },
-  { id: "fucsia", label: "Fucsia" }
+  { id: "hues-dodgerblue", label: "Dodger", icon: "mdi:palette-swatch" },
+  { id: "vulcano", label: "Vulcano", icon: "mdi:fire" },
+  { id: "natural", label: "Natural", icon: "mdi:leaf" },
+  { id: "coral", label: "Coral", icon: "mdi:flower-tulip" },
+  { id: "oceano", label: "Oc\xE9ano", icon: "mdi:waves" },
+  { id: "lavanda", label: "Lavanda", icon: "mdi:flower" },
+  { id: "ambar", label: "\xC1mbar", icon: "mdi:weather-sunny" },
+  { id: "cereza", label: "Cereza", icon: "mdi:fruit-cherries" },
+  { id: "grafito", label: "Grafito", icon: "mdi:square" },
+  { id: "menta", label: "Menta", icon: "mdi:sprout" },
+  { id: "indigo", label: "\xCDndigo", icon: "mdi:moon-waning-crescent" },
+  { id: "tierra", label: "Tierra", icon: "mdi:terrain" },
+  { id: "fucsia", label: "Fucsia", icon: "mdi:star-four-points" }
 ];
 var DESIGN_SCHEME_OPTIONS = [
-  { id: "mono", label: "Mono" },
-  { id: "dual", label: "Dual" },
-  { id: "triad", label: "Tr\xEDada" }
+  { id: "mono", label: "Mono", icon: "mdi:circle" },
+  { id: "dual", label: "Dual", icon: "mdi:circle-half-full" },
+  { id: "triad", label: "Tr\xEDada", icon: "mdi:triangle-outline" }
 ];
+var THEME_COLOR_DESIGN_SCHEME = {
+  "hues-dodgerblue": "triad",
+  vulcano: "dual",
+  natural: "triad",
+  coral: "triad",
+  oceano: "dual",
+  lavanda: "triad",
+  ambar: "dual",
+  cereza: "triad",
+  grafito: "mono",
+  menta: "mono",
+  indigo: "dual",
+  tierra: "dual",
+  fucsia: "triad"
+};
 var LOOKNFEEL_STORAGE_KEY = "looknfeel";
 var LOOKNFEEL_DEFAULT = "contapyme";
-var NEON_LOOKNFEELS = ["neon-mono", "neon-dual", "neon-triad"];
+var NEON_LOOKNFEELS = ["neon"];
 var LOOKNFEEL_OPTIONS = [
-  { id: "contapyme", label: "ContaPyme" },
-  { id: "neon-mono", label: "Neon mono" },
-  { id: "neon-dual", label: "Neon dual" },
-  { id: "neon-triad", label: "Neon tr\xEDada" }
+  { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
+  { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
 ];
-var LOOKNFEEL_DESIGN_SCHEME = {
-  contapyme: "triad",
-  "neon-mono": "mono",
-  "neon-dual": "dual",
-  "neon-triad": "triad"
-};
 var LEGACY_LOOKNFEEL_MAP = {
   classic: "contapyme",
-  "neon-glass": "neon-triad"
+  "neon-glass": "neon",
+  "neon-mono": "neon",
+  "neon-dual": "neon",
+  "neon-triad": "neon"
 };
 var LOOKNFEEL_IDS = LOOKNFEEL_OPTIONS.map((o) => o.id);
 function isLuminance(value) {
@@ -85,8 +95,8 @@ function normalizeLooknfeel(value) {
   if (typeof value === "string" && LEGACY_LOOKNFEEL_MAP[value]) return LEGACY_LOOKNFEEL_MAP[value];
   return LOOKNFEEL_DEFAULT;
 }
-function designSchemeForLooknfeel(value) {
-  return LOOKNFEEL_DESIGN_SCHEME[value] ?? "mono";
+function designSchemeForThemeColor(value) {
+  return THEME_COLOR_DESIGN_SCHEME[value] ?? "mono";
 }
 function readLuminanceFromDom() {
   if (typeof document === "undefined") return "light";
@@ -214,7 +224,8 @@ function setLuminance(value) {
 }
 function setThemeColor(value) {
   if (state.themeColor === value && readThemeColorFromDom() === value) return;
-  applyTheme(state.luminance, value, state.designScheme);
+  const scheme = designSchemeForThemeColor(value);
+  applyTheme(state.luminance, value, scheme);
 }
 function setDesignScheme(value) {
   if (state.designScheme === value && readDesignSchemeFromDom() === value) return;
@@ -253,7 +264,6 @@ function applyLooknfeel(value) {
     localStorage.setItem(LOOKNFEEL_STORAGE_KEY, value);
   } catch {
   }
-  setDesignScheme(designSchemeForLooknfeel(value));
   listeners2.forEach((fn) => {
     try {
       fn(value);
@@ -1098,10 +1108,18 @@ function injectCdnHead(packIds, doc = document) {
 }
 
 // src/components/Icon.tsx
+import { useEffect as useEffect2, useRef } from "react";
 import { jsx } from "react/jsx-runtime";
 function Icon({ icon, className, style }) {
+  const ref = useRef(null);
+  useEffect2(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (className) el.setAttribute("class", className);
+    else el.removeAttribute("class");
+  }, [className]);
   if (!icon) return null;
-  return /* @__PURE__ */ jsx("iconify-icon", { icon, className, style: style && typeof style === "object" ? style : void 0 });
+  return /* @__PURE__ */ jsx("iconify-icon", { ref, icon, style: style && typeof style === "object" ? style : void 0 });
 }
 
 // src/components/Button.tsx
@@ -1124,7 +1142,6 @@ function Button({
   variant = "solid",
   color,
   shape = "round",
-  size = "medium",
   block = false,
   danger = false,
   ghost = false,
@@ -1186,7 +1203,6 @@ function Button({
   ].filter(Boolean).join(" ");
   const dataProps = {
     "data-shape": resolvedShape,
-    "data-size": size,
     "data-variant": normalizedVariant,
     "data-block": block ? "true" : void 0,
     "data-danger": danger ? "true" : void 0,
@@ -1197,12 +1213,29 @@ function Button({
     style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx2("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
+  const extractChildIcon = (nodes) => {
+    let iconEl = null;
+    let rest2 = null;
+    const arr = Array.isArray(nodes) ? nodes : nodes != null ? [nodes] : [];
+    for (const n of arr) {
+      if (iconEl == null && n && typeof n === "object" && "type" in n && (n.type === "iconify-icon" || n.type?.displayName === "Icon")) {
+        iconEl = n;
+        continue;
+      }
+      rest2 = rest2?.length ? [...rest2, n] : n;
+    }
+    return { iconEl, rest: rest2 };
+  };
+  const inlineIcon = icon == null && children != null && children !== "" ? extractChildIcon(children).iconEl : null;
+  const inlineRest = inlineIcon != null ? extractChildIcon(children).rest : null;
+  const finalIcon = iconNode ?? inlineIcon;
+  const finalChildren = inlineIcon != null ? inlineRest : children;
   const content = iconPlacement === "end" ? /* @__PURE__ */ jsxs(Fragment, { children: [
-    children != null && children !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children }),
-    iconNode
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children: finalChildren }),
+    finalIcon
   ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-    iconNode,
-    children != null && children !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children })
+    finalIcon,
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children: finalChildren })
   ] });
   if (href && !wrap) {
     const linkRel = target === "_blank" && !rel ? "noopener noreferrer" : rel;
@@ -1215,7 +1248,7 @@ function Button({
 }
 
 // src/components/FloatButton.tsx
-import { Children, useEffect as useEffect2, useState as useState3 } from "react";
+import { Children, useEffect as useEffect3, useState as useState3 } from "react";
 import { Fragment as Fragment2, jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
 function FloatButtonBase({
   icon,
@@ -1223,7 +1256,6 @@ function FloatButtonBase({
   children,
   type = "default",
   shape = "circle",
-  size = "large",
   href,
   target,
   tooltip,
@@ -1248,7 +1280,6 @@ function FloatButtonBase({
   const dataProps = {
     "data-type": type,
     "data-shape": shape,
-    "data-size": size,
     ...surface,
     className: cls,
     style: surface.style,
@@ -1319,7 +1350,7 @@ function FloatButtonBackTop({
   style
 }) {
   const [visible, setVisible] = useState3(false);
-  useEffect2(() => {
+  useEffect3(() => {
     const el = target?.() ?? (typeof window !== "undefined" ? window : null);
     if (!el) return void 0;
     const node = el;
@@ -1357,15 +1388,13 @@ var FloatButton = Object.assign(FloatButtonRoot, {
 function Fab(props) {
   return /* @__PURE__ */ jsx3(FloatButton, { type: props.color === "secondary" ? "default" : "primary", ...props });
 }
-function IconButton({ size = "medium", color, variant = "text", className, style, children, icon, ...rest }) {
-  const mappedSize = size === "small" ? "small" : size === "large" ? "large" : "medium";
+function IconButton({ color, variant = "text", className, style, children, icon, ...rest }) {
   return /* @__PURE__ */ jsx3(
     Button,
     {
       ...rest,
       variant,
       color,
-      size: mappedSize,
       shape: "circle",
       icon: icon ?? children,
       className: ["mimicus-icon-btn", className].filter(Boolean).join(" "),
@@ -1489,7 +1518,7 @@ function Card({
 }
 
 // src/components/CodeBlock.tsx
-import { useEffect as useEffect3, useRef, useState as useState4 } from "react";
+import { useEffect as useEffect4, useRef as useRef2, useState as useState4 } from "react";
 
 // src/codemirror/constants.ts
 var CODEMIRROR_VERSION = "5.65.18";
@@ -1709,16 +1738,16 @@ function CodeBlock({
   copyTitle = "Copiar",
   placeholder = ""
 }) {
-  const hostRef = useRef(null);
-  const cmRef = useRef(null);
-  const onChangeRef = useRef(onChange);
-  const syncingRef = useRef(false);
+  const hostRef = useRef2(null);
+  const cmRef = useRef2(null);
+  const onChangeRef = useRef2(onChange);
+  const syncingRef = useRef2(false);
   const [cmReady, setCmReady] = useState4(() => typeof window !== "undefined" && !!window.CodeMirror);
   const [copied, setCopied] = useState4(false);
-  useEffect3(() => {
+  useEffect4(() => {
     onChangeRef.current = onChange;
   }, [onChange]);
-  useEffect3(() => {
+  useEffect4(() => {
     if (cmReady) return void 0;
     let cancelled = false;
     ensureCodeMirrorLoaded({ sql: needsSqlMode(mode), css: needsCssMode(mode) }).then(() => {
@@ -1728,7 +1757,7 @@ function CodeBlock({
       cancelled = true;
     };
   }, [cmReady, json, mode, lang]);
-  useEffect3(() => {
+  useEffect4(() => {
     const host = hostRef.current;
     if (!host || !cmReady || typeof window.CodeMirror === "undefined") return void 0;
     const cm = mountCodeMirror(host, {
@@ -1760,7 +1789,7 @@ function CodeBlock({
       cmRef.current = null;
     };
   }, [cmReady, json, mode, lang, readOnly, lineWrapping, lineNumbers, maxHeight, minHeight]);
-  useEffect3(() => {
+  useEffect4(() => {
     const cm = cmRef.current;
     if (!cm) return;
     const cur = cm.getValue();
@@ -1775,7 +1804,7 @@ function CodeBlock({
     syncingRef.current = false;
     if (maxHeight) syncCmBoundedSize(cm, maxHeight, hostRef.current, minHeight);
   }, [value, readOnly, maxHeight, minHeight]);
-  useEffect3(() => {
+  useEffect4(() => {
     if (!cmReady) return void 0;
     const apply = () => {
       const cm = cmRef.current;
@@ -1807,12 +1836,12 @@ function CodeBlock({
   }
   if (!cmReady) {
     return /* @__PURE__ */ jsxs3("div", { className: panelClass, style, children: [
-      /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { size: "small", "aria-label": copyTitle, onClick: () => copyEditorText(value), title: copyTitle, children: "\u29C9" }) }),
+      /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { "aria-label": copyTitle, onClick: () => copyEditorText(value), title: copyTitle, children: "\u29C9" }) }),
       /* @__PURE__ */ jsx5("pre", { className: "mimicus-cm-fallback", style: hostStyle, children: value || placeholder })
     ] });
   }
   return /* @__PURE__ */ jsxs3("div", { className: panelClass, style, children: [
-    /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { size: "small", className: "mimicus-cm-panel__copy", "aria-label": copyTitle, title: copied ? "Copiado" : copyTitle, onClick: handleCopy, children: copied ? "\u2713" : "\u29C9" }) }),
+    /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { className: "mimicus-cm-panel__copy", "aria-label": copyTitle, title: copied ? "Copiado" : copyTitle, onClick: handleCopy, children: copied ? "\u2713" : "\u29C9" }) }),
     /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-host", ref: hostRef, style: hostStyle })
   ] });
 }
@@ -2010,7 +2039,7 @@ function useAppLayoutContext() {
 }
 
 // src/layout/app-layout/AppLayoutSider.tsx
-import { useEffect as useEffect4 } from "react";
+import { useEffect as useEffect5 } from "react";
 import { jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
 function AppLayoutSider({
   width = 200,
@@ -2030,7 +2059,7 @@ function AppLayoutSider({
   const isDark = theme === "dark";
   const bg = isDark ? resolveColor("primary") : resolveColor("card");
   const fg = isDark ? "white" : resolveColor("color");
-  useEffect4(() => {
+  useEffect5(() => {
     ctx?.setSiderWidth(wCss);
   }, [ctx, wCss]);
   const rootClass = [
@@ -2209,7 +2238,7 @@ function AppLayoutRoot({
 var AppLayout = Object.assign(AppLayoutRoot, { Header, Sider, Footer, SLOT_TYPES });
 
 // src/layout/app-layout/layoutSlotContext.tsx
-import { createContext as createContext2, useContext as useContext2, useEffect as useEffect5, useRef as useRef2, useState as useState6 } from "react";
+import { createContext as createContext2, useContext as useContext2, useEffect as useEffect6, useRef as useRef3, useState as useState6 } from "react";
 
 // src/layout/shared/layoutHelpers.ts
 var BREAKPOINT_W = { xs: 0, sm: 480, md: 600, lg: 800, xl: 1200 };
@@ -2236,7 +2265,7 @@ function buildLerpw(clientWidth = 0) {
   };
 }
 function getSlotResume(sizew, clientWidth = 0) {
-  return { sizew, boolszw: getSizeFlags(sizew), lerpw: buildLerpw(clientWidth) };
+  return { sizew, boolszw: getSizeFlags(sizew), lerpw: buildLerpw(clientWidth), width: clientWidth };
 }
 var RGX_OVERFLOW_SCROLL = /\boverflow(?:-x|-y)?\s*:\s*(auto|scroll)\b/i;
 function dataDebug(rest, segment) {
@@ -2301,11 +2330,11 @@ function useLayoutSlot() {
   return useContext2(LayoutSlotContext) ?? DEFAULT_SLOT;
 }
 function useLayoutContainer(sizewProp) {
-  const ref = useRef2(null);
+  const ref = useRef3(null);
   const [clientWidth, setClientWidth] = useState6(0);
   const sizew = sizewProp ?? getBreakPoint(clientWidth);
   const slot = getSlotResume(sizew, clientWidth);
-  useEffect5(() => {
+  useEffect6(() => {
     const el = ref.current;
     if (!el || typeof ResizeObserver === "undefined") return void 0;
     const ro = new ResizeObserver(([entry]) => setClientWidth(entry.contentRect.width));
@@ -2313,16 +2342,18 @@ function useLayoutContainer(sizewProp) {
     setClientWidth(el.clientWidth);
     return () => ro.disconnect();
   }, []);
-  return { ref, sizew, slot };
+  const bpIndex = ["xs", "sm", "md", "lg", "xl"].indexOf(sizew);
+  const vars = { "--mlg-w": `${Math.round(clientWidth)}px`, "--mlg-bp": String(bpIndex) };
+  return { ref, sizew, slot, clientWidth, dataSizew: sizew, vars };
 }
 
 // src/layout/grid/BlockLayout.tsx
 import { jsx as jsx11 } from "react/jsx-runtime";
 function BlockLayout({ inline = false, sizew: sizewProp, cscroll = false, className, style, children, ...rest }) {
-  const { ref, slot } = useLayoutContainer(sizewProp);
+  const { ref, slot, dataSizew, vars } = useLayoutContainer(sizewProp);
   const cls = [getScrollbarClass(cscroll, style), className].filter(Boolean).join(" ");
-  const mergedStyle = joinStyle(style, `display: ${inline ? "inline-block" : "block"}`);
-  return /* @__PURE__ */ jsx11(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx11("div", { ref, className: cls, style: mergedStyle, ...rest, ...dataDebug(rest, "block-layout"), children }) });
+  const mergedStyle = { ...joinStyle(style, `display: ${inline ? "inline-block" : "block"}`), ...vars };
+  return /* @__PURE__ */ jsx11(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx11("div", { ref, className: cls, style: mergedStyle, "data-sizew": dataSizew, ...rest, ...dataDebug(rest, "block-layout"), children }) });
 }
 
 // src/layout/grid/FlexLayout.tsx
@@ -2341,18 +2372,21 @@ function FlexLayout({
   children,
   ...rest
 }) {
-  const { ref, sizew, slot } = useLayoutContainer(sizewProp);
+  const { ref, sizew, slot, dataSizew, vars } = useLayoutContainer(sizewProp);
   const cls = [getScrollbarClass(cscroll, style), className].filter(Boolean).join(" ");
-  const mergedStyle = joinStyle(
-    `gap: ${resolveGap(gap, sizew)}`,
-    direction && `flex-direction: ${direction}`,
-    `flex-wrap: ${wrap ? "wrap" : "nowrap"}`,
-    justify && `justify-content: ${resolveJustify(justify)}`,
-    items && `align-items: ${items}`,
-    style,
-    `display: ${inline ? "inline-flex" : "flex"}`
-  );
-  return /* @__PURE__ */ jsx12(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx12("div", { ref, className: cls, style: mergedStyle, ...rest, ...dataDebug(rest, "flex-layout"), children }) });
+  const mergedStyle = {
+    ...joinStyle(
+      `gap: ${resolveGap(gap, sizew)}`,
+      direction && `flex-direction: ${direction}`,
+      `flex-wrap: ${wrap ? "wrap" : "nowrap"}`,
+      justify && `justify-content: ${resolveJustify(justify)}`,
+      items && `align-items: ${items}`,
+      style,
+      `display: ${inline ? "inline-flex" : "flex"}`
+    ),
+    ...vars
+  };
+  return /* @__PURE__ */ jsx12(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx12("div", { ref, className: cls, style: mergedStyle, "data-sizew": dataSizew, ...rest, ...dataDebug(rest, "flex-layout"), children }) });
 }
 
 // src/layout/grid/GridLayout.tsx
@@ -2407,7 +2441,6 @@ function Divider({
   dashed = false,
   titlePlacement = "center",
   plain = false,
-  size = "medium",
   orientationMargin,
   className,
   style,
@@ -2418,8 +2451,7 @@ function Divider({
   const normalizedVariant = normalizeVariant(variant, "solid");
   const lineVariant = normalizedVariant === "glow" ? "glow" : dashed ? "dashed" : normalizedVariant;
   const lineColor = resolveColor("border");
-  const marginBlock = size === "small" ? "0.5rem" : size === "large" ? "1.5rem" : "1rem";
-  const marginCss = axis === "horizontal" ? `${marginBlock} 0` : `0 0.5rem`;
+  const marginCss = axis === "horizontal" ? `1em 0` : `0 0.5em`;
   const edgeBasis = toCssLength(orientationMargin) ?? "5%";
   const hasText = children != null && children !== false && Children4.count(children) > 0;
   const cls = [
@@ -2445,7 +2477,7 @@ function Divider({
 }
 
 // src/layout/panels/Splitter.tsx
-import { useEffect as useEffect6, useRef as useRef3, useState as useState7 } from "react";
+import { useEffect as useEffect7, useRef as useRef4, useState as useState7 } from "react";
 
 // src/layout/shared/layoutBreakpoints.ts
 var LAYOUT_BP_NARROW = 768;
@@ -2503,12 +2535,12 @@ function Splitter({
   const [panelSize, setPanelSize] = useState7(panelSizeProp);
   const [dragging, setDragging] = useState7(false);
   const [narrow, setNarrow] = useState7(false);
-  const dragStart = useRef3({ x: 0, y: 0, size: panelSizeProp });
-  const resizeHandle = useRef3(null);
-  useEffect6(() => {
+  const dragStart = useRef4({ x: 0, y: 0, size: panelSizeProp });
+  const resizeHandle = useRef4(null);
+  useEffect7(() => {
     setPanelSize(panelSizeProp);
   }, [panelSizeProp]);
-  useEffect6(() => {
+  useEffect7(() => {
     if (storageKey) setPanelSize(readSplitterStorage(storageKey, panelSizeProp, minSize, maxSize));
     return subscribeNarrowViewport(setNarrow);
   }, [storageKey, panelSizeProp, minSize, maxSize]);
@@ -2639,10 +2671,10 @@ function SidePanelBase({
 var SidePanel = Object.assign(SidePanelBase, { View });
 
 // src/components/display/Display.tsx
-import { Children as Children5, useId, useRef as useRef4 } from "react";
+import { Children as Children5, useId, useRef as useRef5 } from "react";
 
 // src/display/useDisplayBinding.ts
-import { useEffect as useEffect7 } from "react";
+import { useEffect as useEffect8 } from "react";
 
 // src/nav/core.ts
 function on(el, type, fn, opts) {
@@ -3033,7 +3065,7 @@ function mountDisplay(scope = document) {
 
 // src/display/useDisplayBinding.ts
 function useDisplayBinding(ref, type, deps = []) {
-  useEffect7(() => {
+  useEffect8(() => {
     const el = ref.current;
     if (!el || !type) return void 0;
     el.dataset.mimicusDisplay = type;
@@ -3062,7 +3094,6 @@ function Badge({
   max = 99,
   color = "primary",
   offset,
-  size = "medium",
   children,
   className,
   style,
@@ -3076,7 +3107,7 @@ function Badge({
     show && /* @__PURE__ */ jsx17(
       "sup",
       {
-        className: cx2("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`, `mimicus-badge--${size}`),
+        className: cx2("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`),
         style: offset ? { transform: `translate(${offset[0] ?? 0}px, ${offset[1] ?? 0}px)` } : void 0,
         children: !dot && label
       }
@@ -3111,13 +3142,13 @@ function Tag({
   );
 }
 var Chip = Tag;
-function Avatar({ src, alt, size = "medium", variant = "circular", children, className, style, ...rest }) {
+function Avatar({ src, alt, variant = "circular", children, className, style, ...rest }) {
   const label = alt ?? (typeof children === "string" ? children : "?");
   return /* @__PURE__ */ jsx17(
     "span",
     {
       ...rest,
-      className: cx2("mimicus-avatar", `mimicus-avatar--${size}`, `mimicus-avatar--${variant}`, className),
+      className: cx2("mimicus-avatar", `mimicus-avatar--${variant}`, className),
       style,
       title: alt,
       children: src ? /* @__PURE__ */ jsx17("img", { className: "mimicus-avatar__img", src, alt: alt ?? "" }) : /* @__PURE__ */ jsx17("span", { className: "mimicus-avatar__fallback", style: { background: hashColor(label) }, children: children ?? initials(label) })
@@ -3130,7 +3161,7 @@ function AvatarGroup({ max = 5, total, spacing = "medium", children, className, 
   const surplus = (total ?? items.length) - shown.length;
   return /* @__PURE__ */ jsxs11("span", { ...rest, className: cx2("mimicus-avatar-group", `mimicus-avatar-group--${spacing}`, className), style, children: [
     shown,
-    surplus > 0 && /* @__PURE__ */ jsxs11(Avatar, { size: "medium", className: "mimicus-avatar-group__surplus", children: [
+    surplus > 0 && /* @__PURE__ */ jsxs11(Avatar, { className: "mimicus-avatar-group__surplus", children: [
       "+",
       surplus
     ] })
@@ -3151,7 +3182,7 @@ function Carousel({
   defaultActiveIndex = 0,
   ...rest
 }) {
-  const ref = useRef4(null);
+  const ref = useRef5(null);
   const slides = Children5.toArray(children);
   useDisplayBinding(ref, "carousel", [slides.length, autoplay, arrows, dots]);
   return /* @__PURE__ */ jsxs11(
@@ -3188,7 +3219,7 @@ function CollapsePanel({ panelKey, header, defaultOpen, children, className, ...
   ] });
 }
 function Collapse({ accordion = false, defaultActiveKey, activeKey, children, className, style, ...rest }) {
-  const ref = useRef4(null);
+  const ref = useRef5(null);
   const keys = activeKey ?? defaultActiveKey;
   useDisplayBinding(ref, "collapse", [accordion, keys]);
   return /* @__PURE__ */ jsx17(
@@ -3213,8 +3244,8 @@ function DescriptionsItem({ label, span = 1, children, className, ...rest }) {
     /* @__PURE__ */ jsx17("dd", { className: "mimicus-descriptions__content", children })
   ] });
 }
-function Descriptions({ title, bordered = false, column = 3, size = "medium", children, className, style, ...rest }) {
-  return /* @__PURE__ */ jsxs11("div", { ...rest, className: cx2("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", `mimicus-descriptions--${size}`, className), style, children: [
+function Descriptions({ title, bordered = false, column = 3, children, className, style, ...rest }) {
+  return /* @__PURE__ */ jsxs11("div", { ...rest, className: cx2("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", className), style, children: [
     title && /* @__PURE__ */ jsx17("div", { className: "mimicus-descriptions__title", children: title }),
     /* @__PURE__ */ jsx17("dl", { className: "mimicus-descriptions__list", style: { "--mimicus-desc-cols": column }, children })
   ] });
@@ -3251,8 +3282,8 @@ function QRCode({ value = "", size = 128, bordered = true, className, style, ...
   };
   return /* @__PURE__ */ jsx17("span", { ...rest, className: cx2("mimicus-qrcode", bordered && "mimicus-qrcode--bordered", className), style, children: /* @__PURE__ */ jsx17("canvas", { ref, width: size, height: size, className: "mimicus-qrcode__canvas", "aria-label": `QR: ${value}` }) });
 }
-function Segmented({ options = [], value, defaultValue, onChange, block, size = "medium", className, style, ...rest }) {
-  const ref = useRef4(null);
+function Segmented({ options = [], value, defaultValue, onChange, block, className, style, ...rest }) {
+  const ref = useRef5(null);
   const cur = value ?? defaultValue ?? options[0]?.value;
   useDisplayBinding(ref, "segmented", [cur, options.length]);
   return /* @__PURE__ */ jsx17(
@@ -3260,7 +3291,7 @@ function Segmented({ options = [], value, defaultValue, onChange, block, size = 
     {
       ...rest,
       ref,
-      className: cx2("mimicus-segmented", `mimicus-segmented--${size}`, block && "mimicus-segmented--block", className),
+      className: cx2("mimicus-segmented", block && "mimicus-segmented--block", className),
       style,
       "data-mimicus-display": "segmented",
       "data-value": cur,
@@ -3294,13 +3325,13 @@ function Statistic({ title, value, prefix, suffix, precision, className, style, 
     ] })
   ] });
 }
-function Table({ columns = [], dataSource = [], bordered, size = "medium", sortable, pagination, className, style, children, ...rest }) {
-  const ref = useRef4(null);
+function Table({ columns = [], dataSource = [], bordered, sortable, pagination, className, style, children, ...rest }) {
+  const ref = useRef5(null);
   useDisplayBinding(ref, sortable ? "table" : null, [sortable, dataSource.length]);
   if (children) {
-    return /* @__PURE__ */ jsx17("table", { ...rest, ref, className: cx2("mimicus-table", bordered && "mimicus-table--bordered", `mimicus-table--${size}`, className), style, "data-mimicus-display": sortable ? "table" : void 0, children });
+    return /* @__PURE__ */ jsx17("table", { ...rest, ref, className: cx2("mimicus-table", bordered && "mimicus-table--bordered", className), style, "data-mimicus-display": sortable ? "table" : void 0, children });
   }
-  return /* @__PURE__ */ jsxs11("table", { ...rest, ref, className: cx2("mimicus-table", bordered && "mimicus-table--bordered", `mimicus-table--${size}`, className), style, "data-mimicus-display": sortable ? "table" : void 0, children: [
+  return /* @__PURE__ */ jsxs11("table", { ...rest, ref, className: cx2("mimicus-table", bordered && "mimicus-table--bordered", className), style, "data-mimicus-display": sortable ? "table" : void 0, children: [
     /* @__PURE__ */ jsx17("thead", { children: /* @__PURE__ */ jsx17("tr", { children: columns.map((col, i) => /* @__PURE__ */ jsx17("th", { "data-mimicus-table-sort": sortable && col.sorter ? i : void 0, className: sortable && col.sorter ? "mimicus-table__sortable" : void 0, children: col.title }, col.key ?? i)) }) }),
     /* @__PURE__ */ jsx17("tbody", { children: dataSource.map((row2, ri) => /* @__PURE__ */ jsx17("tr", { children: columns.map((col, ci) => /* @__PURE__ */ jsx17("td", { children: col.render ? col.render(row2[col.dataIndex], row2) : row2[col.dataIndex] }, col.key ?? ci)) }, row2.key ?? ri)) })
   ] });
@@ -3325,7 +3356,7 @@ function Timeline({ mode = "left", pending, children, className, style, ...rest 
 }
 Timeline.Item = TimelineItem;
 function Tooltip({ title, placement = "top", arrow, children, className, ...rest }) {
-  const ref = useRef4(null);
+  const ref = useRef5(null);
   useDisplayBinding(ref, "tooltip", [title, placement]);
   return /* @__PURE__ */ jsxs11("span", { ...rest, ref, className: cx2("mimicus-tooltip", className), "data-mimicus-display": "tooltip", "data-placement": placement, children: [
     /* @__PURE__ */ jsx17("span", { className: "mimicus-tooltip__trigger", "data-mimicus-tooltip-trigger": true, tabIndex: 0, children }),
@@ -3333,7 +3364,7 @@ function Tooltip({ title, placement = "top", arrow, children, className, ...rest
   ] });
 }
 function Tour({ steps = [], open = false, className, style, ...rest }) {
-  const ref = useRef4(null);
+  const ref = useRef5(null);
   useDisplayBinding(ref, "tour", [open, steps.length]);
   return /* @__PURE__ */ jsxs11("div", { ...rest, ref, className: cx2("mimicus-tour", open && "is-active", className), style, "data-mimicus-display": "tour", "data-open": open, children: [
     /* @__PURE__ */ jsx17("div", { className: "mimicus-tour__overlay", "data-mimicus-tour-overlay": true, hidden: true }),
@@ -3360,12 +3391,12 @@ function TreeNode({ node, checkable, level = 0 }) {
   ] });
 }
 function Tree({ treeData = [], checkable, defaultExpandAll, className, style, ...rest }) {
-  const ref = useRef4(null);
+  const ref = useRef5(null);
   useDisplayBinding(ref, "tree", [checkable, treeData.length]);
   return /* @__PURE__ */ jsx17("div", { ...rest, ref, className: cx2("mimicus-tree", className), style, "data-mimicus-display": "tree", "data-checkable": checkable, "data-default-expand-all": defaultExpandAll, children: treeData.map((n) => /* @__PURE__ */ jsx17(TreeNode, { node: n, checkable }, n.key ?? n.title)) });
 }
 function Calendar({ fullscreen, className, style, ...rest }) {
-  const ref = useRef4(null);
+  const ref = useRef5(null);
   const now = /* @__PURE__ */ new Date();
   useDisplayBinding(ref, "calendar", []);
   return /* @__PURE__ */ jsxs11(
@@ -3727,10 +3758,10 @@ function GridResponsiveForm({ maxcells, mincells, gap = "1rem", className, style
 }
 
 // src/components/forms/Forms.tsx
-import { Children as Children9, useId as useId2, useRef as useRef5, useState as useState8 } from "react";
+import { Children as Children9, useEffect as useEffect10, useId as useId2, useRef as useRef6, useState as useState8 } from "react";
 
 // src/forms/useFormBinding.ts
-import { useEffect as useEffect8 } from "react";
+import { useEffect as useEffect9 } from "react";
 
 // src/forms/controllers.ts
 function bindSlider(root) {
@@ -4106,7 +4137,7 @@ function mountForms(scope = document) {
 
 // src/forms/useFormBinding.ts
 function useFormBinding(ref, type, deps = []) {
-  useEffect8(() => {
+  useEffect9(() => {
     const el = ref.current;
     if (!el) return void 0;
     el.dataset.mimicusForm = type;
@@ -4146,7 +4177,6 @@ function Input({
   value,
   defaultValue,
   onChange,
-  size = "medium",
   status,
   prefix,
   suffix,
@@ -4160,7 +4190,7 @@ function Input({
   ...rest
 }) {
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-  return /* @__PURE__ */ jsxs14("span", { className: cx3("mimicus-input", `mimicus-input--${size}`, status && `is-${status}`, disabled && "is-disabled", className), style, children: [
+  return /* @__PURE__ */ jsxs14("span", { className: cx3("mimicus-input", status && `is-${status}`, disabled && "is-disabled", className), style, children: [
     prefix && /* @__PURE__ */ jsx26("span", { className: "mimicus-input__affix mimicus-input__prefix", children: prefix }),
     /* @__PURE__ */ jsx26(
       "input",
@@ -4194,15 +4224,15 @@ function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, className
     }
   );
 }
-function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, size = "medium", disabled, className, style, ...rest }) {
-  const ref = useRef5(null);
+function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, disabled, className, style, ...rest }) {
+  const ref = useRef6(null);
   const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "input-number", [min, max, step, val]);
   return /* @__PURE__ */ jsxs14(
     "span",
     {
       ref,
-      className: cx3("mimicus-input-number", `mimicus-input-number--${size}`, disabled && "is-disabled", className),
+      className: cx3("mimicus-input-number", disabled && "is-disabled", className),
       style,
       "data-min": min,
       "data-max": max,
@@ -4235,7 +4265,6 @@ function Checkbox({
   indeterminate,
   disabled,
   loading,
-  size = "medium",
   children,
   className,
   style,
@@ -4243,7 +4272,7 @@ function Checkbox({
 }) {
   const [on2, set] = useCtrl(checked, defaultChecked, onChange);
   const id = useId2();
-  return /* @__PURE__ */ jsxs14("label", { className: cx3("mimicus-checkbox", `mimicus-checkbox--${size}`, on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style, children: [
+  return /* @__PURE__ */ jsxs14("label", { className: cx3("mimicus-checkbox", on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style, children: [
     /* @__PURE__ */ jsx26(
       "input",
       {
@@ -4260,8 +4289,15 @@ function Checkbox({
     children != null && /* @__PURE__ */ jsx26("span", { className: "mimicus-checkbox__label", children })
   ] });
 }
-function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, className, ...rest }) {
+function resolveIconNode(icon) {
+  if (icon == null || icon === "") return null;
+  if (typeof icon === "string") return /* @__PURE__ */ jsx26("iconify-icon", { icon });
+  return icon;
+}
+function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, colorChecked, colorUnchecked, className, ...rest }) {
   const surface = mergeSurfaceStyle(color, { variant: variant ?? "solid" });
+  const onNode = resolveIconNode(iconChecked ?? icon) ?? /* @__PURE__ */ jsx26("iconify-icon", { icon: "mdi:check" });
+  const offNode = resolveIconNode(iconUnchecked) ?? /* @__PURE__ */ jsx26("iconify-icon", { icon: "" });
   return /* @__PURE__ */ jsxs14(
     Checkbox,
     {
@@ -4272,11 +4308,15 @@ function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, co
       disabled,
       loading,
       className: cx3("mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", className),
-      style: surface.style,
+      style: {
+        ...surface.style,
+        "--cb-on-fg": colorChecked || void 0,
+        "--cb-off-fg": colorUnchecked || void 0
+      },
       children: [
         /* @__PURE__ */ jsxs14("span", { className: "mimicus-checkbox__icons", children: [
-          /* @__PURE__ */ jsx26("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--on", children: iconChecked ?? icon ?? "\u2713" }),
-          /* @__PURE__ */ jsx26("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--off", children: iconUnchecked ?? "\u25CB" })
+          /* @__PURE__ */ jsx26("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--on", "aria-hidden": true, children: onNode }),
+          /* @__PURE__ */ jsx26("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--off", "aria-hidden": true, children: offNode })
         ] }),
         children
       ]
@@ -4286,9 +4326,17 @@ function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, co
 function CheckboxChip({ value, options, onChange, className, style }) {
   return /* @__PURE__ */ jsx26(ToggleButtonGroup, { exclusive: true, value, onChange, className: cx3("mimicus-checkbox-chip", className), style, children: options?.map((opt) => /* @__PURE__ */ jsx26(ToggleButton, { value: opt.value, icon: opt.icon, children: opt.label ?? opt.value }, opt.value)) });
 }
-function Switch({ checked, defaultChecked = false, onChange, disabled, loading, size = "medium", children, className, style, ...rest }) {
+function resolveIcon(icon) {
+  if (icon == null || icon === "") return null;
+  if (typeof icon === "string") return /* @__PURE__ */ jsx26("iconify-icon", { icon });
+  return icon;
+}
+function Switch({ checked, defaultChecked = false, onChange, disabled, loading, icon, iconOn, iconOff, colorOn, colorOff, children, className, style, ...rest }) {
   const [on2, set] = useCtrl(checked, defaultChecked, onChange);
-  return /* @__PURE__ */ jsxs14("label", { className: cx3("mimicus-switch", `mimicus-switch--${size}`, on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", className), style, children: [
+  const onIcon = resolveIcon(iconOn ?? icon);
+  const offIcon = resolveIcon(iconOff ?? icon);
+  const hasIcons = onIcon != null || offIcon != null;
+  return /* @__PURE__ */ jsxs14("label", { className: cx3("mimicus-switch", on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", hasIcons && "has-icons", className), style, children: [
     /* @__PURE__ */ jsx26(
       "input",
       {
@@ -4301,7 +4349,17 @@ function Switch({ checked, defaultChecked = false, onChange, disabled, loading, 
         onChange: (e) => set(e.target.checked)
       }
     ),
-    /* @__PURE__ */ jsx26("span", { className: "mimicus-switch__track", children: /* @__PURE__ */ jsx26("span", { className: "mimicus-switch__thumb" }) }),
+    /* @__PURE__ */ jsx26(
+      "span",
+      {
+        className: "mimicus-switch__track",
+        style: on2 ? colorOn ? { "--sw-on-fg": colorOn } : void 0 : colorOff ? { "--sw-off-fg": colorOff } : void 0,
+        children: /* @__PURE__ */ jsxs14("span", { className: "mimicus-switch__thumb", children: [
+          onIcon && /* @__PURE__ */ jsx26("span", { className: "mimicus-switch__icon mimicus-switch__icon--on", "aria-hidden": true, children: onIcon }),
+          offIcon && /* @__PURE__ */ jsx26("span", { className: "mimicus-switch__icon mimicus-switch__icon--off", "aria-hidden": true, children: offIcon })
+        ] })
+      }
+    ),
     children != null && /* @__PURE__ */ jsx26("span", { className: "mimicus-switch__label", children })
   ] });
 }
@@ -4347,7 +4405,7 @@ function RadioGroup({ value, defaultValue, onChange, name, direction = "horizont
   return /* @__PURE__ */ jsx26("div", { ...rest, role: "radiogroup", className: cx3("mimicus-radio-group", `mimicus-radio-group--${direction}`, className), style, "data-value": val, children: body });
 }
 function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 1, disabled, vertical, className, style, showValue, ...rest }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "slider", [min, max, step]);
   return /* @__PURE__ */ jsxs14(
@@ -4381,8 +4439,8 @@ function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 
     }
   );
 }
-function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "\u2605", size = "medium", className, style, ...rest }) {
-  const ref = useRef5(null);
+function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "\u2605", className, style, ...rest }) {
+  const ref = useRef6(null);
   const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "rate", [count, allowHalf, allowClear, val, disabled]);
   return /* @__PURE__ */ jsx26(
@@ -4391,7 +4449,7 @@ function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowCl
       ref,
       ...rest,
       role: "radiogroup",
-      className: cx3("mimicus-rate", `mimicus-rate--${size}`, disabled && "is-disabled", className),
+      className: cx3("mimicus-rate", disabled && "is-disabled", className),
       style,
       "data-count": count,
       "data-value": val,
@@ -4407,16 +4465,147 @@ function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowCl
 var Rating = Rate;
 function Select({ value, defaultValue, onChange, options, placeholder, disabled, size = "medium", className, style, children, ...rest }) {
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-  return /* @__PURE__ */ jsxs14("span", { className: cx3("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style, children: [
-    /* @__PURE__ */ jsxs14("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: [
-      placeholder && /* @__PURE__ */ jsx26("option", { value: "", children: placeholder }),
-      children ?? options?.map((opt) => /* @__PURE__ */ jsx26("option", { value: opt.value, disabled: opt.disabled, children: opt.label }, opt.value))
-    ] }),
-    /* @__PURE__ */ jsx26("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
-  ] });
+  const [open, setOpen] = useState8(false);
+  const rootRef = useRef6(null);
+  const dialogRef = useRef6(null);
+  const triggerRef = useRef6(null);
+  const isStructured = Array.isArray(options) && options.every((o) => o && typeof o === "object" && "value" in o);
+  const items = isStructured ? options : [];
+  const current = items.find((o) => String(o.value) === String(val));
+  const fallbackLabel = children ? void 0 : items.find((o) => String(o.value) === String(val))?.label;
+  useEffect10(() => {
+    if (!open) return;
+    const dlg = dialogRef.current;
+    const trg = triggerRef.current;
+    if (!dlg || !trg) return;
+    const place = () => {
+      const r = trg.getBoundingClientRect();
+      const margin = 6;
+      const desiredLeft = r.left;
+      const desiredTop = r.bottom + margin;
+      const panelWidth = Math.max(r.width, 180);
+      const maxLeft = window.innerWidth - panelWidth - 8;
+      dlg.style.setProperty("--mimicus-select-left", `${Math.max(8, Math.min(desiredLeft, maxLeft))}px`);
+      dlg.style.setProperty("--mimicus-select-top", `${desiredTop}px`);
+      dlg.style.setProperty("--mimicus-select-min-w", `${r.width}px`);
+    };
+    place();
+    window.addEventListener("resize", place);
+    window.addEventListener("scroll", place, true);
+    return () => {
+      window.removeEventListener("resize", place);
+      window.removeEventListener("scroll", place, true);
+    };
+  }, [open]);
+  useEffect10(() => {
+    const dlg = dialogRef.current;
+    if (!dlg) return;
+    if (open) {
+      if (!dlg.open) dlg.showModal();
+    } else if (dlg.open) {
+      dlg.close();
+    }
+  }, [open]);
+  useEffect10(() => {
+    if (!open && document.activeElement && triggerRef.current && document.activeElement !== triggerRef.current) {
+    }
+  }, [open]);
+  useEffect10(() => {
+    if (!open) return;
+    function onKey(e) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+  if (!isStructured) {
+    return /* @__PURE__ */ jsxs14("span", { className: cx3("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style, children: [
+      /* @__PURE__ */ jsxs14("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: [
+        placeholder && /* @__PURE__ */ jsx26("option", { value: "", children: placeholder }),
+        children ?? options?.map((opt) => /* @__PURE__ */ jsx26("option", { value: opt.value, disabled: opt.disabled, children: opt.label }, opt.value))
+      ] }),
+      /* @__PURE__ */ jsx26("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
+    ] });
+  }
+  return /* @__PURE__ */ jsxs14(
+    "span",
+    {
+      ref: rootRef,
+      className: cx3("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", open && "is-open", className),
+      style,
+      "data-value": val ?? "",
+      children: [
+        /* @__PURE__ */ jsxs14(
+          "button",
+          {
+            ref: triggerRef,
+            type: "button",
+            className: "mimicus-select__trigger",
+            disabled,
+            "aria-haspopup": "dialog",
+            "aria-expanded": open,
+            onClick: () => !disabled && setOpen((o) => !o),
+            children: [
+              /* @__PURE__ */ jsxs14("span", { className: "mimicus-select__value", children: [
+                current?.icon && /* @__PURE__ */ jsx26("span", { className: "mimicus-select__icon", "aria-hidden": true, children: current.icon }),
+                /* @__PURE__ */ jsx26("span", { className: "mimicus-select__label", children: current?.label ?? placeholder ?? "" })
+              ] }),
+              /* @__PURE__ */ jsx26("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
+            ]
+          }
+        ),
+        open && /* @__PURE__ */ jsx26(
+          "dialog",
+          {
+            ref: dialogRef,
+            className: "mimicus-select__dialog",
+            "data-mimicus-select-dialog": true,
+            onClose: () => setOpen(false),
+            onCancel: (e) => {
+              e.preventDefault();
+              setOpen(false);
+            },
+            onClick: (e) => {
+              const panel = dialogRef.current?.querySelector(".mimicus-select__panel");
+              if (panel && !panel.contains(e.target)) setOpen(false);
+            },
+            children: /* @__PURE__ */ jsxs14("ul", { role: "listbox", className: "mimicus-select__panel", "data-mimicus-select-panel": true, onClick: (e) => e.stopPropagation(), children: [
+              placeholder && /* @__PURE__ */ jsx26("li", { role: "option", "aria-selected": !val, className: cx3("mimicus-select__option", !val && "is-selected"), onClick: () => {
+                set("");
+                setOpen(false);
+              }, children: /* @__PURE__ */ jsx26("span", { className: "mimicus-select__label", children: placeholder }) }),
+              items.map((opt) => {
+                const selected = String(opt.value) === String(val);
+                return /* @__PURE__ */ jsxs14(
+                  "li",
+                  {
+                    role: "option",
+                    "aria-selected": selected,
+                    "aria-disabled": opt.disabled,
+                    className: cx3("mimicus-select__option", selected && "is-selected", opt.disabled && "is-disabled"),
+                    onClick: () => {
+                      if (opt.disabled) return;
+                      set(opt.value);
+                      setOpen(false);
+                    },
+                    children: [
+                      opt.icon && /* @__PURE__ */ jsx26("span", { className: "mimicus-select__icon", "aria-hidden": true, children: opt.icon }),
+                      /* @__PURE__ */ jsx26("span", { className: "mimicus-select__label", children: opt.label ?? opt.value })
+                    ]
+                  },
+                  String(opt.value)
+                );
+              })
+            ] })
+          }
+        ),
+        /* @__PURE__ */ jsx26("select", { ...rest, tabIndex: -1, "aria-hidden": true, className: "mimicus-select__native mimicus-select__native--sr", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: items.map((o) => /* @__PURE__ */ jsx26("option", { value: String(o.value), children: typeof fallbackLabel === "string" ? fallbackLabel : "" }, String(o.value))) })
+      ]
+    }
+  );
 }
 function AutoComplete({ options = [], value, defaultValue, onChange, onSelect, placeholder, disabled, className, style, ...rest }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   useFormBinding(ref, "autocomplete", [options.length]);
   return /* @__PURE__ */ jsxs14("div", { ref, className: cx3("mimicus-autocomplete", disabled && "is-disabled", className), style, "data-mimicus-form": "autocomplete", children: [
@@ -4458,8 +4647,8 @@ function ToggleButton({ value, selected, onChange, disabled, children, icon, cla
     }
   );
 }
-function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", size, children, className, style, ...rest }) {
-  const ref = useRef5(null);
+function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", children, className, style, ...rest }) {
+  const ref = useRef6(null);
   const [val, set] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
   const normalized = exclusive ? val : Array.isArray(val) ? val.join(",") : val;
   return /* @__PURE__ */ jsx26(
@@ -4468,7 +4657,7 @@ function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, or
       ref,
       ...rest,
       role: "group",
-      className: cx3("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, size && `mimicus-toggle-group--${size}`, className),
+      className: cx3("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, className),
       style,
       "data-exclusive": exclusive ? "true" : "false",
       "data-value": normalized,
@@ -4490,7 +4679,7 @@ function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, or
   );
 }
 function Transfer({ dataSource, targetKeys, onChange, titles = ["Origen", "Destino"], disabled, className, style }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   const left = (dataSource ?? []).filter((d) => !(targetKeys ?? []).includes(d.key));
   const right = (dataSource ?? []).filter((d) => (targetKeys ?? []).includes(d.key));
   useFormBinding(ref, "transfer", [left.length, right.length, disabled]);
@@ -4522,7 +4711,7 @@ function Transfer({ dataSource, targetKeys, onChange, titles = ["Origen", "Desti
 }
 var TransferList = Transfer;
 function TransferBoard({ stackCount = 3, stackWidth = 248, disabled, itemsPerStack = 3, className, style }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   useFormBinding(ref, "transfer-board", [stackCount, stackWidth, disabled, itemsPerStack]);
   const stacks = Array.from({ length: stackCount }, (_, s) => /* @__PURE__ */ jsxs14("div", { className: "mimicus-transfer-board__stack", "data-mimicus-transfer-stack": true, style: { width: stackWidth }, children: [
     /* @__PURE__ */ jsxs14("div", { className: "mimicus-transfer-board__stack-title", children: [
@@ -4547,7 +4736,7 @@ function TransferBoard({ stackCount = 3, stackWidth = 248, disabled, itemsPerSta
   );
 }
 function Upload({ accept, multiple, disabled, children, className, style, ...rest }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   useFormBinding(ref, "upload", [accept, multiple]);
   return /* @__PURE__ */ jsxs14("div", { ref, className: cx3("mimicus-upload", disabled && "is-disabled", className), style, "data-mimicus-form": "upload", children: [
     /* @__PURE__ */ jsxs14("label", { className: "mimicus-upload__trigger", children: [
@@ -4558,7 +4747,7 @@ function Upload({ accept, multiple, disabled, children, className, style, ...res
   ] });
 }
 function ColorPicker({ value = "#1677ff", defaultValue, onChange, disabled, className, style, ...rest }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   const [val, set] = useCtrl(value, defaultValue ?? "#1677ff", onChange);
   useFormBinding(ref, "color-picker", [val]);
   return /* @__PURE__ */ jsxs14(
@@ -4586,7 +4775,7 @@ function TimePicker({ value, defaultValue, onChange, disabled, className, style,
   return /* @__PURE__ */ jsx26(Input, { ...rest, type: "time", className: cx3("mimicus-time-picker", className), style, value: val, disabled, onChange: set });
 }
 function Cascader({ options = [], value, onChange, placeholder = "Seleccionar", disabled, className, style }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   useFormBinding(ref, "cascader", [options.length]);
   const flat = options.flatMap((o) => o.children ? o.children.map((c) => ({ ...c, parent: o.label })) : [o]);
   return /* @__PURE__ */ jsxs14("div", { ref, className: cx3("mimicus-cascader", disabled && "is-disabled", className), style, "data-value": value, "data-mimicus-form": "cascader", children: [
@@ -4607,7 +4796,7 @@ function Cascader({ options = [], value, onChange, placeholder = "Seleccionar", 
   ] });
 }
 function TreeSelect({ treeData = [], value, onChange, placeholder = "Seleccionar", disabled, className, style }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   useFormBinding(ref, "tree-select", [treeData.length]);
   const Node = ({ node, depth = 0 }) => /* @__PURE__ */ jsxs14("li", { className: "mimicus-tree-select__node", "data-mimicus-tree-node": true, "data-value": node.value, "data-label": node.title, style: { paddingLeft: `${depth * 0.75}rem` }, children: [
     node.children?.length ? /* @__PURE__ */ jsx26("button", { type: "button", className: "mimicus-tree-select__toggle", "data-mimicus-tree-toggle": true, children: "\u25B8" }) : /* @__PURE__ */ jsx26("span", { className: "mimicus-tree-select__spacer" }),
@@ -4620,7 +4809,7 @@ function TreeSelect({ treeData = [], value, onChange, placeholder = "Seleccionar
   ] });
 }
 function Mentions({ options = [], value, defaultValue, onChange, rows = 3, placeholder, disabled, className, style, ...rest }) {
-  const ref = useRef5(null);
+  const ref = useRef6(null);
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   useFormBinding(ref, "mentions", [options.length]);
   return /* @__PURE__ */ jsxs14("div", { ref, className: cx3("mimicus-mentions", disabled && "is-disabled", className), style, "data-mimicus-form": "mentions", children: [
@@ -4633,10 +4822,10 @@ function Mentions({ options = [], value, defaultValue, onChange, rows = 3, place
 }
 
 // src/components/navigation/Navigation.tsx
-import { Children as Children10, useEffect as useEffect10, useMemo as useMemo3, useRef as useRef6 } from "react";
+import { Children as Children10, useEffect as useEffect12, useMemo as useMemo3, useRef as useRef7 } from "react";
 
 // src/nav/useNavBinding.ts
-import { useEffect as useEffect9 } from "react";
+import { useEffect as useEffect11 } from "react";
 
 // src/nav/paginationMath.ts
 function buildPageRange(count, page, siblingCount = 1) {
@@ -4998,7 +5187,7 @@ function mountNavigation(scope = document) {
 
 // src/nav/useNavBinding.ts
 function useNavBinding(ref, type, deps = []) {
-  useEffect9(() => {
+  useEffect11(() => {
     const el = ref.current;
     if (!el) return void 0;
     el.dataset.mimicusNav = type;
@@ -5015,7 +5204,7 @@ function AnchorLink({ href, title, children, className, ...rest }) {
   return /* @__PURE__ */ jsx27("a", { ...rest, href, title: typeof title === "string" ? title : void 0, className: cx4("mimicus-anchor__link", className), "data-mimicus-anchor-link": true, children: /* @__PURE__ */ jsx27("span", { className: "mimicus-anchor__link-title", children: children ?? title }) });
 }
 function Anchor({ direction = "vertical", affix = false, targetOffset = 0, bounds = 5, container, items, className, style, children, ...rest }) {
-  const ref = useRef6(null);
+  const ref = useRef7(null);
   useNavBinding(ref, "anchor", [direction, affix, targetOffset, bounds, container]);
   const body = children ?? items?.map((it, i) => /* @__PURE__ */ jsx27(AnchorLink, { href: it.href, title: it.title, children: it.title }, it.href ?? i));
   return /* @__PURE__ */ jsx27(
@@ -5076,7 +5265,7 @@ function MenuDivider() {
   return /* @__PURE__ */ jsx27("li", { role: "separator", className: "mimicus-menu__divider" });
 }
 function Menu({ mode = "vertical", selectable, className, style, children, ...rest }) {
-  const ref = useRef6(null);
+  const ref = useRef7(null);
   useNavBinding(ref, "menu", [mode]);
   return /* @__PURE__ */ jsx27(
     "ul",
@@ -5095,7 +5284,7 @@ function Menu({ mode = "vertical", selectable, className, style, children, ...re
 Menu.Item = MenuItem;
 Menu.Divider = MenuDivider;
 function Dropdown({ trigger, menu, placement = "bottomLeft", open, className, style, children, ...rest }) {
-  const ref = useRef6(null);
+  const ref = useRef7(null);
   useNavBinding(ref, "dropdown", [placement, open]);
   const body = children ?? /* @__PURE__ */ jsxs15(Fragment5, { children: [
     /* @__PURE__ */ jsx27("div", { className: "mimicus-dropdown__trigger", "data-mimicus-dropdown-trigger": true, children: trigger }),
@@ -5128,7 +5317,7 @@ function normalizeTabItems(items, children) {
   })?.filter(Boolean) ?? [];
 }
 function Tabs({ type = "line", tabPosition = "top", activeKey, defaultActiveKey, items, className, style, children, ...rest }) {
-  const ref = useRef6(null);
+  const ref = useRef7(null);
   const tabItems = normalizeTabItems(items, children);
   const defaultKey = defaultActiveKey ?? activeKey ?? tabItems[0]?.key;
   useNavBinding(ref, "tabs", [type, tabPosition, activeKey, defaultKey, tabItems.length]);
@@ -5191,8 +5380,8 @@ function Tabs({ type = "line", tabPosition = "top", activeKey, defaultActiveKey,
   );
 }
 Tabs.Tab = TabItem;
-function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, boundaryCount = 1, size, simple, className, style, ...rest }) {
-  const ref = useRef6(null);
+function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, boundaryCount = 1, simple, className, style, ...rest }) {
+  const ref = useRef7(null);
   useNavBinding(ref, "pagination", [count, page, defaultPage, siblingCount, boundaryCount]);
   return /* @__PURE__ */ jsx27(
     "nav",
@@ -5200,7 +5389,7 @@ function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, bound
       ref,
       ...rest,
       "aria-label": "pagination",
-      className: cx4("mimicus-pagination", size && `mimicus-pagination--${size}`, simple && "mimicus-pagination--simple", className),
+      className: cx4("mimicus-pagination", simple && "mimicus-pagination--simple", className),
       style,
       "data-count": count,
       "data-page": page,
@@ -5221,8 +5410,8 @@ function Step({ title, description, status, icon, className, ...rest }) {
     ] })
   ] });
 }
-function Steps({ current = 0, direction = "horizontal", size, clickable, items, className, style, children, ...rest }) {
-  const ref = useRef6(null);
+function Steps({ current = 0, direction = "horizontal", clickable, items, className, style, children, ...rest }) {
+  const ref = useRef7(null);
   useNavBinding(ref, "steps", [current, direction, clickable]);
   const body = children ?? items?.map((it, i) => {
     const st = it.status ?? (i < current ? "finish" : i === Number(current) ? "process" : "wait");
@@ -5233,7 +5422,7 @@ function Steps({ current = 0, direction = "horizontal", size, clickable, items, 
     {
       ref,
       ...rest,
-      className: cx4("mimicus-steps", `mimicus-steps--${direction}`, size && `mimicus-steps--${size}`, className),
+      className: cx4("mimicus-steps", `mimicus-steps--${direction}`, className),
       style,
       "data-current": current,
       "data-direction": direction,
@@ -5246,9 +5435,9 @@ function Steps({ current = 0, direction = "horizontal", size, clickable, items, 
 Steps.Step = Step;
 var Stepper = Steps;
 function Drawer({ open = false, placement = "left", width = 280, title, footer, className, style, children, onClose, ...rest }) {
-  const ref = useRef6(null);
+  const ref = useRef7(null);
   useNavBinding(ref, "drawer", [open, placement, width]);
-  useEffect10(() => {
+  useEffect12(() => {
     const el = ref.current;
     if (!el || !onClose) return void 0;
     const fn = () => onClose();
@@ -5297,7 +5486,7 @@ function BottomNavigationAction({ value, label, icon, className, ...rest }) {
   );
 }
 function BottomNavigation({ value, showLabels, className, style, children, ...rest }) {
-  const ref = useRef6(null);
+  const ref = useRef7(null);
   useNavBinding(ref, "bottom-nav", [value, showLabels]);
   return /* @__PURE__ */ jsx27(
     "nav",
@@ -5349,7 +5538,7 @@ function SpeedDialAction({ icon, tooltip, actionKey, className, ...rest }) {
   );
 }
 function SpeedDial({ direction = "up", ariaLabel = "Acciones", icon, open, className, style, children, ...rest }) {
-  const ref = useRef6(null);
+  const ref = useRef7(null);
   useNavBinding(ref, "speed-dial", [direction, open]);
   return /* @__PURE__ */ jsxs15(
     "div",
@@ -5370,7 +5559,7 @@ function SpeedDial({ direction = "up", ariaLabel = "Acciones", icon, open, class
 SpeedDial.Action = SpeedDialAction;
 
 // src/contapyme/components/LoginButton.tsx
-import { useCallback, useEffect as useEffect12, useState as useState9 } from "react";
+import { useCallback, useEffect as useEffect14, useState as useState9 } from "react";
 
 // src/contapyme/auth/loginCredentials.ts
 var STORAGE_KEY = "jeffaporta:login-creds";
@@ -5545,11 +5734,11 @@ function ContapymeIcon({ icon, size = 20, className, style, ...rest }) {
 }
 
 // src/contapyme/components/LoginDialog.tsx
-import { useEffect as useEffect11, useRef as useRef7 } from "react";
+import { useEffect as useEffect13, useRef as useRef8 } from "react";
 import { jsx as jsx30, jsxs as jsxs16 } from "react/jsx-runtime";
 function LoginDialog({ open, busy, title = "Iniciar sesi\xF3n", icon = "mdi:account-key-outline", onClose, children, footer }) {
-  const ref = useRef7(null);
-  useEffect11(() => {
+  const ref = useRef8(null);
+  useEffect13(() => {
     const el = ref.current;
     if (!el) return void 0;
     const onDialogCancel = (e) => {
@@ -5561,7 +5750,7 @@ function LoginDialog({ open, busy, title = "Iniciar sesi\xF3n", icon = "mdi:acco
     else if (!open && el.open) el.close();
     return () => el.removeEventListener("cancel", onDialogCancel);
   }, [open, busy, onClose]);
-  useEffect11(() => {
+  useEffect13(() => {
     if (!open) return void 0;
     const onKey = (e) => {
       if (e.key === "Escape" && !busy) onClose?.();
@@ -5745,13 +5934,13 @@ function LoginButton({
   const [terceros, setTerceros] = useState9([]);
   const [selectedItercero, setSelectedItercero] = useState9("");
   const [, tick] = useState9(0);
-  useEffect12(() => {
+  useEffect14(() => {
     if (!authEvt || typeof window === "undefined") return void 0;
     const onAuth = () => tick((n) => n + 1);
     window.addEventListener(authEvt, onAuth);
     return () => window.removeEventListener(authEvt, onAuth);
   }, [authEvt]);
-  useEffect12(() => {
+  useEffect14(() => {
     if (!open) return;
     const saved = readLoginCredentials();
     setUser(saved.username || "");
@@ -5838,10 +6027,7 @@ function LoginButton({
     ) }) });
   }
   return /* @__PURE__ */ jsxs18("span", { className: [wrapClass, "mimicus-login-button", className].filter(Boolean).join(" "), style, children: [
-    /* @__PURE__ */ jsx32(FlexLayout, { items: "center", gap: "0.35rem", className: btnClass, children: /* @__PURE__ */ jsxs18(Button, { type: "button", variant: "outlined", color: "neutral", shape: "rect", onClick: () => setOpen(true), style: { width: "auto" }, children: [
-      /* @__PURE__ */ jsx32(ContapymeIcon, { icon: "mdi:login", size: 18 }),
-      "Iniciar sesi\xF3n"
-    ] }) }),
+    /* @__PURE__ */ jsx32(FlexLayout, { items: "center", gap: "0.35rem", className: btnClass, children: /* @__PURE__ */ jsx32(Button, { type: "button", variant: "outlined", color: "neutral", shape: "rect", onClick: () => setOpen(true), style: { width: "auto" }, className: "mimicus-login-button__trigger", children: "Iniciar sesi\xF3n" }) }),
     /* @__PURE__ */ jsx32(
       LoginDialog,
       {
@@ -6195,7 +6381,6 @@ export {
   LOGIN_REMEMBER_LABEL,
   LOGIN_SUBTITLE_DEFAULT,
   LOOKNFEEL_DEFAULT,
-  LOOKNFEEL_DESIGN_SCHEME,
   LOOKNFEEL_OPTIONS,
   LOOKNFEEL_STORAGE_KEY,
   LUMINANCE_STORAGE_KEY,
@@ -6241,6 +6426,7 @@ export {
   Stepper,
   Steps,
   Switch,
+  THEME_COLOR_DESIGN_SCHEME,
   THEME_COLOR_OPTIONS,
   THEME_COLOR_STORAGE_KEY,
   TabItem,
@@ -6283,7 +6469,7 @@ export {
   createDemoSession,
   createOrchestratorSession,
   defaultIterceroFromTerceros,
-  designSchemeForLooknfeel,
+  designSchemeForThemeColor,
   destroyCodeMirror,
   ensureCodeMirrorCss,
   ensureCodeMirrorLoaded,

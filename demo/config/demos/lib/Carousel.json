@@ -5,11 +5,65 @@
   "titleIcon": "mdi:view-carousel-outline",
   "status": "approved",
   "intro": "Carrusel con flechas, puntos y autoplay. Controlador <code>data-mimicus-display=\"carousel\"</code>. Ver <a href=\"https://ant.design/components/carousel\" target=\"_blank\" rel=\"noreferrer\">Ant Carousel</a>.",
-  "component": { "name": "Carousel", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-carousel" },
-  "state": { "autoplay": false, "arrows": true, "dots": true, "infinite": true },
+  "component": {
+    "name": "Carousel",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-carousel"
+  },
+  "state": {
+    "autoplay": false,
+    "arrows": true,
+    "dots": true,
+    "infinite": true
+  },
   "fields": [
-    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "autoplay", "label": "autoplay" }, { "key": "arrows", "label": "arrows" }, { "key": "dots", "label": "dots" }, { "key": "infinite", "label": "infinite" }] }
+    {
+      "kind": "switch-group",
+      "key": "opts",
+      "label": "Opciones",
+      "labelIcon": "mdi:tune",
+      "switches": [
+        {
+          "key": "autoplay",
+          "label": "autoplay",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "arrows",
+          "label": "arrows",
+          "iconOn": "mdi:arrow-left-right-bold",
+          "iconOff": "mdi:arrow-left-right",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "dots",
+          "label": "dots",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "infinite",
+          "label": "infinite",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        }
+      ]
+    }
   ],
-  "code": { "strategy": "disp-carousel", "tagOpts": { "multiline": true } }
+  "code": {
+    "strategy": "disp-carousel",
+    "tagOpts": {
+      "multiline": true
+    }
+  }
 }

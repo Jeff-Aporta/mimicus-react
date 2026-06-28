@@ -19,7 +19,6 @@ export interface DividerProps extends Omit<HTMLAttributes<HTMLDivElement>, "colo
   dashed?: boolean;
   titlePlacement?: "left" | "center" | "right";
   plain?: boolean;
-  size?: "small" | "medium" | "large";
   orientationMargin?: string | number;
   style?: CSSProperties;
   children?: ReactNode;
@@ -40,7 +39,6 @@ export function Divider({
   dashed = false,
   titlePlacement = "center",
   plain = false,
-  size = "medium",
   orientationMargin,
   className,
   style,
@@ -51,8 +49,7 @@ export function Divider({
   const normalizedVariant = normalizeVariant(variant, "solid");
   const lineVariant = normalizedVariant === "glow" ? "glow" : dashed ? "dashed" : normalizedVariant;
   const lineColor = resolveColor("border");
-  const marginBlock = size === "small" ? "0.5rem" : size === "large" ? "1.5rem" : "1rem";
-  const marginCss = axis === "horizontal" ? `${marginBlock} 0` : `0 0.5rem`;
+  const marginCss = axis === "horizontal" ? `1em 0` : `0 0.5em`;
   const edgeBasis = toCssLength(orientationMargin) ?? "5%";
   const hasText = children != null && children !== false && Children.count(children) > 0;
 

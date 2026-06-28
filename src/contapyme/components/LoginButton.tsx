@@ -199,8 +199,7 @@ export function LoginButton({
   return (
     <span className={[wrapClass, "mimicus-login-button", className].filter(Boolean).join(" ")} style={style}>
       <FlexLayout items="center" gap="0.35rem" className={btnClass}>
-        <Button type="button" variant="outlined" color="neutral" shape="rect" onClick={() => setOpen(true)} style={{ width: "auto" }}>
-          <ContapymeIcon icon="mdi:login" size={18} />
+        <Button type="button" variant="outlined" color="neutral" shape="rect" onClick={() => setOpen(true)} style={{ width: "auto" }} className="mimicus-login-button__trigger">
           Iniciar sesión
         </Button>
       </FlexLayout>

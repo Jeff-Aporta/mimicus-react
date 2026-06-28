@@ -6,7 +6,7 @@
  * UI del catálogo: tarjetas, sketches, overview (CatalogHome), ThemeLab y helpers de estado/iconos.
  */
 import { useMemo, useState } from "react";
-import { Button } from "../_ui.ts";
+import { Button, Input } from "../_ui.ts";
 import { resolveColor } from "../_ui.ts";
 import { Icon } from "../../components/Icon.tsx";
 import { itemsInSection, overviewMeta, sectionDescription, sectionIcon, sectionLabel, sectionsWithItems } from "./catalogSections.ts";
@@ -898,10 +898,16 @@ export function CatalogHome({
             <h1 className="catalog-home__title">{heroTitle}</h1>
             <p className="catalog-home__lead">{heroLead}</p>
             <div className="catalog-overview__toolbar">
-              <label className="catalog-search">
-                <Icon icon="mdi:magnify" className="catalog-search__icon" />
-                <input type="search" className="catalog-search__input" placeholder="Buscar componente…" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Buscar componente" />
-              </label>
+              <Input
+                className="catalog-search"
+                type="search"
+                placeholder="Buscar componente…"
+                aria-label="Buscar componente"
+                value={query}
+                onChange={(v) => setQuery(v)}
+                allowClear
+                prefix={<Icon icon="mdi:magnify" className="catalog-search__icon" />}
+              />
               {onOpenPaletteLab && (
                 <Button variant="outlined" color="primary" onClick={onOpenPaletteLab} style={{ width: "fit-content", flexShrink: 0 }}>
                   <Icon icon="mdi:palette-swatch-outline" />

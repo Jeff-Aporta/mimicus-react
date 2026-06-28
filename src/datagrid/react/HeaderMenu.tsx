@@ -19,10 +19,12 @@ export interface HeaderMenuProps {
   onHide: (colId: string) => void;
   onAutosize: (colId: string) => void;
   onFilter: (column: ColumnState) => void;
+  onToggleRowGroup: (colId: string) => void;
+  isGrouped: boolean;
 }
 
 export function HeaderMenu(props: HeaderMenuProps): ReactElement {
-  const { column, x, y, onClose, onSort, onPin, onHide, onAutosize, onFilter } = props;
+  const { column, x, y, onClose, onSort, onPin, onHide, onAutosize, onFilter, onToggleRowGroup, isGrouped } = props;
   const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const close = (e: Event) => { if (ref.current && !ref.current.contains(e.target as Node)) onClose(); };
@@ -49,6 +51,11 @@ export function HeaderMenu(props: HeaderMenuProps): ReactElement {
       <button type="button" className="mim-dg__menu-item" role="menuitem" onClick={act(() => onPin(column.colId, null))}><Icon icon="mdi:pin-off-outline" />No fijar</button>
       <div className="mim-dg__menu-sep" />
       <button type="button" className="mim-dg__menu-item" role="menuitem" onClick={act(() => onAutosize(column.colId))}><Icon icon="mdi:arrow-expand-horizontal" />Autoajustar ancho</button>
+      {column.enableRowGroup && (
+        <button type="button" className="mim-dg__menu-item" role="menuitem" onClick={act(() => onToggleRowGroup(column.colId))}>
+          <Icon icon={isGrouped ? "mdi:ungroup" : "mdi:group"} />{isGrouped ? "Quitar agrupación" : "Agrupar por esta columna"}
+        </button>
+      )}
       <button type="button" className="mim-dg__menu-item" role="menuitem" onClick={act(() => onHide(column.colId))}><Icon icon="mdi:eye-off-outline" />Ocultar columna</button>
     </div>
   );

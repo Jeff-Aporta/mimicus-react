@@ -307,11 +307,19 @@ export const items = [
           "switches": [
             {
               "key": "open",
-              "label": "expandido"
+              "label": "expandido",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "drawer",
-              "label": "drawer"
+              "label": "drawer",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -426,7 +434,11 @@ export const items = [
         {
           "kind": "switch",
           "key": "wrap",
-          "label": "wrap"
+          "label": "wrap",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -502,7 +514,11 @@ export const items = [
           "switches": [
             {
               "key": "inline",
-              "label": "inline"
+              "label": "inline",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         },

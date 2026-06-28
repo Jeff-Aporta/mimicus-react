@@ -14,11 +14,12 @@ export type ThemeColor =
   | "tierra"
   | "fucsia";
 export type DesignScheme = "mono" | "dual" | "triad";
-export type Looknfeel = "contapyme" | "neon-mono" | "neon-dual" | "neon-triad";
+export type Looknfeel = "contapyme" | "neon";
 
 export interface Option<T extends string = string> {
   id: T;
   label: string;
+  icon?: string;
 }
 
 export const LUMINANCE_STORAGE_KEY = "theme-luminance";
@@ -39,49 +40,60 @@ export const LEGACY_THEME_COLOR_MAP: Record<string, ThemeColor> = {
 };
 
 export const THEME_COLOR_OPTIONS: Option<ThemeColor>[] = [
-  { id: "hues-dodgerblue", label: "Dodger" },
-  { id: "vulcano", label: "Vulcano" },
-  { id: "natural", label: "Natural" },
-  { id: "coral", label: "Coral" },
-  { id: "oceano", label: "Océano" },
-  { id: "lavanda", label: "Lavanda" },
-  { id: "ambar", label: "Ámbar" },
-  { id: "cereza", label: "Cereza" },
-  { id: "grafito", label: "Grafito" },
-  { id: "menta", label: "Menta" },
-  { id: "indigo", label: "Índigo" },
-  { id: "tierra", label: "Tierra" },
-  { id: "fucsia", label: "Fucsia" },
+  { id: "hues-dodgerblue", label: "Dodger", icon: "mdi:palette-swatch" },
+  { id: "vulcano", label: "Vulcano", icon: "mdi:fire" },
+  { id: "natural", label: "Natural", icon: "mdi:leaf" },
+  { id: "coral", label: "Coral", icon: "mdi:flower-tulip" },
+  { id: "oceano", label: "Océano", icon: "mdi:waves" },
+  { id: "lavanda", label: "Lavanda", icon: "mdi:flower" },
+  { id: "ambar", label: "Ámbar", icon: "mdi:weather-sunny" },
+  { id: "cereza", label: "Cereza", icon: "mdi:fruit-cherries" },
+  { id: "grafito", label: "Grafito", icon: "mdi:square" },
+  { id: "menta", label: "Menta", icon: "mdi:sprout" },
+  { id: "indigo", label: "Índigo", icon: "mdi:moon-waning-crescent" },
+  { id: "tierra", label: "Tierra", icon: "mdi:terrain" },
+  { id: "fucsia", label: "Fucsia", icon: "mdi:star-four-points" },
 ];
 
 export const DESIGN_SCHEME_OPTIONS: Option<DesignScheme>[] = [
-  { id: "mono", label: "Mono" },
-  { id: "dual", label: "Dual" },
-  { id: "triad", label: "Tríada" },
+  { id: "mono", label: "Mono", icon: "mdi:circle" },
+  { id: "dual", label: "Dual", icon: "mdi:circle-half-full" },
+  { id: "triad", label: "Tríada", icon: "mdi:triangle-outline" },
 ];
+
+/** Scheme preferido por cada paleta. La paleta manda, no el look n feel. */
+export const THEME_COLOR_DESIGN_SCHEME: Record<ThemeColor, DesignScheme> = {
+  "hues-dodgerblue": "triad",
+  vulcano: "dual",
+  natural: "triad",
+  coral: "triad",
+  oceano: "dual",
+  lavanda: "triad",
+  ambar: "dual",
+  cereza: "triad",
+  grafito: "mono",
+  menta: "mono",
+  indigo: "dual",
+  tierra: "dual",
+  fucsia: "triad",
+};
 
 export const LOOKNFEEL_STORAGE_KEY = "looknfeel";
 export const LOOKNFEEL_DEFAULT: Looknfeel = "contapyme";
 
-export const NEON_LOOKNFEELS = ["neon-mono", "neon-dual", "neon-triad"];
+export const NEON_LOOKNFEELS = ["neon"] as const;
 
 export const LOOKNFEEL_OPTIONS: Option<Looknfeel>[] = [
-  { id: "contapyme", label: "ContaPyme" },
-  { id: "neon-mono", label: "Neon mono" },
-  { id: "neon-dual", label: "Neon dual" },
-  { id: "neon-triad", label: "Neon tríada" },
+  { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
+  { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" },
 ];
-
-export const LOOKNFEEL_DESIGN_SCHEME: Record<string, DesignScheme> = {
-  contapyme: "triad",
-  "neon-mono": "mono",
-  "neon-dual": "dual",
-  "neon-triad": "triad",
-};
 
 export const LEGACY_LOOKNFEEL_MAP: Record<string, Looknfeel> = {
   classic: "contapyme",
-  "neon-glass": "neon-triad",
+  "neon-glass": "neon",
+  "neon-mono": "neon",
+  "neon-dual": "neon",
+  "neon-triad": "neon",
 };
 
 const LOOKNFEEL_IDS: string[] = LOOKNFEEL_OPTIONS.map((o) => o.id);
@@ -118,8 +130,8 @@ export function normalizeLooknfeel(value: unknown): Looknfeel {
   return LOOKNFEEL_DEFAULT;
 }
 
-export function designSchemeForLooknfeel(value: string): DesignScheme {
-  return LOOKNFEEL_DESIGN_SCHEME[value] ?? "mono";
+export function designSchemeForThemeColor(value: string): DesignScheme {
+  return THEME_COLOR_DESIGN_SCHEME[value as ThemeColor] ?? "mono";
 }
 
 export function readLuminanceFromDom(): Luminance {

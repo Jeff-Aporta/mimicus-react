@@ -29,7 +29,6 @@ export const items = [
       "state": {
         "color": null,
         "variant": "solid",
-        "size": "medium",
         "shape": "round",
         "type": "button",
         "block": false,
@@ -82,20 +81,6 @@ export const items = [
               "value": "glass"
             }
           ],
-          "accent": "primary"
-        },
-        {
-          "kind": "palette",
-          "key": "size",
-          "label": "size",
-          "labelIcon": "mdi:resize",
-          "attrType": "str",
-          "attrDefault": "medium",
-          "options": {
-            "small": "small",
-            "medium": "medium",
-            "large": "large"
-          },
           "accent": "primary"
         },
         {
@@ -163,27 +148,51 @@ export const items = [
           "switches": [
             {
               "key": "block",
-              "label": "block"
+              "label": "block",
+              "iconOn": "mdi:rectangle",
+              "iconOff": "mdi:rectangle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "danger",
-              "label": "danger"
+              "label": "danger",
+              "iconOn": "mdi:alert-octagon",
+              "iconOff": "mdi:alert-octagon-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "ghost",
-              "label": "ghost"
+              "label": "ghost",
+              "iconOn": "mdi:ghost",
+              "iconOff": "mdi:ghost-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "dashed",
-              "label": "dashed"
+              "label": "dashed",
+              "iconOn": "mdi:border-style",
+              "iconOff": "mdi:border-none-variant",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "disabled",
-              "label": "disabled"
+              "label": "disabled",
+              "iconOn": "mdi:cancel",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "loading",
-              "label": "loading"
+              "label": "loading",
+              "iconOn": "mdi:loading",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -336,11 +345,19 @@ export const items = [
           "switches": [
             {
               "key": "disabled",
-              "label": "disabled"
+              "label": "disabled",
+              "iconOn": "mdi:cancel",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "loading",
-              "label": "loading"
+              "label": "loading",
+              "iconOn": "mdi:loading",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -431,11 +448,19 @@ export const items = [
           "switches": [
             {
               "key": "loading",
-              "label": "loading"
+              "label": "loading",
+              "iconOn": "mdi:loading",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "disabled",
-              "label": "disabled"
+              "label": "disabled",
+              "iconOn": "mdi:cancel",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -580,7 +605,6 @@ export const items = [
       "state": {
         "type": "primary",
         "shape": "circle",
-        "size": "large",
         "disabled": false
       },
       "details": {
@@ -615,23 +639,14 @@ export const items = [
           "accent": "primary"
         },
         {
-          "kind": "palette",
-          "key": "size",
-          "label": "size",
-          "labelIcon": "mdi:resize",
-          "attrType": "str",
-          "attrDefault": "large",
-          "options": {
-            "small": "small",
-            "large": "large"
-          },
-          "accent": "primary"
-        },
-        {
           "kind": "switch",
           "key": "disabled",
           "label": "disabled",
-          "labelIcon": "mdi:cancel"
+          "labelIcon": "mdi:cancel",
+          "iconOn": "mdi:cancel",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -695,11 +710,19 @@ export const items = [
           "switches": [
             {
               "key": "checked",
-              "label": "checked"
+              "label": "checked",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "readonly",
-              "label": "readonly"
+              "label": "readonly",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -785,11 +808,19 @@ export const items = [
           "switches": [
             {
               "key": "loading",
-              "label": "loading"
+              "label": "loading",
+              "iconOn": "mdi:loading",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "disabled",
-              "label": "disabled"
+              "label": "disabled",
+              "iconOn": "mdi:cancel",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }

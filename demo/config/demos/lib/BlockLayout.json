@@ -1,15 +1,46 @@
 {
-   "id": "BlockLayout",
-   "category": "Layouts",
-   "label": "BlockLayout",
-   "titleIcon": "mdi:view-quilt-outline",
-   "status": "pending",
-   "intro": "Base compartida para componentes tipo bloque. Expone <code>sizew</code> por slot y respeta modo <code>inline</code>.",
-   "component": { "name": "BlockLayout", "path": "src/lib/containers/layout/BlockLayout.svelte" },
-   "preview": { "template": "layout-block" },
-   "state": { "inline": false },
-   "details": { "itemCount": 1 },
-   "fields": [{ "kind": "switch", "key": "inline", "label": "inline" }],
-   "detailFields": [{ "kind": "number", "key": "itemCount", "label": "Elementos", "labelIcon": "mdi:numeric", "min": 1, "max": 50, "step": 1 }],
-   "code": { "strategy": "block-layout" }
+  "id": "BlockLayout",
+  "category": "Layouts",
+  "label": "BlockLayout",
+  "titleIcon": "mdi:view-quilt-outline",
+  "status": "pending",
+  "intro": "Base compartida para componentes tipo bloque. Expone <code>sizew</code> por slot y respeta modo <code>inline</code>.",
+  "component": {
+    "name": "BlockLayout",
+    "path": "src/lib/containers/layout/BlockLayout.svelte"
+  },
+  "preview": {
+    "template": "layout-block"
+  },
+  "state": {
+    "inline": false
+  },
+  "details": {
+    "itemCount": 1
+  },
+  "fields": [
+    {
+      "kind": "switch",
+      "key": "inline",
+      "label": "inline",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "detailFields": [
+    {
+      "kind": "number",
+      "key": "itemCount",
+      "label": "Elementos",
+      "labelIcon": "mdi:numeric",
+      "min": 1,
+      "max": 50,
+      "step": 1
+    }
+  ],
+  "code": {
+    "strategy": "block-layout"
+  }
 }

@@ -1,20 +1,106 @@
 {
-   "id": "Chip",
-   "category": "Primitives",
-   "label": "Chip",
-   "titleIcon": "mdi:tag-outline",
-   "status": "approved",
-   "intro": "Alias de <code>Tag</code> para etiquetas informativas con variante, color y forma.",
-   "component": { "name": "Chip", "path": "src/components/display/Display.jsx" },
-   "preview": { "template": "disp-tag", "scale": 1.6 },
-   "state": { "variant": "ghost", "shape": "pill", "upper": false, "color": null },
-   "details": { "text": "Nuevo", "icon": "" },
-   "fields": [
-      { "kind": "palette", "key": "variant", "label": "variant", "labelIcon": "mdi:shape-outline", "attrType": "str", "attrDefault": "ghost", "options": [{ "label": "solid", "value": "solid" }, { "label": "outlined", "value": "outlined" }, { "label": "ghost", "value": "ghost" }, { "label": "glass", "value": "glass" }] },
-      { "kind": "palette", "key": "shape", "label": "shape", "labelIcon": "mdi:vector-square", "attrType": "str", "attrDefault": "pill", "options": [{ "label": "pill", "value": "pill" }, { "label": "round", "value": "round" }, { "label": "rect", "value": "rect" }] },
-      { "kind": "color", "key": "color", "label": "color", "labelIcon": "mdi:palette", "attrType": "color" },
-      { "kind": "switch", "key": "upper", "label": "uppercase", "labelIcon": "mdi:format-letter-case-upper" }
-   ],
-   "detailFields": [{ "kind": "icon-text", "key": "icon-text", "label": "Texto", "labelIcon": "mdi:text", "iconKey": "icon", "textKey": "text" }],
-   "code": { "strategy": "disp-tag" }
+  "id": "Chip",
+  "category": "Primitives",
+  "label": "Chip",
+  "titleIcon": "mdi:tag-outline",
+  "status": "approved",
+  "intro": "Alias de <code>Tag</code> para etiquetas informativas con variante, color y forma.",
+  "component": {
+    "name": "Chip",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-tag",
+    "scale": 1.6
+  },
+  "state": {
+    "variant": "ghost",
+    "shape": "pill",
+    "upper": false,
+    "color": null
+  },
+  "details": {
+    "text": "Nuevo",
+    "icon": ""
+  },
+  "fields": [
+    {
+      "kind": "palette",
+      "key": "variant",
+      "label": "variant",
+      "labelIcon": "mdi:shape-outline",
+      "attrType": "str",
+      "attrDefault": "ghost",
+      "options": [
+        {
+          "label": "solid",
+          "value": "solid"
+        },
+        {
+          "label": "outlined",
+          "value": "outlined"
+        },
+        {
+          "label": "ghost",
+          "value": "ghost"
+        },
+        {
+          "label": "glass",
+          "value": "glass"
+        }
+      ]
+    },
+    {
+      "kind": "palette",
+      "key": "shape",
+      "label": "shape",
+      "labelIcon": "mdi:vector-square",
+      "attrType": "str",
+      "attrDefault": "pill",
+      "options": [
+        {
+          "label": "pill",
+          "value": "pill"
+        },
+        {
+          "label": "round",
+          "value": "round"
+        },
+        {
+          "label": "rect",
+          "value": "rect"
+        }
+      ]
+    },
+    {
+      "kind": "color",
+      "key": "color",
+      "label": "color",
+      "labelIcon": "mdi:palette",
+      "attrType": "color"
+    },
+    {
+      "kind": "switch",
+      "key": "upper",
+      "label": "uppercase",
+      "labelIcon": "mdi:format-letter-case-upper",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "detailFields": [
+    {
+      "kind": "icon-text",
+      "key": "icon-text",
+      "label": "Texto",
+      "labelIcon": "mdi:text",
+      "iconKey": "icon",
+      "textKey": "text"
+    }
+  ],
+  "code": {
+    "strategy": "disp-tag"
+  }
 }

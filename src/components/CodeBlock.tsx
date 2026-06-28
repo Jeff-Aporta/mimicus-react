@@ -161,7 +161,7 @@ export function CodeBlock({
     return (
       <div className={panelClass} style={style}>
         <div className="mimicus-cm-panel__toolbar">
-          <IconButton size="small" aria-label={copyTitle} onClick={() => copyEditorText(value)} title={copyTitle}>⧉</IconButton>
+          <IconButton aria-label={copyTitle} onClick={() => copyEditorText(value)} title={copyTitle}>⧉</IconButton>
         </div>
         <pre className="mimicus-cm-fallback" style={hostStyle}>{value || placeholder}</pre>
       </div>
@@ -171,7 +171,7 @@ export function CodeBlock({
   return (
     <div className={panelClass} style={style}>
       <div className="mimicus-cm-panel__toolbar">
-        <IconButton size="small" className="mimicus-cm-panel__copy" aria-label={copyTitle} title={copied ? "Copiado" : copyTitle} onClick={handleCopy}>
+        <IconButton className="mimicus-cm-panel__copy" aria-label={copyTitle} title={copied ? "Copiado" : copyTitle} onClick={handleCopy}>
           {copied ? "✓" : "⧉"}
         </IconButton>
       </div>

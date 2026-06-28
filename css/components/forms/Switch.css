@@ -1,21 +1,71 @@
 /**
  * Switch (forms) — CSS
- * demo: demo/config/demos/lib/Switch.json
- * llm:  ./Switch.llm.md
  * repo: Jeff-Aporta/mimicus-react · css/components/forms/Switch.css
- * Interruptor on/off con track y thumb animados, tamaños y estado de carga.
+ * Interruptor on/off renderizado como un único icono Iconify.
+ * El flip horizontal (scaleX(-1)) se aplica en estado OFF para invertirlo visualmente.
+ * Sin track, sin thumb, sin animaciones de transform: el icono ES el switch.
  */
 
-/* ── Switch ── */
-.mimicus-switch { display: inline-flex; align-items: center; gap: 0.55rem; cursor: pointer; user-select: none; }
-.mimicus-switch__native { position: absolute; opacity: 0; width: 0; height: 0; }
-.mimicus-switch__track { width: 2.5rem; height: 1.35rem; border-radius: 999px; background: color-mix(in srgb, var(--mimicus-text, #000) 25%, transparent); position: relative; transition: background 0.25s; flex-shrink: 0; }
-.mimicus-switch__thumb { position: absolute; top: 0.15rem; left: 0.15rem; width: 1.05rem; height: 1.05rem; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); transition: transform 0.25s; }
-.mimicus-switch.is-checked .mimicus-switch__track { background: var(--mimicus-primary, #1677ff); }
-.mimicus-switch.is-checked .mimicus-switch__thumb { transform: translateX(1.15rem); }
-.mimicus-switch--small .mimicus-switch__track { width: 2rem; height: 1.1rem; }
-.mimicus-switch--small .mimicus-switch__thumb { width: 0.85rem; height: 0.85rem; }
-.mimicus-switch--small.is-checked .mimicus-switch__thumb { transform: translateX(0.9rem); }
-.mimicus-switch.is-disabled { opacity: 0.5; cursor: not-allowed; }
-.mimicus-switch.is-loading .mimicus-switch__thumb { animation: mimicus-switch-pulse 1s infinite; }
-@keyframes mimicus-switch-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+.mimicus-switch {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55em;
+	cursor: pointer;
+	user-select: none;
+	line-height: 0;
+}
+
+.mimicus-switch__native {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}
+
+/* Caja del icono — no es un track, es sólo un contenedor inline-flex */
+.mimicus-switch__icon-box {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.4em;
+	color: var(--sw-off-fg, color-mix(in oklch, var(--mimicus-color, currentColor), transparent 35%));
+	transition: color 0.18s ease, opacity 0.18s ease;
+	flex-shrink: 0;
+	line-height: 0;
+}
+
+.mimicus-switch__icon-box iconify-icon {
+	display: inline-block;
+	font-size: inherit;
+	width: 1em;
+	height: 1em;
+	line-height: 0;
+	transition: transform 0.22s ease;
+	transform: scaleX(1); /* estado ON: orientación normal */
+}
+
+.mimicus-switch:not(.is-checked) .mimicus-switch__icon-box iconify-icon {
+	transform: scaleX(-1); /* estado OFF: flip horizontal */
+}
+
+/* Estado ON: color del icono se intensifica (suele ser el accent) */
+.mimicus-switch.is-checked .mimicus-switch__icon-box {
+	color: var(--sw-on-fg, var(--mimicus-primary, currentColor));
+}
+
+/* Disabled */
+.mimicus-switch.is-disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Loading — leve pulse sin movimiento del icono */
+.mimicus-switch.is-loading .mimicus-switch__icon-box iconify-icon {
+	animation: mimicus-switch-pulse 1s infinite;
+}
+
+@keyframes mimicus-switch-pulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.45; }
+}

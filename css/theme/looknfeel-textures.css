@@ -1,0 +1,229 @@
+/**
+ * Looknfeel Textures — Sistema general de texturas (gradientes, mesh, glass, patterns)
+ * repo: Jeff-Aporta/mimicus-react · css/theme/looknfeel-textures.css
+ *
+ * Cada looknfeel define sus propias texturas para los roles canónicos de superficie
+ * (chrome, panel, card, chip, preview). Los consumidores no aplican texturas
+ * manualmente: el looknfeel activo compone el background adecuado vía data-attribute.
+ *
+ * Roles (data-texture="<rol>" en cualquier contenedor):
+ *   - chrome   → header / top bar / sider header (surface elevada sutil)
+ *   - surface  → background base de página / shell
+ *   - panel    → panel compacto (form, filtros)
+ *   - card     → card con click / hover (más depth)
+ *   - chip     → chip / tag / pill (más densidad de color)
+ *   - preview  → área de preview de demo (stage neutro con vignette)
+ *
+ * Tokens expuestos por looknfeel (en :root):
+ *   --lkf-texture-{rol}-{dark|light}    background-image completo (gradientes + grain)
+ *   --lkf-texture-grain-{dark|light}    capa de noise SVG superponible
+ *   --lkf-texture-border-{rol}-{dark|light}   border con tinte accent
+ *   --lkf-texture-shadow-{rol}-{dark|light}   box-shadow multilayer
+ *   --lkf-texture-radius                border-radius sugerido para el rol
+ *   --lkf-texture-blur                  backdrop-filter recomendado
+ *
+ * Cómo se aplica:
+ *   [data-texture="card"] { background: var(--lkf-texture-card); }
+ *   .lkf-surface-card    { ...mismo... }
+ */
+
+/* ── Defaults neutrales (aplican cuando ningún looknfeel redefine) ── */
+:root {
+	--lkf-texture-grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+	--lkf-texture-grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+	--lkf-texture-chrome-dark: linear-gradient(180deg, color-mix(in srgb, var(--mimicus-bg-secondary) 92%, transparent), color-mix(in srgb, var(--mimicus-bg-primary) 84%, transparent));
+	--lkf-texture-chrome-light: linear-gradient(180deg, color-mix(in srgb, var(--mimicus-bg-secondary) 96%, white), color-mix(in srgb, var(--mimicus-bg-primary) 92%, transparent));
+	--lkf-texture-surface-dark: var(--mimicus-bg-primary);
+	--lkf-texture-surface-light: var(--mimicus-bg-primary);
+	--lkf-texture-panel-dark: linear-gradient(160deg, color-mix(in srgb, var(--mimicus-bg-secondary) 88%, transparent), color-mix(in srgb, var(--mimicus-bg-primary) 78%, transparent));
+	--lkf-texture-panel-light: linear-gradient(160deg, color-mix(in srgb, var(--mimicus-bg-secondary) 96%, white), color-mix(in srgb, var(--mimicus-bg-primary) 88%, transparent));
+	--lkf-texture-card-dark: linear-gradient(150deg, color-mix(in srgb, var(--mimicus-bg-secondary) 80%, transparent), color-mix(in srgb, var(--mimicus-bg-primary) 60%, transparent));
+	--lkf-texture-card-light: linear-gradient(150deg, color-mix(in srgb, var(--mimicus-bg-secondary) 94%, white), color-mix(in srgb, var(--mimicus-bg-primary) 84%, transparent));
+	--lkf-texture-chip-dark: color-mix(in srgb, var(--mimicus-bg-secondary) 92%, transparent);
+	--lkf-texture-chip-light: color-mix(in srgb, var(--mimicus-bg-secondary) 96%, white);
+	--lkf-texture-preview-dark: linear-gradient(180deg, color-mix(in srgb, var(--mimicus-bg-secondary) 76%, transparent), color-mix(in srgb, var(--mimicus-bg-primary) 88%, transparent));
+	--lkf-texture-preview-light: linear-gradient(180deg, color-mix(in srgb, var(--mimicus-bg-primary) 96%, white), color-mix(in srgb, var(--mimicus-bg-secondary) 84%, transparent));
+	--lkf-texture-radius: 0.5rem;
+	--lkf-texture-blur: 6px;
+}
+
+/* ── Aplicación por data-texture / .lkf-surface-* ── */
+[data-texture="chrome"], .lkf-surface-chrome { background: var(--lkf-texture-chrome); border-color: var(--lkf-texture-border-chrome, transparent); box-shadow: var(--lkf-texture-shadow-chrome, none); }
+[data-texture="surface"], .lkf-surface-surface { background: var(--lkf-texture-surface); }
+[data-texture="panel"], .lkf-surface-panel { background: var(--lkf-texture-panel); border-color: var(--lkf-texture-border-panel, transparent); box-shadow: var(--lkf-texture-shadow-panel, none); border-radius: var(--lkf-texture-radius); }
+[data-texture="card"], .lkf-surface-card { background: var(--lkf-texture-card); border-color: var(--lkf-texture-border-card, transparent); box-shadow: var(--lkf-texture-shadow-card, none); border-radius: var(--lkf-texture-radius); }
+[data-texture="chip"], .lkf-surface-chip { background: var(--lkf-texture-chip); border-color: var(--lkf-texture-border-chip, transparent); border-radius: 999px; }
+[data-texture="preview"], .lkf-surface-preview { background: var(--lkf-texture-preview); border-color: var(--lkf-texture-border-preview, transparent); box-shadow: var(--lkf-texture-shadow-preview, none); border-radius: var(--lkf-texture-radius); }
+
+/* Resolución por luminancia */
+html[data-luminance="dark"] {
+	--lkf-texture-chrome: var(--lkf-texture-chrome-dark);
+	--lkf-texture-surface: var(--lkf-texture-surface-dark);
+	--lkf-texture-panel: var(--lkf-texture-panel-dark);
+	--lkf-texture-card: var(--lkf-texture-card-dark);
+	--lkf-texture-chip: var(--lkf-texture-chip-dark);
+	--lkf-texture-preview: var(--lkf-texture-preview-dark);
+	--lkf-texture-grain: var(--lkf-texture-grain-dark);
+}
+html[data-luminance="light"] {
+	--lkf-texture-chrome: var(--lkf-texture-chrome-light);
+	--lkf-texture-surface: var(--lkf-texture-surface-light);
+	--lkf-texture-panel: var(--lkf-texture-panel-light);
+	--lkf-texture-card: var(--lkf-texture-card-light);
+	--lkf-texture-chip: var(--lkf-texture-chip-light);
+	--lkf-texture-preview: var(--lkf-texture-preview-light);
+	--lkf-texture-grain: var(--lkf-texture-grain-light);
+}
+
+/* ── looknfeel: contapyme — limpio, plano, brand azul, sin mesh ── */
+html[data-looknfeel="contapyme"] {
+	--lkf-texture-chrome-dark:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-secondary, #f5f7fb) 96%, transparent),
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 88%, transparent));
+	--lkf-texture-chrome-light:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-secondary, #f5f7fb) 96%, white),
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 94%, transparent));
+	--lkf-texture-surface-dark: var(--mimicus-bg-primary, #ffffff);
+	--lkf-texture-surface-light: var(--mimicus-bg-primary, #f7f9fc);
+	--lkf-texture-panel-dark:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-secondary, #f5f7fb) 88%, transparent),
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 78%, transparent));
+	--lkf-texture-panel-light:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-secondary, #f5f7fb) 96%, white),
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 84%, transparent));
+	--lkf-texture-card-dark:
+		linear-gradient(160deg,
+			color-mix(in srgb, var(--mimicus-primary, dodgerblue) 5%, var(--mimicus-bg-secondary, #f5f7fb)),
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 88%, transparent));
+	--lkf-texture-card-light:
+		linear-gradient(160deg,
+			color-mix(in srgb, var(--mimicus-primary, dodgerblue) 4%, var(--mimicus-bg-secondary, #f5f7fb)),
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 96%, white));
+	--lkf-texture-chip-dark: color-mix(in srgb, var(--mimicus-primary, dodgerblue) 9%, var(--mimicus-bg-secondary, #f5f7fb));
+	--lkf-texture-chip-light: color-mix(in srgb, var(--mimicus-primary, dodgerblue) 7%, var(--mimicus-bg-secondary, #f5f7fb));
+	--lkf-texture-preview-dark:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-secondary, #f5f7fb) 90%, transparent),
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 96%, transparent));
+	--lkf-texture-preview-light:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-primary, #ffffff) 96%, white),
+			color-mix(in srgb, var(--mimicus-bg-secondary, #f5f7fb) 86%, transparent));
+	--lkf-texture-border-card: color-mix(in srgb, var(--mimicus-primary, dodgerblue) 12%, var(--mimicus-b-color, #cfd8e3));
+	--lkf-texture-border-panel: color-mix(in srgb, var(--mimicus-b-color, #cfd8e3) 80%, transparent);
+	--lkf-texture-border-chrome: color-mix(in srgb, var(--mimicus-b-color, #cfd8e3) 70%, transparent);
+	--lkf-texture-border-preview: color-mix(in srgb, var(--mimicus-b-color, #cfd8e3) 60%, transparent);
+	--lkf-texture-shadow-card:
+		0 1px 2px color-mix(in srgb, var(--mimicus-color, #1f2a3d) 8%, transparent),
+		0 4px 14px color-mix(in srgb, var(--mimicus-color, #1f2a3d) 5%, transparent);
+	--lkf-texture-shadow-panel:
+		0 1px 1px color-mix(in srgb, var(--mimicus-color, #1f2a3d) 4%, transparent);
+	--lkf-texture-shadow-preview: inset 0 1px 0 color-mix(in srgb, white, transparent 60%);
+	--lkf-texture-radius: 0.5rem;
+	--lkf-texture-blur: 4px;
+}
+
+/* ── looknfeel: neon — mesh + grain + glass + glow por rol ── */
+html[data-looknfeel="neon"] {
+	--lkf-texture-chrome-dark:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--neon-purple, #6a4cff) 8%, var(--mimicus-bg-secondary, #0f2340) 84%),
+			color-mix(in srgb, var(--neon-blue, dodgerblue) 14%, var(--mimicus-bg-primary, #050a18) 88%)),
+		var(--lkf-texture-grain-dark);
+	--lkf-texture-chrome-light:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--neon-cyan, #5eb3ff) 6%, var(--mimicus-bg-secondary, #ffffff) 92%),
+			color-mix(in srgb, var(--neon-blue, dodgerblue) 8%, var(--mimicus-bg-primary, #f7f9fc) 90%)),
+		var(--lkf-texture-grain-light);
+	--lkf-texture-surface-dark: var(--mimicus-glass-page-mesh-base, var(--mimicus-bg-primary));
+	--lkf-texture-surface-light: var(--mimicus-glass-page-mesh-base, var(--mimicus-bg-primary));
+	--lkf-texture-panel-dark:
+		linear-gradient(155deg,
+			color-mix(in srgb, var(--neon-purple) 12%, var(--mimicus-bg-secondary) 78%),
+			color-mix(in srgb, var(--neon-blue) 14%, var(--mimicus-bg-primary) 72%)),
+		var(--lkf-texture-grain-dark);
+	--lkf-texture-panel-light:
+		linear-gradient(155deg,
+			color-mix(in srgb, var(--neon-cyan) 9%, var(--mimicus-bg-secondary) 88%),
+			color-mix(in srgb, var(--neon-blue) 11%, var(--mimicus-bg-primary) 84%)),
+		var(--lkf-texture-grain-light);
+	--lkf-texture-card-dark:
+		radial-gradient(ellipse 130% 100% at 8% -4%, color-mix(in srgb, var(--neon-purple) 32%, transparent), transparent 60%),
+		radial-gradient(ellipse 110% 90% at 96% 6%, color-mix(in srgb, var(--neon-cyan) 28%, transparent), transparent 62%),
+		linear-gradient(150deg,
+			color-mix(in srgb, var(--neon-blue) 16%, var(--mimicus-bg-secondary) 70%),
+			color-mix(in srgb, var(--neon-purple) 18%, var(--mimicus-bg-primary) 64%)),
+		var(--lkf-texture-grain-dark);
+	--lkf-texture-card-light:
+		radial-gradient(ellipse 130% 100% at 8% -4%, color-mix(in srgb, var(--neon-cyan) 22%, transparent), transparent 62%),
+		radial-gradient(ellipse 110% 90% at 96% 6%, color-mix(in srgb, var(--neon-purple) 18%, transparent), transparent 64%),
+		linear-gradient(150deg,
+			color-mix(in srgb, var(--neon-cyan) 8%, var(--mimicus-bg-secondary) 90%),
+			color-mix(in srgb, var(--neon-blue) 10%, var(--mimicus-bg-primary) 86%)),
+		var(--lkf-texture-grain-light);
+	--lkf-texture-chip-dark:
+		linear-gradient(140deg,
+			color-mix(in srgb, var(--neon-blue) 26%, transparent),
+			color-mix(in srgb, var(--neon-purple) 18%, transparent)),
+		var(--lkf-texture-grain-dark);
+	--lkf-texture-chip-light:
+		linear-gradient(140deg,
+			color-mix(in srgb, var(--neon-blue) 16%, transparent),
+			color-mix(in srgb, var(--neon-purple) 10%, transparent)),
+		var(--lkf-texture-grain-light);
+	--lkf-texture-preview-dark:
+		radial-gradient(ellipse 110% 80% at 50% -6%, color-mix(in srgb, var(--neon-blue) 14%, transparent), transparent 56%),
+		radial-gradient(ellipse 88% 64% at 96% 8%, color-mix(in srgb, var(--neon-purple) 18%, transparent), transparent 60%),
+		radial-gradient(ellipse 78% 56% at 4% 92%, color-mix(in srgb, var(--neon-cyan) 12%, transparent), transparent 58%),
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-secondary, #0f2340) 70%, transparent),
+			color-mix(in srgb, var(--mimicus-bg-primary, #050a18) 78%, transparent)),
+		var(--lkf-texture-grain-dark);
+	--lkf-texture-preview-light:
+		radial-gradient(ellipse 110% 80% at 50% -6%, color-mix(in srgb, var(--neon-cyan) 8%, transparent), transparent 58%),
+		radial-gradient(ellipse 88% 64% at 96% 8%, color-mix(in srgb, var(--neon-purple) 10%, transparent), transparent 60%),
+		radial-gradient(ellipse 78% 56% at 4% 92%, color-mix(in srgb, var(--neon-blue) 8%, transparent), transparent 60%),
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--mimicus-bg-secondary, #ffffff) 90%, white),
+			color-mix(in srgb, var(--mimicus-bg-primary, #f7f9fc) 88%, transparent)),
+		var(--lkf-texture-grain-light);
+	--lkf-texture-border-card: color-mix(in srgb, var(--neon-purple) 38%, transparent);
+	--lkf-texture-border-panel: color-mix(in srgb, var(--neon-blue) 32%, transparent);
+	--lkf-texture-border-chrome: color-mix(in srgb, var(--neon-cyan) 28%, transparent);
+	--lkf-texture-border-preview: color-mix(in srgb, var(--neon-purple) 32%, transparent);
+	--lkf-texture-border-chip: color-mix(in srgb, var(--neon-blue) 32%, transparent);
+	--lkf-texture-shadow-card:
+		0 0 0 1px color-mix(in srgb, var(--neon-purple) 18%, transparent),
+		0 8px 30px color-mix(in srgb, var(--neon-blue) 22%, transparent),
+		0 0 36px color-mix(in srgb, var(--neon-cyan) 28%, transparent);
+	--lkf-texture-shadow-panel:
+		0 0 0 1px color-mix(in srgb, var(--neon-blue) 16%, transparent),
+		0 4px 18px color-mix(in srgb, var(--neon-blue) 20%, transparent);
+	--lkf-texture-shadow-chrome:
+		inset 0 1px 0 color-mix(in srgb, var(--neon-cyan) 16%, transparent),
+		0 2px 14px color-mix(in srgb, var(--neon-purple) 24%, transparent);
+	--lkf-texture-shadow-preview:
+		inset 0 0 0 1px color-mix(in srgb, var(--neon-cyan) 18%, transparent),
+		inset 0 -10px 30px color-mix(in srgb, var(--neon-blue) 16%, transparent),
+		0 0 40px color-mix(in srgb, var(--neon-purple) 24%, transparent);
+	--lkf-texture-radius: 0.625rem;
+	--lkf-texture-blur: 14px;
+}
+
+/* Backdrop-filter sugerido por looknfeel cuando hay surface translúcida */
+html[data-looknfeel="neon"] [data-texture="card"],
+html[data-looknfeel="neon"] [data-texture="panel"],
+html[data-looknfeel="neon"] [data-texture="preview"] {
+	backdrop-filter: blur(var(--lkf-texture-blur)) saturate(160%);
+	-webkit-backdrop-filter: blur(var(--lkf-texture-blur)) saturate(160%);
+}
+html[data-looknfeel="contapyme"] [data-texture="card"],
+html[data-looknfeel="contapyme"] [data-texture="panel"],
+html[data-looknfeel="contapyme"] [data-texture="preview"] {
+	backdrop-filter: blur(var(--lkf-texture-blur));
+	-webkit-backdrop-filter: blur(var(--lkf-texture-blur));
+}

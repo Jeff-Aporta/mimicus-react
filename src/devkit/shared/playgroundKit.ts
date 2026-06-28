@@ -9,8 +9,9 @@
 const CSS_LEN_RE = /^(-?\d*\.?\d+)(px|rem|em|%|vh|vw|ch|ex)?$/i;
 
 /* Iconografía por opción — portada de ISP-Svelte-Playground (strings Iconify simples). */
+export const NONE_ICON = "mdi:block-helper";
 export const COLOR_ICONS = {
-  "": "mdi:block-helper", primary: "mdi:palette", "design-1": "mdi:circle", "design-2": "mdi:circle-half-full",
+  "": NONE_ICON, primary: "mdi:palette", "design-1": "mdi:circle", "design-2": "mdi:circle-half-full",
   "design-3": "mdi:triangle-outline", info: "mdi:information", success: "mdi:check-circle", warning: "mdi:alert",
   error: "mdi:close-circle", danger: "mdi:fire", color: "mdi:palette-swatch", neutral: "mdi:palette-swatch",
 };

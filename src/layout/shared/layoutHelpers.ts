@@ -13,6 +13,7 @@ export interface SlotResume {
   sizew: string;
   boolszw: SizeFlags;
   lerpw: Lerpw;
+  width: number;
 }
 
 export function getBreakPoint(clientWidth = 0): Breakpoint {
@@ -40,7 +41,7 @@ export function buildLerpw(clientWidth = 0): Lerpw {
 }
 
 export function getSlotResume(sizew: string, clientWidth = 0): SlotResume {
-  return { sizew, boolszw: getSizeFlags(sizew), lerpw: buildLerpw(clientWidth) };
+  return { sizew, boolszw: getSizeFlags(sizew), lerpw: buildLerpw(clientWidth), width: clientWidth };
 }
 
 const RGX_OVERFLOW_SCROLL = /\boverflow(?:-x|-y)?\s*:\s*(auto|scroll)\b/i;

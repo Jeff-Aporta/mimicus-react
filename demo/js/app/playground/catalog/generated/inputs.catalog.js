@@ -223,7 +223,6 @@ export const items = [
         "template": "form-input"
       },
       "state": {
-        "size": "medium",
         "disabled": false,
         "allowClear": true
       },
@@ -232,25 +231,22 @@ export const items = [
       },
       "fields": [
         {
-          "kind": "select-enum",
-          "key": "size",
-          "label": "size",
-          "attrType": "str",
-          "enumValue": {
-            "Small": "small",
-            "Medium": "medium",
-            "Large": "large"
-          }
-        },
-        {
           "kind": "switch",
           "key": "disabled",
-          "label": "disabled"
+          "label": "disabled",
+          "iconOn": "mdi:cancel",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         },
         {
           "kind": "switch",
           "key": "allowClear",
-          "label": "allowClear"
+          "label": "allowClear",
+          "iconOn": "mdi:eraser",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -373,8 +369,7 @@ export const items = [
       },
       "state": {
         "allowHalf": true,
-        "disabled": false,
-        "size": "medium"
+        "disabled": false
       },
       "code": {
         "strategy": "form-entry"
@@ -404,8 +399,7 @@ export const items = [
         "template": "form-rate"
       },
       "state": {
-        "allowHalf": true,
-        "size": "medium"
+        "allowHalf": true
       },
       "code": {
         "strategy": "form-entry"
@@ -435,7 +429,6 @@ export const items = [
         "template": "form-select"
       },
       "state": {
-        "size": "medium",
         "disabled": false
       },
       "code": {
@@ -497,7 +490,6 @@ export const items = [
         "template": "form-input"
       },
       "state": {
-        "size": "medium",
         "allowClear": true
       },
       "code": {
@@ -653,7 +645,11 @@ export const items = [
           "kind": "switch",
           "key": "disabled",
           "label": "disabled",
-          "labelIcon": "mdi:lock-outline"
+          "labelIcon": "mdi:lock-outline",
+          "iconOn": "mdi:cancel",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [

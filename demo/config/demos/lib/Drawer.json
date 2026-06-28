@@ -5,13 +5,53 @@
   "titleIcon": "mdi:dock-left",
   "status": "approved",
   "intro": "Panel lateral MUI Drawer: overlay, animación CSS y cierre con backdrop / Escape.",
-  "component": { "name": "Drawer", "path": "src/components/navigation/Navigation.jsx" },
-  "preview": { "template": "nav-drawer" },
-  "state": { "placement": "left", "width": 280, "defaultOpen": false },
+  "component": {
+    "name": "Drawer",
+    "path": "src/components/navigation/Navigation.jsx"
+  },
+  "preview": {
+    "template": "nav-drawer"
+  },
+  "state": {
+    "placement": "left",
+    "width": 280,
+    "defaultOpen": false
+  },
   "fields": [
-    { "kind": "select-enum", "key": "placement", "label": "placement", "labelIcon": "mdi:dock-left", "attrType": "str", "enumValue": { "Left": "left", "Right": "right", "Top": "top", "Bottom": "bottom" } },
-    { "kind": "number", "key": "width", "label": "width", "labelIcon": "mdi:arrow-expand-horizontal", "min": 200, "max": 480, "step": 20 },
-    { "kind": "switch", "key": "defaultOpen", "label": "defaultOpen", "labelIcon": "mdi:door-open" }
+    {
+      "kind": "select-enum",
+      "key": "placement",
+      "label": "placement",
+      "labelIcon": "mdi:dock-left",
+      "attrType": "str",
+      "enumValue": {
+        "Left": "left",
+        "Right": "right",
+        "Top": "top",
+        "Bottom": "bottom"
+      }
+    },
+    {
+      "kind": "number",
+      "key": "width",
+      "label": "width",
+      "labelIcon": "mdi:arrow-expand-horizontal",
+      "min": 200,
+      "max": 480,
+      "step": 20
+    },
+    {
+      "kind": "switch",
+      "key": "defaultOpen",
+      "label": "defaultOpen",
+      "labelIcon": "mdi:door-open",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
   ],
-  "code": { "strategy": "nav-drawer" }
+  "code": {
+    "strategy": "nav-drawer"
+  }
 }

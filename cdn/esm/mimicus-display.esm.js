@@ -457,7 +457,6 @@ function Badge({
   max = 99,
   color = "primary",
   offset,
-  size = "medium",
   children,
   className,
   style,
@@ -471,7 +470,7 @@ function Badge({
     show && /* @__PURE__ */ jsx(
       "sup",
       {
-        className: cx("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`, `mimicus-badge--${size}`),
+        className: cx("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`),
         style: offset ? { transform: `translate(${offset[0] ?? 0}px, ${offset[1] ?? 0}px)` } : void 0,
         children: !dot && label
       }
@@ -506,13 +505,13 @@ function Tag({
   );
 }
 var Chip = Tag;
-function Avatar({ src, alt, size = "medium", variant = "circular", children, className, style, ...rest }) {
+function Avatar({ src, alt, variant = "circular", children, className, style, ...rest }) {
   const label = alt ?? (typeof children === "string" ? children : "?");
   return /* @__PURE__ */ jsx(
     "span",
     {
       ...rest,
-      className: cx("mimicus-avatar", `mimicus-avatar--${size}`, `mimicus-avatar--${variant}`, className),
+      className: cx("mimicus-avatar", `mimicus-avatar--${variant}`, className),
       style,
       title: alt,
       children: src ? /* @__PURE__ */ jsx("img", { className: "mimicus-avatar__img", src, alt: alt ?? "" }) : /* @__PURE__ */ jsx("span", { className: "mimicus-avatar__fallback", style: { background: hashColor(label) }, children: children ?? initials(label) })
@@ -525,7 +524,7 @@ function AvatarGroup({ max = 5, total, spacing = "medium", children, className, 
   const surplus = (total ?? items.length) - shown.length;
   return /* @__PURE__ */ jsxs("span", { ...rest, className: cx("mimicus-avatar-group", `mimicus-avatar-group--${spacing}`, className), style, children: [
     shown,
-    surplus > 0 && /* @__PURE__ */ jsxs(Avatar, { size: "medium", className: "mimicus-avatar-group__surplus", children: [
+    surplus > 0 && /* @__PURE__ */ jsxs(Avatar, { className: "mimicus-avatar-group__surplus", children: [
       "+",
       surplus
     ] })
@@ -608,8 +607,8 @@ function DescriptionsItem({ label, span = 1, children, className, ...rest }) {
     /* @__PURE__ */ jsx("dd", { className: "mimicus-descriptions__content", children })
   ] });
 }
-function Descriptions({ title, bordered = false, column = 3, size = "medium", children, className, style, ...rest }) {
-  return /* @__PURE__ */ jsxs("div", { ...rest, className: cx("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", `mimicus-descriptions--${size}`, className), style, children: [
+function Descriptions({ title, bordered = false, column = 3, children, className, style, ...rest }) {
+  return /* @__PURE__ */ jsxs("div", { ...rest, className: cx("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", className), style, children: [
     title && /* @__PURE__ */ jsx("div", { className: "mimicus-descriptions__title", children: title }),
     /* @__PURE__ */ jsx("dl", { className: "mimicus-descriptions__list", style: { "--mimicus-desc-cols": column }, children })
   ] });
@@ -646,7 +645,7 @@ function QRCode({ value = "", size = 128, bordered = true, className, style, ...
   };
   return /* @__PURE__ */ jsx("span", { ...rest, className: cx("mimicus-qrcode", bordered && "mimicus-qrcode--bordered", className), style, children: /* @__PURE__ */ jsx("canvas", { ref, width: size, height: size, className: "mimicus-qrcode__canvas", "aria-label": `QR: ${value}` }) });
 }
-function Segmented({ options = [], value, defaultValue, onChange, block, size = "medium", className, style, ...rest }) {
+function Segmented({ options = [], value, defaultValue, onChange, block, className, style, ...rest }) {
   const ref = useRef(null);
   const cur = value ?? defaultValue ?? options[0]?.value;
   useDisplayBinding(ref, "segmented", [cur, options.length]);
@@ -655,7 +654,7 @@ function Segmented({ options = [], value, defaultValue, onChange, block, size = 
     {
       ...rest,
       ref,
-      className: cx("mimicus-segmented", `mimicus-segmented--${size}`, block && "mimicus-segmented--block", className),
+      className: cx("mimicus-segmented", block && "mimicus-segmented--block", className),
       style,
       "data-mimicus-display": "segmented",
       "data-value": cur,
@@ -689,13 +688,13 @@ function Statistic({ title, value, prefix, suffix, precision, className, style, 
     ] })
   ] });
 }
-function Table({ columns = [], dataSource = [], bordered, size = "medium", sortable, pagination, className, style, children, ...rest }) {
+function Table({ columns = [], dataSource = [], bordered, sortable, pagination, className, style, children, ...rest }) {
   const ref = useRef(null);
   useDisplayBinding(ref, sortable ? "table" : null, [sortable, dataSource.length]);
   if (children) {
-    return /* @__PURE__ */ jsx("table", { ...rest, ref, className: cx("mimicus-table", bordered && "mimicus-table--bordered", `mimicus-table--${size}`, className), style, "data-mimicus-display": sortable ? "table" : void 0, children });
+    return /* @__PURE__ */ jsx("table", { ...rest, ref, className: cx("mimicus-table", bordered && "mimicus-table--bordered", className), style, "data-mimicus-display": sortable ? "table" : void 0, children });
   }
-  return /* @__PURE__ */ jsxs("table", { ...rest, ref, className: cx("mimicus-table", bordered && "mimicus-table--bordered", `mimicus-table--${size}`, className), style, "data-mimicus-display": sortable ? "table" : void 0, children: [
+  return /* @__PURE__ */ jsxs("table", { ...rest, ref, className: cx("mimicus-table", bordered && "mimicus-table--bordered", className), style, "data-mimicus-display": sortable ? "table" : void 0, children: [
     /* @__PURE__ */ jsx("thead", { children: /* @__PURE__ */ jsx("tr", { children: columns.map((col, i) => /* @__PURE__ */ jsx("th", { "data-mimicus-table-sort": sortable && col.sorter ? i : void 0, className: sortable && col.sorter ? "mimicus-table__sortable" : void 0, children: col.title }, col.key ?? i)) }) }),
     /* @__PURE__ */ jsx("tbody", { children: dataSource.map((row, ri) => /* @__PURE__ */ jsx("tr", { children: columns.map((col, ci) => /* @__PURE__ */ jsx("td", { children: col.render ? col.render(row[col.dataIndex], row) : row[col.dataIndex] }, col.key ?? ci)) }, row.key ?? ri)) })
   ] });

@@ -9,5 +9,6 @@ export type { DataGridProps } from "./DataGrid.tsx";
 export { useGridModel } from "./useGridModel.ts";
 export type { UseGridModel } from "./useGridModel.ts";
 export { GridToolbar } from "./GridToolbar.tsx";
+export { GroupPanel } from "./GroupPanel.tsx";
 export { registerCellRenderer, getCellRenderer } from "./cellRenderers.tsx";
 export type { CellRenderer, CellRendererParams } from "./cellRenderers.tsx";

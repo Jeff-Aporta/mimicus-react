@@ -15,43 +15,53 @@ var LEGACY_THEME_COLOR_MAP = {
   magenta: "fucsia"
 };
 var THEME_COLOR_OPTIONS = [
-  { id: "hues-dodgerblue", label: "Dodger" },
-  { id: "vulcano", label: "Vulcano" },
-  { id: "natural", label: "Natural" },
-  { id: "coral", label: "Coral" },
-  { id: "oceano", label: "Oc\xE9ano" },
-  { id: "lavanda", label: "Lavanda" },
-  { id: "ambar", label: "\xC1mbar" },
-  { id: "cereza", label: "Cereza" },
-  { id: "grafito", label: "Grafito" },
-  { id: "menta", label: "Menta" },
-  { id: "indigo", label: "\xCDndigo" },
-  { id: "tierra", label: "Tierra" },
-  { id: "fucsia", label: "Fucsia" }
+  { id: "hues-dodgerblue", label: "Dodger", icon: "mdi:palette-swatch" },
+  { id: "vulcano", label: "Vulcano", icon: "mdi:fire" },
+  { id: "natural", label: "Natural", icon: "mdi:leaf" },
+  { id: "coral", label: "Coral", icon: "mdi:flower-tulip" },
+  { id: "oceano", label: "Oc\xE9ano", icon: "mdi:waves" },
+  { id: "lavanda", label: "Lavanda", icon: "mdi:flower" },
+  { id: "ambar", label: "\xC1mbar", icon: "mdi:weather-sunny" },
+  { id: "cereza", label: "Cereza", icon: "mdi:fruit-cherries" },
+  { id: "grafito", label: "Grafito", icon: "mdi:square" },
+  { id: "menta", label: "Menta", icon: "mdi:sprout" },
+  { id: "indigo", label: "\xCDndigo", icon: "mdi:moon-waning-crescent" },
+  { id: "tierra", label: "Tierra", icon: "mdi:terrain" },
+  { id: "fucsia", label: "Fucsia", icon: "mdi:star-four-points" }
 ];
 var DESIGN_SCHEME_OPTIONS = [
-  { id: "mono", label: "Mono" },
-  { id: "dual", label: "Dual" },
-  { id: "triad", label: "Tr\xEDada" }
+  { id: "mono", label: "Mono", icon: "mdi:circle" },
+  { id: "dual", label: "Dual", icon: "mdi:circle-half-full" },
+  { id: "triad", label: "Tr\xEDada", icon: "mdi:triangle-outline" }
 ];
+var THEME_COLOR_DESIGN_SCHEME = {
+  "hues-dodgerblue": "triad",
+  vulcano: "dual",
+  natural: "triad",
+  coral: "triad",
+  oceano: "dual",
+  lavanda: "triad",
+  ambar: "dual",
+  cereza: "triad",
+  grafito: "mono",
+  menta: "mono",
+  indigo: "dual",
+  tierra: "dual",
+  fucsia: "triad"
+};
 var LOOKNFEEL_STORAGE_KEY = "looknfeel";
 var LOOKNFEEL_DEFAULT = "contapyme";
-var NEON_LOOKNFEELS = ["neon-mono", "neon-dual", "neon-triad"];
+var NEON_LOOKNFEELS = ["neon"];
 var LOOKNFEEL_OPTIONS = [
-  { id: "contapyme", label: "ContaPyme" },
-  { id: "neon-mono", label: "Neon mono" },
-  { id: "neon-dual", label: "Neon dual" },
-  { id: "neon-triad", label: "Neon tr\xEDada" }
+  { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
+  { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
 ];
-var LOOKNFEEL_DESIGN_SCHEME = {
-  contapyme: "triad",
-  "neon-mono": "mono",
-  "neon-dual": "dual",
-  "neon-triad": "triad"
-};
 var LEGACY_LOOKNFEEL_MAP = {
   classic: "contapyme",
-  "neon-glass": "neon-triad"
+  "neon-glass": "neon",
+  "neon-mono": "neon",
+  "neon-dual": "neon",
+  "neon-triad": "neon"
 };
 var LOOKNFEEL_IDS = LOOKNFEEL_OPTIONS.map((o) => o.id);
 function isLuminance(value) {
@@ -79,8 +89,8 @@ function normalizeLooknfeel(value) {
   if (typeof value === "string" && LEGACY_LOOKNFEEL_MAP[value]) return LEGACY_LOOKNFEEL_MAP[value];
   return LOOKNFEEL_DEFAULT;
 }
-function designSchemeForLooknfeel(value) {
-  return LOOKNFEEL_DESIGN_SCHEME[value] ?? "mono";
+function designSchemeForThemeColor(value) {
+  return THEME_COLOR_DESIGN_SCHEME[value] ?? "mono";
 }
 function readLuminanceFromDom() {
   if (typeof document === "undefined") return "light";
@@ -208,7 +218,8 @@ function setLuminance(value) {
 }
 function setThemeColor(value) {
   if (state.themeColor === value && readThemeColorFromDom() === value) return;
-  applyTheme(state.luminance, value, state.designScheme);
+  const scheme = designSchemeForThemeColor(value);
+  applyTheme(state.luminance, value, scheme);
 }
 function setDesignScheme(value) {
   if (state.designScheme === value && readDesignSchemeFromDom() === value) return;
@@ -247,7 +258,6 @@ function applyLooknfeel(value) {
     localStorage.setItem(LOOKNFEEL_STORAGE_KEY, value);
   } catch {
   }
-  setDesignScheme(designSchemeForLooknfeel(value));
   listeners2.forEach((fn) => {
     try {
       fn(value);
@@ -299,11 +309,11 @@ export {
   LEGACY_LUMINANCE_KEYS,
   LEGACY_THEME_COLOR_MAP,
   LOOKNFEEL_DEFAULT,
-  LOOKNFEEL_DESIGN_SCHEME,
   LOOKNFEEL_OPTIONS,
   LOOKNFEEL_STORAGE_KEY,
   LUMINANCE_STORAGE_KEY,
   NEON_LOOKNFEELS,
+  THEME_COLOR_DESIGN_SCHEME,
   THEME_COLOR_OPTIONS,
   THEME_COLOR_STORAGE_KEY,
   ThemeProvider,
@@ -312,7 +322,7 @@ export {
   bootLooknfeel,
   bootMimicusUI,
   bootTheme,
-  designSchemeForLooknfeel,
+  designSchemeForThemeColor,
   getLooknfeelState,
   getThemeState,
   isDesignScheme,

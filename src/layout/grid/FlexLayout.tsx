@@ -36,21 +36,24 @@ export function FlexLayout({
   children,
   ...rest
 }: FlexLayoutProps) {
-  const { ref, sizew, slot } = useLayoutContainer(sizewProp);
+  const { ref, sizew, slot, dataSizew, vars } = useLayoutContainer(sizewProp);
   const cls = [getScrollbarClass(cscroll, style), className].filter(Boolean).join(" ");
-  const mergedStyle = joinStyle(
-    `gap: ${resolveGap(gap, sizew)}`,
-    direction && `flex-direction: ${direction}`,
-    `flex-wrap: ${wrap ? "wrap" : "nowrap"}`,
-    justify && `justify-content: ${resolveJustify(justify)}`,
-    items && `align-items: ${items}`,
-    style,
-    `display: ${inline ? "inline-flex" : "flex"}`,
-  );
+  const mergedStyle = {
+    ...joinStyle(
+      `gap: ${resolveGap(gap, sizew)}`,
+      direction && `flex-direction: ${direction}`,
+      `flex-wrap: ${wrap ? "wrap" : "nowrap"}`,
+      justify && `justify-content: ${resolveJustify(justify)}`,
+      items && `align-items: ${items}`,
+      style,
+      `display: ${inline ? "inline-flex" : "flex"}`,
+    ),
+    ...vars,
+  };
 
   return (
     <LayoutSlotContext.Provider value={slot}>
-      <div ref={ref} className={cls} style={mergedStyle} {...rest} {...dataDebug(rest, "flex-layout")}>
+      <div ref={ref} className={cls} style={mergedStyle} data-sizew={dataSizew} {...rest} {...dataDebug(rest, "flex-layout")}>
         {children}
       </div>
     </LayoutSlotContext.Provider>

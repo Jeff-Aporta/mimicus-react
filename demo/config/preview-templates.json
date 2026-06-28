@@ -175,5 +175,6 @@
   "disp-tree": { "type": "builtin", "id": "disp-tree" },
   "disp-calendar": { "type": "builtin", "id": "disp-calendar" },
   "disp-list": { "type": "builtin", "id": "disp-list" },
+  "datagrid": { "type": "builtin", "id": "datagrid" },
   "cmp-code-block": { "type": "builtin", "id": "cmp-code-block" }
 }

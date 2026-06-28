@@ -5,11 +5,44 @@
   "titleIcon": "mdi:file-tree-outline",
   "status": "approved",
   "intro": "Árbol jerárquico expandible (display). Distinto de <code>TreeSelect</code>. Ver <a href=\"https://ant.design/components/tree\" target=\"_blank\" rel=\"noreferrer\">Ant Tree</a>.",
-  "component": { "name": "Tree", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-tree" },
-  "state": { "checkable": false, "defaultExpandAll": true },
+  "component": {
+    "name": "Tree",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-tree"
+  },
+  "state": {
+    "checkable": false,
+    "defaultExpandAll": true
+  },
   "fields": [
-    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "checkable", "label": "checkable" }, { "key": "defaultExpandAll", "label": "defaultExpandAll" }] }
+    {
+      "kind": "switch-group",
+      "key": "opts",
+      "label": "Opciones",
+      "labelIcon": "mdi:tune",
+      "switches": [
+        {
+          "key": "checkable",
+          "label": "checkable",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "defaultExpandAll",
+          "label": "defaultExpandAll",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        }
+      ]
+    }
   ],
-  "code": { "strategy": "disp-tree" }
+  "code": {
+    "strategy": "disp-tree"
+  }
 }

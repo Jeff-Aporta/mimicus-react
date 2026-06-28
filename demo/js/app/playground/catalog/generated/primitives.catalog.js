@@ -23,24 +23,11 @@ export const items = [
         "template": "disp-avatar"
       },
       "state": {
-        "size": "medium",
         "variant": "circular",
         "group": false,
         "max": 4
       },
       "fields": [
-        {
-          "kind": "select-enum",
-          "key": "size",
-          "label": "size",
-          "labelIcon": "mdi:resize",
-          "attrType": "str",
-          "enumValue": {
-            "Small": "small",
-            "Medium": "medium",
-            "Large": "large"
-          }
-        },
         {
           "kind": "select-enum",
           "key": "variant",
@@ -57,7 +44,11 @@ export const items = [
           "kind": "switch",
           "key": "group",
           "label": "AvatarGroup",
-          "labelIcon": "mdi:account-group-outline"
+          "labelIcon": "mdi:account-group-outline",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -201,7 +192,11 @@ export const items = [
           "kind": "switch",
           "key": "upper",
           "label": "uppercase",
-          "labelIcon": "mdi:format-letter-case-upper"
+          "labelIcon": "mdi:format-letter-case-upper",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -267,15 +262,27 @@ export const items = [
           "switches": [
             {
               "key": "fliph",
-              "label": "fliph"
+              "label": "fliph",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "flipv",
-              "label": "flipv"
+              "label": "flipv",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "loading",
-              "label": "loading"
+              "label": "loading",
+              "iconOn": "mdi:loading",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         },
@@ -350,7 +357,11 @@ export const items = [
           "kind": "switch",
           "key": "bordered",
           "label": "bordered",
-          "labelIcon": "mdi:border-all"
+          "labelIcon": "mdi:border-all",
+          "iconOn": "mdi:border-all",
+          "iconOff": "mdi:border-all-variant",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -396,7 +407,11 @@ export const items = [
           "kind": "switch",
           "key": "block",
           "label": "block",
-          "labelIcon": "mdi:arrow-expand-horizontal"
+          "labelIcon": "mdi:arrow-expand-horizontal",
+          "iconOn": "mdi:rectangle",
+          "iconOff": "mdi:rectangle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -538,7 +553,11 @@ export const items = [
           "kind": "switch",
           "key": "upper",
           "label": "uppercase",
-          "labelIcon": "mdi:format-letter-case-upper"
+          "labelIcon": "mdi:format-letter-case-upper",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [

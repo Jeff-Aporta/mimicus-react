@@ -19,6 +19,17 @@ function formatCellValue(col, value, node) {
 function cellText(col, node) {
   return formatCellValue(col, getCellValue(col, node), node);
 }
+function formatValue(col, value) {
+  const def = col.def;
+  if (typeof def.valueFormatter === "function") return def.valueFormatter(value, {});
+  if (value == null || value === "") return "";
+  if (col.type === "boolean") return value ? "\u2713" : "\u2014";
+  if (col.type === "date") {
+    const d = value instanceof Date ? value : new Date(String(value));
+    return Number.isNaN(d.getTime()) ? String(value) : d.toISOString().slice(0, 10);
+  }
+  return String(value);
+}
 
 // src/datagrid/core/columnState.ts
 var DEFAULT_WIDTH = 160;
@@ -50,6 +61,8 @@ function resolveColumns(defs, defaultColWidth = DEFAULT_WIDTH) {
     pinned: def.pinned ?? null,
     hide: def.hide === true,
     align: def.align ?? (def.type === "number" ? "right" : "left"),
+    enableRowGroup: def.enableRowGroup !== false,
+    aggFunc: def.aggFunc ?? null,
     checkboxSelection: def.checkboxSelection === true,
     def
   }));
@@ -237,6 +250,88 @@ function cycleSort(model, colId, additive) {
   return next;
 }
 
+// src/datagrid/core/pipeline/grouping.ts
+function applyAgg(fn, values) {
+  if (fn === "count") return values.length;
+  if (fn === "first") return values.length ? values[0] : null;
+  if (fn === "last") return values.length ? values[values.length - 1] : null;
+  const nums = values.filter((v) => typeof v === "number" && !Number.isNaN(v));
+  if (!nums.length) return null;
+  if (fn === "sum") return nums.reduce((a, b) => a + b, 0);
+  if (fn === "avg") return nums.reduce((a, b) => a + b, 0) / nums.length;
+  if (fn === "min") return Math.min(...nums);
+  if (fn === "max") return Math.max(...nums);
+  return null;
+}
+function aggregateGroup(leaves, colById) {
+  const agg = {};
+  for (const col of colById.values()) {
+    if (!col.aggFunc) continue;
+    agg[col.colId] = applyAgg(col.aggFunc, leaves.map((n) => getCellValue(col, n)));
+  }
+  return agg;
+}
+function groupLevel(leaves, col) {
+  const map = /* @__PURE__ */ new Map();
+  for (const node of leaves) {
+    const value = getCellValue(col, node);
+    const key = String(value ?? "");
+    let g = map.get(key);
+    if (!g) {
+      g = { value, label: formatValue(col, value) || "(vac\xEDo)", leaves: [] };
+      map.set(key, g);
+    }
+    g.leaves.push(node);
+  }
+  return [...map.values()];
+}
+function buildDisplayRows(leaves, rowGroupCols, colById, expandedGroups) {
+  if (!rowGroupCols.length) return leaves.map((node) => ({ kind: "leaf", level: 0, node }));
+  const out = [];
+  const walk = (rows, depth, prefix) => {
+    const colId = rowGroupCols[depth];
+    const col = colById.get(colId);
+    if (!col) return;
+    for (const g of groupLevel(rows, col)) {
+      const id = prefix ? `${prefix}|${colId}=${String(g.value ?? "")}` : `${colId}=${String(g.value ?? "")}`;
+      const expanded = expandedGroups.has(id);
+      out.push({
+        kind: "group",
+        id,
+        colId,
+        field: col.field,
+        value: g.value,
+        label: g.label,
+        level: depth,
+        count: g.leaves.length,
+        expanded,
+        agg: aggregateGroup(g.leaves, colById),
+        leafIds: g.leaves.map((n) => n.id)
+      });
+      if (!expanded) continue;
+      if (depth + 1 < rowGroupCols.length) walk(g.leaves, depth + 1, id);
+      else for (const node of g.leaves) out.push({ kind: "leaf", level: depth + 1, node });
+    }
+  };
+  walk(leaves, 0, "");
+  return out;
+}
+function collectGroupIds(leaves, rowGroupCols, colById) {
+  if (!rowGroupCols.length) return [];
+  const ids = [];
+  const walk = (rows, depth, prefix) => {
+    const col = colById.get(rowGroupCols[depth]);
+    if (!col) return;
+    for (const g of groupLevel(rows, col)) {
+      const id = prefix ? `${prefix}|${col.colId}=${String(g.value ?? "")}` : `${col.colId}=${String(g.value ?? "")}`;
+      ids.push(id);
+      if (depth + 1 < rowGroupCols.length) walk(g.leaves, depth + 1, id);
+    }
+  };
+  walk(leaves, 0, "");
+  return ids;
+}
+
 // src/datagrid/core/gridModel.ts
 function createGridModel(options) {
   const getRowId = options.getRowId ?? ((_row, i) => `row-${i}`);
@@ -252,9 +347,12 @@ function createGridModel(options) {
     pagination: options.pagination ?? false,
     page: 0,
     pageSize: options.pageSize ?? 50,
+    rowGroupCols: options.rowGroupCols ?? [],
+    expandedGroups: /* @__PURE__ */ new Set(),
     getRowId
   };
   rebuildNodes();
+  const groupDefaultExpanded = options.groupDefaultExpanded ?? 0;
   const listeners = /* @__PURE__ */ new Set();
   let cache = null;
   function rebuildNodes() {
@@ -268,11 +366,15 @@ function createGridModel(options) {
     const filtered = filterRows(s.nodes, s.filterModel, s.quickFilter, s.columns, byId);
     const sorted = sortRows(filtered, s.sortModel, byId);
     const totalRows = sorted.length;
-    let pageRows = sorted;
+    const grouped = s.rowGroupCols.filter((c) => byId.has(c));
+    const displayRows = buildDisplayRows(sorted, grouped, byId, s.expandedGroups);
     let page = s.page;
+    let pageRows = sorted;
+    let pageDisplayRows = displayRows;
     if (s.pagination) {
-      const pages = Math.max(1, Math.ceil(totalRows / s.pageSize));
+      const pages = Math.max(1, Math.ceil(displayRows.length / s.pageSize));
       page = Math.min(s.page, pages - 1);
+      pageDisplayRows = displayRows.slice(page * s.pageSize, page * s.pageSize + s.pageSize);
       pageRows = sorted.slice(page * s.pageSize, page * s.pageSize + s.pageSize);
     }
     return {
@@ -287,9 +389,19 @@ function createGridModel(options) {
       pageSize: s.pageSize,
       displayedRows: sorted,
       pageRows,
+      rowGroupCols: grouped,
+      expandedGroups: s.expandedGroups,
+      displayRows,
+      pageDisplayRows,
       totalRows
     };
   }
+  function reseedExpansion() {
+    if (groupDefaultExpanded === -1 && s.rowGroupCols.length) {
+      s.expandedGroups = new Set(collectGroupIds(sortRows(filterRows(s.nodes, s.filterModel, s.quickFilter, s.columns, colById()), s.sortModel, colById()), s.rowGroupCols, colById()));
+    }
+  }
+  reseedExpansion();
   function notify() {
     cache = compute();
     for (const fn of listeners) {
@@ -374,6 +486,44 @@ function createGridModel(options) {
     },
     autosizeColumn(colId) {
       s.columns = autosizeColumn(s.columns, colId, s.nodes);
+      notify();
+    },
+    setRowGroupCols(colIds) {
+      s.rowGroupCols = [...colIds];
+      s.page = 0;
+      reseedExpansion();
+      notify();
+    },
+    addRowGroupCol(colId, index) {
+      if (s.rowGroupCols.includes(colId)) return;
+      const next = s.rowGroupCols.slice();
+      next.splice(index == null ? next.length : Math.max(0, Math.min(index, next.length)), 0, colId);
+      s.rowGroupCols = next;
+      s.page = 0;
+      reseedExpansion();
+      notify();
+    },
+    removeRowGroupCol(colId) {
+      s.rowGroupCols = s.rowGroupCols.filter((c) => c !== colId);
+      s.page = 0;
+      reseedExpansion();
+      notify();
+    },
+    toggleGroup(groupId) {
+      const next = new Set(s.expandedGroups);
+      if (next.has(groupId)) next.delete(groupId);
+      else next.add(groupId);
+      s.expandedGroups = next;
+      notify();
+    },
+    expandAllGroups() {
+      const byId = colById();
+      const sorted = sortRows(filterRows(s.nodes, s.filterModel, s.quickFilter, s.columns, byId), s.sortModel, byId);
+      s.expandedGroups = new Set(collectGroupIds(sorted, s.rowGroupCols, byId));
+      notify();
+    },
+    collapseAllGroups() {
+      s.expandedGroups = /* @__PURE__ */ new Set();
       notify();
     },
     getColumns() {
@@ -502,7 +652,7 @@ function rowsToCsv(columns, rows, opts = {}) {
 }
 
 // src/datagrid/react/DataGrid.tsx
-import { useCallback, useEffect as useEffect4, useLayoutEffect, useMemo as useMemo2, useRef as useRef5, useState as useState2 } from "react";
+import { useCallback, useEffect as useEffect5, useLayoutEffect, useMemo as useMemo2, useRef as useRef6, useState as useState3 } from "react";
 
 // src/datagrid/react/useGridModel.ts
 import { useEffect, useRef, useSyncExternalStore } from "react";
@@ -524,13 +674,21 @@ function useGridModel(options) {
 }
 
 // src/datagrid/react/GridHeader.tsx
-import { useRef as useRef2 } from "react";
+import { useRef as useRef3 } from "react";
 
 // src/components/Icon.tsx
+import { useEffect as useEffect2, useRef as useRef2 } from "react";
 import { jsx } from "react/jsx-runtime";
 function Icon({ icon, className, style }) {
+  const ref = useRef2(null);
+  useEffect2(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (className) el.setAttribute("class", className);
+    else el.removeAttribute("class");
+  }, [className]);
   if (!icon) return null;
-  return /* @__PURE__ */ jsx("iconify-icon", { icon, className, style: style && typeof style === "object" ? style : void 0 });
+  return /* @__PURE__ */ jsx("iconify-icon", { ref, icon, style: style && typeof style === "object" ? style : void 0 });
 }
 
 // src/datagrid/react/GridHeader.tsx
@@ -538,7 +696,7 @@ import { jsx as jsx2, jsxs } from "react/jsx-runtime";
 var sortIcon = { asc: "mdi:arrow-up", desc: "mdi:arrow-down" };
 function GridHeader(props) {
   const { columns, sortModel, selectionMode, headerCheckbox, totalWidth, headerHeight, pinStyles, checkPinStyle, filteredCols, onSort, onToggleAll, onResize, onReorder, onMenu } = props;
-  const drag = useRef2(null);
+  const drag = useRef3(null);
   const startResize = (col) => (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -559,6 +717,7 @@ function GridHeader(props) {
   const onDragStart = (col) => (e) => {
     drag.current = col.colId;
     e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("application/x-mim-col", col.colId);
   };
   const onDrop = (col) => (e) => {
     e.preventDefault();
@@ -620,7 +779,7 @@ function registerCellRenderer(name, renderer) {
 function getCellRenderer(name) {
   return name ? registry.get(name) : void 0;
 }
-registerCellRenderer("boolean", ({ value }) => /* @__PURE__ */ jsx3(Icon, { icon: value ? "mdi:check-circle" : "mdi:close-circle-outline", className: value ? "mim-dg-bool mim-dg-bool--on" : "mim-dg-bool mim-dg-bool--off" }));
+registerCellRenderer("boolean", ({ value }) => /* @__PURE__ */ jsx3("span", { className: value ? "mim-dg-bool mim-dg-bool--on" : "mim-dg-bool mim-dg-bool--off", children: /* @__PURE__ */ jsx3(Icon, { icon: value ? "mdi:check-circle" : "mdi:close-circle-outline" }) }));
 registerCellRenderer("tag", ({ formatted }) => /* @__PURE__ */ jsx3("span", { className: "mim-dg-tag", children: formatted }));
 registerCellRenderer("link", ({ formatted, value }) => /* @__PURE__ */ jsx3("a", { className: "mim-dg-link", href: typeof value === "string" ? value : "#", children: formatted }));
 
@@ -647,9 +806,41 @@ function GridCell({ column, node, pinStyle }) {
 
 // src/datagrid/react/GridBody.tsx
 import { jsx as jsx5, jsxs as jsxs2 } from "react/jsx-runtime";
+var INDENT = 18;
 function GridBody(props) {
-  const { rows, columns, rowHeight, topPad, totalHeight, totalWidth, selection, selectionMode, focusedId, pinStyles, checkPinStyle, onRowSelect } = props;
-  return /* @__PURE__ */ jsx5("div", { className: "mim-dg__body", style: { height: totalHeight, width: totalWidth }, role: "rowgroup", children: /* @__PURE__ */ jsx5("div", { className: "mim-dg__rows", style: { transform: `translateY(${topPad}px)` }, children: rows.map((node) => {
+  const { rows, columns, rowHeight, topPad, totalHeight, totalWidth, selection, selectionMode, focusedId, pinStyles, checkPinStyle, onRowSelect, onToggleGroup } = props;
+  const aggCols = columns.filter((c) => c.aggFunc && !c.hide);
+  return /* @__PURE__ */ jsx5("div", { className: "mim-dg__body", style: { height: totalHeight, width: totalWidth }, role: "rowgroup", children: /* @__PURE__ */ jsx5("div", { className: "mim-dg__rows", style: { transform: `translateY(${topPad}px)` }, children: rows.map((dr) => {
+    if (dr.kind === "group") {
+      return /* @__PURE__ */ jsx5(
+        "div",
+        {
+          className: `mim-dg__row mim-dg__group-row${focusedId === dr.id ? " is-focused" : ""}`,
+          style: { height: rowHeight },
+          role: "row",
+          onClick: () => onToggleGroup(dr.id),
+          children: /* @__PURE__ */ jsxs2("div", { className: "mim-dg__group-cell", style: { paddingLeft: 8 + dr.level * INDENT }, children: [
+            /* @__PURE__ */ jsx5(Icon, { icon: dr.expanded ? "mdi:chevron-down" : "mdi:chevron-right", className: "mim-dg__group-chevron" }),
+            /* @__PURE__ */ jsx5("span", { className: "mim-dg__group-label", children: dr.label }),
+            /* @__PURE__ */ jsxs2("span", { className: "mim-dg__group-count", children: [
+              "(",
+              dr.count.toLocaleString(),
+              ")"
+            ] }),
+            aggCols.map((c) => dr.agg[c.colId] != null && /* @__PURE__ */ jsxs2("span", { className: "mim-dg__group-agg", children: [
+              /* @__PURE__ */ jsxs2("b", { children: [
+                c.headerName,
+                ":"
+              ] }),
+              " ",
+              formatValue(c, dr.agg[c.colId])
+            ] }, c.colId))
+          ] })
+        },
+        dr.id
+      );
+    }
+    const node = dr.node;
     const selected = selection.has(node.id);
     return /* @__PURE__ */ jsxs2(
       "div",
@@ -743,13 +934,62 @@ function GridToolbar(props) {
   ] });
 }
 
+// src/datagrid/react/GroupPanel.tsx
+import { useState } from "react";
+import { jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
+var COL_DND_TYPE = "application/x-mim-col";
+function GroupPanel(props) {
+  const { columns, rowGroupCols, onAdd, onRemove, onExpandAll, onCollapseAll } = props;
+  const [over, setOver] = useState(false);
+  const byId = new Map(columns.map((c) => [c.colId, c]));
+  const onDrop = (e) => {
+    e.preventDefault();
+    setOver(false);
+    const colId = e.dataTransfer.getData(COL_DND_TYPE);
+    if (colId) onAdd(colId);
+  };
+  const chipDragStart = (colId) => (e) => e.dataTransfer.setData(COL_DND_TYPE, colId);
+  return /* @__PURE__ */ jsxs5(
+    "div",
+    {
+      className: `mim-dg__group-panel${over ? " is-over" : ""}${rowGroupCols.length ? " has-groups" : ""}`,
+      role: "toolbar",
+      onDragOver: (e) => {
+        e.preventDefault();
+        setOver(true);
+      },
+      onDragLeave: () => setOver(false),
+      onDrop,
+      children: [
+        /* @__PURE__ */ jsx8(Icon, { icon: "mdi:group", className: "mim-dg__group-panel-icon" }),
+        rowGroupCols.length === 0 && /* @__PURE__ */ jsx8("span", { className: "mim-dg__group-hint", children: "Arrastra una columna aqu\xED para agrupar por sus valores" }),
+        rowGroupCols.map((colId, i) => {
+          const col = byId.get(colId);
+          return /* @__PURE__ */ jsxs5("span", { className: "mim-dg__group-chip-wrap", children: [
+            i > 0 && /* @__PURE__ */ jsx8(Icon, { icon: "mdi:chevron-right", className: "mim-dg__group-chip-arrow" }),
+            /* @__PURE__ */ jsxs5("span", { className: "mim-dg__group-chip", draggable: true, onDragStart: chipDragStart(colId), children: [
+              /* @__PURE__ */ jsx8(Icon, { icon: "mdi:drag-vertical", className: "mim-dg__group-chip-grip" }),
+              /* @__PURE__ */ jsx8("span", { className: "mim-dg__group-chip-label", children: col?.headerName ?? colId }),
+              /* @__PURE__ */ jsx8("button", { type: "button", className: "mim-dg__group-chip-x", "aria-label": `Quitar ${col?.headerName ?? colId}`, onClick: () => onRemove(colId), children: /* @__PURE__ */ jsx8(Icon, { icon: "mdi:close" }) })
+            ] })
+          ] }, colId);
+        }),
+        rowGroupCols.length > 0 && /* @__PURE__ */ jsxs5("span", { className: "mim-dg__group-panel-actions", children: [
+          /* @__PURE__ */ jsx8("button", { type: "button", className: "mim-dg__group-panel-btn", title: "Expandir todo", onClick: onExpandAll, children: /* @__PURE__ */ jsx8(Icon, { icon: "mdi:unfold-more-horizontal" }) }),
+          /* @__PURE__ */ jsx8("button", { type: "button", className: "mim-dg__group-panel-btn", title: "Colapsar todo", onClick: onCollapseAll, children: /* @__PURE__ */ jsx8(Icon, { icon: "mdi:unfold-less-horizontal" }) })
+        ] })
+      ]
+    }
+  );
+}
+
 // src/datagrid/react/HeaderMenu.tsx
-import { useEffect as useEffect2, useRef as useRef3 } from "react";
-import { Fragment, jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
+import { useEffect as useEffect3, useRef as useRef4 } from "react";
+import { Fragment, jsx as jsx9, jsxs as jsxs6 } from "react/jsx-runtime";
 function HeaderMenu(props) {
-  const { column, x, y, onClose, onSort, onPin, onHide, onAutosize, onFilter } = props;
-  const ref = useRef3(null);
-  useEffect2(() => {
+  const { column, x, y, onClose, onSort, onPin, onHide, onAutosize, onFilter, onToggleRowGroup, isGrouped } = props;
+  const ref = useRef4(null);
+  useEffect3(() => {
     const close = (e) => {
       if (ref.current && !ref.current.contains(e.target)) onClose();
     };
@@ -765,56 +1005,60 @@ function HeaderMenu(props) {
     fn();
     onClose();
   };
-  return /* @__PURE__ */ jsxs5("div", { ref, className: "mim-dg__menu pg-scrollbar", style: { left: x, top: y }, role: "menu", children: [
-    column.sortable && /* @__PURE__ */ jsxs5(Fragment, { children: [
-      /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "asc")), children: [
-        /* @__PURE__ */ jsx8(Icon, { icon: "mdi:sort-ascending" }),
+  return /* @__PURE__ */ jsxs6("div", { ref, className: "mim-dg__menu pg-scrollbar", style: { left: x, top: y }, role: "menu", children: [
+    column.sortable && /* @__PURE__ */ jsxs6(Fragment, { children: [
+      /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "asc")), children: [
+        /* @__PURE__ */ jsx9(Icon, { icon: "mdi:sort-ascending" }),
         "Ordenar ascendente"
       ] }),
-      /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "desc")), children: [
-        /* @__PURE__ */ jsx8(Icon, { icon: "mdi:sort-descending" }),
+      /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, "desc")), children: [
+        /* @__PURE__ */ jsx9(Icon, { icon: "mdi:sort-descending" }),
         "Ordenar descendente"
       ] }),
-      /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, null)), children: [
-        /* @__PURE__ */ jsx8(Icon, { icon: "mdi:sort-variant-remove" }),
+      /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onSort(column.colId, null)), children: [
+        /* @__PURE__ */ jsx9(Icon, { icon: "mdi:sort-variant-remove" }),
         "Quitar orden"
       ] }),
-      /* @__PURE__ */ jsx8("div", { className: "mim-dg__menu-sep" })
+      /* @__PURE__ */ jsx9("div", { className: "mim-dg__menu-sep" })
     ] }),
-    column.filterType && /* @__PURE__ */ jsxs5(Fragment, { children: [
-      /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onFilter(column)), children: [
-        /* @__PURE__ */ jsx8(Icon, { icon: "mdi:filter-outline" }),
+    column.filterType && /* @__PURE__ */ jsxs6(Fragment, { children: [
+      /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onFilter(column)), children: [
+        /* @__PURE__ */ jsx9(Icon, { icon: "mdi:filter-outline" }),
         "Filtrar\u2026"
       ] }),
-      /* @__PURE__ */ jsx8("div", { className: "mim-dg__menu-sep" })
+      /* @__PURE__ */ jsx9("div", { className: "mim-dg__menu-sep" })
     ] }),
-    /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "left")), children: [
-      /* @__PURE__ */ jsx8(Icon, { icon: "mdi:pin" }),
+    /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "left")), children: [
+      /* @__PURE__ */ jsx9(Icon, { icon: "mdi:pin" }),
       "Fijar a la izquierda"
     ] }),
-    /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "right")), children: [
-      /* @__PURE__ */ jsx8(Icon, { icon: "mdi:pin" }),
+    /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, "right")), children: [
+      /* @__PURE__ */ jsx9(Icon, { icon: "mdi:pin" }),
       "Fijar a la derecha"
     ] }),
-    /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, null)), children: [
-      /* @__PURE__ */ jsx8(Icon, { icon: "mdi:pin-off-outline" }),
+    /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onPin(column.colId, null)), children: [
+      /* @__PURE__ */ jsx9(Icon, { icon: "mdi:pin-off-outline" }),
       "No fijar"
     ] }),
-    /* @__PURE__ */ jsx8("div", { className: "mim-dg__menu-sep" }),
-    /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onAutosize(column.colId)), children: [
-      /* @__PURE__ */ jsx8(Icon, { icon: "mdi:arrow-expand-horizontal" }),
+    /* @__PURE__ */ jsx9("div", { className: "mim-dg__menu-sep" }),
+    /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onAutosize(column.colId)), children: [
+      /* @__PURE__ */ jsx9(Icon, { icon: "mdi:arrow-expand-horizontal" }),
       "Autoajustar ancho"
     ] }),
-    /* @__PURE__ */ jsxs5("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onHide(column.colId)), children: [
-      /* @__PURE__ */ jsx8(Icon, { icon: "mdi:eye-off-outline" }),
+    column.enableRowGroup && /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onToggleRowGroup(column.colId)), children: [
+      /* @__PURE__ */ jsx9(Icon, { icon: isGrouped ? "mdi:ungroup" : "mdi:group" }),
+      isGrouped ? "Quitar agrupaci\xF3n" : "Agrupar por esta columna"
+    ] }),
+    /* @__PURE__ */ jsxs6("button", { type: "button", className: "mim-dg__menu-item", role: "menuitem", onClick: act(() => onHide(column.colId)), children: [
+      /* @__PURE__ */ jsx9(Icon, { icon: "mdi:eye-off-outline" }),
       "Ocultar columna"
     ] })
   ] });
 }
 
 // src/datagrid/react/FilterPopover.tsx
-import { useEffect as useEffect3, useMemo, useRef as useRef4, useState } from "react";
-import { Fragment as Fragment2, jsx as jsx9, jsxs as jsxs6 } from "react/jsx-runtime";
+import { useEffect as useEffect4, useMemo, useRef as useRef5, useState as useState2 } from "react";
+import { Fragment as Fragment2, jsx as jsx10, jsxs as jsxs7 } from "react/jsx-runtime";
 var TEXT_OPS = [
   { v: "contains", t: "Contiene" },
   { v: "notContains", t: "No contiene" },
@@ -845,8 +1089,8 @@ var DATE_OPS = [
 function FilterPopover(props) {
   const { column, filter, uniqueValues: uniqueValues2, x, y, onApply, onClose } = props;
   const type = column.filterType ?? "text";
-  const ref = useRef4(null);
-  useEffect3(() => {
+  const ref = useRef5(null);
+  useEffect4(() => {
     const onDoc = (e) => {
       if (ref.current && !ref.current.contains(e.target)) onClose();
     };
@@ -857,16 +1101,16 @@ function FilterPopover(props) {
   const nf = filter?.type === "number" ? filter : null;
   const df = filter?.type === "date" ? filter : null;
   const sf = filter?.type === "set" ? filter : null;
-  const [textOp, setTextOp] = useState(tf?.op ?? "contains");
-  const [textVal, setTextVal] = useState(tf?.value ?? "");
-  const [numOp, setNumOp] = useState(nf?.op ?? "eq");
-  const [numVal, setNumVal] = useState(nf?.value != null ? String(nf.value) : "");
-  const [numTo, setNumTo] = useState(nf?.to != null ? String(nf.to) : "");
-  const [dateOp, setDateOp] = useState(df?.op ?? "eq");
-  const [dateVal, setDateVal] = useState(df?.value ?? "");
-  const [dateTo, setDateTo] = useState(df?.to ?? "");
-  const [setSel, setSetSel] = useState(new Set(sf?.values ?? uniqueValues2));
-  const [setSearch, setSetSearch] = useState("");
+  const [textOp, setTextOp] = useState2(tf?.op ?? "contains");
+  const [textVal, setTextVal] = useState2(tf?.value ?? "");
+  const [numOp, setNumOp] = useState2(nf?.op ?? "eq");
+  const [numVal, setNumVal] = useState2(nf?.value != null ? String(nf.value) : "");
+  const [numTo, setNumTo] = useState2(nf?.to != null ? String(nf.to) : "");
+  const [dateOp, setDateOp] = useState2(df?.op ?? "eq");
+  const [dateVal, setDateVal] = useState2(df?.value ?? "");
+  const [dateTo, setDateTo] = useState2(df?.to ?? "");
+  const [setSel, setSetSel] = useState2(new Set(sf?.values ?? uniqueValues2));
+  const [setSearch, setSetSearch] = useState2("");
   const shownVals = useMemo(() => uniqueValues2.filter((v) => v.toLowerCase().includes(setSearch.toLowerCase())), [uniqueValues2, setSearch]);
   const needsValue = (op) => op !== "blank" && op !== "notBlank";
   const apply = () => {
@@ -889,41 +1133,41 @@ function FilterPopover(props) {
     else n.add(v);
     return n;
   });
-  return /* @__PURE__ */ jsxs6("div", { ref, className: "mim-dg__filter pg-scrollbar", style: { left: x, top: y }, role: "dialog", "aria-label": `Filtrar ${column.headerName}`, children: [
-    type === "text" && /* @__PURE__ */ jsxs6(Fragment2, { children: [
-      /* @__PURE__ */ jsx9("select", { className: "mim-dg__filter-field", value: textOp, onChange: (e) => setTextOp(e.target.value), children: TEXT_OPS.map((o) => /* @__PURE__ */ jsx9("option", { value: o.v, children: o.t }, o.v)) }),
-      needsValue(textOp) && /* @__PURE__ */ jsx9("input", { className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: textVal, onChange: (e) => setTextVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() })
+  return /* @__PURE__ */ jsxs7("div", { ref, className: "mim-dg__filter pg-scrollbar", style: { left: x, top: y }, role: "dialog", "aria-label": `Filtrar ${column.headerName}`, children: [
+    type === "text" && /* @__PURE__ */ jsxs7(Fragment2, { children: [
+      /* @__PURE__ */ jsx10("select", { className: "mim-dg__filter-field", value: textOp, onChange: (e) => setTextOp(e.target.value), children: TEXT_OPS.map((o) => /* @__PURE__ */ jsx10("option", { value: o.v, children: o.t }, o.v)) }),
+      needsValue(textOp) && /* @__PURE__ */ jsx10("input", { className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: textVal, onChange: (e) => setTextVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() })
     ] }),
-    type === "number" && /* @__PURE__ */ jsxs6(Fragment2, { children: [
-      /* @__PURE__ */ jsx9("select", { className: "mim-dg__filter-field", value: numOp, onChange: (e) => setNumOp(e.target.value), children: NUM_OPS.map((o) => /* @__PURE__ */ jsx9("option", { value: o.v, children: o.t }, o.v)) }),
-      needsValue(numOp) && /* @__PURE__ */ jsx9("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: numVal, onChange: (e) => setNumVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() }),
-      numOp === "inRange" && /* @__PURE__ */ jsx9("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Hasta\u2026", value: numTo, onChange: (e) => setNumTo(e.target.value) })
+    type === "number" && /* @__PURE__ */ jsxs7(Fragment2, { children: [
+      /* @__PURE__ */ jsx10("select", { className: "mim-dg__filter-field", value: numOp, onChange: (e) => setNumOp(e.target.value), children: NUM_OPS.map((o) => /* @__PURE__ */ jsx10("option", { value: o.v, children: o.t }, o.v)) }),
+      needsValue(numOp) && /* @__PURE__ */ jsx10("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Valor\u2026", autoFocus: true, value: numVal, onChange: (e) => setNumVal(e.target.value), onKeyDown: (e) => e.key === "Enter" && apply() }),
+      numOp === "inRange" && /* @__PURE__ */ jsx10("input", { type: "number", className: "mim-dg__filter-field", placeholder: "Hasta\u2026", value: numTo, onChange: (e) => setNumTo(e.target.value) })
     ] }),
-    type === "date" && /* @__PURE__ */ jsxs6(Fragment2, { children: [
-      /* @__PURE__ */ jsx9("select", { className: "mim-dg__filter-field", value: dateOp, onChange: (e) => setDateOp(e.target.value), children: DATE_OPS.map((o) => /* @__PURE__ */ jsx9("option", { value: o.v, children: o.t }, o.v)) }),
-      /* @__PURE__ */ jsx9("input", { type: "date", className: "mim-dg__filter-field", value: dateVal, onChange: (e) => setDateVal(e.target.value) }),
-      dateOp === "inRange" && /* @__PURE__ */ jsx9("input", { type: "date", className: "mim-dg__filter-field", value: dateTo, onChange: (e) => setDateTo(e.target.value) })
+    type === "date" && /* @__PURE__ */ jsxs7(Fragment2, { children: [
+      /* @__PURE__ */ jsx10("select", { className: "mim-dg__filter-field", value: dateOp, onChange: (e) => setDateOp(e.target.value), children: DATE_OPS.map((o) => /* @__PURE__ */ jsx10("option", { value: o.v, children: o.t }, o.v)) }),
+      /* @__PURE__ */ jsx10("input", { type: "date", className: "mim-dg__filter-field", value: dateVal, onChange: (e) => setDateVal(e.target.value) }),
+      dateOp === "inRange" && /* @__PURE__ */ jsx10("input", { type: "date", className: "mim-dg__filter-field", value: dateTo, onChange: (e) => setDateTo(e.target.value) })
     ] }),
-    type === "set" && /* @__PURE__ */ jsxs6(Fragment2, { children: [
-      /* @__PURE__ */ jsx9("input", { className: "mim-dg__filter-field", placeholder: "Buscar valores\u2026", value: setSearch, onChange: (e) => setSetSearch(e.target.value) }),
-      /* @__PURE__ */ jsxs6("div", { className: "mim-dg__filter-actions-row", children: [
-        /* @__PURE__ */ jsx9("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(new Set(uniqueValues2)), children: "Todo" }),
-        /* @__PURE__ */ jsx9("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(/* @__PURE__ */ new Set()), children: "Nada" })
+    type === "set" && /* @__PURE__ */ jsxs7(Fragment2, { children: [
+      /* @__PURE__ */ jsx10("input", { className: "mim-dg__filter-field", placeholder: "Buscar valores\u2026", value: setSearch, onChange: (e) => setSetSearch(e.target.value) }),
+      /* @__PURE__ */ jsxs7("div", { className: "mim-dg__filter-actions-row", children: [
+        /* @__PURE__ */ jsx10("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(new Set(uniqueValues2)), children: "Todo" }),
+        /* @__PURE__ */ jsx10("button", { type: "button", className: "mim-dg__filter-link", onClick: () => setSetSel(/* @__PURE__ */ new Set()), children: "Nada" })
       ] }),
-      /* @__PURE__ */ jsx9("div", { className: "mim-dg__filter-set pg-scrollbar", children: shownVals.map((v) => /* @__PURE__ */ jsxs6("label", { className: "mim-dg__filter-set-item", children: [
-        /* @__PURE__ */ jsx9("button", { type: "button", className: `mim-dg__checkbox mim-dg__checkbox--${setSel.has(v) ? "all" : "none"}`, onClick: () => toggleVal(v), children: /* @__PURE__ */ jsx9(Icon, { icon: setSel.has(v) ? "mdi:checkbox-marked" : "mdi:checkbox-blank-outline" }) }),
-        /* @__PURE__ */ jsx9("span", { children: v || "(vac\xEDo)" })
+      /* @__PURE__ */ jsx10("div", { className: "mim-dg__filter-set pg-scrollbar", children: shownVals.map((v) => /* @__PURE__ */ jsxs7("label", { className: "mim-dg__filter-set-item", children: [
+        /* @__PURE__ */ jsx10("button", { type: "button", className: `mim-dg__checkbox mim-dg__checkbox--${setSel.has(v) ? "all" : "none"}`, onClick: () => toggleVal(v), children: /* @__PURE__ */ jsx10(Icon, { icon: setSel.has(v) ? "mdi:checkbox-marked" : "mdi:checkbox-blank-outline" }) }),
+        /* @__PURE__ */ jsx10("span", { children: v || "(vac\xEDo)" })
       ] }, v)) })
     ] }),
-    /* @__PURE__ */ jsxs6("div", { className: "mim-dg__filter-actions", children: [
-      /* @__PURE__ */ jsx9("button", { type: "button", className: "mim-dg__tool-btn", onClick: clear, children: "Limpiar" }),
-      /* @__PURE__ */ jsx9("button", { type: "button", className: "mim-dg__tool-btn is-primary", onClick: apply, children: "Aplicar" })
+    /* @__PURE__ */ jsxs7("div", { className: "mim-dg__filter-actions", children: [
+      /* @__PURE__ */ jsx10("button", { type: "button", className: "mim-dg__tool-btn", onClick: clear, children: "Limpiar" }),
+      /* @__PURE__ */ jsx10("button", { type: "button", className: "mim-dg__tool-btn is-primary", onClick: apply, children: "Aplicar" })
     ] })
   ] });
 }
 
 // src/datagrid/react/DataGrid.tsx
-import { jsx as jsx10, jsxs as jsxs7 } from "react/jsx-runtime";
+import { jsx as jsx11, jsxs as jsxs8 } from "react/jsx-runtime";
 var DENSITY_ROW = { compact: 32, normal: 40, comfortable: 52 };
 function DataGrid(props) {
   const {
@@ -935,29 +1179,30 @@ function DataGrid(props) {
     pageSize,
     height = 480,
     toolbar = true,
+    rowGroupPanel = true,
     exportFileName = "datagrid.csv",
     className,
     style,
     onSelectionChange
   } = props;
   const headerHeight = props.headerHeight ?? 44;
-  const [density, setDensity] = useState2(props.density ?? "normal");
+  const [density, setDensity] = useState3(props.density ?? "normal");
   const rowHeight = props.rowHeight ?? DENSITY_ROW[density];
   const options = useMemo2(
-    () => ({ columns, rows, getRowId, selectionMode, pagination, pageSize, density }),
-    [columns, rows, getRowId, selectionMode, pagination, pageSize, density]
+    () => ({ columns, rows, getRowId, selectionMode, pagination, pageSize, density, rowGroupCols: props.rowGroupCols }),
+    [columns, rows, getRowId, selectionMode, pagination, pageSize, density, props.rowGroupCols]
   );
   const { api, state } = useGridModel(options);
-  useEffect4(() => {
+  useEffect5(() => {
     api.setDensity(density);
   }, [api, density]);
-  const viewportRef = useRef5(null);
-  const [scrollTop, setScrollTop] = useState2(0);
-  const [size, setSize] = useState2({ width: 0, height: 0 });
-  const [menu, setMenu] = useState2(null);
-  const [filterPop, setFilterPop] = useState2(null);
-  const [focusRow, setFocusRow] = useState2(-1);
-  const lastRangeFrom = useRef5(null);
+  const viewportRef = useRef6(null);
+  const [scrollTop, setScrollTop] = useState3(0);
+  const [size, setSize] = useState3({ width: 0, height: 0 });
+  const [menu, setMenu] = useState3(null);
+  const [filterPop, setFilterPop] = useState3(null);
+  const [focusRow, setFocusRow] = useState3(-1);
+  const lastRangeFrom = useRef6(null);
   useLayoutEffect(() => {
     const el = viewportRef.current;
     if (!el || typeof ResizeObserver === "undefined") return void 0;
@@ -967,7 +1212,8 @@ function DataGrid(props) {
     return () => ro.disconnect();
   }, []);
   const onScroll = useCallback((e) => setScrollTop(e.currentTarget.scrollTop), []);
-  const dataRows = pagination ? state.pageRows : state.displayedRows;
+  const dataRows = pagination ? state.pageDisplayRows : state.displayRows;
+  const leafRows = pagination ? state.pageRows : state.displayedRows;
   const checkColWidth = selectionMode === "none" ? 0 : 44;
   const layout = orderedForLayout(state.columns);
   const flat = useMemo2(() => {
@@ -997,9 +1243,10 @@ function DataGrid(props) {
   const viewportHeight = Math.max(0, size.height - headerHeight);
   const win = rowWindow(dataRows.length, rowHeight, scrollTop, viewportHeight);
   const visible = dataRows.slice(win.startIndex, win.endIndex);
-  const orderedIds = useMemo2(() => dataRows.map((r) => r.id), [dataRows]);
-  const headerCheckbox = headerCheckboxState(state.selection, dataRows);
+  const orderedIds = useMemo2(() => leafRows.map((r) => r.id), [leafRows]);
+  const headerCheckbox = headerCheckboxState(state.selection, leafRows);
   const filteredCols = useMemo2(() => new Set(Object.keys(state.filterModel)), [state.filterModel]);
+  const groupedSet = useMemo2(() => new Set(state.rowGroupCols), [state.rowGroupCols]);
   const emit = useCallback((next) => {
     api.setSelection(next);
     if (onSelectionChange) {
@@ -1017,7 +1264,12 @@ function DataGrid(props) {
     if (!e.shiftKey) lastRangeFrom.current = node.id;
     emit(next);
   }, [state.selection, selectionMode, orderedIds, emit]);
-  const onToggleAll = useCallback(() => emit(headerCheckbox === "all" ? clearSelection() : selectAll(dataRows)), [emit, headerCheckbox, dataRows]);
+  const onToggleAll = useCallback(() => emit(headerCheckbox === "all" ? clearSelection() : selectAll(leafRows)), [emit, headerCheckbox, leafRows]);
+  const onToggleGroup = useCallback((groupId) => api.toggleGroup(groupId), [api]);
+  const onToggleRowGroup = useCallback((colId) => {
+    if (groupedSet.has(colId)) api.removeRowGroupCol(colId);
+    else api.addRowGroupCol(colId);
+  }, [api, groupedSet]);
   const onSort = useCallback((colId, additive) => api.toggleSort(colId, additive), [api]);
   const onResize = useCallback((colId, width) => api.resizeColumn(colId, width), [api]);
   const onReorder = useCallback((colId, targetColId) => {
@@ -1075,23 +1327,24 @@ function DataGrid(props) {
     else if (e.key === "End") move(last);
     else if (e.key === "PageDown") move(focusRow + pageStep);
     else if (e.key === "PageUp") move(focusRow - pageStep);
-    else if (e.key === " " && focusRow >= 0 && selectionMode !== "none") {
-      const node = dataRows[focusRow];
-      if (node) {
-        lastRangeFrom.current = node.id;
-        emit(toggleRowSelection(state.selection, node.id, selectionMode, { additive: true }));
+    else if ((e.key === " " || e.key === "Enter") && focusRow >= 0) {
+      const dr = dataRows[focusRow];
+      if (dr?.kind === "group") api.toggleGroup(dr.id);
+      else if (dr?.kind === "leaf" && selectionMode !== "none") {
+        lastRangeFrom.current = dr.node.id;
+        emit(toggleRowSelection(state.selection, dr.node.id, selectionMode, { additive: true }));
       }
       e.preventDefault();
     } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "a" && selectionMode === "multiple") {
-      emit(selectAll(dataRows));
+      emit(selectAll(leafRows));
       e.preventDefault();
     } else if (e.key === "Escape") {
       if (state.selection.size) emit(clearSelection());
     }
-  }, [dataRows, focusRow, viewportHeight, rowHeight, selectionMode, state.selection, emit, scrollRowIntoView]);
-  const focusedId = focusRow >= 0 && focusRow < dataRows.length ? dataRows[focusRow].id : null;
-  return /* @__PURE__ */ jsxs7("div", { className: `mim-dg${className ? ` ${className}` : ""}`, "data-density": density, style: { height, ...style }, children: [
-    toolbar && /* @__PURE__ */ jsx10(
+  }, [dataRows, leafRows, focusRow, viewportHeight, rowHeight, selectionMode, state.selection, emit, api, scrollRowIntoView]);
+  const focusedId = focusRow >= 0 && focusRow < dataRows.length ? dataRows[focusRow].kind === "group" ? dataRows[focusRow].id : dataRows[focusRow].node.id : null;
+  return /* @__PURE__ */ jsxs8("div", { className: `mim-dg${className ? ` ${className}` : ""}`, "data-density": density, style: { height, ...style }, children: [
+    toolbar && /* @__PURE__ */ jsx11(
       GridToolbar,
       {
         quickFilter: state.quickFilter,
@@ -1101,8 +1354,19 @@ function DataGrid(props) {
         onExport
       }
     ),
-    /* @__PURE__ */ jsxs7("div", { className: "mim-dg__viewport pg-scrollbar", ref: viewportRef, onScroll, onKeyDown, tabIndex: 0, role: "grid", "aria-rowcount": state.totalRows, children: [
-      /* @__PURE__ */ jsx10(
+    rowGroupPanel && /* @__PURE__ */ jsx11(
+      GroupPanel,
+      {
+        columns: flat,
+        rowGroupCols: state.rowGroupCols,
+        onAdd: (colId) => api.addRowGroupCol(colId),
+        onRemove: (colId) => api.removeRowGroupCol(colId),
+        onExpandAll: () => api.expandAllGroups(),
+        onCollapseAll: () => api.collapseAllGroups()
+      }
+    ),
+    /* @__PURE__ */ jsxs8("div", { className: "mim-dg__viewport pg-scrollbar", ref: viewportRef, onScroll, onKeyDown, tabIndex: 0, role: "grid", "aria-rowcount": state.totalRows, children: [
+      /* @__PURE__ */ jsx11(
         GridHeader,
         {
           columns: flat,
@@ -1121,7 +1385,7 @@ function DataGrid(props) {
           onMenu
         }
       ),
-      /* @__PURE__ */ jsx10(
+      /* @__PURE__ */ jsx11(
         GridBody,
         {
           rows: visible,
@@ -1135,12 +1399,13 @@ function DataGrid(props) {
           focusedId,
           pinStyles,
           checkPinStyle,
-          onRowSelect
+          onRowSelect,
+          onToggleGroup
         }
       )
     ] }),
-    /* @__PURE__ */ jsx10(GridFooter, { page: state.page, pageSize: state.pageSize, totalRows: state.totalRows, selectedCount: state.selection.size, pagination, onPage }),
-    menu && /* @__PURE__ */ jsx10(
+    /* @__PURE__ */ jsx11(GridFooter, { page: state.page, pageSize: state.pageSize, totalRows: state.totalRows, selectedCount: state.selection.size, pagination, onPage }),
+    menu && /* @__PURE__ */ jsx11(
       HeaderMenu,
       {
         column: menu.col,
@@ -1151,10 +1416,12 @@ function DataGrid(props) {
         onPin: (colId, side) => api.pinColumn(colId, side),
         onHide: (colId) => api.hideColumn(colId, true),
         onAutosize: (colId) => api.autosizeColumn(colId),
-        onFilter: onFilterOpen
+        onFilter: onFilterOpen,
+        onToggleRowGroup,
+        isGrouped: groupedSet.has(menu.col.colId)
       }
     ),
-    filterPop && /* @__PURE__ */ jsx10(
+    filterPop && /* @__PURE__ */ jsx11(
       FilterPopover,
       {
         column: filterPop.col,
@@ -1173,14 +1440,17 @@ export {
   GridToolbar,
   applyFlex,
   autosizeColumn,
+  buildDisplayRows,
   cellText,
   clearSelection,
   colWindow,
+  collectGroupIds,
   columnLayout,
   createGridModel,
   cycleSort,
   filterRows,
   formatCellValue,
+  formatValue,
   getCellRenderer,
   getCellValue,
   headerCheckboxState,

@@ -52,7 +52,11 @@ export const items = [
           "kind": "switch",
           "key": "affix",
           "label": "affix (scroll spy)",
-          "labelIcon": "mdi:eye-outline"
+          "labelIcon": "mdi:eye-outline",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         },
         {
           "kind": "number",
@@ -204,7 +208,11 @@ export const items = [
           "kind": "switch",
           "key": "showLabels",
           "label": "showLabels",
-          "labelIcon": "mdi:label-outline"
+          "labelIcon": "mdi:label-outline",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -335,7 +343,11 @@ export const items = [
           "kind": "switch",
           "key": "defaultOpen",
           "label": "defaultOpen",
-          "labelIcon": "mdi:door-open"
+          "labelIcon": "mdi:door-open",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -714,7 +726,11 @@ export const items = [
           "kind": "switch",
           "key": "clickable",
           "label": "clickable",
-          "labelIcon": "mdi:gesture-tap"
+          "labelIcon": "mdi:gesture-tap",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {

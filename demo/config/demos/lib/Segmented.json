@@ -5,9 +5,29 @@
   "titleIcon": "mdi:view-week-outline",
   "status": "approved",
   "intro": "Selector segmentado estilo píldora. <code>bindSegmented</code>. Ver <a href=\"https://ant.design/components/segmented\" target=\"_blank\" rel=\"noreferrer\">Ant Segmented</a>.",
-  "component": { "name": "Segmented", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-segmented" },
-  "state": { "block": false },
-  "fields": [{ "kind": "switch", "key": "block", "label": "block", "labelIcon": "mdi:arrow-expand-horizontal" }],
-  "code": { "strategy": "disp-segmented" }
+  "component": {
+    "name": "Segmented",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-segmented"
+  },
+  "state": {
+    "block": false
+  },
+  "fields": [
+    {
+      "kind": "switch",
+      "key": "block",
+      "label": "block",
+      "labelIcon": "mdi:arrow-expand-horizontal",
+      "iconOn": "mdi:rectangle",
+      "iconOff": "mdi:rectangle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "code": {
+    "strategy": "disp-segmented"
+  }
 }

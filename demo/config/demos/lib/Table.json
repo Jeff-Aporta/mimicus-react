@@ -5,12 +5,44 @@
   "titleIcon": "mdi:table",
   "status": "approved",
   "intro": "Tabla declarativa con ordenamiento opcional. Compatible con <a href=\"https://ant.design/components/table\" target=\"_blank\" rel=\"noreferrer\">Ant Table</a> y <a href=\"https://mui.com/material-ui/react-table/\" target=\"_blank\" rel=\"noreferrer\">MUI Table</a>.",
-  "component": { "name": "Table", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-table" },
-  "state": { "bordered": false, "size": "medium", "sortable": true },
+  "component": {
+    "name": "Table",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-table"
+  },
+  "state": {
+    "bordered": false,
+    "sortable": true
+  },
   "fields": [
-    { "kind": "select-enum", "key": "size", "label": "size", "labelIcon": "mdi:format-line-spacing", "attrType": "str", "enumValue": { "Small": "small", "Medium": "medium" } },
-    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "bordered", "label": "bordered" }, { "key": "sortable", "label": "sortable" }] }
+    {
+      "kind": "switch-group",
+      "key": "opts",
+      "label": "Opciones",
+      "labelIcon": "mdi:tune",
+      "switches": [
+        {
+          "key": "bordered",
+          "label": "bordered",
+          "iconOn": "mdi:border-all",
+          "iconOff": "mdi:border-all-variant",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "sortable",
+          "label": "sortable",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        }
+      ]
+    }
   ],
-  "code": { "strategy": "disp-table" }
+  "code": {
+    "strategy": "disp-table"
+  }
 }

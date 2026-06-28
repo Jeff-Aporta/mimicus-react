@@ -1,15 +1,36 @@
 {
-   "id": "Accordion",
-   "category": "Containers",
-   "label": "Accordion",
-   "titleIcon": "mdi:unfold-more-horizontal",
-   "status": "approved",
-   "intro": "Alias de <code>Collapse</code> con modo acordeón. Controlador <code>data-mimicus-display=\"collapse\"</code>.",
-   "component": { "name": "Accordion", "path": "src/components/display/Display.jsx" },
-   "preview": { "template": "disp-collapse" },
-   "state": { "accordion": true },
-   "fields": [
-      { "kind": "switch", "key": "accordion", "label": "accordion", "labelIcon": "mdi:unfold-more-double" }
-   ],
-   "code": { "strategy": "disp-collapse", "tagOpts": { "multiline": true } }
+  "id": "Accordion",
+  "category": "Containers",
+  "label": "Accordion",
+  "titleIcon": "mdi:unfold-more-horizontal",
+  "status": "approved",
+  "intro": "Alias de <code>Collapse</code> con modo acordeón. Controlador <code>data-mimicus-display=\"collapse\"</code>.",
+  "component": {
+    "name": "Accordion",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-collapse"
+  },
+  "state": {
+    "accordion": true
+  },
+  "fields": [
+    {
+      "kind": "switch",
+      "key": "accordion",
+      "label": "accordion",
+      "labelIcon": "mdi:unfold-more-double",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "code": {
+    "strategy": "disp-collapse",
+    "tagOpts": {
+      "multiline": true
+    }
+  }
 }

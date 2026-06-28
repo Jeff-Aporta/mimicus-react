@@ -54,7 +54,7 @@ function CatalogCategories({ node, ctx }) {
           return (
             <Button key={it.slug} variant={selected ? "soft" : "text"} shape="rect" color={color} onClick={() => ctx.onDemo?.(cat, it.slug)} className="pg-panel-demo-link" title={it.displayLabel} style={{ justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" }}>
               <Icon icon={getDemoIcon(it.id, it)} />
-              <span className="sm-item-label"><span className="sm-item-text">{it.displayLabel}</span>{statusFor(it.id, it) && <ReviewStatusDot status={statusFor(it.id, it)} size="0.48rem" />}</span>
+              <span className="sm-item-label"><span className="sm-item-text">{it.displayLabel}</span></span>
             </Button>
           );
         })}

@@ -5,14 +5,11 @@
  * repo: Jeff-Aporta/mimicus-react · css/components/display/Avatar.css
  * Representación gráfica de usuario, con tamaños, formas y agrupación.
  */
-.mimicus-avatar { display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 50%; background: color-mix(in srgb, var(--mimicus-color) 12%, transparent); color: var(--mimicus-text); font-size: 0.75rem; font-weight: 600; }
-.mimicus-avatar--small { width: 1.5rem; height: 1.5rem; font-size: 0.65rem; }
-.mimicus-avatar--large { width: 2.75rem; height: 2.75rem; font-size: 0.9rem; }
-.mimicus-avatar--square { border-radius: 0.35rem; }
-.mimicus-avatar--rounded { border-radius: 0.65rem; }
+.mimicus-avatar { display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; width: 2em; height: 2em; border-radius: 50%; background: color-mix(in srgb, var(--mimicus-color) 12%, transparent); color: var(--mimicus-text); font-size: 1em; font-weight: 600; }
+.mimicus-avatar--square { border-radius: 0.35em; }
+.mimicus-avatar--rounded { border-radius: 0.65em; }
 .mimicus-avatar__img { width: 100%; height: 100%; object-fit: cover; }
 .mimicus-avatar-group { display: inline-flex; align-items: center; }
-.mimicus-avatar-group .mimicus-avatar { margin-inline-start: -0.45rem; border: 2px solid var(--mimicus-surface); }
+.mimicus-avatar-group .mimicus-avatar { margin-inline-start: -0.45em; border: 2px solid var(--mimicus-surface); }
 .mimicus-avatar-group .mimicus-avatar:first-child { margin-inline-start: 0; }
-.mimicus-avatar-group--small .mimicus-avatar { margin-inline-start: -0.3rem; }
 .mimicus-avatar-group__surplus { background: color-mix(in srgb, var(--mimicus-color) 18%, transparent); }

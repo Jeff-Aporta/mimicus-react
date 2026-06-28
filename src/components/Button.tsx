@@ -11,7 +11,6 @@ import { normalizeVariant, isGlassVariant } from "../theme/constants.ts";
 import { mergeSurfaceStyle } from "../lib/surfaceColor.ts";
 
 type ButtonShape = "round" | "rect" | "pill" | "circle";
-type ButtonSize = "small" | "medium" | "large";
 type ButtonFlags = { danger?: boolean; ghost?: boolean; dashed?: boolean; link?: boolean };
 
 export interface ButtonProps extends Omit<HTMLAttributes<HTMLElement>, "color" | "onClick"> {
@@ -20,7 +19,6 @@ export interface ButtonProps extends Omit<HTMLAttributes<HTMLElement>, "color" |
   variant?: string;
   color?: string;
   shape?: ButtonShape;
-  size?: ButtonSize;
   block?: boolean;
   danger?: boolean;
   ghost?: boolean;
@@ -59,7 +57,6 @@ export function Button({
   variant = "solid",
   color,
   shape = "round",
-  size = "medium",
   block = false,
   danger = false,
   ghost = false,
@@ -125,7 +122,6 @@ export function Button({
 
   const dataProps = {
     "data-shape": resolvedShape,
-    "data-size": size,
     "data-variant": normalizedVariant,
     "data-block": block ? "true" : undefined,
     "data-danger": danger ? "true" : undefined,
@@ -137,9 +133,39 @@ export function Button({
   };
 
   const iconNode = (icon || isLoading) && (isLoading ? <span className="mimicus-text-icon mimicus-btn-spinner" aria-hidden>…</span> : icon);
+  // Si pasaron children que incluyen un <Icon> (iconify-icon) suelto, lo separamos del texto
+  // para que reciba `gap` y no quede pegado al label (button > iconify-icon { gap }).
+  const extractChildIcon = (nodes: ReactNode): { iconEl: ReactNode; rest: ReactNode } => {
+    let iconEl: ReactNode = null;
+    let rest: ReactNode = null;
+    const arr = Array.isArray(nodes) ? nodes : nodes != null ? [nodes] : [];
+    for (const n of arr) {
+      if (
+        iconEl == null &&
+        n &&
+        typeof n === "object" &&
+        "type" in (n as { type?: unknown }) &&
+        ((n as { type?: unknown }).type === "iconify-icon" ||
+          (n as { type?: { displayName?: string } }).type?.displayName === "Icon")
+      ) {
+        iconEl = n;
+        continue;
+      }
+      rest = (rest as ReactNode[] | null)?.length
+        ? [...(rest as ReactNode[]), n]
+        : n;
+    }
+    return { iconEl, rest };
+  };
+
+  const inlineIcon = icon == null && children != null && children !== "" ? extractChildIcon(children).iconEl : null;
+  const inlineRest = inlineIcon != null ? extractChildIcon(children).rest : null;
+  const finalIcon = iconNode ?? inlineIcon;
+  const finalChildren = inlineIcon != null ? inlineRest : children;
+
   const content = iconPlacement === "end"
-    ? <>{children != null && children !== "" && <span className="button-content">{children}</span>}{iconNode}</>
-    : <>{iconNode}{children != null && children !== "" && <span className="button-content">{children}</span>}</>;
+    ? <>{finalChildren != null && finalChildren !== "" && <span className="button-content">{finalChildren}</span>}{finalIcon}</>
+    : <>{finalIcon}{finalChildren != null && finalChildren !== "" && <span className="button-content">{finalChildren}</span>}</>;
 
   if (href && !wrap) {
     const linkRel = target === "_blank" && !rel ? "noopener noreferrer" : rel;

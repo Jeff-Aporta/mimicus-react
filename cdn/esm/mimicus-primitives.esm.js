@@ -1,8 +1,16 @@
 // src/components/Icon.tsx
+import { useEffect, useRef } from "react";
 import { jsx } from "react/jsx-runtime";
 function Icon({ icon, className, style }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (className) el.setAttribute("class", className);
+    else el.removeAttribute("class");
+  }, [className]);
   if (!icon) return null;
-  return /* @__PURE__ */ jsx("iconify-icon", { icon, className, style: style && typeof style === "object" ? style : void 0 });
+  return /* @__PURE__ */ jsx("iconify-icon", { ref, icon, style: style && typeof style === "object" ? style : void 0 });
 }
 
 // src/components/Button.tsx
@@ -10,10 +18,8 @@ import { useState } from "react";
 
 // src/theme/constants.ts
 var LOOKNFEEL_OPTIONS = [
-  { id: "contapyme", label: "ContaPyme" },
-  { id: "neon-mono", label: "Neon mono" },
-  { id: "neon-dual", label: "Neon dual" },
-  { id: "neon-triad", label: "Neon tr\xEDada" }
+  { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
+  { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
 ];
 var LOOKNFEEL_IDS = LOOKNFEEL_OPTIONS.map((o) => o.id);
 function isNgVariant(value) {
@@ -113,7 +119,6 @@ function Button({
   variant = "solid",
   color,
   shape = "round",
-  size = "medium",
   block = false,
   danger = false,
   ghost = false,
@@ -175,7 +180,6 @@ function Button({
   ].filter(Boolean).join(" ");
   const dataProps = {
     "data-shape": resolvedShape,
-    "data-size": size,
     "data-variant": normalizedVariant,
     "data-block": block ? "true" : void 0,
     "data-danger": danger ? "true" : void 0,
@@ -186,12 +190,29 @@ function Button({
     style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx2("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
+  const extractChildIcon = (nodes) => {
+    let iconEl = null;
+    let rest2 = null;
+    const arr = Array.isArray(nodes) ? nodes : nodes != null ? [nodes] : [];
+    for (const n of arr) {
+      if (iconEl == null && n && typeof n === "object" && "type" in n && (n.type === "iconify-icon" || n.type?.displayName === "Icon")) {
+        iconEl = n;
+        continue;
+      }
+      rest2 = rest2?.length ? [...rest2, n] : n;
+    }
+    return { iconEl, rest: rest2 };
+  };
+  const inlineIcon = icon == null && children != null && children !== "" ? extractChildIcon(children).iconEl : null;
+  const inlineRest = inlineIcon != null ? extractChildIcon(children).rest : null;
+  const finalIcon = iconNode ?? inlineIcon;
+  const finalChildren = inlineIcon != null ? inlineRest : children;
   const content = iconPlacement === "end" ? /* @__PURE__ */ jsxs(Fragment, { children: [
-    children != null && children !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children }),
-    iconNode
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children: finalChildren }),
+    finalIcon
   ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-    iconNode,
-    children != null && children !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children })
+    finalIcon,
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children: finalChildren })
   ] });
   if (href && !wrap) {
     const linkRel = target === "_blank" && !rel ? "noopener noreferrer" : rel;
@@ -204,7 +225,7 @@ function Button({
 }
 
 // src/components/FloatButton.tsx
-import { Children, useEffect, useState as useState2 } from "react";
+import { Children, useEffect as useEffect2, useState as useState2 } from "react";
 import { Fragment as Fragment2, jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
 function FloatButtonBase({
   icon,
@@ -212,7 +233,6 @@ function FloatButtonBase({
   children,
   type = "default",
   shape = "circle",
-  size = "large",
   href,
   target,
   tooltip,
@@ -237,7 +257,6 @@ function FloatButtonBase({
   const dataProps = {
     "data-type": type,
     "data-shape": shape,
-    "data-size": size,
     ...surface,
     className: cls,
     style: surface.style,
@@ -308,7 +327,7 @@ function FloatButtonBackTop({
   style
 }) {
   const [visible, setVisible] = useState2(false);
-  useEffect(() => {
+  useEffect2(() => {
     const el = target?.() ?? (typeof window !== "undefined" ? window : null);
     if (!el) return void 0;
     const node = el;
@@ -346,15 +365,13 @@ var FloatButton = Object.assign(FloatButtonRoot, {
 function Fab(props) {
   return /* @__PURE__ */ jsx3(FloatButton, { type: props.color === "secondary" ? "default" : "primary", ...props });
 }
-function IconButton({ size = "medium", color, variant = "text", className, style, children, icon, ...rest }) {
-  const mappedSize = size === "small" ? "small" : size === "large" ? "large" : "medium";
+function IconButton({ color, variant = "text", className, style, children, icon, ...rest }) {
   return /* @__PURE__ */ jsx3(
     Button,
     {
       ...rest,
       variant,
       color,
-      size: mappedSize,
       shape: "circle",
       icon: icon ?? children,
       className: ["mimicus-icon-btn", className].filter(Boolean).join(" "),
@@ -486,7 +503,7 @@ function Card({
 }
 
 // src/components/CodeBlock.tsx
-import { useEffect as useEffect2, useRef, useState as useState3 } from "react";
+import { useEffect as useEffect3, useRef as useRef2, useState as useState3 } from "react";
 
 // src/codemirror/constants.ts
 var CODEMIRROR_VERSION = "5.65.18";
@@ -715,16 +732,16 @@ function CodeBlock({
   copyTitle = "Copiar",
   placeholder = ""
 }) {
-  const hostRef = useRef(null);
-  const cmRef = useRef(null);
-  const onChangeRef = useRef(onChange);
-  const syncingRef = useRef(false);
+  const hostRef = useRef2(null);
+  const cmRef = useRef2(null);
+  const onChangeRef = useRef2(onChange);
+  const syncingRef = useRef2(false);
   const [cmReady, setCmReady] = useState3(() => typeof window !== "undefined" && !!window.CodeMirror);
   const [copied, setCopied] = useState3(false);
-  useEffect2(() => {
+  useEffect3(() => {
     onChangeRef.current = onChange;
   }, [onChange]);
-  useEffect2(() => {
+  useEffect3(() => {
     if (cmReady) return void 0;
     let cancelled = false;
     ensureCodeMirrorLoaded({ sql: needsSqlMode(mode), css: needsCssMode(mode) }).then(() => {
@@ -734,7 +751,7 @@ function CodeBlock({
       cancelled = true;
     };
   }, [cmReady, json, mode, lang]);
-  useEffect2(() => {
+  useEffect3(() => {
     const host = hostRef.current;
     if (!host || !cmReady || typeof window.CodeMirror === "undefined") return void 0;
     const cm = mountCodeMirror(host, {
@@ -766,7 +783,7 @@ function CodeBlock({
       cmRef.current = null;
     };
   }, [cmReady, json, mode, lang, readOnly, lineWrapping, lineNumbers, maxHeight, minHeight]);
-  useEffect2(() => {
+  useEffect3(() => {
     const cm = cmRef.current;
     if (!cm) return;
     const cur = cm.getValue();
@@ -781,7 +798,7 @@ function CodeBlock({
     syncingRef.current = false;
     if (maxHeight) syncCmBoundedSize(cm, maxHeight, hostRef.current, minHeight);
   }, [value, readOnly, maxHeight, minHeight]);
-  useEffect2(() => {
+  useEffect3(() => {
     if (!cmReady) return void 0;
     const apply = () => {
       const cm = cmRef.current;
@@ -813,12 +830,12 @@ function CodeBlock({
   }
   if (!cmReady) {
     return /* @__PURE__ */ jsxs3("div", { className: panelClass, style, children: [
-      /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { size: "small", "aria-label": copyTitle, onClick: () => copyEditorText(value), title: copyTitle, children: "\u29C9" }) }),
+      /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { "aria-label": copyTitle, onClick: () => copyEditorText(value), title: copyTitle, children: "\u29C9" }) }),
       /* @__PURE__ */ jsx5("pre", { className: "mimicus-cm-fallback", style: hostStyle, children: value || placeholder })
     ] });
   }
   return /* @__PURE__ */ jsxs3("div", { className: panelClass, style, children: [
-    /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { size: "small", className: "mimicus-cm-panel__copy", "aria-label": copyTitle, title: copied ? "Copiado" : copyTitle, onClick: handleCopy, children: copied ? "\u2713" : "\u29C9" }) }),
+    /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-panel__toolbar", children: /* @__PURE__ */ jsx5(IconButton, { className: "mimicus-cm-panel__copy", "aria-label": copyTitle, title: copied ? "Copiado" : copyTitle, onClick: handleCopy, children: copied ? "\u2713" : "\u29C9" }) }),
     /* @__PURE__ */ jsx5("div", { className: "mimicus-cm-host", ref: hostRef, style: hostStyle })
   ] });
 }

@@ -1,19 +1,76 @@
 {
-   "id": "Card",
-   "category": "Containers",
-   "label": "Card",
-   "titleIcon": "mdi:credit-card-outline",
-   "status": "approved",
-   "intro": "Contenedor para agrupar contenido con volumen y sombra: sirve para jerarquizar la pantalla y dar contexto visual sin depender solo del texto. Abajo puedes explorar cómo cambian la forma de la superficie, la sensación de relieve y el modo en que la tarjeta ocupa el espacio (en bloque o en línea con el texto).",
-   "component": { "name": "Card", "path": "src/lib/containers/Card.svelte" },
-   "preview": { "template": "card" },
-   "shell": { "relieve": 65, "configBlockCount": 3 },
-   "state": { "variant": "", "inline": false },
-   "details": { "relieve": 65, "relieveDirIndex": 0, "elevation": 0 },
-   "fields": [
-      { "kind": "palette", "key": "variant", "label": "variant", "labelIcon": "mdi:shape-outline", "attrType": "str", "attrDefault": "solid", "attrEmit": "emptyToUndefined", "options": { "Ninguno": "", "solid": "solid", "flat": "flat", "glass": "glass" }, "accent": "primary", "iconMap": { "": "mdi:card-bulleted", "solid": "mdi:card-bulleted", "flat": "mdi:card-outline", "glass": "mdi:shimmer" } },
-      { "kind": "switch", "key": "inline", "label": "inline", "labelIcon": "mdi:tune" }
-   ],
-   "detailFields": [{ "kind": "range", "key": "relieve", "label": "relieve", "labelIcon": "mdi:gradient-horizontal", "min": 0, "max": 100, "step": 1 }],
-   "code": { "strategy": "preview" }
+  "id": "Card",
+  "category": "Containers",
+  "label": "Card",
+  "titleIcon": "mdi:credit-card-outline",
+  "status": "approved",
+  "intro": "Contenedor para agrupar contenido con volumen y sombra: sirve para jerarquizar la pantalla y dar contexto visual sin depender solo del texto. Abajo puedes explorar cómo cambian la forma de la superficie, la sensación de relieve y el modo en que la tarjeta ocupa el espacio (en bloque o en línea con el texto).",
+  "component": {
+    "name": "Card",
+    "path": "src/lib/containers/Card.svelte"
+  },
+  "preview": {
+    "template": "card"
+  },
+  "shell": {
+    "relieve": 65,
+    "configBlockCount": 3
+  },
+  "state": {
+    "variant": "",
+    "inline": false
+  },
+  "details": {
+    "relieve": 65,
+    "relieveDirIndex": 0,
+    "elevation": 0
+  },
+  "fields": [
+    {
+      "kind": "palette",
+      "key": "variant",
+      "label": "variant",
+      "labelIcon": "mdi:shape-outline",
+      "attrType": "str",
+      "attrDefault": "solid",
+      "attrEmit": "emptyToUndefined",
+      "options": {
+        "Ninguno": "",
+        "solid": "solid",
+        "flat": "flat",
+        "glass": "glass"
+      },
+      "accent": "primary",
+      "iconMap": {
+        "": "mdi:card-bulleted",
+        "solid": "mdi:card-bulleted",
+        "flat": "mdi:card-outline",
+        "glass": "mdi:shimmer"
+      }
+    },
+    {
+      "kind": "switch",
+      "key": "inline",
+      "label": "inline",
+      "labelIcon": "mdi:tune",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "detailFields": [
+    {
+      "kind": "range",
+      "key": "relieve",
+      "label": "relieve",
+      "labelIcon": "mdi:gradient-horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 1
+    }
+  ],
+  "code": {
+    "strategy": "preview"
+  }
 }

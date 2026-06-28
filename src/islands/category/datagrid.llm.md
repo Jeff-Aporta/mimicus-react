@@ -27,7 +27,10 @@ import "@jeff-aporta/mimicus-react/datagrid.css";
 ```
 
 ## Características v1
-Virtualización de filas · orden multi-columna (shift en encabezado) · filtros por columna (texto/número/fecha/conjunto) + filtro rápido · selección (checkbox/múltiple/rango con shift) · resize/reorder/fijar (izq-der)/ocultar/autoajustar columnas · paginación · render/formato de celda (registry extensible) · densidad (compacta/normal/cómoda) · exportación CSV · navegación por teclado · theming Mimicus (4 ejes).
+Virtualización de filas · orden multi-columna (shift en encabezado) · filtros por columna (texto/número/fecha/conjunto) + filtro rápido · selección (checkbox/múltiple/rango con shift) · resize/reorder/fijar (izq-der)/ocultar/autoajustar columnas · **agrupación de filas** arrastrando columnas al panel superior (multinivel, conteo por grupo, agregación `aggFunc`: sum/avg/min/max/count/first/last, expandir/colapsar) · paginación · render/formato de celda (registry extensible) · densidad (compacta/normal/cómoda) · exportación CSV · navegación por teclado · theming Mimicus (4 ejes).
+
+### Agrupación
+Arrastra el encabezado de una columna al panel superior (o usa el menú de columna → «Agrupar por esta columna»). El panel muestra chips ordenados (anidamiento) con botón de quitar y acciones expandir/colapsar todo. Las columnas con `aggFunc` muestran su agregado en cada fila de grupo. API: `addRowGroupCol`/`removeRowGroupCol`/`setRowGroupCols`/`toggleGroup`/`expandAllGroups`/`collapseAllGroups`. Props: `rowGroupCols`, `rowGroupPanel`.
 
 ## Tokens / estilo
 Usa `--mimicus-bg-*`, `--mimicus-color`, `--mimicus-b-color`, `--mimicus-primary`, `--mimicus-on-primary` y la clase `.pg-scrollbar`. CSS con nesting nativo en `css/components/datagrid/datagrid.css`.

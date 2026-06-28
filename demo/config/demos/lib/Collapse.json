@@ -5,9 +5,32 @@
   "titleIcon": "mdi:unfold-more-horizontal",
   "status": "approved",
   "intro": "Paneles colapsables con modo acordeón. <code>bindCollapse</code> en JS puro. Ver <a href=\"https://ant.design/components/collapse\" target=\"_blank\" rel=\"noreferrer\">Ant Collapse</a>.",
-  "component": { "name": "Collapse", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-collapse" },
-  "state": { "accordion": false },
-  "fields": [{ "kind": "switch", "key": "accordion", "label": "accordion", "labelIcon": "mdi:unfold-more-double" }],
-  "code": { "strategy": "disp-collapse", "tagOpts": { "multiline": true } }
+  "component": {
+    "name": "Collapse",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-collapse"
+  },
+  "state": {
+    "accordion": false
+  },
+  "fields": [
+    {
+      "kind": "switch",
+      "key": "accordion",
+      "label": "accordion",
+      "labelIcon": "mdi:unfold-more-double",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "code": {
+    "strategy": "disp-collapse",
+    "tagOpts": {
+      "multiline": true
+    }
+  }
 }

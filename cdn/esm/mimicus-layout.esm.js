@@ -125,10 +125,8 @@ import { useState as useState2 } from "react";
 
 // src/theme/constants.ts
 var LOOKNFEEL_OPTIONS = [
-  { id: "contapyme", label: "ContaPyme" },
-  { id: "neon-mono", label: "Neon mono" },
-  { id: "neon-dual", label: "Neon dual" },
-  { id: "neon-triad", label: "Neon tr\xEDada" }
+  { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
+  { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
 ];
 var LOOKNFEEL_IDS = LOOKNFEEL_OPTIONS.map((o) => o.id);
 function isNgVariant(value) {
@@ -182,7 +180,6 @@ function Button({
   variant = "solid",
   color,
   shape = "round",
-  size = "medium",
   block = false,
   danger = false,
   ghost = false,
@@ -244,7 +241,6 @@ function Button({
   ].filter(Boolean).join(" ");
   const dataProps = {
     "data-shape": resolvedShape,
-    "data-size": size,
     "data-variant": normalizedVariant,
     "data-block": block ? "true" : void 0,
     "data-danger": danger ? "true" : void 0,
@@ -255,12 +251,29 @@ function Button({
     style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx2("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
+  const extractChildIcon = (nodes) => {
+    let iconEl = null;
+    let rest2 = null;
+    const arr = Array.isArray(nodes) ? nodes : nodes != null ? [nodes] : [];
+    for (const n of arr) {
+      if (iconEl == null && n && typeof n === "object" && "type" in n && (n.type === "iconify-icon" || n.type?.displayName === "Icon")) {
+        iconEl = n;
+        continue;
+      }
+      rest2 = rest2?.length ? [...rest2, n] : n;
+    }
+    return { iconEl, rest: rest2 };
+  };
+  const inlineIcon = icon == null && children != null && children !== "" ? extractChildIcon(children).iconEl : null;
+  const inlineRest = inlineIcon != null ? extractChildIcon(children).rest : null;
+  const finalIcon = iconNode ?? inlineIcon;
+  const finalChildren = inlineIcon != null ? inlineRest : children;
   const content = iconPlacement === "end" ? /* @__PURE__ */ jsxs(Fragment, { children: [
-    children != null && children !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children }),
-    iconNode
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children: finalChildren }),
+    finalIcon
   ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-    iconNode,
-    children != null && children !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children })
+    finalIcon,
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx2("span", { className: "button-content", children: finalChildren })
   ] });
   if (href && !wrap) {
     const linkRel = target === "_blank" && !rel ? "noopener noreferrer" : rel;
@@ -498,7 +511,7 @@ function buildLerpw(clientWidth = 0) {
   };
 }
 function getSlotResume(sizew, clientWidth = 0) {
-  return { sizew, boolszw: getSizeFlags(sizew), lerpw: buildLerpw(clientWidth) };
+  return { sizew, boolszw: getSizeFlags(sizew), lerpw: buildLerpw(clientWidth), width: clientWidth };
 }
 var RGX_OVERFLOW_SCROLL = /\boverflow(?:-x|-y)?\s*:\s*(auto|scroll)\b/i;
 function dataDebug(rest, segment) {
@@ -575,16 +588,18 @@ function useLayoutContainer(sizewProp) {
     setClientWidth(el.clientWidth);
     return () => ro.disconnect();
   }, []);
-  return { ref, sizew, slot };
+  const bpIndex = ["xs", "sm", "md", "lg", "xl"].indexOf(sizew);
+  const vars = { "--mlg-w": `${Math.round(clientWidth)}px`, "--mlg-bp": String(bpIndex) };
+  return { ref, sizew, slot, clientWidth, dataSizew: sizew, vars };
 }
 
 // src/layout/grid/BlockLayout.tsx
 import { jsx as jsx6 } from "react/jsx-runtime";
 function BlockLayout({ inline = false, sizew: sizewProp, cscroll = false, className, style, children, ...rest }) {
-  const { ref, slot } = useLayoutContainer(sizewProp);
+  const { ref, slot, dataSizew, vars } = useLayoutContainer(sizewProp);
   const cls = [getScrollbarClass(cscroll, style), className].filter(Boolean).join(" ");
-  const mergedStyle = joinStyle(style, `display: ${inline ? "inline-block" : "block"}`);
-  return /* @__PURE__ */ jsx6(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx6("div", { ref, className: cls, style: mergedStyle, ...rest, ...dataDebug(rest, "block-layout"), children }) });
+  const mergedStyle = { ...joinStyle(style, `display: ${inline ? "inline-block" : "block"}`), ...vars };
+  return /* @__PURE__ */ jsx6(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx6("div", { ref, className: cls, style: mergedStyle, "data-sizew": dataSizew, ...rest, ...dataDebug(rest, "block-layout"), children }) });
 }
 
 // src/layout/grid/FlexLayout.tsx
@@ -603,18 +618,21 @@ function FlexLayout({
   children,
   ...rest
 }) {
-  const { ref, sizew, slot } = useLayoutContainer(sizewProp);
+  const { ref, sizew, slot, dataSizew, vars } = useLayoutContainer(sizewProp);
   const cls = [getScrollbarClass(cscroll, style), className].filter(Boolean).join(" ");
-  const mergedStyle = joinStyle(
-    `gap: ${resolveGap(gap, sizew)}`,
-    direction && `flex-direction: ${direction}`,
-    `flex-wrap: ${wrap ? "wrap" : "nowrap"}`,
-    justify && `justify-content: ${resolveJustify(justify)}`,
-    items && `align-items: ${items}`,
-    style,
-    `display: ${inline ? "inline-flex" : "flex"}`
-  );
-  return /* @__PURE__ */ jsx7(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx7("div", { ref, className: cls, style: mergedStyle, ...rest, ...dataDebug(rest, "flex-layout"), children }) });
+  const mergedStyle = {
+    ...joinStyle(
+      `gap: ${resolveGap(gap, sizew)}`,
+      direction && `flex-direction: ${direction}`,
+      `flex-wrap: ${wrap ? "wrap" : "nowrap"}`,
+      justify && `justify-content: ${resolveJustify(justify)}`,
+      items && `align-items: ${items}`,
+      style,
+      `display: ${inline ? "inline-flex" : "flex"}`
+    ),
+    ...vars
+  };
+  return /* @__PURE__ */ jsx7(LayoutSlotContext.Provider, { value: slot, children: /* @__PURE__ */ jsx7("div", { ref, className: cls, style: mergedStyle, "data-sizew": dataSizew, ...rest, ...dataDebug(rest, "flex-layout"), children }) });
 }
 
 // src/layout/grid/GridLayout.tsx
@@ -669,7 +687,6 @@ function Divider({
   dashed = false,
   titlePlacement = "center",
   plain = false,
-  size = "medium",
   orientationMargin,
   className,
   style,
@@ -680,8 +697,7 @@ function Divider({
   const normalizedVariant = normalizeVariant(variant, "solid");
   const lineVariant = normalizedVariant === "glow" ? "glow" : dashed ? "dashed" : normalizedVariant;
   const lineColor = resolveColor("border");
-  const marginBlock = size === "small" ? "0.5rem" : size === "large" ? "1.5rem" : "1rem";
-  const marginCss = axis === "horizontal" ? `${marginBlock} 0` : `0 0.5rem`;
+  const marginCss = axis === "horizontal" ? `1em 0` : `0 0.5em`;
   const edgeBasis = toCssLength(orientationMargin) ?? "5%";
   const hasText = children != null && children !== false && Children3.count(children) > 0;
   const cls = [
@@ -1290,7 +1306,6 @@ function Badge({
   max = 99,
   color = "primary",
   offset,
-  size = "medium",
   children,
   className,
   style,
@@ -1304,7 +1319,7 @@ function Badge({
     show && /* @__PURE__ */ jsx12(
       "sup",
       {
-        className: cx("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`, `mimicus-badge--${size}`),
+        className: cx("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`),
         style: offset ? { transform: `translate(${offset[0] ?? 0}px, ${offset[1] ?? 0}px)` } : void 0,
         children: !dot && label
       }
@@ -1347,8 +1362,8 @@ function DescriptionsItem({ label, span = 1, children, className, ...rest }) {
     /* @__PURE__ */ jsx12("dd", { className: "mimicus-descriptions__content", children })
   ] });
 }
-function Descriptions({ title, bordered = false, column = 3, size = "medium", children, className, style, ...rest }) {
-  return /* @__PURE__ */ jsxs8("div", { ...rest, className: cx("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", `mimicus-descriptions--${size}`, className), style, children: [
+function Descriptions({ title, bordered = false, column = 3, children, className, style, ...rest }) {
+  return /* @__PURE__ */ jsxs8("div", { ...rest, className: cx("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", className), style, children: [
     title && /* @__PURE__ */ jsx12("div", { className: "mimicus-descriptions__title", children: title }),
     /* @__PURE__ */ jsx12("dl", { className: "mimicus-descriptions__list", style: { "--mimicus-desc-cols": column }, children })
   ] });

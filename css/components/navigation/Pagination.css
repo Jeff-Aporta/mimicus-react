@@ -5,10 +5,9 @@
  * repo: Jeff-Aporta/mimicus-react · css/components/navigation/Pagination.css
  * Lista de botones de página con estado activo/deshabilitado, elipsis y variante small.
  */
-.mimicus-pagination__list { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; }
-.mimicus-pagination__btn { min-width: 2rem; height: 2rem; padding: 0 0.35rem; border: 1px solid var(--mimicus-border, rgba(0,0,0,.12)); border-radius: 0.35rem; background: var(--mimicus-surface, #fff); color: inherit; font: inherit; cursor: pointer; }
+.mimicus-pagination__list { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.25em; }
+.mimicus-pagination__btn { min-width: 2em; height: 2em; padding: 0 0.35em; border: 1px solid var(--mimicus-border, rgba(0,0,0,.12)); border-radius: 0.35rem; background: var(--mimicus-surface, #fff); color: inherit; font: inherit; cursor: pointer; }
 .mimicus-pagination__btn:hover:not(:disabled) { border-color: var(--mimicus-primary, #1677ff); color: var(--mimicus-primary, #1677ff); }
 .mimicus-pagination__btn.is-active { border-color: var(--mimicus-primary, #1677ff); background: var(--mimicus-primary, #1677ff); color: var(--mimicus-on-primary); }
 .mimicus-pagination__btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.mimicus-pagination__ellipsis { padding: 0 0.25rem; opacity: 0.55; user-select: none; }
-.mimicus-pagination--small .mimicus-pagination__btn { min-width: 1.65rem; height: 1.65rem; font-size: 0.8rem; }
+.mimicus-pagination__ellipsis { padding: 0 0.25em; opacity: 0.55; user-select: none; }

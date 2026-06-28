@@ -18,6 +18,7 @@
 	width: 100% !important;
 	max-width: 100%;
 	min-width: 0 !important;
+	min-height: 2.75rem;
 	padding-inline: 0.2rem !important;
 	border-radius: var(--mimicus-ui-radius, 0.5rem);
 
@@ -48,4 +49,21 @@
 	height: auto;
 	min-height: var(--pg-shell-header-h);
 	padding-block: 0.3rem;
+}
+
+/* Neon-glass — hit area 44px en rail colapsado y bordes lift (no glow agresivo en dark) */
+html[data-looknfeel="neon"] .pg-panel-rail__btn {
+	min-height: 2.75rem;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+html[data-luminance="dark"][data-looknfeel="neon"] .pg-panel-rail__btn:not(:disabled):hover {
+	transform: translateY(-1px);
+	box-shadow:
+		0 0 0 1px color-mix(in srgb, var(--neon-blue), transparent 60%),
+		0 0 14px color-mix(in srgb, var(--neon-cyan), transparent 78%);
+}
+
+html[data-luminance="light"][data-looknfeel="neon"] .pg-panel-rail__btn:not(:disabled):hover {
+	box-shadow: 0 2px 8px color-mix(in srgb, var(--mimicus-primary), transparent 88%);
 }

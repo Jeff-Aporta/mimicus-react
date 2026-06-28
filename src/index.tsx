@@ -19,7 +19,7 @@ import { Masonry } from "./layout/grid/Masonry.tsx";
 import { ImageList } from "./layout/grid/ImageList.tsx";
 import { Separator } from "./layout/dividers/Separator.tsx";
 import { GridResponsiveForm } from "./layout/grid/GridResponsiveForm.tsx";
-import { useLayoutSlot } from "./layout/app-layout/layoutSlotContext.tsx";
+import { useLayoutSlot, useLayoutSize } from "./layout/app-layout/layoutSlotContext.tsx";
 import { Icon } from "./components/Icon.tsx";
 import { Button } from "./components/Button.tsx";
 import { FloatButton, Fab, IconButton } from "./components/FloatButton.tsx";
@@ -147,6 +147,7 @@ export {
   Separator,
   GridResponsiveForm,
   useLayoutSlot,
+  useLayoutSize,
   Icon,
   Button,
   FloatButton,

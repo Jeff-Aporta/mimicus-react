@@ -7,7 +7,6 @@ import { Children, useEffect, useMemo, useRef } from "react";
 import type { CSSProperties, ElementType, ReactElement, ReactNode } from "react";
 import { useNavBinding } from "../../nav/useNavBinding.ts";
 
-type Size = "small" | "medium" | "large";
 interface BaseProps { className?: string; style?: CSSProperties; children?: ReactNode }
 
 function cx(...p: unknown[]): string { return p.filter(Boolean).join(" "); }
@@ -177,13 +176,13 @@ Tabs.Tab = TabItem;
 
 /* ── Pagination ── */
 export interface PaginationProps extends BaseProps {
-  count?: number; page?: number; defaultPage?: number; siblingCount?: number; boundaryCount?: number; size?: Size; simple?: boolean; [key: string]: unknown;
+  count?: number; page?: number; defaultPage?: number; siblingCount?: number; boundaryCount?: number; simple?: boolean; [key: string]: unknown;
 }
-export function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, boundaryCount = 1, size, simple, className, style, ...rest }: PaginationProps) {
+export function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, boundaryCount = 1, simple, className, style, ...rest }: PaginationProps) {
   const ref = useRef(null);
   useNavBinding(ref, "pagination", [count, page, defaultPage, siblingCount, boundaryCount]);
   return (
-    <nav ref={ref} {...rest} aria-label="pagination" className={cx("mimicus-pagination", size && `mimicus-pagination--${size}`, simple && "mimicus-pagination--simple", className)}
+    <nav ref={ref} {...rest} aria-label="pagination" className={cx("mimicus-pagination", simple && "mimicus-pagination--simple", className)}
       style={style} data-count={count} data-page={page} data-default-page={defaultPage}
       data-sibling-count={siblingCount} data-boundary-count={boundaryCount} data-mimicus-nav="pagination">
       <div className="mimicus-pagination__list" data-mimicus-pagination-list role="navigation" />
@@ -207,9 +206,9 @@ export function Step({ title, description, status, icon, className, ...rest }: S
 
 interface StepEntry { title?: ReactNode; description?: ReactNode; status?: string; icon?: ReactNode }
 export interface StepsProps extends BaseProps {
-  current?: number; direction?: "horizontal" | "vertical"; size?: Size; clickable?: boolean; items?: StepEntry[]; [key: string]: unknown;
+  current?: number; direction?: "horizontal" | "vertical"; clickable?: boolean; items?: StepEntry[]; [key: string]: unknown;
 }
-export function Steps({ current = 0, direction = "horizontal", size, clickable, items, className, style, children, ...rest }: StepsProps) {
+export function Steps({ current = 0, direction = "horizontal", clickable, items, className, style, children, ...rest }: StepsProps) {
   const ref = useRef(null);
   useNavBinding(ref, "steps", [current, direction, clickable]);
   const body = children ?? items?.map((it, i) => {
@@ -217,7 +216,7 @@ export function Steps({ current = 0, direction = "horizontal", size, clickable, 
     return <Step key={i} title={it.title} description={it.description} status={st} icon={it.icon} />;
   });
   return (
-    <div ref={ref} {...rest} className={cx("mimicus-steps", `mimicus-steps--${direction}`, size && `mimicus-steps--${size}`, className)}
+    <div ref={ref} {...rest} className={cx("mimicus-steps", `mimicus-steps--${direction}`, className)}
       style={style} data-current={current} data-direction={direction} data-clickable={clickable ? "true" : undefined} data-mimicus-nav="steps">
       {body}
     </div>

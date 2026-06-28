@@ -39,11 +39,19 @@ export const items = [
           "switches": [
             {
               "key": "showPasswordToggle",
-              "label": "showPasswordToggle"
+              "label": "showPasswordToggle",
+              "iconOn": "mdi:eye",
+              "iconOff": "mdi:eye-off",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "showRemember",
-              "label": "showRemember"
+              "label": "showRemember",
+              "iconOn": "mdi:bookmark",
+              "iconOff": "mdi:bookmark-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -112,13 +120,21 @@ export const items = [
           "kind": "switch",
           "key": "showCurrent",
           "label": "FPS actual",
-          "labelIcon": "mdi:speedometer-slow"
+          "labelIcon": "mdi:speedometer-slow",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         },
         {
           "kind": "switch",
           "key": "showLegend",
           "label": "Leyenda de umbrales",
-          "labelIcon": "mdi:format-list-bulleted"
+          "labelIcon": "mdi:format-list-bulleted",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {

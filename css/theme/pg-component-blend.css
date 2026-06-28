@@ -19,13 +19,68 @@
 	--cmp-chrome: var(--pg-panel-chrome);
 	--cmp-chrome-fg: var(--pg-panel-fg);
 	--cmp-accent: var(--surface-accent, var(--mimicus-primary));
-	--cmp-blend-bg: color-mix(in oklch, var(--cmp-chrome) 88%, var(--cmp-accent) 12%);
-	--cmp-blend-bg-hover: color-mix(in oklch, var(--cmp-chrome) 80%, var(--cmp-accent) 20%);
-	--cmp-blend-bg-active: color-mix(in oklch, var(--cmp-chrome) 58%, var(--cmp-accent) 42%);
-	--cmp-blend-border: color-mix(in oklch, var(--cmp-chrome) 62%, var(--cmp-accent) 38%);
-	--cmp-blend-fg: color-mix(in oklch, var(--cmp-chrome-fg) 64%, var(--cmp-accent) 36%);
-	--cmp-blend-fg-strong: color-mix(in oklch, var(--cmp-chrome-fg) 38%, var(--cmp-accent) 62%);
-	--cmp-blend-glow: color-mix(in oklch, var(--cmp-accent) 18%, transparent);
+	--cmp-blend-bg: color-mix(in oklab, var(--cmp-chrome) 88%, var(--cmp-accent) 12%);
+	--cmp-blend-bg-hover: color-mix(in oklab, var(--cmp-chrome) 80%, var(--cmp-accent) 20%);
+	--cmp-blend-bg-active: color-mix(in oklab, var(--cmp-chrome) 58%, var(--cmp-accent) 42%);
+	--cmp-blend-border: color-mix(in oklab, var(--cmp-chrome) 62%, var(--cmp-accent) 38%);
+	--cmp-blend-fg-soft: oklch(from var(--cmp-accent) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1);
+	/* Alpha-compositing real contra la card: accent al 15% / 30% / 100% sobre --cmp-chrome. */
+	--cmp-blend-softbg: color-mix(in oklab, var(--cmp-chrome) 85%, var(--cmp-accent) 15%);
+	--cmp-blend-softbg-strong: color-mix(in oklab, var(--cmp-chrome) 70%, var(--cmp-accent) 30%);
+	--cmp-blend-softbg-full: var(--cmp-accent);
+	--cmp-blend-fg: color-mix(in oklab, var(--cmp-chrome-fg) 64%, var(--cmp-accent) 36%);
+	--cmp-blend-fg-strong: color-mix(in oklab, var(--cmp-chrome-fg) 38%, var(--cmp-accent) 62%);
+	--cmp-blend-glow: color-mix(in oklab, var(--cmp-accent) 18%, var(--cmp-chrome) 82%);
+}
+
+/* Nuevos chips de PaletteGrid (button-block) — heredan los tokens del shell config */
+.demo-config-shell .pg-palette-chips .button-block,
+.demo-config-shell .pg-palette-grid .button-block {
+	--cmp-chrome: var(--pg-panel-chrome);
+	--cmp-chrome-fg: var(--pg-panel-fg);
+	--cmp-accent: var(--surface-accent, var(--mimicus-primary));
+	/* Alpha-compositing real: el color "transparente" se calcula mezclando el accent sobre la card. */
+	/* 15% accent sobre la card → mismo resultado que accent @ 15% alpha renderizado contra la card. */
+	--cmp-blend-softbg: color-mix(in oklab, var(--cmp-chrome) 85%, var(--cmp-accent) 15%);
+	--cmp-blend-softbg-hover: color-mix(in oklab, var(--cmp-chrome) 75%, var(--cmp-accent) 25%);
+	--cmp-blend-softbg-strong: color-mix(in oklab, var(--cmp-chrome) 60%, var(--cmp-accent) 40%);
+	--cmp-blend-softbg-full: var(--cmp-accent);
+}
+
+/* Idle (text) — accent al 15% sobre la card; bg2font del color ya compuesto */
+.demo-config-shell .pg-palette-chips .button-block[data-variant="text"],
+.demo-config-shell .pg-palette-grid .button-block[data-variant="text"] {
+	background: var(--cmp-blend-softbg) !important;
+	background-image: none !important;
+	color: oklch(from var(--cmp-blend-softbg) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
+	border-color: color-mix(in oklab, var(--cmp-accent) 25%, var(--cmp-chrome)) !important;
+	box-shadow: none !important;
+}
+
+/* Hover idle — accent al 25% sobre la card */
+.demo-config-shell .pg-palette-chips .button-block[data-variant="text"]:not(:disabled):hover,
+.demo-config-shell .pg-palette-grid .button-block[data-variant="text"]:not(:disabled):hover {
+	background: var(--cmp-blend-softbg-hover) !important;
+	color: oklch(from var(--cmp-blend-softbg-hover) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
+	border-color: color-mix(in oklab, var(--cmp-accent) 45%, var(--cmp-chrome)) !important;
+}
+
+/* Selected (soft) — 100% accent + bg2font del color sólido */
+.demo-config-shell .pg-palette-chips .button-block[data-variant="soft"],
+.demo-config-shell .pg-palette-grid .button-block[data-variant="soft"] {
+	background: var(--cmp-blend-softbg-full) !important;
+	background-image: none !important;
+	color: oklch(from var(--cmp-blend-softbg-full) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
+	border-color: var(--cmp-accent) !important;
+	font-weight: 600;
+	box-shadow: none !important;
+}
+
+/* Hover selected — pequeño lift manteniendo el 100% */
+.demo-config-shell .pg-palette-chips .button-block[data-variant="soft"]:not(:disabled):hover,
+.demo-config-shell .pg-palette-grid .button-block[data-variant="soft"]:not(:disabled):hover {
+	background: color-mix(in oklab, var(--cmp-accent), var(--cmp-chrome) 8%) !important;
+	color: oklch(from color-mix(in oklab, var(--cmp-accent), var(--cmp-chrome) 8%) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
 }
 
 /* Preview — tinte sutil del chrome × acento del demo (--pg-preview-accent en .preview-stage) */
@@ -36,9 +91,9 @@
 
 /* Config — chips: outlined (idle) · solid (seleccionado) */
 .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
-	background: transparent !important;
+	background: var(--cmp-blend-softbg) !important;
 	background-image: none !important;
-	color: var(--cmp-blend-fg) !important;
+	color: oklch(from var(--cmp-blend-softbg) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
 	border: 1px solid var(--cmp-blend-border) !important;
 	box-shadow: none !important;
 	text-shadow: none !important;
@@ -46,26 +101,72 @@
 
 .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"]:not(:disabled):hover,
 .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"]:not([aria-disabled="true"]):hover {
-	background: color-mix(in oklch, var(--cmp-chrome) 94%, var(--cmp-accent) 6%) !important;
-	color: var(--cmp-blend-fg-strong) !important;
+	background: var(--cmp-blend-softbg-strong) !important;
+	color: oklch(from var(--cmp-blend-softbg-strong) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
 	border-color: var(--cmp-blend-border) !important;
 }
 
 .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
 	background: var(--cmp-blend-bg-active) !important;
 	background-image: none !important;
-	color: var(--cmp-blend-fg-strong) !important;
+	color: oklch(from var(--cmp-blend-bg-active) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1) !important;
 	border: 1px solid var(--cmp-blend-border) !important;
 	font-weight: 600;
 }
 
-/* neon — glow en chips de config */
-html[data-looknfeel^="neon-"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
-	box-shadow: inset 0 0 10px var(--cmp-blend-glow) !important;
+/* neon — glow en chips de config (outlined / solid) */
+html[data-looknfeel^="neon-"][data-luminance="dark"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
+	box-shadow:
+		inset 0 0 0 1px color-mix(in oklab, var(--cmp-accent) 32%, var(--cmp-chrome) 68%),
+		0 0 8px color-mix(in oklab, var(--cmp-accent) 18%, transparent) !important;
+}
+html[data-looknfeel^="neon-"][data-luminance="light"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="outlined"] {
+	box-shadow:
+		inset 0 0 0 1px color-mix(in oklab, var(--cmp-accent) 28%, var(--cmp-chrome) 72%),
+		0 0 6px color-mix(in oklab, var(--cmp-accent) 16%, transparent) !important;
 }
 
-html[data-looknfeel^="neon-"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
-	box-shadow: inset 0 0 18px var(--cmp-blend-glow), 0 0 10px var(--cmp-blend-glow) !important;
+/* neon dark: el chip "solid" emite luz (no sombra interior oscura) */
+html[data-looknfeel^="neon-"][data-luminance="dark"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
+	border-color: color-mix(in oklab, var(--cmp-accent) 65%, transparent) !important;
+	box-shadow:
+		inset 0 1px 0 color-mix(in oklab, white 28%, transparent),
+		0 0 14px color-mix(in oklab, var(--cmp-accent) 38%, transparent),
+		0 0 28px color-mix(in oklab, var(--cmp-accent) 24%, transparent) !important;
+}
+html[data-looknfeel^="neon-"][data-luminance="light"] .demo-config-shell :is(.palette-grid__chip, .checkbox-chip__pill)[data-variant="solid"] {
+	border-color: color-mix(in oklab, var(--cmp-accent) 70%, var(--cmp-chrome) 30%) !important;
+	box-shadow:
+		inset 0 0 0 1px color-mix(in oklab, white 32%, transparent),
+		0 0 8px color-mix(in oklab, var(--cmp-accent) 22%, transparent) !important;
+}
+
+/* neon — button-block chips: glow tinte card × accent (compuesto, no contra transparent) */
+html[data-looknfeel="neon"] .demo-config-shell .pg-palette-chips .button-block[data-variant="text"],
+html[data-looknfeel="neon"] .demo-config-shell .pg-palette-grid .button-block[data-variant="text"] {
+	box-shadow:
+		inset 0 0 0 1px color-mix(in oklab, var(--cmp-accent) 32%, var(--cmp-chrome) 68%),
+		0 0 10px color-mix(in oklab, var(--cmp-accent) 22%, transparent) !important;
+}
+
+/* neon dark: el chip "soft" (seleccionado) no debe sumar inset oscuro sobre chrome oscuro;
+   en su lugar emite glow exterior + halo interior sutil para preservar la sensación de "luz". */
+html[data-looknfeel="neon"][data-luminance="dark"] .demo-config-shell .pg-palette-chips .button-block[data-variant="soft"],
+html[data-looknfeel="neon"][data-luminance="dark"] .demo-config-shell .pg-palette-grid .button-block[data-variant="soft"] {
+	border-color: color-mix(in oklab, var(--cmp-accent) 65%, transparent) !important;
+	box-shadow:
+		inset 0 1px 0 color-mix(in oklab, white 26%, transparent),
+		0 0 14px color-mix(in oklab, var(--cmp-accent) 40%, transparent),
+		0 0 32px color-mix(in oklab, var(--cmp-accent) 28%, transparent) !important;
+}
+
+/* neon light: tinte sutil interior para dar profundidad sin oscurecer el fondo claro */
+html[data-looknfeel="neon"][data-luminance="light"] .demo-config-shell .pg-palette-chips .button-block[data-variant="soft"],
+html[data-looknfeel="neon"][data-luminance="light"] .demo-config-shell .pg-palette-grid .button-block[data-variant="soft"] {
+	border-color: color-mix(in oklab, var(--cmp-accent) 75%, var(--cmp-chrome) 25%) !important;
+	box-shadow:
+		inset 0 0 0 1px color-mix(in oklab, white 32%, transparent),
+		0 0 10px color-mix(in oklab, var(--cmp-accent) 22%, transparent) !important;
 }
 
 /* Preview — mismo contrato outlined / solid */

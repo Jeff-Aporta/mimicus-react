@@ -1,23 +1,39 @@
 /**
  * Checkbox (forms) — CSS
- * demo: demo/config/demos/lib/Checkbox.json
- * llm:  ./Checkbox.llm.md
  * repo: Jeff-Aporta/mimicus-react · css/components/forms/Checkbox.css
- * Casilla de verificación con estados checked/indeterminate/disabled y variante de iconos.
+ * Casilla con estados checked/indeterminate/disabled; variante CheckboxIcon con iconos Iconify por estado.
  */
 
 /* ── Checkbox ── */
-.mimicus-checkbox { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; user-select: none; }
+.mimicus-checkbox { display: inline-flex; align-items: center; gap: 0.5em; cursor: pointer; user-select: none; }
 .mimicus-checkbox__native { position: absolute; opacity: 0; width: 0; height: 0; }
-.mimicus-checkbox__box { width: 1.05rem; height: 1.05rem; border: 1.5px solid var(--mimicus-field-border); border-radius: 0.25rem; background: var(--mimicus-surface, #fff); display: grid; place-items: center; transition: all 0.2s; flex-shrink: 0; }
-.mimicus-checkbox__box::after { content: ""; width: 0.35rem; height: 0.6rem; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0); transition: transform 0.15s; margin-top: -0.1rem; }
+.mimicus-checkbox__box { width: 1.05em; height: 1.05em; border: 1.5px solid var(--mimicus-field-border); border-radius: 0.25em; background: var(--mimicus-surface, #fff); display: grid; place-items: center; transition: all 0.2s; flex-shrink: 0; }
+.mimicus-checkbox__box::after { content: ""; width: 0.35em; height: 0.6em; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0); transition: transform 0.15s; margin-top: -0.1em; }
 .mimicus-checkbox.is-checked .mimicus-checkbox__box, .mimicus-checkbox.is-indeterminate .mimicus-checkbox__box { background: var(--mimicus-primary, #1677ff); border-color: var(--mimicus-primary, #1677ff); }
 .mimicus-checkbox.is-checked .mimicus-checkbox__box::after { transform: rotate(45deg) scale(1); }
-.mimicus-checkbox.is-indeterminate .mimicus-checkbox__box::after { content: ""; width: 0.55rem; height: 2px; border: none; background: #fff; transform: none; margin: 0; }
+.mimicus-checkbox.is-indeterminate .mimicus-checkbox__box::after { content: ""; width: 0.55em; height: 2px; border: none; background: #fff; transform: none; margin: 0; }
 .mimicus-checkbox.is-disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── CheckboxIcon: iconos Iconify por estado (sin dibujado manual) ── */
 .mimicus-checkbox--icon .mimicus-checkbox__box { display: none; }
-.mimicus-checkbox__icons { position: relative; width: 1.35rem; height: 1.35rem; }
-.mimicus-checkbox__icon { position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.1rem; transition: opacity 0.2s; }
-.mimicus-checkbox__icon--on { opacity: 0; }
+.mimicus-checkbox__icons { position: relative; width: 1.35em; height: 1.35em; display: inline-flex; align-items: center; justify-content: center; }
+.mimicus-checkbox__icon {
+	position: absolute; inset: 0;
+	display: grid; place-items: center;
+	transition: opacity 0.2s, transform 0.2s;
+	font-size: 1.25em;
+	line-height: 0;
+	color: var(--cb-off-fg, var(--mimicus-text, #555));
+}
+.mimicus-checkbox__icon > iconify-icon { font-size: 1em; color: inherit; line-height: 0; }
+.mimicus-checkbox__icon--on { opacity: 0; color: var(--cb-on-fg, var(--mimicus-primary, #1677ff)); }
 .mimicus-checkbox.is-checked .mimicus-checkbox__icon--on { opacity: 1; }
 .mimicus-checkbox.is-checked .mimicus-checkbox__icon--off { opacity: 0; }
+
+/* Variante glass: fondo translúcido cuando está checked */
+.mimicus-checkbox--icon.mimicus-checkbox--glass.is-checked .mimicus-checkbox__icons {
+	background: linear-gradient(145deg, color-mix(in srgb, var(--mimicus-primary) 22%, transparent), color-mix(in srgb, var(--mimicus-primary) 6%, transparent));
+	border-radius: 0.35em;
+	backdrop-filter: blur(8px) saturate(140%);
+	-webkit-backdrop-filter: blur(8px) saturate(140%);
+}

@@ -147,8 +147,8 @@
 	max-width: 100%;
 	min-height: 0;
 	border-radius: 0.5rem;
-	background: var(--pg-preview-stage-bg);
-	box-shadow: var(--pg-preview-stage-shadow);
+	background: var(--pg-preview-stage-bg, var(--lkf-texture-preview, transparent));
+	box-shadow: var(--pg-preview-stage-shadow, var(--lkf-texture-shadow-preview, none));
 	transition: background-color 0.15s ease, box-shadow 0.15s ease;
 	padding: 0.75rem 1rem;
 }

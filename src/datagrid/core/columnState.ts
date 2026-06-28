@@ -39,6 +39,8 @@ export function resolveColumns<T extends RowData>(defs: ColumnDef<T>[], defaultC
     pinned: def.pinned ?? null,
     hide: def.hide === true,
     align: def.align ?? (def.type === "number" ? "right" : "left"),
+    enableRowGroup: def.enableRowGroup !== false,
+    aggFunc: def.aggFunc ?? null,
     checkboxSelection: def.checkboxSelection === true,
     def: def as unknown as ColumnDef,
   }));

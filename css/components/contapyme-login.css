@@ -138,6 +138,45 @@
   }
 }
 
+/* ── Trigger "Iniciar sesión" — paridad MUI outlined sizeSmall colorInherit ──
+   Mide aprox 120×31px, padding 4px 10px, font 0.8125rem (13px), borde 1px sutil,
+   sin glow neon y sin transforms/elevaciones. */
+.mimicus-login-button__trigger {
+  min-width: 5rem;
+  height: 1.9375rem;
+  min-height: 1.9375rem;
+  padding: 0.25rem 0.625rem !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  border-radius: var(--mimicus-ui-radius, 0.25rem);
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent) !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  text-transform: none;
+  transform: none !important;
+  gap: 0.4em;
+  color: inherit !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.mimicus-login-button__trigger:hover:not(:disabled) {
+  background-color: color-mix(in srgb, currentColor 8%, transparent) !important;
+  border-color: color-mix(in srgb, currentColor 55%, transparent) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.mimicus-login-button__trigger:active:not(:disabled) {
+  background-color: color-mix(in srgb, currentColor 14%, transparent) !important;
+  transform: none !important;
+}
+.mimicus-login-button__trigger:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--mimicus-primary), transparent 50%);
+  outline-offset: 2px;
+}
+
 .header-session-chip,
 .mimicus-login-button__chip {
   gap: 0.35rem;

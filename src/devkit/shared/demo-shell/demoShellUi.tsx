@@ -5,9 +5,9 @@
  * repo: Jeff-Aporta/mimicus-react · src/devkit/shared/demo-shell/demoShellUi.tsx
  * UI del shell de un demo: DemoController, renderer de campos de config y AccordionDemo.
  */
-import { Button, CodeBlock, Switch, Input, Select, InputNumber } from "../../_ui.ts";
-import { useMemo, useState } from "react";
-import { buildTag, colorOptions, columnsConfig, iconEnum, mergeStyleString, optionsToItems, parseStyleString, stepCssLength, defaultOptionIcon, COLOR_ICONS } from "../playgroundKit.ts";
+import { Button, CodeBlock, Switch, Input, Select, InputNumber, Radio, Slider } from "../../_ui.ts";
+import { useEffect, useMemo, useState } from "react";
+import { buildTag, colorOptions, columnsConfig, iconEnum, mergeStyleString, optionsToItems, parseStyleString, stepCssLength, defaultOptionIcon, NONE_ICON, COLOR_ICONS } from "../playgroundKit.ts";
 import { Icon } from "../../../components/Icon.tsx";
 import { ReviewStatusDot } from "../../catalog/catalogUi.tsx";
 
@@ -80,17 +80,50 @@ export function ConfigCard({ children, className }) {
   return <div className={["pg-demo-config-card", "card-root", className].filter(Boolean).join(" ")}>{children}</div>;
 }
 
-export function InputDecorated({ label, icon, asTitle, children, className }) {
+export function InputDecorated({ label, icon, asTitle, info, infoTitle, children, className }) {
   const Tag = asTitle ? "h3" : "label";
+  const [open, setOpen] = useState(false);
+  const hasInfo = Boolean(info && String(info).trim());
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
   return (
     <div className={["pg-input-decorated", asTitle && "pg-input-decorated--title", className].filter(Boolean).join(" ")}>
-      {(label || icon) && (
+      {(label || icon || hasInfo) && (
         <Tag className="pg-input-decorated__label">
           {icon && <span className="pg-input-decorated__icon" aria-hidden><iconify-icon icon={icon} /></span>}
-          {label}
+          <span className="pg-input-decorated__label-text">{label}</span>
+          {hasInfo && (
+            <button
+              type="button"
+              className="pg-input-decorated__info"
+              aria-label={`Más información sobre ${label || "esta sección"}`}
+              title={`Más información sobre ${label || "esta sección"}`}
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen(true); }}
+            >
+              <iconify-icon icon="mdi:information-outline" />
+            </button>
+          )}
         </Tag>
       )}
       <div className="pg-input-decorated__body">{children}</div>
+      {hasInfo && open && (
+        <div className="pg-input-decorated__info-overlay" role="dialog" aria-modal="true" aria-label={infoTitle || label || "Información"} onClick={() => setOpen(false)}>
+          <div className="pg-input-decorated__info-card" onClick={(e) => e.stopPropagation()}>
+            <header className="pg-input-decorated__info-card-header">
+              {icon && <iconify-icon icon={icon} />}
+              <h4>{infoTitle || label}</h4>
+              <button type="button" className="pg-input-decorated__info-close" aria-label="Cerrar" onClick={() => setOpen(false)}>
+                <iconify-icon icon="mdi:close" />
+              </button>
+            </header>
+            <div className="pg-input-decorated__info-body" dangerouslySetInnerHTML={{ __html: String(info) }} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -102,38 +135,77 @@ export function PaletteGrid({ label, labelIcon, value, onValueChange, options, n
 
   if (layout === "chips") {
     return (
-      <InputDecorated label={label} icon={labelIcon}>
-        <div className="pg-palette-chips" style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
-          {items.map(([lbl, val]) => {
-            const selected = String(value ?? "") === String(val ?? "");
-            const icon = getIcon ? getIcon(val) : undefined;
-            return (
-              <Button key={`${groupName}-${String(val)}`} type="button" variant={selected ? "soft" : "text"} color={accent === "semantic" && val ? val : "primary"} shape="pill" onClick={() => onValueChange?.(val === "" ? undefined : val)} style={{ fontSize: "0.78rem", paddingBlock: "0.2rem", paddingInline: "0.7rem", minHeight: "1.7rem" }}>
-                {icon && <Icon icon={icon} />}
-                {lbl || String(val ?? "Ninguno")}
-              </Button>
-            );
-          })}
-        </div>
-      </InputDecorated>
+      <div className="pg-palette-chips" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(5.25em, 1fr))", gap: "0.35em", width: "100%" }}>
+        {items.map(([lbl, val]) => {
+          const selected = String(value ?? "") === String(val ?? "");
+          const isNone = val === "" || val == null;
+          const icon = isNone ? NONE_ICON : (getIcon ? getIcon(val) : undefined);
+          const showLabel = !isNone && (lbl || val);
+          return (
+            <Button key={`${groupName}-${String(val)}`} type="button" variant={selected ? "soft" : "text"} color={accent === "semantic" && val ? val : "primary"} shape="pill" block onClick={() => onValueChange?.(val === "" ? undefined : val)} title={isNone ? "Ninguno" : (lbl || String(val ?? "Ninguno"))} style={{ justifyContent: "center", paddingBlock: "0.2em", paddingInline: isNone ? "0.4em" : "0.6em", minHeight: "1.8em", gap: isNone ? 0 : "0.35em" }}>
+              {icon && <Icon icon={icon} />}
+              {showLabel && <span>{lbl || String(val ?? "Ninguno")}</span>}
+            </Button>
+          );
+        })}
+      </div>
     );
   }
 
   return (
-    <InputDecorated label={label} icon={labelIcon}>
-      <div className="pg-palette-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gap: "0.35rem", width: "100%" }}>
-        {items.map(([lbl, val]) => {
-          const selected = String(value ?? "") === String(val ?? "");
-          return (
-            <label key={`${groupName}-${String(val)}`} className="pg-palette-grid__item" style={{ display: "flex", alignItems: "center", gap: "0.35rem", cursor: "pointer" }}>
-              <input type="radio" name={groupName} checked={selected} onChange={() => onValueChange?.(val === "" ? undefined : val)} />
-              <span>{lbl || String(val ?? "Ninguno")}</span>
-            </label>
-          );
-        })}
-      </div>
-    </InputDecorated>
+    <div className="pg-palette-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gap: "0.35em", width: "100%" }}>
+      {items.map(([lbl, val]) => {
+        const selected = String(value ?? "") === String(val ?? "");
+        const isNone = val === "" || val == null;
+        const icon = isNone ? NONE_ICON : undefined;
+        return (
+          <Radio key={`${groupName}-${String(val)}`} className="pg-palette-grid__item" name={groupName} value={String(val ?? "")} checked={selected} onChange={() => onValueChange?.(val === "" ? undefined : val)} title={isNone ? "Ninguno" : (lbl || String(val ?? "Ninguno"))}>
+            {icon && <Icon icon={icon} />}
+            {!isNone && <span style={{ marginInlineStart: "0.35em" }}>{lbl || String(val ?? "Ninguno")}</span>}
+          </Radio>
+        );
+      })}
+    </div>
   );
+}
+
+function fieldInfo(field) {
+  if (field.info) return { title: field.infoTitle || field.label, body: field.info };
+  // Genera info por defecto según kind/key.
+  const key = String(field.key || "").toLowerCase();
+  const kind = String(field.kind || "");
+  const map = {
+    variant: { title: "Variante visual", body: "Cambia el aspecto del componente: <code>solid</code> (fondo lleno), <code>outlined</code> (sólo borde), <code>text</code> (sin fondo, transparente), <code>ghost</code> (vidrio translúcido), <code>soft</code> (tinte accent al 15%), <code>dashed</code> (borde discontinuo) y <code>glass</code> (efecto glass con backdrop-filter)." },
+    shape: { title: "Forma del borde", body: "Define el radio del borde: <code>round</code> (esquinas redondeadas suaves), <code>rect</code> (recto, 0px), <code>pill</code> (cápsula, radio total) y <code>circle</code> (círculo perfecto cuando el contenido es sólo un icono)." },
+    size: { title: "Tamaño", body: "Escala interna del componente. En Mimicus UI el tamaño es contextual: depende del <code>font-size</code> del contenedor (unidades <code>em</code>)." },
+    color: { title: "Color de acento", body: "Color semántico que tintará el componente. Puede ser un color del sistema (<code>primary</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>info</code>, <code>neutral</code>) o un valor custom." },
+    icon: { title: "Ícono", body: "Ícono Iconify que se mostrará. Escribe el nombre (<code>mdi:check</code>) o elige uno de las opciones." },
+    iconplacement: { title: "Posición del ícono", body: "Define si el ícono aparece al inicio (<code>start</code>) o al final (<code>end</code>) del texto." },
+    htmltype: { title: "Tipo HTML", body: "Atributo <code>type</code> nativo del botón: <code>button</code>, <code>submit</code> o <code>reset</code>." },
+    block: { title: "block", body: "Hace que el componente ocupe todo el ancho disponible." },
+    danger: { title: "danger", body: "Aplica el color semántico <code>danger</code> (rojo), típicamente para acciones destructivas." },
+    ghost: { title: "ghost", body: "Fondo translúcido (vidrio) en hover/active; en idle se ve como <code>outlined</code>." },
+    dashed: { title: "dashed", body: "Borde discontinuo en lugar de sólido." },
+    disabled: { title: "disabled", body: "Deshabilita la interacción y aplica opacidad reducida." },
+    loading: { title: "loading", body: "Muestra un indicador de progreso y bloquea clicks mientras dura la operación." },
+  };
+  if (map[key]) return map[key];
+  if (kind === "switch") return { title: field.label, body: `Interruptor booleano. Cuando está <code>true</code> activa el flag <code>${field.key}</code>.` };
+  if (kind === "switch-group") return { title: field.label, body: `Grupo de interruptores booleanos. Cada toggle activa un flag independiente del componente.` };
+  if (kind === "palette") return { title: field.label, body: `Selector de paleta. Elige una de las opciones disponibles; el componente adoptará la variante visual correspondiente.` };
+  if (kind === "select-enum") return { title: field.label, body: `Selector enumerado. Elige uno de los valores disponibles para <code>${field.key}</code>.` };
+  if (kind === "number") return { title: field.label, body: `Valor numérico entre el mínimo y máximo definidos.` };
+  if (kind === "range") return { title: field.label, body: `Rango numérico continuo (slider).` };
+  if (kind === "text") return { title: field.label, body: `Entrada de texto libre.` };
+  if (kind === "color") return { title: field.label, body: `Selector de color. Acepta cualquier valor CSS (hex, rgb, hsl, oklch, named).` };
+  if (kind === "code") return { title: field.label, body: `Editor de código inline. Útil para estilos CSS o clases personalizadas.` };
+  if (kind === "icon-text") return { title: field.label, body: `Combina un ícono Iconify con un texto libre.` };
+  return null;
+}
+
+function withInfo(passed) {
+  const info = fieldInfo(passed);
+  return info ? { ...passed, _info: info.body, _infoTitle: info.title } : passed;
 }
 
 function orderFields(arr) {
@@ -158,20 +230,26 @@ function withNoneOption(options) {
   return hasNone ? mapped : [{ label: "", value: "" }, ...mapped];
 }
 
-function SwitchRow({ checked, label, onChange }) {
-  return <Switch className="pg-switch-row" size="small" checked={!!checked} onChange={(v) => onChange?.(v)}>{label}</Switch>;
+function SwitchRow({ checked, label, onChange, iconOn, iconOff, colorOn, colorOff }) {
+  return (
+    <Switch
+      className="pg-switch-row"
+      checked={!!checked}
+      onChange={(v) => onChange?.(v)}
+      iconOn={iconOn ? <Icon icon={iconOn} /> : undefined}
+      iconOff={iconOff ? <Icon icon={iconOff ?? iconOn ?? "mdi:circle-outline"} /> : undefined}
+      colorOn={colorOn}
+      colorOff={colorOff}
+    >
+      {label}
+    </Switch>
+  );
 }
 
 function ConfigRangeField({ value, min = 0, max = 100, step = 1, onChange }) {
   const num = Number(value ?? min);
-  const pct = max === min ? 0 : ((num - min) / (max - min)) * 100;
-  const handle = (e) => onChange(Number(e.target.value));
   return (
-    <div className="mimicus-slider pg-config-range" style={{ width: "100%" }}>
-      <div className="mimicus-slider__rail"><div className="mimicus-slider__fill" style={{ width: `${pct}%` }} /></div>
-      <input type="range" className="mimicus-slider__input" min={min} max={max} step={step} value={num} onInput={handle} onChange={handle} />
-      <span className="mimicus-slider__value">{num}</span>
-    </div>
+    <Slider className="pg-config-range" min={min} max={max} step={step} value={num} onChange={(v) => onChange(Number(v))} showValue style={{ width: "100%" }} />
   );
 }
 
@@ -180,17 +258,20 @@ function IconTextField({ field, state, patchState }) {
   const textVal = state[field.textKey] ?? "";
   return (
     <InputDecorated label={field.label} icon={field.labelIcon}>
-      <div style={{ display: "grid", gap: "0.6rem" }}>
-        <PaletteGrid
-          label="Ícono"
-          value={String(iconVal)}
-          onValueChange={(v) => patchState(String(field.iconKey), v)}
-          options={Object.entries(iconEnum).map(([val, lbl]) => ({ label: lbl, value: val }))}
-          layout="chips"
-          getIcon={(v) => (v ? String(v) : undefined)}
-        />
-        <label style={{ display: "grid", gap: "0.3rem" }}>
-          <span style={{ fontSize: "0.8rem", opacity: 0.85 }}>Texto</span>
+      <div style={{ display: "grid", gap: "0.6em" }}>
+        <InputDecorated label="Ícono" icon="mdi:emoticon-outline">
+          <div className="pg-field-cluster">
+            <PaletteGrid
+              value={String(iconVal)}
+              onValueChange={(v) => patchState(String(field.iconKey), v)}
+              options={Object.entries(iconEnum).map(([val, lbl]) => ({ label: lbl, value: val }))}
+              layout="chips"
+              getIcon={(v) => (v ? String(v) : undefined)}
+            />
+          </div>
+        </InputDecorated>
+        <label className="pg-icon-text-field__text">
+          <span className="pg-input-decorated__label">Texto</span>
           <Input value={String(textVal)} onChange={(v) => patchState(String(field.textKey), v)} prefix={iconVal ? <Icon icon={String(iconVal)} /> : undefined} />
         </label>
       </div>
@@ -198,7 +279,7 @@ function IconTextField({ field, state, patchState }) {
   );
 }
 
-function ConfigCodeField({ value = "", onChange, placeholder, mode, lang, minHeight = "4.5rem", maxHeight = "8.5rem" }) {
+function ConfigCodeField({ value = "", onChange, placeholder, mode, lang, minHeight = "4.5em", maxHeight = "8.5em" }) {
   return (
     <div className="code-edit-field">
       <CodeBlock
@@ -226,28 +307,62 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
     onStateChange?.({ ...state, [key]: normalized });
   }
 
+  function decorate(field, props = {}) {
+    const info = fieldInfo(field);
+    return {
+      label: field.label,
+      icon: props.icon ?? field.labelIcon,
+      info: info?.body,
+      infoTitle: info?.title,
+    };
+  }
+
   return typedFields.map((field) => {
     const key = fieldId(field);
     const wrap = (node) => <ConfigCard key={key}>{node}</ConfigCard>;
 
     if (field.kind === "palette") {
       const opts = field.layout === "sideCross" || field.layout === "chips" ? field.options : withNoneOption(field.options);
-      return wrap(<PaletteGrid label={field.label} labelIcon={field.labelIcon} value={state[field.key]} onValueChange={(v) => patchState(String(field.key), v)} options={opts} name={field.name ?? `pg-${String(field.key)}`} columns={field.columns} accent={field.accent ?? "primary"} layout={field.layout ?? "chips"} getIcon={field.getIcon ?? ((v) => defaultOptionIcon(field.key, v))} />);
+      const d = decorate(field, { icon: field.labelIcon });
+      return wrap(
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
+          <div className="pg-field-cluster">
+            <PaletteGrid value={state[field.key]} onValueChange={(v) => patchState(String(field.key), v)} options={opts} name={field.name ?? `pg-${String(field.key)}`} columns={field.columns} accent={field.accent ?? "primary"} layout={field.layout ?? "chips"} getIcon={field.getIcon ?? ((v) => defaultOptionIcon(field.key, v))} />
+          </div>
+        </InputDecorated>,
+      );
     }
 
     if (field.kind === "color") {
-      return wrap(<PaletteGrid label={field.label} labelIcon={field.labelIcon} value={state[field.key]} onValueChange={(v) => patchState(String(field.key), v)} options={colorOptions} name={`pg-color-${String(field.key)}`} layout="chips" accent="semantic" getIcon={(v) => COLOR_ICONS[String(v)]} />);
+      const d = decorate(field, { icon: field.labelIcon });
+      return wrap(
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
+          <div className="pg-field-cluster">
+            <PaletteGrid value={state[field.key]} onValueChange={(v) => patchState(String(field.key), v)} options={colorOptions} name={`pg-color-${String(field.key)}`} layout="chips" accent="semantic" getIcon={(v) => COLOR_ICONS[String(v)]} />
+          </div>
+        </InputDecorated>,
+      );
     }
 
     if (field.kind === "switch") {
-      return wrap(<InputDecorated label={field.label} icon={field.labelIcon ?? "mdi:tune"}><SwitchRow checked={state[field.key]} label={field.label} onChange={(v) => patchState(String(field.key), v)} /></InputDecorated>);
+      const d = decorate(field, { icon: field.labelIcon ?? "mdi:tune" });
+      return wrap(
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
+          <div className="pg-field-cluster">
+            <SwitchRow checked={state[field.key]} label={field.label} onChange={(v) => patchState(String(field.key), v)} iconOn={field.iconOn ?? field.icon ?? "mdi:check"} iconOff={field.iconOff ?? field.icon ?? "mdi:circle-outline"} colorOn={field.colorOn ?? "var(--mimicus-success, #2e9e5a)"} colorOff={field.colorOff ?? "var(--mimicus-color)"} />
+          </div>
+        </InputDecorated>,
+      );
     }
 
     if (field.kind === "switch-group") {
+      const d = decorate(field, { icon: field.labelIcon });
       return wrap(
-        <InputDecorated label={field.label} icon={field.labelIcon}>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-            {field.switches.map((sw) => <SwitchRow key={String(sw.key)} checked={state[sw.key]} label={sw.label} onChange={(v) => patchState(String(sw.key), v)} />)}
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
+          <div className="pg-field-cluster">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(7.5em, 1fr))", gap: "0.35em 0.75em", width: "100%" }}>
+              {field.switches.map((sw) => <SwitchRow key={String(sw.key)} checked={state[sw.key]} label={sw.label} onChange={(v) => patchState(String(sw.key), v)} iconOn={sw.iconOn ?? sw.icon ?? "mdi:check"} iconOff={sw.iconOff ?? sw.icon ?? "mdi:circle-outline"} colorOn={sw.colorOn ?? "var(--mimicus-success, #2e9e5a)"} colorOff={sw.colorOff ?? "var(--mimicus-color)"} />)}
+            </div>
           </div>
         </InputDecorated>,
       );
@@ -257,8 +372,9 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
       if (field.normalize) {
         const fkey = String(field.key);
         const normalize = field.normalize;
+        const d = decorate(field, { icon: field.labelIcon });
         return wrap(
-          <InputDecorated label={field.label} icon={field.labelIcon}>
+          <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
             <Input
               className="input-decorated-number"
               placeholder={field.placeholder}
@@ -275,24 +391,27 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
           </InputDecorated>,
         );
       }
+      const d = decorate(field, { icon: field.labelIcon });
       return wrap(
-        <InputDecorated label={field.label} icon={field.labelIcon}>
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
           <Input placeholder={field.placeholder} value={String(state[field.key] ?? "")} onChange={(v) => patchState(String(field.key), v)} />
         </InputDecorated>,
       );
     }
 
     if (field.kind === "range") {
+      const d = decorate(field, { icon: field.labelIcon });
       return wrap(
-        <InputDecorated label={field.label} icon={field.labelIcon}>
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
           <ConfigRangeField value={state[field.key]} min={field.min} max={field.max} step={field.step} onChange={(v) => patchState(String(field.key), v)} />
         </InputDecorated>,
       );
     }
 
     if (field.kind === "number") {
+      const d = decorate(field, { icon: field.labelIcon });
       return wrap(
-        <InputDecorated label={field.label} icon={field.labelIcon}>
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
           <InputNumber min={field.min} max={field.max} step={field.step} value={Number(state[field.key] ?? 0)} onChange={(v) => patchState(String(field.key), v)} />
         </InputDecorated>,
       );
@@ -300,8 +419,9 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
 
     if (field.kind === "select-enum") {
       const entries = Object.entries(field.enumValue ?? {});
+      const d = decorate(field, { icon: field.labelIcon });
       return wrap(
-        <InputDecorated label={field.label} icon={field.labelIcon}>
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
           <Select value={String(state[field.key] ?? "")} onChange={(v) => patchState(String(field.key), v)}
             options={entries.map(([k, v]) => ({ value: String(v), label: k }))} />
         </InputDecorated>,
@@ -311,16 +431,17 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
     if (field.kind === "code") {
       const fkey = String(field.key);
       const mode = field.lang === "css" ? "css" : field.mode ?? (field.lang === "html" ? undefined : field.lang);
+      const d = decorate(field, { icon: field.labelIcon ?? "mdi:code-braces" });
       return wrap(
-        <InputDecorated label={field.label} icon={field.labelIcon ?? "mdi:code-braces"}>
+        <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
           <ConfigCodeField
             value={String(state[fkey] ?? "")}
             onChange={(v) => patchState(fkey, v)}
             placeholder={field.placeholder}
             mode={mode}
             lang={field.lang}
-            minHeight={field.minHeight ?? "6rem"}
-            maxHeight={field.maxHeight ?? "16rem"}
+            minHeight={field.minHeight ?? "6em"}
+            maxHeight={field.maxHeight ?? "16em"}
           />
         </InputDecorated>,
       );
@@ -445,7 +566,7 @@ export function AccordionDemo({
               </div>
             )}
             {finalCodeStr && showCode && (
-              <CodeBlock value={finalCodeStr} readOnly lang="jsx" minHeight="7rem" maxHeight="22rem" lineWrapping className="pg-demo-example__code" />
+              <CodeBlock value={finalCodeStr} readOnly lang="jsx" minHeight="7em" maxHeight="22em" lineWrapping className="pg-demo-example__code" />
             )}
           </div>
         </section>
@@ -457,13 +578,8 @@ export function AccordionDemo({
           <ConfigCard className="pg-demo-config-section demo-config-shell">
             <div style={{ display: "grid", gridTemplateColumns: `repeat(${configCols}, minmax(0, 1fr))`, gap: "0.75rem", width: "100%", alignItems: "start" }}>
               <ConfigCard>
-                <InputDecorated label="style" icon="mdi:palette-swatch-outline">
-                  <ConfigCodeField value={demoStyle} onChange={(v) => onDemoStyleChange?.(v)} placeholder="inline style" mode="css" minHeight="4.5rem" maxHeight="8.5rem" />
-                </InputDecorated>
-              </ConfigCard>
-              <ConfigCard>
-                <InputDecorated label="className" icon="mdi:code-braces">
-                  <ConfigCodeField value={demoClass} onChange={(v) => onDemoClassChange?.(v)} placeholder="clases CSS" minHeight="4.5rem" maxHeight="8.5rem" />
+                <InputDecorated label="style" icon="mdi:palette-swatch-outline" info="Estilos CSS inline que se aplican directamente al contenedor del demo. Útil para ajustes rápidos sin modificar la hoja de estilos global." infoTitle="Estilo inline">
+                  <ConfigCodeField value={demoStyle} onChange={(v) => onDemoStyleChange?.(v)} placeholder="inline style" mode="css" minHeight="4.5em" maxHeight="8.5em" />
                 </InputDecorated>
               </ConfigCard>
               <DemoConfigRenderer fields={configFields} state={state} onStateChange={onStateChange} />

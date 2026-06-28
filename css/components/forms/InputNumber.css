@@ -8,6 +8,6 @@
 
 /* ── InputNumber ── */
 .mimicus-input-number { display: inline-flex; align-items: stretch; border: 1px solid var(--mimicus-field-border); border-radius: var(--mimicus-field-radius); overflow: hidden; background: var(--mimicus-field-bg); }
-.mimicus-input-number__btn { width: 2rem; border: none; background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 8%, transparent); cursor: pointer; font-size: 1rem; }
+.mimicus-input-number__btn { width: 2em; border: none; background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 8%, transparent); cursor: pointer; font-size: 1em; }
 .mimicus-input-number__btn:hover { background: color-mix(in srgb, var(--mimicus-primary, #1677ff) 16%, transparent); }
-.mimicus-input-number__native { width: 3.5rem; border: none; text-align: center; background: transparent; font: inherit; }
+.mimicus-input-number__native { width: 3.5em; border: none; text-align: center; background: transparent; font: inherit; padding: 0.35em 0; }

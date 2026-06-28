@@ -3,12 +3,11 @@
  * repo: Jeff-Aporta/mimicus-react · src/components/forms/Forms.tsx
  * Monolito de componentes de formulario (Input, Select, Checkbox, Switch, Radio, Slider, etc.).
  */
-import { Children, useId, useRef, useState } from "react";
+import { Children, useEffect, useId, useRef, useState } from "react";
 import type { CSSProperties, ReactElement, ReactNode } from "react";
 import { mergeSurfaceStyle } from "../../lib/surfaceColor.ts";
 import { useFormBinding } from "../../forms/useFormBinding.ts";
 
-type Size = "small" | "medium" | "large";
 interface Option { value: string; label?: ReactNode; disabled?: boolean; icon?: ReactNode }
 interface BaseProps { className?: string; style?: CSSProperties; children?: ReactNode }
 
@@ -44,17 +43,17 @@ Form.Item = FormItem;
 
 /* ── Input / TextField ── */
 export interface InputProps extends BaseProps {
-  value?: string; defaultValue?: string; onChange?: (v: string) => void; size?: Size; status?: string;
+  value?: string; defaultValue?: string; onChange?: (v: string) => void; status?: string;
   prefix?: ReactNode; suffix?: ReactNode; allowClear?: boolean; disabled?: boolean; readOnly?: boolean;
   placeholder?: string; type?: string; [key: string]: unknown;
 }
 export function Input({
-  value, defaultValue, onChange, size = "medium", status, prefix, suffix, allowClear, disabled, readOnly,
+  value, defaultValue, onChange, status, prefix, suffix, allowClear, disabled, readOnly,
   placeholder, type = "text", className, style, ...rest
 }: InputProps) {
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
   return (
-    <span className={cx("mimicus-input", `mimicus-input--${size}`, status && `is-${status}`, disabled && "is-disabled", className)} style={style}>
+    <span className={cx("mimicus-input", status && `is-${status}`, disabled && "is-disabled", className)} style={style}>
       {prefix && <span className="mimicus-input__affix mimicus-input__prefix">{prefix}</span>}
       <input {...rest} type={type} className="mimicus-input__native" value={val ?? ""} readOnly={readOnly} disabled={disabled}
         placeholder={placeholder} onChange={(e) => set(e.target.value)} />
@@ -79,14 +78,14 @@ export function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, cl
 /* ── InputNumber ── */
 export interface InputNumberProps extends BaseProps {
   value?: number; defaultValue?: number; onChange?: (v: number) => void; min?: number; max?: number; step?: number;
-  size?: Size; disabled?: boolean; [key: string]: unknown;
+  disabled?: boolean; [key: string]: unknown;
 }
-export function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, size = "medium", disabled, className, style, ...rest }: InputNumberProps) {
+export function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, disabled, className, style, ...rest }: InputNumberProps) {
   const ref = useRef(null);
   const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "input-number", [min, max, step, val]);
   return (
-    <span ref={ref} className={cx("mimicus-input-number", `mimicus-input-number--${size}`, disabled && "is-disabled", className)} style={style}
+    <span ref={ref} className={cx("mimicus-input-number", disabled && "is-disabled", className)} style={style}
       data-min={min} data-max={max} data-step={step} data-value={val} data-mimicus-form="input-number">
       <button type="button" className="mimicus-input-number__btn" data-mimicus-input-number-dec disabled={disabled} tabIndex={-1}>−</button>
       <input {...rest} type="text" inputMode="decimal" className="mimicus-input-number__native" value={val ?? 0} disabled={disabled}
@@ -99,15 +98,15 @@ export function InputNumber({ value, defaultValue = 0, onChange, min, max, step 
 /* ── Checkbox ── */
 export interface CheckboxProps extends BaseProps {
   checked?: boolean; defaultChecked?: boolean; onChange?: (v: boolean) => void; indeterminate?: boolean;
-  disabled?: boolean; loading?: boolean; size?: Size; [key: string]: unknown;
+  disabled?: boolean; loading?: boolean; [key: string]: unknown;
 }
 export function Checkbox({
-  checked, defaultChecked = false, onChange, indeterminate, disabled, loading, size = "medium", children, className, style, ...rest
+  checked, defaultChecked = false, onChange, indeterminate, disabled, loading, children, className, style, ...rest
 }: CheckboxProps) {
   const [on, set] = useCtrl(checked, defaultChecked, onChange);
   const id = useId();
   return (
-    <label className={cx("mimicus-checkbox", `mimicus-checkbox--${size}`, on && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className)} style={style}>
+    <label className={cx("mimicus-checkbox", on && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className)} style={style}>
       <input {...rest} id={id} type="checkbox" className="mimicus-checkbox__native" checked={Boolean(on)} disabled={disabled || loading}
         onChange={(e) => set(e.target.checked)} />
       <span className="mimicus-checkbox__box" aria-hidden />
@@ -117,16 +116,38 @@ export function Checkbox({
 }
 
 export interface CheckboxIconProps extends CheckboxProps {
-  color?: string; variant?: string; icon?: ReactNode; iconChecked?: ReactNode; iconUnchecked?: ReactNode;
+  color?: string; variant?: string;
+  /** Icono (aplica a ambos estados). Acepta string Iconify ("mdi:check") o ReactNode. */
+  icon?: string | ReactNode;
+  /** Icono para estado checked. Si se omite, usa `icon`. */
+  iconChecked?: string | ReactNode;
+  /** Icono para estado unchecked. Si se omite, usa un cuadrado vacío. */
+  iconUnchecked?: string | ReactNode;
+  /** Color del icono en estado checked. */
+  colorChecked?: string;
+  /** Color del icono en estado unchecked. */
+  colorUnchecked?: string;
 }
-export function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, className, ...rest }: CheckboxIconProps) {
+function resolveIconNode(icon: string | ReactNode | undefined): ReactNode {
+  if (icon == null || icon === "") return null;
+  if (typeof icon === "string") return <iconify-icon icon={icon} />;
+  return icon;
+}
+export function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, colorChecked, colorUnchecked, className, ...rest }: CheckboxIconProps) {
   const surface = mergeSurfaceStyle(color, { variant: variant ?? "solid" });
+  const onNode = resolveIconNode(iconChecked ?? icon) ?? <iconify-icon icon="mdi:check" />;
+  const offNode = resolveIconNode(iconUnchecked) ?? <iconify-icon icon="" />;
   return (
     <Checkbox {...rest} checked={checked} defaultChecked={defaultChecked} onChange={onChange} disabled={disabled} loading={loading}
-      className={cx("mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", className)} style={surface.style}>
+      className={cx("mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", className)}
+      style={{
+        ...surface.style,
+        "--cb-on-fg": colorChecked || undefined,
+        "--cb-off-fg": colorUnchecked || undefined,
+      } as CSSProperties}>
       <span className="mimicus-checkbox__icons">
-        <span className="mimicus-checkbox__icon mimicus-checkbox__icon--on">{iconChecked ?? icon ?? "✓"}</span>
-        <span className="mimicus-checkbox__icon mimicus-checkbox__icon--off">{iconUnchecked ?? "○"}</span>
+        <span className="mimicus-checkbox__icon mimicus-checkbox__icon--on" aria-hidden>{onNode}</span>
+        <span className="mimicus-checkbox__icon mimicus-checkbox__icon--off" aria-hidden>{offNode}</span>
       </span>
       {children}
     </Checkbox>
@@ -144,15 +165,44 @@ export function CheckboxChip({ value, options, onChange, className, style }: Che
 
 /* ── Switch ── */
 export interface SwitchProps extends BaseProps {
-  checked?: boolean; defaultChecked?: boolean; onChange?: (v: boolean) => void; disabled?: boolean; loading?: boolean; size?: Size; [key: string]: unknown;
+  checked?: boolean; defaultChecked?: boolean; onChange?: (v: boolean) => void; disabled?: boolean; loading?: boolean;
+  /** Icono único: nombre Iconify ("mdi:check") o ReactNode; se muestra en ambos estados. */
+  icon?: string | ReactNode;
+  /** Icono específico para estado ON. */
+  iconOn?: ReactNode;
+  /** Icono específico para estado OFF. */
+  iconOff?: ReactNode;
+  /** Color del icono en estado ON (CSS color). */
+  colorOn?: string;
+  /** Color del icono en estado OFF (CSS color). */
+  colorOff?: string;
+  [key: string]: unknown;
 }
-export function Switch({ checked, defaultChecked = false, onChange, disabled, loading, size = "medium", children, className, style, ...rest }: SwitchProps) {
+function resolveIcon(icon: string | ReactNode | undefined): ReactNode | null {
+  if (icon == null || icon === "") return null;
+  if (typeof icon === "string") return <iconify-icon icon={icon} />;
+  return icon;
+}
+export function Switch({ checked, defaultChecked = false, onChange, disabled, loading, icon, iconOn, iconOff, colorOn, colorOff, children, className, style, ...rest }: SwitchProps) {
   const [on, set] = useCtrl(checked, defaultChecked, onChange);
+  // Icono único: usa iconOn si existe, si no iconOff, si no el icono por defecto del switch.
+  // El flip horizontal se aplica por CSS al icono cuando está OFF para invertirlo visualmente.
+  const activeIcon = resolveIcon(iconOn ?? icon ?? "mdi:toggle-switch");
+  const offIcon = resolveIcon(iconOff ?? icon ?? "mdi:toggle-switch-outline");
+  const activeNode = on ? activeIcon : offIcon;
+  const fgVar = on ? "--sw-on-fg" : "--sw-off-fg";
+  const fgValue = on ? colorOn : colorOff;
   return (
-    <label className={cx("mimicus-switch", `mimicus-switch--${size}`, on && "is-checked", disabled && "is-disabled", loading && "is-loading", className)} style={style}>
+    <label className={cx("mimicus-switch", on && "is-checked", disabled && "is-disabled", loading && "is-loading", className)} style={style}>
       <input {...rest} type="checkbox" role="switch" className="mimicus-switch__native" checked={Boolean(on)} disabled={disabled || loading}
         onChange={(e) => set(e.target.checked)} />
-      <span className="mimicus-switch__track"><span className="mimicus-switch__thumb" /></span>
+      <span
+        className={cx("mimicus-switch__icon-box", on && "is-on")}
+        style={fgValue ? { [fgVar]: fgValue } as CSSProperties : undefined}
+        aria-hidden
+      >
+        {activeNode}
+      </span>
       {children != null && <span className="mimicus-switch__label">{children}</span>}
     </label>
   );
@@ -225,14 +275,14 @@ export function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, 
 /* ── Rate / Rating ── */
 export interface RateProps extends BaseProps {
   value?: number; defaultValue?: number; onChange?: (v: number) => void; count?: number; allowHalf?: boolean;
-  allowClear?: boolean; disabled?: boolean; character?: ReactNode; size?: Size; [key: string]: unknown;
+  allowClear?: boolean; disabled?: boolean; character?: ReactNode; [key: string]: unknown;
 }
-export function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "★", size = "medium", className, style, ...rest }: RateProps) {
+export function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "★", className, style, ...rest }: RateProps) {
   const ref = useRef(null);
   const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "rate", [count, allowHalf, allowClear, val, disabled]);
   return (
-    <div ref={ref} {...rest} role="radiogroup" className={cx("mimicus-rate", `mimicus-rate--${size}`, disabled && "is-disabled", className)} style={style}
+    <div ref={ref} {...rest} role="radiogroup" className={cx("mimicus-rate", disabled && "is-disabled", className)} style={style}
       data-count={count} data-value={val} data-default-value={defaultValue} data-allow-half={allowHalf ? "true" : undefined}
       data-allow-clear={allowClear ? "true" : "false"} data-disabled={disabled ? "true" : undefined} data-mimicus-form="rate">
       {Array.from({ length: count }, (_, i) => (
@@ -246,17 +296,156 @@ export const Rating = Rate;
 /* ── Select ── */
 export interface SelectProps extends BaseProps {
   value?: string; defaultValue?: string; onChange?: (v: string) => void; options?: Option[];
-  placeholder?: string; disabled?: boolean; size?: Size; [key: string]: unknown;
+  placeholder?: string; disabled?: boolean; size?: "small" | "medium"; [key: string]: unknown;
 }
 export function Select({ value, defaultValue, onChange, options, placeholder, disabled, size = "medium", className, style, children, ...rest }: SelectProps) {
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLSpanElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // Fallback nativo cuando options llega como strings simples o sólo `children` (compatibilidad).
+  const isStructured = Array.isArray(options) && options.every((o) => o && typeof o === "object" && "value" in (o as object));
+  const items: Option[] = isStructured ? (options as Option[]) : [];
+  const current = items.find((o) => String(o.value) === String(val));
+  const fallbackLabel = children ? undefined : items.find((o) => String(o.value) === String(val))?.label;
+
+  // Posiciona el panel flotante debajo del trigger, manteniéndolo en viewport.
+  useEffect(() => {
+    if (!open) return;
+    const dlg = dialogRef.current;
+    const trg = triggerRef.current;
+    if (!dlg || !trg) return;
+    const place = () => {
+      const r = trg.getBoundingClientRect();
+      const margin = 0;
+      const desiredLeft = r.left;
+      const desiredTop = r.bottom + margin;
+      const panelWidth = Math.max(r.width, 180);
+      const maxLeft = window.innerWidth - panelWidth - 8;
+      dlg.style.setProperty("--mimicus-select-left", `${Math.max(8, Math.min(desiredLeft, maxLeft))}px`);
+      dlg.style.setProperty("--mimicus-select-top", `${desiredTop}px`);
+      dlg.style.setProperty("--mimicus-select-min-w", `${r.width}px`);
+    };
+    place();
+    window.addEventListener("resize", place);
+    window.addEventListener("scroll", place, true);
+    return () => {
+      window.removeEventListener("resize", place);
+      window.removeEventListener("scroll", place, true);
+    };
+  }, [open]);
+
+  // Abre/cierra el <dialog> nativo (top-layer + backdrop + focus trap + Escape gratis).
+  useEffect(() => {
+    const dlg = dialogRef.current;
+    if (!dlg) return;
+    if (open) {
+      if (!dlg.open) dlg.showModal();
+    } else if (dlg.open) {
+      dlg.close();
+    }
+  }, [open]);
+
+  // Cuando se desmonta el <dialog> (open=false), pierde el foco que tenía → lo devolvemos al trigger.
+  useEffect(() => {
+    if (!open && document.activeElement && triggerRef.current && document.activeElement !== triggerRef.current) {
+      // No forzamos foco para no interrumpir otros flujos (preview inputs, etc.).
+      // El <dialog> se desmonta limpio, así que no hay backdrop residual ni focus atrapado.
+    }
+  }, [open]);
+
+  // Cierre al pulsar Escape (defensa adicional; <dialog> ya lo hace).
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  if (!isStructured) {
+    return (
+      <span className={cx("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className)} style={style}>
+        <select {...rest} className="mimicus-select__native" value={val ?? ""} disabled={disabled} onChange={(e) => set(e.target.value)}>
+          {placeholder && <option value="">{placeholder}</option>}
+          {children ?? options?.map((opt) => <option key={opt.value} value={opt.value} disabled={opt.disabled}>{opt.label}</option>)}
+        </select>
+        <span className="mimicus-select__arrow" aria-hidden>▾</span>
+      </span>
+    );
+  }
+
   return (
-    <span className={cx("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className)} style={style}>
-      <select {...rest} className="mimicus-select__native" value={val ?? ""} disabled={disabled} onChange={(e) => set(e.target.value)}>
-        {placeholder && <option value="">{placeholder}</option>}
-        {children ?? options?.map((opt) => <option key={opt.value} value={opt.value} disabled={opt.disabled}>{opt.label}</option>)}
+    <span
+      ref={rootRef}
+      className={cx("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", open && "is-open", className)}
+      style={style}
+      data-value={val ?? ""}
+    >
+      <button
+        ref={triggerRef}
+        type="button"
+        className="mimicus-select__trigger"
+        disabled={disabled}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        onClick={() => !disabled && setOpen((o) => !o)}
+      >
+        <span className="mimicus-select__value">
+          {current?.icon && <span className="mimicus-select__icon" aria-hidden>{current.icon}</span>}
+          <span className="mimicus-select__label">{current?.label ?? placeholder ?? ""}</span>
+        </span>
+        <span className="mimicus-select__arrow" aria-hidden>▾</span>
+      </button>
+      {open && (
+      <dialog
+        ref={dialogRef}
+        className="mimicus-select__dialog"
+        data-mimicus-select-dialog
+        onClose={() => setOpen(false)}
+        onCancel={(e) => { e.preventDefault(); setOpen(false); }}
+        onClick={(e) => {
+          // Click en el backdrop (::backdrop o fuera del panel) cierra.
+          const panel = dialogRef.current?.querySelector(".mimicus-select__panel") as HTMLElement | null;
+          if (panel && !panel.contains(e.target as Node)) setOpen(false);
+        }}
+      >
+        <ul role="listbox" className="mimicus-select__panel" data-mimicus-select-panel onClick={(e) => e.stopPropagation()}>
+          {placeholder && (
+            <li role="option" aria-selected={!val} className={cx("mimicus-select__option", !val && "is-selected")} onClick={() => { set(""); setOpen(false); }}>
+              <span className="mimicus-select__label">{placeholder}</span>
+            </li>
+          )}
+          {items.map((opt) => {
+            const selected = String(opt.value) === String(val);
+            return (
+              <li
+                key={String(opt.value)}
+                role="option"
+                aria-selected={selected}
+                aria-disabled={opt.disabled}
+                className={cx("mimicus-select__option", selected && "is-selected", opt.disabled && "is-disabled")}
+                onClick={() => {
+                  if (opt.disabled) return;
+                  set(opt.value);
+                  setOpen(false);
+                }}
+              >
+                {opt.icon && <span className="mimicus-select__icon" aria-hidden>{opt.icon}</span>}
+                <span className="mimicus-select__label">{opt.label ?? opt.value}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </dialog>
+      )}
+      {/* Mantiene un <select> oculto para forms nativos y a11y */}
+      <select {...rest} tabIndex={-1} aria-hidden className="mimicus-select__native mimicus-select__native--sr" value={val ?? ""} disabled={disabled} onChange={(e) => set(e.target.value)}>
+        {items.map((o) => <option key={String(o.value)} value={String(o.value)}>{typeof fallbackLabel === "string" ? fallbackLabel : ""}</option>)}
       </select>
-      <span className="mimicus-select__arrow" aria-hidden>▾</span>
     </span>
   );
 }
@@ -303,14 +492,14 @@ export function ToggleButton({ value, selected, onChange, disabled, children, ic
 
 export interface ToggleButtonGroupProps extends BaseProps {
   value?: string | string[]; defaultValue?: string | string[]; onChange?: (v: string) => void; exclusive?: boolean;
-  orientation?: "horizontal" | "vertical"; size?: Size; [key: string]: unknown;
+  orientation?: "horizontal" | "vertical"; [key: string]: unknown;
 }
-export function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", size, children, className, style, ...rest }: ToggleButtonGroupProps) {
+export function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", children, className, style, ...rest }: ToggleButtonGroupProps) {
   const ref = useRef(null);
   const [val, set] = useCtrl<string | string[]>(value, defaultValue ?? (exclusive ? "" : []), onChange as (v: string | string[]) => void);
   const normalized = exclusive ? val : (Array.isArray(val) ? val.join(",") : val);
   return (
-    <div ref={ref} {...rest} role="group" className={cx("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, size && `mimicus-toggle-group--${size}`, className)}
+    <div ref={ref} {...rest} role="group" className={cx("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, className)}
       style={style} data-exclusive={exclusive ? "true" : "false"} data-value={normalized as string} data-mimicus-form="toggle-group">
       {Children.map(children, (child) => {
         const node = child as ReactElement<ToggleButtonProps> | null;

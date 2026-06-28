@@ -5,14 +5,41 @@
   "titleIcon": "mdi:form-textbox",
   "status": "approved",
   "intro": "Campo de texto Ant / MUI <code>TextField</code>: tamaños, clear, prefijos y estados.",
-  "component": { "name": "Input", "path": "src/components/forms/Forms.jsx" },
-  "preview": { "template": "form-input" },
-  "state": { "size": "medium", "disabled": false, "allowClear": true },
-  "details": { "placeholder": "Escribe aquí…" },
+  "component": {
+    "name": "Input",
+    "path": "src/components/forms/Forms.jsx"
+  },
+  "preview": {
+    "template": "form-input"
+  },
+  "state": {
+    "disabled": false,
+    "allowClear": true
+  },
+  "details": {
+    "placeholder": "Escribe aquí…"
+  },
   "fields": [
-    { "kind": "select-enum", "key": "size", "label": "size", "attrType": "str", "enumValue": { "Small": "small", "Medium": "medium", "Large": "large" } },
-    { "kind": "switch", "key": "disabled", "label": "disabled" },
-    { "kind": "switch", "key": "allowClear", "label": "allowClear" }
+    {
+      "kind": "switch",
+      "key": "disabled",
+      "label": "disabled",
+      "iconOn": "mdi:cancel",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    },
+    {
+      "kind": "switch",
+      "key": "allowClear",
+      "label": "allowClear",
+      "iconOn": "mdi:eraser",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
   ],
-  "code": { "strategy": "form-entry" }
+  "code": {
+    "strategy": "form-entry"
+  }
 }

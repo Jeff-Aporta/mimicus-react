@@ -5,35 +5,125 @@
   "titleIcon": "mdi:dock-left",
   "status": "approved",
   "intro": "Panel lateral estándar del ecosistema Mimicus: expandido, <code>rail</code> (colapsado, solo iconos) o <code>drawer</code>. Las vistas y la navegación del header se alimentan por JSON — ver <code>demo/config/playground-shell.json</code> (<code>views</code>, <code>navigation.rows</code>). Usa <code>SidePanelSection</code> para acordeones. En rail el scrollbar se oculta.",
-  "component": { "name": "SidePanel", "path": "src/layout/SidePanel.jsx" },
-  "preview": { "template": "layout-side-panel", "style": "width: 100%; align-self: stretch;" },
-  "shell": { "relieve": 62, "configBlockCount": 2 },
-  "state": { "open": true, "drawer": false },
-  "details": { "sectionCount": 3 },
+  "component": {
+    "name": "SidePanel",
+    "path": "src/layout/SidePanel.jsx"
+  },
+  "preview": {
+    "template": "layout-side-panel",
+    "style": "width: 100%; align-self: stretch;"
+  },
+  "shell": {
+    "relieve": 62,
+    "configBlockCount": 2
+  },
+  "state": {
+    "open": true,
+    "drawer": false
+  },
+  "details": {
+    "sectionCount": 3
+  },
   "panelViews": {
     "collapsed": {
       "type": "stack",
       "className": "pg-panel-view pg-panel-view--rail",
       "gap": "0.35rem",
-      "children": [{ "type": "catalog-categories", "mode": "rail" }]
+      "children": [
+        {
+          "type": "catalog-categories",
+          "mode": "rail"
+        }
+      ]
     },
     "expanded": {
       "type": "stack",
       "className": "pg-panel-view pg-panel-view--expanded",
       "gap": "0.25rem",
-      "children": [{ "type": "catalog-categories", "mode": "sections" }]
+      "children": [
+        {
+          "type": "catalog-categories",
+          "mode": "sections"
+        }
+      ]
     }
   },
   "fields": [
-    { "kind": "switch-group", "key": "modes", "label": "Modos", "labelIcon": "mdi:tune", "switches": [{ "key": "open", "label": "expandido" }, { "key": "drawer", "label": "drawer" }] }
+    {
+      "kind": "switch-group",
+      "key": "modes",
+      "label": "Modos",
+      "labelIcon": "mdi:tune",
+      "switches": [
+        {
+          "key": "open",
+          "label": "expandido",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "drawer",
+          "label": "drawer",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        }
+      ]
+    }
   ],
   "detailFields": [
-    { "kind": "number", "key": "sectionCount", "label": "secciones demo", "labelIcon": "mdi:counter", "min": 1, "max": 6, "step": 1 }
+    {
+      "kind": "number",
+      "key": "sectionCount",
+      "label": "secciones demo",
+      "labelIcon": "mdi:counter",
+      "min": 1,
+      "max": 6,
+      "step": 1
+    }
   ],
   "presets": [
-    { "label": "Expandido", "icon": "mdi:dock-left", "state": { "open": true, "drawer": false }, "details": { "sectionCount": 3 } },
-    { "label": "Rail", "icon": "mdi:dock-window", "state": { "open": false, "drawer": false }, "details": { "sectionCount": 4 } },
-    { "label": "Drawer", "icon": "mdi:page-layout-sidebar-left", "state": { "open": true, "drawer": true }, "details": { "sectionCount": 2 } }
+    {
+      "label": "Expandido",
+      "icon": "mdi:dock-left",
+      "state": {
+        "open": true,
+        "drawer": false
+      },
+      "details": {
+        "sectionCount": 3
+      }
+    },
+    {
+      "label": "Rail",
+      "icon": "mdi:dock-window",
+      "state": {
+        "open": false,
+        "drawer": false
+      },
+      "details": {
+        "sectionCount": 4
+      }
+    },
+    {
+      "label": "Drawer",
+      "icon": "mdi:page-layout-sidebar-left",
+      "state": {
+        "open": true,
+        "drawer": true
+      },
+      "details": {
+        "sectionCount": 2
+      }
+    }
   ],
-  "code": { "strategy": "side-panel-pattern", "tagOpts": { "multiline": true } }
+  "code": {
+    "strategy": "side-panel-pattern",
+    "tagOpts": {
+      "multiline": true
+    }
+  }
 }

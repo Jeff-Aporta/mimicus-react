@@ -1,19 +1,76 @@
 {
-   "id": "Space",
-   "category": "Layouts",
-   "label": "Space",
-   "titleIcon": "mdi:arrow-expand-horizontal",
-   "status": "approved",
-   "intro": "Espaciado entre elementos inline (Ant Design <code>Space</code>): orientación, tamaño y wrap.",
-   "component": { "name": "Space", "path": "src/layout/Space.jsx" },
-   "preview": { "template": "layout-flex", "options": { "wrapperStyle": "width: 100%;" } },
-   "state": { "orientation": "horizontal", "size": "middle", "wrap": false },
-   "details": { "itemCount": 4 },
-   "fields": [
-      { "kind": "select-enum", "key": "orientation", "label": "orientation", "enumValue": { "Horizontal": "horizontal", "Vertical": "vertical" } },
-      { "kind": "select-enum", "key": "size", "label": "size", "enumValue": { "small": "small", "middle": "middle", "large": "large" } },
-      { "kind": "switch", "key": "wrap", "label": "wrap" }
-   ],
-   "detailFields": [{ "kind": "number", "key": "itemCount", "label": "Elementos", "min": 1, "max": 12, "step": 1 }],
-   "code": { "strategy": "layout-items", "tagOpts": { "multiline": true }, "options": { "layout": "flex", "useCard": true } }
+  "id": "Space",
+  "category": "Layouts",
+  "label": "Space",
+  "titleIcon": "mdi:arrow-expand-horizontal",
+  "status": "approved",
+  "intro": "Espaciado entre elementos inline (Ant Design <code>Space</code>): orientación, tamaño y wrap.",
+  "component": {
+    "name": "Space",
+    "path": "src/layout/Space.jsx"
+  },
+  "preview": {
+    "template": "layout-flex",
+    "options": {
+      "wrapperStyle": "width: 100%;"
+    }
+  },
+  "state": {
+    "orientation": "horizontal",
+    "size": "middle",
+    "wrap": false
+  },
+  "details": {
+    "itemCount": 4
+  },
+  "fields": [
+    {
+      "kind": "select-enum",
+      "key": "orientation",
+      "label": "orientation",
+      "enumValue": {
+        "Horizontal": "horizontal",
+        "Vertical": "vertical"
+      }
+    },
+    {
+      "kind": "select-enum",
+      "key": "size",
+      "label": "size",
+      "enumValue": {
+        "small": "small",
+        "middle": "middle",
+        "large": "large"
+      }
+    },
+    {
+      "kind": "switch",
+      "key": "wrap",
+      "label": "wrap",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "detailFields": [
+    {
+      "kind": "number",
+      "key": "itemCount",
+      "label": "Elementos",
+      "min": 1,
+      "max": 12,
+      "step": 1
+    }
+  ],
+  "code": {
+    "strategy": "layout-items",
+    "tagOpts": {
+      "multiline": true
+    },
+    "options": {
+      "layout": "flex",
+      "useCard": true
+    }
+  }
 }

@@ -18,13 +18,13 @@ export interface BlockLayoutProps extends Omit<HTMLAttributes<HTMLDivElement>, "
 }
 
 export function BlockLayout({ inline = false, sizew: sizewProp, cscroll = false, className, style, children, ...rest }: BlockLayoutProps) {
-  const { ref, slot } = useLayoutContainer(sizewProp);
+  const { ref, slot, dataSizew, vars } = useLayoutContainer(sizewProp);
   const cls = [getScrollbarClass(cscroll, style), className].filter(Boolean).join(" ");
-  const mergedStyle = joinStyle(style, `display: ${inline ? "inline-block" : "block"}`);
+  const mergedStyle = { ...joinStyle(style, `display: ${inline ? "inline-block" : "block"}`), ...vars };
 
   return (
     <LayoutSlotContext.Provider value={slot}>
-      <div ref={ref} className={cls} style={mergedStyle} {...rest} {...dataDebug(rest, "block-layout")}>
+      <div ref={ref} className={cls} style={mergedStyle} data-sizew={dataSizew} {...rest} {...dataDebug(rest, "block-layout")}>
         {children}
       </div>
     </LayoutSlotContext.Provider>

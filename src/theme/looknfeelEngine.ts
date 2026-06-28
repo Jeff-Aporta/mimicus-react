@@ -3,10 +3,8 @@ import {
   LOOKNFEEL_DEFAULT,
   normalizeLooknfeel,
   readLooknfeelFromDom,
-  designSchemeForLooknfeel,
   type Looknfeel,
 } from "./constants.ts";
-import { setDesignScheme } from "./themeEngine.ts";
 
 export type LooknfeelListener = (value: Looknfeel) => void;
 
@@ -39,7 +37,6 @@ export function applyLooknfeel(value: Looknfeel): void {
   try {
     localStorage.setItem(LOOKNFEEL_STORAGE_KEY, value);
   } catch { /* ignore */ }
-  setDesignScheme(designSchemeForLooknfeel(value));
   listeners.forEach((fn) => {
     try { fn(value); } catch { /* ignore */ }
   });

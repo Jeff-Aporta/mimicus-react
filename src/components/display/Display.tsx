@@ -17,10 +17,10 @@ function hashColor(s: ReactNode): string { let h = 0; const str = String(s); for
 
 /* ── Badge (count / dot) ── */
 export interface BadgeProps extends BaseProps {
-  count?: number | string; dot?: boolean; showZero?: boolean; max?: number; color?: string; offset?: [number, number]; size?: Size; [key: string]: unknown;
+  count?: number | string; dot?: boolean; showZero?: boolean; max?: number; color?: string; offset?: [number, number]; [key: string]: unknown;
 }
 export function Badge({
-  count, dot, showZero = false, max = 99, color = "primary", offset, size = "medium", children, className, style, ...rest
+  count, dot, showZero = false, max = 99, color = "primary", offset, children, className, style, ...rest
 }: BadgeProps) {
   const n = Number(count);
   const show = dot || (showZero ? n >= 0 : n > 0);
@@ -29,7 +29,7 @@ export function Badge({
     <span {...rest} className={cx("mimicus-badge-wrap", className)} style={style}>
       {children}
       {show && (
-        <sup className={cx("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`, `mimicus-badge--${size}`)}
+        <sup className={cx("mimicus-badge", dot && "mimicus-badge--dot", `mimicus-badge--${color}`)}
           style={offset ? { transform: `translate(${offset[0] ?? 0}px, ${offset[1] ?? 0}px)` } : undefined}>
           {!dot && label}
         </sup>
@@ -59,12 +59,12 @@ export const Chip = Tag;
 
 /* ── Avatar ── */
 export interface AvatarProps extends BaseProps {
-  src?: string; alt?: string; size?: Size; variant?: "circular" | "rounded" | "square"; [key: string]: unknown;
+  src?: string; alt?: string; variant?: "circular" | "rounded" | "square"; [key: string]: unknown;
 }
-export function Avatar({ src, alt, size = "medium", variant = "circular", children, className, style, ...rest }: AvatarProps) {
+export function Avatar({ src, alt, variant = "circular", children, className, style, ...rest }: AvatarProps) {
   const label = alt ?? (typeof children === "string" ? children : "?");
   return (
-    <span {...rest} className={cx("mimicus-avatar", `mimicus-avatar--${size}`, `mimicus-avatar--${variant}`, className)} style={style}
+    <span {...rest} className={cx("mimicus-avatar", `mimicus-avatar--${variant}`, className)} style={style}
       title={alt}>
       {src ? <img className="mimicus-avatar__img" src={src} alt={alt ?? ""} /> : (
         <span className="mimicus-avatar__fallback" style={{ background: hashColor(label) }}>{children ?? initials(label)}</span>
@@ -81,7 +81,7 @@ export function AvatarGroup({ max = 5, total, spacing = "medium", children, clas
   return (
     <span {...rest} className={cx("mimicus-avatar-group", `mimicus-avatar-group--${spacing}`, className)} style={style}>
       {shown}
-      {surplus > 0 && <Avatar size="medium" className="mimicus-avatar-group__surplus">+{surplus}</Avatar>}
+      {surplus > 0 && <Avatar className="mimicus-avatar-group__surplus">+{surplus}</Avatar>}
     </span>
   );
 }
@@ -164,11 +164,11 @@ export function DescriptionsItem({ label, span = 1, children, className, ...rest
 }
 
 export interface DescriptionsProps extends BaseProps {
-  title?: ReactNode; bordered?: boolean; column?: number; size?: Size; [key: string]: unknown;
+  title?: ReactNode; bordered?: boolean; column?: number; [key: string]: unknown;
 }
-export function Descriptions({ title, bordered = false, column = 3, size = "medium", children, className, style, ...rest }: DescriptionsProps) {
+export function Descriptions({ title, bordered = false, column = 3, children, className, style, ...rest }: DescriptionsProps) {
   return (
-    <div {...rest} className={cx("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", `mimicus-descriptions--${size}`, className)} style={style}>
+    <div {...rest} className={cx("mimicus-descriptions", bordered && "mimicus-descriptions--bordered", className)} style={style}>
       {title && <div className="mimicus-descriptions__title">{title}</div>}
       <dl className="mimicus-descriptions__list" style={{ "--mimicus-desc-cols": column } as CSSProperties}>
         {children}
@@ -223,14 +223,14 @@ export function QRCode({ value = "", size = 128, bordered = true, className, sty
 /* ── Segmented ── */
 interface SegmentedOption { value: string; label?: ReactNode; icon?: ReactNode }
 export interface SegmentedProps extends BaseProps {
-  options?: SegmentedOption[]; value?: string; defaultValue?: string; onChange?: (v: string) => void; block?: boolean; size?: Size; [key: string]: unknown;
+  options?: SegmentedOption[]; value?: string; defaultValue?: string; onChange?: (v: string) => void; block?: boolean; [key: string]: unknown;
 }
-export function Segmented({ options = [], value, defaultValue, onChange, block, size = "medium", className, style, ...rest }: SegmentedProps) {
+export function Segmented({ options = [], value, defaultValue, onChange, block, className, style, ...rest }: SegmentedProps) {
   const ref = useRef(null);
   const cur = value ?? defaultValue ?? options[0]?.value;
   useDisplayBinding(ref, "segmented", [cur, options.length]);
   return (
-    <div {...rest} ref={ref} className={cx("mimicus-segmented", `mimicus-segmented--${size}`, block && "mimicus-segmented--block", className)} style={style}
+    <div {...rest} ref={ref} className={cx("mimicus-segmented", block && "mimicus-segmented--block", className)} style={style}
       data-mimicus-display="segmented" data-value={cur} role="group">
       {options.map((opt) => (
         <button key={opt.value} type="button" className={cx("mimicus-segmented__item", cur === opt.value && "is-active")}
@@ -264,16 +264,16 @@ export function Statistic({ title, value, prefix, suffix, precision, className, 
 // columns/dataSource son genéricos del consumidor; `any` puntual por la forma arbitraria de las filas.
 interface TableColumn { key?: string; title?: ReactNode; dataIndex?: string; sorter?: unknown; render?: (cell: any, row: any) => ReactNode }
 export interface TableProps extends BaseProps {
-  columns?: TableColumn[]; dataSource?: any[]; bordered?: boolean; size?: Size; sortable?: boolean; pagination?: unknown; [key: string]: unknown;
+  columns?: TableColumn[]; dataSource?: any[]; bordered?: boolean; sortable?: boolean; pagination?: unknown; [key: string]: unknown;
 }
-export function Table({ columns = [], dataSource = [], bordered, size = "medium", sortable, pagination, className, style, children, ...rest }: TableProps) {
+export function Table({ columns = [], dataSource = [], bordered, sortable, pagination, className, style, children, ...rest }: TableProps) {
   const ref = useRef(null);
   useDisplayBinding(ref, sortable ? "table" : null, [sortable, dataSource.length]);
   if (children) {
-    return <table {...rest} ref={ref} className={cx("mimicus-table", bordered && "mimicus-table--bordered", `mimicus-table--${size}`, className)} style={style} data-mimicus-display={sortable ? "table" : undefined}>{children}</table>;
+    return <table {...rest} ref={ref} className={cx("mimicus-table", bordered && "mimicus-table--bordered", className)} style={style} data-mimicus-display={sortable ? "table" : undefined}>{children}</table>;
   }
   return (
-    <table {...rest} ref={ref} className={cx("mimicus-table", bordered && "mimicus-table--bordered", `mimicus-table--${size}`, className)} style={style} data-mimicus-display={sortable ? "table" : undefined}>
+    <table {...rest} ref={ref} className={cx("mimicus-table", bordered && "mimicus-table--bordered", className)} style={style} data-mimicus-display={sortable ? "table" : undefined}>
       <thead><tr>{columns.map((col, i) => (
         <th key={col.key ?? i} data-mimicus-table-sort={sortable && col.sorter ? i : undefined} className={sortable && col.sorter ? "mimicus-table__sortable" : undefined}>{col.title}</th>
       ))}</tr></thead>

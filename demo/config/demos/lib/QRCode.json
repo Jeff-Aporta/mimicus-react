@@ -5,14 +5,50 @@
   "titleIcon": "mdi:qrcode",
   "status": "approved",
   "intro": "Código QR renderizado en <code>canvas</code> (patrón demo determinista). Ver <a href=\"https://ant.design/components/qr-code\" target=\"_blank\" rel=\"noreferrer\">Ant QRCode</a>.",
-  "component": { "name": "QRCode", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-qrcode" },
-  "state": { "size": 128, "bordered": true },
-  "details": { "value": "https://mimicus.dev" },
+  "component": {
+    "name": "QRCode",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-qrcode"
+  },
+  "state": {
+    "size": 128,
+    "bordered": true
+  },
+  "details": {
+    "value": "https://mimicus.dev"
+  },
   "fields": [
-    { "kind": "number", "key": "size", "label": "size", "labelIcon": "mdi:resize", "min": 64, "max": 256, "step": 8 },
-    { "kind": "switch", "key": "bordered", "label": "bordered", "labelIcon": "mdi:border-all" }
+    {
+      "kind": "number",
+      "key": "size",
+      "label": "size",
+      "labelIcon": "mdi:resize",
+      "min": 64,
+      "max": 256,
+      "step": 8
+    },
+    {
+      "kind": "switch",
+      "key": "bordered",
+      "label": "bordered",
+      "labelIcon": "mdi:border-all",
+      "iconOn": "mdi:border-all",
+      "iconOff": "mdi:border-all-variant",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
   ],
-  "detailFields": [{ "kind": "text", "key": "value", "label": "value", "labelIcon": "mdi:link-variant" }],
-  "code": { "strategy": "disp-qrcode" }
+  "detailFields": [
+    {
+      "kind": "text",
+      "key": "value",
+      "label": "value",
+      "labelIcon": "mdi:link-variant"
+    }
+  ],
+  "code": {
+    "strategy": "disp-qrcode"
+  }
 }

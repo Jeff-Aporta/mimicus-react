@@ -586,7 +586,7 @@ html[data-luminance="light"] {
 /* Tokens scrollbar — derivados de la paleta activa (--mimicus-* en html / .mimicus-ui-root). */
 html,
 .mimicus-ui-root {
-	--pg-scrollbar-size: 6px;
+	--pg-scrollbar-size: 2.4px;
 	--pg-scrollbar-track: color-mix(in srgb, var(--mimicus-primary) 16%, transparent);
 	--pg-scrollbar-thumb: color-mix(in srgb, var(--mimicus-primary) 55%, var(--mimicus-info, var(--mimicus-primary)) 12%);
 	--pg-scrollbar-thumb-hover: color-mix(in srgb, var(--mimicus-primary) 72%, var(--mimicus-info, var(--mimicus-primary)) 18%);

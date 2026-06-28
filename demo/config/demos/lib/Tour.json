@@ -5,9 +5,29 @@
   "titleIcon": "mdi:map-marker-path",
   "status": "approved",
   "intro": "Recorrido guiado por pasos con overlay. <code>bindTour</code>. Ver <a href=\"https://ant.design/components/tour\" target=\"_blank\" rel=\"noreferrer\">Ant Tour</a>.",
-  "component": { "name": "Tour", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-tour" },
-  "state": { "open": true },
-  "fields": [{ "kind": "switch", "key": "open", "label": "open", "labelIcon": "mdi:eye-outline" }],
-  "code": { "strategy": "disp-tour" }
+  "component": {
+    "name": "Tour",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-tour"
+  },
+  "state": {
+    "open": true
+  },
+  "fields": [
+    {
+      "kind": "switch",
+      "key": "open",
+      "label": "open",
+      "labelIcon": "mdi:eye-outline",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "code": {
+    "strategy": "disp-tour"
+  }
 }

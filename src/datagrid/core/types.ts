@@ -9,6 +9,7 @@ export type CellValue = unknown;
 export type RowData = Record<string, CellValue>;
 
 export type ColumnType = "text" | "number" | "date" | "boolean";
+export type AggFunc = "sum" | "avg" | "min" | "max" | "count" | "first" | "last";
 export type SortDir = "asc" | "desc";
 export type PinSide = "left" | "right" | null;
 export type Align = "left" | "center" | "right";
@@ -32,6 +33,9 @@ export interface ColumnDef<T = RowData> {
   pinned?: PinSide;
   hide?: boolean;
   align?: Align;
+  rowGroup?: boolean;          // agrupar por esta columna desde el inicio
+  enableRowGroup?: boolean;    // permite arrastrarla al panel de agrupación (default: true salvo que se desactive)
+  aggFunc?: AggFunc;           // función de agregación para filas de grupo
   checkboxSelection?: boolean;
   valueGetter?: (row: T) => CellValue;
   valueFormatter?: (value: CellValue, row: T) => string;
@@ -57,6 +61,8 @@ export interface ColumnState {
   pinned: PinSide;
   hide: boolean;
   align: Align;
+  enableRowGroup: boolean;
+  aggFunc: AggFunc | null;
   checkboxSelection: boolean;
   def: ColumnDef;
 }
@@ -77,6 +83,23 @@ export type FilterModel = Record<string, ColumnFilter>;
 
 export interface RowNode<T = RowData> { id: string; index: number; data: T }
 
+/** Fila de grupo (cuando hay agrupación activa). */
+export interface GroupRow<T = RowData> {
+  kind: "group";
+  id: string;                          // ruta única del grupo (clave de expand/collapse)
+  colId: string;                       // columna que define el grupo
+  field: string;
+  value: CellValue;                    // valor crudo del grupo
+  label: string;                       // valor formateado para mostrar
+  level: number;                       // profundidad (0 = raíz)
+  count: number;                       // nº de hojas descendientes
+  expanded: boolean;
+  agg: Record<string, CellValue>;      // valores agregados por colId
+  leafIds: string[];                   // ids de todas las hojas descendientes
+}
+export interface LeafRow<T = RowData> { kind: "leaf"; level: number; node: RowNode<T> }
+export type DisplayRow<T = RowData> = GroupRow<T> | LeafRow<T>;
+
 export interface GridOptions<T = RowData> {
   columns: ColumnDef<T>[];
   rows: T[];
@@ -89,6 +112,8 @@ export interface GridOptions<T = RowData> {
   quickFilter?: string;
   density?: Density;
   defaultColWidth?: number;
+  rowGroupCols?: string[];
+  groupDefaultExpanded?: number;       // niveles expandidos por defecto (0=ninguno, -1=todos)
 }
 
 export interface GridState<T = RowData> {
@@ -101,9 +126,13 @@ export interface GridState<T = RowData> {
   pagination: boolean;
   page: number;
   pageSize: number;
-  displayedRows: RowNode<T>[];
-  pageRows: RowNode<T>[];
-  totalRows: number;
+  displayedRows: RowNode<T>[];         // hojas filtradas+ordenadas (para selección/export)
+  pageRows: RowNode<T>[];              // hojas de la página (sin agrupación)
+  rowGroupCols: string[];              // columnas de agrupación activas (orden)
+  expandedGroups: Set<string>;
+  displayRows: DisplayRow<T>[];        // vista renderizable (grupos + hojas, según expansión)
+  pageDisplayRows: DisplayRow<T>[];    // vista renderizable de la página
+  totalRows: number;                   // nº de hojas tras filtrar
 }
 
 export type GridListener<T = RowData> = (state: GridState<T>) => void;

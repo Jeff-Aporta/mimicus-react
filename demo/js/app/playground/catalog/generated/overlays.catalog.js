@@ -129,7 +129,11 @@ export const items = [
         {
           "kind": "switch",
           "key": "notClose",
-          "label": "notClose"
+          "label": "notClose",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -175,7 +179,11 @@ export const items = [
           "kind": "switch",
           "key": "showfloat",
           "label": "showfloat",
-          "labelIcon": "mdi:eye-outline"
+          "labelIcon": "mdi:eye-outline",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         },
         {
           "kind": "text",
@@ -452,7 +460,11 @@ export const items = [
           "kind": "switch",
           "key": "showCloseHeader",
           "label": "showCloseHeader",
-          "attrOmit": true
+          "attrOmit": true,
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -546,7 +558,11 @@ export const items = [
           "kind": "switch",
           "key": "useModal",
           "label": "useModal",
-          "labelIcon": "mdi:application-outline"
+          "labelIcon": "mdi:application-outline",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ]
     }

@@ -6,9 +6,8 @@
  * Indicador numérico o de punto superpuesto sobre un elemento.
  */
 .mimicus-badge-wrap { position: relative; display: inline-flex; vertical-align: middle; }
-.mimicus-badge { position: absolute; top: 0; right: 0; transform: translate(50%, -50%); min-width: 1.1rem; height: 1.1rem; padding: 0 0.3rem; border-radius: 999px; font-size: 0.65rem; font-weight: 600; line-height: 1.1rem; text-align: center; --badge-bg: var(--mimicus-primary); background: var(--badge-bg); color: oklch(from var(--badge-bg) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1); box-shadow: 0 0 0 2px var(--mimicus-bg); z-index: 1; }
-.mimicus-badge--dot { width: 0.5rem; min-width: 0.5rem; height: 0.5rem; padding: 0; border-radius: 50%; }
+.mimicus-badge { position: absolute; top: 0; right: 0; transform: translate(50%, -50%); min-width: 1.1em; height: 1.1em; padding: 0 0.3em; border-radius: 999px; font-size: 0.65em; font-weight: 600; line-height: 1.1em; text-align: center; --badge-bg: var(--mimicus-primary); background: var(--badge-bg); color: oklch(from var(--badge-bg) calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1); box-shadow: 0 0 0 2px var(--mimicus-bg); z-index: 1; }
+.mimicus-badge--dot { width: 0.5em; min-width: 0.5em; height: 0.5em; padding: 0; border-radius: 50%; }
 .mimicus-badge--success { --badge-bg: var(--mimicus-success); }
 .mimicus-badge--error { --badge-bg: var(--mimicus-error); }
 .mimicus-badge--warning { --badge-bg: var(--mimicus-warning); }
-.mimicus-badge--small { min-width: 0.95rem; height: 0.95rem; font-size: 0.6rem; line-height: 0.95rem; }

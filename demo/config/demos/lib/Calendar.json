@@ -5,9 +5,29 @@
   "titleIcon": "mdi:calendar-month-outline",
   "status": "approved",
   "intro": "Calendario mensual con navegación vía <code>bindCalendar</code>. Inspirado en <a href=\"https://ant.design/components/calendar\" target=\"_blank\" rel=\"noreferrer\">Ant Calendar</a>.",
-  "component": { "name": "Calendar", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-calendar" },
-  "state": { "fullscreen": false },
-  "fields": [{ "kind": "switch", "key": "fullscreen", "label": "fullscreen", "labelIcon": "mdi:fullscreen" }],
-  "code": { "strategy": "disp-calendar" }
+  "component": {
+    "name": "Calendar",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-calendar"
+  },
+  "state": {
+    "fullscreen": false
+  },
+  "fields": [
+    {
+      "kind": "switch",
+      "key": "fullscreen",
+      "label": "fullscreen",
+      "labelIcon": "mdi:fullscreen",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "code": {
+    "strategy": "disp-calendar"
+  }
 }

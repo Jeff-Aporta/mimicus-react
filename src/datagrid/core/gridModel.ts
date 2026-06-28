@@ -9,9 +9,11 @@ import type {
   ColumnDef, ColumnFilter, ColumnState, Density, GridListener, GridOptions, GridState,
   PinSide, RowData, RowNode, SortModel,
 } from "./types.ts";
+import type { DisplayRow } from "./types.ts";
 import { resolveColumns, setColumnWidth, setColumnPinned, setColumnHidden, moveColumn, autosizeColumn } from "./columnState.ts";
 import { filterRows } from "./pipeline/filtering.ts";
 import { sortRows, cycleSort } from "./pipeline/sorting.ts";
+import { buildDisplayRows, collectGroupIds } from "./pipeline/grouping.ts";
 
 export interface GridApi<T extends RowData = RowData> {
   getState(): GridState<T>;
@@ -31,6 +33,12 @@ export interface GridApi<T extends RowData = RowData> {
   hideColumn(colId: string, hide: boolean): void;
   reorderColumn(colId: string, toIndex: number): void;
   autosizeColumn(colId: string): void;
+  setRowGroupCols(colIds: string[]): void;
+  addRowGroupCol(colId: string, index?: number): void;
+  removeRowGroupCol(colId: string): void;
+  toggleGroup(groupId: string): void;
+  expandAllGroups(): void;
+  collapseAllGroups(): void;
   getColumns(): ColumnState[];
   getDisplayedRows(): RowNode<T>[];
   getAllRows(): RowNode<T>[];
@@ -48,6 +56,8 @@ interface Internal<T extends RowData> {
   pagination: boolean;
   page: number;
   pageSize: number;
+  rowGroupCols: string[];
+  expandedGroups: Set<string>;
   getRowId: (row: T, index: number) => string;
 }
 
@@ -65,9 +75,14 @@ export function createGridModel<T extends RowData = RowData>(options: GridOption
     pagination: options.pagination ?? false,
     page: 0,
     pageSize: options.pageSize ?? 50,
+    rowGroupCols: options.rowGroupCols ?? [],
+    expandedGroups: new Set<string>(),
     getRowId,
   };
   rebuildNodes();
+
+  // Seed inicial de expansión por defecto (groupDefaultExpanded niveles).
+  const groupDefaultExpanded = options.groupDefaultExpanded ?? 0;
 
   const listeners = new Set<GridListener<T>>();
   let cache: GridState<T> | null = null;
@@ -85,11 +100,16 @@ export function createGridModel<T extends RowData = RowData>(options: GridOption
     const filtered = filterRows(s.nodes, s.filterModel, s.quickFilter, s.columns, byId);
     const sorted = sortRows(filtered, s.sortModel, byId);
     const totalRows = sorted.length;
-    let pageRows = sorted;
+    const grouped = s.rowGroupCols.filter((c) => byId.has(c));
+    const displayRows: DisplayRow<T>[] = buildDisplayRows(sorted, grouped, byId, s.expandedGroups);
+
     let page = s.page;
+    let pageRows = sorted;
+    let pageDisplayRows = displayRows;
     if (s.pagination) {
-      const pages = Math.max(1, Math.ceil(totalRows / s.pageSize));
+      const pages = Math.max(1, Math.ceil(displayRows.length / s.pageSize));
       page = Math.min(s.page, pages - 1);
+      pageDisplayRows = displayRows.slice(page * s.pageSize, page * s.pageSize + s.pageSize);
       pageRows = sorted.slice(page * s.pageSize, page * s.pageSize + s.pageSize);
     }
     return {
@@ -104,9 +124,20 @@ export function createGridModel<T extends RowData = RowData>(options: GridOption
       pageSize: s.pageSize,
       displayedRows: sorted,
       pageRows,
+      rowGroupCols: grouped,
+      expandedGroups: s.expandedGroups,
+      displayRows,
+      pageDisplayRows,
       totalRows,
     };
   }
+
+  function reseedExpansion(): void {
+    if (groupDefaultExpanded === -1 && s.rowGroupCols.length) {
+      s.expandedGroups = new Set(collectGroupIds(sortRows(filterRows(s.nodes, s.filterModel, s.quickFilter, s.columns, colById()), s.sortModel, colById()), s.rowGroupCols, colById()));
+    }
+  }
+  reseedExpansion();
 
   function notify(): void {
     cache = compute();
@@ -135,6 +166,25 @@ export function createGridModel<T extends RowData = RowData>(options: GridOption
     hideColumn(colId, hide) { s.columns = setColumnHidden(s.columns, colId, hide); notify(); },
     reorderColumn(colId, toIndex) { s.columns = moveColumn(s.columns, colId, toIndex); notify(); },
     autosizeColumn(colId) { s.columns = autosizeColumn(s.columns, colId, s.nodes); notify(); },
+    setRowGroupCols(colIds) { s.rowGroupCols = [...colIds]; s.page = 0; reseedExpansion(); notify(); },
+    addRowGroupCol(colId, index) {
+      if (s.rowGroupCols.includes(colId)) return;
+      const next = s.rowGroupCols.slice();
+      next.splice(index == null ? next.length : Math.max(0, Math.min(index, next.length)), 0, colId);
+      s.rowGroupCols = next; s.page = 0; reseedExpansion(); notify();
+    },
+    removeRowGroupCol(colId) { s.rowGroupCols = s.rowGroupCols.filter((c) => c !== colId); s.page = 0; reseedExpansion(); notify(); },
+    toggleGroup(groupId) {
+      const next = new Set(s.expandedGroups);
+      if (next.has(groupId)) next.delete(groupId); else next.add(groupId);
+      s.expandedGroups = next; notify();
+    },
+    expandAllGroups() {
+      const byId = colById();
+      const sorted = sortRows(filterRows(s.nodes, s.filterModel, s.quickFilter, s.columns, byId), s.sortModel, byId);
+      s.expandedGroups = new Set(collectGroupIds(sorted, s.rowGroupCols, byId)); notify();
+    },
+    collapseAllGroups() { s.expandedGroups = new Set(); notify(); },
     getColumns() { return s.columns; },
     getDisplayedRows() { return api.getState().displayedRows; },
     getAllRows() { return s.nodes; },

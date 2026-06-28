@@ -31,3 +31,16 @@ export function formatCellValue<T extends RowData>(col: ColumnState, value: Cell
 export function cellText<T extends RowData>(col: ColumnState, node: RowNode<T>): string {
   return formatCellValue(col, getCellValue(col, node), node);
 }
+
+/** Formatea un valor crudo sin nodo (para etiquetas de grupo / agregados). Usa valueFormatter si existe. */
+export function formatValue(col: ColumnState, value: CellValue): string {
+  const def = col.def;
+  if (typeof def.valueFormatter === "function") return def.valueFormatter(value, {} as never);
+  if (value == null || value === "") return "";
+  if (col.type === "boolean") return value ? "✓" : "—";
+  if (col.type === "date") {
+    const d = value instanceof Date ? value : new Date(String(value));
+    return Number.isNaN(d.getTime()) ? String(value) : d.toISOString().slice(0, 10);
+  }
+  return String(value);
+}

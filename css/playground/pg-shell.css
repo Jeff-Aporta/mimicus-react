@@ -19,7 +19,7 @@ html.pg-playground-doc #root {
 
 .pg-playground-shell {
 	z-index: 1;
-	background: var(--pg-shell-surface, var(--mimicus-bg-primary));
+	background: var(--pg-shell-surface, var(--lkf-texture-surface, var(--mimicus-bg-primary)));
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -86,12 +86,14 @@ html.pg-playground-doc #root {
 	}
 
 	& .pg-nav-row--secondary .pg-nav-row__scroller {
-		min-height: 1.7rem;
+		min-height: 2rem;
 	}
 
 	& .pg-nav-row--secondary .pg-nav-tab {
-		min-height: 1.7rem;
-		padding-block: 0.22rem;
+		min-height: 2rem;
+		padding-block: 0.32rem;
+		padding-inline: 0.6rem;
+		gap: 0.42rem;
 	}
 }
 
@@ -102,8 +104,8 @@ html.pg-playground-doc #root {
 	flex-direction: column;
 	align-items: stretch;
 	width: 100%;
-	background: var(--pg-shell-header-bg, var(--mimicus-bg-secondary));
-	border-bottom: var(--pg-shell-header-edge, 1px solid var(--mimicus-b-color));
+	background: var(--pg-shell-header-bg, var(--lkf-texture-chrome, var(--mimicus-bg-secondary)));
+	border-bottom: var(--pg-shell-header-edge, 1px solid var(--lkf-texture-border-chrome, var(--mimicus-b-color)));
 
 	&.mimicus-app-layout-header {
 		border-bottom: var(--pg-shell-header-edge, 1px solid var(--mimicus-b-color));
@@ -144,7 +146,7 @@ html.pg-playground-doc #root {
 .pg-shell-header-stack .pg-shell-toolbar,
 .mimicus-app-layout-header__bar {
 	display: grid;
-	grid-template-columns: auto minmax(0, 1fr) minmax(0, auto);
+	grid-template-columns: auto minmax(0, 1fr) minmax(0, max-content);
 	align-items: center;
 }
 
@@ -175,7 +177,8 @@ html.pg-playground-doc #root {
 	gap: 0.25rem;
 	min-width: 0;
 	max-width: 100%;
-	overflow-x: auto;
+	overflow: visible clip;
+	flex-wrap: nowrap;
 	overflow-y: visible;
 	flex-wrap: nowrap;
 	-webkit-overflow-scrolling: touch;
@@ -190,9 +193,10 @@ html.pg-playground-doc #root {
 .pg-shell-route-title {
 	flex: 0 1 auto;
 	min-width: 0;
-	max-width: min(42vw, 22rem);
+	max-width: min(38vw, 18rem);
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 	white-space: nowrap;
 	text-align: center;
 	opacity: 0.88;
@@ -287,15 +291,16 @@ html.pg-playground-doc #root {
 }
 
 .pg-nav-row--secondary .pg-nav-row__scroller {
-	min-height: 1.85rem;
+	min-height: 2rem;
 }
 
 .pg-nav-row--secondary .pg-nav-tab {
-	font-size: 0.72rem;
+	font-size: 0.74rem;
 	font-weight: 500;
-	min-height: 1.85rem;
+	min-height: 2rem;
 	min-width: 3.65rem;
-	gap: 0.38rem;
+	gap: 0.42rem;
+	padding-inline: 0.6rem;
 	padding-inline: 0.58rem;
 	padding-block: 0.28rem;
 	opacity: 0.95;
@@ -525,18 +530,25 @@ html.pg-playground-doc #root {
 }
 
 .pg-header-skin-bar {
-	flex-shrink: 0;
+	flex-shrink: 1;
+	min-width: 0;
+	max-width: 100%;
+	box-sizing: border-box;
 	margin-left: 0.15rem;
 	display: inline-flex;
 	align-items: center;
 	gap: 0.35rem;
 	flex-wrap: nowrap;
-	overflow: visible;
+	overflow: hidden;
 
 	& > .button-wrap,
 	& > .pg-header-skin-bar__theme-btn,
 	& > button.pg-header-skin-bar__theme-btn {
-		flex-shrink: 0;
+		flex: 0 0 auto;
+	}
+
+	& .pg-skin-toggle {
+		min-width: 0;
 	}
 }
 

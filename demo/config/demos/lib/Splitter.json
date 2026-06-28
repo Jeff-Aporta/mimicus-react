@@ -1,72 +1,155 @@
 {
-
-   "id": "Splitter",
-
-   "category": "Layouts",
-
-   "label": "Splitter",
-
-   "titleIcon": "mdi:arrow-split-vertical",
-
-   "status": "approved",
-
-   "intro": "Layout de dos paneles con separador arrastrable (estilo Ant Design Splitter / IsaSplitView). <code>direction=&quot;horizontal&quot;</code> → paneles laterales (barra vertical); <code>direction=&quot;vertical&quot;</code> → paneles apilados (barra horizontal). Modo <code>inline</code> (<code>inline-flex</code>), <code>minSize</code>/<code>maxSize</code> y <code>storageKey</code>.",
-
-   "component": { "name": "Splitter", "path": "src/lib/containers/layout/Splitter.svelte" },
-
-   "preview": { "template": "layout-splitter", "style": "width: 100%; align-self: stretch;" },
-
-   "shell": { "relieve": 65, "configBlockCount": 2 },
-
-   "state": { "inline": false, "direction": "horizontal", "panelSize": 240, "minSize": 160, "maxSize": 480 },
-
-   "demoConfig": {
-
-      "panelItemCount": 2,
-
-      "panelCells": 1,
-
-      "panelLayout": "columns",
-
-      "mainItemCount": 4,
-
-      "mainCells": 2,
-
-      "mainLayout": "columns"
-
-   },
-
-   "fields": [
-
-      { "kind": "switch-group", "key": "modes", "label": "Modos", "labelIcon": "mdi:tune", "switches": [{ "key": "inline", "label": "inline" }] },
-
-      { "kind": "select-enum", "key": "direction", "label": "direction", "labelIcon": "mdi:arrow-split-vertical", "attrType": "str", "enumValue": { "Lateral ↔ (horizontal)": "horizontal", "Apilado ↕ (vertical)": "vertical" } },
-
-      { "kind": "number", "key": "panelSize", "label": "panelSize", "labelIcon": "mdi:arrow-expand-horizontal", "min": 120, "max": 640, "step": 8 },
-
-      { "kind": "number", "key": "minSize", "label": "minSize", "labelIcon": "mdi:arrow-collapse-horizontal", "min": 80, "max": 400, "step": 8 },
-
-      { "kind": "number", "key": "maxSize", "label": "maxSize", "labelIcon": "mdi:arrow-expand-all", "min": 200, "max": 800, "step": 8 }
-
-   ],
-
-   "demoConfigFields": [
-
-      { "kind": "number", "key": "panelItemCount", "label": "Panel · ítems", "labelIcon": "mdi:counter", "min": 1, "max": 12, "step": 1 },
-
-      { "kind": "number", "key": "panelCells", "label": "Panel · celdas", "labelIcon": "mdi:view-grid-outline", "min": 1, "max": 6, "step": 1 },
-
-      { "kind": "select-enum", "key": "panelLayout", "label": "Panel · disposición", "labelIcon": "mdi:view-column-outline", "enumValue": { "Columnas": "columns", "Filas": "rows" } },
-
-      { "kind": "number", "key": "mainItemCount", "label": "Contenido · ítems", "labelIcon": "mdi:counter", "min": 1, "max": 12, "step": 1 },
-
-      { "kind": "number", "key": "mainCells", "label": "Contenido · celdas", "labelIcon": "mdi:view-grid-outline", "min": 1, "max": 6, "step": 1 },
-
-      { "kind": "select-enum", "key": "mainLayout", "label": "Contenido · disposición", "labelIcon": "mdi:view-column-outline", "enumValue": { "Columnas": "columns", "Filas": "rows" } }
-
-   ],
-
-   "code": { "strategy": "splitter-layout", "tagOpts": { "multiline": true } }
-
+  "id": "Splitter",
+  "category": "Layouts",
+  "label": "Splitter",
+  "titleIcon": "mdi:arrow-split-vertical",
+  "status": "approved",
+  "intro": "Layout de dos paneles con separador arrastrable (estilo Ant Design Splitter / IsaSplitView). <code>direction=&quot;horizontal&quot;</code> → paneles laterales (barra vertical); <code>direction=&quot;vertical&quot;</code> → paneles apilados (barra horizontal). Modo <code>inline</code> (<code>inline-flex</code>), <code>minSize</code>/<code>maxSize</code> y <code>storageKey</code>.",
+  "component": {
+    "name": "Splitter",
+    "path": "src/lib/containers/layout/Splitter.svelte"
+  },
+  "preview": {
+    "template": "layout-splitter",
+    "style": "width: 100%; align-self: stretch;"
+  },
+  "shell": {
+    "relieve": 65,
+    "configBlockCount": 2
+  },
+  "state": {
+    "inline": false,
+    "direction": "horizontal",
+    "panelSize": 240,
+    "minSize": 160,
+    "maxSize": 480
+  },
+  "demoConfig": {
+    "panelItemCount": 2,
+    "panelCells": 1,
+    "panelLayout": "columns",
+    "mainItemCount": 4,
+    "mainCells": 2,
+    "mainLayout": "columns"
+  },
+  "fields": [
+    {
+      "kind": "switch-group",
+      "key": "modes",
+      "label": "Modos",
+      "labelIcon": "mdi:tune",
+      "switches": [
+        {
+          "key": "inline",
+          "label": "inline",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        }
+      ]
+    },
+    {
+      "kind": "select-enum",
+      "key": "direction",
+      "label": "direction",
+      "labelIcon": "mdi:arrow-split-vertical",
+      "attrType": "str",
+      "enumValue": {
+        "Lateral ↔ (horizontal)": "horizontal",
+        "Apilado ↕ (vertical)": "vertical"
+      }
+    },
+    {
+      "kind": "number",
+      "key": "panelSize",
+      "label": "panelSize",
+      "labelIcon": "mdi:arrow-expand-horizontal",
+      "min": 120,
+      "max": 640,
+      "step": 8
+    },
+    {
+      "kind": "number",
+      "key": "minSize",
+      "label": "minSize",
+      "labelIcon": "mdi:arrow-collapse-horizontal",
+      "min": 80,
+      "max": 400,
+      "step": 8
+    },
+    {
+      "kind": "number",
+      "key": "maxSize",
+      "label": "maxSize",
+      "labelIcon": "mdi:arrow-expand-all",
+      "min": 200,
+      "max": 800,
+      "step": 8
+    }
+  ],
+  "demoConfigFields": [
+    {
+      "kind": "number",
+      "key": "panelItemCount",
+      "label": "Panel · ítems",
+      "labelIcon": "mdi:counter",
+      "min": 1,
+      "max": 12,
+      "step": 1
+    },
+    {
+      "kind": "number",
+      "key": "panelCells",
+      "label": "Panel · celdas",
+      "labelIcon": "mdi:view-grid-outline",
+      "min": 1,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "kind": "select-enum",
+      "key": "panelLayout",
+      "label": "Panel · disposición",
+      "labelIcon": "mdi:view-column-outline",
+      "enumValue": {
+        "Columnas": "columns",
+        "Filas": "rows"
+      }
+    },
+    {
+      "kind": "number",
+      "key": "mainItemCount",
+      "label": "Contenido · ítems",
+      "labelIcon": "mdi:counter",
+      "min": 1,
+      "max": 12,
+      "step": 1
+    },
+    {
+      "kind": "number",
+      "key": "mainCells",
+      "label": "Contenido · celdas",
+      "labelIcon": "mdi:view-grid-outline",
+      "min": 1,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "kind": "select-enum",
+      "key": "mainLayout",
+      "label": "Contenido · disposición",
+      "labelIcon": "mdi:view-column-outline",
+      "enumValue": {
+        "Columnas": "columns",
+        "Filas": "rows"
+      }
+    }
+  ],
+  "code": {
+    "strategy": "splitter-layout",
+    "tagOpts": {
+      "multiline": true
+    }
+  }
 }
-

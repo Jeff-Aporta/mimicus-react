@@ -25,8 +25,12 @@ export function registerCellRenderer(name: string, renderer: CellRenderer): void
 export function getCellRenderer(name: string | undefined): CellRenderer | undefined { return name ? registry.get(name) : undefined; }
 
 // Renderers integrados ---------------------------------------------------------
+// Nota: <iconify-icon> es un custom element; React no refleja `className`→`class` en él,
+// así que la clase de color va en un <span> contenedor y el icono hereda el color.
 registerCellRenderer("boolean", ({ value }) => (
-  <Icon icon={value ? "mdi:check-circle" : "mdi:close-circle-outline"} className={value ? "mim-dg-bool mim-dg-bool--on" : "mim-dg-bool mim-dg-bool--off"} />
+  <span className={value ? "mim-dg-bool mim-dg-bool--on" : "mim-dg-bool mim-dg-bool--off"}>
+    <Icon icon={value ? "mdi:check-circle" : "mdi:close-circle-outline"} />
+  </span>
 ));
 registerCellRenderer("tag", ({ formatted }) => <span className="mim-dg-tag">{formatted}</span>);
 registerCellRenderer("link", ({ formatted, value }) => <a className="mim-dg-link" href={typeof value === "string" ? value : "#"}>{formatted}</a>);

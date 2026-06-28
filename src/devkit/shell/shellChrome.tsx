@@ -15,6 +15,8 @@ import {
 
   Button,
 
+  Select,
+
   setLuminance,
 
   setThemeColor,
@@ -185,15 +187,17 @@ export function PlaygroundSkinSelect({ label, value, options, onChange, accent =
 
   const dataProps = accent === "palette" ? { "data-palette": value } : { "data-look": value };
 
+  const selectOptions = options.map((o) => ({
+    value: o.id,
+    label: o.label,
+    icon: o.icon ? <iconify-icon icon={o.icon} /> : undefined,
+  }));
+
   return (
 
     <div className={["pg-skin-toggle", accent === "palette" ? "pg-skin-toggle--palette" : "pg-skin-toggle--look"].join(" ")} {...dataProps} title={label}>
 
-      <select className="pg-skin-toggle__select" value={value} onChange={(e) => onChange?.(e.target.value)} aria-label={label}>
-
-        {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-
-      </select>
+      <Select className="pg-skin-toggle__select" size="small" value={value} options={selectOptions} onChange={(v) => onChange?.(v)} aria-label={label} />
 
     </div>
 
@@ -227,7 +231,7 @@ export function HeaderSkinBar() {
 
       <PlaygroundSkinSelect label="Look n feel" accent="look" value={look} options={LOOKNFEEL_OPTIONS} onChange={applyLooknfeel} />
 
-      <Button variant={theme.luminance === "dark" ? "soft" : "text"} color="neutral" shape="rect" className="pg-header-skin-bar__theme-btn" onClick={() => setLuminance(theme.luminance === "dark" ? "light" : "dark")} title={theme.luminance === "dark" ? "Modo claro" : "Modo oscuro"} style={{ width: "auto", minWidth: "2rem", flexShrink: 0 }}>
+      <Button variant={theme.luminance === "dark" ? "soft" : "text"} color="neutral" shape="rect" className="pg-header-skin-bar__theme-btn" onClick={() => setLuminance(theme.luminance === "dark" ? "light" : "dark")} title={theme.luminance === "dark" ? "Modo claro" : "Modo oscuro"} style={{ flexShrink: 0 }}>
 
         <span aria-hidden>{theme.luminance === "dark" ? "☀" : "☾"}</span>
 

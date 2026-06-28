@@ -1,22 +1,80 @@
 {
-   "id": "FloatButton",
-   "category": "Iconized",
-   "label": "FloatButton",
-   "titleIcon": "mdi:plus-circle-outline",
-   "status": "approved",
-   "intro": "Botón flotante (FAB) para la acción principal de una vista. Soporta <code>type</code> default/primary, formas circle/square, tamaños y modo extendido con texto — convenciones <a href=\"https://ant.design/components/float-button\">Ant Design</a> y <a href=\"https://mui.com/material-ui/react-floating-action-button/\">MUI Fab</a>.",
-   "component": { "name": "FloatButton", "path": "src/components/FloatButton.jsx" },
-   "preview": { "template": "float-button", "scale": 1 },
-   "state": { "type": "primary", "shape": "circle", "size": "large", "disabled": false },
-   "details": { "icon": "mdi:plus", "label": "" },
-   "fields": [
-      { "kind": "palette", "key": "type", "label": "type", "labelIcon": "mdi:palette", "attrType": "str", "attrDefault": "default", "options": { "default": "default", "primary": "primary" }, "accent": "primary" },
-      { "kind": "palette", "key": "shape", "label": "shape", "labelIcon": "mdi:circle-outline", "attrType": "str", "attrDefault": "circle", "options": { "circle": "circle", "square": "square" }, "accent": "primary" },
-      { "kind": "palette", "key": "size", "label": "size", "labelIcon": "mdi:resize", "attrType": "str", "attrDefault": "large", "options": { "small": "small", "large": "large" }, "accent": "primary" },
-      { "kind": "switch", "key": "disabled", "label": "disabled", "labelIcon": "mdi:cancel" }
-   ],
-   "detailFields": [
-      { "kind": "icon-text", "key": "icon-text", "label": "Icono y etiqueta", "labelIcon": "mdi:text-box-outline", "iconKey": "icon", "textKey": "label" }
-   ],
-   "code": { "strategy": "icon-text-body", "options": { "iconKey": "icon", "textKey": "label" } }
+  "id": "FloatButton",
+  "category": "Iconized",
+  "label": "FloatButton",
+  "titleIcon": "mdi:plus-circle-outline",
+  "status": "approved",
+  "intro": "Botón flotante (FAB) para la acción principal de una vista. Soporta <code>type</code> default/primary, formas circle/square, tamaños y modo extendido con texto — convenciones <a href=\"https://ant.design/components/float-button\">Ant Design</a> y <a href=\"https://mui.com/material-ui/react-floating-action-button/\">MUI Fab</a>.",
+  "component": {
+    "name": "FloatButton",
+    "path": "src/components/FloatButton.jsx"
+  },
+  "preview": {
+    "template": "float-button",
+    "scale": 1
+  },
+  "state": {
+    "type": "primary",
+    "shape": "circle",
+    "disabled": false
+  },
+  "details": {
+    "icon": "mdi:plus",
+    "label": ""
+  },
+  "fields": [
+    {
+      "kind": "palette",
+      "key": "type",
+      "label": "type",
+      "labelIcon": "mdi:palette",
+      "attrType": "str",
+      "attrDefault": "default",
+      "options": {
+        "default": "default",
+        "primary": "primary"
+      },
+      "accent": "primary"
+    },
+    {
+      "kind": "palette",
+      "key": "shape",
+      "label": "shape",
+      "labelIcon": "mdi:circle-outline",
+      "attrType": "str",
+      "attrDefault": "circle",
+      "options": {
+        "circle": "circle",
+        "square": "square"
+      },
+      "accent": "primary"
+    },
+    {
+      "kind": "switch",
+      "key": "disabled",
+      "label": "disabled",
+      "labelIcon": "mdi:cancel",
+      "iconOn": "mdi:cancel",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "detailFields": [
+    {
+      "kind": "icon-text",
+      "key": "icon-text",
+      "label": "Icono y etiqueta",
+      "labelIcon": "mdi:text-box-outline",
+      "iconKey": "icon",
+      "textKey": "label"
+    }
+  ],
+  "code": {
+    "strategy": "icon-text-body",
+    "options": {
+      "iconKey": "icon",
+      "textKey": "label"
+    }
+  }
 }

@@ -161,10 +161,8 @@ import { useState } from "react";
 
 // src/theme/constants.ts
 var LOOKNFEEL_OPTIONS = [
-  { id: "contapyme", label: "ContaPyme" },
-  { id: "neon-mono", label: "Neon mono" },
-  { id: "neon-dual", label: "Neon dual" },
-  { id: "neon-triad", label: "Neon tr\xEDada" }
+  { id: "contapyme", label: "ContaPyme", icon: "mdi:office-building" },
+  { id: "neon", label: "Neon", icon: "mdi:lightbulb-on-outline" }
 ];
 var LOOKNFEEL_IDS = LOOKNFEEL_OPTIONS.map((o) => o.id);
 function isNgVariant(value) {
@@ -254,7 +252,6 @@ function Button({
   variant = "solid",
   color,
   shape = "round",
-  size = "medium",
   block = false,
   danger = false,
   ghost = false,
@@ -316,7 +313,6 @@ function Button({
   ].filter(Boolean).join(" ");
   const dataProps = {
     "data-shape": resolvedShape,
-    "data-size": size,
     "data-variant": normalizedVariant,
     "data-block": block ? "true" : void 0,
     "data-danger": danger ? "true" : void 0,
@@ -327,12 +323,29 @@ function Button({
     style: { width: block ? "100%" : "fit-content", maxWidth: block ? void 0 : "100%", ...surfaceStyle.style }
   };
   const iconNode = (icon || isLoading) && (isLoading ? /* @__PURE__ */ jsx("span", { className: "mimicus-text-icon mimicus-btn-spinner", "aria-hidden": true, children: "\u2026" }) : icon);
+  const extractChildIcon = (nodes) => {
+    let iconEl = null;
+    let rest2 = null;
+    const arr = Array.isArray(nodes) ? nodes : nodes != null ? [nodes] : [];
+    for (const n of arr) {
+      if (iconEl == null && n && typeof n === "object" && "type" in n && (n.type === "iconify-icon" || n.type?.displayName === "Icon")) {
+        iconEl = n;
+        continue;
+      }
+      rest2 = rest2?.length ? [...rest2, n] : n;
+    }
+    return { iconEl, rest: rest2 };
+  };
+  const inlineIcon = icon == null && children != null && children !== "" ? extractChildIcon(children).iconEl : null;
+  const inlineRest = inlineIcon != null ? extractChildIcon(children).rest : null;
+  const finalIcon = iconNode ?? inlineIcon;
+  const finalChildren = inlineIcon != null ? inlineRest : children;
   const content = iconPlacement === "end" ? /* @__PURE__ */ jsxs(Fragment, { children: [
-    children != null && children !== "" && /* @__PURE__ */ jsx("span", { className: "button-content", children }),
-    iconNode
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx("span", { className: "button-content", children: finalChildren }),
+    finalIcon
   ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-    iconNode,
-    children != null && children !== "" && /* @__PURE__ */ jsx("span", { className: "button-content", children })
+    finalIcon,
+    finalChildren != null && finalChildren !== "" && /* @__PURE__ */ jsx("span", { className: "button-content", children: finalChildren })
   ] });
   if (href && !wrap) {
     const linkRel = target === "_blank" && !rel ? "noopener noreferrer" : rel;

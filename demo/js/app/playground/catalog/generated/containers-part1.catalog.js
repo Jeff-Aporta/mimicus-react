@@ -1,4 +1,4 @@
-/** Auto-generado — Containers */
+/** Auto-generado — Containers (parte 1/2) */
 export const items = [
   {
     "section": "data-display",
@@ -30,7 +30,11 @@ export const items = [
           "kind": "switch",
           "key": "accordion",
           "label": "accordion",
-          "labelIcon": "mdi:unfold-more-double"
+          "labelIcon": "mdi:unfold-more-double",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -89,7 +93,11 @@ export const items = [
           "kind": "switch",
           "key": "inline",
           "label": "inline",
-          "labelIcon": "mdi:tune"
+          "labelIcon": "mdi:tune",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -162,11 +170,19 @@ export const items = [
           "switches": [
             {
               "key": "dot",
-              "label": "dot"
+              "label": "dot",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "showZero",
-              "label": "showZero"
+              "label": "showZero",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -206,7 +222,11 @@ export const items = [
           "kind": "switch",
           "key": "fullscreen",
           "label": "fullscreen",
-          "labelIcon": "mdi:fullscreen"
+          "labelIcon": "mdi:fullscreen",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -276,7 +296,11 @@ export const items = [
           "kind": "switch",
           "key": "inline",
           "label": "inline",
-          "labelIcon": "mdi:tune"
+          "labelIcon": "mdi:tune",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "detailFields": [
@@ -332,19 +356,35 @@ export const items = [
           "switches": [
             {
               "key": "autoplay",
-              "label": "autoplay"
+              "label": "autoplay",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "arrows",
-              "label": "arrows"
+              "label": "arrows",
+              "iconOn": "mdi:arrow-left-right-bold",
+              "iconOff": "mdi:arrow-left-right",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "dots",
-              "label": "dots"
+              "label": "dots",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "infinite",
-              "label": "infinite"
+              "label": "infinite",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -387,7 +427,11 @@ export const items = [
           "kind": "switch",
           "key": "accordion",
           "label": "accordion",
-          "labelIcon": "mdi:unfold-more-double"
+          "labelIcon": "mdi:unfold-more-double",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -412,7 +456,7 @@ export const items = [
       "label": "DataGrid",
       "titleIcon": "mdi:table-large",
       "status": "approved",
-      "intro": "Grilla de datos de alto rendimiento con virtualización de filas, orden multi-columna, filtros por columna (texto/número/fecha/conjunto), filtro rápido, selección, fijado/reordenamiento/redimensionado de columnas, paginación, densidad y exportación CSV. Motor agnóstico (TS puro) con capa React delgada — vive en la isla <code>./datagrid</code>.",
+      "intro": "Grilla de datos de alto rendimiento con virtualización de filas, orden multi-columna, filtros por columna (texto/número/fecha/conjunto), filtro rápido, selección, fijado/reordenamiento/redimensionado de columnas, <b>agrupación arrastrando columnas al panel superior</b> (con conteo y agregación), paginación, densidad y exportación CSV. Motor agnóstico (TS puro) con capa React delgada — vive en la isla <code>./datagrid</code>.",
       "component": {
         "name": "DataGrid",
         "path": "src/datagrid/react/DataGrid.tsx"
@@ -426,6 +470,8 @@ export const items = [
         "pagination": false,
         "pageSize": 50,
         "toolbar": true,
+        "rowGroupPanel": true,
+        "groupBy": "",
         "rowCount": 1000
       },
       "fields": [
@@ -439,6 +485,18 @@ export const items = [
             "Ninguna": "none",
             "Única": "single",
             "Múltiple": "multiple"
+          }
+        },
+        {
+          "kind": "select-enum",
+          "key": "groupBy",
+          "label": "agrupar por",
+          "labelIcon": "mdi:group",
+          "attrType": "str",
+          "enumValue": {
+            "(sin agrupar)": "",
+            "Categoría": "categoria",
+            "Región": "region"
           }
         },
         {
@@ -486,11 +544,27 @@ export const items = [
           "switches": [
             {
               "key": "pagination",
-              "label": "pagination"
+              "label": "pagination",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "toolbar",
-              "label": "toolbar"
+              "label": "toolbar",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
+            },
+            {
+              "key": "rowGroupPanel",
+              "label": "panel grupos",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -531,7 +605,11 @@ export const items = [
           "kind": "switch",
           "key": "bordered",
           "label": "bordered",
-          "labelIcon": "mdi:border-all"
+          "labelIcon": "mdi:border-all",
+          "iconOn": "mdi:border-all",
+          "iconOff": "mdi:border-all-variant",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         },
         {
           "kind": "number",
@@ -600,7 +678,11 @@ export const items = [
           "kind": "switch",
           "key": "showAction",
           "label": "acción",
-          "labelIcon": "mdi:gesture-tap-button"
+          "labelIcon": "mdi:gesture-tap-button",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -643,11 +725,19 @@ export const items = [
           "switches": [
             {
               "key": "dense",
-              "label": "dense"
+              "label": "dense",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "subheader",
-              "label": "subheader"
+              "label": "subheader",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -739,21 +829,9 @@ export const items = [
       },
       "state": {
         "bordered": false,
-        "size": "medium",
         "sortable": true
       },
       "fields": [
-        {
-          "kind": "select-enum",
-          "key": "size",
-          "label": "size",
-          "labelIcon": "mdi:format-line-spacing",
-          "attrType": "str",
-          "enumValue": {
-            "Small": "small",
-            "Medium": "medium"
-          }
-        },
         {
           "kind": "switch-group",
           "key": "opts",
@@ -762,11 +840,19 @@ export const items = [
           "switches": [
             {
               "key": "bordered",
-              "label": "bordered"
+              "label": "bordered",
+              "iconOn": "mdi:border-all",
+              "iconOff": "mdi:border-all-variant",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             },
             {
               "key": "sortable",
-              "label": "sortable"
+              "label": "sortable",
+              "iconOn": "mdi:check",
+              "iconOff": "mdi:circle-outline",
+              "colorOn": "var(--mimicus-success, #2e9e5a)",
+              "colorOff": "var(--mimicus-color, currentColor)"
             }
           ]
         }
@@ -819,7 +905,11 @@ export const items = [
           "kind": "switch",
           "key": "pending",
           "label": "pending",
-          "labelIcon": "mdi:clock-outline"
+          "labelIcon": "mdi:clock-outline",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
@@ -881,98 +971,15 @@ export const items = [
           "kind": "switch",
           "key": "arrow",
           "label": "arrow",
-          "labelIcon": "mdi:arrow-top-right"
+          "labelIcon": "mdi:arrow-top-right",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
         }
       ],
       "code": {
         "strategy": "disp-tooltip"
-      }
-    }
-  },
-  {
-    "section": "data-display",
-    "category": "Containers",
-    "slug": "tour",
-    "id": "Tour",
-    "label": "Tour",
-    "displayLabel": "Tour",
-    "path": "demos/lib/Tour.json",
-    "definition": {
-      "id": "Tour",
-      "category": "Containers",
-      "label": "Tour",
-      "titleIcon": "mdi:map-marker-path",
-      "status": "approved",
-      "intro": "Recorrido guiado por pasos con overlay. <code>bindTour</code>. Ver <a href=\"https://ant.design/components/tour\" target=\"_blank\" rel=\"noreferrer\">Ant Tour</a>.",
-      "component": {
-        "name": "Tour",
-        "path": "src/components/display/Display.jsx"
-      },
-      "preview": {
-        "template": "disp-tour"
-      },
-      "state": {
-        "open": true
-      },
-      "fields": [
-        {
-          "kind": "switch",
-          "key": "open",
-          "label": "open",
-          "labelIcon": "mdi:eye-outline"
-        }
-      ],
-      "code": {
-        "strategy": "disp-tour"
-      }
-    }
-  },
-  {
-    "section": "data-display",
-    "category": "Containers",
-    "slug": "tree",
-    "id": "Tree",
-    "label": "Tree",
-    "displayLabel": "Tree",
-    "path": "demos/lib/Tree.json",
-    "definition": {
-      "id": "Tree",
-      "category": "Containers",
-      "label": "Tree",
-      "titleIcon": "mdi:file-tree-outline",
-      "status": "approved",
-      "intro": "Árbol jerárquico expandible (display). Distinto de <code>TreeSelect</code>. Ver <a href=\"https://ant.design/components/tree\" target=\"_blank\" rel=\"noreferrer\">Ant Tree</a>.",
-      "component": {
-        "name": "Tree",
-        "path": "src/components/display/Display.jsx"
-      },
-      "preview": {
-        "template": "disp-tree"
-      },
-      "state": {
-        "checkable": false,
-        "defaultExpandAll": true
-      },
-      "fields": [
-        {
-          "kind": "switch-group",
-          "key": "opts",
-          "label": "Opciones",
-          "labelIcon": "mdi:tune",
-          "switches": [
-            {
-              "key": "checkable",
-              "label": "checkable"
-            },
-            {
-              "key": "defaultExpandAll",
-              "label": "defaultExpandAll"
-            }
-          ]
-        }
-      ],
-      "code": {
-        "strategy": "disp-tree"
       }
     }
   }

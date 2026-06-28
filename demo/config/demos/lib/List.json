@@ -5,11 +5,47 @@
   "titleIcon": "mdi:format-list-bulleted",
   "status": "approved",
   "intro": "Lista vertical estilo MUI con ítems, avatar y acciones. Ver <a href=\"https://mui.com/material-ui/react-list/\" target=\"_blank\" rel=\"noreferrer\">MUI List</a>.",
-  "component": { "name": "List", "path": "src/components/display/Display.jsx" },
-  "preview": { "template": "disp-list" },
-  "state": { "dense": false, "subheader": true },
+  "component": {
+    "name": "List",
+    "path": "src/components/display/Display.jsx"
+  },
+  "preview": {
+    "template": "disp-list"
+  },
+  "state": {
+    "dense": false,
+    "subheader": true
+  },
   "fields": [
-    { "kind": "switch-group", "key": "opts", "label": "Opciones", "labelIcon": "mdi:tune", "switches": [{ "key": "dense", "label": "dense" }, { "key": "subheader", "label": "subheader" }] }
+    {
+      "kind": "switch-group",
+      "key": "opts",
+      "label": "Opciones",
+      "labelIcon": "mdi:tune",
+      "switches": [
+        {
+          "key": "dense",
+          "label": "dense",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "subheader",
+          "label": "subheader",
+          "iconOn": "mdi:check",
+          "iconOff": "mdi:circle-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        }
+      ]
+    }
   ],
-  "code": { "strategy": "disp-list", "tagOpts": { "multiline": true } }
+  "code": {
+    "strategy": "disp-list",
+    "tagOpts": {
+      "multiline": true
+    }
+  }
 }

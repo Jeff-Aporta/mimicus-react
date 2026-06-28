@@ -1,5 +1,5 @@
 // src/components/forms/Forms.tsx
-import { Children, useId, useRef, useState } from "react";
+import { Children, useEffect as useEffect2, useId, useRef, useState } from "react";
 
 // src/lib/resolveColor.ts
 var componentColors = [
@@ -505,7 +505,6 @@ function Input({
   value,
   defaultValue,
   onChange,
-  size = "medium",
   status,
   prefix,
   suffix,
@@ -519,7 +518,7 @@ function Input({
   ...rest
 }) {
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-  return /* @__PURE__ */ jsxs("span", { className: cx("mimicus-input", `mimicus-input--${size}`, status && `is-${status}`, disabled && "is-disabled", className), style, children: [
+  return /* @__PURE__ */ jsxs("span", { className: cx("mimicus-input", status && `is-${status}`, disabled && "is-disabled", className), style, children: [
     prefix && /* @__PURE__ */ jsx("span", { className: "mimicus-input__affix mimicus-input__prefix", children: prefix }),
     /* @__PURE__ */ jsx(
       "input",
@@ -553,7 +552,7 @@ function TextArea({ value, defaultValue, onChange, rows = 4, autoSize, className
     }
   );
 }
-function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, size = "medium", disabled, className, style, ...rest }) {
+function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, disabled, className, style, ...rest }) {
   const ref = useRef(null);
   const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "input-number", [min, max, step, val]);
@@ -561,7 +560,7 @@ function InputNumber({ value, defaultValue = 0, onChange, min, max, step = 1, si
     "span",
     {
       ref,
-      className: cx("mimicus-input-number", `mimicus-input-number--${size}`, disabled && "is-disabled", className),
+      className: cx("mimicus-input-number", disabled && "is-disabled", className),
       style,
       "data-min": min,
       "data-max": max,
@@ -594,7 +593,6 @@ function Checkbox({
   indeterminate,
   disabled,
   loading,
-  size = "medium",
   children,
   className,
   style,
@@ -602,7 +600,7 @@ function Checkbox({
 }) {
   const [on2, set] = useCtrl(checked, defaultChecked, onChange);
   const id = useId();
-  return /* @__PURE__ */ jsxs("label", { className: cx("mimicus-checkbox", `mimicus-checkbox--${size}`, on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style, children: [
+  return /* @__PURE__ */ jsxs("label", { className: cx("mimicus-checkbox", on2 && "is-checked", indeterminate && "is-indeterminate", disabled && "is-disabled", loading && "is-loading", className), style, children: [
     /* @__PURE__ */ jsx(
       "input",
       {
@@ -619,8 +617,15 @@ function Checkbox({
     children != null && /* @__PURE__ */ jsx("span", { className: "mimicus-checkbox__label", children })
   ] });
 }
-function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, className, ...rest }) {
+function resolveIconNode(icon) {
+  if (icon == null || icon === "") return null;
+  if (typeof icon === "string") return /* @__PURE__ */ jsx("iconify-icon", { icon });
+  return icon;
+}
+function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, color, variant, children, icon, iconChecked, iconUnchecked, colorChecked, colorUnchecked, className, ...rest }) {
   const surface = mergeSurfaceStyle(color, { variant: variant ?? "solid" });
+  const onNode = resolveIconNode(iconChecked ?? icon) ?? /* @__PURE__ */ jsx("iconify-icon", { icon: "mdi:check" });
+  const offNode = resolveIconNode(iconUnchecked) ?? /* @__PURE__ */ jsx("iconify-icon", { icon: "" });
   return /* @__PURE__ */ jsxs(
     Checkbox,
     {
@@ -631,11 +636,15 @@ function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, co
       disabled,
       loading,
       className: cx("mimicus-checkbox--icon", variant === "glass" && "mimicus-checkbox--glass", className),
-      style: surface.style,
+      style: {
+        ...surface.style,
+        "--cb-on-fg": colorChecked || void 0,
+        "--cb-off-fg": colorUnchecked || void 0
+      },
       children: [
         /* @__PURE__ */ jsxs("span", { className: "mimicus-checkbox__icons", children: [
-          /* @__PURE__ */ jsx("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--on", children: iconChecked ?? icon ?? "\u2713" }),
-          /* @__PURE__ */ jsx("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--off", children: iconUnchecked ?? "\u25CB" })
+          /* @__PURE__ */ jsx("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--on", "aria-hidden": true, children: onNode }),
+          /* @__PURE__ */ jsx("span", { className: "mimicus-checkbox__icon mimicus-checkbox__icon--off", "aria-hidden": true, children: offNode })
         ] }),
         children
       ]
@@ -645,9 +654,17 @@ function CheckboxIcon({ checked, defaultChecked, onChange, disabled, loading, co
 function CheckboxChip({ value, options, onChange, className, style }) {
   return /* @__PURE__ */ jsx(ToggleButtonGroup, { exclusive: true, value, onChange, className: cx("mimicus-checkbox-chip", className), style, children: options?.map((opt) => /* @__PURE__ */ jsx(ToggleButton, { value: opt.value, icon: opt.icon, children: opt.label ?? opt.value }, opt.value)) });
 }
-function Switch({ checked, defaultChecked = false, onChange, disabled, loading, size = "medium", children, className, style, ...rest }) {
+function resolveIcon(icon) {
+  if (icon == null || icon === "") return null;
+  if (typeof icon === "string") return /* @__PURE__ */ jsx("iconify-icon", { icon });
+  return icon;
+}
+function Switch({ checked, defaultChecked = false, onChange, disabled, loading, icon, iconOn, iconOff, colorOn, colorOff, children, className, style, ...rest }) {
   const [on2, set] = useCtrl(checked, defaultChecked, onChange);
-  return /* @__PURE__ */ jsxs("label", { className: cx("mimicus-switch", `mimicus-switch--${size}`, on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", className), style, children: [
+  const onIcon = resolveIcon(iconOn ?? icon);
+  const offIcon = resolveIcon(iconOff ?? icon);
+  const hasIcons = onIcon != null || offIcon != null;
+  return /* @__PURE__ */ jsxs("label", { className: cx("mimicus-switch", on2 && "is-checked", disabled && "is-disabled", loading && "is-loading", hasIcons && "has-icons", className), style, children: [
     /* @__PURE__ */ jsx(
       "input",
       {
@@ -660,7 +677,17 @@ function Switch({ checked, defaultChecked = false, onChange, disabled, loading, 
         onChange: (e) => set(e.target.checked)
       }
     ),
-    /* @__PURE__ */ jsx("span", { className: "mimicus-switch__track", children: /* @__PURE__ */ jsx("span", { className: "mimicus-switch__thumb" }) }),
+    /* @__PURE__ */ jsx(
+      "span",
+      {
+        className: "mimicus-switch__track",
+        style: on2 ? colorOn ? { "--sw-on-fg": colorOn } : void 0 : colorOff ? { "--sw-off-fg": colorOff } : void 0,
+        children: /* @__PURE__ */ jsxs("span", { className: "mimicus-switch__thumb", children: [
+          onIcon && /* @__PURE__ */ jsx("span", { className: "mimicus-switch__icon mimicus-switch__icon--on", "aria-hidden": true, children: onIcon }),
+          offIcon && /* @__PURE__ */ jsx("span", { className: "mimicus-switch__icon mimicus-switch__icon--off", "aria-hidden": true, children: offIcon })
+        ] })
+      }
+    ),
     children != null && /* @__PURE__ */ jsx("span", { className: "mimicus-switch__label", children })
   ] });
 }
@@ -740,7 +767,7 @@ function Slider({ value, defaultValue = 0, onChange, min = 0, max = 100, step = 
     }
   );
 }
-function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "\u2605", size = "medium", className, style, ...rest }) {
+function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowClear = true, disabled, character = "\u2605", className, style, ...rest }) {
   const ref = useRef(null);
   const [val, set] = useCtrl(value, defaultValue, onChange);
   useFormBinding(ref, "rate", [count, allowHalf, allowClear, val, disabled]);
@@ -750,7 +777,7 @@ function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowCl
       ref,
       ...rest,
       role: "radiogroup",
-      className: cx("mimicus-rate", `mimicus-rate--${size}`, disabled && "is-disabled", className),
+      className: cx("mimicus-rate", disabled && "is-disabled", className),
       style,
       "data-count": count,
       "data-value": val,
@@ -766,13 +793,144 @@ function Rate({ value, defaultValue = 0, onChange, count = 5, allowHalf, allowCl
 var Rating = Rate;
 function Select({ value, defaultValue, onChange, options, placeholder, disabled, size = "medium", className, style, children, ...rest }) {
   const [val, set] = useCtrl(value, defaultValue ?? "", onChange);
-  return /* @__PURE__ */ jsxs("span", { className: cx("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style, children: [
-    /* @__PURE__ */ jsxs("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: [
-      placeholder && /* @__PURE__ */ jsx("option", { value: "", children: placeholder }),
-      children ?? options?.map((opt) => /* @__PURE__ */ jsx("option", { value: opt.value, disabled: opt.disabled, children: opt.label }, opt.value))
-    ] }),
-    /* @__PURE__ */ jsx("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
-  ] });
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+  const dialogRef = useRef(null);
+  const triggerRef = useRef(null);
+  const isStructured = Array.isArray(options) && options.every((o) => o && typeof o === "object" && "value" in o);
+  const items = isStructured ? options : [];
+  const current = items.find((o) => String(o.value) === String(val));
+  const fallbackLabel = children ? void 0 : items.find((o) => String(o.value) === String(val))?.label;
+  useEffect2(() => {
+    if (!open) return;
+    const dlg = dialogRef.current;
+    const trg = triggerRef.current;
+    if (!dlg || !trg) return;
+    const place = () => {
+      const r = trg.getBoundingClientRect();
+      const margin = 6;
+      const desiredLeft = r.left;
+      const desiredTop = r.bottom + margin;
+      const panelWidth = Math.max(r.width, 180);
+      const maxLeft = window.innerWidth - panelWidth - 8;
+      dlg.style.setProperty("--mimicus-select-left", `${Math.max(8, Math.min(desiredLeft, maxLeft))}px`);
+      dlg.style.setProperty("--mimicus-select-top", `${desiredTop}px`);
+      dlg.style.setProperty("--mimicus-select-min-w", `${r.width}px`);
+    };
+    place();
+    window.addEventListener("resize", place);
+    window.addEventListener("scroll", place, true);
+    return () => {
+      window.removeEventListener("resize", place);
+      window.removeEventListener("scroll", place, true);
+    };
+  }, [open]);
+  useEffect2(() => {
+    const dlg = dialogRef.current;
+    if (!dlg) return;
+    if (open) {
+      if (!dlg.open) dlg.showModal();
+    } else if (dlg.open) {
+      dlg.close();
+    }
+  }, [open]);
+  useEffect2(() => {
+    if (!open && document.activeElement && triggerRef.current && document.activeElement !== triggerRef.current) {
+    }
+  }, [open]);
+  useEffect2(() => {
+    if (!open) return;
+    function onKey(e) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+  if (!isStructured) {
+    return /* @__PURE__ */ jsxs("span", { className: cx("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", className), style, children: [
+      /* @__PURE__ */ jsxs("select", { ...rest, className: "mimicus-select__native", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: [
+        placeholder && /* @__PURE__ */ jsx("option", { value: "", children: placeholder }),
+        children ?? options?.map((opt) => /* @__PURE__ */ jsx("option", { value: opt.value, disabled: opt.disabled, children: opt.label }, opt.value))
+      ] }),
+      /* @__PURE__ */ jsx("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
+    ] });
+  }
+  return /* @__PURE__ */ jsxs(
+    "span",
+    {
+      ref: rootRef,
+      className: cx("mimicus-select", `mimicus-select--${size}`, disabled && "is-disabled", open && "is-open", className),
+      style,
+      "data-value": val ?? "",
+      children: [
+        /* @__PURE__ */ jsxs(
+          "button",
+          {
+            ref: triggerRef,
+            type: "button",
+            className: "mimicus-select__trigger",
+            disabled,
+            "aria-haspopup": "dialog",
+            "aria-expanded": open,
+            onClick: () => !disabled && setOpen((o) => !o),
+            children: [
+              /* @__PURE__ */ jsxs("span", { className: "mimicus-select__value", children: [
+                current?.icon && /* @__PURE__ */ jsx("span", { className: "mimicus-select__icon", "aria-hidden": true, children: current.icon }),
+                /* @__PURE__ */ jsx("span", { className: "mimicus-select__label", children: current?.label ?? placeholder ?? "" })
+              ] }),
+              /* @__PURE__ */ jsx("span", { className: "mimicus-select__arrow", "aria-hidden": true, children: "\u25BE" })
+            ]
+          }
+        ),
+        open && /* @__PURE__ */ jsx(
+          "dialog",
+          {
+            ref: dialogRef,
+            className: "mimicus-select__dialog",
+            "data-mimicus-select-dialog": true,
+            onClose: () => setOpen(false),
+            onCancel: (e) => {
+              e.preventDefault();
+              setOpen(false);
+            },
+            onClick: (e) => {
+              const panel = dialogRef.current?.querySelector(".mimicus-select__panel");
+              if (panel && !panel.contains(e.target)) setOpen(false);
+            },
+            children: /* @__PURE__ */ jsxs("ul", { role: "listbox", className: "mimicus-select__panel", "data-mimicus-select-panel": true, onClick: (e) => e.stopPropagation(), children: [
+              placeholder && /* @__PURE__ */ jsx("li", { role: "option", "aria-selected": !val, className: cx("mimicus-select__option", !val && "is-selected"), onClick: () => {
+                set("");
+                setOpen(false);
+              }, children: /* @__PURE__ */ jsx("span", { className: "mimicus-select__label", children: placeholder }) }),
+              items.map((opt) => {
+                const selected = String(opt.value) === String(val);
+                return /* @__PURE__ */ jsxs(
+                  "li",
+                  {
+                    role: "option",
+                    "aria-selected": selected,
+                    "aria-disabled": opt.disabled,
+                    className: cx("mimicus-select__option", selected && "is-selected", opt.disabled && "is-disabled"),
+                    onClick: () => {
+                      if (opt.disabled) return;
+                      set(opt.value);
+                      setOpen(false);
+                    },
+                    children: [
+                      opt.icon && /* @__PURE__ */ jsx("span", { className: "mimicus-select__icon", "aria-hidden": true, children: opt.icon }),
+                      /* @__PURE__ */ jsx("span", { className: "mimicus-select__label", children: opt.label ?? opt.value })
+                    ]
+                  },
+                  String(opt.value)
+                );
+              })
+            ] })
+          }
+        ),
+        /* @__PURE__ */ jsx("select", { ...rest, tabIndex: -1, "aria-hidden": true, className: "mimicus-select__native mimicus-select__native--sr", value: val ?? "", disabled, onChange: (e) => set(e.target.value), children: items.map((o) => /* @__PURE__ */ jsx("option", { value: String(o.value), children: typeof fallbackLabel === "string" ? fallbackLabel : "" }, String(o.value))) })
+      ]
+    }
+  );
 }
 function AutoComplete({ options = [], value, defaultValue, onChange, onSelect, placeholder, disabled, className, style, ...rest }) {
   const ref = useRef(null);
@@ -817,7 +975,7 @@ function ToggleButton({ value, selected, onChange, disabled, children, icon, cla
     }
   );
 }
-function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", size, children, className, style, ...rest }) {
+function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, orientation = "horizontal", children, className, style, ...rest }) {
   const ref = useRef(null);
   const [val, set] = useCtrl(value, defaultValue ?? (exclusive ? "" : []), onChange);
   const normalized = exclusive ? val : Array.isArray(val) ? val.join(",") : val;
@@ -827,7 +985,7 @@ function ToggleButtonGroup({ value, defaultValue, onChange, exclusive = true, or
       ref,
       ...rest,
       role: "group",
-      className: cx("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, size && `mimicus-toggle-group--${size}`, className),
+      className: cx("mimicus-toggle-group", `mimicus-toggle-group--${orientation}`, className),
       style,
       "data-exclusive": exclusive ? "true" : "false",
       "data-value": normalized,

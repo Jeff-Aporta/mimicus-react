@@ -5,18 +5,51 @@
   "titleIcon": "mdi:login",
   "status": "approved",
   "intro": "Botón de inicio de sesión ContaPyme replicable en todas las apps del ecosistema. Modal glass con usuario corporativo (<code>@contapyme.com</code> opcional), ojo de contraseña, recordar credenciales y multi-empresa vía <code>main-orchestrator</code>. Colócalo en <code>AppLayout.Header.Tools</code>.",
-  "component": { "name": "LoginButton", "path": "src/contapyme/components/LoginButton.jsx" },
-  "preview": { "template": "contapyme-login" },
-  "shell": { "relieve": 40, "configBlockCount": 1 },
-  "state": { "showPasswordToggle": true, "showRemember": true },
+  "component": {
+    "name": "LoginButton",
+    "path": "src/contapyme/components/LoginButton.jsx"
+  },
+  "preview": {
+    "template": "contapyme-login"
+  },
+  "shell": {
+    "relieve": 40,
+    "configBlockCount": 1
+  },
+  "state": {
+    "showPasswordToggle": true,
+    "showRemember": true
+  },
   "fields": [
-    { "kind": "switch-group", "key": "login", "label": "Login", "labelIcon": "mdi:account-key-outline", "switches": [
-      { "key": "showPasswordToggle", "label": "showPasswordToggle" },
-      { "key": "showRemember", "label": "showRemember" }
-    ]}
+    {
+      "kind": "switch-group",
+      "key": "login",
+      "label": "Login",
+      "labelIcon": "mdi:account-key-outline",
+      "switches": [
+        {
+          "key": "showPasswordToggle",
+          "label": "showPasswordToggle",
+          "iconOn": "mdi:eye",
+          "iconOff": "mdi:eye-off",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        },
+        {
+          "key": "showRemember",
+          "label": "showRemember",
+          "iconOn": "mdi:bookmark",
+          "iconOff": "mdi:bookmark-outline",
+          "colorOn": "var(--mimicus-success, #2e9e5a)",
+          "colorOff": "var(--mimicus-color, currentColor)"
+        }
+      ]
+    }
   ],
   "code": {
     "strategy": "contapyme-login",
-    "tagOpts": { "multiline": true }
+    "tagOpts": {
+      "multiline": true
+    }
   }
 }

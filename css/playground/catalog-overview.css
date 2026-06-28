@@ -49,18 +49,11 @@
 	margin-top: 1.1rem;
 }
 
-.catalog-search {
-	display: flex;
-	align-items: center;
-	gap: 0.45rem;
+/* Dimensionamiento del buscador (el componente Input de la librería aporta su propia superficie). */
+.catalog-search.mimicus-input {
 	flex: 1 1 14rem;
 	min-width: min(100%, 14rem);
 	max-width: 22rem;
-	padding: 0.45rem 0.7rem;
-	border-radius: var(--mimicus-ui-radius, 0.55rem);
-	border: 1px solid var(--catalog-search-border, color-mix(in srgb, var(--mimicus-b-color), transparent 20%));
-	background: var(--catalog-search-bg, color-mix(in srgb, var(--mimicus-bg-secondary), transparent 8%));
-	color: var(--catalog-fg);
 }
 
 .catalog-search__icon {

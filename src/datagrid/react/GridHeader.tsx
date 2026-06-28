@@ -43,7 +43,11 @@ export function GridHeader(props: GridHeaderProps): ReactElement {
     if ((e.target as HTMLElement).closest(".mim-dg__resizer, .mim-dg__head-menu-btn")) return;
     if (col.sortable) onSort(col.colId, e.shiftKey);
   };
-  const onDragStart = (col: ColumnState) => (e: DragEvent) => { drag.current = col.colId; e.dataTransfer.effectAllowed = "move"; };
+  const onDragStart = (col: ColumnState) => (e: DragEvent) => {
+    drag.current = col.colId;
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("application/x-mim-col", col.colId); // para el panel de agrupación
+  };
   const onDrop = (col: ColumnState) => (e: DragEvent) => { e.preventDefault(); if (drag.current && drag.current !== col.colId) onReorder(drag.current, col.colId); drag.current = null; };
 
   return (

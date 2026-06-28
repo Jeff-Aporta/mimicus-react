@@ -1,25 +1,109 @@
 {
-   "id": "FloatingComponent",
-   "category": "Overlays",
-   "label": "FloatingComponent",
-   "titleIcon": "mdi:arrange-bring-forward",
-   "status": "pending",
-   "intro": "Panel flotante absoluto junto al contenido (p. ej. acciones de fila). Expone <code>FC_KEEP_ALIVE_CTX</code> para menús anidados. En la vista previa, pasa el cursor sobre la <strong>fila resaltada</strong> o activa <code>showfloat</code>.",
-   "component": { "name": "FloatingComponent", "path": "src/components/overlays/FloatingComponent.svelte" },
-   "preview": { "template": "cmp-floating-component", "style": "width: 100%; align-self: stretch;" },
-   "shell": { "relieve": 58, "configBlockCount": 2 },
-   "state": { "showfloat": false, "rowText": "Factura #1042 — pendiente de revisión", "horizontal": "right", "vertical": "center" },
-   "fields": [
-      { "kind": "switch", "key": "showfloat", "label": "showfloat", "labelIcon": "mdi:eye-outline" },
-      { "kind": "text", "key": "rowText", "label": "rowText", "labelIcon": "mdi:text" },
-      { "kind": "select-enum", "key": "horizontal", "label": "horizontal", "labelIcon": "mdi:arrow-expand-horizontal", "enumValue": { "left": "left", "center": "center", "right": "right" } },
-      { "kind": "select-enum", "key": "vertical", "label": "vertical", "labelIcon": "mdi:arrow-expand-vertical", "enumValue": { "top": "top", "center": "center", "bottom": "bottom" } }
-   ],
-   "presets": [
-      { "label": "Hover en fila", "icon": "mdi:cursor-default-gesture", "state": { "showfloat": false, "rowText": "Factura #1042 — pendiente de revisión", "horizontal": "right", "vertical": "center" } },
-      { "label": "Siempre visible", "icon": "mdi:eye-outline", "state": { "showfloat": true, "rowText": "Fila con panel flotante fijo", "horizontal": "right", "vertical": "center" } },
-      { "label": "Izquierda", "icon": "mdi:arrow-left", "state": { "showfloat": true, "rowText": "Acciones ancladas a la izquierda", "horizontal": "left", "vertical": "center" } },
-      { "label": "Abajo centrado", "icon": "mdi:arrow-down", "state": { "showfloat": true, "rowText": "Métrica con barra inferior", "horizontal": "center", "vertical": "bottom" } }
-   ],
-   "tests": "extras/FloatingComponentTests.svelte"
+  "id": "FloatingComponent",
+  "category": "Overlays",
+  "label": "FloatingComponent",
+  "titleIcon": "mdi:arrange-bring-forward",
+  "status": "pending",
+  "intro": "Panel flotante absoluto junto al contenido (p. ej. acciones de fila). Expone <code>FC_KEEP_ALIVE_CTX</code> para menús anidados. En la vista previa, pasa el cursor sobre la <strong>fila resaltada</strong> o activa <code>showfloat</code>.",
+  "component": {
+    "name": "FloatingComponent",
+    "path": "src/components/overlays/FloatingComponent.svelte"
+  },
+  "preview": {
+    "template": "cmp-floating-component",
+    "style": "width: 100%; align-self: stretch;"
+  },
+  "shell": {
+    "relieve": 58,
+    "configBlockCount": 2
+  },
+  "state": {
+    "showfloat": false,
+    "rowText": "Factura #1042 — pendiente de revisión",
+    "horizontal": "right",
+    "vertical": "center"
+  },
+  "fields": [
+    {
+      "kind": "switch",
+      "key": "showfloat",
+      "label": "showfloat",
+      "labelIcon": "mdi:eye-outline",
+      "iconOn": "mdi:check",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    },
+    {
+      "kind": "text",
+      "key": "rowText",
+      "label": "rowText",
+      "labelIcon": "mdi:text"
+    },
+    {
+      "kind": "select-enum",
+      "key": "horizontal",
+      "label": "horizontal",
+      "labelIcon": "mdi:arrow-expand-horizontal",
+      "enumValue": {
+        "left": "left",
+        "center": "center",
+        "right": "right"
+      }
+    },
+    {
+      "kind": "select-enum",
+      "key": "vertical",
+      "label": "vertical",
+      "labelIcon": "mdi:arrow-expand-vertical",
+      "enumValue": {
+        "top": "top",
+        "center": "center",
+        "bottom": "bottom"
+      }
+    }
+  ],
+  "presets": [
+    {
+      "label": "Hover en fila",
+      "icon": "mdi:cursor-default-gesture",
+      "state": {
+        "showfloat": false,
+        "rowText": "Factura #1042 — pendiente de revisión",
+        "horizontal": "right",
+        "vertical": "center"
+      }
+    },
+    {
+      "label": "Siempre visible",
+      "icon": "mdi:eye-outline",
+      "state": {
+        "showfloat": true,
+        "rowText": "Fila con panel flotante fijo",
+        "horizontal": "right",
+        "vertical": "center"
+      }
+    },
+    {
+      "label": "Izquierda",
+      "icon": "mdi:arrow-left",
+      "state": {
+        "showfloat": true,
+        "rowText": "Acciones ancladas a la izquierda",
+        "horizontal": "left",
+        "vertical": "center"
+      }
+    },
+    {
+      "label": "Abajo centrado",
+      "icon": "mdi:arrow-down",
+      "state": {
+        "showfloat": true,
+        "rowText": "Métrica con barra inferior",
+        "horizontal": "center",
+        "vertical": "bottom"
+      }
+    }
+  ],
+  "tests": "extras/FloatingComponentTests.svelte"
 }

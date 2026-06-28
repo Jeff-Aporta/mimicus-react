@@ -13,7 +13,7 @@ import {
   Switch, LabeledSwitch, Radio, RadioGroup, Slider, Rate, Rating, Select, AutoComplete,
   ToggleButton, ToggleButtonGroup, Transfer, TransferBoard, Upload, ColorPicker, DatePicker, TimePicker, Cascader, TreeSelect, Mentions,
   Badge, Tag, Avatar, AvatarGroup, Carousel, Collapse, CollapsePanel, Descriptions, DescriptionsItem, Empty, QRCode, Segmented, Statistic, Table, Timeline, TimelineItem, Tooltip, Tour, Tree, Calendar, List, ListItem, ListItemText, ListItemIcon, ListItemAvatar,
-  LoginButton, ContapymeSessionProvider, createDemoSession, SidePanel, SidePanelSection,
+  LoginButton, ContapymeSessionProvider, createDemoSession, SidePanel, SidePanelSection, DataGrid,
 } from "../../_ui.ts";
 import { Icon } from "../../../components/Icon.tsx";
 import {
@@ -94,7 +94,7 @@ function CardPreview({ state, details, previewKey, demoStyle, demoClass }) {
 function DividerPreview({ state, details, previewKey, demoStyle, demoClass }) {
   const orientation = state.orientation === "vertical" ? "vertical" : "horizontal";
   const variant = ["dashed", "dotted", "glow"].includes(String(state.variant)) ? state.variant : "solid";
-  const dividerProps = { orientation, variant, titlePlacement: state.titlePlacement ?? "center", plain: Boolean(state.plain), size: state.size ?? "medium", dashed: Boolean(state.dashed), orientationMargin: String(details.orientationMargin ?? "").trim() || undefined };
+  const dividerProps = { orientation, variant, titlePlacement: state.titlePlacement ?? "center", plain: Boolean(state.plain), dashed: Boolean(state.dashed), orientationMargin: String(details.orientationMargin ?? "").trim() || undefined };
   const shellStyle = mergeStyleString(`border: ${resolveColor("border")} 1px solid; border-radius: 0.5rem; padding: 0.75rem; box-sizing: border-box`, demoStyle);
   const showTitle = Boolean(details.showTitle) && String(details.title ?? "").trim();
   return (
@@ -214,7 +214,7 @@ function MenuPreview({ state, previewKey, demoStyle, demoClass }) {
 function PaginationPreview({ state, previewKey, demoStyle, demoClass }) {
   return (
     <div key={previewKey} className={["mimicus-nav-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
-      <Pagination count={Math.round(Number(state.count)) || 10} defaultPage={Math.round(Number(state.defaultPage)) || 1} size={state.size === "small" ? "small" : undefined} siblingCount={Math.round(Number(state.siblingCount)) || 1} />
+      <Pagination count={Math.round(Number(state.count)) || 10} defaultPage={Math.round(Number(state.defaultPage)) || 1} siblingCount={Math.round(Number(state.siblingCount)) || 1} />
     </div>
   );
 }
@@ -334,7 +334,7 @@ function InputPreview({ state, details, previewKey, demoStyle, demoClass }) {
   return (
     <div key={previewKey} className={["mimicus-form-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
       <FormItem label="Campo de texto">
-        <Input size={state.size ?? "medium"} disabled={state.disabled} allowClear={Boolean(state.allowClear)} placeholder={details.placeholder ?? "Escribe aquí…"} status={state.status} />
+        <Input disabled={state.disabled} allowClear={Boolean(state.allowClear)} placeholder={details.placeholder ?? "Escribe aquí…"} status={state.status} />
       </FormItem>
     </div>
   );
@@ -351,7 +351,7 @@ function AutoCompletePreview({ state, previewKey, demoStyle, demoClass }) {
 function SelectPreview({ state, previewKey, demoStyle, demoClass }) {
   return (
     <div key={previewKey} className={["mimicus-form-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
-      <Select size={state.size} disabled={state.disabled} placeholder="Elige una opción" options={DEMO_AUTOCOMPLETE} defaultValue="react" />
+      <Select disabled={state.disabled} placeholder="Elige una opción" options={DEMO_AUTOCOMPLETE} defaultValue="react" />
     </div>
   );
 }
@@ -367,7 +367,7 @@ function SliderPreview({ state, previewKey, demoStyle, demoClass }) {
 function RatePreview({ state, previewKey, demoStyle, demoClass }) {
   return (
     <div key={previewKey} className={["mimicus-form-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
-      <Rate defaultValue={2.5} allowHalf={Boolean(state.allowHalf)} disabled={state.disabled} size={state.size} />
+      <Rate defaultValue={2.5} allowHalf={Boolean(state.allowHalf)} disabled={state.disabled} />
     </div>
   );
 }
@@ -516,7 +516,7 @@ function AvatarPreview({ state, previewKey, demoStyle, demoClass }) {
           <Avatar alt="Ana">A</Avatar><Avatar alt="Luis">L</Avatar><Avatar alt="Sofía">S</Avatar><Avatar alt="María">M</Avatar><Avatar alt="Pedro">P</Avatar>
         </AvatarGroup>
       ) : (
-        <Avatar size={state.size ?? "medium"} variant={state.variant ?? "circular"} alt="Remy Sharp">{state.withImage ? undefined : "RS"}</Avatar>
+        <Avatar variant={state.variant ?? "circular"} alt="Remy Sharp">{state.withImage ? undefined : "RS"}</Avatar>
       )}
     </div>
   );
@@ -561,7 +561,7 @@ function DescriptionsPreview({ state, previewKey, demoStyle, demoClass }) {
 function EmptyPreview({ state, previewKey, demoStyle, demoClass }) {
   return (
     <div key={previewKey} className={["mimicus-display-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
-      <Empty description={state.description ?? "No data"} image={state.image ?? "default"}>{state.showAction && <Button variant="solid" size="small">Crear</Button>}</Empty>
+      <Empty description={state.description ?? "No data"} image={state.image ?? "default"}>{state.showAction && <Button variant="solid">Crear</Button>}</Empty>
     </div>
   );
 }
@@ -593,7 +593,7 @@ function StatisticPreview({ state, previewKey, demoStyle, demoClass }) {
 function TablePreview({ state, previewKey, demoStyle, demoClass }) {
   return (
     <div key={previewKey} className={["mimicus-display-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
-      <Table columns={DEMO_TABLE_COLS} dataSource={DEMO_TABLE_DATA} bordered={Boolean(state.bordered)} size={state.size ?? "medium"} sortable={Boolean(state.sortable)} />
+      <Table columns={DEMO_TABLE_COLS} dataSource={DEMO_TABLE_DATA} bordered={Boolean(state.bordered)} sortable={Boolean(state.sortable)} />
     </div>
   );
 }
@@ -715,7 +715,6 @@ function LoginButtonPreview({ previewKey, demoStyle, demoClass }) {
     <ContapymeSessionProvider session={session}>
       <div key={previewKey} className={["mimicus-login-button-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("width:100%;padding:0.65rem 0.75rem;border:1px solid var(--mimicus-b-color);border-radius:var(--mimicus-ui-radius,0.5rem);background:color-mix(in srgb,var(--mimicus-bg-secondary),transparent 8%)", demoStyle))}>
         <FlexLayout items="center" justify="flex-end" gap="0.5rem">
-          <span style={{ fontSize: "0.78rem", opacity: 0.75, marginRight: "auto" }}>AppLayout.Header.Tools</span>
           <LoginButton showPasswordToggle showRemember />
         </FlexLayout>
       </div>
@@ -724,6 +723,7 @@ function LoginButtonPreview({ previewKey, demoStyle, demoClass }) {
 }
 
 const DG_CATS = ["Papelería", "Tecnología", "Aseo", "Cafetería", "Mobiliario", "Empaques"];
+const DG_REGS = ["Andina", "Caribe", "Pacífica", "Orinoquía"];
 const DG_PRODS = ["Resma carta", "Tóner láser", "Jabón líquido", "Café molido", "Silla ergonómica", "Caja kraft", "Marcador", "Disco SSD", "Servilletas", "Escritorio"];
 function buildDataGridRows(n) {
   const rows = [];
@@ -735,6 +735,7 @@ function buildDataGridRows(n) {
       id: i + 1,
       producto: `${DG_PRODS[i % DG_PRODS.length]} ${100 + i}`,
       categoria: DG_CATS[i % DG_CATS.length],
+      region: DG_REGS[i % DG_REGS.length],
       cantidad: cant,
       precio,
       total: cant * precio,
@@ -745,12 +746,13 @@ function buildDataGridRows(n) {
   return rows;
 }
 const DG_COLUMNS = [
-  { field: "id", headerName: "#", type: "number", width: 70, pinned: "left", filter: true },
+  { field: "id", headerName: "#", type: "number", width: 70, pinned: "left", filter: true, enableRowGroup: false },
   { field: "producto", headerName: "Producto", flex: 2, minWidth: 180, filter: true },
   { field: "categoria", headerName: "Categoría", filter: "set", width: 140 },
-  { field: "cantidad", headerName: "Cantidad", type: "number", filter: true, width: 110 },
-  { field: "precio", headerName: "Precio", type: "number", filter: true, width: 130, valueFormatter: (v) => `$ ${Number(v).toLocaleString("es-CO")}` },
-  { field: "total", headerName: "Total", type: "number", filter: true, width: 150, valueFormatter: (v) => `$ ${Number(v).toLocaleString("es-CO")}` },
+  { field: "region", headerName: "Región", filter: "set", width: 120 },
+  { field: "cantidad", headerName: "Cantidad", type: "number", filter: true, width: 110, aggFunc: "sum" },
+  { field: "precio", headerName: "Precio", type: "number", filter: true, width: 130, aggFunc: "avg", valueFormatter: (v) => `$ ${Math.round(Number(v)).toLocaleString("es-CO")}` },
+  { field: "total", headerName: "Total", type: "number", filter: true, width: 150, aggFunc: "sum", valueFormatter: (v) => `$ ${Math.round(Number(v)).toLocaleString("es-CO")}` },
   { field: "activo", headerName: "Activo", type: "boolean", cellRenderer: "boolean", width: 90, align: "center" },
   { field: "fecha", headerName: "Fecha", type: "date", filter: "date", width: 130 },
 ];
@@ -758,6 +760,7 @@ const DG_COLUMNS = [
 function DataGridPreview({ state, previewKey, demoStyle, demoClass }) {
   const rowCount = Math.max(0, Math.round(Number(state.rowCount)) || 1000);
   const rows = useMemo(() => buildDataGridRows(rowCount), [rowCount]);
+  const rowGroupCols = useMemo(() => (state.groupBy ? [state.groupBy] : []), [state.groupBy]);
   return (
     <div key={previewKey} className={["mimicus-display-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("width:100%", demoStyle))}>
       <DataGrid
@@ -769,6 +772,8 @@ function DataGridPreview({ state, previewKey, demoStyle, demoClass }) {
         pageSize={Math.round(Number(state.pageSize)) || 50}
         density={state.density ?? "normal"}
         toolbar={state.toolbar !== false}
+        rowGroupPanel={state.rowGroupPanel !== false}
+        rowGroupCols={rowGroupCols}
         height={Math.round(Number(state.height)) || 460}
       />
     </div>

@@ -2,15 +2,16 @@
  * datagrid/react/GridBody — isla: datagrid
  * llm:  ./GridBody.llm.md
  * repo: Jeff-Aporta/mimicus-react · src/datagrid/react/GridBody.tsx
- * Cuerpo virtualizado: renderiza sólo la ventana de filas visibles (alto fijo) sobre un spacer total.
+ * Cuerpo virtualizado: renderiza la ventana de filas visibles (hojas y filas de grupo) sobre un spacer total.
  */
 import type { CSSProperties, MouseEvent, ReactElement } from "react";
 import { Icon } from "../../components/Icon.tsx";
-import type { ColumnState, RowData, RowNode, SelectionMode } from "../core/types.ts";
+import type { ColumnState, DisplayRow, RowData, RowNode, SelectionMode } from "../core/types.ts";
+import { formatValue } from "../core/valueFormatter.ts";
 import { GridCell } from "./GridCell.tsx";
 
 export interface GridBodyProps<T extends RowData> {
-  rows: RowNode<T>[];          // ventana visible
+  rows: DisplayRow<T>[];       // ventana visible (grupos + hojas)
   columns: ColumnState[];
   rowHeight: number;
   topPad: number;
@@ -22,14 +23,39 @@ export interface GridBodyProps<T extends RowData> {
   pinStyles: Record<string, CSSProperties>;
   checkPinStyle?: CSSProperties;
   onRowSelect: (node: RowNode<T>, e: MouseEvent) => void;
+  onToggleGroup: (groupId: string) => void;
 }
 
+const INDENT = 18;
+
 export function GridBody<T extends RowData>(props: GridBodyProps<T>): ReactElement {
-  const { rows, columns, rowHeight, topPad, totalHeight, totalWidth, selection, selectionMode, focusedId, pinStyles, checkPinStyle, onRowSelect } = props;
+  const { rows, columns, rowHeight, topPad, totalHeight, totalWidth, selection, selectionMode, focusedId, pinStyles, checkPinStyle, onRowSelect, onToggleGroup } = props;
+  const aggCols = columns.filter((c) => c.aggFunc && !c.hide);
   return (
     <div className="mim-dg__body" style={{ height: totalHeight, width: totalWidth }} role="rowgroup">
       <div className="mim-dg__rows" style={{ transform: `translateY(${topPad}px)` }}>
-        {rows.map((node) => {
+        {rows.map((dr) => {
+          if (dr.kind === "group") {
+            return (
+              <div
+                key={dr.id}
+                className={`mim-dg__row mim-dg__group-row${focusedId === dr.id ? " is-focused" : ""}`}
+                style={{ height: rowHeight }}
+                role="row"
+                onClick={() => onToggleGroup(dr.id)}
+              >
+                <div className="mim-dg__group-cell" style={{ paddingLeft: 8 + dr.level * INDENT }}>
+                  <Icon icon={dr.expanded ? "mdi:chevron-down" : "mdi:chevron-right"} className="mim-dg__group-chevron" />
+                  <span className="mim-dg__group-label">{dr.label}</span>
+                  <span className="mim-dg__group-count">({dr.count.toLocaleString()})</span>
+                  {aggCols.map((c) => dr.agg[c.colId] != null && (
+                    <span key={c.colId} className="mim-dg__group-agg"><b>{c.headerName}:</b> {formatValue(c, dr.agg[c.colId])}</span>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+          const node = dr.node;
           const selected = selection.has(node.id);
           return (
             <div

@@ -1,29 +1,125 @@
 {
-   "id": "TransferBoard",
-   "category": "Inputs",
-   "label": "TransferBoard",
-   "titleIcon": "mdi:view-column-outline",
-   "status": "approved",
-   "intro": "Tablero tipo Trello / <a href=\"https://mui.com/material-ui/react-transfer-list/\" target=\"_blank\" rel=\"noreferrer\">MUI Transfer List</a> sin botones: varias columnas (stacks) con tarjetas que se mueven por <strong>drag &amp; drop</strong> entre stacks y se reordenan dentro de cada uno. Superficie <code>neon-glass</code> con acentos por columna.",
-   "component": { "name": "TransferBoard", "path": "src/components/forms/Forms.jsx" },
-   "preview": { "template": "cmp-transfer-board" },
-   "shell": { "relieve": 62, "configBlockCount": 2 },
-   "state": { "stackCount": 3, "stackWidth": 248, "disabled": false },
-   "details": { "itemsPerStack": 3 },
-   "fields": [
-      { "kind": "number", "key": "stackCount", "label": "stacks", "labelIcon": "mdi:view-column-outline", "min": 2, "max": 6, "step": 1 },
-      { "kind": "number", "key": "stackWidth", "label": "stackWidth", "labelIcon": "mdi:arrow-expand-horizontal", "min": 180, "max": 360, "step": 8 },
-      { "kind": "switch", "key": "disabled", "label": "disabled", "labelIcon": "mdi:lock-outline" }
-   ],
-   "detailFields": [
-      { "kind": "number", "key": "itemsPerStack", "label": "Tarjetas / stack", "labelIcon": "mdi:cards-outline", "min": 1, "max": 6, "step": 1 }
-   ],
-   "presets": [
-      { "label": "Kanban 3 columnas", "icon": "mdi:view-column-outline", "state": { "stackCount": 3, "stackWidth": 248, "disabled": false }, "details": { "itemsPerStack": 3 } },
-      { "label": "Trello 4 stacks", "icon": "mdi:view-dashboard-outline", "state": { "stackCount": 4, "stackWidth": 232, "disabled": false }, "details": { "itemsPerStack": 2 } },
-      { "label": "Transfer 2 listas", "icon": "mdi:swap-horizontal", "state": { "stackCount": 2, "stackWidth": 280, "disabled": false }, "details": { "itemsPerStack": 4 } },
-      { "label": "Solo lectura", "icon": "mdi:lock-outline", "state": { "stackCount": 3, "stackWidth": 248, "disabled": true }, "details": { "itemsPerStack": 2 } }
-   ],
-   "tests": "extras/TransferBoardTests.svelte",
-   "code": { "strategy": "transfer-board", "tagOpts": { "multiline": true } }
+  "id": "TransferBoard",
+  "category": "Inputs",
+  "label": "TransferBoard",
+  "titleIcon": "mdi:view-column-outline",
+  "status": "approved",
+  "intro": "Tablero tipo Trello / <a href=\"https://mui.com/material-ui/react-transfer-list/\" target=\"_blank\" rel=\"noreferrer\">MUI Transfer List</a> sin botones: varias columnas (stacks) con tarjetas que se mueven por <strong>drag &amp; drop</strong> entre stacks y se reordenan dentro de cada uno. Superficie <code>neon-glass</code> con acentos por columna.",
+  "component": {
+    "name": "TransferBoard",
+    "path": "src/components/forms/Forms.jsx"
+  },
+  "preview": {
+    "template": "cmp-transfer-board"
+  },
+  "shell": {
+    "relieve": 62,
+    "configBlockCount": 2
+  },
+  "state": {
+    "stackCount": 3,
+    "stackWidth": 248,
+    "disabled": false
+  },
+  "details": {
+    "itemsPerStack": 3
+  },
+  "fields": [
+    {
+      "kind": "number",
+      "key": "stackCount",
+      "label": "stacks",
+      "labelIcon": "mdi:view-column-outline",
+      "min": 2,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "kind": "number",
+      "key": "stackWidth",
+      "label": "stackWidth",
+      "labelIcon": "mdi:arrow-expand-horizontal",
+      "min": 180,
+      "max": 360,
+      "step": 8
+    },
+    {
+      "kind": "switch",
+      "key": "disabled",
+      "label": "disabled",
+      "labelIcon": "mdi:lock-outline",
+      "iconOn": "mdi:cancel",
+      "iconOff": "mdi:circle-outline",
+      "colorOn": "var(--mimicus-success, #2e9e5a)",
+      "colorOff": "var(--mimicus-color, currentColor)"
+    }
+  ],
+  "detailFields": [
+    {
+      "kind": "number",
+      "key": "itemsPerStack",
+      "label": "Tarjetas / stack",
+      "labelIcon": "mdi:cards-outline",
+      "min": 1,
+      "max": 6,
+      "step": 1
+    }
+  ],
+  "presets": [
+    {
+      "label": "Kanban 3 columnas",
+      "icon": "mdi:view-column-outline",
+      "state": {
+        "stackCount": 3,
+        "stackWidth": 248,
+        "disabled": false
+      },
+      "details": {
+        "itemsPerStack": 3
+      }
+    },
+    {
+      "label": "Trello 4 stacks",
+      "icon": "mdi:view-dashboard-outline",
+      "state": {
+        "stackCount": 4,
+        "stackWidth": 232,
+        "disabled": false
+      },
+      "details": {
+        "itemsPerStack": 2
+      }
+    },
+    {
+      "label": "Transfer 2 listas",
+      "icon": "mdi:swap-horizontal",
+      "state": {
+        "stackCount": 2,
+        "stackWidth": 280,
+        "disabled": false
+      },
+      "details": {
+        "itemsPerStack": 4
+      }
+    },
+    {
+      "label": "Solo lectura",
+      "icon": "mdi:lock-outline",
+      "state": {
+        "stackCount": 3,
+        "stackWidth": 248,
+        "disabled": true
+      },
+      "details": {
+        "itemsPerStack": 2
+      }
+    }
+  ],
+  "tests": "extras/TransferBoardTests.svelte",
+  "code": {
+    "strategy": "transfer-board",
+    "tagOpts": {
+      "multiline": true
+    }
+  }
 }

@@ -17,6 +17,7 @@ import { GridHeader } from "./GridHeader.tsx";
 import { GridBody } from "./GridBody.tsx";
 import { GridFooter } from "./GridFooter.tsx";
 import { GridToolbar } from "./GridToolbar.tsx";
+import { GroupPanel } from "./GroupPanel.tsx";
 import { HeaderMenu } from "./HeaderMenu.tsx";
 import { FilterPopover } from "./FilterPopover.tsx";
 
@@ -32,6 +33,8 @@ export interface DataGridProps<T extends RowData = RowData> {
   density?: Density;
   height?: number | string;
   toolbar?: boolean;
+  rowGroupPanel?: boolean;
+  rowGroupCols?: string[];
   exportFileName?: string;
   className?: string;
   style?: CSSProperties;
@@ -42,14 +45,14 @@ const DENSITY_ROW: Record<Density, number> = { compact: 32, normal: 40, comforta
 
 export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): ReactElement {
   const { columns, rows, getRowId, selectionMode = "none", pagination = false, pageSize,
-    height = 480, toolbar = true, exportFileName = "datagrid.csv", className, style, onSelectionChange } = props;
+    height = 480, toolbar = true, rowGroupPanel = true, exportFileName = "datagrid.csv", className, style, onSelectionChange } = props;
   const headerHeight = props.headerHeight ?? 44;
 
   const [density, setDensity] = useState<Density>(props.density ?? "normal");
   const rowHeight = props.rowHeight ?? DENSITY_ROW[density];
 
-  const options = useMemo(() => ({ columns, rows, getRowId, selectionMode, pagination, pageSize, density }),
-    [columns, rows, getRowId, selectionMode, pagination, pageSize, density]);
+  const options = useMemo(() => ({ columns, rows, getRowId, selectionMode, pagination, pageSize, density, rowGroupCols: props.rowGroupCols }),
+    [columns, rows, getRowId, selectionMode, pagination, pageSize, density, props.rowGroupCols]);
   const { api, state } = useGridModel<T>(options);
 
   useEffect(() => { api.setDensity(density); }, [api, density]);
@@ -73,7 +76,8 @@ export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): 
 
   const onScroll = useCallback((e: UIEvent<HTMLDivElement>) => setScrollTop(e.currentTarget.scrollTop), []);
 
-  const dataRows = pagination ? state.pageRows : state.displayedRows;
+  const dataRows = pagination ? state.pageDisplayRows : state.displayRows;   // filas a renderizar (grupos + hojas)
+  const leafRows = pagination ? state.pageRows : state.displayedRows;        // hojas (selección/teclado)
   const checkColWidth = selectionMode === "none" ? 0 : 44;
   const layout = orderedForLayout(state.columns);
   const flat = useMemo(() => {
@@ -98,9 +102,10 @@ export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): 
   const win = rowWindow(dataRows.length, rowHeight, scrollTop, viewportHeight);
   const visible = dataRows.slice(win.startIndex, win.endIndex);
 
-  const orderedIds = useMemo(() => dataRows.map((r) => r.id), [dataRows]);
-  const headerCheckbox = headerCheckboxState(state.selection, dataRows);
+  const orderedIds = useMemo(() => leafRows.map((r) => r.id), [leafRows]);
+  const headerCheckbox = headerCheckboxState(state.selection, leafRows);
   const filteredCols = useMemo(() => new Set(Object.keys(state.filterModel)), [state.filterModel]);
+  const groupedSet = useMemo(() => new Set(state.rowGroupCols), [state.rowGroupCols]);
 
   const emit = useCallback((next: Set<string>) => {
     api.setSelection(next);
@@ -117,7 +122,9 @@ export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): 
     emit(next);
   }, [state.selection, selectionMode, orderedIds, emit]);
 
-  const onToggleAll = useCallback(() => emit(headerCheckbox === "all" ? clearSelection() : selectAll(dataRows)), [emit, headerCheckbox, dataRows]);
+  const onToggleAll = useCallback(() => emit(headerCheckbox === "all" ? clearSelection() : selectAll(leafRows)), [emit, headerCheckbox, leafRows]);
+  const onToggleGroup = useCallback((groupId: string) => api.toggleGroup(groupId), [api]);
+  const onToggleRowGroup = useCallback((colId: string) => { if (groupedSet.has(colId)) api.removeRowGroupCol(colId); else api.addRowGroupCol(colId); }, [api, groupedSet]);
   const onSort = useCallback((colId: string, additive: boolean) => api.toggleSort(colId, additive), [api]);
   const onResize = useCallback((colId: string, width: number) => api.resizeColumn(colId, width), [api]);
   const onReorder = useCallback((colId: string, targetColId: string) => {
@@ -166,14 +173,16 @@ export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): 
     else if (e.key === "End") move(last);
     else if (e.key === "PageDown") move(focusRow + pageStep);
     else if (e.key === "PageUp") move(focusRow - pageStep);
-    else if (e.key === " " && focusRow >= 0 && selectionMode !== "none") {
-      const node = dataRows[focusRow]; if (node) { lastRangeFrom.current = node.id; emit(toggleRowSelection(state.selection, node.id, selectionMode, { additive: true })); }
+    else if ((e.key === " " || e.key === "Enter") && focusRow >= 0) {
+      const dr = dataRows[focusRow];
+      if (dr?.kind === "group") api.toggleGroup(dr.id);
+      else if (dr?.kind === "leaf" && selectionMode !== "none") { lastRangeFrom.current = dr.node.id; emit(toggleRowSelection(state.selection, dr.node.id, selectionMode, { additive: true })); }
       e.preventDefault();
-    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "a" && selectionMode === "multiple") { emit(selectAll(dataRows)); e.preventDefault(); }
+    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "a" && selectionMode === "multiple") { emit(selectAll(leafRows)); e.preventDefault(); }
     else if (e.key === "Escape") { if (state.selection.size) emit(clearSelection()); }
-  }, [dataRows, focusRow, viewportHeight, rowHeight, selectionMode, state.selection, emit, scrollRowIntoView]);
+  }, [dataRows, leafRows, focusRow, viewportHeight, rowHeight, selectionMode, state.selection, emit, api, scrollRowIntoView]);
 
-  const focusedId = focusRow >= 0 && focusRow < dataRows.length ? dataRows[focusRow]!.id : null;
+  const focusedId = focusRow >= 0 && focusRow < dataRows.length ? (dataRows[focusRow]!.kind === "group" ? (dataRows[focusRow] as { id: string }).id : (dataRows[focusRow] as { node: RowNode<T> }).node.id) : null;
 
   return (
     <div className={`mim-dg${className ? ` ${className}` : ""}`} data-density={density} style={{ height, ...style }}>
@@ -184,6 +193,16 @@ export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): 
           density={density}
           onDensity={setDensity}
           onExport={onExport}
+        />
+      )}
+      {rowGroupPanel && (
+        <GroupPanel
+          columns={flat}
+          rowGroupCols={state.rowGroupCols}
+          onAdd={(colId) => api.addRowGroupCol(colId)}
+          onRemove={(colId) => api.removeRowGroupCol(colId)}
+          onExpandAll={() => api.expandAllGroups()}
+          onCollapseAll={() => api.collapseAllGroups()}
         />
       )}
       <div className="mim-dg__viewport pg-scrollbar" ref={viewportRef} onScroll={onScroll} onKeyDown={onKeyDown} tabIndex={0} role="grid" aria-rowcount={state.totalRows}>
@@ -216,6 +235,7 @@ export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): 
           pinStyles={pinStyles}
           checkPinStyle={checkPinStyle}
           onRowSelect={onRowSelect}
+          onToggleGroup={onToggleGroup}
         />
       </div>
       <GridFooter page={state.page} pageSize={state.pageSize} totalRows={state.totalRows} selectedCount={state.selection.size} pagination={pagination} onPage={onPage} />
@@ -227,6 +247,8 @@ export function DataGrid<T extends RowData = RowData>(props: DataGridProps<T>): 
           onHide={(colId: string) => api.hideColumn(colId, true)}
           onAutosize={(colId: string) => api.autosizeColumn(colId)}
           onFilter={onFilterOpen}
+          onToggleRowGroup={onToggleRowGroup}
+          isGrouped={groupedSet.has(menu.col.colId)}
         />
       )}
       {filterPop && (

@@ -3,6 +3,7 @@ import {
   LUMINANCE_STORAGE_KEY,
   THEME_COLOR_STORAGE_KEY,
   DESIGN_SCHEME_STORAGE_KEY,
+  designSchemeForThemeColor,
   isLuminance,
   isDesignScheme,
   normalizeThemeColor,
@@ -118,7 +119,8 @@ export function setLuminance(value: Luminance): void {
 
 export function setThemeColor(value: ThemeColor): void {
   if (state.themeColor === value && readThemeColorFromDom() === value) return;
-  applyTheme(state.luminance, value, state.designScheme);
+  const scheme = designSchemeForThemeColor(value);
+  applyTheme(state.luminance, value, scheme);
 }
 
 export function setDesignScheme(value: DesignScheme): void {

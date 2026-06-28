@@ -5,18 +5,19 @@ button,
 	user-select: none;
 	cursor: pointer;
 	appearance: none;
+	font: inherit;            /* hereda la fuente del contexto: el botón escala con el em circundante (uso inline) */
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.4rem;
+	gap: 0.4em;
 	white-space: nowrap;
 	min-width: 16px;
 	width: fit-content;
 	max-width: 100%;
 	height: fit-content;
-	min-height: 2rem;
-	padding: 0.35rem 0.75rem;
+	min-height: 2em;
+	padding: 0.35em 0.75em;
 	box-sizing: border-box;
 	border: none;
 	line-height: 1.2;
@@ -41,6 +42,17 @@ button > .button-content,
 	display: inline-flex;
 	align-items: center;
 	line-height: 1.2;
+	gap: 0.4em;
+}
+
+button > .button-content > iconify-icon,
+.button-wrap > .button-content > iconify-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	line-height: 0;
+	font-size: 1.05em;
 }
 
 button:focus,
@@ -83,48 +95,10 @@ button[data-shape="circle"],
 .button-wrap[data-shape="circle"],
 a.button-link[data-shape="circle"] {
 	border-radius: 50%;
-	width: 2.5rem;
-	height: 2.5rem;
-	min-width: 2.5rem;
+	width: 2.5em;
+	height: 2.5em;
+	min-width: 2.5em;
 	padding: 0;
-}
-
-button[data-size="small"],
-.button-wrap[data-size="small"],
-a.button-link[data-size="small"] {
-	min-height: 1.65rem;
-	padding: 0.2rem 0.6rem;
-	font-size: 0.82rem;
-	gap: 0.35rem;
-}
-
-button[data-size="medium"],
-.button-wrap[data-size="medium"],
-a.button-link[data-size="medium"] {
-	min-height: 2rem;
-	font-size: 0.9rem;
-}
-
-button[data-size="large"],
-.button-wrap[data-size="large"],
-a.button-link[data-size="large"] {
-	min-height: 2.5rem;
-	padding: 0.45rem 1rem;
-	font-size: 1rem;
-}
-
-button[data-size="small"][data-shape="circle"],
-.button-wrap[data-size="small"][data-shape="circle"] {
-	width: 2rem;
-	height: 2rem;
-	min-width: 2rem;
-}
-
-button[data-size="large"][data-shape="circle"],
-.button-wrap[data-size="large"][data-shape="circle"] {
-	width: 3rem;
-	height: 3rem;
-	min-width: 3rem;
 }
 
 button.button-block,

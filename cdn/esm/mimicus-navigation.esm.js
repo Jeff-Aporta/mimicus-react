@@ -602,7 +602,7 @@ function Tabs({ type = "line", tabPosition = "top", activeKey, defaultActiveKey,
   );
 }
 Tabs.Tab = TabItem;
-function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, boundaryCount = 1, size, simple, className, style, ...rest }) {
+function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, boundaryCount = 1, simple, className, style, ...rest }) {
   const ref = useRef(null);
   useNavBinding(ref, "pagination", [count, page, defaultPage, siblingCount, boundaryCount]);
   return /* @__PURE__ */ jsx(
@@ -611,7 +611,7 @@ function Pagination({ count = 10, page, defaultPage = 1, siblingCount = 1, bound
       ref,
       ...rest,
       "aria-label": "pagination",
-      className: cx("mimicus-pagination", size && `mimicus-pagination--${size}`, simple && "mimicus-pagination--simple", className),
+      className: cx("mimicus-pagination", simple && "mimicus-pagination--simple", className),
       style,
       "data-count": count,
       "data-page": page,
@@ -632,7 +632,7 @@ function Step({ title, description, status, icon, className, ...rest }) {
     ] })
   ] });
 }
-function Steps({ current = 0, direction = "horizontal", size, clickable, items, className, style, children, ...rest }) {
+function Steps({ current = 0, direction = "horizontal", clickable, items, className, style, children, ...rest }) {
   const ref = useRef(null);
   useNavBinding(ref, "steps", [current, direction, clickable]);
   const body = children ?? items?.map((it, i) => {
@@ -644,7 +644,7 @@ function Steps({ current = 0, direction = "horizontal", size, clickable, items, 
     {
       ref,
       ...rest,
-      className: cx("mimicus-steps", `mimicus-steps--${direction}`, size && `mimicus-steps--${size}`, className),
+      className: cx("mimicus-steps", `mimicus-steps--${direction}`, className),
       style,
       "data-current": current,
       "data-direction": direction,
