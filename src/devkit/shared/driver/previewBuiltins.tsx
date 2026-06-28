@@ -898,9 +898,30 @@ function TipInfoPreview({ state, previewKey, demoStyle, demoClass }) {
 }
 
 function InvokedFloaterPreview({ state, previewKey, demoStyle, demoClass }) {
+  const trigger = state.trigger ?? "click";
+  const hint = trigger === "hover" ? "Pasa el cursor sobre el botón para abrir el panel."
+    : trigger === "contextmenu" ? "Clic derecho sobre el botón para abrir el panel."
+    : "Haz clic en el botón para abrir el popover anclado.";
   return (
-    <div key={previewKey} className={["mimicus-overlay-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(demoStyle)}>
-      <InvokedFloater anchorLabel={state.anchorLabel} panelText={state.panelText} side={state.side ?? "bottom"} align={state.align ?? "center"} trigger={state.trigger ?? "click"} />
+    <div key={previewKey} className={["mimicus-invoked-floater-preview", demoClass].filter(Boolean).join(" ")} style={parseStyleString(mergeStyleString("width: 100%", demoStyle))}>
+      <p className="mimicus-invoked-floater-preview__hint">{hint}</p>
+      <div className="mimicus-invoked-floater-preview__card">
+        <div className="mimicus-invoked-floater-preview__head">
+          <Icon icon="mdi:file-document-outline" className="mimicus-invoked-floater-preview__head-icon" />
+          <span className="mimicus-invoked-floater-preview__title">Factura #1042</span>
+          <span className="mimicus-invoked-floater-preview__badge">Pendiente</span>
+        </div>
+        <p className="mimicus-invoked-floater-preview__meta">Cliente Acme Corp · $1.240.000 · vence en 3 días</p>
+        <div className="mimicus-invoked-floater-preview__actions">
+          <InvokedFloater
+            anchorLabel={<><Icon icon="mdi:information-outline" /> {state.anchorLabel ?? "Abrir panel"}</>}
+            panelText={state.panelText}
+            side={state.side ?? "bottom"}
+            align={state.align ?? "center"}
+            trigger={trigger}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -914,11 +935,17 @@ function FloatingComponentPreview({ state, previewKey, demoStyle, demoClass }) {
         {showfloat ? "Panel de acciones fijado con showfloat." : "Pasa el cursor sobre la fila resaltada para editar o eliminar."}
       </p>
       <div className="mimicus-floating-component-preview__list" role="list">
-        <div className="mimicus-floating-component-preview__row" role="listitem">Factura #1041 — pagada</div>
+        <div className="mimicus-floating-component-preview__row" role="listitem">
+          <span className="mimicus-floating-component-preview__row-label">Factura #1041 — Acme Corp</span>
+          <span className="mimicus-floating-component-preview__status is-paid">Pagada</span>
+        </div>
         <div className="mimicus-floating-component-preview__row mimicus-floating-component-preview__row--active" role="listitem">
           <FloatingComponent showfloat={showfloat} rowText={rowText} horizontal={state.horizontal ?? "right"} vertical={state.vertical ?? "center"} />
         </div>
-        <div className="mimicus-floating-component-preview__row" role="listitem">Factura #1043 — borrador</div>
+        <div className="mimicus-floating-component-preview__row" role="listitem">
+          <span className="mimicus-floating-component-preview__row-label">Factura #1043 — Globex S.A.</span>
+          <span className="mimicus-floating-component-preview__status is-draft">Borrador</span>
+        </div>
       </div>
     </div>
   );

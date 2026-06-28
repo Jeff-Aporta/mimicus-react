@@ -6161,11 +6161,14 @@ function InvokedFloater({
     e.preventDefault();
     openPanel();
   } } : { onClick: () => setOpen((v) => !v) };
-  return /* @__PURE__ */ jsxs17("span", { className: cx5("mimicus-invoked-floater", className), style, children: [
-    /* @__PURE__ */ jsx30("button", { ref: anchorRef, type: "button", className: "mimicus-invoked-floater__anchor", ...anchorProps, children: anchorLabel }),
+  return /* @__PURE__ */ jsxs17("span", { className: cx5("mimicus-invoked-floater", open && "is-open", className), style, children: [
+    /* @__PURE__ */ jsx30("button", { ref: anchorRef, type: "button", className: cx5("mimicus-invoked-floater__anchor", open && "is-active"), ...anchorProps, children: anchorLabel }),
     open && /* @__PURE__ */ jsxs17("div", { className: cx5("mimicus-invoked-floater__panel", `is-${side}`, `align-${align}`), role: "dialog", children: [
-      /* @__PURE__ */ jsx30("p", { style: { margin: 0 }, children: panelText }),
-      /* @__PURE__ */ jsx30(Button, { variant: "text", onClick: closePanel, children: "Cerrar" })
+      /* @__PURE__ */ jsx30("span", { className: "mimicus-invoked-floater__caret", "aria-hidden": "true" }),
+      /* @__PURE__ */ jsxs17("div", { className: "mimicus-invoked-floater__panel-inner", children: [
+        /* @__PURE__ */ jsx30("p", { className: "mimicus-invoked-floater__panel-text", children: panelText }),
+        /* @__PURE__ */ jsx30("div", { className: "mimicus-invoked-floater__panel-foot", children: /* @__PURE__ */ jsx30(Button, { variant: "text", onClick: closePanel, children: "Cerrar" }) })
+      ] })
     ] })
   ] });
 }
@@ -6182,15 +6185,18 @@ function FloatingComponent({
   return /* @__PURE__ */ jsxs17(
     "div",
     {
-      className: cx5("mimicus-floating-component", className),
+      className: cx5("mimicus-floating-component", visible && "is-active", className),
       style,
       onMouseEnter: () => setHover(true),
       onMouseLeave: () => setHover(false),
       children: [
-        /* @__PURE__ */ jsx30("div", { className: "mimicus-floating-component__row", children: rowText }),
+        /* @__PURE__ */ jsxs17("div", { className: "mimicus-floating-component__row", children: [
+          /* @__PURE__ */ jsx30("span", { className: "mimicus-floating-component__row-text", children: rowText }),
+          !visible && /* @__PURE__ */ jsx30("span", { className: "mimicus-floating-component__row-hint", "aria-hidden": "true", children: "Acciones" })
+        ] }),
         visible && /* @__PURE__ */ jsxs17("div", { className: cx5("mimicus-floating-component__panel", `h-${horizontal}`, `v-${vertical}`), children: [
-          /* @__PURE__ */ jsx30(Button, { variant: "text", icon: "mdi:pencil-outline", children: "Editar" }),
-          /* @__PURE__ */ jsx30(Button, { variant: "text", icon: "mdi:delete-outline", children: "Eliminar" })
+          /* @__PURE__ */ jsx30(Tooltip, { title: "Editar", children: /* @__PURE__ */ jsx30(IconButton, { variant: "text", icon: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:pencil-outline" }), "aria-label": "Editar" }) }),
+          /* @__PURE__ */ jsx30(Tooltip, { title: "Eliminar", children: /* @__PURE__ */ jsx30(IconButton, { variant: "text", color: "danger", icon: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:delete-outline" }), "aria-label": "Eliminar" }) })
         ] })
       ]
     }

@@ -4980,11 +4980,14 @@ function InvokedFloater({
     e.preventDefault();
     openPanel();
   } } : { onClick: () => setOpen((v) => !v) };
-  return /* @__PURE__ */ jsxs15("span", { className: cx4("mimicus-invoked-floater", className), style, children: [
-    /* @__PURE__ */ jsx27("button", { ref: anchorRef, type: "button", className: "mimicus-invoked-floater__anchor", ...anchorProps, children: anchorLabel }),
+  return /* @__PURE__ */ jsxs15("span", { className: cx4("mimicus-invoked-floater", open && "is-open", className), style, children: [
+    /* @__PURE__ */ jsx27("button", { ref: anchorRef, type: "button", className: cx4("mimicus-invoked-floater__anchor", open && "is-active"), ...anchorProps, children: anchorLabel }),
     open && /* @__PURE__ */ jsxs15("div", { className: cx4("mimicus-invoked-floater__panel", `is-${side}`, `align-${align}`), role: "dialog", children: [
-      /* @__PURE__ */ jsx27("p", { style: { margin: 0 }, children: panelText }),
-      /* @__PURE__ */ jsx27(Button, { variant: "text", onClick: closePanel, children: "Cerrar" })
+      /* @__PURE__ */ jsx27("span", { className: "mimicus-invoked-floater__caret", "aria-hidden": "true" }),
+      /* @__PURE__ */ jsxs15("div", { className: "mimicus-invoked-floater__panel-inner", children: [
+        /* @__PURE__ */ jsx27("p", { className: "mimicus-invoked-floater__panel-text", children: panelText }),
+        /* @__PURE__ */ jsx27("div", { className: "mimicus-invoked-floater__panel-foot", children: /* @__PURE__ */ jsx27(Button, { variant: "text", onClick: closePanel, children: "Cerrar" }) })
+      ] })
     ] })
   ] });
 }
@@ -5001,15 +5004,18 @@ function FloatingComponent({
   return /* @__PURE__ */ jsxs15(
     "div",
     {
-      className: cx4("mimicus-floating-component", className),
+      className: cx4("mimicus-floating-component", visible && "is-active", className),
       style,
       onMouseEnter: () => setHover(true),
       onMouseLeave: () => setHover(false),
       children: [
-        /* @__PURE__ */ jsx27("div", { className: "mimicus-floating-component__row", children: rowText }),
+        /* @__PURE__ */ jsxs15("div", { className: "mimicus-floating-component__row", children: [
+          /* @__PURE__ */ jsx27("span", { className: "mimicus-floating-component__row-text", children: rowText }),
+          !visible && /* @__PURE__ */ jsx27("span", { className: "mimicus-floating-component__row-hint", "aria-hidden": "true", children: "Acciones" })
+        ] }),
         visible && /* @__PURE__ */ jsxs15("div", { className: cx4("mimicus-floating-component__panel", `h-${horizontal}`, `v-${vertical}`), children: [
-          /* @__PURE__ */ jsx27(Button, { variant: "text", icon: "mdi:pencil-outline", children: "Editar" }),
-          /* @__PURE__ */ jsx27(Button, { variant: "text", icon: "mdi:delete-outline", children: "Eliminar" })
+          /* @__PURE__ */ jsx27(Tooltip, { title: "Editar", children: /* @__PURE__ */ jsx27(IconButton, { variant: "text", icon: /* @__PURE__ */ jsx27(Icon, { icon: "mdi:pencil-outline" }), "aria-label": "Editar" }) }),
+          /* @__PURE__ */ jsx27(Tooltip, { title: "Eliminar", children: /* @__PURE__ */ jsx27(IconButton, { variant: "text", color: "danger", icon: /* @__PURE__ */ jsx27(Icon, { icon: "mdi:delete-outline" }), "aria-label": "Eliminar" }) })
         ] })
       ]
     }
@@ -12013,10 +12019,51 @@ function TipInfoPreview({ state: state2, previewKey, demoStyle, demoClass }) {
   return /* @__PURE__ */ jsx52("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ jsx52(TipInfo, { label: state2.label, descripcion: state2.descripcion, kind: state2.kind ?? "info", trigger: state2.trigger ?? "click", useModal: Boolean(state2.useModal) }) }, previewKey);
 }
 function InvokedFloaterPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-  return /* @__PURE__ */ jsx52("div", { className: ["mimicus-overlay-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(demoStyle), children: /* @__PURE__ */ jsx52(InvokedFloater, { anchorLabel: state2.anchorLabel, panelText: state2.panelText, side: state2.side ?? "bottom", align: state2.align ?? "center", trigger: state2.trigger ?? "click" }) }, previewKey);
+  const trigger = state2.trigger ?? "click";
+  const hint = trigger === "hover" ? "Pasa el cursor sobre el bot\xF3n para abrir el panel." : trigger === "contextmenu" ? "Clic derecho sobre el bot\xF3n para abrir el panel." : "Haz clic en el bot\xF3n para abrir el popover anclado.";
+  return /* @__PURE__ */ jsxs33("div", { className: ["mimicus-invoked-floater-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width: 100%", demoStyle)), children: [
+    /* @__PURE__ */ jsx52("p", { className: "mimicus-invoked-floater-preview__hint", children: hint }),
+    /* @__PURE__ */ jsxs33("div", { className: "mimicus-invoked-floater-preview__card", children: [
+      /* @__PURE__ */ jsxs33("div", { className: "mimicus-invoked-floater-preview__head", children: [
+        /* @__PURE__ */ jsx52(Icon, { icon: "mdi:file-document-outline", className: "mimicus-invoked-floater-preview__head-icon" }),
+        /* @__PURE__ */ jsx52("span", { className: "mimicus-invoked-floater-preview__title", children: "Factura #1042" }),
+        /* @__PURE__ */ jsx52("span", { className: "mimicus-invoked-floater-preview__badge", children: "Pendiente" })
+      ] }),
+      /* @__PURE__ */ jsx52("p", { className: "mimicus-invoked-floater-preview__meta", children: "Cliente Acme Corp \xB7 $1.240.000 \xB7 vence en 3 d\xEDas" }),
+      /* @__PURE__ */ jsx52("div", { className: "mimicus-invoked-floater-preview__actions", children: /* @__PURE__ */ jsx52(
+        InvokedFloater,
+        {
+          anchorLabel: /* @__PURE__ */ jsxs33(Fragment10, { children: [
+            /* @__PURE__ */ jsx52(Icon, { icon: "mdi:information-outline" }),
+            " ",
+            state2.anchorLabel ?? "Abrir panel"
+          ] }),
+          panelText: state2.panelText,
+          side: state2.side ?? "bottom",
+          align: state2.align ?? "center",
+          trigger
+        }
+      ) })
+    ] })
+  ] }, previewKey);
 }
 function FloatingComponentPreview({ state: state2, previewKey, demoStyle, demoClass }) {
-  return /* @__PURE__ */ jsx52("div", { className: ["mimicus-floating-component-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width: 100%", demoStyle)), children: /* @__PURE__ */ jsx52(FloatingComponent, { showfloat: Boolean(state2.showfloat), rowText: state2.rowText, horizontal: state2.horizontal ?? "right", vertical: state2.vertical ?? "center" }) }, previewKey);
+  const showfloat = Boolean(state2.showfloat);
+  const rowText = state2.rowText ?? "Factura #1042 \u2014 pendiente de revisi\xF3n";
+  return /* @__PURE__ */ jsxs33("div", { className: ["mimicus-floating-component-preview", demoClass].filter(Boolean).join(" "), style: parseStyleString(mergeStyleString("width: 100%", demoStyle)), children: [
+    /* @__PURE__ */ jsx52("p", { className: "mimicus-floating-component-preview__hint", children: showfloat ? "Panel de acciones fijado con showfloat." : "Pasa el cursor sobre la fila resaltada para editar o eliminar." }),
+    /* @__PURE__ */ jsxs33("div", { className: "mimicus-floating-component-preview__list", role: "list", children: [
+      /* @__PURE__ */ jsxs33("div", { className: "mimicus-floating-component-preview__row", role: "listitem", children: [
+        /* @__PURE__ */ jsx52("span", { className: "mimicus-floating-component-preview__row-label", children: "Factura #1041 \u2014 Acme Corp" }),
+        /* @__PURE__ */ jsx52("span", { className: "mimicus-floating-component-preview__status is-paid", children: "Pagada" })
+      ] }),
+      /* @__PURE__ */ jsx52("div", { className: "mimicus-floating-component-preview__row mimicus-floating-component-preview__row--active", role: "listitem", children: /* @__PURE__ */ jsx52(FloatingComponent, { showfloat, rowText, horizontal: state2.horizontal ?? "right", vertical: state2.vertical ?? "center" }) }),
+      /* @__PURE__ */ jsxs33("div", { className: "mimicus-floating-component-preview__row", role: "listitem", children: [
+        /* @__PURE__ */ jsx52("span", { className: "mimicus-floating-component-preview__row-label", children: "Factura #1043 \u2014 Globex S.A." }),
+        /* @__PURE__ */ jsx52("span", { className: "mimicus-floating-component-preview__status is-draft", children: "Borrador" })
+      ] })
+    ] })
+  ] }, previewKey);
 }
 var previewBuiltins = {
   card: CardPreview,

@@ -4,10 +4,10 @@
    "label": "InvokedFloater",
    "titleIcon": "mdi:message-arrow-right-outline",
    "status": "pending",
-   "intro": "Popover anclado con <code>Dialog</code> nativo: posicionamiento viewport-aware, triggers click/hover/contextmenu y cierre exterior.",
+   "intro": "Popover anclado a un botón disparador. En la vista previa aparece dentro de una tarjeta de factura; prueba <code>side</code>, <code>align</code> y el tipo de <code>trigger</code>.",
    "component": { "name": "InvokedFloater", "path": "src/components/overlays/Overlays.tsx" },
-   "preview": { "template": "cmp-invoked-floater" },
-   "state": { "anchorLabel": "Abrir panel", "panelText": "Contenido del floater reposicionado según espacio disponible.", "side": "bottom", "align": "center", "trigger": "click" },
+   "preview": { "template": "cmp-invoked-floater", "style": "width: 100%; align-self: stretch;" },
+   "state": { "anchorLabel": "Ver detalle", "panelText": "Esta factura está pendiente de revisión contable. Puedes aprobarla o solicitar correcciones al cliente.", "side": "bottom", "align": "end", "trigger": "click" },
    "fields": [
       { "kind": "text", "key": "anchorLabel", "label": "anchorLabel", "labelIcon": "mdi:gesture-tap-button" },
       { "kind": "text", "key": "panelText", "label": "panelText", "labelIcon": "mdi:text" },

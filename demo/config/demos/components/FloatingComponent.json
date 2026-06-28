@@ -69,7 +69,17 @@
       "icon": "mdi:cursor-default-gesture",
       "state": {
         "showfloat": false,
-        "rowText": "Fila con panel flotante fijo",
+        "rowText": "Factura #1042 — pendiente de revisión",
+        "horizontal": "right",
+        "vertical": "center"
+      }
+    },
+    {
+      "label": "Siempre visible",
+      "icon": "mdi:eye-outline",
+      "state": {
+        "showfloat": true,
+        "rowText": "Factura #1042 — pendiente de revisión",
         "horizontal": "right",
         "vertical": "center"
       }

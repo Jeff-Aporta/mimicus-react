@@ -9,7 +9,6 @@ import type { CSSProperties, HTMLAttributes, MouseEvent, ReactNode } from "react
 import { Card } from "../Card.tsx";
 import { Icon } from "../Icon.tsx";
 import { Button } from "../Button.tsx";
-import { Icon } from "../Icon.tsx";
 import { IconButton } from "../FloatButton.tsx";
 import { Tooltip } from "../display/Display.tsx";
 
@@ -356,12 +355,17 @@ export function InvokedFloater({
       : { onClick: () => setOpen((v) => !v) };
 
   return (
-    <span className={cx("mimicus-invoked-floater", className)} style={style}>
-      <button ref={anchorRef} type="button" className="mimicus-invoked-floater__anchor" {...anchorProps}>{anchorLabel}</button>
+    <span className={cx("mimicus-invoked-floater", open && "is-open", className)} style={style}>
+      <button ref={anchorRef} type="button" className={cx("mimicus-invoked-floater__anchor", open && "is-active")} {...anchorProps}>{anchorLabel}</button>
       {open && (
         <div className={cx("mimicus-invoked-floater__panel", `is-${side}`, `align-${align}`)} role="dialog">
-          <p style={{ margin: 0 }}>{panelText}</p>
-          <Button variant="text" onClick={closePanel}>Cerrar</Button>
+          <span className="mimicus-invoked-floater__caret" aria-hidden="true" />
+          <div className="mimicus-invoked-floater__panel-inner">
+            <p className="mimicus-invoked-floater__panel-text">{panelText}</p>
+            <div className="mimicus-invoked-floater__panel-foot">
+              <Button variant="text" onClick={closePanel}>Cerrar</Button>
+            </div>
+          </div>
         </div>
       )}
     </span>
@@ -398,8 +402,8 @@ export function FloatingComponent({
       </div>
       {visible && (
         <div className={cx("mimicus-floating-component__panel", `h-${horizontal}`, `v-${vertical}`)}>
-          <Button variant="text" icon={<Icon icon="mdi:pencil-outline" />}>Editar</Button>
-          <Button variant="text" icon={<Icon icon="mdi:delete-outline" />}>Eliminar</Button>
+          <Tooltip title="Editar"><IconButton variant="text" icon={<Icon icon="mdi:pencil-outline" />} aria-label="Editar" /></Tooltip>
+          <Tooltip title="Eliminar"><IconButton variant="text" color="danger" icon={<Icon icon="mdi:delete-outline" />} aria-label="Eliminar" /></Tooltip>
         </div>
       )}
     </div>

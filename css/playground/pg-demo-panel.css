@@ -175,7 +175,7 @@
 	margin-inline: auto;
 }
 
-.preview-frame .preview-stage .demo-preview-root > :is(.mimicus-overlay-preview, .mimicus-overlay-preview--local, .layout-side-panel-preview, .mimicus-tour-demo) {
+.preview-frame .preview-stage .demo-preview-root > :is(.mimicus-overlay-preview, .mimicus-overlay-preview--local, .layout-side-panel-preview, .mimicus-tour-demo, .mimicus-floating-component-preview, .mimicus-invoked-floater-preview) {
 	width: 100%;
 	max-width: 100%;
 }

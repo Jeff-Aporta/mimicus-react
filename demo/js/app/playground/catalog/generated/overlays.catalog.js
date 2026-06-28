@@ -87,7 +87,7 @@ export const items = [
       "label": "FloatingComponent",
       "titleIcon": "mdi:arrange-bring-forward",
       "status": "pending",
-      "intro": "Panel flotante absoluto junto al contenido (p. ej. acciones de fila). Expone <code>FC_KEEP_ALIVE_CTX</code> para menús anidados. En la vista previa, pasa el cursor sobre la <strong>fila resaltada</strong> o activa <code>showfloat</code>.",
+      "intro": "Panel flotante de acciones junto a una fila (p. ej. editar/eliminar en un listado). En la vista previa hay tres filas de ejemplo: la del centro es la interactiva. Pasa el cursor sobre ella o activa <code>showfloat</code>.",
       "component": {
         "name": "FloatingComponent",
         "path": "src/components/overlays/Overlays.tsx"
@@ -101,7 +101,7 @@ export const items = [
         "configBlockCount": 2
       },
       "state": {
-        "showfloat": false,
+        "showfloat": true,
         "rowText": "Factura #1042 — pendiente de revisión",
         "horizontal": "right",
         "vertical": "center"
@@ -162,7 +162,7 @@ export const items = [
           "icon": "mdi:eye-outline",
           "state": {
             "showfloat": true,
-            "rowText": "Fila con panel flotante fijo",
+            "rowText": "Factura #1042 — pendiente de revisión",
             "horizontal": "right",
             "vertical": "center"
           }
@@ -205,19 +205,20 @@ export const items = [
       "label": "InvokedFloater",
       "titleIcon": "mdi:message-arrow-right-outline",
       "status": "pending",
-      "intro": "Popover anclado con <code>Dialog</code> nativo: posicionamiento viewport-aware, triggers click/hover/contextmenu y cierre exterior.",
+      "intro": "Popover anclado a un botón disparador. En la vista previa aparece dentro de una tarjeta de factura; prueba <code>side</code>, <code>align</code> y el tipo de <code>trigger</code>.",
       "component": {
         "name": "InvokedFloater",
         "path": "src/components/overlays/Overlays.tsx"
       },
       "preview": {
-        "template": "cmp-invoked-floater"
+        "template": "cmp-invoked-floater",
+        "style": "width: 100%; align-self: stretch;"
       },
       "state": {
-        "anchorLabel": "Abrir panel",
-        "panelText": "Contenido del floater reposicionado según espacio disponible.",
+        "anchorLabel": "Ver detalle",
+        "panelText": "Esta factura está pendiente de revisión contable. Puedes aprobarla o solicitar correcciones al cliente.",
         "side": "bottom",
-        "align": "center",
+        "align": "end",
         "trigger": "click"
       },
       "fields": [
