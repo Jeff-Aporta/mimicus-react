@@ -31,8 +31,10 @@ export function GlassHeaderBand({
   children,
 }: GlassHeaderBandProps) {
   const rootClass = ["mimicus-glass-header", compact && "mimicus-glass-header--compact", className].filter(Boolean).join(" ");
-  const accentStyle = sectionColor
-    ? ({ "--sm-accent": resolveColor(sectionColor) } as CSSProperties)
+  /* --sm-accent = color puro (superficies); --sm-accent-fg = bow 20% (texto). */
+const bow = sectionColor ? `color-mix(in oklch, ${resolveColor(sectionColor)} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)` : undefined;
+const accentStyle = sectionColor
+    ? ({ "--sm-accent": resolveColor(sectionColor), "--sm-accent-fg": bow } as CSSProperties)
     : undefined;
 
   return (

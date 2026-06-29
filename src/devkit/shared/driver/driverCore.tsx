@@ -62,7 +62,24 @@ export function DemoPage({ definition }) {
       demoId={definition.id} state={state} details={details} demoConfig={demoConfig} demoStyle={demoStyle} demoClass={demoClass}
       onStateChange={setState} onDetailsChange={setDetails} onDemoConfigChange={setDemoConfig} onDemoStyleChange={setDemoStyle} onDemoClassChange={setDemoClass}
       intro={definition.intro}
-      preview={(ctx) => <div className="demo-preview-root"><PreviewRenderer definition={definition} {...ctx} /></div>}
+      preview={(ctx) => (
+        <div
+          className="demo-preview-root"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            maxWidth: "100%",
+            minWidth: 0,
+            minHeight: "2.5rem",
+            boxSizing: "border-box",
+          }}
+        >
+          <PreviewRenderer definition={definition} {...ctx} />
+        </div>
+      )}
     />
   );
 }

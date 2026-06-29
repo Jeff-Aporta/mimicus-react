@@ -7,6 +7,7 @@ html[data-theme-color="grafito"][data-luminance="light"],
 	--mimicus-design-2: #64748b;
 	--mimicus-design-3: #0ea5e9;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 215.3deg;
 	--mimicus-color: #1e293b;
 	--mimicus-bg-primary: #f8fafc;
 	--mimicus-bg-secondary: #ffffff;
@@ -28,6 +29,7 @@ html[data-theme-color="grafito"][data-luminance="dark"],
 	--mimicus-design-2: #cbd5e1;
 	--mimicus-design-3: #38bdf8;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 215deg;
 	--mimicus-color: #f1f5f9;
 	--mimicus-bg-primary: #0f1419;
 	--mimicus-bg-secondary: #1e293b;
@@ -50,6 +52,7 @@ html[data-theme-color="menta"][data-luminance="light"],
 	--mimicus-design-2: #22d3ee;
 	--mimicus-design-3: #a3e635;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 173.4deg;
 	--mimicus-color: #0a2e28;
 	--mimicus-bg-primary: #f0fdfa;
 	--mimicus-bg-secondary: #ffffff;
@@ -71,6 +74,7 @@ html[data-theme-color="menta"][data-luminance="dark"],
 	--mimicus-design-2: #67e8f9;
 	--mimicus-design-3: #bef264;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 170.6deg;
 	--mimicus-color: #ecfdf5;
 	--mimicus-bg-primary: #041a16;
 	--mimicus-bg-secondary: #0c2e28;
@@ -93,6 +97,7 @@ html[data-theme-color="vulcano"][data-luminance="light"],
 	--mimicus-design-2: #6e6862;
 	--mimicus-design-3: #6e6862;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 30deg;
 	--mimicus-color: #2a2826;
 	--mimicus-bg-primary: #f4f2ef;
 	--mimicus-bg-secondary: #ffffff;
@@ -114,6 +119,7 @@ html[data-theme-color="vulcano"][data-luminance="dark"],
 	--mimicus-design-2: #b5aea4;
 	--mimicus-design-3: #b5aea4;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 35.3deg;
 	--mimicus-color: #eceae6;
 	--mimicus-bg-primary: #1a1917;
 	--mimicus-bg-secondary: #2c2a27;
@@ -136,6 +142,7 @@ html[data-theme-color="carbon"][data-luminance="light"],
 	--mimicus-design-2: #374151;
 	--mimicus-design-3: #374151;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 216.9deg;
 	--mimicus-color: #111827;
 	--mimicus-bg-primary: #f9fafb;
 	--mimicus-bg-secondary: #ffffff;
@@ -157,6 +164,7 @@ html[data-theme-color="carbon"][data-luminance="dark"],
 	--mimicus-design-2: #9ca3af;
 	--mimicus-design-3: #9ca3af;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 217.9deg;
 	--mimicus-color: #f3f4f6;
 	--mimicus-bg-primary: #0b0f14;
 	--mimicus-bg-secondary: #1f2937;
@@ -179,6 +187,7 @@ html[data-theme-color="plata"][data-luminance="light"],
 	--mimicus-design-2: #64748b;
 	--mimicus-design-3: #64748b;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 215.4deg;
 	--mimicus-color: #1e293b;
 	--mimicus-bg-primary: #f1f5f9;
 	--mimicus-bg-secondary: #ffffff;
@@ -200,6 +209,7 @@ html[data-theme-color="plata"][data-luminance="dark"],
 	--mimicus-design-2: #cbd5e1;
 	--mimicus-design-3: #cbd5e1;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 212.7deg;
 	--mimicus-color: #f8fafc;
 	--mimicus-bg-primary: #121820;
 	--mimicus-bg-secondary: #243044;
@@ -222,6 +232,7 @@ html[data-theme-color="humo"][data-luminance="light"],
 	--mimicus-design-2: #78716c;
 	--mimicus-design-3: #78716c;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 25deg;
 	--mimicus-color: #292524;
 	--mimicus-bg-primary: #fafaf9;
 	--mimicus-bg-secondary: #ffffff;
@@ -243,6 +254,7 @@ html[data-theme-color="humo"][data-luminance="dark"],
 	--mimicus-design-2: #a8a29e;
 	--mimicus-design-3: #a8a29e;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 24deg;
 	--mimicus-color: #fafaf9;
 	--mimicus-bg-primary: #1c1917;
 	--mimicus-bg-secondary: #292524;
@@ -265,6 +277,7 @@ html[data-theme-color="marfil"][data-luminance="light"],
 	--mimicus-design-2: #a8947a;
 	--mimicus-design-3: #a8947a;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 33.9deg;
 	--mimicus-color: #3d3428;
 	--mimicus-bg-primary: #faf8f5;
 	--mimicus-bg-secondary: #ffffff;
@@ -286,6 +299,7 @@ html[data-theme-color="marfil"][data-luminance="dark"],
 	--mimicus-design-2: #d4c4a8;
 	--mimicus-design-3: #d4c4a8;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 38.2deg;
 	--mimicus-color: #faf6ef;
 	--mimicus-bg-primary: #1a1612;
 	--mimicus-bg-secondary: #2e2820;
@@ -308,6 +322,7 @@ html[data-theme-color="azabache"][data-luminance="light"],
 	--mimicus-design-2: #1e293b;
 	--mimicus-design-3: #1e293b;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 217.2deg;
 	--mimicus-color: #0f172a;
 	--mimicus-bg-primary: #f8fafc;
 	--mimicus-bg-secondary: #ffffff;
@@ -329,6 +344,7 @@ html[data-theme-color="azabache"][data-luminance="dark"],
 	--mimicus-design-2: #64748b;
 	--mimicus-design-3: #64748b;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 215.4deg;
 	--mimicus-color: #e2e8f0;
 	--mimicus-bg-primary: #060a10;
 	--mimicus-bg-secondary: #0f172a;
@@ -351,6 +367,7 @@ html[data-theme-color="nieve"][data-luminance="light"],
 	--mimicus-design-2: #94a3b8;
 	--mimicus-design-3: #94a3b8;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 215deg;
 	--mimicus-color: #334155;
 	--mimicus-bg-primary: #f8fafc;
 	--mimicus-bg-secondary: #ffffff;
@@ -372,6 +389,7 @@ html[data-theme-color="nieve"][data-luminance="dark"],
 	--mimicus-design-2: #e2e8f0;
 	--mimicus-design-3: #e2e8f0;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 214.3deg;
 	--mimicus-color: #f8fafc;
 	--mimicus-bg-primary: #0c1218;
 	--mimicus-bg-secondary: #1a2430;
@@ -394,6 +412,7 @@ html[data-theme-color="piedra"][data-luminance="light"],
 	--mimicus-design-2: #8b8178;
 	--mimicus-design-3: #8b8178;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 28.4deg;
 	--mimicus-color: #3a3530;
 	--mimicus-bg-primary: #f7f5f3;
 	--mimicus-bg-secondary: #ffffff;
@@ -415,6 +434,7 @@ html[data-theme-color="piedra"][data-luminance="dark"],
 	--mimicus-design-2: #b8aea4;
 	--mimicus-design-3: #b8aea4;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 30deg;
 	--mimicus-color: #f5f2ef;
 	--mimicus-bg-primary: #1a1816;
 	--mimicus-bg-secondary: #2c2926;
@@ -437,6 +457,7 @@ html[data-theme-color="oceano"][data-luminance="light"],
 	--mimicus-design-2: #38bdf8;
 	--mimicus-design-3: #f59e0b;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 174.7deg;
 	--mimicus-color: #0a2e32;
 	--mimicus-bg-primary: #f0fdfa;
 	--mimicus-bg-secondary: #ffffff;
@@ -458,6 +479,7 @@ html[data-theme-color="oceano"][data-luminance="dark"],
 	--mimicus-design-2: #7dd3fc;
 	--mimicus-design-3: #fcd34d;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 172.5deg;
 	--mimicus-color: #ecfdf5;
 	--mimicus-bg-primary: #041a18;
 	--mimicus-bg-secondary: #0c2e2a;
@@ -480,6 +502,7 @@ html[data-theme-color="ambar"][data-luminance="light"],
 	--mimicus-design-2: #ca8a04;
 	--mimicus-design-3: #dc2626;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 32.1deg;
 	--mimicus-color: #3a2808;
 	--mimicus-bg-primary: #fffbeb;
 	--mimicus-bg-secondary: #ffffff;
@@ -501,6 +524,7 @@ html[data-theme-color="ambar"][data-luminance="dark"],
 	--mimicus-design-2: #facc15;
 	--mimicus-design-3: #f87171;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 43.3deg;
 	--mimicus-color: #fef3c7;
 	--mimicus-bg-primary: #1a1206;
 	--mimicus-bg-secondary: #2e200c;
@@ -523,6 +547,7 @@ html[data-theme-color="indigo"][data-luminance="light"],
 	--mimicus-design-2: #6366f1;
 	--mimicus-design-3: #f97316;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 244.5deg;
 	--mimicus-color: #1e1b4b;
 	--mimicus-bg-primary: #eef2ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -544,6 +569,7 @@ html[data-theme-color="indigo"][data-luminance="dark"],
 	--mimicus-design-2: #a5b4fc;
 	--mimicus-design-3: #fb923c;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 234.5deg;
 	--mimicus-color: #e0e7ff;
 	--mimicus-bg-primary: #0c0a1e;
 	--mimicus-bg-secondary: #1e1b4b;
@@ -566,6 +592,7 @@ html[data-theme-color="tierra"][data-luminance="light"],
 	--mimicus-design-2: #a16207;
 	--mimicus-design-3: #15803d;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 22.7deg;
 	--mimicus-color: #3a2810;
 	--mimicus-bg-primary: #fefce8;
 	--mimicus-bg-secondary: #ffffff;
@@ -587,6 +614,7 @@ html[data-theme-color="tierra"][data-luminance="dark"],
 	--mimicus-design-2: #eab308;
 	--mimicus-design-3: #4ade80;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 32.1deg;
 	--mimicus-color: #fef3c7;
 	--mimicus-bg-primary: #1a1006;
 	--mimicus-bg-secondary: #2e1e0c;
@@ -609,6 +637,7 @@ html[data-theme-color="cobre"][data-luminance="light"],
 	--mimicus-design-2: #0d9488;
 	--mimicus-design-3: #b45309;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 26deg;
 	--mimicus-color: #3a2010;
 	--mimicus-bg-primary: #fff7ed;
 	--mimicus-bg-secondary: #ffffff;
@@ -630,6 +659,7 @@ html[data-theme-color="cobre"][data-luminance="dark"],
 	--mimicus-design-2: #2dd4bf;
 	--mimicus-design-3: #fb923c;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 27deg;
 	--mimicus-color: #ffedd5;
 	--mimicus-bg-primary: #1a0e06;
 	--mimicus-bg-secondary: #2e1810;
@@ -652,6 +682,7 @@ html[data-theme-color="oliva"][data-luminance="light"],
 	--mimicus-design-2: #ca8a04;
 	--mimicus-design-3: #647048;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 78deg;
 	--mimicus-color: #2a2e1a;
 	--mimicus-bg-primary: #f7f8f2;
 	--mimicus-bg-secondary: #ffffff;
@@ -673,6 +704,7 @@ html[data-theme-color="oliva"][data-luminance="dark"],
 	--mimicus-design-2: #fbbf24;
 	--mimicus-design-3: #a3b86c;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 76.6deg;
 	--mimicus-color: #f0f4e4;
 	--mimicus-bg-primary: #14180c;
 	--mimicus-bg-secondary: #242a18;
@@ -695,6 +727,7 @@ html[data-theme-color="glaciar"][data-luminance="light"],
 	--mimicus-design-2: #7dd3fc;
 	--mimicus-design-3: #0284c7;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 200.4deg;
 	--mimicus-color: #0c2a42;
 	--mimicus-bg-primary: #f0f9ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -716,6 +749,7 @@ html[data-theme-color="glaciar"][data-luminance="dark"],
 	--mimicus-design-2: #bae6fd;
 	--mimicus-design-3: #38bdf8;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 198.4deg;
 	--mimicus-color: #e0f2fe;
 	--mimicus-bg-primary: #061018;
 	--mimicus-bg-secondary: #0c2030;
@@ -738,6 +772,7 @@ html[data-theme-color="bosque"][data-luminance="light"],
 	--mimicus-design-2: #a16207;
 	--mimicus-design-3: #166534;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 142.8deg;
 	--mimicus-color: #0a2818;
 	--mimicus-bg-primary: #f0fdf4;
 	--mimicus-bg-secondary: #ffffff;
@@ -759,6 +794,7 @@ html[data-theme-color="bosque"][data-luminance="dark"],
 	--mimicus-design-2: #fbbf24;
 	--mimicus-design-3: #4ade80;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 141.9deg;
 	--mimicus-color: #ecfdf5;
 	--mimicus-bg-primary: #061408;
 	--mimicus-bg-secondary: #0c2414;
@@ -781,6 +817,7 @@ html[data-theme-color="medianoche"][data-luminance="light"],
 	--mimicus-design-2: #38bdf8;
 	--mimicus-design-3: #1e3a5f;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 214.2deg;
 	--mimicus-color: #0a1828;
 	--mimicus-bg-primary: #eff6ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -802,6 +839,7 @@ html[data-theme-color="medianoche"][data-luminance="dark"],
 	--mimicus-design-2: #22d3ee;
 	--mimicus-design-3: #60a5fa;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 213.1deg;
 	--mimicus-color: #dbeafe;
 	--mimicus-bg-primary: #060c14;
 	--mimicus-bg-secondary: #0f1a2e;
@@ -824,6 +862,7 @@ html[data-theme-color="ciruela"][data-luminance="light"],
 	--mimicus-design-2: #db2777;
 	--mimicus-design-3: #7e22ce;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 272.1deg;
 	--mimicus-color: #2a0a3a;
 	--mimicus-bg-primary: #faf5ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -845,6 +884,7 @@ html[data-theme-color="ciruela"][data-luminance="dark"],
 	--mimicus-design-2: #f472b6;
 	--mimicus-design-3: #c084fc;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 270deg;
 	--mimicus-color: #fae8ff;
 	--mimicus-bg-primary: #14061a;
 	--mimicus-bg-secondary: #240a2e;
@@ -869,6 +909,7 @@ html[data-theme-color="contapyme"][data-luminance="light"],
 	--mimicus-design-2: #e85d4c;
 	--mimicus-design-3: #9b5de5;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 240deg;
 	--mimicus-color: #1a2a3a;
 	--mimicus-bg-primary: #f4f8fc;
 	--mimicus-bg-secondary: #ffffff;
@@ -892,6 +933,7 @@ html[data-theme-color="contapyme"][data-luminance="dark"],
 	--mimicus-design-2: #e85d4c;
 	--mimicus-design-3: #9b5de5;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 240deg;
 	--mimicus-color: #e8f2ff;
 	--mimicus-bg-primary: #0a1424;
 	--mimicus-bg-secondary: #0f2340;
@@ -914,6 +956,7 @@ html[data-theme-color="natural"][data-luminance="light"],
 	--mimicus-design-2: #3d7cb8;
 	--mimicus-design-3: #c9783c;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 149deg;
 	--mimicus-color: #0f3322;
 	--mimicus-bg-primary: #f2fbf6;
 	--mimicus-bg-secondary: #ffffff;
@@ -935,6 +978,7 @@ html[data-theme-color="natural"][data-luminance="dark"],
 	--mimicus-design-2: #7ec8ff;
 	--mimicus-design-3: #f0d060;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 150.8deg;
 	--mimicus-color: #ecfdf5;
 	--mimicus-bg-primary: #0a1810;
 	--mimicus-bg-secondary: #0f2818;
@@ -957,6 +1001,7 @@ html[data-theme-color="coral"][data-luminance="light"],
 	--mimicus-design-2: #f4a261;
 	--mimicus-design-3: #9b5de5;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 6.5deg;
 	--mimicus-color: #3a1810;
 	--mimicus-bg-primary: #fff8f5;
 	--mimicus-bg-secondary: #ffffff;
@@ -978,6 +1023,7 @@ html[data-theme-color="coral"][data-luminance="dark"],
 	--mimicus-design-2: #ffc078;
 	--mimicus-design-3: #c9a0ff;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 8deg;
 	--mimicus-color: #fff0eb;
 	--mimicus-bg-primary: #1a0a08;
 	--mimicus-bg-secondary: #2e1410;
@@ -1000,6 +1046,7 @@ html[data-theme-color="lavanda"][data-luminance="light"],
 	--mimicus-design-2: #ec4899;
 	--mimicus-design-3: #06b6d4;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 258.3deg;
 	--mimicus-color: #2a1848;
 	--mimicus-bg-primary: #faf5ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -1021,6 +1068,7 @@ html[data-theme-color="lavanda"][data-luminance="dark"],
 	--mimicus-design-2: #f472b6;
 	--mimicus-design-3: #22d3ee;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 255.1deg;
 	--mimicus-color: #f3e8ff;
 	--mimicus-bg-primary: #120a24;
 	--mimicus-bg-secondary: #1e1038;
@@ -1043,6 +1091,7 @@ html[data-theme-color="cereza"][data-luminance="light"],
 	--mimicus-design-2: #e11d48;
 	--mimicus-design-3: #7c3aed;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 345.3deg;
 	--mimicus-color: #3a0818;
 	--mimicus-bg-primary: #fff1f2;
 	--mimicus-bg-secondary: #ffffff;
@@ -1064,6 +1113,7 @@ html[data-theme-color="cereza"][data-luminance="dark"],
 	--mimicus-design-2: #f43f5e;
 	--mimicus-design-3: #a78bfa;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 351.3deg;
 	--mimicus-color: #ffe4e6;
 	--mimicus-bg-primary: #1a060c;
 	--mimicus-bg-secondary: #2e0a14;
@@ -1086,6 +1136,7 @@ html[data-theme-color="fucsia"][data-luminance="light"],
 	--mimicus-design-2: #ec4899;
 	--mimicus-design-3: #6366f1;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 293.4deg;
 	--mimicus-color: #3a0a3a;
 	--mimicus-bg-primary: #fdf4ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -1107,6 +1158,7 @@ html[data-theme-color="fucsia"][data-luminance="dark"],
 	--mimicus-design-2: #f472b6;
 	--mimicus-design-3: #818cf8;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 292deg;
 	--mimicus-color: #fae8ff;
 	--mimicus-bg-primary: #1a061a;
 	--mimicus-bg-secondary: #2e0e2e;
@@ -1129,6 +1181,7 @@ html[data-theme-color="aurora"][data-luminance="light"],
 	--mimicus-design-2: #06b6d4;
 	--mimicus-design-3: #f472b6;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 160.1deg;
 	--mimicus-color: #0a2820;
 	--mimicus-bg-primary: #f0fdf9;
 	--mimicus-bg-secondary: #ffffff;
@@ -1150,6 +1203,7 @@ html[data-theme-color="aurora"][data-luminance="dark"],
 	--mimicus-design-2: #22d3ee;
 	--mimicus-design-3: #f9a8d4;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 158.1deg;
 	--mimicus-color: #ecfdf5;
 	--mimicus-bg-primary: #061410;
 	--mimicus-bg-secondary: #0c241c;
@@ -1172,6 +1226,7 @@ html[data-theme-color="tropico"][data-luminance="light"],
 	--mimicus-design-2: #22c55e;
 	--mimicus-design-3: #0ea5e9;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 45.4deg;
 	--mimicus-color: #1a2810;
 	--mimicus-bg-primary: #fefce8;
 	--mimicus-bg-secondary: #ffffff;
@@ -1193,6 +1248,7 @@ html[data-theme-color="tropico"][data-luminance="dark"],
 	--mimicus-design-2: #4ade80;
 	--mimicus-design-3: #38bdf8;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 47.9deg;
 	--mimicus-color: #fef9c3;
 	--mimicus-bg-primary: #141808;
 	--mimicus-bg-secondary: #243018;
@@ -1215,6 +1271,7 @@ html[data-theme-color="electrico"][data-luminance="light"],
 	--mimicus-design-2: #22d3ee;
 	--mimicus-design-3: #facc15;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 292.2deg;
 	--mimicus-color: #2a103a;
 	--mimicus-bg-primary: #fdf4ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -1236,6 +1293,7 @@ html[data-theme-color="electrico"][data-luminance="dark"],
 	--mimicus-design-2: #67e8f9;
 	--mimicus-design-3: #fde047;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 292deg;
 	--mimicus-color: #fdf4ff;
 	--mimicus-bg-primary: #18061a;
 	--mimicus-bg-secondary: #2c0e30;
@@ -1258,6 +1316,7 @@ html[data-theme-color="crepusculo"][data-luminance="light"],
 	--mimicus-design-2: #f97316;
 	--mimicus-design-3: #2563eb;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 262.1deg;
 	--mimicus-color: #1e1038;
 	--mimicus-bg-primary: #f5f3ff;
 	--mimicus-bg-secondary: #ffffff;
@@ -1279,6 +1338,7 @@ html[data-theme-color="crepusculo"][data-luminance="dark"],
 	--mimicus-design-2: #fb923c;
 	--mimicus-design-3: #60a5fa;
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: 255.1deg;
 	--mimicus-color: #ede9fe;
 	--mimicus-bg-primary: #100818;
 	--mimicus-bg-secondary: #1e1030;

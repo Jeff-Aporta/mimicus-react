@@ -6,7 +6,11 @@ function sortedCategories(ctx) {
   );
 }
 function sectionMeta(ctx, sectionId) {
-  return ctx.catalog?.sections?.[sectionId] ?? ctx.catalog?.categories?.[sectionId] ?? {};
+  return ctx.sectionsMeta?.[sectionId] ?? ctx.catalog?.sections?.[sectionId] ?? ctx.catalog?.categories?.[sectionId] ?? {};
+}
+function humanizeId(id) {
+  if (!id) return "";
+  return id.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim().split(" ").map((w) => w ? w[0].toUpperCase() + w.slice(1) : "").join(" ");
 }
 function sectionAccentIndexFor(ctx, categoryId) {
   const i = sortedCategories(ctx).indexOf(categoryId);
@@ -26,7 +30,7 @@ function sectionColorFor(ctx, categoryId) {
 function resolveCategoryTabDescriptors(ctx) {
   return sortedCategories(ctx).map((cat) => {
     const meta = sectionMeta(ctx, cat);
-    return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), colorSlot: sectionColorSlotFor(ctx, cat), kind: "category" };
+    return { id: cat, label: meta.label ?? humanizeId(cat), icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), colorSlot: sectionColorSlotFor(ctx, cat), kind: "category" };
   });
 }
 function resolveCatalogDemoTabDescriptors(ctx) {
@@ -628,25 +632,25 @@ function NavTabRow({ tabs = [], value, onChange, tier = "primary", className, ta
     const active = scrollerRef.current.querySelector(".pg-nav-tab.is-active, .pg-nav-tab[aria-selected='true']");
     active?.scrollIntoView?.({ block: "nearest", inline: "nearest", behavior: "smooth" });
   }, [value, tabs.length]);
+  const onClick = (e, tab) => {
+    if (tab.disabled) return;
+    if (tabHref && (e.ctrlKey || e.metaKey || e.button === 1)) {
+      const url = tabHref(tab.id);
+      if (url) {
+        e.preventDefault();
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+    }
+    onChange?.(tab.id, tab);
+  };
   return /* @__PURE__ */ jsx2("div", { className: ["pg-nav-row", secondary ? "pg-nav-row--secondary" : "pg-nav-row--primary", className].filter(Boolean).join(" "), role: "tablist", children: /* @__PURE__ */ jsx2("div", { ref: scrollerRef, className: "pg-nav-row__scroller custom-scrollbar", children: tabs.map((tab) => {
     const selected = value === tab.id;
     const label = tab.label || tab.title || tab.id;
     const tabColor = tab.color ?? "primary";
-    const isSectionTab = tab.kind !== "action" && !tab.id?.startsWith("__");
-    const tabStyle = isSectionTab ? { "--sm-accent": tabColor } : void 0;
-    const onClick = (e) => {
-      if (tab.disabled) return;
-      if (tabHref && (e.ctrlKey || e.metaKey || e.button === 1)) {
-        const url = tabHref(tab.id);
-        if (url) {
-          e.preventDefault();
-          window.open(url, "_blank", "noopener,noreferrer");
-          return;
-        }
-      }
-      onChange?.(tab.id, tab);
-    };
-    return /* @__PURE__ */ jsx2(
+    const bowMix = `color-mix(in oklch, ${tabColor} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
+    const wrapStyle = { "--sm-accent": tabColor, "--sm-accent-fg": bowMix };
+    return /* @__PURE__ */ jsx2("span", { className: "pg-nav-tab__wrap", "data-section-color": tab.colorSlot ?? tabColor, style: wrapStyle, children: /* @__PURE__ */ jsx2(
       Button,
       {
         type: "button",
@@ -657,16 +661,13 @@ function NavTabRow({ tabs = [], value, onChange, tier = "primary", className, ta
         shape: "rect",
         color: tabColor,
         className: ["pg-nav-tab", selected && "is-active"].filter(Boolean).join(" "),
-        "data-section-color": isSectionTab ? tab.colorSlot ?? tabColor : void 0,
-        style: tabStyle,
         title: tab.disabled ? tab.disabledTitle || "No disponible" : String(label),
-        onClick,
-        onAuxClick: onClick,
+        onClick: (e) => onClick(e, tab),
+        onAuxClick: (e) => onClick(e, tab),
         icon: tab.icon ? /* @__PURE__ */ jsx2("iconify-icon", { className: "pg-nav-tab__icon", icon: tab.disabled ? "mdi:lock-outline" : tab.icon, "aria-hidden": true }) : void 0,
         children: /* @__PURE__ */ jsx2("span", { className: "pg-nav-tab__label", children: label })
-      },
-      tab.id
-    );
+      }
+    ) }, tab.id);
   }) }) });
 }
 

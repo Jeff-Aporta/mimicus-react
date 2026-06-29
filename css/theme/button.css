@@ -141,6 +141,26 @@ a.button-link {
 	color: inherit;
 }
 
+/* Bow pálido sobre la fuente del botón cuando está dentro de un contenedor [data-section-color].
+   Sobrescribe `--bttn-ccnt-clr` (color del texto) y `--bttn-clr` (color del tema) en estados idle/soft. */
+[data-section-color] button[data-variant="text"],
+[data-section-color] .button-wrap[data-variant="text"] {
+	--bttn-clr: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 20%, var(--mimicus-color) 80%);
+	--bttn-ccnt-clr: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 20%, var(--mimicus-color) 80%);
+}
+
+[data-section-color] button[data-variant="soft"],
+[data-section-color] .button-wrap[data-variant="soft"] {
+	--bttn-clr: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 20%, var(--mimicus-color) 80%);
+	--bttn-ccnt-clr: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 20%, var(--mimicus-color) 80%);
+	--bttn-sft-fnt: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 20%, var(--mimicus-color) 80%);
+}
+
+[data-section-color] button[data-variant="text"]:is(:hover, :focus-visible),
+[data-section-color] .button-wrap[data-variant="text"]:is(:hover, :focus-visible) {
+	--bttn-ccnt-clr: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 55%, var(--mimicus-color) 45%);
+}
+
 .mimicus-btn-spinner {
 	display: inline-block;
 	animation: sz-pulse 1.2s infinite ease-in-out;
@@ -192,13 +212,13 @@ html[data-looknfeel="contapyme"] .button-wrap[data-variant="ghost"]:not(:hover) 
 html[data-looknfeel="contapyme"] button[data-variant="outlined"]:not(:disabled):hover,
 html[data-looknfeel="contapyme"] .button-wrap[data-variant="outlined"]:not([aria-disabled="true"]):hover {
 	background-color: var(--bttn-l-hvr-bg);
-	color: var(--bttn-clr);
+	color: var(--bttn-out-fnt-hvr);
 }
 
 html[data-looknfeel="contapyme"] button[data-variant="outlined"]:not(:disabled):active,
 html[data-looknfeel="contapyme"] .button-wrap[data-variant="outlined"]:not([aria-disabled="true"]):active {
 	background-color: var(--bttn-l-ctv-bg);
-	color: var(--bttn-clr);
+	color: var(--bttn-out-fnt-ctv);
 	transform: translateY(1px);
 }
 
@@ -345,6 +365,8 @@ html[data-looknfeel="neon"] .button-wrap:not(.palette-grid__chip):not(.checkbox-
 
 html[data-looknfeel="neon"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not(:disabled):hover,
 html[data-looknfeel="neon"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not([aria-disabled="true"]):hover {
+	background-color: var(--bttn-l-hvr-bg);
+	color: var(--bttn-out-fnt-hvr);
 	border-color: color-mix(in srgb, var(--bttn-clr) 65%, transparent);
 	box-shadow: 0 0 14px color-mix(in srgb, var(--bttn-clr) 24%, transparent);
 	transform: translateY(-1px);
@@ -352,6 +374,8 @@ html[data-looknfeel="neon"] .button-wrap:not(.palette-grid__chip):not(.checkbox-
 
 html[data-looknfeel="neon"] button:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not(:disabled):active,
 html[data-looknfeel="neon"] .button-wrap:not(.palette-grid__chip):not(.checkbox-chip__pill)[data-variant="outlined"]:not([aria-disabled="true"]):active {
+	background-color: var(--bttn-l-ctv-bg);
+	color: var(--bttn-out-fnt-ctv);
 	transform: scale(0.98);
 }
 

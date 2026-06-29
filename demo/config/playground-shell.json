@@ -15,13 +15,21 @@
       "type": "stack",
       "className": "pg-panel-view pg-panel-view--rail",
       "gap": "0.35rem",
-      "children": [{ "type": "catalog-categories", "mode": "rail" }]
+      "children": [
+        { "type": "action", "id": "__home__", "label": "Inicio", "icon": "mdi:home", "nav": "home", "actionClass": "pg-panel-rail__btn", "shape": "rect", "variant": "text" },
+        { "type": "separator" },
+        { "type": "catalog-categories", "mode": "rail" }
+      ]
     },
     "expanded": {
       "type": "stack",
       "className": "pg-panel-view pg-panel-view--expanded",
       "gap": "0.25rem",
-      "children": [{ "type": "catalog-categories", "mode": "sections" }]
+      "children": [
+        { "type": "action", "id": "__home__", "label": "Inicio", "icon": "mdi:home", "nav": "home", "shape": "rect", "variant": "text", "className": "pg-panel-demo-link pg-panel-demo-link--home" },
+        { "type": "separator" },
+        { "type": "catalog-categories", "mode": "sections" }
+      ]
     }
   },
   "navigation": {

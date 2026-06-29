@@ -5,8 +5,8 @@
  * repo: Jeff-Aporta/mimicus-react · src/devkit/shared/demo-shell/demoShellUi.tsx
  * UI del shell de un demo: DemoController, renderer de campos de config y AccordionDemo.
  */
-import { Button, CodeBlock, Switch, Input, InputNumber, Slider } from "../../_ui.ts";
-import { useEffect, useMemo, useState } from "react";
+import { Button, CodeBlock, Switch, Input, InputNumber, Slider, Modal } from "../../_ui.ts";
+import { useMemo, useState } from "react";
 import { buildTag, colorOptions, columnsConfig, iconEnum, mergeStyleString, optionsToItems, parseStyleString, stepCssLength, defaultOptionIcon, NONE_ICON, COLOR_ICONS } from "../playgroundKit.ts";
 import { Icon } from "../../../components/Icon.tsx";
 
@@ -96,12 +96,12 @@ export function InputDecorated({ label, icon, asTitle, info, infoTitle, children
   const Tag = asTitle ? "h3" : rowBetween ? "div" : "label";
   const [open, setOpen] = useState(false);
   const hasInfo = Boolean(info && String(info).trim());
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
+  const modalTitle = useMemo(() => (
+    <span className="pg-input-decorated__info-title">
+      {icon && <Icon icon={icon} />}
+      <span>{infoTitle || label}</span>
+    </span>
+  ), [icon, infoTitle, label]);
   return (
     <div className={["pg-input-decorated", asTitle && "pg-input-decorated--title", rowBetween && "pg-input-decorated--row-between", className].filter(Boolean).join(" ")}>
       {(label || icon || hasInfo) && (
@@ -122,19 +122,10 @@ export function InputDecorated({ label, icon, asTitle, info, infoTitle, children
         </Tag>
       )}
       <div className="pg-input-decorated__body">{children}</div>
-      {hasInfo && open && (
-        <div className="pg-input-decorated__info-overlay" role="dialog" aria-modal="true" aria-label={infoTitle || label || "Información"} onClick={() => setOpen(false)}>
-          <div className="pg-input-decorated__info-card" onClick={(e) => e.stopPropagation()}>
-            <header className="pg-input-decorated__info-card-header">
-              {icon && <iconify-icon icon={icon} />}
-              <h4>{infoTitle || label}</h4>
-              <button type="button" className="pg-input-decorated__info-close" aria-label="Cerrar" onClick={() => setOpen(false)}>
-                <iconify-icon icon="mdi:close" />
-              </button>
-            </header>
-            <div className="pg-input-decorated__info-body" dangerouslySetInnerHTML={{ __html: String(info) }} />
-          </div>
-        </div>
+      {hasInfo && (
+        <Modal open={open} onClose={() => setOpen(false)} title={modalTitle} variant="solid" showCloseHeader>
+          <div className="pg-input-decorated__info-body" dangerouslySetInnerHTML={{ __html: String(info) }} />
+        </Modal>
       )}
     </div>
   );
@@ -148,23 +139,26 @@ function paletteOptionIcon(val, getIcon) {
   return getIcon ? getIcon(val) : undefined;
 }
 
-function PaletteOptionButton({ lbl, val, selected, accent, getIcon, showLabel, onPick }) {
+function PaletteOptionButton({ lbl, val, selected, accent, getIcon, showLabel, onPick, shape = "pill", align = "center" }) {
   const isNone = val === "" || val == null;
   const icon = paletteOptionIcon(val, getIcon);
   const title = isNone ? "Ninguno" : (lbl || String(val ?? "Ninguno"));
   const color = accent === "semantic" && val ? val : "primary";
   return (
-    <Button type="button" variant={selected ? "soft" : "text"} color={color} shape="pill" block onClick={() => onPick?.(isNone ? undefined : val)} title={title} style={{ justifyContent: "center", paddingBlock: "0.2em", paddingInline: showLabel && !isNone ? "0.55em" : "0.4em", minHeight: "1.85em", gap: "0.35em", minWidth: 0 }}>
+    <Button type="button" variant={selected ? "soft" : "text"} color={color} shape={shape} block onClick={() => onPick?.(isNone ? undefined : val)} title={title} style={{ justifyContent: align === "start" ? "flex-start" : "center", paddingBlock: "0.2em", paddingInline: showLabel && !isNone ? "0.65em" : "0.4em", minHeight: "1.85em", gap: "0.45em", minWidth: 0, textAlign: align === "start" ? "left" : "center" }}>
       {icon && <Icon icon={icon} />}
       {showLabel && !isNone && (lbl || val) != null && String(lbl || val) !== "" && <span>{lbl || String(val ?? "Ninguno")}</span>}
     </Button>
   );
 }
 
-export function PaletteGrid({ label, labelIcon, value, onValueChange, options, name, columns, accent = "primary", layout = "chips", getIcon }) {
+export function PaletteGrid({ label, labelIcon, value, onValueChange, options, name, columns, accent = "primary", layout = "chips", getIcon, chipShape, chipAlign }) {
   const items = optionsToItems(options);
   const cols = typeof columns === "number" ? columns : columnsConfig(items.length);
   const groupName = name || `pg-palette-${label}`;
+  const isChips = layout === "chips";
+  const shape = chipShape ?? (isChips ? "rect" : "pill");
+  const align = chipAlign ?? (isChips ? "start" : "center");
 
   function pick(val) {
     onValueChange?.(val === "" || val == null ? undefined : val);
@@ -172,7 +166,7 @@ export function PaletteGrid({ label, labelIcon, value, onValueChange, options, n
 
   function renderOption(lbl, val, showLabel) {
     const selected = String(value ?? "") === String(val ?? "");
-    return <PaletteOptionButton key={`${groupName}-${String(val)}`} lbl={lbl} val={val} selected={selected} accent={accent} getIcon={getIcon} showLabel={showLabel} onPick={pick} />;
+    return <PaletteOptionButton key={`${groupName}-${String(val)}`} lbl={lbl} val={val} selected={selected} accent={accent} getIcon={getIcon} showLabel={showLabel} onPick={pick} shape={shape} align={align} />;
   }
 
   if (layout === "sideCross") {
@@ -192,7 +186,7 @@ export function PaletteGrid({ label, labelIcon, value, onValueChange, options, n
 
   if (layout === "chips") {
     return (
-      <div className="pg-palette-chips" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(5.25em, 1fr))", gap: "0.35em", width: "100%" }}>
+      <div className="pg-palette-chips pg-palette-chips--list" style={{ display: "flex", flexDirection: "column", gap: "0.35em", width: "100%" }}>
         {items.map(([lbl, val]) => renderOption(lbl, val, true))}
       </div>
     );
@@ -205,10 +199,13 @@ export function PaletteGrid({ label, labelIcon, value, onValueChange, options, n
   );
 }
 
+function fieldInfoKey(field) {
+  return String(field?.key || field?.attrName || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
 function fieldInfo(field) {
   if (field.info) return { title: field.infoTitle || field.label, body: field.info };
-  // Genera info por defecto según kind/key.
-  const key = String(field.key || "").toLowerCase();
+  const key = fieldInfoKey(field);
   const kind = String(field.kind || "");
   const map = {
     variant: { title: "Variante visual", body: "Cambia el aspecto del componente: <code>solid</code> (fondo lleno), <code>outlined</code> (sólo borde), <code>text</code> (sin fondo, transparente), <code>ghost</code> (vidrio translúcido), <code>soft</code> (tinte accent al 15%), <code>dashed</code> (borde discontinuo) y <code>glass</code> (efecto glass con backdrop-filter)." },
@@ -224,6 +221,54 @@ function fieldInfo(field) {
     dashed: { title: "dashed", body: "Borde discontinuo en lugar de sólido." },
     disabled: { title: "disabled", body: "Deshabilita la interacción y aplica opacidad reducida." },
     loading: { title: "loading", body: "Muestra un indicador de progreso y bloquea clicks mientras dura la operación." },
+    placement: { title: "Ubicación del panel", body: "Lado desde el que aparece el panel deslizante: <code>left</code>, <code>right</code>, <code>top</code> o <code>bottom</code>." },
+    side: { title: "Lado del flotante", body: "Posición relativa al elemento ancla: <code>top</code>, <code>bottom</code>, <code>left</code> o <code>right</code>." },
+    width: { title: "Ancho del panel", body: "Ancho en píxeles cuando el panel entra por los lados (<code>left</code> / <code>right</code>). No aplica en orientación vertical." },
+    height: { title: "Alto del panel", body: "Alto en píxeles cuando el panel entra por arriba o abajo (<code>top</code> / <code>bottom</code>)." },
+    defaultopen: { title: "Abierto por defecto", body: "Si es <code>true</code>, el panel o overlay inicia visible sin interacción del usuario." },
+    open: { title: "Abierto", body: "Controla si el overlay o panel está visible (modo controlado)." },
+    align: { title: "Alineación", body: "Alineación respecto al ancla: <code>start</code> (inicio), <code>center</code> (centro) o <code>end</code> (final)." },
+    trigger: { title: "Disparador", body: "Evento que abre el flotante: <code>click</code>, <code>hover</code> o <code>focus</code>." },
+    inline: { title: "Inline", body: "Si es <code>true</code>, el componente se renderiza en línea sin portal ni overlay flotante." },
+    arrow: { title: "Flecha", body: "Muestra u oculta la punta/flecha que apunta al elemento ancla." },
+    title: { title: "Título", body: "Texto del encabezado del panel, modal o alerta." },
+    severity: { title: "Severidad", body: "Nivel semántico del mensaje: <code>info</code>, <code>success</code>, <code>warning</code> o <code>error</code>." },
+    dismissible: { title: "Cerrable", body: "Permite al usuario cerrar manualmente el componente (botón × o similar)." },
+    showfloat: { title: "Mostrar flotante", body: "Controla la visibilidad del panel flotante asociado al hover o focus." },
+    scope: { title: "Ámbito", body: "Define dónde se monta el overlay: <code>local</code> (contenedor) o <code>global</code> (documento)." },
+    orientation: { title: "Orientación", body: "Dirección del layout interno: <code>horizontal</code> o <code>vertical</code>." },
+    direction: { title: "Dirección", body: "Sentido de lectura o flujo visual: <code>ltr</code> o <code>rtl</code>." },
+    value: { title: "Valor", body: "Valor actual del control (modo controlado)." },
+    multiline: { title: "Multilínea", body: "Permite varias líneas de texto en lugar de una sola." },
+    readonly: { title: "Sólo lectura", body: "Muestra el valor pero impide editarlo." },
+    required: { title: "Requerido", body: "Marca el campo como obligatorio para envío de formulario." },
+    placeholder: { title: "Placeholder", body: "Texto de ayuda que aparece cuando el campo está vacío." },
+    maxlength: { title: "Longitud máxima", body: "Número máximo de caracteres permitidos." },
+    fullwidth: { title: "Ancho completo", body: "El control ocupa el 100% del ancho del contenedor padre." },
+    elevation: { title: "Elevación", body: "Nivel de sombra/depth del componente (típicamente 0–24 en estilo Material)." },
+    bordered: { title: "Con borde", body: "Dibuja un borde visible alrededor del componente." },
+    sticky: { title: "Sticky", body: "Mantiene el elemento fijo al hacer scroll dentro de su contenedor." },
+    collapsible: { title: "Colapsable", body: "Permite expandir y contraer la sección con un control interactivo." },
+    defaultexpanded: { title: "Expandido por defecto", body: "Si es <code>true</code>, la sección inicia abierta." },
+    delay: { title: "Retardo", body: "Milisegundos de espera antes de mostrar u ocultar el flotante." },
+    offset: { title: "Desplazamiento", body: "Distancia en píxeles entre el ancla y el panel flotante." },
+    zindex: { title: "z-index", body: "Capa de apilamiento CSS del overlay respecto a otros elementos." },
+    backdrop: { title: "Backdrop", body: "Capa semitransparente detrás del overlay; suele cerrar al hacer clic." },
+    modal: { title: "Modal", body: "Si es <code>true</code>, bloquea la interacción con el resto de la página mientras está abierto." },
+    persistent: { title: "Persistente", body: "Impide cerrar el overlay con clic fuera o Escape." },
+    animated: { title: "Animado", body: "Activa transiciones de entrada/salida del componente." },
+    rounded: { title: "Redondeado", body: "Aplica esquinas redondeadas al contenedor." },
+    dense: { title: "Denso", body: "Reduce padding y altura para mayor densidad visual." },
+    nowrap: { title: "Sin salto de línea", body: "Evita que el texto haga wrap en una sola línea." },
+    truncate: { title: "Truncar", body: "Recorta el texto largo con puntos suspensivos (<code>…</code>)." },
+    href: { title: "Enlace", body: "URL de destino cuando el componente actúa como enlace." },
+    target: { title: "Target", body: "Destino del enlace: <code>_blank</code>, <code>_self</code>, etc." },
+    type: { title: "Tipo", body: "Variante o tipo semántico del componente según su API." },
+    label: { title: "Etiqueta", body: "Texto visible asociado al control o acción." },
+    name: { title: "Nombre", body: "Identificador del campo en formularios (<code>name</code> HTML)." },
+    id: { title: "ID", body: "Identificador único del elemento en el DOM." },
+    classname: { title: "className", body: "Clases CSS adicionales aplicadas al elemento raíz." },
+    style: { title: "style", body: "Estilos inline adicionales en el elemento raíz." },
   };
   if (map[key]) return map[key];
   if (kind === "switch") return { title: field.label, body: `Interruptor booleano. Cuando está <code>true</code> activa el flag <code>${field.key}</code>.` };
@@ -453,10 +498,11 @@ export function DemoConfigRenderer({ fields, state, onStateChange }) {
 
     if (field.kind === "select-enum") {
       const d = decorate(field, { icon: field.labelIcon });
+      const layout = field.layout ?? "chips";
       return wrap(
         <InputDecorated label={d.label} icon={d.icon} info={d.info} infoTitle={d.infoTitle}>
           <div className="pg-field-cluster">
-            <PaletteGrid value={state[field.key]} onValueChange={(v) => patchState(String(field.key), v)} options={field.enumValue ?? {}} name={`pg-${String(field.key)}`} layout="chips" accent="primary" getIcon={field.getIcon ?? ((v) => defaultOptionIcon(field.key, v))} />
+            <PaletteGrid value={state[field.key]} onValueChange={(v) => patchState(String(field.key), v)} options={field.enumValue ?? {}} name={`pg-${String(field.key)}`} layout={layout} accent={field.accent ?? "primary"} getIcon={field.getIcon ?? ((v) => defaultOptionIcon(field.key, v))} />
           </div>
         </InputDecorated>,
       );
@@ -505,7 +551,59 @@ function resolveApiDefault(field, values, { switchFallback = false } = {}) {
   return undefined;
 }
 
+function formatFieldEnumOptions(field) {
+  if (!field) return "";
+  const opts = field.options;
+  if (Array.isArray(opts) && opts.length) {
+    const parts = opts.map((o) => {
+      if (o && typeof o === "object") {
+        const val = o.value ?? o;
+        const lbl = o.label;
+        return lbl && lbl !== val ? `<code>${val}</code> (${lbl})` : `<code>${val}</code>`;
+      }
+      return `<code>${o}</code>`;
+    });
+    return `<p><strong>Valores posibles:</strong> ${parts.join(", ")}.</p>`;
+  }
+  const ev = field.enumValue;
+  if (ev && typeof ev === "object" && Object.keys(ev).length) {
+    const parts = Object.entries(ev).map(([lbl, val]) => `<code>${val}</code> (${lbl})`);
+    return `<p><strong>Valores posibles:</strong> ${parts.join(", ")}.</p>`;
+  }
+  return "";
+}
+
+function formatFieldRange(field) {
+  if (!field || (field.min == null && field.max == null && field.step == null)) return "";
+  const parts = [];
+  if (field.min != null) parts.push(`mínimo <code>${field.min}</code>`);
+  if (field.max != null) parts.push(`máximo <code>${field.max}</code>`);
+  if (field.step != null) parts.push(`paso <code>${field.step}</code>`);
+  return `<p><strong>Rango:</strong> ${parts.join(", ")}.</p>`;
+}
+
+function buildApiPropModalContent(field, row) {
+  const lookupField = field ?? { key: row.name, label: row.desc, kind: row.type, attrType: row.type };
+  const info = fieldInfo(lookupField);
+  const title = info?.title ?? row.desc ?? String(row.name);
+  const parts = [];
+  if (info?.body) parts.push(`<p>${info.body}</p>`);
+  else {
+    const shortDesc = row.desc && row.desc !== row.name ? ` — ${row.desc}` : "";
+    parts.push(`<p>Propiedad del componente <code>${row.name}</code>${shortDesc}.</p>`);
+  }
+  if (field) {
+    const enumHtml = formatFieldEnumOptions(field);
+    const rangeHtml = formatFieldRange(field);
+    if (enumHtml) parts.push(enumHtml);
+    if (rangeHtml) parts.push(rangeHtml);
+  }
+  parts.push(`<dl class="pg-api-prop-modal__meta"><dt>Tipo</dt><dd><code>${row.type}</code></dd><dt>Valor por defecto</dt><dd><code>${row.def}</code></dd></dl>`);
+  return { title, body: parts.join("") };
+}
+
 export function ApiTable({ adapter }) {
+  const [activeRow, setActiveRow] = useState(null);
   const state = adapter?.initialState?.() ?? {};
   const details = adapter?.initialDetails?.() ?? {};
   const demoConfig = adapter?.initialDemoConfig?.() ?? {};
@@ -520,6 +618,7 @@ export function ApiTable({ adapter }) {
           desc: sw.label,
           type: sw.attrType ?? "boolean",
           def: formatApiDefault(resolveApiDefault(sw, values, { switchFallback: true })),
+          field: sw,
         });
       }
       return;
@@ -533,28 +632,44 @@ export function ApiTable({ adapter }) {
       desc: f.label,
       type: f.attrType ?? f.kind,
       def: formatApiDefault(resolveApiDefault(f, values)),
+      field: f,
     });
   };
   for (const f of adapter?.fields?.() ?? []) pushField(f, state);
   for (const f of adapter?.detailFields?.() ?? []) pushField(f, details);
   for (const f of adapter?.demoConfigFields?.() ?? []) pushField(f, demoConfig);
+  const modalContent = useMemo(() => (activeRow ? buildApiPropModalContent(activeRow.field, activeRow) : null), [activeRow]);
   if (!rows.length) return null;
   return (
-    <div className="pg-api-table-wrap">
-      <table className="pg-api-table">
-        <thead><tr><th>Property</th><th>Description</th><th>Type</th><th>Default</th></tr></thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={String(r.name)}>
-              <td><code className="pg-api-table__prop">{String(r.name)}</code></td>
-              <td>{r.desc ?? "—"}</td>
-              <td><code className="pg-api-table__type">{String(r.type)}</code></td>
-              <td><code className="pg-api-table__default">{String(r.def)}</code></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="pg-api-table-wrap">
+        <table className="pg-api-table">
+          <thead><tr><th>Property</th><th>Description</th><th>Type</th><th>Default</th></tr></thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={String(r.name)}>
+                <td>
+                  <button type="button" className="pg-api-table__prop-btn" onClick={() => setActiveRow(r)} aria-label={`Ver explicación de ${r.name}`} title={`Ver explicación de ${r.name}`}>
+                    <code className="pg-api-table__prop">{String(r.name)}</code>
+                  </button>
+                </td>
+                <td>{r.desc ?? "—"}</td>
+                <td><code className="pg-api-table__type">{String(r.type)}</code></td>
+                <td><code className="pg-api-table__default">{String(r.def)}</code></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {activeRow && modalContent && (
+        <Modal open onClose={() => setActiveRow(null)} variant="solid" showCloseHeader title={<span className="pg-input-decorated__info-title"><Icon icon="mdi:code-braces" /><code>{String(activeRow.name)}</code></span>}>
+          <div className="pg-api-prop-modal">
+            <h4 className="pg-api-prop-modal__title">{modalContent.title}</h4>
+            <div className="pg-input-decorated__info-body" dangerouslySetInnerHTML={{ __html: modalContent.body }} />
+          </div>
+        </Modal>
+      )}
+    </>
   );
 }
 

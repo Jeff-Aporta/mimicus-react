@@ -23,6 +23,93 @@
 	padding: 0.25rem 0 0.5rem;
 }
 
+.catalog-overview__hero-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1.5rem;
+	width: 100%;
+}
+
+.catalog-overview__hero-text {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.catalog-overview__hero-logo-wrap {
+	display: inline-block;
+	flex-shrink: 0;
+	height: 100%;
+	max-height: clamp(160px, 22vw, 240px);
+	width: auto;
+	align-self: stretch;
+	margin-top: 0;
+	transition: filter 0.4s ease;
+	/* Hue base del logo (≈ dodgerblue ≈ 210°). El hue-rotate se calcula con
+	   var(--mimicus-primary-h) para tintar el pulpo con el color principal de
+	   la paleta activa, simulando cambio de "textura" en cada skin. */
+	--mimicus-logo-base-h: 210;
+	filter: hue-rotate(calc((var(--mimicus-primary-h, 210) - var(--mimicus-logo-base-h)) * 1deg)) saturate(1.08) brightness(1.02);
+}
+
+html[data-luminance="dark"] .catalog-overview__hero-logo-wrap {
+	filter:
+		hue-rotate(calc((var(--mimicus-primary-h, 210) - var(--mimicus-logo-base-h)) * 1deg))
+		saturate(1.08) brightness(1.02)
+		drop-shadow(0 0 10px color-mix(in oklch, var(--mimicus-primary) 45%, transparent))
+		drop-shadow(0 0 24px color-mix(in oklch, var(--mimicus-primary) 25%, transparent));
+}
+
+html[data-luminance="dark"] .catalog-overview__hero-logo-wrap:hover {
+	filter:
+		hue-rotate(calc((var(--mimicus-primary-h, 210) - var(--mimicus-logo-base-h)) * 1deg))
+		saturate(1.14) brightness(1.05)
+		drop-shadow(0 0 16px color-mix(in oklch, var(--mimicus-primary) 65%, transparent))
+		drop-shadow(0 0 36px color-mix(in oklch, var(--mimicus-primary) 38%, transparent));
+}
+
+.catalog-overview__hero-logo {
+	display: block;
+	height: 100%;
+	max-height: clamp(160px, 22vw, 240px);
+	width: auto;
+	object-fit: contain;
+}
+
+@media (max-width: 640px) {
+	.catalog-overview__hero-row {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.catalog-overview__hero-logo-wrap {
+		order: 2;
+		align-self: center;
+		width: auto;
+		height: clamp(64px, 18vw, 112px);
+		max-height: none;
+		margin-top: 0;
+		margin-bottom: 0.25rem;
+	}
+
+	.catalog-overview__hero-logo {
+		height: 100%;
+		max-height: none;
+	}
+
+	.catalog-overview__hero-text {
+		order: 1;
+	}
+
+	.catalog-overview__hero-text .catalog-home__title {
+		order: 3;
+	}
+
+	.catalog-overview__hero-text .catalog-home__lead {
+		order: 4;
+	}
+}
+
 .catalog-overview__hero--section {
 	margin-bottom: 1.5rem;
 }
@@ -46,6 +133,7 @@
 	font-size: 1.05rem;
 	opacity: 0.72;
 	flex-shrink: 0;
+	margin-inline-end: 0.5rem;
 }
 
 .catalog-search__input {

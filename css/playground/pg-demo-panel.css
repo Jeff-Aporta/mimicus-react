@@ -238,10 +238,11 @@
 	width: 100%;
 }
 
+/* Label de campo: estilo compacto, mayúsculas, separado por línea sutil. */
 .pg-input-decorated__label {
 	display: flex;
 	align-items: center;
-	gap: 0.35rem;
+	gap: var(--pg-config-label-icon-gap, 0.5rem);
 	margin: 0 0 0.45rem;
 	padding: 0.15rem 0 0.45rem;
 	border-bottom: 1px solid var(--pg-config-label-border, color-mix(in srgb, var(--mimicus-b-color), transparent 52%));
@@ -252,17 +253,67 @@
 	text-transform: uppercase;
 }
 
+/* Head de card/sección: paridad visual con .mimicus-glass-header--compact.mimicus-title-card.
+   Banda compacta con borde-izquierdo de accent, gradient sutil, separador superior
+   y tipografía sin uppercase. El accent se hereda de --sm-accent (si existe) o del primario. */
+.pg-input-decorated--title {
+	--pg-config-title-accent: var(--sm-accent, var(--mimicus-primary));
+	--pg-config-title-bg: linear-gradient(90deg, color-mix(in srgb, var(--pg-config-title-accent) 22%, transparent), transparent 72%);
+}
+
 .pg-input-decorated--title > .pg-input-decorated__label {
-	font-size: 0.82rem;
-	font-weight: 700;
-	letter-spacing: 0.07em;
-	margin-bottom: 0.65rem;
-	padding-bottom: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-height: 2.35rem;
+	margin: 0 0 0.55rem;
+	padding: 0.42rem 0.55rem;
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	text-transform: none;
+	color: color-mix(in oklch, var(--pg-config-title-accent) 60%, var(--mimicus-color) 40%);
+	background: var(--pg-config-title-bg);
+	border-top: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 42%);
+	border-bottom: 0;
+	border-left: 4px solid var(--pg-config-title-accent);
+	border-radius: 0;
 }
 
 .pg-input-decorated__icon {
-	opacity: 0.72;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	flex-shrink: 0;
+	width: 1.05em;
+	min-width: 1.05em;
+	opacity: 0.72;
+}
+
+.pg-input-decorated__icon iconify-icon {
+	display: block;
+	width: 1em;
+	height: 1em;
+}
+
+/* Icono del head: paridad con .mimicus-glass-header__icon (círculo + gradiente del accent). */
+.pg-input-decorated--title .pg-input-decorated__icon {
+	width: 1.35rem;
+	min-width: 1.35rem;
+	height: 1.35rem;
+	opacity: 1;
+	color: #fff;
+	background: linear-gradient(135deg, var(--pg-config-title-accent), color-mix(in srgb, var(--pg-config-title-accent) 60%, transparent));
+	box-shadow: 0 3px 12px color-mix(in srgb, var(--pg-config-title-accent) 40%, transparent);
+	border-radius: 50%;
+	padding: 0;
+	font-size: 0.7rem;
+}
+
+.pg-input-decorated--title .pg-input-decorated__icon iconify-icon {
+	width: 1em;
+	height: 1em;
+	display: inline-block;
 }
 
 .pg-input-decorated__body {

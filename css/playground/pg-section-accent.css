@@ -12,14 +12,34 @@
 	.mimicus-title-card
 )[data-section-color],
 .catalog-section[data-section-color] {
-	--sm-accent: var(--mimicus-design-active-1, var(--mimicus-primary));
-	--sm-accent-fg: oklch(from var(--sm-accent) l calc(c * 0.5) h);
-	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 22%, transparent);
-	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 11%, transparent);
-	--pg-accent-fg-selected: color-mix(in srgb, var(--sm-accent-fg, var(--sm-accent)) 94%, var(--pg-sidebar-fg, var(--mimicus-color)) 6%);
-	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 78%, var(--sm-accent-fg, var(--sm-accent)) 22%);
-	--pg-accent-border-selected: color-mix(in srgb, var(--sm-accent) 38%, transparent);
-	--pg-accent-ring-selected: color-mix(in srgb, var(--sm-accent) 16%, transparent);
+	/* Solo definimos tokens derivados. --sm-accent = color puro (superficies/bordes).
+	   --sm-accent-fg = bow 40% (solo texto). Los componentes inyectan ambos via inline style. */
+	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 18%, transparent);
+	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 50%, transparent);
+	--pg-accent-fg-selected: color-mix(in oklch, var(--sm-accent-fg, var(--sm-accent)) 60%, var(--pg-sidebar-fg, var(--mimicus-color)) 40%);
+	/* Bow pálido sobre la fuente: accent (ya bow 20%) al 20% contra color de fuente. */
+	--pg-accent-fg-idle: color-mix(in oklch, var(--sm-accent-fg, var(--sm-accent)) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%);
+	--pg-accent-border-selected: color-mix(in srgb, var(--sm-accent) 32%, transparent);
+	--pg-accent-ring-selected: color-mix(in srgb, var(--sm-accent) 18%, transparent);
+}
+
+/* Contapyme — desaturar el acento heredado para que las cards/secciones no parezcan neón.
+   Mantenemos el hue pero bajamos la saturación (oklch chroma → 0.06) y oscurecemos levemente,
+   así el color de sección sigue siendo identificable pero queda dentro del lenguaje sobrio de contapyme. */
+html[data-looknfeel="contapyme"] .pg-playground-shell :is(
+	.pg-nav-tab,
+	.pg-panel-rail__btn,
+	.pg-panel-demo-link,
+	.catalog-card,
+	.mimicus-title-card
+)[data-section-color],
+html[data-looknfeel="contapyme"] .catalog-section[data-section-color] {
+	--pg-accent-bg-selected: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.92) c 0.06 h) 14%, transparent);
+	--pg-accent-bg-hover: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.92) c 0.06 h) 50%, transparent);
+	--pg-accent-fg-selected: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.78) c 0.05 h) 50%, var(--pg-sidebar-fg, var(--mimicus-color)) 50%);
+	--pg-accent-fg-idle: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.78) c 0.05 h) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%);
+	--pg-accent-border-selected: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.85) c 0.05 h) 24%, transparent);
+	--pg-accent-ring-selected: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.85) c 0.05 h) 14%, transparent);
 }
 
 html[data-luminance="dark"] .pg-playground-shell :is(
@@ -29,9 +49,9 @@ html[data-luminance="dark"] .pg-playground-shell :is(
 	.catalog-card,
 	.mimicus-title-card
 )[data-section-color] {
-	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 28%, transparent);
-	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 14%, transparent);
-	--pg-accent-fg-idle: color-mix(in srgb, var(--pg-sidebar-fg, var(--mimicus-color)) 72%, var(--sm-accent-fg, var(--sm-accent)) 28%);
+	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 20%, transparent);
+	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 50%, transparent);
+	--pg-accent-fg-idle: color-mix(in oklch, var(--sm-accent-fg, var(--sm-accent)) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%);
 }
 
 html[data-luminance="light"] .pg-playground-shell :is(
@@ -41,10 +61,13 @@ html[data-luminance="light"] .pg-playground-shell :is(
 	.catalog-card,
 	.mimicus-title-card
 )[data-section-color] {
-	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 18%, transparent);
-	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 9%, transparent);
+	--pg-accent-bg-selected: color-mix(in srgb, var(--sm-accent) 16%, transparent);
+	--pg-accent-bg-hover: color-mix(in srgb, var(--sm-accent) 50%, transparent);
+	--pg-accent-fg-idle: color-mix(in oklch, var(--sm-accent-fg, var(--sm-accent)) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%);
 }
 
+/* Fallback de --sm-accent para slots semánticos cuando el componente no inyecta el color inline.
+   --sm-accent se mantiene PURO (sin bow) — el bow 20% solo se aplica al texto vía --sm-accent-fg. */
 .pg-playground-shell :is(
 	.pg-nav-tab,
 	.pg-panel-rail__btn,
@@ -52,13 +75,13 @@ html[data-luminance="light"] .pg-playground-shell :is(
 	.catalog-card,
 	.catalog-card__footer.mimicus-glass-header
 ) {
-	&[data-section-color="primary"] { --sm-accent: var(--mimicus-primary); }
-	&[data-section-color="info"] { --sm-accent: var(--mimicus-info); }
-	&[data-section-color="success"] { --sm-accent: var(--mimicus-success); }
-	&[data-section-color="warning"] { --sm-accent: var(--mimicus-warning); }
+	&[data-section-color="primary"] { --sm-accent: var(--mimicus-primary); --sm-accent-fg: color-mix(in oklch, var(--mimicus-primary) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%); }
+	&[data-section-color="info"] { --sm-accent: var(--mimicus-info); --sm-accent-fg: color-mix(in oklch, var(--mimicus-info) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%); }
+	&[data-section-color="success"] { --sm-accent: var(--mimicus-success); --sm-accent-fg: color-mix(in oklch, var(--mimicus-success) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%); }
+	&[data-section-color="warning"] { --sm-accent: var(--mimicus-warning); --sm-accent-fg: color-mix(in oklch, var(--mimicus-warning) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%); }
 	&[data-section-color="error"],
-	&[data-section-color="danger"] { --sm-accent: var(--mimicus-error, var(--mimicus-danger)); }
-	&[data-section-color="color"] { --sm-accent: var(--mimicus-color); }
+	&[data-section-color="danger"] { --sm-accent: var(--mimicus-error, var(--mimicus-danger)); --sm-accent-fg: color-mix(in oklch, var(--mimicus-error, var(--mimicus-danger)) 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%); }
+	&[data-section-color="color"] { --sm-accent: var(--pg-sidebar-fg, var(--mimicus-color)); --sm-accent-fg: var(--pg-sidebar-fg, var(--mimicus-color)); }
 }
 
 /* Seleccionado — tinte alpha sobre chrome (no bloque sólido) */
@@ -95,7 +118,7 @@ html[data-luminance="light"] .pg-playground-shell :is(
 	&[data-variant="text"]:not(:disabled):hover {
 		background: var(--pg-accent-bg-hover) !important;
 		color: var(--pg-accent-fg-selected) !important;
-		border-color: color-mix(in srgb, var(--sm-accent) 22%, transparent) !important;
+		border-color: color-mix(in srgb, var(--sm-accent) 10%, transparent) !important;
 	}
 
 	&[data-variant="text"]:not(:disabled):hover :is(iconify-icon, .iconify) {
@@ -109,13 +132,29 @@ html[data-luminance="light"] .pg-playground-shell :is(
 }
 
 .catalog-card[data-section-color] {
-	--catalog-sketch-accent: var(--sm-accent);
-	--catalog-card-hover-border: color-mix(in srgb, var(--sm-accent) 42%, var(--catalog-card-border));
-	--catalog-card-hover-shadow: 0 4px 18px color-mix(in srgb, var(--sm-accent) 28%, transparent);
-	--catalog-card-focus: color-mix(in srgb, var(--sm-accent) 35%, transparent);
+	--catalog-sketch-accent: color-mix(in srgb, var(--sm-accent) 88%, var(--mimicus-color) 12%);
+	/* Border base hereda el color de la sección, no el neutro del looknfeel. */
+	--catalog-card-border: color-mix(in srgb, var(--sm-accent) 42%, transparent);
+	--catalog-card-hover-border: color-mix(in srgb, var(--sm-accent) 62%, var(--catalog-card-border));
+	--catalog-card-hover-shadow: 0 4px 16px color-mix(in srgb, var(--sm-accent) 34%, transparent);
+	--catalog-card-focus: color-mix(in srgb, var(--sm-accent) 50%, transparent);
 }
 
 .catalog-card[data-section-color] .catalog-card__preview {
-	background-color: color-mix(in srgb, var(--sm-accent) 9%, var(--catalog-card-preview-bg));
-	--catalog-card-preview-border: color-mix(in srgb, var(--sm-accent) 18%, var(--catalog-card-preview-border, var(--mimicus-b-color)));
+	background-color: color-mix(in srgb, var(--sm-accent) 15%, var(--catalog-card-preview-bg));
+	--catalog-card-preview-border: color-mix(in srgb, var(--sm-accent) 38%, var(--catalog-card-preview-border, var(--mimicus-b-color)));
+}
+
+/* Contapyme — bajar saturación y luminosidad del hover-shadow y focus de cards para no parecer neón.
+   Mantenemos identidad de sección pero con un shadow sobrio y sin halo fluorescente. */
+html[data-looknfeel="contapyme"] .catalog-card[data-section-color] {
+	--catalog-card-border: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.82) c 0.04 h) 30%, transparent);
+	--catalog-card-hover-border: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.85) c 0.05 h) 40%, var(--catalog-card-border));
+	--catalog-card-hover-shadow: 0 2px 8px color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.85) c 0.04 h) 18%, transparent);
+	--catalog-card-focus: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.85) c 0.04 h) 28%, transparent);
+}
+
+html[data-looknfeel="contapyme"] .catalog-card[data-section-color] .catalog-card__preview {
+	background-color: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.9) c 0.04 h) 10%, var(--catalog-card-preview-bg));
+	--catalog-card-preview-border: color-mix(in oklch, oklch(from var(--sm-accent) calc(l * 0.85) c 0.04 h) 22%, var(--catalog-card-preview-border, var(--mimicus-b-color)));
 }

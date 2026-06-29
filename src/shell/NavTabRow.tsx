@@ -12,14 +12,22 @@ export interface NavTab {
   id: string;
   label?: ReactNode;
   title?: ReactNode;
+  icon?: any;
   color?: string;
   colorSlot?: string;
-  icon?: string;
+  nav?: any;
+  target?: any;
+  disabled?: any;
+  disabledTitle?: any;
   kind?: string;
-  disabled?: boolean;
-  disabledTitle?: string;
+  category?: any;
   [key: string]: any;
 }
+
+export type ShellConfig = any;
+export type ShellNavCtx = any;
+export type NavNode = any;
+export type NavRow = any;
 
 export interface NavTabRowProps {
   tabs?: NavTab[];
@@ -40,6 +48,19 @@ export function NavTabRow({ tabs = [], value, onChange, tier = "primary", classN
     active?.scrollIntoView?.({ block: "nearest", inline: "nearest", behavior: "smooth" });
   }, [value, tabs.length]);
 
+  const onClick = (e: MouseEvent<HTMLElement>, tab: NavTab) => {
+    if (tab.disabled) return;
+    if (tabHref && (e.ctrlKey || e.metaKey || e.button === 1)) {
+      const url = tabHref(tab.id);
+      if (url) {
+        e.preventDefault();
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+    }
+    onChange?.(tab.id, tab);
+  };
+
   return (
     <div className={["pg-nav-row", secondary ? "pg-nav-row--secondary" : "pg-nav-row--primary", className].filter(Boolean).join(" ")} role="tablist">
       <div ref={scrollerRef} className="pg-nav-row__scroller custom-scrollbar">
@@ -47,40 +68,28 @@ export function NavTabRow({ tabs = [], value, onChange, tier = "primary", classN
           const selected = value === tab.id;
           const label = tab.label || tab.title || tab.id;
           const tabColor = tab.color ?? "primary";
-          const isSectionTab = tab.kind !== "action" && !tab.id?.startsWith("__");
-          const tabStyle = isSectionTab ? ({ "--sm-accent": tabColor } as CSSProperties) : undefined;
-          const onClick = (e: MouseEvent<HTMLElement>) => {
-            if (tab.disabled) return;
-            if (tabHref && (e.ctrlKey || e.metaKey || e.button === 1)) {
-              const url = tabHref(tab.id);
-              if (url) {
-                e.preventDefault();
-                window.open(url, "_blank", "noopener,noreferrer");
-                return;
-              }
-            }
-            onChange?.(tab.id, tab);
-          };
+          /* --sm-accent = color puro (para superficies/bordes/iconos); --sm-accent-fg = bow 20% (solo para fuente). */
+          const bowMix = `color-mix(in oklch, ${tabColor} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
+          const wrapStyle = { "--sm-accent": tabColor, "--sm-accent-fg": bowMix } as CSSProperties;
           return (
-            <Button
-              key={tab.id}
-              type="button"
-              role="tab"
-              aria-selected={selected}
-              disabled={Boolean(tab.disabled)}
-              variant={selected ? "soft" : "text"}
-              shape="rect"
-              color={tabColor}
-              className={["pg-nav-tab", selected && "is-active"].filter(Boolean).join(" ")}
-              data-section-color={isSectionTab ? (tab.colorSlot ?? tabColor) : undefined}
-              style={tabStyle}
-              title={tab.disabled ? tab.disabledTitle || "No disponible" : String(label)}
-              onClick={onClick}
-              onAuxClick={onClick}
-              icon={tab.icon ? <iconify-icon className="pg-nav-tab__icon" icon={tab.disabled ? "mdi:lock-outline" : tab.icon} aria-hidden /> : undefined}
-            >
-              <span className="pg-nav-tab__label">{label}</span>
-            </Button>
+            <span key={tab.id} className="pg-nav-tab__wrap" data-section-color={tab.colorSlot ?? tabColor} style={wrapStyle}>
+              <Button
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                disabled={Boolean(tab.disabled)}
+                variant={selected ? "soft" : "text"}
+                shape="rect"
+                color={tabColor}
+                className={["pg-nav-tab", selected && "is-active"].filter(Boolean).join(" ")}
+                title={tab.disabled ? tab.disabledTitle || "No disponible" : String(label)}
+                onClick={(e) => onClick(e, tab)}
+                onAuxClick={(e) => onClick(e, tab)}
+                icon={tab.icon ? <iconify-icon className="pg-nav-tab__icon" icon={tab.disabled ? "mdi:lock-outline" : tab.icon} aria-hidden /> : undefined}
+              >
+                <span className="pg-nav-tab__label">{label}</span>
+              </Button>
+            </span>
           );
         })}
       </div>

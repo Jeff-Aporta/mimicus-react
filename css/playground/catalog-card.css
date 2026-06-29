@@ -66,23 +66,23 @@ html[data-looknfeel="neon"] .catalog-card {
 		border-radius: inherit 0 0 inherit;
 		background: linear-gradient(
 			180deg,
-			color-mix(in srgb, var(--sm-accent, var(--neon-blue, var(--mimicus-primary))) 72%, transparent),
-			color-mix(in srgb, var(--sm-accent, var(--neon-purple, var(--mimicus-primary))) 48%, transparent)
+			color-mix(in srgb, var(--sm-accent, var(--neon-blue, var(--mimicus-primary))) 88%, transparent),
+			color-mix(in srgb, var(--sm-accent, var(--neon-purple, var(--mimicus-primary))) 64%, transparent)
 		);
-		opacity: 0.55;
+		opacity: 0.82;
 		pointer-events: none;
 		z-index: 3;
 		transition: opacity 0.2s ease, width 0.2s ease;
 	}
 
 	&:hover::after {
-		opacity: 0.92;
+		opacity: 1;
 		width: 4px;
 	}
 
 	&:hover .demo-sketch {
-		color: var(--sm-accent, var(--catalog-sketch-accent));
-		filter: drop-shadow(0 0 10px color-mix(in srgb, var(--sm-accent, var(--catalog-sketch-accent)) 38%, transparent));
+		color: var(--catalog-sketch-accent);
+		filter: none;
 	}
 
 	&:hover .mimicus-title-card .mimicus-glass-header__icon {
@@ -128,6 +128,11 @@ html[data-looknfeel="neon"] .catalog-card .mimicus-title-card {
 
 .catalog-card .mimicus-title-card .mimicus-glass-header__title {
 	color: var(--catalog-card-name-fg);
+}
+
+.catalog-card[data-section-color] .mimicus-glass-header__title,
+.catalog-card[data-section-color] .mimicus-title-card__title {
+	color: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 20%, var(--catalog-card-name-fg) 80%);
 }
 
 .demo-sketch {

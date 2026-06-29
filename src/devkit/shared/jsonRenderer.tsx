@@ -34,10 +34,15 @@ function CatalogCategories({ node, ctx }) {
       const colorSlot = sectionColorSlotFor(ctx, cat);
       const active = route.category === cat;
       const meta = sectionMeta(ctx, cat);
+      /* --sm-accent = color puro (superficies); --sm-accent-fg = bow 20% (texto). */
+      const bow = `color-mix(in oklch, ${color} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
+      const wrapStyle = { "--sm-accent": color, "--sm-accent-fg": bow, width: "100%" } as React.CSSProperties;
       return (
-        <Button key={cat} variant={active ? "soft" : "text"} shape="rect" color={color} data-section-color={colorSlot} className="pg-panel-rail__btn" title={meta.label ?? cat} onClick={() => ctx.onCategory?.(cat)} style={{ width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem", "--sm-accent": color }}>
-          <Icon icon={meta.icon ?? "mdi:folder-outline"} style={{ fontSize: "1.2rem" }} />
-        </Button>
+        <span key={cat} className="pg-rail-btn-wrap" data-section-color={colorSlot} style={wrapStyle}>
+          <Button variant={active ? "soft" : "text"} shape="rect" color={color} className="pg-panel-rail__btn" title={meta.label ?? cat} onClick={() => ctx.onCategory?.(cat)} style={{ width: "100%", justifyContent: "center", minHeight: "2.35rem", paddingInline: "0.25rem" }}>
+            <Icon icon={meta.icon ?? "mdi:folder-outline"} style={{ fontSize: "1.2rem" }} />
+          </Button>
+        </span>
       );
     });
   }
@@ -49,15 +54,19 @@ function CatalogCategories({ node, ctx }) {
     const colorSlot = sectionColorSlotFor(ctx, cat);
     const meta = sectionMeta(ctx, cat);
     const items = catalogItems.filter((it) => (it.section ?? it.category) === cat);
+    /* SidePanelSection ya inyecta --sm-accent en su contenedor; sus Button hijos heredan. */
     return (
       <SidePanelSection key={cat} icon={meta.icon ?? "mdi:folder-outline"} label={meta.label ?? cat} color={color} colorSlot={colorSlot} open={sectionOpen?.[cat]} collapsed={false} active={route.category === cat && !route.slug} forceOpen={route.category === cat && !!route.slug} count={items.length} onToggle={() => setSectionOpen?.((prev) => ({ ...prev, [cat]: !prev[cat] }))} onHeaderClick={() => ctx.onCategory?.(cat)}>
         {items.map((it) => {
           const selected = route.category === cat && route.slug === it.slug;
+          const bow = `color-mix(in oklch, ${color} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
           return (
-            <Button key={it.slug} variant={selected ? "soft" : "text"} shape="rect" color={color} data-section-color={colorSlot} onClick={() => ctx.onDemo?.(cat, it.slug)} className="pg-panel-demo-link" title={it.displayLabel} style={{ justifyContent: "flex-start", fontSize: "0.85rem", width: "100%", "--sm-accent": color }}>
-              <Icon icon={getDemoIcon(it.id, it)} />
-              <span className="sm-item-label"><span className="sm-item-text">{it.displayLabel}</span></span>
-            </Button>
+            <span key={it.slug} data-section-color={colorSlot} style={{ "--sm-accent": color, "--sm-accent-fg": bow }} className="pg-demo-link-wrap">
+              <Button variant={selected ? "soft" : "text"} shape="rect" color={color} onClick={() => ctx.onDemo?.(cat, it.slug)} className="pg-panel-demo-link" title={it.displayLabel} style={{ justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" }}>
+                <Icon icon={getDemoIcon(it.id, it)} />
+                <span className="sm-item-label"><span className="sm-item-text">{it.displayLabel}</span></span>
+              </Button>
+            </span>
           );
         })}
       </SidePanelSection>
@@ -71,6 +80,37 @@ export function PlaygroundJsonPanel({ node, ctx }) {
 
 export function JsonRenderer({ node, ctx, keyPrefix = "" }) {
   if (!node) return null;
+
+  if (node.type === "action") {
+    const isHome = node.id === "__home__" || node.nav === "home";
+    const active = isHome && ctx.route?.category == null && ctx.route?.slug == null;
+    const IconComp = node.icon ? <Icon icon={node.icon} /> : undefined;
+    const actionColor = node.color ?? "primary";
+    /* --sm-accent = color puro (superficies); --sm-accent-fg = bow 20% (texto). */
+    const bow = `color-mix(in oklch, ${actionColor} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
+    const wrapStyle = { "--sm-accent": actionColor, "--sm-accent-fg": bow, width: "100%" } as React.CSSProperties;
+    return (
+      <span className="pg-action-wrap" data-section-color={actionColor} style={wrapStyle}>
+        <Button
+          variant={node.variant ?? (active ? "soft" : "text")}
+          shape={node.shape ?? "rect"}
+          color={actionColor}
+          className={node.className ?? "pg-panel-demo-link"}
+          title={node.label}
+          onClick={() => {
+            if (node.id === "__home__" || node.nav === "home") ctx.onHome?.();
+            else ctx.onAction?.(node.id, node);
+          }}
+          style={{ justifyContent: "flex-start", fontSize: "0.85rem", width: "100%" }}
+        >
+          {IconComp}
+          <span className="sm-item-label"><span className="sm-item-text">{node.label}</span></span>
+        </Button>
+      </span>
+    );
+  }
+
+  if (node.type === "separator") return <hr className="sidebar-separator" />;
 
   if (node.type === "builtin") {
     const Builtin = previewBuiltins[node.id];

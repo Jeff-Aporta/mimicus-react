@@ -15,11 +15,34 @@ function bColor(bBase, alpha) {
   return `#${hex}${alpha}`;
 }
 
+/** Convierte "#rrggbb" a hue OKLCH en grados (0-360, redondeado a 1 dec).
+ *  Sirve para que el logo SVG (que tiene un hue fijo) pueda recibir
+ *  `filter: hue-rotate(calc(var(--mimicus-primary-h) - 210deg))`
+ *  y adaptarse al color principal de cada paleta. */
+function hueFromHex(hex) {
+  const v = hex.replace("#", "");
+  const r = parseInt(v.slice(0, 2), 16) / 255;
+  const g = parseInt(v.slice(2, 4), 16) / 255;
+  const b = parseInt(v.slice(4, 6), 16) / 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const d = max - min;
+  if (d === 0) return 0;
+  let h;
+  if (max === r) h = ((g - b) / d) % 6;
+  else if (max === g) h = (b - r) / d + 2;
+  else h = (r - g) / d + 4;
+  h = h * 60;
+  if (h < 0) h += 360;
+  return Math.round(h * 10) / 10;
+}
+
 function cssVars(side) {
   return `	--mimicus-design-1: ${side.d1};
 	--mimicus-design-2: ${side.d2};
 	--mimicus-design-3: ${side.d3};
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: ${hueFromHex(side.d1)}deg;
 	--mimicus-color: ${side.color};
 	--mimicus-bg-primary: ${side.bgPrimary};
 	--mimicus-bg-secondary: ${side.bgSecondary};
@@ -40,6 +63,7 @@ function cssVarsDark(side) {
 	--mimicus-design-2: ${side.d2};
 	--mimicus-design-3: ${side.d3};
 	--mimicus-primary: var(--mimicus-design-1);
+	--mimicus-primary-h: ${hueFromHex(side.d1)}deg;
 	--mimicus-color: ${side.color};
 	--mimicus-bg-primary: ${side.bgPrimary};
 	--mimicus-bg-secondary: ${side.bgSecondary};

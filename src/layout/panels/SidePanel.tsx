@@ -99,7 +99,7 @@ function SidePanelBase({
       {!drawer && onToggle && (
         <div className={["mimicus-side-panel__header", "pg-sidebar-header", "pg-sidebar-header--panel", rail && "pg-sidebar-header--rail"].filter(Boolean).join(" ")}>
           <Button variant="text" shape="rect" color="neutral" onClick={onToggle} className={["sidebar-header-btn", rail ? "sidebar-header-btn--rail" : "sidebar-toggle-btn"].filter(Boolean).join(" ")} title={open ? collapseTitle : expandTitle} style={rail ? { width: "100%", justifyContent: "center" } : { flexShrink: 0, width: "auto" }}>
-            <iconify-icon icon={open ? "mdi:menu-open" : "mdi:menu"} aria-hidden />
+            <iconify-icon icon={open ? "mdi:menu-open" : "mdi:menu"} aria-hidden style={{ width: "1.05rem", height: "1.05rem", fontSize: "1.05rem", color: "currentColor", display: "inline-block", flexShrink: 0 }} />
           </Button>
         </div>
       )}

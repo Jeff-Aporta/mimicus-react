@@ -8,8 +8,10 @@ html[data-looknfeel="contapyme"] .pg-sidebar {
 	color: var(--mimicus-color);
 }
 
+/* Efecto split: borde derecho sutil con gradiente (línea de split visual). */
 html[data-looknfeel="contapyme"] .pg-sidebar .pg-sidebar-body {
-	border-right: 1px solid var(--mimicus-b-color);
+	border-right: 1px solid color-mix(in srgb, var(--mimicus-b-color) 80%, transparent);
+	box-shadow: inset -1px 0 0 color-mix(in srgb, var(--mimicus-primary) 8%, transparent);
 }
 
 html[data-looknfeel="contapyme"] {
@@ -22,6 +24,17 @@ html[data-looknfeel="contapyme"] .pg-sidebar-header {
 	border-bottom: var(--pg-shell-header-edge);
 	border-radius: 0;
 	margin: 0;
+}
+
+/* Icono del toggle visible: tamaño/color explícitos para garantizar render aun si Iconify tarda en hidratar. */
+html[data-looknfeel="contapyme"] .pg-sidebar-header :is(.sidebar-header-btn, .sidebar-toggle-btn) :is(iconify-icon, .iconify) {
+	color: var(--mimicus-color);
+	font-size: 1.05rem;
+	width: 1.05rem;
+	height: 1.05rem;
+	display: inline-block;
+	visibility: visible;
+	opacity: 1;
 }
 
 html[data-looknfeel="contapyme"] .pg-sidebar button[data-variant="text"]:not(.sm-section *),
@@ -58,6 +71,15 @@ html[data-looknfeel="contapyme"] .mimicus-ui-brand {
 	color: transparent;
 }
 
+/* Contapyme: card headers planos (sin gradients), solo el border-left marca la jerarquía */
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label,
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label,
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .input-decorated-label {
+	--pg-config-title-bg: color-mix(in srgb, var(--pg-config-title-accent) 4%, transparent);
+	background: var(--pg-config-title-bg) !important;
+	border-left-width: 3px;
+}
+
 html[data-looknfeel="contapyme"] .mimicus-ui-section-label {
 	color: var(--mimicus-color);
 }
@@ -73,15 +95,48 @@ html[data-looknfeel="contapyme"] .catalog-home {
 	--catalog-fg: var(--mimicus-color);
 	--catalog-muted: var(--pg-text-muted);
 	--catalog-section-icon: var(--mimicus-primary);
+	--catalog-card-name-fg: var(--mimicus-color);
+	--catalog-card-bg: var(--mimicus-bg-secondary);
+	/* Border base con identidad de marca: tinte del primary en lugar del neutro --mimicus-b-color.
+	   Cuando hay data-section-color, pg-section-accent.css lo reemplaza por --sm-accent. */
+	--catalog-card-border: color-mix(in srgb, var(--mimicus-primary) 32%, transparent);
+	--catalog-card-shadow: 0 1px 2px color-mix(in srgb, var(--mimicus-color), transparent 92%);
+	--catalog-card-preview-bg: var(--mimicus-bg-primary);
+	--catalog-card-footer-bg: color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-primary) 3%);
+}
+
+/* TitleCard / glass-header — variante plana al look Contapyme.
+   Fondo basado en el color de card con leve énfasis según luminancia:
+   dark → card con tinte primary; light → card con tinte blanco. */
+html[data-looknfeel="contapyme"] .mimicus-title-card {
+	--mgh-accent: var(--sm-accent, var(--mimicus-primary));
+	--mgh-bg: linear-gradient(180deg, color-mix(in srgb, var(--mimicus-bg-secondary), var(--mimicus-primary) 4%), var(--mimicus-bg-secondary));
+	--mgh-edge-top: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 30%);
+	--mgh-edge-bottom: none;
+	--mgh-backdrop: none;
+	--mgh-inset: none;
+	--mgh-icon-radius: 0.4rem;
+	--mgh-icon-shadow: none;
+	--mgh-title-fg: var(--mimicus-color);
+}
+
+html[data-luminance="light"][data-looknfeel="contapyme"] .mimicus-title-card {
+	--mgh-bg: linear-gradient(180deg, color-mix(in srgb, var(--mimicus-bg-secondary), white 6%), var(--mimicus-bg-secondary));
+}
+
+html[data-looknfeel="contapyme"] .mimicus-title-card .mimicus-glass-header__title {
+	font-weight: 600;
+	letter-spacing: 0.01em;
 }
 
 /* Sidebar — acordeones por categoría (blend sección × chrome) */
 html[data-looknfeel="contapyme"] .pg-sidebar .sm-section {
 	box-sizing: border-box;
-	margin-inline: 0.1rem;
-	padding: 0.1rem 0.15rem 0.1rem 0;
+	margin-inline: 0.15rem;
+	padding: 0.1rem 0.3rem;
 	border-radius: var(--mimicus-ui-radius, 0.5rem);
-	border-left: 2px solid color-mix(in oklch, var(--sm-blend-bar), transparent 42%);
+	border: 1px solid color-mix(in srgb, var(--mimicus-b-color) 70%, transparent);
+	border-left: 4px solid color-mix(in oklch, var(--sm-blend-bar), transparent 42%);
 	background: var(--sm-blend-bg);
 	transition: background 0.18s ease, border-color 0.18s ease;
 }
@@ -98,6 +153,7 @@ html[data-looknfeel="contapyme"] .pg-sidebar .sm-section.is-active {
 
 html[data-looknfeel="contapyme"] .pg-sidebar .sm-section.is-collapsed {
 	border-left-width: 0;
+	border-color: transparent;
 	background: transparent;
 	padding-inline: 0;
 }
@@ -314,4 +370,54 @@ html[data-looknfeel="contapyme"] .pg-content-header .pg-header-skin-bar__theme-b
 html[data-looknfeel="contapyme"] .pg-content-header .pg-header-skin-bar__theme-btn[data-variant="text"]:not(:disabled):hover {
 	background: color-mix(in srgb, var(--mimicus-primary) 10%, var(--mimicus-bg-secondary)) !important;
 	border-color: color-mix(in srgb, var(--mimicus-primary) 35%, var(--mimicus-b-color)) !important;
+}
+
+/* ContaPyme looknfeel: surfaces opacas (sin transparency ni backdrop-filter en dropdowns). */
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__trigger {
+	background: var(--mimicus-bg-secondary) !important;
+	border-color: var(--mimicus-b-color) !important;
+	color: var(--mimicus-color) !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__trigger:hover,
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select.is-open .mimicus-select__trigger {
+	background: color-mix(in srgb, var(--mimicus-primary) 6%, var(--mimicus-bg-secondary)) !important;
+	border-color: color-mix(in srgb, var(--mimicus-primary) 35%, var(--mimicus-b-color)) !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__trigger:focus-visible {
+	border-color: var(--mimicus-primary) !important;
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--mimicus-primary) 18%, transparent) !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__dialog .mimicus-select__panel {
+	--mimicus-select-panel-bg: var(--mimicus-bg-secondary) !important;
+	background: var(--mimicus-bg-secondary) !important;
+	background-color: var(--mimicus-bg-secondary) !important;
+	border: 1px solid var(--mimicus-b-color) !important;
+	border-top: 0 !important;
+	box-shadow: 0 6px 18px color-mix(in srgb, #000 14%, transparent) !important;
+	color: var(--mimicus-color) !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__label,
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__arrow,
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__option .mimicus-select__label,
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__option .mimicus-select__suffix {
+	color: var(--mimicus-color) !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__option:hover,
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__option:focus-visible {
+	background: color-mix(in srgb, var(--mimicus-primary) 10%, var(--mimicus-bg-secondary)) !important;
+}
+
+html[data-looknfeel="contapyme"] .pg-content-header .pg-skin-toggle .mimicus-select__option[aria-selected="true"] {
+	background: color-mix(in srgb, var(--mimicus-primary) 16%, var(--mimicus-bg-secondary)) !important;
+	color: var(--mimicus-primary) !important;
 }

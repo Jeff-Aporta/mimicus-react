@@ -36,7 +36,9 @@ export interface SidePanelSectionProps {
 export function SidePanelSection({
   icon = "mdi:folder-outline", label, open, active, forceOpen, count, color = "primary", colorSlot, collapsed, onToggle, onHeaderClick, children,
 }: SidePanelSectionProps) {
-  const accentStyle = { "--sm-accent": resolveColor(color) } as CSSProperties;
+  /* --sm-accent = color puro; --sm-accent-fg = bow 20% (solo para texto). */
+  const bow = `color-mix(in oklch, ${resolveColor(color)} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
+  const accentStyle = { "--sm-accent": resolveColor(color), "--sm-accent-fg": bow } as CSSProperties;
   return (
     <div className={["mimicus-side-panel-section", "sm-section", collapsed && "is-collapsed", open && !collapsed && "is-open", active && "is-active"].filter(Boolean).join(" ")} style={accentStyle} data-section-color={colorSlot ?? color}>
       <div style={{ display: "flex", alignItems: "stretch", gap: "0.1rem", width: "100%" }}>

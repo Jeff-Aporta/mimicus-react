@@ -96,6 +96,7 @@ export function Playground({ catalog = [], catalogMeta, sectionsMeta, shellConfi
   const panelCtx = useMemo(() => ({
     route,
     catalog: catalogMeta,
+    sectionsMeta,
     catalogItems: implementedCatalogItems,
     categories: implementedSections,
     sectionOrder: sectionOrder(),
@@ -120,7 +121,7 @@ export function Playground({ catalog = [], catalogMeta, sectionsMeta, shellConfi
       brandTitle={MIMICUS_UI.name}
       onBrandClick={() => setNav(null)}
       headerCenter={routeTitle ? <span className="title pg-route-title pg-shell-route-title pg-vt-header">{routeTitle}</span> : null}
-      headerTools={<><FpsCounter /><HeaderSkinBar /></>}
+      headerTools={<><HeaderSkinBar /><FpsCounter /></>}
       shellNavigation={<ShellHeaderNav shellConfig={cfg} ctx={panelCtx} onTab={(id) => dispatchShellNav(id, panelCtx, cfg)} />}
       collapsedPanel={collapsedPanel}
       expandedPanel={expandedPanel}

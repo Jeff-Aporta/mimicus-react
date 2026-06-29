@@ -132,10 +132,72 @@
 	}
 }
 
+.pg-api-table__prop-btn {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+	text-align: left;
+	border-radius: 0.25em;
+	transition: color 0.15s ease, background 0.15s ease;
+}
+
+.pg-api-table__prop-btn:hover,
+.pg-api-table__prop-btn:focus-visible {
+	color: var(--mimicus-primary);
+	outline: none;
+}
+
+.pg-api-table__prop-btn:focus-visible {
+	box-shadow: 0 0 0 2px color-mix(in oklch, var(--mimicus-primary), transparent 60%);
+}
+
 .pg-api-table__prop {
 	font-family: var(--pg-font-mono, ui-monospace, monospace);
 	font-size: 0.84em;
 	color: var(--mimicus-primary);
+	text-decoration: underline dotted;
+	text-underline-offset: 0.18em;
+}
+
+.pg-api-table__prop-btn:hover .pg-api-table__prop,
+.pg-api-table__prop-btn:focus-visible .pg-api-table__prop {
+	text-decoration-style: solid;
+}
+
+.pg-api-prop-modal__title {
+	margin: 0 0 0.55rem;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.35;
+	color: var(--mimicus-color);
+}
+
+.pg-api-prop-modal__meta {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 0.3rem 1rem;
+	margin: 0.85rem 0 0;
+	padding: 0.65rem 0.8rem;
+	border-radius: 0.45rem;
+	background: color-mix(in oklch, var(--mimicus-bg-secondary), transparent 20%);
+	border: 1px solid color-mix(in oklch, var(--mimicus-b-color), transparent 50%);
+	font-size: 0.84em;
+	line-height: 1.45;
+}
+
+.pg-api-prop-modal__meta dt {
+	margin: 0;
+	font-weight: 600;
+	opacity: 0.72;
+}
+
+.pg-api-prop-modal__meta dd {
+	margin: 0;
 }
 
 .pg-api-table__type {

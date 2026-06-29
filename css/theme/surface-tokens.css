@@ -47,6 +47,10 @@ button[data-variant],
 	--bttn-l-ctv-bg: color-mix(in srgb, var(--bttn-clr), transparent 30%);
 	--bttn-txt-hvr-fg: color-mix(in srgb, var(--bttn-clr) 72%, var(--mimicus-color));
 	--bttn-txt-ctv-fg: color-mix(in srgb, var(--bttn-clr) 58%, var(--mimicus-color));
+	/* Outlined/ghost: en hover el bg se vuelve opaco (color sólido) → aplicar bg2font al texto.
+	   Esto garantiza contraste correcto en TODA paleta/modo sin tener que predefinir el color manualmente. */
+	--bttn-out-fnt-hvr: oklch(from var(--bttn-clr) calc((sign(0.55 - l) + 1) / 2 * 100%) 0 h / 1);
+	--bttn-out-fnt-ctv: oklch(from var(--bttn-clr) calc((sign(0.45 - l) + 1) / 2 * 100%) 0 h / 1);
 	/* Soft = tinte alpha tenue de acento + texto de acento fuerte (legible sobre la superficie). */
 	--bttn-sft-bg: color-mix(in srgb, var(--bttn-clr) 18%, transparent);
 	--bttn-sft-bg-hvr: color-mix(in srgb, var(--bttn-clr) 28%, transparent);

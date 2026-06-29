@@ -268,7 +268,7 @@ function PlaygroundShellHeader({
   const nav = shellNavigation ?? <>{primaryNav}{secondaryNav}</>;
 
   return (
-    <AppLayout.Header barClassName="pg-shell-toolbar" className="pg-shell-header-stack pg-content-header">
+    <AppLayout.Header barClassName="pg-shell-toolbar pg-shell-toolbar--cols-2" className="pg-shell-header-stack pg-content-header">
       <AppLayout.Header.Brand>
         {showShellMenuBtn && (
           <Button variant="text" shape="rect" color="neutral" onClick={onShellMenuClick} className="sidebar-header-btn pg-shell-menu-btn" title={menuTitle} style={{ flexShrink: 0, width: "auto" }}>

@@ -1158,7 +1158,7 @@ function SidePanelBase({
       style: { ...style && typeof style === "object" ? style : {} },
       children: [
         drawer && onClose && /* @__PURE__ */ jsx11("div", { className: "mimicus-side-panel__drawer-bar pg-sidebar-drawer-bar", children: /* @__PURE__ */ jsx11(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onClose, className: "sidebar-toggle-btn", title: closeTitle, style: { width: "auto", marginLeft: "auto" }, children: /* @__PURE__ */ jsx11("iconify-icon", { icon: closeIcon, "aria-hidden": true }) }) }),
-        !drawer && onToggle && /* @__PURE__ */ jsx11("div", { className: ["mimicus-side-panel__header", "pg-sidebar-header", "pg-sidebar-header--panel", rail && "pg-sidebar-header--rail"].filter(Boolean).join(" "), children: /* @__PURE__ */ jsx11(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onToggle, className: ["sidebar-header-btn", rail ? "sidebar-header-btn--rail" : "sidebar-toggle-btn"].filter(Boolean).join(" "), title: open ? collapseTitle : expandTitle, style: rail ? { width: "100%", justifyContent: "center" } : { flexShrink: 0, width: "auto" }, children: /* @__PURE__ */ jsx11("iconify-icon", { icon: open ? "mdi:menu-open" : "mdi:menu", "aria-hidden": true }) }) }),
+        !drawer && onToggle && /* @__PURE__ */ jsx11("div", { className: ["mimicus-side-panel__header", "pg-sidebar-header", "pg-sidebar-header--panel", rail && "pg-sidebar-header--rail"].filter(Boolean).join(" "), children: /* @__PURE__ */ jsx11(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onToggle, className: ["sidebar-header-btn", rail ? "sidebar-header-btn--rail" : "sidebar-toggle-btn"].filter(Boolean).join(" "), title: open ? collapseTitle : expandTitle, style: rail ? { width: "100%", justifyContent: "center" } : { flexShrink: 0, width: "auto" }, children: /* @__PURE__ */ jsx11("iconify-icon", { icon: open ? "mdi:menu-open" : "mdi:menu", "aria-hidden": true, style: { width: "1.05rem", height: "1.05rem", fontSize: "1.05rem", color: "currentColor", display: "inline-block", flexShrink: 0 } }) }) }),
         /* @__PURE__ */ jsx11("div", { className: bodyClass, children: content })
       ]
     }
@@ -1740,7 +1740,8 @@ function SidePanelSection({
   onHeaderClick,
   children
 }) {
-  const accentStyle = { "--sm-accent": resolveColor(color) };
+  const bow = `color-mix(in oklch, ${resolveColor(color)} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
+  const accentStyle = { "--sm-accent": resolveColor(color), "--sm-accent-fg": bow };
   return /* @__PURE__ */ jsxs9("div", { className: ["mimicus-side-panel-section", "sm-section", collapsed && "is-collapsed", open && !collapsed && "is-open", active && "is-active"].filter(Boolean).join(" "), style: accentStyle, "data-section-color": colorSlot ?? color, children: [
     /* @__PURE__ */ jsxs9("div", { style: { display: "flex", alignItems: "stretch", gap: "0.1rem", width: "100%" }, children: [
       /* @__PURE__ */ jsxs9(Button, { variant: active ? "soft" : "text", shape: "rect", color, onClick: onHeaderClick, style: { flex: "1 1 auto", minWidth: 0, justifyContent: collapsed ? "center" : "flex-start", fontSize: "0.78rem", fontWeight: 600 }, title: typeof label === "string" ? label : void 0, children: [

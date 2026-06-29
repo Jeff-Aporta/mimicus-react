@@ -600,9 +600,17 @@ function mergeSurfaceStyle(color, opts = {}) {
 // src/lib/colorTransform.ts
 var colorTransform_exports = {};
 __export(colorTransform_exports, {
+  Color: () => Color,
   applyColorTransform: () => applyColorTransform,
+  backdrop: () => backdrop,
   bg2font: () => bg2font,
   bgTransparent2font: () => bgTransparent2font,
+  border: () => border,
+  danger: () => danger,
+  drawer_overlay: () => drawer_overlay,
+  error: () => error,
+  fontcolor: () => fontcolor,
+  info: () => info,
   joinColorStyle: () => joinColorStyle,
   mkAlpha: () => mkAlpha,
   mkBow: () => mkBow,
@@ -615,34 +623,183 @@ __export(colorTransform_exports, {
   mkSoftBg: () => mkSoftBg,
   mkUnbow: () => mkUnbow,
   mkWinChromeAccent: () => mkWinChromeAccent,
+  modal_overlay: () => modal_overlay,
+  neutral: () => neutral,
   paletteBaseStyle: () => paletteBaseStyle,
   paletteStateVarRules: () => paletteStateVarRules,
-  paletteSurfaceTint: () => paletteSurfaceTint
+  paletteSurfaceTint: () => paletteSurfaceTint,
+  primary: () => primary,
+  secondary: () => secondary,
+  softBorder: () => softBorder,
+  success: () => success,
+  warning: () => warning
 });
-var mkDarken = (c, p = 0) => colorMix(c, "black", p);
-var mkLighten = (c, p = 0) => colorMix(c, "white", p);
-var mkAlpha = (c, p = 0) => colorMix(c, "transparent", p);
-var mkInvertL = (c) => `hsl(from ${resolveColor(c)} h s calc(100 - l))`;
-var mkBow = (color, percent = 0) => colorMix(color, "color", percent);
-var mkUnbow = (color, percent = 0) => colorMix(color, mkInvertL("color"), percent);
-var bg2font = (c) => `oklch(from ${c} calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1)`;
+var clamp = (v, min = 0, max = 100) => Math.min(Math.max(v, min), max);
+var fval = (v, p = 3) => +v.toFixed(p);
+var toFactor = (v) => clamp(v) / 100;
+function resolveAny(input) {
+  if (!input) return "";
+  if (input === "transparent" || input === "inherit" || input === "currentColor") return input;
+  if (/^#|^rgb|^rgba|^hsl|^hsla|^oklch|^oklab|^color\(|^var\(|^white|^black/i.test(input)) return input;
+  const resolved = resolveColor(input);
+  return resolved || input;
+}
+function unwrapOklch(color) {
+  const trimmed = color.trim();
+  if (!trimmed.startsWith("oklch(")) return null;
+  const inner = trimmed.slice(6, -1).trim();
+  const fromMatch = inner.match(/^from\s+(.+?)\s+(.+)$/i);
+  if (!fromMatch) {
+    const parts = inner.split(/\s+/);
+    return { base: "currentColor", L: parts[0] ?? "l", C: parts[1] ?? "c", H: parts[2] ?? "h", A: (parts[3] ?? "").replace(/^\//, "") || "alpha" };
+  }
+  const base = fromMatch[1].trim();
+  const rest = fromMatch[2].trim();
+  const comps = [];
+  let depth = 0, current = "";
+  for (const ch of rest) {
+    if (ch === "(") depth++;
+    else if (ch === ")") depth--;
+    if (ch === " " && depth === 0) {
+      if (current) {
+        comps.push(current);
+        current = "";
+      }
+    } else current += ch;
+  }
+  if (current) comps.push(current);
+  const wrap = (s) => s === "l" || s === "c" || s === "h" || s === "alpha" ? s : `(${s})`;
+  const L = wrap((comps[0] ?? "l").replace(/^\//, ""));
+  const C = wrap((comps[1] ?? "c").replace(/^\//, ""));
+  const hSplit = (comps[2] ?? "h").split(/\s*\/\s*/);
+  const H = wrap(hSplit[0]);
+  const A = wrap((hSplit[1] ?? comps[3] ?? "").replace(/^\//, "") || "alpha");
+  return { base, L, C, H, A };
+}
+function applyOpts(color, opts) {
+  const { blacken = 0, whiten = 0, saturate = 0, desaturate = 0, huerotate = 0, transparent = 0, bow = 0, unbow = 0, alpha, hue, saturation, bright } = opts;
+  if (alpha === 0 || transparent === 100) return "transparent";
+  if (!color) return "";
+  const hasBlacken = blacken > 0;
+  const hasWhiten = whiten > 0;
+  const hasSaturate = saturate > 0;
+  const hasDesaturate = desaturate > 0;
+  const hasHuerotate = huerotate % 360 !== 0;
+  const hasTransparent = transparent > 0;
+  const hasBow = bow > 0;
+  const hasUnbow = unbow > 0;
+  const hasAlpha = alpha !== void 0 && alpha > 0;
+  const hasHue = hue !== void 0;
+  const hasSaturation = saturation !== void 0 && saturation > 0;
+  const hasBright = bright !== void 0 && bright > 0;
+  const flags = [hasBlacken, hasWhiten, hasSaturate, hasDesaturate, hasHuerotate, hasTransparent, hasBow, hasUnbow, hasAlpha, hasHue, hasSaturation, hasBright];
+  const active = flags.filter(Boolean).length;
+  if (active === 0) return color;
+  let single;
+  if (active === 1) {
+    if (hasBlacken) single = `color-mix(in srgb, ${color}, black ${clamp(blacken)}%)`;
+    else if (hasWhiten) single = `color-mix(in srgb, ${color}, white ${clamp(whiten)}%)`;
+    else if (hasTransparent) single = `color-mix(in srgb, ${color}, transparent ${clamp(transparent)}%)`;
+    else if (hasBow) single = `color-mix(in srgb, ${color}, rgb(0 0 0) ${clamp(bow)}%)`;
+    else if (hasUnbow) single = `color-mix(in srgb, ${color}, rgb(255 255 255) ${clamp(unbow)}%)`;
+    else if (hasDesaturate) single = `color-mix(in srgb, ${color}, oklch(from ${color} l 0 h) ${clamp(desaturate)}%)`;
+    else if (hasSaturate) {
+      const boost = clamp(saturate) * 2e-3;
+      single = `color-mix(in srgb, ${color}, oklch(from ${color} calc(l + ${boost}) 0.4 h) ${clamp(saturate)}%)`;
+    } else if (hasAlpha) single = `oklch(from ${color} l c h / ${fval((alpha ?? 0) / 100)})`;
+    else if (hasHue) single = `oklch(from ${color} l c ${hue})`;
+    else if (hasHuerotate) single = `oklch(from ${color} l c calc(h + ${huerotate}))`;
+    else if (hasSaturation) single = `oklch(from ${color} l ${fval((saturation ?? 0) / 100)} h)`;
+    else if (hasBright) single = `oklch(from ${color} ${fval((bright ?? 0) / 100)} c h)`;
+  }
+  if (single) return single;
+  const unwrapped = unwrapOklch(color);
+  let base, eL, eC, eH, eA;
+  if (unwrapped) {
+    base = unwrapped.base === "currentColor" ? "currentColor" : unwrapped.base;
+    eL = unwrapped.L;
+    eC = unwrapped.C;
+    eH = unwrapped.H;
+    eA = unwrapped.A;
+  } else {
+    base = color;
+    eL = "l";
+    eC = "c";
+    eH = "h";
+    eA = "alpha";
+  }
+  const netBow = Math.max(0, bow - unbow);
+  const netUnbow = Math.max(0, unbow - bow);
+  const bowFactor = toFactor(netBow);
+  const unbowFactor = toFactor(netUnbow);
+  const blackenFactor = toFactor(blacken);
+  const whitenFactor = toFactor(whiten);
+  let huePart = eH;
+  if (hue !== void 0) huePart = `${hue}`;
+  else if (huerotate % 360 !== 0) huePart = `calc(${eH} + ${huerotate})`;
+  let alphaPart = "";
+  if (alpha !== void 0) alphaPart = ` / ${fval(alpha / 100)}`;
+  else if (transparent > 0) alphaPart = ` / calc(${eA} * ${fval(1 - toFactor(transparent))})`;
+  else if (eA !== "alpha") alphaPart = ` / ${eA}`;
+  let satPart = eC;
+  if (hasSaturation) {
+    satPart = `${fval(saturation / 100)}`;
+  } else {
+    const pieces = [];
+    if (hasBow) pieces.push(`(1 - ${fval(bowFactor)})`);
+    if (hasUnbow) pieces.push(`(1 - ${fval(unbowFactor)})`);
+    if (hasBlacken) pieces.push(`(1 - ${fval(blackenFactor)})`);
+    if (hasWhiten) pieces.push(`(1 - ${fval(whitenFactor)})`);
+    const chromaMult = pieces.length > 0 ? pieces.join(" * ") : "";
+    let currentSat = eC;
+    if (hasSaturate) currentSat = `calc(${eC} + (0.5 - ${eC}) * ${fval(toFactor(saturate), 2)})`;
+    else if (hasDesaturate) currentSat = `calc(${eC} * ${fval(1 - toFactor(desaturate), 2)})`;
+    if (chromaMult) satPart = `calc(${currentSat} * ${chromaMult})`;
+    else if (hasSaturate || hasDesaturate) satPart = currentSat;
+  }
+  let lightPart = eL;
+  if (hasBright) {
+    lightPart = `${fval(bright / 100)}`;
+  } else {
+    const lOps = [];
+    let baseL = eL;
+    if (hasBlacken || hasWhiten) {
+      baseL = `(${eL} * ${fval(1 - blackenFactor)} + (1 - ${eL}) * ${fval(whitenFactor)})`;
+    }
+    const neonL = hasSaturate ? ` + (1 - ${baseL}) * ${fval(toFactor(saturate), 2)}` : "";
+    if (hasBow) lOps.push(`((1 - ${baseL}) * ${fval(bowFactor)} - ${baseL} * ${fval(bowFactor)})`);
+    if (hasUnbow) lOps.push(`(${baseL} * ${fval(unbowFactor)} - (1 - ${baseL}) * ${fval(unbowFactor)})`);
+    if (lOps.length > 0 || hasBlacken || hasWhiten || hasSaturate) {
+      const opsStr = lOps.length > 0 ? " + " + lOps.join(" + ") : "";
+      lightPart = `calc(${baseL}${neonL}${opsStr})`;
+    }
+  }
+  return `oklch(from ${base} ${lightPart} ${satPart} ${huePart}${alphaPart})`;
+}
+var mkDarken = (c, p = 0) => applyOpts(resolveAny(c), { blacken: p });
+var mkLighten = (c, p = 0) => applyOpts(resolveAny(c), { whiten: p });
+var mkAlpha = (c, p = 0) => applyOpts(resolveAny(c), { transparent: p });
+var mkInvertL = (c) => `oklch(from ${resolveAny(c)} l c calc(100% - l))`;
+var mkBow = (color, percent = 0) => applyOpts(resolveAny(color), { bow: percent });
+var mkUnbow = (color, percent = 0) => applyOpts(resolveAny(color), { unbow: percent });
+var bg2font = (c) => `oklch(from ${resolveAny(c)} calc((sign(0.75 - l) + 1) / 2 * 100%) 0 h / 1)`;
 var bgTransparent2font = (c, alphaPct, bg) => bg2font(colorMix(bg, c, 100 - alphaPct));
-var mkWinChromeAccent = (color = "primary") => `oklch(from ${resolveColor(color)} l calc(min(0.26, max(c, 0.14) + 0.05)) h)`;
-var mkOklchShiftL = (c, delta, min = 0.06, max = 0.98) => `oklch(from ${resolveColor(c)} calc(clamp(${min}, l + ${delta}, ${max})) c h)`;
+var mkWinChromeAccent = (color = "primary") => `oklch(from ${resolveAny(color)} l calc(min(0.26, max(c, 0.14) + 0.05)) h)`;
+var mkOklchShiftL = (c, delta, min = 0.06, max = 0.98) => `oklch(from ${resolveAny(c)} calc(clamp(${min}, l + ${delta}, ${max})) c h)`;
 var mkSoftBg = (color, veilPct = 88) => mkAlpha(color, veilPct);
 function mkSemanticBorder(color = "neutral", bowPct = 50, alphaPct = 85) {
   return mkAlpha(mkUnbow(color, bowPct), alphaPct);
 }
 var mkHeadingColor = (color = "primary", bowPct) => mkBow(color, bowPct);
 function paletteBaseStyle(color = "primary") {
-  return { "--ct-base": resolveColor(color) };
+  return { "--ct-base": resolveAny(color) };
 }
 function paletteSurfaceTint(color, opts = {}) {
-  const accent = resolveColor(color);
-  const bg = colorMix(resolveColor(opts.surface ?? "card"), color, opts.cardMix ?? 15);
+  const accent = resolveAny(color);
+  const bg = colorMix(resolveAny(opts.surface ?? "card"), color, opts.cardMix ?? 15);
   const fg = colorMix(bg2font(bg), color, opts.fgMix ?? 40);
-  const border = colorMix(bg, color, opts.borderMix ?? 35);
-  return { accent, bg, fg, border };
+  const border2 = colorMix(bg, color, opts.borderMix ?? 35);
+  return { accent, bg, fg, border: border2 };
 }
 function joinColorStyle(...parts) {
   return parts.filter(Boolean).join("; ");
@@ -662,15 +819,96 @@ function applyColorTransform(base, kind, amount = 0) {
     case "invertL":
       return mkInvertL(base);
     case "bg2font":
-      return bg2font(resolveColor(base));
+      return bg2font(resolveAny(base));
     default:
-      return resolveColor(base);
+      return resolveAny(base);
   }
 }
 function paletteStateVarRules(cssVarName) {
   const ref = cssVarName.startsWith("var(") ? cssVarName : `var(${cssVarName})`;
   return [`${cssVarName}-hvr: ${mkLighten(ref, 15)}`, `${cssVarName}-ctv: ${mkDarken(ref, 20)}`];
 }
+var border = "#80808050";
+var backdrop = "rgba(0, 128, 255, 0.05)";
+var modal_overlay = "rgba(0, 0, 0, 0.1)";
+var drawer_overlay = "rgba(0, 0, 0, 0.05)";
+var neutral = "#808080";
+var softBorder = "#80808018";
+var especiales = { modal_overlay, drawer_overlay, neutral, softBorder, border, backdrop };
+function unwrapColorDef(input) {
+  if (!input) return null;
+  if (typeof input === "string") return { base: input, opts: {} };
+  const entries = Object.entries(input);
+  if (!entries.length) return null;
+  const [base, opts] = entries[0];
+  return { base, opts: opts ?? {} };
+}
+var Color = {
+  get: (name) => {
+    const parsed = unwrapColorDef(name);
+    if (!parsed) return "";
+    return Color.transform(parsed.base, parsed.opts);
+  },
+  primary: (opts = {}) => Color.transform("primary", opts),
+  info: (opts = {}) => Color.transform("info", opts),
+  success: (opts = {}) => Color.transform("success", opts),
+  warning: (opts = {}) => Color.transform("warning", opts),
+  error: (opts = {}) => Color.transform("error", opts),
+  danger: (opts = {}) => Color.transform("danger", opts),
+  design1: (opts = {}) => Color.transform("design-1", opts),
+  design2: (opts = {}) => Color.transform("design-2", opts),
+  design3: (opts = {}) => Color.transform("design-3", opts),
+  bg: (opts = {}) => Color.transform("bg", opts),
+  card: (opts = {}) => Color.transform("card", opts),
+  fontcolor: (opts = {}) => Color.transform("color", opts),
+  paper: (opts = {}) => Color.transform("bg", opts),
+  background: (opts = {}) => Color.transform("bg", opts),
+  border: (opts = {}) => Color.transform("border", opts),
+  readonly: (opts = {}) => Color.transform("border", opts),
+  currentColor: (opts = {}) => Color.transform("currentColor", opts),
+  /* Resuelve todos los colores base del tema (token → CSS var resuelto). */
+  getColors: () => ({ ...especiales, primary: resolveAny("primary"), info: resolveAny("info"), success: resolveAny("success"), warning: resolveAny("warning"), error: resolveAny("error"), danger: resolveAny("danger"), design1: resolveAny("design-1"), design2: resolveAny("design-2"), design3: resolveAny("design-3"), bg: resolveAny("bg"), card: resolveAny("card"), fontcolor: resolveAny("color"), border: resolveAny("border") }),
+  /* Aplica mods. Acepta objeto `{ base: opts }`. */
+  transform: (c, opts = {}) => {
+    const parsed = unwrapColorDef(c);
+    if (!parsed) return "";
+    const merged = { ...parsed.opts, ...opts };
+    if (merged.mixColor) merged.mixColor = resolveAny(merged.mixColor);
+    const resolved = resolveAny(parsed.base);
+    let result = applyOpts(resolved, merged);
+    if (opts.mixColor && opts.pmix !== void 0) result = `color-mix(in srgb, ${result}, ${resolveAny(opts.mixColor)} ${clamp(opts.pmix)}%)`;
+    return result;
+  },
+  /* Mezcla dos colores. */
+  mix: (c1, c2, p = 50) => `color-mix(in srgb, ${resolveAny(c1)} ${clamp(p)}%, ${resolveAny(c2)})`,
+  /* Sombra basada en elevación (0-100). */
+  elevation: (p, opts = {}) => {
+    const { dx = 0, dy = 1, col, darkshadow = 1 } = opts;
+    p = clamp(p);
+    const dshadow = clamp(darkshadow, 0, 1);
+    if (p === 0 || dshadow === 0) return "none";
+    const f = p / 100;
+    const ox = (f * 25 * dx).toFixed(2);
+    const oy = (f * 25 * dy).toFixed(2);
+    const b = (2.5 + f * 47.5).toFixed(2);
+    const s = (f * -12).toFixed(2);
+    const a = +((0.18 + Math.sqrt(f) * 0.12) * 0.7 * dshadow).toFixed(3);
+    const c = col ? Color.transform(col, { alpha: Math.round(a * 100) }) : `rgb(0 0 0 / ${a})`;
+    return `${ox}px ${oy}px ${b}px ${s}px ${c}`;
+  },
+  /* Contraste óptimo (blanco/negro) por luminancia. */
+  getContrastColor: (c) => {
+    const resolved = resolveAny(Color.get(c) || (typeof c === "string" ? c : ""));
+    return resolved ? `oklch(from ${resolved} calc((sign(0.7 - l) + 1) * 50%) 0 h / 1)` : "";
+  },
+  /* Opuesto al contraste óptimo. */
+  getUncontrastColor: (c) => {
+    const resolved = resolveAny(Color.get(c) || (typeof c === "string" ? c : ""));
+    return resolved ? `oklch(from ${resolved} calc(((sign(0.7 - l) * -1) + 1) * 50%) 0 h / 1)` : "";
+  }
+};
+var { primary, info, success, warning, error, danger, fontcolor } = Color.getColors();
+var secondary = Color.transform("primary", { huerotate: 60 });
 
 // src/snippets/fluidCss.js
 var CSS_PROP_RE = /^[a-z][a-zA-Z0-9]*$/;
@@ -1350,15 +1588,15 @@ function Icon({ icon, className, style }) {
 // src/components/Button.tsx
 import { useState as useState2 } from "react";
 import { Fragment, jsx as jsx2, jsxs } from "react/jsx-runtime";
-function resolveButtonVariant(variant, { danger, ghost, dashed, link }) {
+function resolveButtonVariant(variant, { danger: danger2, ghost, dashed, link }) {
   if (link) return "text";
   if (ghost) return "ghost";
   if (dashed) return "dashed";
   return normalizeVariant(variant, "solid");
 }
-function resolveButtonColor(color, { danger }) {
+function resolveButtonColor(color, { danger: danger2 }) {
   if (color) return color;
-  if (danger) return "danger";
+  if (danger2) return "danger";
   return color;
 }
 function Button({
@@ -1368,7 +1606,7 @@ function Button({
   color,
   shape = "round",
   block = false,
-  danger = false,
+  danger: danger2 = false,
   ghost = false,
   dashed = false,
   link = false,
@@ -1388,8 +1626,8 @@ function Button({
 }) {
   const [busy, setBusy] = useState2(false);
   const isLink = Boolean(href) || link;
-  const normalizedVariant = resolveButtonVariant(variant, { danger, ghost, dashed, link: isLink && !href });
-  const resolvedColor = resolveButtonColor(color, { danger });
+  const normalizedVariant = resolveButtonVariant(variant, { danger: danger2, ghost, dashed, link: isLink && !href });
+  const resolvedColor = resolveButtonColor(color, { danger: danger2 });
   const surfaceStyle = mergeSurfaceStyle(resolvedColor, { variant: normalizedVariant, style });
   const isLoading = loading || busy;
   const isDisabled = disabled || isLoading;
@@ -1430,7 +1668,7 @@ function Button({
     "data-shape": resolvedShape,
     "data-variant": normalizedVariant,
     "data-block": block ? "true" : void 0,
-    "data-danger": danger ? "true" : void 0,
+    "data-danger": danger2 ? "true" : void 0,
     "data-icon-placement": icon && children != null && children !== "" ? iconPlacement : void 0,
     "data-glass-active": isGlassVariant(variant) && glassActive ? "true" : void 0,
     ...surfaceStyle,
@@ -1756,7 +1994,8 @@ function GlassHeaderBand({
   children
 }) {
   const rootClass = ["mimicus-glass-header", compact && "mimicus-glass-header--compact", className].filter(Boolean).join(" ");
-  const accentStyle = sectionColor ? { "--sm-accent": resolveColor(sectionColor) } : void 0;
+  const bow = sectionColor ? `color-mix(in oklch, ${resolveColor(sectionColor)} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)` : void 0;
+  const accentStyle = sectionColor ? { "--sm-accent": resolveColor(sectionColor), "--sm-accent-fg": bow } : void 0;
   return /* @__PURE__ */ jsxs3(Tag2, { className: rootClass, "data-section-color": sectionColor || void 0, style: accentStyle, children: [
     icon !== false && icon ? /* @__PURE__ */ jsx5("span", { className: "mimicus-glass-header__icon", "aria-hidden": true, children: /* @__PURE__ */ jsx5(Icon, { icon }) }) : null,
     /* @__PURE__ */ jsxs3("div", { className: "mimicus-glass-header__body", children: [
@@ -2146,7 +2385,7 @@ function buildTypographyStyle({ color, variant, style, lines, ellipsis }) {
   const v = (variant ? TYPOGRAPHY_VARIANTS[variant] : void 0) ?? TYPOGRAPHY_VARIANTS.body1;
   const surface = mergeSurfaceStyle(color, { style });
   const nLines = Number(lines);
-  const clamp = (nLines > 0 || ellipsis) && nLines !== 0 ? {
+  const clamp2 = (nLines > 0 || ellipsis) && nLines !== 0 ? {
     display: "-webkit-box",
     WebkitBoxOrient: "vertical",
     WebkitLineClamp: Math.max(1, Math.round(nLines) || 1),
@@ -2163,7 +2402,7 @@ function buildTypographyStyle({ color, variant, style, lines, ellipsis }) {
       textTransform: v.textTransform,
       ...color ? { color: resolveColor(color) } : {},
       margin: 0,
-      ...clamp,
+      ...clamp2,
       ...surface.style ?? {},
       ...style && typeof style === "object" ? style : {}
     }
@@ -2940,7 +3179,7 @@ function SidePanelBase({
       style: { ...style && typeof style === "object" ? style : {} },
       children: [
         drawer && onClose && /* @__PURE__ */ jsx18("div", { className: "mimicus-side-panel__drawer-bar pg-sidebar-drawer-bar", children: /* @__PURE__ */ jsx18(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onClose, className: "sidebar-toggle-btn", title: closeTitle, style: { width: "auto", marginLeft: "auto" }, children: /* @__PURE__ */ jsx18("iconify-icon", { icon: closeIcon, "aria-hidden": true }) }) }),
-        !drawer && onToggle && /* @__PURE__ */ jsx18("div", { className: ["mimicus-side-panel__header", "pg-sidebar-header", "pg-sidebar-header--panel", rail && "pg-sidebar-header--rail"].filter(Boolean).join(" "), children: /* @__PURE__ */ jsx18(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onToggle, className: ["sidebar-header-btn", rail ? "sidebar-header-btn--rail" : "sidebar-toggle-btn"].filter(Boolean).join(" "), title: open ? collapseTitle : expandTitle, style: rail ? { width: "100%", justifyContent: "center" } : { flexShrink: 0, width: "auto" }, children: /* @__PURE__ */ jsx18("iconify-icon", { icon: open ? "mdi:menu-open" : "mdi:menu", "aria-hidden": true }) }) }),
+        !drawer && onToggle && /* @__PURE__ */ jsx18("div", { className: ["mimicus-side-panel__header", "pg-sidebar-header", "pg-sidebar-header--panel", rail && "pg-sidebar-header--rail"].filter(Boolean).join(" "), children: /* @__PURE__ */ jsx18(Button, { variant: "text", shape: "rect", color: "neutral", onClick: onToggle, className: ["sidebar-header-btn", rail ? "sidebar-header-btn--rail" : "sidebar-toggle-btn"].filter(Boolean).join(" "), title: open ? collapseTitle : expandTitle, style: rail ? { width: "100%", justifyContent: "center" } : { flexShrink: 0, width: "auto" }, children: /* @__PURE__ */ jsx18("iconify-icon", { icon: open ? "mdi:menu-open" : "mdi:menu", "aria-hidden": true, style: { width: "1.05rem", height: "1.05rem", fontSize: "1.05rem", color: "currentColor", display: "inline-block", flexShrink: 0 } }) }) }),
         /* @__PURE__ */ jsx18("div", { className: bodyClass, children: content })
       ]
     }
@@ -3751,10 +3990,10 @@ function Calendar({ fullscreen, className, style, ...rest }) {
     }
   );
 }
-function ListItemText({ primary, secondary, className, ...rest }) {
+function ListItemText({ primary: primary2, secondary: secondary2, className, ...rest }) {
   return /* @__PURE__ */ jsxs12("div", { ...rest, className: cx2("mimicus-list-item__text", className), children: [
-    primary && /* @__PURE__ */ jsx19("span", { className: "mimicus-list-item__primary", children: primary }),
-    secondary && /* @__PURE__ */ jsx19("span", { className: "mimicus-list-item__secondary", children: secondary })
+    primary2 && /* @__PURE__ */ jsx19("span", { className: "mimicus-list-item__primary", children: primary2 }),
+    secondary2 && /* @__PURE__ */ jsx19("span", { className: "mimicus-list-item__secondary", children: secondary2 })
   ] });
 }
 function ListItemIcon({ children, className, ...rest }) {
@@ -3801,7 +4040,8 @@ function SidePanelSection({
   onHeaderClick,
   children
 }) {
-  const accentStyle = { "--sm-accent": resolveColor(color) };
+  const bow = `color-mix(in oklch, ${resolveColor(color)} 20%, var(--pg-sidebar-fg, var(--mimicus-color)) 80%)`;
+  const accentStyle = { "--sm-accent": resolveColor(color), "--sm-accent-fg": bow };
   return /* @__PURE__ */ jsxs13("div", { className: ["mimicus-side-panel-section", "sm-section", collapsed && "is-collapsed", open && !collapsed && "is-open", active && "is-active"].filter(Boolean).join(" "), style: accentStyle, "data-section-color": colorSlot ?? color, children: [
     /* @__PURE__ */ jsxs13("div", { style: { display: "flex", alignItems: "stretch", gap: "0.1rem", width: "100%" }, children: [
       /* @__PURE__ */ jsxs13(Button, { variant: active ? "soft" : "text", shape: "rect", color, onClick: onHeaderClick, style: { flex: "1 1 auto", minWidth: 0, justifyContent: collapsed ? "center" : "flex-start", fontSize: "0.78rem", fontWeight: 600 }, title: typeof label === "string" ? label : void 0, children: [
@@ -4376,9 +4616,9 @@ function bindInputNumber(root) {
   const step = () => parseNum(root.dataset.step, 1);
   const min = () => parseNum(root.dataset.min, -Infinity);
   const max = () => parseNum(root.dataset.max, Infinity);
-  const clamp = (v) => Math.min(max(), Math.max(min(), v));
+  const clamp2 = (v) => Math.min(max(), Math.max(min(), v));
   const set = (v) => {
-    input.value = String(clamp(v));
+    input.value = String(clamp2(v));
     root.dataset.value = input.value;
     emit(root, "mimicus-input-number-change", { value: parseNum(input.value) });
   };
@@ -4482,14 +4722,14 @@ function useCtrl(value, defaultValue, onChange) {
   };
   return [v, set];
 }
-function FormItem({ label, required, help, error, children, className, layout = "vertical", ...rest }) {
-  return /* @__PURE__ */ jsxs15("label", { ...rest, className: cx3("mimicus-form-item", `mimicus-form-item--${layout}`, error && "has-error", className), children: [
+function FormItem({ label, required, help, error: error2, children, className, layout = "vertical", ...rest }) {
+  return /* @__PURE__ */ jsxs15("label", { ...rest, className: cx3("mimicus-form-item", `mimicus-form-item--${layout}`, error2 && "has-error", className), children: [
     label && /* @__PURE__ */ jsxs15("span", { className: "mimicus-form-item__label", children: [
       label,
       required && /* @__PURE__ */ jsx28("span", { className: "mimicus-form-item__req", children: "*" })
     ] }),
     /* @__PURE__ */ jsx28("span", { className: "mimicus-form-item__control", children }),
-    (help || error) && /* @__PURE__ */ jsx28("span", { className: "mimicus-form-item__extra", children: error ?? help })
+    (help || error2) && /* @__PURE__ */ jsx28("span", { className: "mimicus-form-item__extra", children: error2 ?? help })
   ] });
 }
 function Form({ layout = "vertical", className, style, children, ...rest }) {
@@ -5436,7 +5676,7 @@ function bindSteps(root) {
   return () => cleanups.forEach((fn) => fn());
 }
 function bindDrawer(root) {
-  const backdrop = qs("[data-mimicus-drawer-backdrop]", root) ?? qs(".mimicus-drawer__backdrop", root);
+  const backdrop2 = qs("[data-mimicus-drawer-backdrop]", root) ?? qs(".mimicus-drawer__backdrop", root);
   const panel = qs("[data-mimicus-drawer-panel]", root) ?? qs(".mimicus-drawer__panel", root);
   const closeBtn = qs("[data-mimicus-drawer-close]", root);
   const sync = () => {
@@ -5453,7 +5693,7 @@ function bindDrawer(root) {
   };
   sync();
   const cleanups = [
-    on(backdrop, "click", close),
+    on(backdrop2, "click", close),
     on(closeBtn, "click", close),
     on(document, "keydown", (e) => {
       if (e.key === "Escape" && parseBool(root.dataset.open)) close();
@@ -6036,7 +6276,7 @@ function Modal({
   return /* @__PURE__ */ jsx30(Dialog, { ...dialogProps, open: isOpen, loading, notClose, className: cx5("is-modal", className), onClose: close, children: /* @__PURE__ */ jsx30(Card, { variant, id: "modal-window", className: "blockCloseClick mimicus-modal__card", style: { padding: 0, border: "none", ...style }, children: /* @__PURE__ */ jsxs17("div", { className: "mimicus-modal__layout", children: [
     (title || showCloseHeader) && /* @__PURE__ */ jsxs17("header", { className: "mimicus-modal__header", children: [
       title && /* @__PURE__ */ jsx30("div", { className: "mimicus-modal__title", children: title }),
-      showCloseHeader && !notClose && /* @__PURE__ */ jsx30(IconButton, { variant: "text", icon: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:close" }), "aria-label": "Cerrar", disabled: loading || notClose, onClick: close })
+      showCloseHeader && !notClose && /* @__PURE__ */ jsx30("button", { type: "button", className: "mimicus-modal__close", "aria-label": "Cerrar", title: "Cerrar", disabled: loading || notClose, onClick: close, children: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:close" }) })
     ] }),
     /* @__PURE__ */ jsx30("div", { className: cx5("mimicus-modal__content", loading && "loading"), children })
   ] }) }) });
@@ -6125,14 +6365,32 @@ function Toaster() {
     t.kind !== "loading" && /* @__PURE__ */ jsx30("button", { type: "button", className: "mimicus-toast__close", "aria-label": "Cerrar", onClick: () => toastRemove(t.id), children: "\xD7" })
   ] }, t.id)) });
 }
+var ALERT_ICONS = {
+  error: "mdi:alert-circle",
+  danger: "mdi:alert-circle",
+  warning: "mdi:alert",
+  success: "mdi:check-circle"
+};
 function Alert({ color = "info", title, inline, className, style, children, ...rest }) {
-  return /* @__PURE__ */ jsxs17("div", { ...rest, className: cx5("mimicus-alert", `mimicus-alert--${color}`, inline && "mimicus-alert--inline", className), style, role: "alert", children: [
-    /* @__PURE__ */ jsx30(Icon, { icon: color === "error" ? "mdi:alert-circle" : color === "warning" ? "mdi:alert" : color === "success" ? "mdi:check-circle" : "mdi:information", className: "mimicus-alert__icon", "aria-hidden": true }),
-    /* @__PURE__ */ jsxs17("div", { className: "mimicus-alert__content", children: [
-      title && /* @__PURE__ */ jsx30("strong", { className: "mimicus-alert__title", children: title }),
-      children && /* @__PURE__ */ jsx30("div", { className: "mimicus-alert__body", children })
-    ] })
-  ] });
+  const tone = color || "info";
+  const surface = mergeSurfaceStyle(tone, { style });
+  return /* @__PURE__ */ jsxs17(
+    "div",
+    {
+      ...rest,
+      ...surface["data-surface-color"] ? { "data-surface-color": surface["data-surface-color"] } : {},
+      className: cx5("mimicus-alert", `mimicus-alert--${tone}`, inline && "mimicus-alert--inline", className),
+      style: surface.style,
+      role: "alert",
+      children: [
+        /* @__PURE__ */ jsx30(Icon, { icon: ALERT_ICONS[tone] ?? "mdi:information", className: "mimicus-alert__icon", "aria-hidden": true }),
+        /* @__PURE__ */ jsxs17("div", { className: "mimicus-alert__content", children: [
+          title && /* @__PURE__ */ jsx30("strong", { className: "mimicus-alert__title", children: title }),
+          children && /* @__PURE__ */ jsx30("div", { className: "mimicus-alert__body", children })
+        ] })
+      ]
+    }
+  );
 }
 function TipInfo({ label, descripcion, kind = "info", trigger = "click", useModal = false, className, style }) {
   const [modalOpen, setModalOpen] = useState9(false);
@@ -6153,21 +6411,40 @@ function InvokedFloater({
   className,
   style
 }) {
-  const [open, setOpen] = useState9(trigger === "manual");
+  const [open, setOpen] = useState9(false);
+  const closeTimer = useRef8();
   const anchorRef = useRef8(null);
-  const openPanel = () => setOpen(true);
-  const closePanel = () => setOpen(false);
-  const anchorProps = trigger === "hover" ? { onMouseEnter: openPanel, onMouseLeave: closePanel } : trigger === "contextmenu" ? { onContextMenu: (e) => {
+  useEffect13(() => {
+    setOpen(trigger === "manual");
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, [trigger]);
+  const keepOpen = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = void 0;
+    }
+  };
+  const scheduleClose = () => {
+    keepOpen();
+    closeTimer.current = setTimeout(() => setOpen(false), 140);
+  };
+  const hoverWrapProps = trigger === "hover" ? { onMouseEnter: () => {
+    keepOpen();
+    setOpen(true);
+  }, onMouseLeave: scheduleClose } : {};
+  const anchorProps = trigger === "hover" ? {} : trigger === "contextmenu" ? { onContextMenu: (e) => {
     e.preventDefault();
-    openPanel();
-  } } : { onClick: () => setOpen((v) => !v) };
-  return /* @__PURE__ */ jsxs17("span", { className: cx5("mimicus-invoked-floater", open && "is-open", className), style, children: [
+    setOpen(true);
+  } } : trigger === "manual" ? {} : { onClick: () => setOpen((v) => !v) };
+  return /* @__PURE__ */ jsxs17("span", { className: cx5("mimicus-invoked-floater", open && "is-open", className), style, ...hoverWrapProps, children: [
     /* @__PURE__ */ jsx30("button", { ref: anchorRef, type: "button", className: cx5("mimicus-invoked-floater__anchor", open && "is-active"), ...anchorProps, children: anchorLabel }),
-    open && /* @__PURE__ */ jsxs17("div", { className: cx5("mimicus-invoked-floater__panel", `is-${side}`, `align-${align}`), role: "dialog", children: [
+    /* @__PURE__ */ jsxs17("div", { className: cx5("mimicus-invoked-floater__panel", open && "is-visible", `is-${side}`, `align-${align}`), role: "dialog", "aria-hidden": !open, children: [
       /* @__PURE__ */ jsx30("span", { className: "mimicus-invoked-floater__caret", "aria-hidden": "true" }),
       /* @__PURE__ */ jsxs17("div", { className: "mimicus-invoked-floater__panel-inner", children: [
         /* @__PURE__ */ jsx30("p", { className: "mimicus-invoked-floater__panel-text", children: panelText }),
-        /* @__PURE__ */ jsx30("div", { className: "mimicus-invoked-floater__panel-foot", children: /* @__PURE__ */ jsx30(Button, { variant: "text", onClick: closePanel, children: "Cerrar" }) })
+        /* @__PURE__ */ jsx30("div", { className: "mimicus-invoked-floater__panel-foot", children: /* @__PURE__ */ jsx30(Button, { variant: "text", onClick: () => setOpen(false), children: "Cerrar" }) })
       ] })
     ] })
   ] });
@@ -6185,18 +6462,18 @@ function FloatingComponent({
   return /* @__PURE__ */ jsxs17(
     "div",
     {
-      className: cx5("mimicus-floating-component", visible && "is-active", className),
+      className: cx5("mimicus-floating-component", showfloat && "is-pinned", visible && "is-active", className),
       style,
       onMouseEnter: () => setHover(true),
       onMouseLeave: () => setHover(false),
       children: [
         /* @__PURE__ */ jsxs17("div", { className: "mimicus-floating-component__row", children: [
           /* @__PURE__ */ jsx30("span", { className: "mimicus-floating-component__row-text", children: rowText }),
-          !visible && /* @__PURE__ */ jsx30("span", { className: "mimicus-floating-component__row-hint", "aria-hidden": "true", children: "Acciones" })
+          /* @__PURE__ */ jsx30("span", { className: "mimicus-floating-component__row-hint", "aria-hidden": visible, children: "Acciones" })
         ] }),
-        visible && /* @__PURE__ */ jsxs17("div", { className: cx5("mimicus-floating-component__panel", `h-${horizontal}`, `v-${vertical}`), children: [
-          /* @__PURE__ */ jsx30(Tooltip, { title: "Editar", children: /* @__PURE__ */ jsx30(IconButton, { variant: "text", icon: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:pencil-outline" }), "aria-label": "Editar" }) }),
-          /* @__PURE__ */ jsx30(Tooltip, { title: "Eliminar", children: /* @__PURE__ */ jsx30(IconButton, { variant: "text", color: "danger", icon: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:delete-outline" }), "aria-label": "Eliminar" }) })
+        /* @__PURE__ */ jsxs17("div", { className: cx5("mimicus-floating-component__panel", visible && "is-visible", `h-${horizontal}`, `v-${vertical}`), "aria-hidden": !visible, children: [
+          /* @__PURE__ */ jsx30(Tooltip, { title: "Editar", children: /* @__PURE__ */ jsx30(IconButton, { variant: "text", icon: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:pencil-outline" }), "aria-label": "Editar", tabIndex: visible ? 0 : -1 }) }),
+          /* @__PURE__ */ jsx30(Tooltip, { title: "Eliminar", children: /* @__PURE__ */ jsx30(IconButton, { variant: "text", color: "danger", icon: /* @__PURE__ */ jsx30(Icon, { icon: "mdi:delete-outline" }), "aria-label": "Eliminar", tabIndex: visible ? 0 : -1 }) })
         ] })
       ]
     }
@@ -6998,6 +7275,7 @@ export {
   CodeMirrorPanel,
   Collapse,
   CollapsePanel,
+  Color,
   ColorPicker,
   Container,
   ContapymeIcon,
@@ -7114,11 +7392,13 @@ export {
   applyColorTransform,
   applyLooknfeel,
   applyTheme,
+  backdrop,
   bg2font,
   bgTransparent2font,
   bootLooknfeel,
   bootMimicusUI,
   bootTheme,
+  border,
   cdn_exports as cdn,
   clearLoginCredentials,
   colorMix,
@@ -7126,16 +7406,21 @@ export {
   copyEditorText,
   createDemoSession,
   createOrchestratorSession,
+  danger,
   defaultIterceroFromTerceros,
   designSchemeColorCount,
   designSchemeForThemeColor,
   destroyCodeMirror,
+  drawer_overlay,
   ensureCodeMirrorCss,
   ensureCodeMirrorLoaded,
+  error,
   fluidCss,
+  fontcolor,
   formatContapymeLoginInput,
   getLooknfeelState,
   getThemeState,
+  info,
   isAppLayoutVariant,
   isDesignScheme,
   isGlassVariant,
@@ -7158,10 +7443,12 @@ export {
   mkSoftBg,
   mkUnbow,
   mkWinChromeAccent,
+  modal_overlay,
   mountCodeMirror,
   mountDisplay,
   mountForms,
   mountNavigation,
+  neutral,
   ngBaseVariant,
   normalizeAppLayoutVariant,
   normalizeContapymeLoginId,
@@ -7173,6 +7460,7 @@ export {
   paletteBaseStyle,
   paletteStateVarRules,
   paletteSurfaceTint,
+  primary,
   readDesignSchemeFromDom,
   readLoginCredentials,
   readLooknfeelFromDom,
@@ -7183,12 +7471,15 @@ export {
   resolveContapymeSession,
   resolveSessionHeaderLabel,
   saveLoginCredentials,
+  secondary,
   setDesignScheme,
   setLuminance,
   setThemeColor,
   snippets_exports as snippets,
+  softBorder,
   subscribeLooknfeel,
   subscribeTheme,
+  success,
   surfaceVariantAttrs,
   toastError,
   toastLoading,
@@ -7197,5 +7488,6 @@ export {
   useContapymeSession,
   useLayoutSlot,
   useResolvedContapymeSession,
+  warning,
   wrapPassword
 };

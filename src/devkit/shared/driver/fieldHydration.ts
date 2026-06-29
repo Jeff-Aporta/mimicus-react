@@ -18,10 +18,36 @@ const NORMALIZERS = { cssLength: normalizeCssLength };
 const SIDE_ICON_MAP = {
   top: "mdi:arrow-up", right: "mdi:arrow-right", bottom: "mdi:arrow-down", left: "mdi:arrow-left", "": "mdi:block-helper",
 };
+const CARDINAL_PLACEMENT_KEYS = new Set(["placement", "side"]);
+const CARDINAL_PLACEMENT_VALUES = new Set(["top", "bottom", "left", "right"]);
+const CARDINAL_PLACEMENT_LABELS = { top: "Top", bottom: "Bottom", left: "Left", right: "Right" };
+
+function enumValueToOptions(enumValue) {
+  const out = {};
+  for (const [lbl, val] of Object.entries(enumValue ?? {})) {
+    const key = CARDINAL_PLACEMENT_LABELS[val] ?? lbl;
+    out[key] = val;
+  }
+  return out;
+}
+
+function isCardinalPlacementField(f) {
+  if (!CARDINAL_PLACEMENT_KEYS.has(String(f.key ?? ""))) return false;
+  const vals = Object.values(f.enumValue ?? f.options ?? {});
+  return vals.length === 4 && vals.every((v) => CARDINAL_PLACEMENT_VALUES.has(String(v)));
+}
 
 export function hydrateField(raw) {
   const f = { ...raw };
   if (typeof f.enumRef === "string") { f.enumValue = ENUM_REFS[f.enumRef] ?? {}; delete f.enumRef; }
+  if (f.kind === "select-enum" && isCardinalPlacementField(f)) {
+    f.kind = "palette";
+    f.layout = "sideCross";
+    f.iconMapRef = "drawerSide";
+    f.options = enumValueToOptions(f.enumValue);
+    f.accent = f.accent ?? "primary";
+    delete f.enumValue;
+  }
   if (typeof f.iconMap === "object" && f.iconMap !== null) {
     const iconMap = f.iconMap;
     f.getIcon = (val) => iconMap[String(val ?? "")] ?? iconMap[""] ?? "mdi:block-helper";

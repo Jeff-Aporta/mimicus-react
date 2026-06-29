@@ -149,130 +149,40 @@ html[data-luminance="light"][data-looknfeel="neon"] .mimicus-divider--glow .mimi
 	opacity: 0.85;
 }
 
-/* Alert — glass neon translúcido con degradados por semántica */
+/* Alert — glass neon translúcido; acento vía --alert-accent / data-surface-color */
 html[data-looknfeel="neon"] .mimicus-alert {
 	backdrop-filter: blur(14px) saturate(170%);
 	-webkit-backdrop-filter: blur(14px) saturate(170%);
 	border-width: 1px;
 	border-style: solid;
-}
-
-html[data-looknfeel="neon"] .mimicus-alert--info {
-	border-color: color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 52%) !important;
+	border-color: color-mix(in srgb, var(--alert-accent), transparent 52%) !important;
 	background: linear-gradient(
 		128deg,
-		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 74%),
-		color-mix(in srgb, var(--neon-blue, var(--mimicus-primary)), transparent 80%) 44%,
-		color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 84%)
+		color-mix(in srgb, var(--alert-accent), transparent 74%),
+		color-mix(in srgb, var(--mimicus-design-active-2, var(--neon-blue, var(--mimicus-info))), transparent 80%) 44%,
+		color-mix(in srgb, var(--mimicus-design-active-3, var(--neon-purple, var(--mimicus-primary))), transparent 84%)
 	) !important;
 	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 76%),
-		0 0 22px color-mix(in srgb, var(--neon-blue, var(--mimicus-primary)), transparent 82%),
-		0 0 38px color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 90%),
-		inset 0 1px 0 color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 84%);
+		0 0 0 1px color-mix(in srgb, var(--alert-accent), transparent 76%),
+		0 0 22px color-mix(in srgb, var(--alert-accent), transparent 82%),
+		0 0 38px color-mix(in srgb, var(--mimicus-design-active-3, var(--neon-purple, var(--mimicus-primary))), transparent 90%),
+		inset 0 1px 0 color-mix(in srgb, var(--alert-accent), transparent 84%);
 }
 
-html[data-looknfeel="neon"] .mimicus-alert--success {
-	border-color: color-mix(in srgb, var(--neon-green, var(--mimicus-success)), transparent 50%) !important;
-	background: linear-gradient(
-		128deg,
-		color-mix(in srgb, var(--neon-sage, var(--mimicus-success)), transparent 72%),
-		color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 78%) 46%,
-		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 84%)
-	) !important;
-	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--neon-green, var(--mimicus-success)), transparent 74%),
-		0 0 22px color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 80%),
-		0 0 36px color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 90%),
-		inset 0 1px 0 color-mix(in srgb, var(--neon-sage, var(--mimicus-success)), transparent 82%);
-}
-
-html[data-looknfeel="neon"] .mimicus-alert--warning {
-	border-color: color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 48%) !important;
-	background: linear-gradient(
-		128deg,
-		color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 70%),
-		color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 76%) 42%,
-		color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 84%)
-	) !important;
-	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 72%),
-		0 0 22px color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 78%),
-		0 0 36px color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 88%),
-		inset 0 1px 0 color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 80%);
-}
-
-html[data-looknfeel="neon"] .mimicus-alert--error {
-	border-color: color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 48%) !important;
-	background: linear-gradient(
-		128deg,
-		color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 72%),
-		color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 78%) 44%,
-		color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 84%)
-	) !important;
-	box-shadow:
-		0 0 0 1px color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 72%),
-		0 0 22px color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 78%),
-		0 0 38px color-mix(in srgb, var(--neon-purple, var(--mimicus-primary)), transparent 88%),
-		inset 0 1px 0 color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 80%);
-}
-
-html[data-looknfeel="neon"] .mimicus-alert--info .mimicus-alert__icon {
-	color: var(--neon-cyan, var(--mimicus-info));
-	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 48%));
-}
-
-html[data-looknfeel="neon"] .mimicus-alert--success .mimicus-alert__icon {
-	color: var(--neon-green, var(--mimicus-success));
-	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 46%));
-}
-
-html[data-looknfeel="neon"] .mimicus-alert--warning .mimicus-alert__icon {
-	color: var(--neon-amber, var(--mimicus-warning));
-	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 44%));
-}
-
-html[data-looknfeel="neon"] .mimicus-alert--error .mimicus-alert__icon {
-	color: var(--neon-rose, var(--mimicus-error));
-	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 44%));
+html[data-looknfeel="neon"] .mimicus-alert__icon {
+	color: var(--alert-accent);
+	filter: drop-shadow(0 0 7px color-mix(in srgb, var(--alert-accent), transparent 48%));
 }
 
 html[data-looknfeel="neon"] .mimicus-alert__title {
-	text-shadow: 0 0 18px color-mix(in srgb, currentColor, transparent 72%);
+	text-shadow: 0 0 18px color-mix(in srgb, var(--alert-accent), transparent 72%);
 }
 
-html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--info {
+html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert {
 	background: linear-gradient(
 		128deg,
-		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 58%),
-		color-mix(in srgb, var(--neon-blue, var(--mimicus-primary)), transparent 64%) 44%,
-		color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 70%)
-	) !important;
-}
-
-html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--success {
-	background: linear-gradient(
-		128deg,
-		color-mix(in srgb, var(--neon-sage, var(--mimicus-success)), transparent 56%),
-		color-mix(in srgb, var(--neon-teal, var(--mimicus-success)), transparent 62%) 46%,
-		color-mix(in srgb, var(--neon-cyan, var(--mimicus-info)), transparent 68%)
-	) !important;
-}
-
-html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--warning {
-	background: linear-gradient(
-		128deg,
-		color-mix(in srgb, var(--neon-amber, var(--mimicus-warning)), transparent 54%),
-		color-mix(in srgb, var(--neon-ember, var(--mimicus-warning)), transparent 60%) 42%,
-		color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 68%)
-	) !important;
-}
-
-html[data-luminance="light"][data-looknfeel="neon"] .mimicus-alert--error {
-	background: linear-gradient(
-		128deg,
-		color-mix(in srgb, var(--neon-rose, var(--mimicus-error)), transparent 56%),
-		color-mix(in srgb, var(--neon-magenta, var(--mimicus-error)), transparent 62%) 44%,
-		color-mix(in srgb, var(--neon-lilac, var(--neon-purple)), transparent 70%)
+		color-mix(in srgb, var(--alert-accent), transparent 58%),
+		color-mix(in srgb, var(--mimicus-design-active-2, var(--neon-blue, var(--mimicus-info))), transparent 64%) 44%,
+		color-mix(in srgb, var(--mimicus-design-active-3, var(--neon-purple, var(--mimicus-primary))), transparent 70%)
 	) !important;
 }

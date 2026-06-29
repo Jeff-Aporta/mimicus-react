@@ -8,24 +8,29 @@
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	flex: 1 1 0;
+	flex: 0 0 auto;
 	flex-wrap: nowrap;
 	gap: 0.3rem;
 	min-width: 0;
-	width: 100%;
-	max-width: 100%;
-	margin-left: 0.1rem;
+	width: auto;
+	max-width: fit-content;
+	/* Empuja el bloque completo a la derecha dentro de pg-shell-toolbar__tools.
+	   El FPS chip (margin-inline-start: auto) mantiene su posición al extremo derecho. */
+	margin-inline-start: auto;
+	margin-inline-end: 0.5rem;
 	overflow: hidden;
 
 	& > .pg-header-skin-bar__theme-btn,
 	& > button.pg-header-skin-bar__theme-btn {
 		flex: 0 0 auto;
+		align-self: center;
 		box-sizing: border-box;
 		width: calc(var(--pg-shell-header-h, 2.75rem) - 0.45rem) !important;
 		min-width: calc(var(--pg-shell-header-h, 2.75rem) - 0.45rem) !important;
 		max-width: calc(var(--pg-shell-header-h, 2.75rem) - 0.45rem) !important;
 		height: calc(var(--pg-shell-header-h, 2.75rem) - 0.45rem) !important;
 		min-height: 0 !important;
+		margin: 0 !important;
 		padding: 0 !important;
 		font-size: 0.95rem;
 		line-height: 1;
@@ -41,15 +46,15 @@
 	}
 
 	& .pg-skin-toggle {
-		min-width: clamp(3.75rem, 7vw, 5.5rem);
+		min-width: clamp(6.5rem, 12vw, 9rem);
 		flex: 1 1 0;
-		max-width: none;
+		max-width: 220px;
 	}
 }
 
 .pg-content-header .pg-header-skin-bar .pg-skin-toggle {
-	min-width: clamp(3.75rem, 7vw, 5.5rem);
-	max-width: none;
+	min-width: clamp(6.5rem, 12vw, 9rem);
+	max-width: 220px;
 	flex: 1 1 0;
 }
 
@@ -195,6 +200,7 @@ html[data-looknfeel="neon"] .pg-content-header {
 /* Skin toggle con el componente Select de la librería (className pg-skin-toggle__select sobre el wrapper). */
 .pg-skin-toggle__select.mimicus-select {
 	width: 100%;
+	max-width: 150px;
 	height: calc(var(--pg-shell-header-h, 2.5rem) - 0.2rem);
 	min-height: calc(var(--pg-shell-header-h, 2.5rem) - 0.2rem);
 	--mimicus-select-font-size: 0.74em;
@@ -223,6 +229,8 @@ html[data-looknfeel="neon"] .pg-content-header {
 		box-shadow: none;
 		backdrop-filter: none;
 		-webkit-backdrop-filter: none;
+		max-width: 150px;
+		min-width: 0;
 	}
 
 	& .mimicus-select__trigger:hover,

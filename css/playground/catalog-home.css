@@ -50,15 +50,29 @@
 	border-radius: var(--mimicus-ui-radius, 0.75rem);
 	background: linear-gradient(
 		165deg,
-		color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 11%, transparent) 0%,
-		color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 4%, transparent) 42%,
+		color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 15%, var(--mimicus-bg-secondary) 85%) 0%,
+		color-mix(in srgb, var(--sm-accent, var(--mimicus-primary)) 9%, transparent) 38%,
 		transparent 100%
 	);
-	border: 1px solid color-mix(in srgb, var(--sm-accent, var(--mimicus-b-color)) 16%, transparent);
+	border: 1px solid color-mix(in srgb, var(--sm-accent, var(--mimicus-b-color)) 32%, var(--mimicus-b-color) 40%);
+}
+
+/* Contapyme — superficie plana con acento desaturado (sin gradient multicolor saturado).
+   Mantenemos identidad de sección via bar lateral 4px del accent y borde sutil. */
+html[data-looknfeel="contapyme"] .catalog-section {
+	background:
+		linear-gradient(
+			90deg,
+			color-mix(in oklch, oklch(from var(--sm-accent, var(--mimicus-primary)) calc(l * 0.9) c 0.05 h) 7%, transparent) 0%,
+			transparent 100%
+		),
+		var(--mimicus-bg-primary, #ffffff);
+	border: 1px solid color-mix(in oklch, oklch(from var(--sm-accent, var(--mimicus-primary)) calc(l * 0.85) c 0.04 h) 18%, var(--mimicus-b-color));
+	border-left: 4px solid color-mix(in oklch, oklch(from var(--sm-accent, var(--mimicus-primary)) calc(l * 0.85) c 0.05 h) 60%, var(--mimicus-b-color));
 }
 
 .catalog-section[data-section-color] .catalog-section-heading__title {
-	color: color-mix(in srgb, var(--sm-accent-fg, var(--sm-accent)) 78%, var(--catalog-fg));
+	color: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 20%, var(--catalog-fg) 80%);
 }
 
 .catalog-section__nav {

@@ -11,6 +11,7 @@ import { Icon } from "../Icon.tsx";
 import { Button } from "../Button.tsx";
 import { IconButton } from "../FloatButton.tsx";
 import { Tooltip } from "../display/Display.tsx";
+import { mergeSurfaceStyle } from "../../lib/surfaceColor.ts";
 
 interface BaseProps { className?: string; style?: CSSProperties; children?: ReactNode }
 
@@ -155,7 +156,9 @@ export function Modal({
             <header className="mimicus-modal__header">
               {title && <div className="mimicus-modal__title">{title}</div>}
               {showCloseHeader && !notClose && (
-                <IconButton variant="text" icon={<Icon icon="mdi:close" />} aria-label="Cerrar" disabled={loading || notClose} onClick={close} />
+                <button type="button" className="mimicus-modal__close" aria-label="Cerrar" title="Cerrar" disabled={loading || notClose} onClick={close}>
+                  <Icon icon="mdi:close" />
+                </button>
               )}
             </header>
           )}
@@ -286,10 +289,25 @@ export interface AlertProps extends BaseProps {
   inline?: boolean;
 }
 
+const ALERT_ICONS: Record<string, string> = {
+  error: "mdi:alert-circle",
+  danger: "mdi:alert-circle",
+  warning: "mdi:alert",
+  success: "mdi:check-circle",
+};
+
 export function Alert({ color = "info", title, inline, className, style, children, ...rest }: AlertProps) {
+  const tone = color || "info";
+  const surface = mergeSurfaceStyle(tone, { style });
   return (
-    <div {...rest} className={cx("mimicus-alert", `mimicus-alert--${color}`, inline && "mimicus-alert--inline", className)} style={style} role="alert">
-      <Icon icon={color === "error" ? "mdi:alert-circle" : color === "warning" ? "mdi:alert" : color === "success" ? "mdi:check-circle" : "mdi:information"} className="mimicus-alert__icon" aria-hidden />
+    <div
+      {...rest}
+      {...(surface["data-surface-color"] ? { "data-surface-color": surface["data-surface-color"] } : {})}
+      className={cx("mimicus-alert", `mimicus-alert--${tone}`, inline && "mimicus-alert--inline", className)}
+      style={surface.style}
+      role="alert"
+    >
+      <Icon icon={ALERT_ICONS[tone] ?? "mdi:information"} className="mimicus-alert__icon" aria-hidden />
       <div className="mimicus-alert__content">
         {title && <strong className="mimicus-alert__title">{title}</strong>}
         {children && <div className="mimicus-alert__body">{children}</div>}
@@ -344,30 +362,33 @@ export function InvokedFloater({
   className,
   style,
 }: InvokedFloaterProps) {
-  const [open, setOpen] = useState(trigger === "manual");
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
   const anchorRef = useRef<HTMLButtonElement>(null);
-  const openPanel = () => setOpen(true);
-  const closePanel = () => setOpen(false);
-  const anchorProps = trigger === "hover"
-    ? { onMouseEnter: openPanel, onMouseLeave: closePanel }
-    : trigger === "contextmenu"
-      ? { onContextMenu: (e: MouseEvent) => { e.preventDefault(); openPanel(); } }
-      : { onClick: () => setOpen((v) => !v) };
+  useEffect(() => {
+    setOpen(trigger === "manual");
+    return () => { if (closeTimer.current) clearTimeout(closeTimer.current); };
+  }, [trigger]);
+  const keepOpen = () => { if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = undefined; } };
+  const scheduleClose = () => { keepOpen(); closeTimer.current = setTimeout(() => setOpen(false), 140); };
+  const hoverWrapProps = trigger === "hover" ? { onMouseEnter: () => { keepOpen(); setOpen(true); }, onMouseLeave: scheduleClose } : {};
+  const anchorProps = trigger === "hover" ? {}
+    : trigger === "contextmenu" ? { onContextMenu: (e: MouseEvent) => { e.preventDefault(); setOpen(true); } }
+    : trigger === "manual" ? {}
+    : { onClick: () => setOpen((v) => !v) };
 
   return (
-    <span className={cx("mimicus-invoked-floater", open && "is-open", className)} style={style}>
+    <span className={cx("mimicus-invoked-floater", open && "is-open", className)} style={style} {...hoverWrapProps}>
       <button ref={anchorRef} type="button" className={cx("mimicus-invoked-floater__anchor", open && "is-active")} {...anchorProps}>{anchorLabel}</button>
-      {open && (
-        <div className={cx("mimicus-invoked-floater__panel", `is-${side}`, `align-${align}`)} role="dialog">
-          <span className="mimicus-invoked-floater__caret" aria-hidden="true" />
-          <div className="mimicus-invoked-floater__panel-inner">
-            <p className="mimicus-invoked-floater__panel-text">{panelText}</p>
-            <div className="mimicus-invoked-floater__panel-foot">
-              <Button variant="text" onClick={closePanel}>Cerrar</Button>
-            </div>
+      <div className={cx("mimicus-invoked-floater__panel", open && "is-visible", `is-${side}`, `align-${align}`)} role="dialog" aria-hidden={!open}>
+        <span className="mimicus-invoked-floater__caret" aria-hidden="true" />
+        <div className="mimicus-invoked-floater__panel-inner">
+          <p className="mimicus-invoked-floater__panel-text">{panelText}</p>
+          <div className="mimicus-invoked-floater__panel-foot">
+            <Button variant="text" onClick={() => setOpen(false)}>Cerrar</Button>
           </div>
         </div>
-      )}
+      </div>
     </span>
   );
 }
@@ -391,21 +412,19 @@ export function FloatingComponent({
   const visible = showfloat || hover;
   return (
     <div
-      className={cx("mimicus-floating-component", visible && "is-active", className)}
+      className={cx("mimicus-floating-component", showfloat && "is-pinned", visible && "is-active", className)}
       style={style}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <div className="mimicus-floating-component__row">
         <span className="mimicus-floating-component__row-text">{rowText}</span>
-        {!visible && <span className="mimicus-floating-component__row-hint" aria-hidden="true">Acciones</span>}
+        <span className="mimicus-floating-component__row-hint" aria-hidden={visible}>Acciones</span>
       </div>
-      {visible && (
-        <div className={cx("mimicus-floating-component__panel", `h-${horizontal}`, `v-${vertical}`)}>
-          <Tooltip title="Editar"><IconButton variant="text" icon={<Icon icon="mdi:pencil-outline" />} aria-label="Editar" /></Tooltip>
-          <Tooltip title="Eliminar"><IconButton variant="text" color="danger" icon={<Icon icon="mdi:delete-outline" />} aria-label="Eliminar" /></Tooltip>
-        </div>
-      )}
+      <div className={cx("mimicus-floating-component__panel", visible && "is-visible", `h-${horizontal}`, `v-${vertical}`)} aria-hidden={!visible}>
+        <Tooltip title="Editar"><IconButton variant="text" icon={<Icon icon="mdi:pencil-outline" />} aria-label="Editar" tabIndex={visible ? 0 : -1} /></Tooltip>
+        <Tooltip title="Eliminar"><IconButton variant="text" color="danger" icon={<Icon icon="mdi:delete-outline" />} aria-label="Eliminar" tabIndex={visible ? 0 : -1} /></Tooltip>
+      </div>
     </div>
   );
 }

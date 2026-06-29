@@ -846,26 +846,33 @@ export function CatalogHome({
       <div className="catalog-overview__main catalog-home">
         {showHero && (
           <header className="catalog-overview__hero pg-vt-hero">
-            <p className="catalog-home__kicker mimicus-ui-brand">{overview.kicker ?? MIMICUS_UI.name}</p>
-            <h1 className="catalog-home__title">{heroTitle}</h1>
-            <p className="catalog-home__lead">{heroLead}</p>
-            <div className="catalog-overview__toolbar">
-              <Input
-                className="catalog-search"
-                type="search"
-                placeholder="Buscar componente…"
-                aria-label="Buscar componente"
-                value={query}
-                onChange={(v) => setQuery(v)}
-                allowClear
-                prefix={<Icon icon="mdi:magnify" className="catalog-search__icon" />}
-              />
-              {onOpenPaletteLab && (
-                <Button variant="outlined" color="primary" onClick={onOpenPaletteLab} style={{ width: "fit-content", flexShrink: 0 }}>
-                  <Icon icon="mdi:palette-swatch-outline" />
-                  Paleta & Look
-                </Button>
-              )}
+            <div className="catalog-overview__hero-row">
+              <div className="catalog-overview__hero-text">
+                <p className="catalog-home__kicker mimicus-ui-brand">{overview.kicker ?? MIMICUS_UI.name}</p>
+                <h1 className="catalog-home__title">{heroTitle}</h1>
+                <p className="catalog-home__lead">{heroLead}</p>
+                <div className="catalog-overview__toolbar">
+                  <Input
+                    className="catalog-search"
+                    type="search"
+                    placeholder="Buscar componente…"
+                    aria-label="Buscar componente"
+                    value={query}
+                    onChange={(v) => setQuery(v)}
+                    allowClear
+                    prefix={<Icon icon="mdi:magnify" className="catalog-search__icon" />}
+                  />
+                  {onOpenPaletteLab && (
+                    <Button variant="outlined" color="primary" onClick={onOpenPaletteLab} style={{ width: "fit-content", flexShrink: 0 }}>
+                      <Icon icon="mdi:palette-swatch-outline" />
+                      Paleta & Look
+                    </Button>
+                  )}
+                </div>
+              </div>
+              <span className="catalog-overview__hero-logo-wrap">
+                <img src="./assets/mimicus-logo.svg" alt="Mimicus" className="catalog-overview__hero-logo" />
+              </span>
             </div>
           </header>
         )}

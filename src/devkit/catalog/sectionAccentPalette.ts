@@ -1,14 +1,16 @@
 /**
- * Paleta de acentos por sección del catálogo — tonos libres espaciados en la rueda
- * para que dos secciones contiguas contrasten claramente.
+ * Paleta base por sección — colores puros (sin bow). El bow 80% se aplica
+ * después en CSS/JS mezclando contra `--mimicus-color`, por lo que estos
+ * valores son solo el "tinte" del que se tira. Saltos irregulares de hue
+ * para diferenciar secciones contiguas.
  */
-const GOLDEN_HUE = 137.508;
+const VARIED_HUES = [210, 350, 30, 270, 160, 220, 12, 290, 140, 340, 50, 250];
 
 export function buildSectionAccentPalette(count = 12): string[] {
   return Array.from({ length: count }, (_, i) => {
-    const h = Math.round((i * GOLDEN_HUE) % 360);
-    const s = 70 + (i % 3) * 5;
-    const l = 50 + (i % 2) * 6;
+    const h = VARIED_HUES[i % VARIED_HUES.length];
+    const s = 70 + (i % 3) * 4;
+    const l = 48 + (i % 2) * 5;
     return `hsl(${h} ${s}% ${l}%)`;
   });
 }

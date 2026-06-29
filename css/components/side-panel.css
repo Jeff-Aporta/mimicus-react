@@ -55,6 +55,21 @@
 	justify-content: center;
 }
 
+/* Fallback universal: mientras Iconify hidrata el <iconify-icon> queda vacío.
+   Mostramos un símbolo unicode como respaldo para que el botón nunca aparezca sin icono. */
+.pg-sidebar-header .sidebar-toggle-btn > .button-content:empty::before,
+.pg-sidebar-header .sidebar-toggle-btn > iconify-icon:empty::before,
+.pg-sidebar-header .sidebar-header-btn > .button-content:empty::before,
+.pg-sidebar-header .sidebar-header-btn > iconify-icon:empty::before {
+	content: "☰";
+	font-size: 1.05rem;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: inherit;
+}
+
 .mimicus-side-panel-view--rail {
 	align-items: center;
 	padding-inline: 0;

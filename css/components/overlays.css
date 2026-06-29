@@ -78,14 +78,51 @@
 .mimicus-modal__header {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	gap: 0.5rem;
-	padding: 0.65rem 0.75rem;
-	border-bottom: 1px solid color-mix(in oklab, var(--mimicus-primary, #1677ff) 12%, var(--mimicus-border, rgba(0,0,0,.08)));
+	gap: 0.65rem;
+	padding: 0.7rem 0.85rem;
+	border-bottom: 1px solid color-mix(in oklab, var(--mimicus-primary, #1677ff) 14%, var(--mimicus-border, rgba(0,0,0,.08)));
 	font-weight: 600;
+	background: linear-gradient(180deg, color-mix(in srgb, var(--mimicus-primary, #1677ff) 6%, transparent), transparent);
 }
-.mimicus-modal__title { display: inline-flex; align-items: center; gap: 0.4rem; min-width: 0; }
-.mimicus-modal__content { padding: 0.85rem 0.75rem; overflow: auto; }
+.mimicus-modal__title { display: inline-flex; align-items: center; gap: 0.45rem; min-width: 0; flex: 1 1 auto; }
+.mimicus-modal__close {
+	flex: 0 0 auto;
+	margin-left: auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.85rem;
+	height: 1.85rem;
+	padding: 0;
+	border: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 50%);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--mimicus-bg-secondary), transparent 30%);
+	color: color-mix(in srgb, var(--mimicus-color), transparent 30%);
+	cursor: pointer;
+	transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+	font: inherit;
+	line-height: 0;
+}
+.mimicus-modal__close iconify-icon,
+.mimicus-modal__close .iconify {
+	font-size: 1rem;
+	width: 1rem;
+	height: 1rem;
+	display: inline-block;
+}
+.mimicus-modal__close:hover,
+.mimicus-modal__close:focus-visible {
+	color: var(--mimicus-error, var(--mimicus-primary, #1677ff));
+	background: color-mix(in srgb, var(--mimicus-error, var(--mimicus-primary, #1677ff)), transparent 86%);
+	border-color: color-mix(in srgb, var(--mimicus-error, var(--mimicus-primary, #1677ff)), transparent 50%);
+	transform: scale(1.05);
+	outline: none;
+}
+.mimicus-modal__close:focus-visible {
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--mimicus-primary, #1677ff), transparent 60%);
+}
+.mimicus-modal__close:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.mimicus-modal__content { padding: 0.95rem 0.9rem 1.05rem; overflow: auto; }
 
 /* ── Action drawer ── */
 .mimicus-dialog.is-action-drawer { display: flex; }
@@ -210,22 +247,37 @@ html[data-looknfeel="neon"] .mimicus-action-drawer__card.card-root[data-variant=
 
 /* ── Alert ── */
 .mimicus-alert {
+	--alert-accent: var(--surface-accent, var(--mimicus-primary));
 	display: flex;
 	align-items: flex-start;
 	gap: 0.55rem;
 	padding: 0.65rem 0.75rem;
 	border-radius: 0.45rem;
-	border: 1px solid var(--mimicus-border, rgba(0,0,0,.1));
-	background: color-mix(in srgb, var(--mimicus-bg-secondary, #fff) 92%, var(--mimicus-primary) 8%);
+	border: 1px solid color-mix(in srgb, var(--alert-accent) 35%, transparent);
+	background: color-mix(in srgb, var(--alert-accent) 8%, var(--mimicus-bg-secondary));
 }
 
-.mimicus-alert--inline { display: inline-flex; }
-.mimicus-alert--info { border-color: color-mix(in srgb, var(--mimicus-info, #1677ff) 35%, transparent); background: color-mix(in srgb, var(--mimicus-info, #1677ff) 8%, var(--mimicus-bg-secondary)); }
-.mimicus-alert--success { border-color: color-mix(in srgb, var(--mimicus-success, #2e9e5a) 35%, transparent); background: color-mix(in srgb, var(--mimicus-success) 8%, var(--mimicus-bg-secondary)); }
-.mimicus-alert--warning { border-color: color-mix(in srgb, var(--mimicus-warning, #faad14) 35%, transparent); background: color-mix(in srgb, var(--mimicus-warning) 10%, var(--mimicus-bg-secondary)); }
-.mimicus-alert--error { border-color: color-mix(in srgb, var(--mimicus-error, #d9363e) 35%, transparent); background: color-mix(in srgb, var(--mimicus-error) 8%, var(--mimicus-bg-secondary)); }
+.mimicus-alert[data-surface-color] { --alert-accent: var(--surface-accent); }
+.mimicus-alert--info:not([data-surface-color]) { --alert-accent: var(--mimicus-info); }
+.mimicus-alert--success:not([data-surface-color]) { --alert-accent: var(--mimicus-success); }
+.mimicus-alert--warning:not([data-surface-color]) { --alert-accent: var(--mimicus-warning); }
+.mimicus-alert--error:not([data-surface-color]),
+.mimicus-alert--danger:not([data-surface-color]) { --alert-accent: var(--mimicus-danger, var(--mimicus-error)); }
+.mimicus-alert--primary:not([data-surface-color]),
+.mimicus-alert--design-1:not([data-surface-color]) { --alert-accent: var(--mimicus-design-active-1, var(--mimicus-design-1, var(--mimicus-primary))); }
+.mimicus-alert--design-2:not([data-surface-color]) { --alert-accent: var(--mimicus-design-active-2, var(--mimicus-design-2, var(--mimicus-info))); }
+.mimicus-alert--design-3:not([data-surface-color]) { --alert-accent: var(--mimicus-design-active-3, var(--mimicus-design-3, var(--mimicus-warning))); }
+.mimicus-alert--neutral:not([data-surface-color]) { --alert-accent: color-mix(in srgb, var(--mimicus-color) 62%, transparent); }
+.mimicus-alert--color:not([data-surface-color]) { --alert-accent: var(--mimicus-color); }
 
-.mimicus-alert__icon { flex-shrink: 0; font-size: 1.15rem; opacity: 0.9; }
+.mimicus-alert--inline { display: inline-flex; }
+
+.mimicus-alert__icon {
+	flex-shrink: 0;
+	font-size: 1.15rem;
+	opacity: 0.9;
+	color: var(--alert-accent);
+}
 .mimicus-alert__title { display: block; margin-bottom: 0.15rem; }
 .mimicus-alert__body { font-size: 0.92rem; opacity: 0.92; }
 
@@ -268,6 +320,7 @@ html[data-looknfeel="neon"] .mimicus-action-drawer__card.card-root[data-variant=
 	transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 .mimicus-invoked-floater__anchor:hover,
+.mimicus-invoked-floater:is(:hover, .is-open) .mimicus-invoked-floater__anchor,
 .mimicus-invoked-floater__anchor.is-active {
 	border-color: color-mix(in srgb, var(--mimicus-primary) 58%, var(--mimicus-border));
 	background: color-mix(in srgb, var(--mimicus-primary) 16%, var(--mimicus-bg-secondary));
@@ -284,11 +337,18 @@ html[data-looknfeel="neon"] .mimicus-action-drawer__card.card-root[data-variant=
 	box-shadow:
 		0 0 0 1px color-mix(in srgb, var(--mimicus-color) 4%, transparent),
 		0 14px 34px color-mix(in srgb, var(--mimicus-color) 16%, transparent);
-	animation: mimicus-invoked-floater-in 0.16s ease-out;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.18s ease, visibility 0.18s ease;
 }
-@keyframes mimicus-invoked-floater-in {
-	from { opacity: 0; }
-	to { opacity: 1; }
+.mimicus-invoked-floater__panel.is-visible {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+	.mimicus-invoked-floater__panel { transition: none; }
 }
 .mimicus-invoked-floater__panel-inner {
 	display: flex;
@@ -423,9 +483,10 @@ html[data-looknfeel="neon"] .mimicus-action-drawer__card.card-root[data-variant=
 	border: 1px solid var(--mimicus-border, rgba(0,0,0,.1));
 	background: color-mix(in srgb, var(--mimicus-primary) 6%, var(--mimicus-bg-secondary));
 	cursor: pointer;
-	transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+	transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
-.mimicus-floating-component__row-text { min-width: 0; flex: 1 1 auto; font-size: 0.9rem; }
+.mimicus-floating-component__row-text { min-width: 0; flex: 1 1 auto; font-size: 0.9rem; transition: padding-inline-end 0.18s ease; }
+.mimicus-floating-component.is-active .mimicus-floating-component__row-text { padding-inline-end: 4.25rem; }
 .mimicus-floating-component__row-hint {
 	flex: 0 0 auto;
 	font-size: 0.72rem;
@@ -434,6 +495,7 @@ html[data-looknfeel="neon"] .mimicus-action-drawer__card.card-root[data-variant=
 	text-transform: uppercase;
 	opacity: 0.55;
 	color: var(--mimicus-primary, currentColor);
+	transition: opacity 0.18s ease, transform 0.18s ease;
 }
 .mimicus-floating-component:hover .mimicus-floating-component__row,
 .mimicus-floating-component.is-active .mimicus-floating-component__row {
@@ -441,7 +503,11 @@ html[data-looknfeel="neon"] .mimicus-action-drawer__card.card-root[data-variant=
 	background: color-mix(in srgb, var(--mimicus-primary) 11%, var(--mimicus-bg-secondary));
 	box-shadow: 0 0 0 1px color-mix(in srgb, var(--mimicus-primary) 18%, transparent);
 }
-.mimicus-floating-component.is-active .mimicus-floating-component__row-hint { opacity: 0; }
+.mimicus-floating-component.is-active .mimicus-floating-component__row-hint {
+	opacity: 0;
+	transform: translateX(0.35rem);
+	pointer-events: none;
+}
 .mimicus-floating-component__panel {
 	position: absolute;
 	display: inline-flex;
@@ -454,6 +520,21 @@ html[data-looknfeel="neon"] .mimicus-action-drawer__card.card-root[data-variant=
 	box-shadow:
 		0 0 0 1px color-mix(in srgb, var(--mimicus-color) 4%, transparent),
 		0 8px 22px color-mix(in srgb, var(--mimicus-color) 14%, transparent);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.18s ease, visibility 0.18s ease;
+}
+.mimicus-floating-component__panel.is-visible {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+	.mimicus-floating-component__row,
+	.mimicus-floating-component__row-text,
+	.mimicus-floating-component__row-hint,
+	.mimicus-floating-component__panel { transition: none; }
 }
 .mimicus-floating-component__panel .mimicus-icon-btn { width: 1.85rem; height: 1.85rem; min-width: 1.85rem; }
 .mimicus-floating-component__panel.h-right { right: 0.35rem; }

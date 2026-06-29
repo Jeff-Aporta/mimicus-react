@@ -30,7 +30,19 @@ export function sortedCategories(ctx: ShellNavCtx): string[] {
 }
 
 export function sectionMeta(ctx: ShellNavCtx, sectionId: string): any {
-  return ctx.catalog?.sections?.[sectionId] ?? ctx.catalog?.categories?.[sectionId] ?? {};
+  return ctx.sectionsMeta?.[sectionId] ?? ctx.catalog?.sections?.[sectionId] ?? ctx.catalog?.categories?.[sectionId] ?? {};
+}
+
+/* Humaniza un id a un label legible: "contapyme-context" → "Contapyme Context". */
+export function humanizeId(id: string): string {
+  if (!id) return "";
+  return id
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : ""))
+    .join(" ");
 }
 
 export function sectionAccentIndexFor(ctx: ShellNavCtx, categoryId: string): number {
@@ -57,7 +69,7 @@ export function sectionColorFor(ctx: ShellNavCtx, categoryId: string): string {
 export function resolveCategoryTabDescriptors(ctx: ShellNavCtx): NavTab[] {
   return sortedCategories(ctx).map((cat) => {
     const meta = sectionMeta(ctx, cat);
-    return { id: cat, label: meta.label ?? cat, icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), colorSlot: sectionColorSlotFor(ctx, cat), kind: "category" };
+    return { id: cat, label: meta.label ?? humanizeId(cat), icon: meta.icon ?? "mdi:folder-outline", color: sectionColorFor(ctx, cat), colorSlot: sectionColorSlotFor(ctx, cat), kind: "category" };
   });
 }
 

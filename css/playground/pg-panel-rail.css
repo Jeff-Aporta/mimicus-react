@@ -37,8 +37,11 @@
 	display: none !important;
 }
 
-.pg-panel-view--expanded {
-	padding: 0.5rem 0.4rem 1rem;
+/* padding lateral más generoso: el sidebar mide ~250-265px y los accordion (border-radius 0.5rem + 1px)
+   necesitan respiro a los lados para que el border-radius no quede recortado contra el scrollbar. */
+.pg-playground-shell .pg-panel-view--expanded,
+.mimicus-side-panel-view.pg-panel-view--expanded {
+	padding: 0.5rem 0.55rem 1rem;
 }
 
 .pg-playground-shell.is-collapsed .pg-sidebar-drawer-bar {

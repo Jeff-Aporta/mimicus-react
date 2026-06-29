@@ -9,9 +9,9 @@
 	--sm-chrome-fg: var(--pg-sidebar-fg, var(--mimicus-color));
 	--sm-blend-idle: color-mix(in oklch, var(--sm-chrome) 91%, var(--sm-accent, var(--mimicus-primary)) 9%);
 	--sm-blend-subtle: color-mix(in oklch, var(--sm-chrome) 88%, var(--sm-accent, var(--mimicus-primary)) 12%);
-	--sm-blend-bg: color-mix(in oklch, var(--sm-chrome) 88%, var(--sm-accent, var(--mimicus-primary)) 12%);
-	--sm-blend-bg-open: color-mix(in oklch, var(--sm-chrome) 78%, var(--sm-accent, var(--mimicus-primary)) 22%);
-	--sm-blend-bg-active: color-mix(in oklch, var(--sm-chrome) 66%, var(--sm-accent, var(--mimicus-primary)) 34%);
+	--sm-blend-bg: color-mix(in oklch, var(--sm-chrome) 85%, transparent);
+	--sm-blend-bg-open: color-mix(in oklch, var(--sm-chrome) 85%, transparent);
+	--sm-blend-bg-active: color-mix(in oklch, var(--sm-accent, var(--mimicus-primary)) 15%, transparent);
 	--sm-blend-bar: color-mix(in oklch, var(--sm-chrome) 36%, var(--sm-accent, var(--mimicus-primary)) 64%);
 	--sm-blend-border: color-mix(in oklch, var(--sm-chrome) 70%, var(--sm-accent, var(--mimicus-primary)) 30%);
 	--sm-blend-fg: color-mix(in oklch, var(--sm-chrome-fg) 68%, var(--sm-accent, var(--mimicus-primary)) 32%);

@@ -16,6 +16,8 @@
 	--pg-config-label-fg: var(--mimicus-color);
 	--pg-config-label-muted: var(--pg-text-muted, color-mix(in srgb, var(--mimicus-color), transparent 32%));
 	--pg-config-label-border: var(--pg-field-border, color-mix(in srgb, var(--mimicus-b-color), transparent 52%));
+	--pg-config-label-icon-gap: 0.5rem;
+	--pg-config-label-title-icon-gap: 0.62rem;
 	--pg-config-rail-border: color-mix(in srgb, var(--mimicus-b-color), transparent 42%);
 	/* Inputs inline (CodeEditField, number, autocomplete) — derivados del tile de campo */
 	--pg-config-input-bg: color-mix(in srgb, var(--pg-config-field-bg), var(--mimicus-bg-readonly) 48%);
@@ -155,17 +157,71 @@
 	opacity: 1 !important;
 }
 
-/* ── Labels (CLASS, RELIEVE, VARIANTE, …) ── */
+/* ── Card headers (Flags, Class, Relieve, Variante, …) ──
+   Cada .pg-demo-config-card envuelve un único InputDecorated cuyo label ES el header
+   visual del grupo. Se estiliza como banda compacta con border-left de accent,
+   gradient sutil y tipografía sin uppercase. No debe confundirse con los labels
+   anidados dentro de clusters (estos siguen el estilo compacto de abajo). */
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label,
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label,
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .input-decorated-label {
+	--pg-config-title-accent: color-mix(in oklch, var(--mimicus-primary, var(--sm-accent, currentColor)) 78%, var(--mimicus-bg) 22%);
+	--pg-config-title-bg: linear-gradient(90deg, color-mix(in srgb, var(--pg-config-title-accent) 16%, transparent), transparent 72%);
+
+	display: flex !important;
+	align-items: center;
+	gap: var(--pg-config-label-title-icon-gap, 0.62rem);
+	margin: -0.05rem 0 0.55rem !important;
+	padding: 0.42rem 0.55rem !important;
+	min-height: 2.1rem;
+	font-size: 0.82rem;
+	font-weight: 600;
+	letter-spacing: 0.005em;
+	text-transform: none !important;
+	color: color-mix(in oklch, var(--pg-config-title-accent) 62%, var(--mimicus-color) 38%) !important;
+	background: var(--pg-config-title-bg);
+	border-top: 1px solid color-mix(in srgb, var(--mimicus-b-color), transparent 48%);
+	border-bottom: 0 !important;
+	border-left: 4px solid var(--pg-config-title-accent);
+	border-radius: 0;
+	box-shadow: none;
+	opacity: 1 !important;
+}
+
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label > .pg-input-decorated__label-text,
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .input-decorated-label > .input-decorated-label-text,
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label > .mimicus-input-decorated-label-text {
+	color: inherit !important;
+	font-size: inherit !important;
+	font-weight: inherit !important;
+	letter-spacing: inherit !important;
+	text-transform: inherit !important;
+	opacity: 1 !important;
+}
+
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label > .pg-input-decorated__icon,
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label > .input-decorated-label-icon,
+.demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label > .pg-input-decorated__info {
+	color: var(--pg-config-title-accent) !important;
+	opacity: 1 !important;
+}
+
+/* ── Labels anidados (clusters internos, switch rowBetween, IconTextField, …) ──
+   Aquí sí va el estilo compacto + uppercase. Excluye explícitamente los card headers
+   de arriba y los asTitle que ya tienen su propio look. */
 .demo-config-shell {
-	& :is(.input-decorated-label, .palette-grid__label, .mimicus-input-decorated-label, .pg-input-decorated__label) {
-		margin-bottom: 0.65em;
-		padding: 0.15em 0 0.45em;
+	& :is(.input-decorated-label, .palette-grid__label, .mimicus-input-decorated-label, .pg-input-decorated__label):not(.pg-input-decorated--title > .pg-input-decorated__label):not(.pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label):not(.pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label):not(.pg-demo-config-card.card-root > .pg-input-decorated > .input-decorated-label) {
+		display: flex;
+		align-items: center;
+		gap: var(--pg-config-label-icon-gap, 0.5rem);
+		margin-bottom: 0.55em;
+		padding: 0.15em 0 0.4em;
 		border-bottom: 1px solid var(--pg-config-label-border) !important;
 		color: var(--pg-config-label-fg) !important;
 		opacity: 1 !important;
 	}
 
-	& :is(.input-decorated-label-text, .mimicus-input-decorated-label-text, .palette-grid__label, .pg-input-decorated__label) {
+	& :is(.input-decorated-label-text, .mimicus-input-decorated-label-text, .palette-grid__label, .pg-input-decorated__label-text):not(.pg-input-decorated--title > .pg-input-decorated__label-text):not(.pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label > .pg-input-decorated__label-text):not(.pg-demo-config-card.card-root > .pg-input-decorated > .input-decorated-label > .input-decorated-label-text):not(.pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label > .mimicus-input-decorated-label-text) {
 		color: var(--pg-config-label-fg) !important;
 		font-size: 0.74em;
 		font-weight: 600;
@@ -174,7 +230,13 @@
 		opacity: 1 !important;
 	}
 
-	& :is(.input-decorated-label-icon, .palette-grid__label-icon, .pg-input-decorated__icon) {
+	& :is(.input-decorated-label-icon, .palette-grid__label-icon, .pg-input-decorated__icon):not(.pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label > .pg-input-decorated__icon):not(.pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label > .input-decorated-label-icon) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 1.05em;
+		min-width: 1.05em;
 		color: var(--pg-config-label-muted) !important;
 		opacity: 1 !important;
 	}
@@ -325,6 +387,12 @@
 .demo-config-shell .pg-palette-grid .button-block,
 .demo-config-shell .pg-palette-chips .button-block {
 	min-width: 0;
+}
+
+.demo-config-shell .pg-palette-chips--list .button-block {
+	width: 100%;
+	justify-content: flex-start !important;
+	text-align: left;
 }
 
 /* ══════════════ contapyme ══════════════ */
@@ -527,14 +595,23 @@ html[data-luminance="light"][data-looknfeel="neon"] .demo-config-shell .pg-demo-
 
 /* ── Botón de info a la derecha del label ── */
 .demo-config-shell .pg-input-decorated__label {
-	display: flex !important;
+	display: inline-flex !important;
+	flex-wrap: nowrap;
 	align-items: center;
-	gap: 0.45em;
+	gap: var(--pg-config-label-icon-gap, 0.5rem);
+	white-space: nowrap;
+}
+
+.demo-config-shell .pg-input-decorated--title > .pg-input-decorated__label {
+	gap: var(--pg-config-label-title-icon-gap, 0.62rem);
 }
 
 .demo-config-shell .pg-input-decorated__label-text {
-	flex: 1 1 auto;
+	flex: 0 1 auto;
 	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .demo-config-shell .pg-input-decorated__info {
@@ -575,120 +652,56 @@ html[data-luminance="light"][data-looknfeel="neon"] .demo-config-shell .pg-demo-
 	box-shadow: 0 0 0 2px color-mix(in oklch, var(--mimicus-primary), transparent 60%);
 }
 
-/* ── Modal de info ── */
-.pg-input-decorated__info-overlay {
-	position: fixed;
-	inset: 0;
-	z-index: 9999;
-	background: color-mix(in oklch, var(--mimicus-bg-primary), transparent 25%);
-	display: flex;
+/* ── Modal de info (campo config + api-prop) ── */
+.pg-input-decorated__info-title {
+	display: inline-flex;
 	align-items: center;
-	justify-content: center;
-	padding: 1em;
-	animation: pg-info-overlay-in 0.18s ease both;
-}
-
-@keyframes pg-info-overlay-in {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
-
-.pg-input-decorated__info-card {
-	background: var(--lkf-texture-panel, var(--mimicus-bg-secondary));
-	border: 1px solid color-mix(in oklch, var(--mimicus-b-color), transparent 35%);
-	border-radius: var(--lkf-texture-radius, 0.85em);
-	box-shadow:
-		0 18px 48px -12px color-mix(in oklch, var(--mimicus-color), transparent 84%),
-		0 4px 14px -4px color-mix(in oklch, var(--mimicus-color), transparent 88%),
-		inset 0 1px 0 color-mix(in oklch, var(--mimicus-color), transparent 92%);
-	max-width: min(32em, calc(100% - 2em));
-	width: 100%;
-	max-height: calc(100dvh - 2em);
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-	color: var(--mimicus-color);
-	animation: pg-info-card-in 0.22s cubic-bezier(0.2, 0.7, 0.3, 1.1) both;
-}
-
-@keyframes pg-info-card-in {
-	from { opacity: 0; transform: translateY(8px) scale(0.96); }
-	to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-html[data-looknfeel="neon"] .pg-input-decorated__info-card {
-	background: var(--lkf-texture-panel-dark, var(--mimicus-bg-secondary));
-	box-shadow:
-		0 0 0 1px color-mix(in oklch, var(--mimicus-primary), transparent 65%),
-		0 18px 48px -8px color-mix(in oklch, var(--mimicus-primary), transparent 70%),
-		0 4px 14px -4px color-mix(in oklch, var(--mimicus-color), transparent 80%),
-		inset 0 1px 0 color-mix(in oklch, var(--mimicus-primary), transparent 80%);
-}
-
-.pg-input-decorated__info-card-header {
-	display: flex;
-	align-items: center;
-	gap: 0.5em;
-	padding: 0.85em 1em;
-	border-bottom: 1px solid color-mix(in oklch, var(--mimicus-b-color), transparent 55%);
-	font-size: 0.78em;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	font-weight: 600;
-	color: var(--mimicus-primary);
-	background: color-mix(in oklch, var(--mimicus-bg-secondary), var(--mimicus-primary) 6%);
-}
-
-.pg-input-decorated__info-card-header iconify-icon {
-	font-size: 1.05em;
-	width: 1.05em;
-	height: 1.05em;
-}
-
-.pg-input-decorated__info-card-header h4 {
-	flex: 1 1 auto;
+	gap: 0.55rem;
 	min-width: 0;
-	margin: 0;
-	font: inherit;
-	color: inherit;
+	padding: 0.15rem 0.55rem 0.15rem 0.4rem;
+	border-radius: 0.55rem;
+	background: color-mix(in srgb, var(--mimicus-primary), transparent 88%);
+	color: var(--mimicus-color);
+	font-weight: 600;
+	font-size: 0.95rem;
+	max-width: 100%;
 }
 
-.pg-input-decorated__info-close {
-	flex: 0 0 auto;
+.pg-input-decorated__info-title iconify-icon,
+.pg-input-decorated__info-title .iconify {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 1.6em;
-	height: 1.6em;
+	width: 1.55rem;
+	height: 1.55rem;
+	border-radius: 0.45rem;
+	background: color-mix(in srgb, var(--mimicus-primary), transparent 70%);
+	color: var(--mimicus-primary);
+	font-size: 1rem;
+	flex-shrink: 0;
+}
+
+.pg-input-decorated__info-title > span,
+.pg-input-decorated__info-title > code {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pg-input-decorated__info-title code {
+	font-family: var(--pg-font-mono, ui-monospace, monospace);
+	font-size: 0.95em;
+	color: var(--mimicus-color);
+	background: transparent;
 	padding: 0;
 	border: 0;
-	border-radius: 50%;
-	background: transparent;
-	color: color-mix(in oklch, var(--mimicus-color), transparent 35%);
-	cursor: pointer;
-	transition: color 0.15s ease, background 0.15s ease;
-	line-height: 0;
-}
-
-.pg-input-decorated__info-close iconify-icon {
-	font-size: 0.95em;
-	width: 0.95em;
-	height: 0.95em;
-}
-
-.pg-input-decorated__info-close:hover,
-.pg-input-decorated__info-close:focus-visible {
-	color: var(--mimicus-color);
-	background: color-mix(in oklch, var(--mimicus-color), transparent 88%);
-	outline: none;
 }
 
 .pg-input-decorated__info-body {
-	padding: 0.9em 1em 1.05em;
+	margin: 0;
 	font-size: 0.88em;
 	line-height: 1.55;
-	overflow: auto;
-	max-height: 60vh;
 	color: color-mix(in oklch, var(--mimicus-color), transparent 8%);
 }
 
@@ -700,4 +713,22 @@ html[data-looknfeel="neon"] .pg-input-decorated__info-card {
 	background: color-mix(in oklch, var(--mimicus-bg-readonly), var(--mimicus-primary) 8%);
 	border: 1px solid color-mix(in oklch, var(--mimicus-b-color), transparent 60%);
 	color: var(--mimicus-primary);
+}
+
+/* ── Looknfeel contapyme: desatura el accent de los card headers ──
+   Evita que el gradient y el border-left de los headers se vean neón
+   en contapyme. Se reduce chroma oklch y se mezcla con el fondo. */
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label,
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label,
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .input-decorated-label {
+	--pg-config-title-accent: oklch(from color-mix(in oklch, var(--mimicus-primary) 70%, var(--mimicus-bg) 30%) calc(l * 0.78) calc(c * 0.32) h);
+	--pg-config-title-bg: linear-gradient(90deg, color-mix(in srgb, var(--pg-config-title-accent) 10%, transparent), transparent 70%);
+	border-left-width: 3px;
+	box-shadow: none;
+}
+
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label > .pg-input-decorated__icon,
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .mimicus-input-decorated-label > .input-decorated-label-icon,
+html[data-looknfeel="contapyme"] .demo-config-shell .pg-demo-config-card.card-root > .pg-input-decorated > .pg-input-decorated__label > .pg-input-decorated__info {
+	color: oklch(from color-mix(in oklch, var(--mimicus-primary) 60%, var(--mimicus-bg) 40%) calc(l * 0.78) calc(c * 0.32) h) !important;
 }

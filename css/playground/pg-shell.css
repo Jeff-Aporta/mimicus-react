@@ -69,7 +69,6 @@ html.pg-playground-doc #root {
 
 	& .pg-header-skin-bar {
 		gap: 0.25rem;
-		margin-left: 0;
 	}
 
 	& .fps-histogram-chip {
@@ -156,19 +155,31 @@ html.pg-playground-doc #root {
 .pg-shell-header-stack .pg-shell-toolbar,
 .mimicus-app-layout-header__bar {
 	display: grid;
-	grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.35fr);
+	grid-template-columns: 1fr 1fr 1fr;
 	align-items: center;
 	box-sizing: border-box;
 	max-width: 100%;
+}
+
+/* Variante 2 secciones (25% brand / 75% tools), oculta center. */
+.pg-shell-header-stack .pg-shell-toolbar.pg-shell-toolbar--cols-2,
+.mimicus-app-layout-header__bar.pg-shell-toolbar--cols-2 {
+	grid-template-columns: 25% 75%;
+}
+
+.pg-shell-header-stack .pg-shell-toolbar.pg-shell-toolbar--cols-2 .pg-shell-toolbar__center,
+.pg-shell-header-stack .pg-shell-toolbar.pg-shell-toolbar--cols-2 .mimicus-app-layout-header__center {
+	display: none;
 }
 
 .pg-shell-header-stack .pg-shell-toolbar__brand,
 .pg-shell-header-stack .mimicus-app-layout-header__brand {
 	display: flex;
 	align-items: center;
-	justify-self: start;
+	justify-self: stretch;
 	gap: 0.25rem;
 	min-width: 0;
+	padding-inline-end: 0.5rem;
 }
 
 .pg-shell-header-stack .pg-shell-toolbar__center,
@@ -178,6 +189,7 @@ html.pg-playground-doc #root {
 	justify-content: center;
 	justify-self: stretch;
 	min-width: 0;
+	padding-inline: 0.5rem;
 }
 
 .pg-shell-header-stack .pg-shell-toolbar__tools,
@@ -195,6 +207,7 @@ html.pg-playground-doc #root {
 	flex-shrink: 1;
 	box-sizing: border-box;
 	padding-inline-end: 0;
+	padding-inline-start: 0.5rem;
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -566,6 +579,7 @@ html.pg-playground-doc #root {
 	height: calc(var(--pg-shell-header-h) - 0.45rem);
 	min-height: 0;
 	padding-block: 0;
+	margin-inline-start: auto;
 }
 
 .fps-histogram-chip__value {
