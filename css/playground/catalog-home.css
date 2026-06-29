@@ -58,7 +58,8 @@
 }
 
 /* Contapyme — superficie plana con acento desaturado (sin gradient multicolor saturado).
-   Mantenemos identidad de sección via bar lateral 4px del accent y borde sutil. */
+   Mantenemos identidad de sección via bar lateral 4px del accent y ring sutil teñido
+   con el color de la categoría (op ~50% del accent desaturado). */
 html[data-looknfeel="contapyme"] .catalog-section {
 	background:
 		linear-gradient(
@@ -67,7 +68,7 @@ html[data-looknfeel="contapyme"] .catalog-section {
 			transparent 100%
 		),
 		var(--mimicus-bg-primary, #ffffff);
-	border: 1px solid color-mix(in oklch, oklch(from var(--sm-accent, var(--mimicus-primary)) calc(l * 0.85) c 0.04 h) 18%, var(--mimicus-b-color));
+	border: 1px solid color-mix(in oklch, oklch(from var(--sm-accent, var(--mimicus-primary)) calc(l * 0.85) c 0.05 h) 50%, transparent);
 	border-left: 4px solid color-mix(in oklch, oklch(from var(--sm-accent, var(--mimicus-primary)) calc(l * 0.85) c 0.05 h) 60%, var(--mimicus-b-color));
 }
 

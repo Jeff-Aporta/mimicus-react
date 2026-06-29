@@ -389,6 +389,24 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
     }
   }, [open]);
 
+  // Al abrir el panel, centra verticalmente la opción seleccionada dentro del
+  // contenedor scrollable. Especialmente útil cuando la paleta activa queda
+  // fuera del viewport visible (selects con muchas opciones).
+  useLayoutEffect(() => {
+    if (!open) return;
+    const panel = dialogRef.current?.querySelector(".mimicus-select__panel") as HTMLElement | null;
+    if (!panel) return;
+    const selected = panel.querySelector<HTMLElement>(".mimicus-select__option[aria-selected='true']");
+    if (!selected) return;
+    requestAnimationFrame(() => {
+      const ph = panel.clientHeight;
+      const sh = selected.offsetHeight;
+      const so = selected.offsetTop;
+      const target = Math.max(0, so - (ph - sh) / 2);
+      panel.scrollTo({ top: target, behavior: "auto" });
+    });
+  }, [open, val]);
+
   // Tras elegir en el panel, devolver foco al trigger para ↑/↓ sin reabrir.
   useEffect(() => {
     if (open || !refocusTriggerAfterPickRef.current) return;
@@ -460,7 +478,7 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
       >
         <ul role="listbox" className="mimicus-select__panel" data-mimicus-select-panel onClick={(e) => e.stopPropagation()}>
           {placeholder && (
-            <li role="option" aria-selected={!val} className={cx("mimicus-select__option", !val && "is-selected")} onClick={() => pickOption("")}>
+            <li role="option" aria-selected={!val} title={placeholder} className={cx("mimicus-select__option", !val && "is-selected")} onClick={() => pickOption("")}>
               <span className="mimicus-select__label">{placeholder}</span>
             </li>
           )}
@@ -470,10 +488,12 @@ export function Select({ value, defaultValue, onChange, options, placeholder, di
               <li
                 key={String(opt.value)}
                 role="option"
+                title={opt.label ?? opt.value}
                 aria-selected={selected}
                 aria-disabled={opt.disabled}
                 className={cx("mimicus-select__option", selected && "is-selected", opt.disabled && "is-disabled")}
                 onClick={() => { if (!opt.disabled) pickOption(String(opt.value)); }}
+                onMouseEnter={(e) => { e.currentTarget.setAttribute("data-hover-title", String(opt.label ?? opt.value ?? "")); }}
               >
                 {opt.icon && <span className="mimicus-select__icon" aria-hidden>{opt.icon}</span>}
                 <span className="mimicus-select__label">{opt.label ?? opt.value}</span>

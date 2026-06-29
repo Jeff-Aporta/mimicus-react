@@ -284,3 +284,47 @@ html[data-looknfeel="neon"] .pg-content-header {
 	}
 	& .mimicus-select__arrow { color: var(--pg-skin-chrome-fg); }
 }
+
+/* Tooltip del nombre de paleta/look al pasar el mouse por una opción.
+   Mismo cromo que el panel para no romper el looknfeel y aparece instantáneo
+   (los tooltips nativos del navegador tienen ~1s de delay). */
+.pg-skin-toggle .mimicus-select__option { position: relative; }
+
+.pg-skin-toggle .mimicus-select__option[data-hover-title]:hover::after {
+	content: attr(data-hover-title);
+	position: absolute;
+	inset-inline-start: calc(100% + 0.5rem);
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 9999;
+	background: var(--mimicus-bg-secondary);
+	color: var(--pg-skin-accent, var(--mimicus-primary));
+	border: 1px solid color-mix(in srgb, var(--pg-skin-accent, var(--mimicus-primary)) 40%, transparent);
+	border-radius: 0.4rem;
+	padding: 0.3em 0.65em;
+	font-size: 0.82em;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+	pointer-events: none;
+	animation: pg-skin-toggle-tooltip-in 0.12s ease-out;
+}
+
+@keyframes pg-skin-toggle-tooltip-in {
+	from { opacity: 0; transform: translate(0.25rem, -50%); }
+	to { opacity: 1; transform: translateY(-50%); }
+}
+
+/* Si el panel está muy a la derecha del viewport, el tooltip se voltea hacia la izquierda. */
+.pg-skin-toggle .mimicus-select__option[data-hover-title]:hover::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	border: 6px solid transparent;
+	border-inline-end-color: var(--pg-skin-accent, var(--mimicus-primary));
+	z-index: 9999;
+	pointer-events: none;
+}
