@@ -1,5 +1,5 @@
 {
-  "componentRef": "main",
+  "componentRef": "685f0f8",
   "esm": {
     "main": "esm/mimicus-react.esm.min.js",
     "bootstrap": "esm/mimicus-react.bootstrap.esm.min.js",
